@@ -1,6 +1,7 @@
-@use 'utilities' as *;
+@use "utilities" as *;
 
 body {
   color: $black;
   font-size: $base-font-size;
+  font-family: $font-family-default;
 }
