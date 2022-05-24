@@ -1,0 +1,44 @@
+@use "utilities" as *;
+
+// paragraphs
+
+p {
+    font-weight: $font-weight-regular;
+    font-size: $base-font-size;
+}
+
+// headings
+
+h1 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xxl;
+}
+
+h2 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xl;
+}
+
+h3 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-l;
+}
+
+// links
+
+a {
+    color: $kyky-primary-dark;
+}
+
+// forms
+
+label {
+    font-weight: $font-weight-regular;
+    font-size: $base-font-size;
+}
+
+input[type=text]{
+    font-weight: $font-weight-light;
+    font-size: $font-size-xs;
+    color: $grayscale-medium;
+}

@@ -3,17 +3,17 @@
 $black: #000000;
 $white: #ffffff;
 
-$grayscale-light: #F8F9F8;
-$grayscale-medium-light: #CCCCCC;
+$grayscale-light: #f8f9f8;
+$grayscale-medium-light: #cccccc;
 $grayscale-medium: #808080;
-$grayscale-medium-dark: #25282B;
-$grayscale-darker: #1A1A1A;
-$grayscale-darkest: #1B1B1B;
+$grayscale-medium-dark: #25282b;
+$grayscale-darker: #1a1a1a;
+$grayscale-darkest: #1b1b1b;
 
 $kyky-primary-dark: #387a70;
-$kyky-primary-default: #18C7AD;
+$kyky-primary-default: #18c7ad;
 
-$alert-red: #F51720;
+$alert-red: #f51720;
 
 // font styles
 
@@ -31,15 +31,15 @@ $font-size-xxl: calc($base-font-size * 1.875); //--30px
 
 // font weights
 
-$thin: 100;
-$extra-light: 200;
-$light: 300;
-$regular: 400;
-$medium: 500;
-$semi-bold: 600;
-$bold: 700;
-$extra-bold: 800;
-$black: 900;
+$font-weight-thin: 100;
+$font-weight-extra-light: 200;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+$font-weight-black: 900;
 
 //line-height
 

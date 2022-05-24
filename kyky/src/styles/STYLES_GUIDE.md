@@ -16,6 +16,10 @@ Page components like buttons, cards, fields, etc.
 
 Layout elements like grids, containers, page sections etc.
 
+## typography.scss
+
+Text styles (headings, paragraphs etc.)
+
 ## utilities.scss
 
 Variables, functions and mixins (for colors, text sizes, margins, paddings etc.)
