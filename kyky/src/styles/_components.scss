@@ -1,0 +1,10 @@
+@use "utilities" as *;
+
+button-primary {
+    height: 46.84px;
+    width: 311px;
+    border-radius: calc($base-border-radius * 0.7);
+    background-color: $kyky-primary-dark;
+    color: $white;
+    box-shadow: $base-box-shadow;
+}
