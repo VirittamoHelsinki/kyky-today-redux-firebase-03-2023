@@ -41,6 +41,23 @@ $bold: 700;
 $extra-bold: 800;
 $black: 900;
 
+//line-height
+
+$base-line-height: 20px;
+
+//margins
+$base-margin: 1em; //--16px
+$margin-small: calc($base-margin * 0.469); //--7.5px
+$margin-medium: calc($base-margin * 0.844); //--13.5px
+$margin-medium-large: calc($base-margin * 1.563); //--25px
+$margin-large: calc($base-margin * 1.875); //--30px
+
+//paddings
+$base-padding: 1em; //--16px
+$padding-small: calc($base-padding * 0.469); //--7.5px
+$padding-medium: calc($base-padding * 0.844); //--13.5px
+$padding-medium-large: calc($base-padding * 1.563); //--25px
+$padding-large: calc($base-padding * 1.875); //--30px
 
 // shadows
 
