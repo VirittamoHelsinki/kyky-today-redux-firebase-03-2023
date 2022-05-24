@@ -1,11 +1,29 @@
 // UI colors
 
-$black: #1b1b1b;
+$black: #000000;
 $white: #ffffff;
-$kyky-primary: #387a70;
+$grayscale-light: #F8F9F8;
+$grayscale-medium: #CCCCCC;
+$grayscale-dark: #808080;
+$grayscale-darker: #1A1A1A;
+$grayscale-darkest: #1B1B1B;
+
+$kyky-primary-dark: #387a70;
+$kyky-primary-default: #18C7AD;
+
+$alert-red: #F51720;
+
+
+// font styles
+
+$font-family-default: 'Roboto', sans-serif;
 
 // font sizes
 
 $base-font-size: 1rem; //--16px
+$font-size-xs: calc($base-font-size * 0.813); //--13px
+$font-size-s: calc($base-font-size * 0.875); //--14px
 
-$font-size-small: calc($base-font-size * 0.813); //--13px
+// shadows
+
+$base-box-shadow: 0px 4px 4px 0px #00000040;
