@@ -21,9 +21,32 @@ $font-family-default: 'Roboto', sans-serif;
 // font sizes
 
 $base-font-size: 1rem; //--16px
+$font-size-xxs: calc($base-font-size * 0.75); //--12px
 $font-size-xs: calc($base-font-size * 0.813); //--13px
 $font-size-s: calc($base-font-size * 0.875); //--14px
+$font-size-l: calc($base-font-size * 1.125); //--18px
+$font-size-xl: calc($base-font-size * 1.25); //--20px
+$font-size-xxl: calc($base-font-size * 1.875); //--30px
+
+// font weights
+
+$thin: 100;
+$extra-light: 200;
+$light: 300;
+$regular: 400;
+$medium: 500;
+$semi-bold: 600;
+$bold: 700;
+$extra-bold: 800;
+$black: 900;
+
 
 // shadows
 
 $base-box-shadow: 0px 4px 4px 0px #00000040;
+
+// borders
+
+$base-border-thickness: 1px;
+
+$base-border-radius: 10px;
