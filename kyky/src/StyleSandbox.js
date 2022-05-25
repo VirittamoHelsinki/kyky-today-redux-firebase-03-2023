@@ -7,25 +7,26 @@ function StyleSandbox() {
   return (
     <div className="sandbox">
       <h1>Style SandBox</h1>
-      <h1>{lang.h1_title}</h1>
-      <h2>{lang.h2_title}</h2>
-      <button type="button">{lang.primary_button}</button>
+      <br />
+      <h1>{lang.sandbox_h1}</h1>
+      <h2>{lang.sandbox_h2}</h2>
+      <h3>{lang.sandbox_h3}</h3>
       <button type="button" className="button-primary">
-        Primary button
+        {lang.sandbox_button_primary}
       </button>
       <form className="card-light">
-        <h1>Title</h1>
-        <label htmlFor="test">Label text</label>
+        <h1>{lang.sandbox_card_title}</h1>
+        <label htmlFor="test">{lang.sandbox_text_label}</label>
         <input
           type="text"
           id="text-input-test"
           name="text-input-test"
-          placeholder="Placeholder text"
+          placeholder={lang.sandbox_placeholder}
         />
         <div className="checkbox-container">
           <input type="checkbox" id="checkbox-test" name="checkbox-test" value="test" />
           <label className="checkbox-label" htmlFor="checkbox-test">
-            Checkbox Label
+            {lang.sandbox_checkbox_label}
           </label>
         </div>
       </form>

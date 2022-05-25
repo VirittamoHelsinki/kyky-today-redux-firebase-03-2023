@@ -1,7 +1,12 @@
 {
   "language": "en",
   "name": "English",
-  "h1_title": "Amazing H1 Title",
-  "h2_title": "Amazing H2 Title",
-  "primary_button": "Primary Button"
+  "sandbox_h1": "Amazing H1 Title",
+  "sandbox_h2": "Amazing H2 Title",
+  "sandbox_h3": "Amazing H3 Title",
+  "sandbox_button_primary": "Button Primary",
+  "sandbox_card_title": "Cool Card Title",
+  "sandbox_text_label": "Text Field Label",
+  "sandbox_checkbox_label": "Checkbox Label",
+  "sandbox_placeholder": "Placeholder text"
 }

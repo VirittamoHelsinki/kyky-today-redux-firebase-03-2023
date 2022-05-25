@@ -1,7 +1,12 @@
 {
   "language": "fi",
   "name": "Suomi",
-  "h1_title": "Mahtava H1 Title",
-  "h2_title": "Mahtava H2 Title",
-  "primary_button": "Päänappi"
+  "sandbox_h1": "Mahtava H1 Otsikko",
+  "sandbox_h2": "Mahtava H2 Otsikko",
+  "sandbox_h3": "Mahtava H3 Otsikko",
+  "sandbox_button_primary": "Päänappi",
+  "sandbox_card_title": "Kortin pääotsikko",
+  "sandbox_text_label": "Tekstikentän labeli",
+  "sandbox_checkbox_label": "Raksiboksin labeli",
+  "sandbox_placeholder": "Esimerkkiteksti"
 }
