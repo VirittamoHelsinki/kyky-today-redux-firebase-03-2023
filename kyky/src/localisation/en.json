@@ -1,12 +1,22 @@
 {
   "language": "en",
   "name": "English",
-  "sandbox_h1": "Amazing H1 Title",
-  "sandbox_h2": "Amazing H2 Title",
-  "sandbox_h3": "Amazing H3 Title",
-  "sandbox_button_primary": "Button Primary",
-  "sandbox_card_title": "Cool Card Title",
-  "sandbox_text_label": "Text Field Label",
-  "sandbox_checkbox_label": "Checkbox Label",
-  "sandbox_placeholder": "Placeholder text"
+
+  "registration": {
+    "username": "username",
+    "email": "email",
+    "password": "password"
+  },
+
+  "sandbox": {
+    "h1": "Amazing H1 Title",
+    "h2": "Amazing H2 Title",
+    "h3": "Amazing H3 Title",
+    "button_primary": "Button Primary",
+    "card_title": "Cool Card Title",
+    "text_label": "Text Field Label",
+    "checkbox_label": "Checkbox Label",
+    "placeholder": "Placeholder text",
+    "link": " Click Me I'm a Link"
+  }
 }

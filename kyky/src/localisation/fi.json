@@ -1,12 +1,22 @@
 {
   "language": "fi",
   "name": "Suomi",
-  "sandbox_h1": "Mahtava H1 Otsikko",
-  "sandbox_h2": "Mahtava H2 Otsikko",
-  "sandbox_h3": "Mahtava H3 Otsikko",
-  "sandbox_button_primary": "Päänappi",
-  "sandbox_card_title": "Kortin pääotsikko",
-  "sandbox_text_label": "Tekstikentän labeli",
-  "sandbox_checkbox_label": "Raksiboksin labeli",
-  "sandbox_placeholder": "Esimerkkiteksti"
+
+  "registration": {
+    "username": "username",
+    "email": "email",
+    "password": "password"
+  },
+
+  "sandbox": {
+    "h1": "Mahtava H1 Otsikko",
+    "h2": "Mahtava H2 Otsikko",
+    "h3": "Mahtava H3 Otsikko",
+    "button_primary": "Päänappi",
+    "card_title": "Kortin pääotsikko",
+    "text_label": "Tekstikentän labeli",
+    "checkbox_label": "Raksiboksin labeli",
+    "placeholder": "Esimerkkiteksti",
+    "link": " klikkaa minua olen linkki"
+  }
 }
