@@ -10,7 +10,10 @@
   border-radius: calc($base-border-radius * 0.7);
   background-color: $kyky-primary-dark;
   color: $white;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
   box-shadow: $base-box-shadow;
+  margin: calc($base-margin * 1) 0;
 }
 
 // cards
@@ -20,6 +23,4 @@
   border: none;
   border-radius: $base-border-radius;
   box-shadow: $base-box-shadow;
-  padding: $padding-large;
-  margin: $padding-large;
 }

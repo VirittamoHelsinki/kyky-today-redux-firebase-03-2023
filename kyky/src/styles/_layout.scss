@@ -26,33 +26,74 @@ footer {
 // forms
 
 form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 $padding-large;
+  padding-bottom: $padding-large;
+
+  h1 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xxl;
+    margin: $base-margin 0;
+    text-align: center;
+  }
+
+  h2 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xl;
+    margin: $base-margin 0;
+  }
+
+  h3 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-l;
+  }
+
   label {
     font-weight: $font-weight-regular;
     font-size: $base-font-size;
+    display: block;
   }
 
-  .radio-button-label {
-    font-weight: $font-weight-light;
-    font-size: $font-size-s;
+  .checkbox-container {
+
+    display: flex;
+    align-items: center;
+
+    label {
+      font-weight: $font-weight-regular;
+      font-size: $font-size-s;
+      display: inline-block;
+      margin-left: 20px;
+
+    }
+
+    input[type=checkbox] {
+      width: 17px;
+      height: 17px;
+      border-radius: none;
+      box-shadow: $base-box-shadow;
+      border: calc($base-border-thickness*2) solid $black;
+    }
   }
 
   // form fields
 
-  input[type='text'],
-  input[type='password'],
-  input[type='select'],
-  input[type='tel'],
-  input[type='email'] {
+  input {
     height: 40px;
+    width: 100%;
     border: $base-border-thickness solid $grayscale-medium-light;
     border-radius: calc($base-border-radius * 0.7);
-    margin: $margin-small 0;
+    margin: calc($base-margin * 0.5) 0;
     font-weight: $font-weight-light;
-    font-size: $font-size-xs;
+    font-size: $font-size-s;
     padding: $padding-medium;
     padding-left: $padding-medium-large;
     color: $grayscale-medium;
   }
+
+
 }
 
 .sandbox {
@@ -60,6 +101,6 @@ form {
   background-color: $grayscale-light;
   display: flex;
   flex-direction: column;
-  width: 80vw;
-  height: 80vh;
+  width: 100vw;
+  height: 90vh;
 }
