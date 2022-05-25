@@ -7,8 +7,38 @@ p {
     font-size: $base-font-size;
 }
 
+// headings
+
+h1 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xxl;
+}
+
+h2 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xl;
+}
+
+h3 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-l;
+}
+
 // links
 
 a {
     color: $kyky-primary-dark;
+
+    &:visited {
+        color: $kyky-primary-dark;
+    }
+
+    &:hover {
+        color: $kyky-primary-dark;
+    }
+
+    &:active {
+        color: $kyky-primary-dark;
+    }
+
 }

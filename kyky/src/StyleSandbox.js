@@ -13,13 +13,37 @@ function StyleSandbox() {
       <h3>{lang.sandbox.h3}</h3>
       <form className="card-light small">
         <h1>{lang.sandbox.card_title}</h1>
-        <label htmlFor="test">{lang.sandbox.text_label}</label>
-        <input
-          type="text"
-          id="text-input-test"
-          name="text-input-test"
-          placeholder={lang.sandbox.placeholder}
-        />
+        <div className="input-container">
+          <label htmlFor="test">{lang.sandbox.text_label}</label>
+          <input
+            type="text"
+            id="text-input-test"
+            name="text-input-test"
+            placeholder={lang.sandbox.placeholder}
+          />
+          <icon>[PIC]</icon>
+        </div>
+        <div className="input-container">
+          <label htmlFor="test">{lang.sandbox.text_label}</label>
+          <input
+            type="text"
+            id="text-input-test"
+            name="text-input-test"
+            placeholder={lang.sandbox.placeholder}
+          />
+          <icon>[PIC]</icon>
+        </div>
+        <div className="input-container">
+          <label htmlFor="test">{lang.sandbox.text_label}</label>
+          <input
+            type="text"
+            id="text-input-test"
+            name="text-input-test"
+            placeholder={lang.sandbox.placeholder}
+          />
+          <icon>[PIC]</icon>
+        </div>
+
         <div className="checkbox-container">
           <input type="checkbox" id="checkbox-test" name="checkbox-test" value="test" />
           <label className="checkbox-label" htmlFor="checkbox-test">
