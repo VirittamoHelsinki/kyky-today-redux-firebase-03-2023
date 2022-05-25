@@ -1,8 +1,9 @@
-@use 'utilities' as *;
+@use "utilities" as *;
 
 // buttons
 
 .button-primary {
+  position: relative;
   min-height: 45px;
   min-width: 310px;
   width: clamp(310px, 30%, 410px);
@@ -17,6 +18,13 @@
 
   a {
     color: unset;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    left: 0%;
+    top: 0%;
   }
 }
 
