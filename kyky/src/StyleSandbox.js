@@ -51,8 +51,10 @@ function StyleSandbox() {
             <a href="https://www.google.com/">{lang.sandbox.link}</a>
           </label>
         </div>
-        <button type="button" className="button-primary">
-          {lang.sandbox.button_primary}
+        <button type="button" className="button-primary" onClick="">
+          <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" rel="noreferrer">
+            {lang.sandbox.button_primary}
+          </a>
         </button>
       </form>
     </main>

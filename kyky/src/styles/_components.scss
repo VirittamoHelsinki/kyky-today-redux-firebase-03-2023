@@ -14,6 +14,10 @@
   font-weight: $font-weight-bold;
   box-shadow: $base-box-shadow;
   margin: calc($base-margin * 1) 0;
+
+  a {
+    color: unset;
+  }
 }
 
 // cards
