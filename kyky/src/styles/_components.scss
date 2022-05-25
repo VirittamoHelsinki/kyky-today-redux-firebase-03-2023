@@ -3,35 +3,23 @@
 // buttons
 
 .button-primary {
-  height: 46.84px;
-  width: 311px;
+  min-height: 45px;
+  min-width: 310px;
+  width: clamp(310px, 30%, 410px);
+  padding: $padding-small calc($base-padding * 3);
   border-radius: calc($base-border-radius * 0.7);
   background-color: $kyky-primary-dark;
   color: $white;
   box-shadow: $base-box-shadow;
 }
 
-// form fields
-
-input[type='text'],
-input[type='password'],
-input[type='select'],
-input[type='tel'],
-input[type='email'] {
-  height: 40px;
-  border: $base-border-thickness solid $grayscale-medium-light;
-  border-radius: calc($base-border-radius * 0.7);
-  margin: $margin-small 0;
-  padding: $padding-medium;
-}
-
 // cards
 
 .card-light {
-    background-color: $white;
-    border:none;
-    border-radius: $base-border-radius;
-    box-shadow: $base-box-shadow;
-    padding: $padding-large;
-    margin: $padding-large;
+  background-color: $white;
+  border: none;
+  border-radius: $base-border-radius;
+  box-shadow: $base-box-shadow;
+  padding: $padding-large;
+  margin: $padding-large;
 }

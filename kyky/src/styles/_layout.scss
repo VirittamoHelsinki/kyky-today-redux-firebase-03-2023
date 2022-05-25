@@ -5,3 +5,61 @@ body {
   font-size: $base-font-size;
   font-family: $font-family-default;
 }
+
+footer {
+  background-color: $grayscale-medium-dark;
+
+  ul {
+    text-align: center;
+  }
+
+  li {
+    color: $white;
+    text-transform: capitalize;
+  }
+
+  h1 {
+    color: $kyky-primary-default
+  }
+}
+
+// forms
+
+form {
+  label {
+    font-weight: $font-weight-regular;
+    font-size: $base-font-size;
+  }
+
+  .radio-button-label {
+    font-weight: $font-weight-light;
+    font-size: $font-size-s;
+  }
+
+  // form fields
+
+  input[type='text'],
+  input[type='password'],
+  input[type='select'],
+  input[type='tel'],
+  input[type='email'] {
+    height: 40px;
+    border: $base-border-thickness solid $grayscale-medium-light;
+    border-radius: calc($base-border-radius * 0.7);
+    margin: $margin-small 0;
+    font-weight: $font-weight-light;
+    font-size: $font-size-xs;
+    padding: $padding-medium;
+    padding-left: $padding-medium-large;
+    color: $grayscale-medium;
+  }
+}
+
+.sandbox {
+  padding: $padding-large;
+  background-color: $grayscale-light;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  height: 80vh;
+}

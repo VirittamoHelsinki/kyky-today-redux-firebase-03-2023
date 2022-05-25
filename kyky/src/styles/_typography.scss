@@ -29,16 +29,3 @@ h3 {
 a {
     color: $kyky-primary-dark;
 }
-
-// forms
-
-label {
-    font-weight: $font-weight-regular;
-    font-size: $base-font-size;
-}
-
-input[type=text]{
-    font-weight: $font-weight-light;
-    font-size: $font-size-xs;
-    color: $grayscale-medium;
-}
