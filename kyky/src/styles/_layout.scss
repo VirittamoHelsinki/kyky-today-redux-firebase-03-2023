@@ -8,20 +8,28 @@ body {
 
 // FOOTER
 
-footer {
+footer.main-footer {
   background-color: $grayscale-medium-dark;
+  display: flex;
+  flex-wrap: wrap;
+  padding: $padding-medium-large 0;
+  justify-content: center;
+  width: 100%;
 
   ul {
+    display: flex;
+    flex-direction: column;
+    gap: $base-margin;
+    white-space: nowrap;
+    margin: 0 5%;
     text-align: center;
-  }
-
-  li {
+    text-transform: uppercase;
     color: $white;
-    text-transform: capitalize;
   }
 
   h1 {
-    color: $kyky-primary-default
+    color: $kyky-primary-default;
+    font-size: calc($font-size-xxl * 0.9);
   }
 }
 
@@ -49,12 +57,18 @@ form {
     margin: $base-margin 0;
   }
 
+  section {
+    margin-bottom: $base-margin;
+    width: 100%;
+  }
+
   // checkboxes
 
   .checkbox-container {
     display: flex;
     width: 100%;
     align-items: center;
+    margin: calc($base-margin / 2) 0;
 
     label {
       font-size: $font-size-s;
@@ -66,8 +80,15 @@ form {
       width: 17px;
       height: 17px;
       border-radius: none;
-      box-shadow: $base-box-shadow;
       border: calc($base-border-thickness*2) solid $black;
+      box-shadow: $base-box-shadow;
+      background-color: transparent;
+    }
+
+    &.no-shadow {
+      input {
+        box-shadow: none;
+      }
     }
   }
 
@@ -89,12 +110,13 @@ form {
       font-size: $font-size-s;
       padding: $padding-medium;
       padding-left: $padding-medium-large;
-      color: $grayscale-medium;
+      color: $black;
+      background-color: transparent;
     }
 
     label {
       grid-row: 1/2;
-      margin-bottom: calc($base-margin/3);
+      margin-bottom: calc($base-margin / 2);
     }
 
     icon {
@@ -102,6 +124,12 @@ form {
       align-self: center;
       justify-content: flex-end;
       grid-row: 2/3;
+    }
+
+    &.error {
+      input {
+        border: calc($base-border-thickness * 5) solid $alert-red;
+      }
     }
   }
 }
@@ -114,8 +142,7 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 90vh;
+  width: 100%;
 
   form {
     max-width: $wide;

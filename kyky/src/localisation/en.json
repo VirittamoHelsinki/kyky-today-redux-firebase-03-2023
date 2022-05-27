@@ -15,8 +15,10 @@
     "button_primary": "Button Primary",
     "card_title": "Cool Card Title",
     "text_label": "Text Field Label",
+    "text_label_error": "This Input Is Invalid",
     "checkbox_label": "Checkbox Label",
     "placeholder": "Placeholder text",
-    "link": " Click Me I'm a Link"
+    "link": " Click Me I'm a Link",
+    "checkbox_label_no_shadow": "Look Mom, No Shadow"
   }
 }

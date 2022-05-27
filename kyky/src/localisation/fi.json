@@ -15,8 +15,10 @@
     "button_primary": "Päänappi",
     "card_title": "Kortin pääotsikko",
     "text_label": "Tekstikentän labeli",
+    "text_label_error": "Tämä tekstikenttä on väärin",
     "checkbox_label": "Raksiboksin labeli",
     "placeholder": "Esimerkkiteksti",
-    "link": " klikkaa minua olen linkki"
+    "link": " klikkaa minua olen linkki",
+    "checkbox_label_no_shadow": "Katso äiti, ilman varjoa"
   }
 }
