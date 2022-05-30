@@ -19,6 +19,7 @@
     "checkbox_label": "Raksiboksin labeli",
     "placeholder": "Esimerkkiteksti",
     "link": " klikkaa minua olen linkki",
-    "checkbox_label_no_shadow": "Katso äiti, ilman varjoa"
+    "checkbox_label_no_shadow": "Katso äiti, ilman varjoa",
+    "password": "Salasana"
   }
 }

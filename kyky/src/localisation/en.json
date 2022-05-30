@@ -19,6 +19,7 @@
     "checkbox_label": "Checkbox Label",
     "placeholder": "Placeholder text",
     "link": " Click Me I'm a Link",
-    "checkbox_label_no_shadow": "Look Mom, No Shadow"
+    "checkbox_label_no_shadow": "Look Mom, No Shadow",
+    "password": "Password"
   }
 }

@@ -1,6 +1,7 @@
 // For visual component guidance and testing :)
 import { useContext } from 'react';
 import Language from './language';
+import 'material-icons/iconfont/material-icons.css';
 
 function StyleSandbox() {
   const { lang } = useContext(Language);
@@ -22,26 +23,29 @@ function StyleSandbox() {
               name="text-input-test"
               placeholder={lang.sandbox.placeholder}
             />
-            <icon>[PIC]</icon>
+            <i className="material-icons-outlined inside">done</i>
+            <i className="material-icons-outlined">info</i>
           </div>
+
           <div className="input-container error">
             <label htmlFor="test2">{lang.sandbox.text_label_error}</label>
             <input
               type="text"
               id="text-input-test2"
               name="text-input-test2"
-              placeholder={lang.sandbox.placeholder}
+              placeholder={lang.sandbox.password}
             />
-            <icon>[PIC]</icon>
           </div>
           <div className="input-container">
-            <label htmlFor="test3">{lang.sandbox.text_label}</label>
+            <label htmlFor="test3">{lang.sandbox.password}</label>
             <input
-              type="text"
+              type="password"
               id="text-input-test3"
               name="text-input-test3"
               placeholder={lang.sandbox.placeholder}
             />
+
+            <i className="material-icons-outlined">visibility</i>
           </div>
         </section>
         <section>
