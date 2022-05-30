@@ -96,7 +96,7 @@ form {
 
   .input-container {
     display: grid;
-    grid-template-columns: minmax(110px, 635px) 3em;
+    grid-template-columns: clamp(110px, 85%, 635px) 4%;
     grid-template-rows: auto 40px;
     margin-bottom: $base-margin;
 
@@ -119,11 +119,18 @@ form {
       margin-bottom: calc($base-margin / 2);
     }
 
-    icon {
+
+    i.inside {
+      position: relative;
+      left: -150%;
+    }
+
+    i {
       display: flex;
       align-self: center;
       justify-content: flex-end;
       grid-row: 2/3;
+      grid-column-start: -1;
     }
 
     &.error {
