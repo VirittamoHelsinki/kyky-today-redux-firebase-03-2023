@@ -72,6 +72,14 @@ form {
     width: 100%;
   }
 
+  span.login-help {
+    font-size: $font-size-xl;
+
+    a {
+      font-weight: $font-weight-bold;
+    }
+  }
+
   // checkboxes
 
   .checkbox-container {
@@ -110,7 +118,8 @@ form {
     grid-template-rows: auto 40px;
     margin-bottom: $base-margin;
 
-    input {
+    input,
+    select {
       grid-row: 2/3;
       height: 100%;
       width: 100%;
