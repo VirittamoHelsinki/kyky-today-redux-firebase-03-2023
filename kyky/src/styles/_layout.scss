@@ -12,7 +12,8 @@ footer.main-footer {
   background-color: $grayscale-medium-dark;
   display: flex;
   flex-wrap: wrap;
-  padding: $padding-medium-large 0;
+  padding-top: $padding-large;
+  padding-bottom: $padding-medium;
   justify-content: center;
   width: 100%;
 
@@ -30,6 +31,15 @@ footer.main-footer {
   h1 {
     color: $kyky-primary-default;
     font-size: calc($font-size-xxl * 0.9);
+  }
+
+  div.social-icons {
+    margin-top: calc($base-margin*2);
+    flex: 1 0 100%;
+    display: flex;
+    gap: 2.5%;
+    justify-content: center;
+    align-items: center;
   }
 }
 

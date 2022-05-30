@@ -40,3 +40,7 @@
 .material-icons-outlined {
   font-size: 38px !important;
 }
+
+.material-icons-outlined.light {
+  color: $white  !important;
+}

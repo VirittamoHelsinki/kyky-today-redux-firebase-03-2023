@@ -1,3 +1,5 @@
+import 'material-icons/iconfont/material-icons.css';
+
 // footer
 
 function Footer() {
@@ -15,6 +17,12 @@ function Footer() {
         <li>Link B</li>
         <li>Link C</li>
       </ul>
+      <div className="social-icons">
+        <span className="material-icons-outlined light">supervised_user_circle</span>
+        <span className="material-icons-outlined light">supervised_user_circle</span>
+        <span className="material-icons-outlined light">supervised_user_circle</span>
+        <span className="material-icons-outlined light">supervised_user_circle</span>
+      </div>
     </footer>
   );
 }
