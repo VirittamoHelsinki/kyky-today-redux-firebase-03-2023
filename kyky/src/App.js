@@ -16,7 +16,6 @@ function App() {
       <>
         <Header languages={languages} lang={lang} setLang={setLang} />
         <div className="App">Hello, World</div>
-        <StyleSandbox />
         <UserRegistration />
         <Footer />
       </>
