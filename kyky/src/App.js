@@ -6,6 +6,7 @@ import en from './localisation/en.json';
 import StyleSandbox from './StyleSandbox';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import UserRegistration from './components/UserRegistration';
 
 const languages = { fi, en };
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Header languages={languages} lang={lang} setLang={setLang} />
         <div className="App">Hello, World</div>
         <StyleSandbox />
+        <UserRegistration />
         <Footer />
       </>
     </Language.Provider>

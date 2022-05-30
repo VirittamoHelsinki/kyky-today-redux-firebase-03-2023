@@ -3,9 +3,19 @@
   "name": "English",
 
   "registration": {
-    "username": "username",
-    "email": "email",
-    "password": "password"
+    "title": "Rekisteröidy - Kyky",
+    "username": "Käyttäjätunnus",
+    "email": "Sähköposti",
+    "password": "Salasana",
+    "confirm_password": "Vahvista salasana",
+    "company": "Yritysmuoto",
+    "subscribe_newsletter": "Haluan tilata uutiskirjeen",
+    "I_agree": "Hyväksyn ",
+    "user_agreement": "käyttäjäehdot",
+    "submit_form": "Rekisteröidy",
+    "sign_in": "Kirjaudu sisään täällä",
+    "or": " tai ",
+    "recover_password": "palauta salasanasi"
   },
 
   "sandbox": {

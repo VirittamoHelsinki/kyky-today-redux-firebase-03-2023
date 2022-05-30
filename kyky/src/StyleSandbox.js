@@ -22,6 +22,7 @@ function StyleSandbox() {
               id="text-input-test"
               name="text-input-test"
               placeholder={lang.sandbox.placeholder}
+              autoComplete="username"
             />
             <i className="material-icons-outlined inside">done</i>
             <i className="material-icons-outlined">info</i>
@@ -34,6 +35,7 @@ function StyleSandbox() {
               id="text-input-test2"
               name="text-input-test2"
               placeholder={lang.sandbox.password}
+              autoComplete="username"
             />
           </div>
           <div className="input-container">
@@ -43,6 +45,7 @@ function StyleSandbox() {
               id="text-input-test3"
               name="text-input-test3"
               placeholder={lang.sandbox.placeholder}
+              autoComplete="new-password"
             />
 
             <i className="material-icons-outlined">visibility</i>
@@ -50,13 +53,13 @@ function StyleSandbox() {
         </section>
         <section>
           <div className="checkbox-container no-shadow">
-            <input type="checkbox" id="checkbox-test" name="checkbox-test" value="test" />
-            <label className="checkbox-label" htmlFor="checkbox-test">
+            <input type="checkbox" id="checkbox-test" name="checkbox-test1" value="test" />
+            <label className="checkbox-label" htmlFor="checkbox-test1">
               {lang.sandbox.checkbox_label_no_shadow}
             </label>
           </div>
           <div className="checkbox-container">
-            <input type="checkbox" id="checkbox-test" name="checkbox-test" value="test" />
+            <input type="checkbox" id="checkbox-test2" name="checkbox-test2" value="test" />
             <label className="checkbox-label" htmlFor="checkbox-test">
               {lang.sandbox.checkbox_label}
               <a href="https://www.google.com/">{lang.sandbox.link}</a>
