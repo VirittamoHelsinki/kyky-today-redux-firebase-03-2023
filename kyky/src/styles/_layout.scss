@@ -144,7 +144,8 @@ form {
       left: -120%;
     }
 
-    i {
+    i,
+    .icon-button {
       display: flex;
       align-self: center;
       justify-content: flex-end;
