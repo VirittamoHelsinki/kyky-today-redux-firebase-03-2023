@@ -44,9 +44,9 @@ a {
 }
 
 .material-icons-outlined {
-    font-size: 38px !important;
+    font-size: calc($material-icons-font-size * 1.6) !important;
 }
 
 .material-icons-outlined.light {
-    color: $white  !important;
+    color: $white;
 }
