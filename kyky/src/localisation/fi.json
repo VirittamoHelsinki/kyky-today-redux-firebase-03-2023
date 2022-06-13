@@ -2,6 +2,10 @@
   "code": "fi",
   "name": "Suomi",
 
+  "common": {
+    "dropdown_default": "Valitse"
+  },
+
   "registration": {
     "title": "Rekisteröidy - Kyky",
     "username": "Käyttäjätunnus",

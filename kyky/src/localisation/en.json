@@ -2,20 +2,24 @@
   "code": "en",
   "name": "English",
 
+  "common": {
+    "dropdown_default": "Choose"
+  },
+
   "registration": {
-    "title": "Rekisteröidy - Kyky",
-    "username": "Käyttäjätunnus",
-    "email": "Sähköposti",
-    "password": "Salasana",
-    "confirm_password": "Vahvista salasana",
-    "company": "Yritysmuoto",
-    "subscribe_newsletter": "Haluan tilata uutiskirjeen",
-    "I_agree": "Hyväksyn ",
-    "user_agreement": "käyttäjäehdot",
-    "submit_form": "Rekisteröidy",
-    "sign_in": "Kirjaudu sisään täällä",
-    "or": " tai ",
-    "recover_password": "palauta salasanasi"
+    "title": "Register - Kyky",
+    "username": "Username",
+    "email": "E-mail",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "company": "Company",
+    "subscribe_newsletter": "Subscribe to newsletter",
+    "I_agree": "I agree ",
+    "user_agreement": "the Terms of Use",
+    "submit_form": "Register",
+    "sign_in": "Sign in here",
+    "or": " or ",
+    "recover_password": "recover your password"
   },
 
   "sandbox": {
