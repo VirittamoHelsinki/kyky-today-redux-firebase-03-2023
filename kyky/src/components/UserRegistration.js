@@ -1,9 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Language from '../language';
 import 'material-icons/iconfont/material-icons.css';
 
 function UserRegistration() {
   const { lang } = useContext(Language);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
   return (
     <form className="card-light small">
       <h1>{lang.registration.title}</h1>
@@ -33,29 +36,43 @@ function UserRegistration() {
         <div className="input-container">
           <label htmlFor="password">{lang.registration.password}</label>
           <input
-            type="password"
+            type={passwordVisible ? 'text' : 'password'}
             name="password"
             placeholder={lang.registration.password}
             autoComplete="new-password"
             required
           />
-          <i className="material-icons-outlined">visibility</i>
+          <button
+            type="button"
+            className="icon-button"
+            onClick={() => setPasswordVisible(!passwordVisible)}>
+            <i className="material-icons-outlined">
+              {passwordVisible ? 'visibility_off' : 'visibility'}
+            </i>
+          </button>
         </div>
         <div className="input-container">
           <label htmlFor="password">{lang.registration.confirm_password}</label>
           <input
-            type="password"
+            type={confirmPasswordVisible ? 'text' : 'password'}
             name="confirmPassword"
             placeholder={lang.registration.confirm_password}
             autoComplete="off"
             required
           />
-          <i className="material-icons-outlined">visibility</i>
+          <button
+            type="button"
+            className="icon-button"
+            onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}>
+            <i className="material-icons-outlined">
+              {confirmPasswordVisible ? 'visibility_off' : 'visibility'}
+            </i>
+          </button>
         </div>
         <div className="input-container">
           <label htmlFor="company">{lang.registration.company}</label>
           <select name="company" placeholder={lang.registration.company}>
-            <option value="">Valitse</option>
+            <option value="">{lang.common.dropdown_default}</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
             <option value="3">Option 3</option>
