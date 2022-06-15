@@ -6,6 +6,15 @@ function UserRegistration() {
   const { lang } = useContext(Language);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [validateUserName, setValidateUserName] = useState(false);
+  const [username, setUsername] = useState(false);
+
+  const handleUsernameValidation = () => {
+    if (username.length >= 3) {
+      return setValidateUserName(true);
+    }
+    return setValidateUserName(false);
+  };
 
   return (
     <form className="card-light small">
@@ -19,8 +28,12 @@ function UserRegistration() {
             placeholder={lang.registration.username}
             autoComplete="username"
             required
+            onChange={(e) => {
+              setUsername(e.target.value);
+              handleUsernameValidation();
+            }}
           />
-          <i className="material-icons-outlined inside">done</i>
+          {validateUserName && <i className="material-icons-outlined inside">done</i>}
           <i className="material-icons-outlined">info</i>
         </div>
         <div className="input-container">
