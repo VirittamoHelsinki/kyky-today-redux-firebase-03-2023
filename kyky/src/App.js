@@ -5,12 +5,13 @@ import Language from './language';
 import fi from './localisation/fi.json';
 import en from './localisation/en.json';
 import StyleSandbox from './StyleSandbox';
+import ProfileCreation from './ProfileCreation';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
 const languages = { fi, en };
 function App() {
-  const [lang, setLang] = useState(languages.en);
+  const [lang, setLang] = useState(languages.fi);
   return (
     <Language.Provider value={{ lang }}>
       <>
@@ -19,6 +20,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<StyleSandbox />} />
+            <Route path="/profile-creation" element={<ProfileCreation />} />
           </Routes>
         </BrowserRouter>
         <Footer />
