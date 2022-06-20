@@ -21,5 +21,17 @@
     "link": " klikkaa minua olen linkki",
     "checkbox_label_no_shadow": "Katso äiti, ilman varjoa",
     "password": "Salasana"
+  },
+
+  "profile_creation": {
+    "h1": "Luo Profiili",
+    "choose_portrait": "Valitse profiilikuva",
+    "add_portrait": "Lisää kuva",
+    "name": "Nimi",
+    "phone": "Puhelinnumero",
+    "address": "Osoite",
+    "city": "Kaupunki",
+    "zip": "Postinumero",
+    "country": "Maa"
   }
 }
