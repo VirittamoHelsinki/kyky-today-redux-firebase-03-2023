@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Language from './language';
 import fi from './localisation/fi.json';
 import en from './localisation/en.json';
@@ -15,7 +16,11 @@ function App() {
       <>
         <Header languages={languages} lang={lang} setLang={setLang} />
         <div className="App">Hello, World</div>
-        <StyleSandbox />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<StyleSandbox />} />
+          </Routes>
+        </BrowserRouter>
         <Footer />
       </>
     </Language.Provider>
