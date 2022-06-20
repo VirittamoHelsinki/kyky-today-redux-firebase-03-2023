@@ -5,15 +5,14 @@ import 'material-icons/iconfont/material-icons.css';
 function UserRegistration() {
   const { lang } = useContext(Language);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [validateUserName, setValidateUserName] = useState(false);
-  const [username, setUsername] = useState(false);
+  const [username, setUsername] = useState('');
 
-  const handleUsernameValidation = () => {
-    if (username.length >= 3) {
-      return setValidateUserName(true);
+  const handleUsernameValidation = ({ target: { value } }) => {
+    if (value === '' || value.length < 3) {
+      return setValidateUserName(false);
     }
-    return setValidateUserName(false);
+    return setValidateUserName(true);
   };
 
   return (
@@ -25,12 +24,13 @@ function UserRegistration() {
           <input
             type="text"
             name="username"
+            value={username}
             placeholder={lang.registration.username}
             autoComplete="username"
             required
             onChange={(e) => {
               setUsername(e.target.value);
-              handleUsernameValidation();
+              handleUsernameValidation(e);
             }}
           />
           {validateUserName && <i className="material-icons-outlined inside">done</i>}
@@ -57,17 +57,15 @@ function UserRegistration() {
           />
           <button
             type="button"
-            className="icon-button"
+            className="material-icons-outlined"
             onClick={() => setPasswordVisible(!passwordVisible)}>
-            <i className="material-icons-outlined">
-              {passwordVisible ? 'visibility_off' : 'visibility'}
-            </i>
+            {passwordVisible ? 'visibility_off' : 'visibility'}
           </button>
         </div>
         <div className="input-container">
           <label htmlFor="password">{lang.registration.confirm_password}</label>
           <input
-            type={confirmPasswordVisible ? 'text' : 'password'}
+            type={passwordVisible ? 'text' : 'password'}
             name="confirmPassword"
             placeholder={lang.registration.confirm_password}
             autoComplete="off"
@@ -75,11 +73,9 @@ function UserRegistration() {
           />
           <button
             type="button"
-            className="icon-button"
-            onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}>
-            <i className="material-icons-outlined">
-              {confirmPasswordVisible ? 'visibility_off' : 'visibility'}
-            </i>
+            className="material-icons-outlined"
+            onClick={() => setPasswordVisible(!passwordVisible)}>
+            {passwordVisible ? 'visibility_off' : 'visibility'}
           </button>
         </div>
         <div className="input-container">
