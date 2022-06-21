@@ -114,7 +114,7 @@ form {
 
   .input-container {
     display: grid;
-    grid-template-columns: clamp(110px, 85%, 635px) 4%;
+    grid-template-columns: clamp(110px, 88%, 635px) auto;
     grid-template-rows: auto 40px;
     margin-bottom: $base-margin;
 
@@ -141,15 +141,17 @@ form {
 
     i.inside {
       position: relative;
-      left: -150%;
+      left: -120%;
     }
 
-    i {
+    i,
+    .icon-button {
       display: flex;
       align-self: center;
       justify-content: flex-end;
       grid-row: 2/3;
-      grid-column-start: -1;
+      grid-column: 2/3;
+      margin-left: 0.2em;
     }
 
     &.error {

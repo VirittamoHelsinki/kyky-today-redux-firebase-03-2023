@@ -1,0 +1,88 @@
+@use "utilities" as *;
+
+/* Profile creation styles */
+
+.profile {
+  background-color: $grayscale-light;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  form {
+    width: $wide;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 $padding-large;
+    padding-bottom: $padding-large;
+    margin: $base-margin;
+
+    section {
+      width: 65%;
+    }
+  }
+}
+
+.profile-pic {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+
+    img {
+      filter: brightness(0.4);
+    }
+
+    p {
+      opacity: 1;
+    }
+  }
+
+  img {
+    transition: 180ms filter;
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 50%;
+    will-change: filter;
+  }
+
+  .profile-pic-plus {
+    position: absolute;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xl;
+    border: 0.25rem solid black;
+    width: 2rem;
+    border-radius: 50%;
+    bottom: 1.75rem;
+    right: 2.25rem;
+  }
+
+  p {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-l;
+  }
+
+  .profile-pic-add-text {
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    width: 3rem;
+    transform: translate(-50%);
+    opacity: 0;
+  }
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: $base-margin;
+}
