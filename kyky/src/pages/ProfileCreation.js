@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import Language from './language';
+import Language from '../language';
 import 'material-icons/iconfont/material-icons.css';
-import pic from './image/portrait-of-smiling-young-man-wearing-glasses-DIGF000310.jpg';
+import pic from '../image/portrait-of-smiling-young-man-wearing-glasses-DIGF000310.jpg';
 
 export default function ProfileCreation() {
   const { lang } = useContext(Language);
@@ -77,6 +77,11 @@ export default function ProfileCreation() {
               autoComplete="country-name"
             />
           </div>
+        </section>
+        <section>
+          <button type="submit" className="button-primary">
+            {lang.profile_creation.submit_form}
+          </button>
         </section>
       </form>
     </main>

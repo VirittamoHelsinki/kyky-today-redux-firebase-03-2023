@@ -5,10 +5,10 @@ import Language from './language';
 import fi from './localisation/fi.json';
 import en from './localisation/en.json';
 import StyleSandbox from './StyleSandbox';
-import ProfileCreation from './ProfileCreation';
+import ProfileCreation from './pages/ProfileCreation';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import UserRegistration from './components/UserRegistration';
+import UserRegistration from './pages/UserRegistration';
 
 const languages = { fi, en };
 function App() {

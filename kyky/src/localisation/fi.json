@@ -46,6 +46,7 @@
     "address": "Osoite",
     "city": "Kaupunki",
     "zip": "Postinumero",
-    "country": "Maa"
+    "country": "Maa",
+    "submit_form": "Seuraava"
   }
 }
