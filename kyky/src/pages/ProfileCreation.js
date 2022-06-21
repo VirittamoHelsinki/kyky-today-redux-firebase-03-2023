@@ -3,8 +3,34 @@ import Language from '../language';
 import pic from '../image/portrait-of-smiling-young-man-wearing-glasses-DIGF000310.jpg';
 import Input from '../components/Input';
 import CheckboxContainer from '../components/CheckboxContainer';
-import Checkbox from '../components/Checkbox';
 
+const languages = [
+  { name: 'fi', title: 'Suomi' },
+  { name: 'se', title: 'Ruotsi' },
+  { name: 'en', title: 'Englanti' },
+  { name: 'ru', title: 'Venäjä' },
+  { name: 'ee', title: 'Viro' },
+  { name: 'lv', title: 'Latvia' },
+  { name: 'is', title: 'Islanti' },
+  { name: 'dk', title: 'Tanska' },
+  { name: 'no', title: 'Norja' },
+  { name: 'de', title: 'Saksa' },
+  { name: 'es', title: 'Espanja' },
+  { name: 'fr', title: 'Ranska' },
+  { name: 'it', title: 'Italia' },
+  { name: 'gr', title: 'Kreikka' },
+  { name: 'po', title: 'Portugali' },
+  { name: 'ua', title: 'Ukraina' },
+  { name: 'hu', title: 'Unkari' },
+  { name: 'tr', title: 'Turkki' },
+  { name: 'cn', title: 'Kiina' },
+  { name: 'jp', title: 'Japani' },
+  { name: 'kr', title: 'Korea' },
+  { name: 'vn', title: 'Vietnami' },
+  { name: 'in', title: 'Hindi' },
+  { name: 'sa', title: 'Arabia' }
+];
+const areas = [{ name: 'uusimaa', title: 'Uusimaa' }];
 export default function ProfileCreation() {
   const { lang } = useContext(Language);
   return (
@@ -63,52 +89,14 @@ export default function ProfileCreation() {
           />
         </section>
         <section>
-          <CheckboxContainer title="Kielitaito">
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-          </CheckboxContainer>
+          <CheckboxContainer title="Kielitaito" content={languages} />
         </section>
         <section>
-          <CheckboxContainer title="Valitse alueet, jossa haluat työskennellä">
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-            <Checkbox title="Testi" name="test" />
-          </CheckboxContainer>
+          <CheckboxContainer
+            title="Valitse alueet, joissa haluat työskennellä"
+            content={areas}
+            customSelect={false}
+          />
         </section>
         <section>
           <div className="yes-no-container">
