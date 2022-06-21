@@ -43,10 +43,14 @@ a {
 
 }
 
-.material-icons-outlined {
-    font-size: calc($material-icons-font-size * 1.6) !important;
+.material-icons-outlined,
+button.material-icons-outlined {
+    font-size: 38px !important;
+    background-color: transparent;
 }
 
-.material-icons-outlined.light {
-    color: $white;
+.material-icons-outlined.light,
+button.material-icons-outlined.light {
+    color: $white  !important;
+    background-color: transparent;
 }

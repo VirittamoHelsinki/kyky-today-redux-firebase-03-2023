@@ -8,6 +8,7 @@ import StyleSandbox from './StyleSandbox';
 import ProfileCreation from './ProfileCreation';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import UserRegistration from './components/UserRegistration';
 
 const languages = { fi, en };
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={<StyleSandbox />} />
             <Route path="/profile-creation" element={<ProfileCreation />} />
+            <Route path="/user-registration" element={<UserRegistration />} />
           </Routes>
         </BrowserRouter>
         <Footer />

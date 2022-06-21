@@ -2,10 +2,24 @@
   "code": "en",
   "name": "English",
 
+  "common": {
+    "dropdown_default": "Choose"
+  },
+
   "registration": {
-    "username": "username",
-    "email": "email",
-    "password": "password"
+    "title": "Register - Kyky",
+    "username": "Username",
+    "email": "E-mail",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "company": "Company",
+    "subscribe_newsletter": "Subscribe to newsletter",
+    "I_agree": "I agree ",
+    "user_agreement": "the Terms of Use",
+    "submit_form": "Register",
+    "sign_in": "Sign in here",
+    "or": " or ",
+    "recover_password": "recover your password"
   },
 
   "sandbox": {
