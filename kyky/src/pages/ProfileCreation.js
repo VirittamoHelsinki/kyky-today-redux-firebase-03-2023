@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import Language from '../language';
 import pic from '../image/portrait-of-smiling-young-man-wearing-glasses-DIGF000310.jpg';
 import Input from '../components/Input';
+import CheckboxContainer from '../components/CheckboxContainer';
+import Checkbox from '../components/Checkbox';
 
 export default function ProfileCreation() {
   const { lang } = useContext(Language);
@@ -59,6 +61,86 @@ export default function ProfileCreation() {
             placeholder={lang.profile_creation.country}
             autoComplete="country-name"
           />
+        </section>
+        <section>
+          <CheckboxContainer title="Kielitaito">
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+          </CheckboxContainer>
+        </section>
+        <section>
+          <CheckboxContainer title="Valitse alueet, jossa haluat työskennellä">
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+            <Checkbox title="Testi" name="test" />
+          </CheckboxContainer>
+        </section>
+        <section>
+          <div className="yes-no-container">
+            <p className="title">Voin matkustaa alueeni ulkopuolelle tarvittaessa</p>
+            <div className="yes-no-buttons">
+              <label htmlFor="yes">
+                Kyllä
+                <input type="radio" id="yes" name="travel" value="true" />
+              </label>
+
+              <label htmlFor="no">
+                Ei
+                <input type="radio" id="no" name="travel" value="false" />
+              </label>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div className="yes-no-container">
+            <p className="title">Minulta löytyy auto</p>
+            <div className="yes-no-buttons">
+              <label htmlFor="yes">
+                Kyllä
+                <input type="radio" id="yes" name="car" value="true" />
+              </label>
+
+              <label htmlFor="no">
+                Ei
+                <input type="radio" id="no" name="car" value="false" />
+              </label>
+            </div>
+          </div>
         </section>
         <section>
           <button type="submit" className="button-primary">
