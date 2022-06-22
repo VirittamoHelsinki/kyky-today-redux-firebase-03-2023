@@ -1,5 +1,7 @@
 # MAIN FILES
 
+Icons & symbols library https://fonts.google.com/icons
+
 ## index.scss
 
 Imports
