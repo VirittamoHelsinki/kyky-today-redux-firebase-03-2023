@@ -6,6 +6,7 @@ import CheckboxContainer from '../components/CheckboxContainer';
 import Choice from '../components/Choice';
 import RadioChoices from '../components/RadioChoices';
 import FileUpload from '../components/FileUpload';
+import TextArea from '../components/TextArea';
 
 const languages = [
   'Suomi',
@@ -143,6 +144,9 @@ export default function ProfileCreation() {
         </section>
         <section>
           <FileUpload title="Portfolio" subTitle="" />
+        </section>
+        <section>
+          <TextArea title="Suositukset" name="recommendations" />
         </section>
         <section>
           <button type="submit" className="button-primary">

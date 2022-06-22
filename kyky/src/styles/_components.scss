@@ -250,3 +250,39 @@
     }
   }
 }
+
+.text-area {
+  position: relative;
+  left: 90px;
+  width: auto;
+  height: auto;
+  margin: 10px;
+  border: none;
+  border-radius: $base-border-radius;
+  padding: 10px;
+  resize: none;
+  font-weight: $font-weight-bold;
+  color: black;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    position: relative;
+    margin: 15px;
+    font-size: 1.3rem;
+    right: 5%;
+  }
+
+  textarea {
+    width: 500px;
+    margin: 15px;
+    height: 150px;
+    border: none;
+    border-radius: $base-border-radius;
+    padding: 10px;
+    resize: none;
+    font-weight: $font-weight-bold;
+    box-shadow: $base-box-shadow;
+    color: black;
+  }
+}
