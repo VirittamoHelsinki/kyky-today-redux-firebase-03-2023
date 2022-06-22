@@ -18,7 +18,6 @@ export default function Input({
   title = 'label',
   required = false,
   onChange = () => {},
-  value = '',
   icon = { text: '', className: '' },
   children
 }) {
@@ -34,7 +33,6 @@ export default function Input({
         autoComplete={autoComplete}
         required={required}
         onChange={onChange}
-        value={value}
       />
       {icon.className !== '' && <i className={icon.className}>{icon.text}</i>}
       {children}
