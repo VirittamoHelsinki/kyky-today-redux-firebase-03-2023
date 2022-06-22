@@ -72,67 +72,67 @@ export default function ProfileCreation() {
           <Input
             type="text"
             name="name"
-            title={lang.profile_creation.name}
+            label={lang.profile_creation.name}
             placeholder={lang.profile_creation.name}
             autoComplete="username"
-            icon={{ text: 'info', className: 'material-icons-outlined' }}
+            iconText="info"
           />
           <Input
             type="text"
             name="phone"
-            title={lang.profile_creation.phone}
+            label={lang.profile_creation.phone}
             placeholder={lang.profile_creation.phone}
             autoComplete="tel"
           />
           <Input
             type="text"
             name="address"
-            title={lang.profile_creation.address}
+            label={lang.profile_creation.address}
             placeholder={lang.profile_creation.address}
             autoComplete="street-address"
           />
           <Input
             type="text"
             name="city"
-            title={lang.profile_creation.city}
+            label={lang.profile_creation.city}
             placeholder={lang.profile_creation.city}
             autoComplete="address-level2"
           />
           <Input
             type="text"
             name="zip"
-            title={lang.profile_creation.zip}
+            label={lang.profile_creation.zip}
             placeholder={lang.profile_creation.zip}
             autoComplete="postal-code"
           />
           <Input
             type="text"
             name="country"
-            title={lang.profile_creation.country}
+            label={lang.profile_creation.country}
             placeholder={lang.profile_creation.country}
             autoComplete="country-name"
           />
         </section>
         <section>
-          <CheckboxContainer title="Kielitaito" content={languages} />
+          <CheckboxContainer label="Kielitaito" content={languages} />
         </section>
         <section>
           <CheckboxContainer
-            title="Valitse alueet, joissa haluat työskennellä"
+            label="Valitse alueet, joissa haluat työskennellä"
             content={areas}
             customSelect={false}
           />
         </section>
         <section>
-          <RadioChoices title="Voin matkustaa alueeni ulkopuolelle tarvittaessa">
-            <Choice title="Kyllä" name="travel" />
-            <Choice title="Ei" name="travel" />
+          <RadioChoices label="Voin matkustaa alueeni ulkopuolelle tarvittaessa">
+            <Choice label="Kyllä" name="travel" />
+            <Choice label="Ei" name="travel" />
           </RadioChoices>
         </section>
         <section>
-          <RadioChoices title="Minä omistan auton">
-            <Choice title="Kyllä" name="car" />
-            <Choice title="Ei" name="car" />
+          <RadioChoices label="Minä omistan auton">
+            <Choice label="Kyllä" name="car" />
+            <Choice label="Ei" name="car" />
           </RadioChoices>
         </section>
         <section>
@@ -146,7 +146,7 @@ export default function ProfileCreation() {
           <FileUpload title="Portfolio" subTitle="" />
         </section>
         <section>
-          <TextArea title="Suositukset" name="recommendations" />
+          <TextArea label="Suositukset" name="recommendations" />
         </section>
         <section>
           <button type="submit" className="button-primary">

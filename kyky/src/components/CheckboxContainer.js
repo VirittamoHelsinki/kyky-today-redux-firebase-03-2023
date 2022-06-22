@@ -5,7 +5,7 @@ import 'material-icons/iconfont/material-icons.css';
 
 /* Instead of passing children, must pass an array of information */
 export default function CheckboxContainer({
-  title,
+  label,
   content,
   className = 'checkbox-div',
   customSelect = true
@@ -16,7 +16,7 @@ export default function CheckboxContainer({
   const [expanded, setExpanded] = useState(true);
   return (
     <div className={className}>
-      <div className="checkbox-div-title">{title}</div>
+      <div className="checkbox-div-title">{label}</div>
       <div className="checkbox-div-header">
         <div className="content">
           {selected.map((item) => (
@@ -40,7 +40,7 @@ export default function CheckboxContainer({
             <Checkbox
               key={checkbox}
               name={checkbox}
-              title={checkbox}
+              label={checkbox}
               checked={selected.includes(checkbox)}
               onChange={() => {
                 if (selected.includes(checkbox)) {
@@ -54,7 +54,7 @@ export default function CheckboxContainer({
         })}
         {customSelect && (
           <>
-            <Checkbox title="Muu" name="other" onChange={() => setCustom(!custom)} />
+            <Checkbox label="Muu" name="other" onChange={() => setCustom(!custom)} />
             {custom && (
               <input
                 type="text"

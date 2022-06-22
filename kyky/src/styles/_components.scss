@@ -69,7 +69,7 @@
     padding: 0;
   }
 
-  .checkbox-div-title {
+  .checkbox-div-label {
     position: absolute;
     left: 0;
     top: -30px;
@@ -178,6 +178,7 @@
     * {
       margin: 10px;
     }
+
     h3 {
       font-size: 1.3rem;
     }
@@ -210,6 +211,7 @@
     margin: 12px;
     display: flex;
     flex-direction: column;
+
     .file {
       margin: 5px;
       width: 100%;
@@ -288,9 +290,10 @@
 }
 
 .radio-choices {
-  .radio-choices-title {
+  .radio-choices-label {
     padding: 20px;
   }
+
   .radio-choice {
     margin: 15px;
   }

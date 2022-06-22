@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 
-export default function Choice({ title, name, className = 'radio-choice' }) {
+export default function Choice({ label, name, className = 'radio-choice' }) {
   return (
     <label className={className} htmlFor={name}>
-      <input type="radio" name={name} value={title} />
-      {title}
+      <input type="radio" name={name} value={label} />
+      {label}
     </label>
   );
 }

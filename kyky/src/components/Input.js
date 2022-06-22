@@ -15,26 +15,32 @@ export default function Input({
   className = 'input-container',
   placeholder = 'input',
   autoComplete = 'off',
-  title = 'label',
-  required = false,
+  label = 'label',
+  value = '',
+  required,
   onChange = () => {},
-  icon = { text: '', className: '' },
+  iconText = '',
+  iconClassName = 'material-icons-outlined',
+  iconIsButton = true,
   children
 }) {
   return (
     <div className={className}>
       <label id={name} htmlFor={name}>
-        {title}
+        {label}
       </label>
       <input
         type={type}
         name={name}
+        value={value}
         placeholder={placeholder}
         autoComplete={autoComplete}
         required={required}
         onChange={onChange}
       />
-      {icon.className !== '' && <i className={icon.className}>{icon.text}</i>}
+      {iconText !== '' && (
+        <i className={`${iconClassName} ${iconIsButton ? 'icon-button' : ''}`}>{iconText}</i>
+      )}
       {children}
     </div>
   );
