@@ -35,7 +35,7 @@ export default function ProfileCreation() {
   const { lang } = useContext(Language);
   return (
     <main className="profile">
-      <form className="card-light wide">
+      <form className="card-light wide" onSubmit={(e) => e.preventDefault()}>
         <h1>{lang.profile_creation.h1}</h1>
         <div className="profile-pic">
           <img src={pic} alt="profile" />

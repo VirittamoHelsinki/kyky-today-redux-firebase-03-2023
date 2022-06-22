@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import Checkbox from './Checkbox';
+import 'material-icons/iconfont/material-icons.css';
 
 /* Instead of passing children, must pass an array of information */
 export default function CheckboxContainer({
@@ -12,21 +13,28 @@ export default function CheckboxContainer({
   const [selected, setSelected] = useState([]);
   const [custom, setCustom] = useState('');
   const [customText, setCustomText] = useState('');
+  const [expanded, setExpanded] = useState(true);
   return (
     <div className={className}>
       <div className="checkbox-div-title">{title}</div>
       <div className="checkbox-div-header">
-        {selected.map((item) => (
-          <button
-            type="button"
-            key={item}
-            className="checkbox-div-header-item"
-            onClick={() => setSelected(selected.filter((itm) => itm !== item))}>
-            {item}
-          </button>
-        ))}
+        <div className="content">
+          {selected.map((item) => (
+            <button
+              type="button"
+              key={item}
+              className="checkbox-div-header-item"
+              onClick={() => setSelected(selected.filter((itm) => itm !== item))}>
+              {item}
+            </button>
+          ))}
+        </div>
+        {/* Expand button and header content are separated */}
+        <button className="expand-button" type="button" onClick={() => setExpanded(!expanded)}>
+          <i className="material-icons-outlined">{expanded ? 'expand_less' : 'expand_more'}</i>
+        </button>
       </div>
-      <div className="checkbox-div-content">
+      <div className={`checkbox-div-content ${expanded ? '' : 'less'}`}>
         {content.map((checkbox) => {
           return (
             <Checkbox
