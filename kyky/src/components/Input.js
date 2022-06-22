@@ -22,6 +22,7 @@ export default function Input({
   iconText = '',
   iconClassName = 'material-icons-outlined',
   iconIsButton = true,
+  iconOnClick = () => {},
   children
 }) {
   return (
@@ -38,9 +39,13 @@ export default function Input({
         required={required}
         onChange={onChange}
       />
-      {iconText !== '' && (
-        <i className={`${iconClassName} ${iconIsButton ? 'icon-button' : ''}`}>{iconText}</i>
+      {iconText !== '' && !iconIsButton && <i className={`${iconClassName}`}>{iconText}</i>}
+      {iconText !== '' && iconIsButton && (
+        <button className={`${iconClassName} icon-button`} type="button" onClick={iconOnClick}>
+          {iconText}
+        </button>
       )}
+
       {children}
     </div>
   );
