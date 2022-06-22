@@ -33,7 +33,6 @@ export default function FileUpload({
     const filesEvent = e.dataTransfer.files[0];
     const filesArray = [...files];
     filesArray.push(filesEvent);
-    console.log(filesArray);
     setFiles(filesArray);
   };
 
@@ -96,7 +95,7 @@ export default function FileUpload({
         </i>
         Lisää tiedostoja
       </button>
-      <input type="file" ref={fileInput} onChange={handleChange} multiple hidden />
+      <input type="file" ref={fileInput} onChange={handleChange} hidden />
     </div>
   );
 }
