@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import Language from '../language';
+import Input from '../components/Input';
 import 'material-icons/iconfont/material-icons.css';
 
 function UserRegistration() {
@@ -20,13 +21,14 @@ function UserRegistration() {
       <h1>{lang.registration.title}</h1>
       <section>
         <div className="input-container">
-          <label htmlFor="username">{lang.registration.username}</label>
-          <input
+          <Input
+            label={lang.registration.username}
             type="text"
             name="username"
             value={username}
             placeholder={lang.registration.username}
             autoComplete="username"
+            iconText="info"
             required
             onChange={(e) => {
               setUsername(e.target.value);
@@ -34,7 +36,6 @@ function UserRegistration() {
             }}
           />
           {validateUserName && <i className="material-icons-outlined inside">done</i>}
-          <i className="material-icons-outlined">info</i>
         </div>
         <div className="input-container">
           <label htmlFor="email">{lang.registration.email}</label>
@@ -57,7 +58,7 @@ function UserRegistration() {
           />
           <button
             type="button"
-            className="material-icons-outlined"
+            className="material-icons-outlined icon-button"
             onClick={() => setPasswordVisible(!passwordVisible)}>
             {passwordVisible ? 'visibility_off' : 'visibility'}
           </button>
@@ -73,7 +74,7 @@ function UserRegistration() {
           />
           <button
             type="button"
-            className="material-icons-outlined"
+            className="material-icons-outlined icon-button"
             onClick={() => setPasswordVisible(!passwordVisible)}>
             {passwordVisible ? 'visibility_off' : 'visibility'}
           </button>
