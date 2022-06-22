@@ -38,15 +38,15 @@ export default function CheckboxContainer({
         {content.map((checkbox) => {
           return (
             <Checkbox
-              key={checkbox.name}
-              name={checkbox.name}
-              title={checkbox.title}
-              checked={selected.includes(checkbox.title)}
+              key={checkbox}
+              name={checkbox}
+              title={checkbox}
+              checked={selected.includes(checkbox)}
               onChange={() => {
-                if (selected.includes(checkbox.title)) {
-                  setSelected(selected.filter((item) => item !== checkbox.title));
+                if (selected.includes(checkbox)) {
+                  setSelected(selected.filter((item) => item !== checkbox));
                 } else {
-                  setSelected([...selected, checkbox.title]);
+                  setSelected([...selected, checkbox]);
                 }
               }}
             />

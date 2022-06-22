@@ -3,34 +3,58 @@ import Language from '../language';
 import pic from '../image/portrait-of-smiling-young-man-wearing-glasses-DIGF000310.jpg';
 import Input from '../components/Input';
 import CheckboxContainer from '../components/CheckboxContainer';
+import Choice from '../components/Choice';
+import RadioChoices from '../components/RadioChoices';
+import FileUpload from '../components/FileUpload';
 
 const languages = [
-  { name: 'fi', title: 'Suomi' },
-  { name: 'se', title: 'Ruotsi' },
-  { name: 'en', title: 'Englanti' },
-  { name: 'ru', title: 'Venäjä' },
-  { name: 'ee', title: 'Viro' },
-  { name: 'lv', title: 'Latvia' },
-  { name: 'is', title: 'Islanti' },
-  { name: 'dk', title: 'Tanska' },
-  { name: 'no', title: 'Norja' },
-  { name: 'de', title: 'Saksa' },
-  { name: 'es', title: 'Espanja' },
-  { name: 'fr', title: 'Ranska' },
-  { name: 'it', title: 'Italia' },
-  { name: 'gr', title: 'Kreikka' },
-  { name: 'po', title: 'Portugali' },
-  { name: 'ua', title: 'Ukraina' },
-  { name: 'hu', title: 'Unkari' },
-  { name: 'tr', title: 'Turkki' },
-  { name: 'cn', title: 'Kiina' },
-  { name: 'jp', title: 'Japani' },
-  { name: 'kr', title: 'Korea' },
-  { name: 'vn', title: 'Vietnami' },
-  { name: 'in', title: 'Hindi' },
-  { name: 'sa', title: 'Arabia' }
+  'Suomi',
+  'Ruotsi',
+  'Englanti',
+  'Venäjä',
+  'Viro',
+  'Latvia',
+  'Islanti',
+  'Tanska',
+  'Norja',
+  'Saksa',
+  'Espanja',
+  'Ranska',
+  'Italia',
+  'Kreikka',
+  'Portugali',
+  'Ukraina',
+  'Unkari',
+  'Turkki',
+  'Kiina',
+  'Japani',
+  'Korea',
+  'Vietnami',
+  'Hindi',
+  'Arabia'
 ];
-const areas = [{ name: 'uusimaa', title: 'Uusimaa' }];
+const areas = [
+  'Uusimaa',
+  'Ahvenanmaa',
+  'Etelä-Karjala',
+  'Etelä-Pohjanmaa',
+  'Etelä-Savo',
+  'Kainuu',
+  'Kanta-Häme',
+  'Pääkaupunkiseutu',
+  'Keski-Pohjanmaa',
+  'Keski-Suomi',
+  'Kymenlaakso',
+  'Lappi',
+  'Pirkanmaa',
+  'Pohjanmaa',
+  'Pohjois-Karjala',
+  'Pohjois-Pohjanmaa',
+  'Pohjois-Savo',
+  'Päijät-Häme',
+  'Satakunta',
+  'Varsinais-Suomi'
+];
 export default function ProfileCreation() {
   const { lang } = useContext(Language);
   return (
@@ -99,36 +123,26 @@ export default function ProfileCreation() {
           />
         </section>
         <section>
-          <div className="yes-no-container">
-            <p className="title">Voin matkustaa alueeni ulkopuolelle tarvittaessa</p>
-            <div className="yes-no-buttons">
-              <label htmlFor="yes">
-                Kyllä
-                <input type="radio" id="yes" name="travel" value="true" />
-              </label>
-
-              <label htmlFor="no">
-                Ei
-                <input type="radio" id="no" name="travel" value="false" />
-              </label>
-            </div>
-          </div>
+          <RadioChoices title="Voin matkustaa alueeni ulkopuolelle tarvittaessa">
+            <Choice title="Kyllä" name="travel" />
+            <Choice title="Ei" name="travel" />
+          </RadioChoices>
         </section>
         <section>
-          <div className="yes-no-container">
-            <p className="title">Minulta löytyy auto</p>
-            <div className="yes-no-buttons">
-              <label htmlFor="yes">
-                Kyllä
-                <input type="radio" id="yes" name="car" value="true" />
-              </label>
-
-              <label htmlFor="no">
-                Ei
-                <input type="radio" id="no" name="car" value="false" />
-              </label>
-            </div>
-          </div>
+          <RadioChoices title="Minä omistan auton">
+            <Choice title="Kyllä" name="car" />
+            <Choice title="Ei" name="car" />
+          </RadioChoices>
+        </section>
+        <section>
+          <FileUpload
+            title="Opinnot"
+            subTitle="Voit vapaasti kertoa opinnoistasi ja mitä tutkintoja, kursseja, tai sertifikaatteja olet suorittanut"
+            showDropArea
+          />
+        </section>
+        <section>
+          <FileUpload title="Portfolio" subTitle="" />
         </section>
         <section>
           <button type="submit" className="button-primary">
