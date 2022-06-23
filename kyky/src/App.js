@@ -8,6 +8,7 @@ import StyleSandbox from './StyleSandbox';
 import ProfileCreation from './pages/ProfileCreation';
 import Header from './components/Header';
 import UserRegistration from './pages/UserRegistration';
+import ContactForm from './pages/ContactForm';
 
 const languages = { fi, en };
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<StyleSandbox />} />
             <Route path="/profile-creation" element={<ProfileCreation />} />
             <Route path="/user-registration" element={<UserRegistration />} />
+            <Route path="/contact-form" element={<ContactForm />} />
           </Routes>
         </BrowserRouter>
       </>
