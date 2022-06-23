@@ -6,79 +6,120 @@ import 'material-icons/iconfont/material-icons.css';
 function UserRegistration() {
   const { lang } = useContext(Language);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [validateUserName, setValidateUserName] = useState(false);
+
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [usernameCheck, setUsernameCheck] = useState(false);
+
+  const [usernameIsValid, setUsernameIsValid] = useState(true);
+  const [emailIsValid, setEmailIsValid] = useState(true);
+  const [passwordIsValid, setPasswordIsValid] = useState(true);
+  const [passwordConfirmIsValid, setPasswordConfirmIsValid] = useState(true);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (usernameIsValid && emailIsValid && passwordIsValid && passwordConfirmIsValid) {
+      console.log('submit');
+    }
+  };
+
+  const handleFormValidation = () => {
+    if (username.length < 5) {
+      setUsernameIsValid(false);
+    } else {
+      setUsernameIsValid(true);
+    }
+    if (email.length < 5 || !email.includes('@') || !email.includes('.')) {
+      setEmailIsValid(false);
+    } else {
+      setEmailIsValid(true);
+    }
+    if (password.length < 8 || password !== passwordConfirm) {
+      setPasswordIsValid(false);
+    } else {
+      setPasswordIsValid(true);
+    }
+    if (passwordConfirm < 8 || password !== passwordConfirm) {
+      setPasswordConfirmIsValid(false);
+    }
+    if (passwordConfirm === password) {
+      setPasswordConfirmIsValid(true);
+    }
+  };
 
   const handleUsernameValidation = ({ target: { value } }) => {
-    if (value === '' || value.length < 3) {
-      return setValidateUserName(false);
+    setUsername(value);
+    if (value.length < 5) {
+      setUsernameCheck(false);
+    } else {
+      setUsernameCheck(true);
     }
-    return setValidateUserName(true);
   };
 
   return (
-    <form className="card-light small">
+    <form className="card-light small" onSubmit={handleSubmit}>
       <h1>{lang.registration.title}</h1>
       <section>
-        <div className="input-container">
-          <Input
-            label={lang.registration.username}
-            type="text"
-            name="username"
-            value={username}
-            placeholder={lang.registration.username}
-            autoComplete="username"
-            iconText="info"
-            required
-            onChange={(e) => {
-              setUsername(e.target.value);
-              handleUsernameValidation(e);
-            }}
-          />
-          {validateUserName && <i className="material-icons-outlined inside">done</i>}
-        </div>
-        <div className="input-container">
-          <label htmlFor="email">{lang.registration.email}</label>
-          <input
-            type="email"
-            name="email"
-            placeholder={lang.registration.email}
-            autoComplete="email"
-            required
-          />
-        </div>
-        <div className="input-container">
-          <label htmlFor="password">{lang.registration.password}</label>
-          <input
-            type={passwordVisible ? 'text' : 'password'}
-            name="password"
-            placeholder={lang.registration.password}
-            autoComplete="new-password"
-            required
-          />
-          <button
-            type="button"
-            className="material-icons-outlined icon-button"
-            onClick={() => setPasswordVisible(!passwordVisible)}>
-            {passwordVisible ? 'visibility_off' : 'visibility'}
-          </button>
-        </div>
-        <div className="input-container">
-          <label htmlFor="password">{lang.registration.confirm_password}</label>
-          <input
-            type={passwordVisible ? 'text' : 'password'}
-            name="confirmPassword"
-            placeholder={lang.registration.confirm_password}
-            autoComplete="off"
-            required
-          />
-          <button
-            type="button"
-            className="material-icons-outlined icon-button"
-            onClick={() => setPasswordVisible(!passwordVisible)}>
-            {passwordVisible ? 'visibility_off' : 'visibility'}
-          </button>
-        </div>
+        <Input
+          label={lang.registration.username}
+          type="text"
+          name="username"
+          value={username}
+          placeholder={lang.registration.username}
+          className={`input-container ${usernameIsValid ? '' : 'error'}`}
+          autoComplete="username"
+          iconText="info"
+          onChange={(e) => {
+            handleUsernameValidation(e);
+            setUsername(e.target.value);
+          }}>
+          {usernameCheck && <i className="material-icons-outlined inside">done</i>}
+        </Input>
+        <Input
+          label={lang.registration.email}
+          type="email"
+          name="email"
+          value={email}
+          placeholder={lang.registration.email}
+          className={`input-container ${emailIsValid ? '' : 'error'}`}
+          autoComplete="email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+
+        <Input
+          label={lang.registration.password}
+          type={passwordVisible ? 'text' : 'password'}
+          name="password"
+          value={password}
+          placeholder={lang.registration.password}
+          className={`input-container ${passwordIsValid ? '' : 'error'}`}
+          autoComplete="new-password"
+          iconText={passwordVisible ? 'visibility_off' : 'visibility'}
+          iconOnClick={() => setPasswordVisible(!passwordVisible)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+
+        <Input
+          label={lang.registration.confirm_password}
+          type={passwordVisible ? 'text' : 'password'}
+          name="passwordConfirm"
+          value={passwordConfirm}
+          placeholder={lang.registration.confirm_password}
+          className={`input-container ${passwordConfirmIsValid ? '' : 'error'}`}
+          autoComplete="off"
+          iconText={passwordVisible ? 'visibility_off' : 'visibility'}
+          iconOnClick={() => setPasswordVisible(!passwordVisible)}
+          onChange={(e) => {
+            setPasswordConfirm(e.target.value);
+          }}
+        />
         <div className="input-container">
           <label htmlFor="company">{lang.registration.company}</label>
           <select name="company" placeholder={lang.registration.company}>
@@ -95,14 +136,14 @@ function UserRegistration() {
           </label>
         </div>
         <div className="checkbox-container no-shadow">
-          <input type="checkbox" name="user_agreement" value="user_agreement" required />
+          <input type="checkbox" name="user_agreement" value="user_agreement" />
           <label className="checkbox-label" htmlFor="user_agreement">
             {lang.registration.I_agree}
             <a href="https://www.google.com/">{lang.registration.user_agreement}</a>
           </label>
         </div>
       </section>
-      <button type="submit" className="button-primary">
+      <button type="submit" className="button-primary" onClick={() => handleFormValidation()}>
         {lang.registration.submit_form}
       </button>
       <span className="login-help">
