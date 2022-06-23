@@ -12,7 +12,7 @@ A reset file to standardify and regulate styles (across browsers)
 
 ## components.scss
 
-Page components like buttons, cards, fields, etc.
+Reusable page components like buttons, cards, fields, inputs etc.
 
 ## layout.scss
 

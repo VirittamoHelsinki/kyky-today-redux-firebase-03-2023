@@ -6,43 +6,6 @@ body {
   font-family: $font-family-default;
 }
 
-// FOOTER
-
-footer.main-footer {
-  background-color: $grayscale-medium-dark;
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: $padding-large;
-  padding-bottom: $padding-medium;
-  justify-content: center;
-  width: 100%;
-
-  ul {
-    display: flex;
-    flex-direction: column;
-    gap: $base-margin;
-    white-space: nowrap;
-    margin: 0 5%;
-    text-align: center;
-    text-transform: uppercase;
-    color: $white;
-  }
-
-  h1 {
-    color: $kyky-primary-default;
-    font-size: calc($font-size-xxl * 0.9);
-  }
-
-  div.social-icons {
-    margin-top: calc($base-margin*2);
-    flex: 1 0 100%;
-    display: flex;
-    gap: 2.5%;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
 // FORMS
 
 form {
@@ -77,87 +40,6 @@ form {
 
     a {
       font-weight: $font-weight-bold;
-    }
-  }
-
-  // checkboxes
-
-  .checkbox-container {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    margin: calc($base-margin / 2) 0;
-
-    label {
-      font-size: $font-size-s;
-      display: inline-block;
-      margin-left: 20px;
-    }
-
-    input[type=checkbox] {
-      width: 17px;
-      height: 17px;
-      border-radius: none;
-      border: calc($base-border-thickness*2) solid $black;
-      box-shadow: $base-box-shadow;
-      background-color: transparent;
-    }
-
-    &.no-shadow {
-      input {
-        box-shadow: none;
-      }
-    }
-  }
-
-  // form fields
-
-  .input-container {
-    display: grid;
-    grid-template-columns: clamp(110px, 88%, 635px) auto;
-    grid-template-rows: auto 40px;
-    margin-bottom: $base-margin;
-
-    input,
-    select {
-      grid-row: 2/3;
-      height: 100%;
-      width: 100%;
-      border: $base-border-thickness solid $grayscale-medium-light;
-      border-radius: calc($base-border-radius * 0.7);
-      font-weight: $font-weight-light;
-      font-size: $font-size-s;
-      padding: $padding-medium;
-      padding-left: $padding-medium-large;
-      color: $black;
-      background-color: transparent;
-    }
-
-    label {
-      grid-row: 1/2;
-      margin-bottom: calc($base-margin / 2);
-    }
-
-
-    i.inside {
-      position: relative;
-      left: -120%;
-    }
-
-    i,
-    .icon-button {
-      display: flex;
-      align-self: center;
-      justify-content: flex-end;
-      grid-row: 2/3;
-      grid-column: 2/3;
-      margin-left: 0.5em;
-    }
-
-    &.error {
-      input {
-        border: calc($base-border-thickness * 5) solid $alert-red;
-      }
     }
   }
 }

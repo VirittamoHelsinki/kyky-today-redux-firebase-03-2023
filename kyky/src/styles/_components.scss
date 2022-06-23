@@ -46,6 +46,97 @@
   box-shadow: $base-box-shadow;
 }
 
+
+// checkboxes
+
+.checkbox-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: calc($base-margin / 2) 0;
+
+  label {
+    font-size: $font-size-s;
+    display: inline-block;
+    margin-left: 20px;
+  }
+
+  input[type=checkbox] {
+    width: 17px;
+    height: 17px;
+    border-radius: none;
+    border: calc($base-border-thickness*2) solid $black;
+    box-shadow: $base-box-shadow;
+    background-color: transparent;
+  }
+
+  &.no-shadow {
+    input {
+      box-shadow: none;
+    }
+  }
+
+  &.error {
+    input {
+      outline: calc($base-border-thickness * 5) solid $alert-red;
+    }
+  }
+}
+
+// form fields
+
+form {
+
+  .input-container {
+    display: grid;
+    grid-template-columns: clamp(110px, 88%, 635px) auto;
+    grid-template-rows: auto 40px;
+    margin-bottom: $base-margin;
+
+    input,
+    select {
+      grid-row: 2/3;
+      height: 100%;
+      width: 100%;
+      border: $base-border-thickness solid $grayscale-medium-light;
+      border-radius: calc($base-border-radius * 0.7);
+      font-weight: $font-weight-light;
+      font-size: $font-size-s;
+      padding: $padding-medium;
+      padding-left: $padding-medium-large;
+      color: $black;
+      background-color: transparent;
+    }
+
+    label {
+      grid-row: 1/2;
+      margin-bottom: calc($base-margin / 2);
+    }
+
+
+    i.inside {
+      position: relative;
+      left: -120%;
+    }
+
+    i,
+    .icon-button {
+      display: flex;
+      align-self: center;
+      justify-content: flex-end;
+      grid-row: 2/3;
+      grid-column: 2/3;
+      margin-left: 0.5em;
+    }
+
+    &.error {
+      input {
+        border: calc($base-border-thickness * 5) solid $alert-red;
+      }
+    }
+  }
+}
+
 // checkbox container
 
 .checkbox-div {
