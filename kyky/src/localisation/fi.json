@@ -48,5 +48,16 @@
     "zip": "Postinumero",
     "country": "Maa",
     "submit_form": "Seuraava"
+  },
+
+  "contact_form": {
+    "h1": "Luo Profiili",
+    "email": "Sähköposti",
+    "title": "Mitä asiasi koskee?",
+    "title_placeholder": "Viestisi",
+    "address": "Osoite",
+    "city": "Kaupunki",
+    "zip": "Postinumero",
+    "country": "Maa"
   }
 }
