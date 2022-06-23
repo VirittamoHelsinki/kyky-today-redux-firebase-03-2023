@@ -91,3 +91,51 @@
   align-items: center;
   margin: $base-margin;
 }
+
+.input-label-required {
+  &:after {
+    content: " *";
+    color: red;
+}
+}
+
+.contact-form {
+  background-color: $grayscale-light;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  section {
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    line-height: 2em;
+  }
+
+  form {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 $padding-large;
+    padding-bottom: $padding-large;
+    margin: $base-margin;
+
+    section {
+      width: 60%;
+      margin-left: 60px;
+    }
+  }
+}
+
+.faq-section {
+  line-height: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
