@@ -2,27 +2,40 @@ import { useContext, useState } from 'react';
 import Language from '../language';
 import Input from '../components/Input';
 import 'material-icons/iconfont/material-icons.css';
+import Checkbox from '../components/Checkbox';
+// import CheckboxContainer from '../components/CheckboxContainer';
 
 function UserRegistration() {
   const { lang } = useContext(Language);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [usernameCheck, setUsernameCheck] = useState(false);
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [usernameCheck, setUsernameCheck] = useState(false);
+  const [company, setCompany] = useState('');
+  const [subscribe, setSubscribe] = useState(false);
+  const [terms, setTerms] = useState(false);
 
   const [usernameIsValid, setUsernameIsValid] = useState(true);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
   const [passwordConfirmIsValid, setPasswordConfirmIsValid] = useState(true);
+  const [termsAccepted, setTermsAccepted] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (usernameIsValid && emailIsValid && passwordIsValid && passwordConfirmIsValid) {
+    if (
+      usernameIsValid &&
+      emailIsValid &&
+      passwordIsValid &&
+      passwordConfirmIsValid &&
+      termsAccepted
+    ) {
       console.log('submit');
+      console.log(username, email, password, passwordConfirm, company, subscribe, termsAccepted);
     }
   };
 
@@ -37,7 +50,7 @@ function UserRegistration() {
     } else {
       setEmailIsValid(true);
     }
-    if (password.length < 8 || password !== passwordConfirm) {
+    if (password.length < 8) {
       setPasswordIsValid(false);
     } else {
       setPasswordIsValid(true);
@@ -47,6 +60,11 @@ function UserRegistration() {
     }
     if (passwordConfirm === password) {
       setPasswordConfirmIsValid(true);
+    }
+    if (!terms) {
+      setTermsAccepted(false);
+    } else {
+      setTermsAccepted(true);
     }
   };
 
@@ -120,28 +138,39 @@ function UserRegistration() {
             setPasswordConfirm(e.target.value);
           }}
         />
-        <div className="input-container">
-          <label htmlFor="company">{lang.registration.company}</label>
-          <select name="company" placeholder={lang.registration.company}>
-            <option value="">{lang.common.dropdown_default}</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
-        </div>
-        <div className="checkbox-container no-shadow">
-          <input type="checkbox" name="subscribe_newsletter" value="subscribe_newsletter" />
-          <label className="checkbox-label" htmlFor="subscribe_newsletter">
-            {lang.registration.subscribe_newsletter}
-          </label>
-        </div>
-        <div className="checkbox-container no-shadow">
-          <input type="checkbox" name="user_agreement" value="user_agreement" />
-          <label className="checkbox-label" htmlFor="user_agreement">
-            {lang.registration.I_agree}
-            <a href="https://www.google.com/">{lang.registration.user_agreement}</a>
-          </label>
-        </div>
+
+        <Input
+          label={lang.registration.company}
+          type="text"
+          name="company"
+          value={company}
+          placeholder={lang.registration.company}
+          autoComplete="off"
+          onChange={(e) => {
+            setCompany(e.target.value);
+          }}
+        />
+      </section>
+      <section>
+        <Checkbox
+          label={lang.registration.subscribe_newsletter}
+          name="subscribe"
+          value={subscribe}
+          className="checkbox-container no-shadow"
+          onChange={(e) => {
+            setSubscribe(e.target.checked);
+          }}
+        />
+        <Checkbox
+          name="terms"
+          value={terms}
+          className={`checkbox-container no-shadow ${termsAccepted ? '' : 'error'}`}
+          onChange={(e) => {
+            setTerms(e.target.checked);
+          }}>
+          {lang.registration.I_agree}
+          <a href="https://www.google.com/">{lang.registration.terms}</a>
+        </Checkbox>
       </section>
       <button type="submit" className="button-primary" onClick={() => handleFormValidation()}>
         {lang.registration.submit_form}
