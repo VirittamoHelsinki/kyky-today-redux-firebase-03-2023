@@ -4,13 +4,31 @@
  * Simple checkbox component for use in forms.
  * You can add a link by passing it as a child to the component.
  */
-export default function Checkbox({ label, name, onChange, checked = 'ignore', children }) {
+export default function Checkbox({
+  label,
+  name,
+  value,
+  className = 'checkbox-container',
+  onChange,
+  checked = 'ignore',
+  required,
+  children
+}) {
   return (
-    <div className="checkbox-container">
+    <div className={className}>
       {checked === 'ignore' ? (
-        <input type="checkbox" name={name} id={name} onChange={onChange} />
+        <input type="checkbox" name={name} id={name} value={value} onChange={onChange} />
       ) : (
-        <input type="checkbox" name={name} id={name} onChange={onChange} checked={checked} />
+        <input
+          type="checkbox"
+          name={name}
+          id={name}
+          value={value}
+          className={className}
+          onChange={onChange}
+          checked={checked}
+          required={required}
+        />
       )}
 
       <label className="checkbox-label" htmlFor={name}>
