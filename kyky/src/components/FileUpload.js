@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useRef, useState, useEffect } from 'react';
+import Button from './Button';
 
 export default function FileUpload({
   title,
@@ -89,12 +90,12 @@ export default function FileUpload({
           );
         })}
       </div>
-      <button type="button" className="button-primary" onClick={handleClick}>
+      <Button type="button" onClick={handleClick}>
         <i className="material-icons-outlined" style={{ color: 'black' }}>
           add_circle_outline
         </i>
         Lisää tiedostoja
-      </button>
+      </Button>
       <input type="file" ref={fileInput} onChange={handleChange} hidden />
     </div>
   );

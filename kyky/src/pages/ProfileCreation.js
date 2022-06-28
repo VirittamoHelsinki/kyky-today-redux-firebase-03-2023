@@ -7,6 +7,7 @@ import Choice from '../components/Choice';
 import RadioChoices from '../components/RadioChoices';
 import FileUpload from '../components/FileUpload';
 import TextArea from '../components/TextArea';
+import Button from '../components/Button';
 
 const languages = [
   'Suomi',
@@ -149,9 +150,7 @@ export default function ProfileCreation() {
           <TextArea label="Suositukset" name="recommendations" />
         </section>
         <section>
-          <button type="submit" className="button-primary">
-            {lang.profile_creation.submit_form}
-          </button>
+          <Button type="submit">{lang.profile_creation.submit_form}</Button>
         </section>
       </form>
     </main>
