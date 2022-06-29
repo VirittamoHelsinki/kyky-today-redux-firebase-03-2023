@@ -7,7 +7,7 @@ function ContactForm() {
   const [showAll, setShowAll] = useState(false);
   const [buttonLabel, setButtonLabel] = useState('Näytä kaikki');
   const { lang } = useContext(Language);
-  const showSubmitButton = false;
+  const showSubmitButton = true;
 
   const toggleVisibility = () => {
     if (showAll === false) {
