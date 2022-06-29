@@ -3,7 +3,11 @@
   "name": "Suomi",
 
   "common": {
-    "dropdown_default": "Valitse"
+    "dropdown_default": "Valitse",
+    "max_files": "Voit lisätä {filesNumber} tiedostoa. Tiedostojen koko saa olla enintään {size}MB",
+    "add_files": "Lisää tiedostoja",
+    "yes": "Kyllä",
+    "no": "Ei"
   },
 
   "registration": {
@@ -47,7 +51,15 @@
     "city": "Kaupunki",
     "zip": "Postinumero",
     "country": "Maa",
-    "submit_form": "Seuraava"
+    "submit_form": "Seuraava",
+    "language_skill": "Kielitaito",
+    "work_areas": "Valitse alueet, joissa haluat työskennellä",
+    "outside_work_areas": "Voin matkustaa alueeni ulkopuolelle tarvittaessa",
+    "own_car": "Minä omistan auton",
+    "studies": "Opinnot",
+    "studies_description": "Voit vapaasti kertoa opinnoistasi ja mitä tutkintoja, kursseja, tai sertifikaatteja olet suorittanut",
+    "portfolio": "Portfolio",
+    "recommendations": "Suositukset"
   },
 
   "contact_form": {

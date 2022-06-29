@@ -3,7 +3,11 @@
   "name": "English",
 
   "common": {
-    "dropdown_default": "Choose"
+    "dropdown_default": "Choose",
+    "max_files": "You can add up to {filesNumber} files. Maximum size of files is {size}MB",
+    "add_files": "Add files",
+    "yes": "Yes",
+    "no": "No"
   },
 
   "registration": {
@@ -20,6 +24,26 @@
     "sign_in": "Sign in here",
     "or": " or ",
     "recover_password": "recover your password"
+  },
+  "profile_creation": {
+    "h1": "Create your profile",
+    "choose_portrait": "Select profile picture",
+    "add_portrait": "Add image",
+    "name": "Name",
+    "phone": "Phone number",
+    "address": "Address",
+    "city": "City",
+    "zip": "Zipcode",
+    "country": "Country",
+    "submit_form": "Next",
+    "language_skill": "Language skills",
+    "work_areas": "Choose the areas you'd like to work in",
+    "outside_work_areas": "I can travel outside my work area when necessary",
+    "own_car": "I have a car",
+    "studies": "Studies",
+    "studies_description": "You can freely describe your studies and what degrees, courses or certificates you may have",
+    "portfolio": "Portfolio",
+    "recommendations": "Recommendations"
   },
 
   "sandbox": {
