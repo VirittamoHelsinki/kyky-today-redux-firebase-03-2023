@@ -11,9 +11,15 @@ function UserLogIn() {
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [creditalError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (username === '' || password === '') {
+      return;
+    }
+    console.log('username:', username, 'password:', password, 'remember me:', remember);
+    alert(`Matching username and password: ${creditalError}`);
   };
 
   return (

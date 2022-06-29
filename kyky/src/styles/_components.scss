@@ -157,6 +157,15 @@ form {
       color: red;
     }
   }
+
+  span.login-help {
+    font-size: $font-size-xl;
+    margin-top: $margin-small;
+
+    a {
+      font-weight: $font-weight-bold;
+    }
+  }
 }
 
 // checkbox container
