@@ -85,20 +85,6 @@
   }
 }
 
-.input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: $base-margin;
-}
-
-.input-label-required {
-  &:after {
-    content: " *";
-    color: red;
-}
-}
-
 .contact-form {
   background-color: $grayscale-light;
   display: flex;
