@@ -1,4 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+/* Variables, functions and mixins
+    - UI colors
+    - font-sizes
+    - font-families
+    - font-weights
+    - font-styles
+    - drop-shadows
+    - borders
+    - margins
+    - paddings
+    - widths
+    - heights
+ */
 
 // UI colors
 $black: #000000;
@@ -13,7 +25,7 @@ $kyky-primary-dark: #387a70;
 $kyky-primary-default: #18c7ad;
 $alert-red: #f51720;
 
-// font styles
+// font families
 $font-family-default: 'Roboto', sans-serif;
 
 // font sizes

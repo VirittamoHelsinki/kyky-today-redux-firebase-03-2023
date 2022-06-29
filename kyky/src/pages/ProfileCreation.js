@@ -7,6 +7,7 @@ import Choice from '../components/Choice';
 import RadioChoices from '../components/RadioChoices';
 import FileUpload from '../components/FileUpload';
 import TextArea from '../components/TextArea';
+import Button from '../components/Button';
 
 const languages = [
   'Suomi',
@@ -114,44 +115,42 @@ export default function ProfileCreation() {
           />
         </section>
         <section>
-          <CheckboxContainer label="Kielitaito" content={languages} />
+          <CheckboxContainer label={lang.profile_creation.language_skill} content={languages} />
         </section>
         <section>
           <CheckboxContainer
-            label="Valitse alueet, joissa haluat työskennellä"
+            label={lang.profile_creation.work_areas}
             content={areas}
             customSelect={false}
           />
         </section>
         <section>
-          <RadioChoices label="Voin matkustaa alueeni ulkopuolelle tarvittaessa">
-            <Choice label="Kyllä" name="travel" />
-            <Choice label="Ei" name="travel" />
+          <RadioChoices label={lang.profile_creation.outside_work_areas}>
+            <Choice label={lang.common.yes} name="travel" />
+            <Choice label={lang.common.no} name="travel" />
           </RadioChoices>
         </section>
         <section>
-          <RadioChoices label="Minä omistan auton">
-            <Choice label="Kyllä" name="car" />
-            <Choice label="Ei" name="car" />
+          <RadioChoices label={lang.profile_creation.own_car}>
+            <Choice label={lang.common.yes} name="car" />
+            <Choice label={lang.common.no} name="car" />
           </RadioChoices>
         </section>
         <section>
           <FileUpload
-            title="Opinnot"
-            subTitle="Voit vapaasti kertoa opinnoistasi ja mitä tutkintoja, kursseja, tai sertifikaatteja olet suorittanut"
+            title={lang.profile_creation.studies}
+            subTitle={lang.profile_creation.studies_description}
             showDropArea
           />
         </section>
         <section>
-          <FileUpload title="Portfolio" subTitle="" />
+          <FileUpload title={lang.profile_creation.portfolio} subTitle="" />
         </section>
         <section>
-          <TextArea label="Suositukset" name="recommendations" />
+          <TextArea label={lang.profile_creation.recommendations} name="recommendations" />
         </section>
         <section>
-          <button type="submit" className="button-primary">
-            {lang.profile_creation.submit_form}
-          </button>
+          <Button type="submit">{lang.profile_creation.submit_form}</Button>
         </section>
       </form>
     </main>

@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useContext } from 'react';
+import Language from '../language';
+import Button from './Button';
 
 export default function FileUpload({
   title,
@@ -12,6 +14,8 @@ export default function FileUpload({
   const fileInput = useRef(null);
   const drop = useRef(null);
   const [files, setFiles] = useState([]);
+  const [text, setText] = useState('');
+  const { lang } = useContext(Language);
 
   const handleClick = () => {
     fileInput.current.click();
@@ -49,6 +53,12 @@ export default function FileUpload({
   }, [showDropArea]);
 
   useEffect(() => {
+    const rawText = lang.common.max_files;
+    const parsedText = rawText.replace('{filesNumber}', filesNumber).replace('{size}', size);
+    setText(parsedText);
+  }, [lang]);
+
+  useEffect(() => {
     console.log(files);
     if (files.length > 0) {
       console.log('excuse me WTF');
@@ -61,9 +71,7 @@ export default function FileUpload({
       <div className="file-upload-texts">
         <h3 className="file-upload-title">{title}</h3>
         <p className="file-upload-subtitle">{subTitle}</p>
-        <p className="files-info">
-          Voit lisätä {filesNumber} tiedostoa. Tiedostojen koko saa olla enintään {size}MB
-        </p>
+        <p className="files-info">{text}</p>
       </div>
       {showDropArea && (
         <div className="file-upload-drop-area" ref={drop}>
@@ -89,12 +97,12 @@ export default function FileUpload({
           );
         })}
       </div>
-      <button type="button" className="button-primary" onClick={handleClick}>
+      <Button type="button" onClick={handleClick}>
         <i className="material-icons-outlined" style={{ color: 'black' }}>
           add_circle_outline
         </i>
-        Lisää tiedostoja
-      </button>
+        {lang.common.add_files}
+      </Button>
       <input type="file" ref={fileInput} onChange={handleChange} hidden />
     </div>
   );

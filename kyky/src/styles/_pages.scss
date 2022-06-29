@@ -1,6 +1,8 @@
 @use "utilities" as *;
 
-/* Profile creation styles */
+/* Page-specific styles (non-reusable) */
+
+// Profile creation styles
 
 .profile {
   background-color: $grayscale-light;
@@ -85,6 +87,7 @@
   }
 }
 
+<<<<<<< HEAD
 .input-flex-container {
   display: flex;
   flex-direction: column;
@@ -99,6 +102,8 @@
  }
 }
 
+=======
+>>>>>>> 74d5eaa6a107bbd766fff84f9b202a81cc2d8f92
 .contact-form {
   background-color: $grayscale-light;
   display: flex;
@@ -143,6 +148,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   margin-left: -2rem;
 
   h1 {
@@ -178,3 +184,7 @@
   align-items: center;
   margin-left: -60px;
 }
+=======
+  width: 60%;
+}
+>>>>>>> 74d5eaa6a107bbd766fff84f9b202a81cc2d8f92

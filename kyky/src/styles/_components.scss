@@ -1,5 +1,13 @@
 @use "utilities" as *;
 
+/* Reusable components:
+- buttons
+- cards
+- forms
+- text fields
+- inputs
+*/
+
 // buttons
 
 .button-primary {
@@ -87,6 +95,13 @@
 
 form {
 
+  .input-flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: $base-margin;
+  }
+
   .input-container {
     display: grid;
     grid-template-columns: clamp(110px, 88%, 635px) auto;
@@ -133,6 +148,13 @@ form {
       input {
         border: calc($base-border-thickness * 5) solid $alert-red;
       }
+    }
+  }
+
+  .input-label-required {
+    &:after {
+      content: " *";
+      color: red;
     }
   }
 }
