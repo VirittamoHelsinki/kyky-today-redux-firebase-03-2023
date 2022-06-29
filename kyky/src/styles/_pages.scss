@@ -85,7 +85,7 @@
   }
 }
 
-.input-container {
+.input-flex-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,7 +96,7 @@
   &:after {
     content: " *";
     color: red;
-}
+ }
 }
 
 .contact-form {
@@ -106,12 +106,18 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  line-height: 2em;
 
-  section {
-    width: 60%;
-    justify-content: center;
-    align-items: center;
-    line-height: 2em;
+  h1 {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    margin-top: 3.5em;
+    margin-bottom: 2em;
+    font-size: 1.8rem;
   }
 
   form {
@@ -137,5 +143,38 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60%;
+  margin-left: -2rem;
+
+  h1 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+}
+
+.info-section {
+  line-height: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-number {
+  color: $kyky-primary-dark;
+  font-size: 2rem;
+  font-weight: bolder;
+  margin-top: 10px;
+}
+
+.kyky-email {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: -60px;
 }
