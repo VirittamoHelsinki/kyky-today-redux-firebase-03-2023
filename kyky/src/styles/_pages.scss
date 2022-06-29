@@ -1,6 +1,8 @@
 @use "utilities" as *;
 
-/* Profile creation styles */
+/* Page-specific styles (non-reusable) */
+
+// Profile creation styles
 
 .profile {
   background-color: $grayscale-light;
