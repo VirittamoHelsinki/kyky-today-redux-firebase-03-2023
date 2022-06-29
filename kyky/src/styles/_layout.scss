@@ -4,6 +4,7 @@ body {
   color: $black;
   font-size: $base-font-size;
   font-family: $font-family-default;
+  background-color: $grayscale-light;
 }
 
 // FORMS
@@ -13,7 +14,7 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 $padding-large;
+  padding: $padding-xlarge;
   padding-bottom: $padding-xlarge;
   margin: $base-margin;
 
@@ -27,7 +28,7 @@ form {
 
   h1 {
     text-align: center;
-    margin: $base-margin 0;
+    margin: 0 0 $base-margin;
   }
 
   section {
