@@ -1,4 +1,4 @@
-@use "utilities" as *;
+@use "_utilities" as *;
 
 /* Typography:
     - paragraphs
@@ -14,24 +14,29 @@ p {
 
 // headings
 
-h1 {
-    font-weight: $font-weight-bold;
-    font-size: $font-size-xxl;
-}
-
-h2 {
-    font-weight: $font-weight-bold;
-    font-size: $font-size-xl;
-}
-
+h1,
+h2,
 h3 {
     font-weight: $font-weight-bold;
-    font-size: $font-size-l;
+    font-size: $heading-size-m;
+
+    &.small {
+        @include fontScale(1.25);
+    }
+
+    &.medium {
+        @include fontScale(1.875);
+    }
+
+    &.large {
+        @include fontScale(2.5);
+    }
 }
 
 // links
 
-a {
+a.primary {
+    //primary link colors and styles
     color: $kyky-primary-dark;
 
     &:visited {

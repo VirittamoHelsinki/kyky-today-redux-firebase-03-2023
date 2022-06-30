@@ -1,6 +1,6 @@
 // For visual component guidance and testing :)
 import { useContext } from 'react';
-import Language from './language';
+import Language from '../language';
 import 'material-icons/iconfont/material-icons.css';
 
 function StyleSandbox() {
@@ -66,7 +66,7 @@ function StyleSandbox() {
             </label>
           </div>
         </section>
-        <button type="button" className="button-primary" onClick="">
+        <button type="button" className="button-primary" onClick={() => console.log('click :D')}>
           <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" rel="noreferrer">
             {lang.sandbox.button_primary}
           </a>

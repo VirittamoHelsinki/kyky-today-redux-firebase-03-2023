@@ -19,8 +19,8 @@ $grayscale-light: #f8f9f8;
 $grayscale-medium-light: #cccccc;
 $grayscale-medium: #808080;
 $grayscale-medium-dark: #25282b;
-$grayscale-darker: #1a1a1a;
-$grayscale-darkest: #1b1b1b;
+$grayscale-dark: #1a1a1a;
+$grayscale-darker: #1b1b1b;
 $kyky-primary-dark: #387a70;
 $kyky-primary-default: #18c7ad;
 $alert-red: #f51720;
@@ -30,12 +30,24 @@ $font-family-default: 'Roboto', sans-serif;
 
 // font sizes
 $base-font-size: 1rem; //--16px
+
+// paragraph, label, etc. text sizes
+
 $font-size-xxs: calc($base-font-size * 0.75); //--12px
 $font-size-xs: calc($base-font-size * 0.813); //--13px
 $font-size-s: calc($base-font-size * 0.875); //--14px
+$font-size-m: calc($base-font-size * 1); //--16px
 $font-size-l: calc($base-font-size * 1.125); //--18px
 $font-size-xl: calc($base-font-size * 1.25); //--20px
-$font-size-xxl: calc($base-font-size * 1.875); //--30px
+$font-size-xxl: calc($base-font-size * 1.5); //--24px
+
+// header sizes
+
+$heading-size-s: calc($base-font-size * 1.25); //--20px
+$heading-size-m: calc($base-font-size * 1.875); //--30px
+$heading-size-l: calc($base-font-size * 2.5); //--40px
+
+
 
 // font weights
 $font-weight-thin: 100;
@@ -77,9 +89,16 @@ $base-border-radius: 10px;
 
 //element widths
 $wide: 1185px;
+$medium: 930px;
 $small: 575px;
 
 //material icons
 $material-icons-font-path: './' !default;
 $material-icons-font-size: 24px !default;
 $material-icons-font-display: block !default;
+
+//mixins
+
+@mixin fontScale($size) {
+    font-size: calc($size * $base-font-size);
+}

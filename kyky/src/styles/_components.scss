@@ -1,4 +1,4 @@
-@use "utilities" as *;
+@use "_utilities" as *;
 
 /* Reusable components:
 - buttons
@@ -47,11 +47,20 @@
 
 // cards
 
-.card-light {
-  background-color: $white;
+.card {
   border: none;
   border-radius: $base-border-radius;
-  box-shadow: $base-box-shadow;
+
+  &.light {
+    background-color: $white;
+    color: $black;
+  }
+
+  &.shadow {
+    box-shadow: $base-box-shadow;
+  }
+
+  background-color: $white;
 }
 
 

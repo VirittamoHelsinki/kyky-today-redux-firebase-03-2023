@@ -1,9 +1,13 @@
-@use "utilities" as *;
+@use "_utilities" as *;
 
 /* Layout elements like;
   - containers
   - grids
   - sections */
+
+#root {
+  min-height: 100vh;
+}
 
 body {
   color: $black;
@@ -11,6 +15,33 @@ body {
   font-family: $font-family-default;
   background-color: $grayscale-light;
 }
+
+header {
+  background-color: $grayscale-medium;
+  padding: $base-padding;
+  color: $white;
+  font-size: $base-font-size;
+  font-family: $font-family-default;
+
+  .component-header {
+    //delete this after not needed anymore
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid $grayscale-light;
+    position: absolute;
+    top: 0;
+    left: 0;
+    gap: 1em;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    nav.component-selector a {
+      color: $white;
+      text-decoration: none;
+    }
+  }
+}
+
 
 // FORMS
 
@@ -24,11 +55,15 @@ form {
   margin: $base-margin;
 
   &.wide {
-    width: clamp(calc($wide/2), 100%, $wide);
+    width: clamp(270px, 100%, $wide);
+  }
+
+  &.medium {
+    width: clamp(270px, 100%, $medium);
   }
 
   &.small {
-    width: clamp(calc($small/2), 100%, $small);
+    width: clamp(270px, 100%, $small);
   }
 
   h1 {
@@ -42,17 +77,22 @@ form {
   }
 }
 
-// SANDBOX
+/* Wrapper class, used to center elements e.g. in the main component*/
 
-.sandbox {
-  background-color: $grayscale-light;
+.wrapper {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
   width: 100%;
 
-  form {
-    max-width: $wide;
+  &.column {
+    flex-direction: column;
   }
+
+  &.fixed-centered {
+    justify-content: center;
+    align-items: center;
+  }
+
 }

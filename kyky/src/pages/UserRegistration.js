@@ -78,109 +78,117 @@ function UserRegistration() {
   };
 
   return (
-    <form className="card-light small" onSubmit={handleSubmit}>
-      <h1>{lang.registration.title}</h1>
-      <section>
-        <Input
-          label={lang.registration.username}
-          type="text"
-          name="username"
-          value={username}
-          placeholder={lang.registration.username}
-          className={`input-container ${usernameIsValid ? '' : 'error'}`}
-          autoComplete="username"
-          iconText="info"
-          onChange={(e) => {
-            handleUsernameValidation(e);
-            setUsername(e.target.value);
-          }}>
-          {usernameCheck && <i className="material-icons-outlined inside">done</i>}
-        </Input>
-        <Input
-          label={lang.registration.email}
-          type="email"
-          name="email"
-          value={email}
-          placeholder={lang.registration.email}
-          className={`input-container ${emailIsValid ? '' : 'error'}`}
-          autoComplete="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
+    <main className="wrapper fixed-centered">
+      <form className="card light small shadow" onSubmit={handleSubmit}>
+        <h1>{lang.registration.title}</h1>
+        <section>
+          <Input
+            label={lang.registration.username}
+            type="text"
+            name="username"
+            value={username}
+            placeholder={lang.registration.username}
+            className={`input-container ${usernameIsValid ? '' : 'error'}`}
+            autoComplete="username"
+            iconText="info"
+            onChange={(e) => {
+              handleUsernameValidation(e);
+              setUsername(e.target.value);
+            }}>
+            {usernameCheck && <i className="material-icons-outlined inside">done</i>}
+          </Input>
+          <Input
+            label={lang.registration.email}
+            type="email"
+            name="email"
+            value={email}
+            placeholder={lang.registration.email}
+            className={`input-container ${emailIsValid ? '' : 'error'}`}
+            autoComplete="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
 
-        <Input
-          label={lang.registration.password}
-          type={passwordVisible ? 'text' : 'password'}
-          name="password"
-          value={password}
-          placeholder={lang.registration.password}
-          className={`input-container ${passwordIsValid ? '' : 'error'}`}
-          autoComplete="new-password"
-          iconText={passwordVisible ? 'visibility_off' : 'visibility'}
-          iconOnClick={() => setPasswordVisible(!passwordVisible)}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
+          <Input
+            label={lang.registration.password}
+            type={passwordVisible ? 'text' : 'password'}
+            name="password"
+            value={password}
+            placeholder={lang.registration.password}
+            className={`input-container ${passwordIsValid ? '' : 'error'}`}
+            autoComplete="new-password"
+            iconText={passwordVisible ? 'visibility_off' : 'visibility'}
+            iconOnClick={() => setPasswordVisible(!passwordVisible)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
 
-        <Input
-          label={lang.registration.confirm_password}
-          type={passwordVisible ? 'text' : 'password'}
-          name="passwordConfirm"
-          value={passwordConfirm}
-          placeholder={lang.registration.confirm_password}
-          className={`input-container ${passwordConfirmIsValid ? '' : 'error'}`}
-          autoComplete="off"
-          iconText={passwordVisible ? 'visibility_off' : 'visibility'}
-          iconOnClick={() => setPasswordVisible(!passwordVisible)}
-          onChange={(e) => {
-            setPasswordConfirm(e.target.value);
-          }}
-        />
+          <Input
+            label={lang.registration.confirm_password}
+            type={passwordVisible ? 'text' : 'password'}
+            name="passwordConfirm"
+            value={passwordConfirm}
+            placeholder={lang.registration.confirm_password}
+            className={`input-container ${passwordConfirmIsValid ? '' : 'error'}`}
+            autoComplete="off"
+            iconText={passwordVisible ? 'visibility_off' : 'visibility'}
+            iconOnClick={() => setPasswordVisible(!passwordVisible)}
+            onChange={(e) => {
+              setPasswordConfirm(e.target.value);
+            }}
+          />
 
-        <Input
-          label={lang.registration.company}
-          type="text"
-          name="company"
-          value={company}
-          placeholder={lang.registration.company}
-          autoComplete="off"
-          onChange={(e) => {
-            setCompany(e.target.value);
-          }}
-        />
-      </section>
-      <section>
-        <Checkbox
-          label={lang.registration.subscribe_newsletter}
-          name="subscribe"
-          value={subscribe}
-          className="checkbox-container no-shadow"
-          onChange={(e) => {
-            setSubscribe(e.target.checked);
-          }}
-        />
-        <Checkbox
-          name="terms"
-          value={terms}
-          className={`checkbox-container no-shadow ${termsAccepted ? '' : 'error'}`}
-          onChange={(e) => {
-            setTerms(e.target.checked);
-          }}>
-          {lang.registration.I_agree}
-          <a href="https://www.google.com/">{lang.registration.terms}</a>
-        </Checkbox>
-      </section>
-      <button type="submit" className="button-primary" onClick={() => handleFormValidation()}>
-        {lang.registration.submit_form}
-      </button>
-      <span className="login-help">
-        <a href="https://www.google.com/">{lang.registration.sign_in}</a>
-        {lang.registration.or}
-        <a href="https://www.google.com/">{lang.registration.recover_password}</a>
-      </span>
-    </form>
+          <Input
+            label={lang.registration.company}
+            type="text"
+            name="company"
+            value={company}
+            placeholder={lang.registration.company}
+            autoComplete="off"
+            onChange={(e) => {
+              setCompany(e.target.value);
+            }}
+          />
+        </section>
+        <section>
+          <Checkbox
+            label={lang.registration.subscribe_newsletter}
+            name="subscribe"
+            value={subscribe}
+            className="checkbox-container no-shadow"
+            onChange={(e) => {
+              setSubscribe(e.target.checked);
+            }}
+          />
+          <Checkbox
+            name="terms"
+            value={terms}
+            className={`checkbox-container no-shadow ${termsAccepted ? '' : 'error'}`}
+            onChange={(e) => {
+              setTerms(e.target.checked);
+            }}>
+            {lang.registration.I_agree}
+            <a className="primary" href="https://www.google.com/">
+              {lang.registration.terms}
+            </a>
+          </Checkbox>
+        </section>
+        <button type="submit" className="button-primary" onClick={() => handleFormValidation()}>
+          {lang.registration.submit_form}
+        </button>
+        <span className="login-help">
+          <a className="primary" href="https://www.google.com/">
+            {lang.registration.sign_in}
+          </a>
+          {lang.registration.or}
+          <a className="primary" href="https://www.google.com/">
+            {lang.registration.recover_password}
+          </a>
+        </span>
+      </form>
+    </main>
   );
 }
 

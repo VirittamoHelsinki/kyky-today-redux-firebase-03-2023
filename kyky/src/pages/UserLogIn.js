@@ -23,49 +23,55 @@ function UserLogIn() {
   };
 
   return (
-    <form className="card-light small" onSubmit={handleSubmit}>
-      <section>
-        <h1>Kirjaudu sisään - Kyky</h1>
-        <Input
-          label={lang.registration.username}
-          type="text"
-          name="username"
-          value={username}
-          placeholder={lang.registration.username}
-          autoComplete="username"
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <Input
-          label={lang.registration.password}
-          type={passwordVisible ? 'text' : 'password'}
-          name="password"
-          value={password}
-          placeholder={lang.registration.password}
-          autoComplete="new-password"
-          iconText={passwordVisible ? 'visibility_off' : 'visibility'}
-          iconOnClick={() => setPasswordVisible(!passwordVisible)}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </section>
-      <Checkbox
-        label={lang.registration.remember}
-        name="remember"
-        value={remember}
-        onChange={(e) => setRemember(e.target.checked)}
-        checked={remember}>
-        Pidä minut kirjautuneena
-      </Checkbox>
-      <Button type="submit" onClick={handleSubmit}>
-        Kirjaudu sisään
-      </Button>
-      <span className="login-help">
-        <a href="https://www.google.com/">{lang.registration.sign_in}</a>
-        {lang.registration.or}
-        <a href="https://www.google.com/">{lang.registration.recover_password}</a>
-      </span>
-    </form>
+    <main className="wrapper fixed-centered">
+      <form className="card light small shadow centered" onSubmit={handleSubmit}>
+        <section>
+          <h1>Kirjaudu sisään - Kyky</h1>
+          <Input
+            label={lang.registration.username}
+            type="text"
+            name="username"
+            value={username}
+            placeholder={lang.registration.username}
+            autoComplete="username"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <Input
+            label={lang.registration.password}
+            type={passwordVisible ? 'text' : 'password'}
+            name="password"
+            value={password}
+            placeholder={lang.registration.password}
+            autoComplete="new-password"
+            iconText={passwordVisible ? 'visibility_off' : 'visibility'}
+            iconOnClick={() => setPasswordVisible(!passwordVisible)}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </section>
+        <Checkbox
+          label={lang.registration.remember}
+          name="remember"
+          value={remember}
+          onChange={(e) => setRemember(e.target.checked)}
+          checked={remember}>
+          Pidä minut kirjautuneena
+        </Checkbox>
+        <Button type="submit" onClick={handleSubmit}>
+          Kirjaudu sisään
+        </Button>
+        <span className="login-help">
+          <a className="primary" href="https://www.google.com/">
+            {lang.registration.sign_in}
+          </a>
+          {lang.registration.or}
+          <a className="primary" href="https://www.google.com/">
+            {lang.registration.recover_password}
+          </a>
+        </span>
+      </form>
+    </main>
   );
 }
 

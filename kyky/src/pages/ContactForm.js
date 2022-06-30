@@ -43,12 +43,22 @@ function ContactForm() {
   function faqSection() {
     return (
       <div className="faq-section">
-        <h1>FAQ, top 5</h1>
-        <a href="url">Mikä on Kyky?</a>
-        <a href="url">Kuka voi liittyä?</a>
-        <a href="url">Miten voi liittyä?</a>
-        <a href="url">Miten voi ostaa palveluita?</a>
-        <a href="url">Miten voin peruuttaa ostoni?</a>
+        <h1 className="large">FAQ, top 5</h1>
+        <a className="primary" href="url">
+          Mikä on Kyky?
+        </a>
+        <a className="primary" href="url">
+          Kuka voi liittyä?
+        </a>
+        <a className="primary" href="url">
+          Miten voi liittyä?
+        </a>
+        <a className="primary" href="url">
+          Miten voi ostaa palveluita?
+        </a>
+        <a className="primary" href="url">
+          Miten voin peruuttaa ostoni?
+        </a>
         <button className="button-primary" type="button" onClick={toggleVisibility}>
           {buttonLabel}
         </button>
@@ -60,16 +70,36 @@ function ContactForm() {
     return (
       <div className="faq-section">
         <h1>FAQ, top 5</h1>
-        <a href="url">Mikä on Kyky?</a>
-        <a href="url">Kuka voi liittyä?</a>
-        <a href="url">Miten voi liittyä?</a>
-        <a href="url">Miten voi ostaa palveluita?</a>
-        <a href="url">Miten voin peruuttaa ostoni?</a>
-        <a href="url">Linkki</a>
-        <a href="url">Linkki</a>
-        <a href="url">Linkki</a>
-        <a href="url">Linkki</a>
-        <a href="url">Linkki</a>
+        <a className="primary" href="url">
+          Mikä on Kyky?
+        </a>
+        <a className="primary" href="url">
+          Kuka voi liittyä?
+        </a>
+        <a className="primary" href="url">
+          Miten voi liittyä?
+        </a>
+        <a className="primary" href="url">
+          Miten voi ostaa palveluita?
+        </a>
+        <a className="primary" href="url">
+          Miten voin peruuttaa ostoni?
+        </a>
+        <a className="primary" href="url">
+          Linkki
+        </a>
+        <a className="primary" href="url">
+          Linkki
+        </a>
+        <a className="primary" href="url">
+          Linkki
+        </a>
+        <a className="primary" href="url">
+          Linkki
+        </a>
+        <a className="primary" href="url">
+          Linkki
+        </a>
         <button className="button-primary" type="button" onClick={toggleVisibility}>
           {buttonLabel}
         </button>
@@ -78,9 +108,9 @@ function ContactForm() {
   }
 
   return (
-    <main className="contact-form">
-      <form className="card-light wide" onSubmit={handleSubmit}>
-        <h1>Ota yhteyttä</h1>
+    <main className="wrapper fixed-centered contact-form">
+      <form className="card light medium shadow" onSubmit={handleSubmit}>
+        <h1 className="large">Ota yhteyttä</h1>
         <div className="info-section">
           <p>Meidät tavoittaa verkossa, Whatsapilla ja sähköpostilla</p>
           <p>Ota yhteyttä, autamme mielellämme!</p>
