@@ -108,52 +108,56 @@ function ContactForm() {
   }
 
   return (
-    <main className="wrapper fixed-centered contact-form">
-      <form className="card light medium shadow" onSubmit={handleSubmit}>
+    <main className="wrapper fixed-centered">
+      <div className="container card light medium shadow">
         <h1 className="large">Ota yhteyttä</h1>
-        <div className="info-section">
+        <address className="info-section">
           <p>Meidät tavoittaa verkossa, Whatsapilla ja sähköpostilla</p>
           <p>Ota yhteyttä, autamme mielellämme!</p>
           <p>Täytä yhteydenottolomake lähetä sähköpostia tai laita veistiä Whatsappilla</p>
           <p className="phone-number">000 000 0000</p>
           <p className="kyky-email">email@kyky.today</p>
           <p>Olemme tavoitettavissa ma-pe 9-18</p>
+        </address>
+
+        <form onSubmit={handleSubmit} className="contact-form tight">
           <h2>Yhteydenottolomake</h2>
-        </div>
-        <section>
-          <div className="input-container">
-            <label className="input-label-required" htmlFor="email">
-              {lang.contact_form.email}
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder={lang.contact_form.email}
-              autoComplete="username"
-              value={email}
-              onChange={({ target }) => {
-                setEmail(target.value);
-              }}
-            />
-          </div>
-          <div className="input-container">
-            <label className="input-label-required" htmlFor="message">
-              {lang.contact_form.title}
-            </label>
-            <input
-              type="text"
-              placeholder={lang.contact_form.title_placeholder}
-              value={message}
-              onChange={({ target }) => {
-                setMessage(target.value);
-              }}
-            />
-          </div>
-          {showSubmitButton === true ? submitButton() : null}
-          {showAll === false ? faqSection() : faqSectionLong()}
-        </section>
-      </form>
+
+          <section>
+            <div className="input-container flex">
+              <label className="input-label-required" htmlFor="email">
+                {lang.contact_form.email}
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder={lang.contact_form.email}
+                autoComplete="username"
+                value={email}
+                onChange={({ target }) => {
+                  setEmail(target.value);
+                }}
+              />
+            </div>
+            <div className="input-container flex">
+              <label className="input-label-required" htmlFor="message">
+                {lang.contact_form.title}
+              </label>
+              <input
+                type="text"
+                placeholder={lang.contact_form.title_placeholder}
+                value={message}
+                onChange={({ target }) => {
+                  setMessage(target.value);
+                }}
+              />
+            </div>
+          </section>
+        </form>
+        {showSubmitButton === true ? submitButton() : null}
+        {showAll === false ? faqSection() : faqSectionLong()}
+      </div>
     </main>
   );
 }

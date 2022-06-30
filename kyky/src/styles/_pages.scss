@@ -73,13 +73,6 @@
   }
 }
 
-.input-flex-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: $base-margin;
-}
-
 .input-label-required {
   &:after {
     content: " *";
@@ -89,9 +82,12 @@
 
 .contact-form {
   line-height: 2em;
+  padding: 0;
+  padding-bottom: $padding-large;
+  margin: $base-margin;
+  width: clamp(10em, 100%, 435px);
 
   h1 {
-    margin-top: 1.5em;
     margin-bottom: 1.5em;
   }
 
@@ -99,26 +95,14 @@
     margin-top: 3.5em;
     margin-bottom: 2em;
   }
-
-  form {
-    padding: 0 $padding-large;
-    padding-bottom: $padding-large;
-    margin: $base-margin;
-
-    section {
-      width: 60%;
-      margin-left: 60px;
-    }
-  }
 }
 
 .faq-section {
-  line-height: 2em;
+  line-height: 2.5em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: -2.75rem;
 
   h1 {
     margin-top: 2em;
@@ -144,12 +128,4 @@
 .kyky-email {
   font-size: 1.5rem;
   margin-top: 10px;
-}
-
-.contact-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: -60px;
 }

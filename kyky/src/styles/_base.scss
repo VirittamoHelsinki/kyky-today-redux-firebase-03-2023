@@ -29,6 +29,13 @@ ul {
   list-style: none;
 }
 
+address,
+blockquote,
+q {
+  quotes: none;
+  font-style: normal;
+}
+
 img {
   max-width: 100%;
   height: auto;

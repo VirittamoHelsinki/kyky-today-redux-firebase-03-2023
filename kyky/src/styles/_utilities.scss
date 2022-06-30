@@ -102,3 +102,7 @@ $material-icons-font-display: block !default;
 @mixin fontScale($size) {
     font-size: calc($size * $base-font-size);
 }
+
+@mixin elemWidth($size) {
+    width: clamp(270px, 100%, $size); // size: $wide, $medium, $small
+}

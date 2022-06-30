@@ -45,7 +45,9 @@ header {
 
 // FORMS
 
-form {
+form,
+.container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,15 +57,15 @@ form {
   margin: $base-margin;
 
   &.wide {
-    width: clamp(270px, 100%, $wide);
+    @include elemWidth($wide);
   }
 
   &.medium {
-    width: clamp(270px, 100%, $medium);
+    @include elemWidth($medium);
   }
 
   &.small {
-    width: clamp(270px, 100%, $small);
+    @include elemWidth($small);
   }
 
   h1 {
@@ -74,7 +76,10 @@ form {
   section {
     margin-bottom: $base-margin;
     width: 100%;
+
+
   }
+
 }
 
 /* Wrapper class, used to center elements e.g. in the main component*/
