@@ -1,0 +1,48 @@
+[
+  {
+    "date": "2022-09-02",
+    "jobs": [
+      {
+        "name": "babysitting",
+        "times": [
+          {
+            "start": "9.00",
+            "end": "10.00"
+          },
+          {
+            "start": "19.30",
+            "end": "22.00"
+          }
+        ]
+      },
+      {
+        "name": "plant_sitting",
+        "times": [
+          {
+            "start": "9.00",
+            "end": "10.30"
+          }
+        ]
+      },
+      {
+        "name": "wordpress_designer",
+        "times": [
+          {
+            "start": "8.00",
+            "end": "10.00"
+          }
+        ]
+      },
+
+      {
+        "name": "photography",
+        "times": [
+          {
+            "start": "12.00",
+            "end": "18.30"
+          }
+        ]
+      }
+    ]
+  }
+]

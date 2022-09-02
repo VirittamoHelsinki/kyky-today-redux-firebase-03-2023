@@ -9,6 +9,8 @@ function ContactForm() {
   const { lang } = useContext(Language);
   const showSubmitButton = true;
 
+  // Toggle function for showing long
+  // and short version of FAQ section
   const toggleVisibility = () => {
     if (showAll === false) {
       setButtonLabel('Piilota');
@@ -18,6 +20,10 @@ function ContactForm() {
     setShowAll(!showAll);
   };
 
+  // Handler function for submittin the form.
+  // Basically an empty function used only
+  // for demonstration purposes, prints
+  // form info to console.
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -30,6 +36,7 @@ function ContactForm() {
     }
   }
 
+
   function submitButton() {
     return (
       <div className="contact-section">
@@ -40,6 +47,9 @@ function ContactForm() {
     );
   }
 
+  // Function that returns the short
+  // version of FAQ section. Used with
+  // toggleVisibility.
   function faqSection() {
     return (
       <div className="faq-section">
@@ -66,6 +76,9 @@ function ContactForm() {
     );
   }
 
+  // Function that returns the long
+  // version of FAQ section. Used with
+  // toggleVisibility.
   function faqSectionLong() {
     return (
       <div className="faq-section">

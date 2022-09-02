@@ -17,11 +17,14 @@ body {
 }
 
 header {
+  position: fixed;
+  width: 100%;
   background-color: $grayscale-medium;
   padding: $base-padding;
   color: $white;
   font-size: $base-font-size;
   font-family: $font-family-default;
+  z-index: 5;
 
   .component-header {
     //delete this after not needed anymore
@@ -41,7 +44,6 @@ header {
     }
   }
 }
-
 
 // FORMS
 
@@ -76,10 +78,7 @@ form,
   section {
     margin-bottom: $base-margin;
     width: 100%;
-
-
   }
-
 }
 
 /* Wrapper class, used to center elements e.g. in the main component*/
@@ -99,5 +98,4 @@ form,
     justify-content: center;
     align-items: center;
   }
-
 }

@@ -63,7 +63,6 @@
   background-color: $white;
 }
 
-
 // checkboxes
 
 .checkbox-container {
@@ -78,11 +77,11 @@
     margin-left: 20px;
   }
 
-  input[type=checkbox] {
+  input[type="checkbox"] {
     width: 17px;
     height: 17px;
     border-radius: none;
-    border: calc($base-border-thickness*2) solid $black;
+    border: calc($base-border-thickness * 2) solid $black;
     box-shadow: $base-box-shadow;
     background-color: transparent;
   }
@@ -103,7 +102,6 @@
 // form fields
 
 form {
-
   .input-container {
     display: grid;
     grid-template-columns: clamp(110px, 88%, 635px) auto;
@@ -142,7 +140,6 @@ form {
         }
       }
     }
-
 
     i.inside {
       position: relative;
@@ -434,4 +431,127 @@ form {
   .radio-choice {
     margin: 15px;
   }
+}
+
+.minified-calendar {
+  width: 490px;
+  height: 440px;
+  position: relative;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px;
+
+  .calendar-header {
+    width: 100%;
+    height: 90px;
+    background: rgba(211, 211, 211, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: space-between;
+
+    .calendar-header-top {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 60px;
+    }
+
+    .calendar-header-bottom {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 30px;
+
+      .calendar-header-day {
+        width: calc(100% / 7);
+        text-transform: capitalize;
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+
+    .calendar-select {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      select {
+        text-transform: capitalize;
+        font-size: 1.1rem;
+
+        option {
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+
+  .calendar-body {
+    width: 100%;
+    height: calc(100% - 90px);
+    background: rgba(156, 156, 156, 0.6);
+
+    .calendar-days {
+      width: 100%;
+      max-height: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+
+      .calendar-day {
+        width: 66px;
+        height: 66px;
+        margin: 2px;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+
+        &:hover {
+          filter: brightness(125%);
+          box-sizing: border-box;
+          background: $kyky-primary-dark;
+          border: 6px solid rgb(65, 163, 163);
+          color: white;
+        }
+
+        &.selected {
+          box-sizing: border-box;
+          background: $kyky-primary-dark;
+          border: 6px solid rgb(65, 163, 163);
+          color: white;
+        }
+
+        &.disabled {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+.rounded-select {
+  border-radius: 0.25rem;
+  border: 1px solid #a0a0a0;
+  padding: 0.45rem 0.2rem;
+}
+
+.arrow {
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.kyky-rounded {
+  border-radius: 1rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  color: white;
+  background: $kyky-primary-dark;
 }

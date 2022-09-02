@@ -45,6 +45,19 @@
     "portfolio": "Portfolio",
     "recommendations": "Recommendations"
   },
+  "job_creation": {
+    "h1": "Job addition",
+    "job_title": "Job title",
+    "name": "Name",
+    "job_description" : "Job description",
+    "job_category": "Job category",
+    "place": "Place",
+    "insurance": "I have an insurance",
+    "standard_price": "Standard price",
+    "include_alv": "VAT included in price",
+    "add_price": "Additional price",
+    "pictures": "Images"
+  },
 
   "sandbox": {
     "h1": "Amazing H1 Title",

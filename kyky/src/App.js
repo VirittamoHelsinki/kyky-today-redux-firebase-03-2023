@@ -10,6 +10,9 @@ import UserRegistration from './pages/UserRegistration';
 import ContactForm from './pages/ContactForm';
 import UserLogin from './pages/UserLogIn';
 import LandingPage from './pages/LandingPage';
+import JobCreation from './pages/JobCreation';
+import Overview from './pages/Overview';
+import JobCalendar from './pages/JobCalendar';
 
 const languages = { fi, en };
 function App() {
@@ -20,7 +23,11 @@ function App() {
     { to: '/profile-creation', label: 'Profile Creation' },
     { to: '/user-registration', label: 'User Registration' },
     { to: '/contact-form', label: 'Contact Form' },
-    { to: '/user-log-in', label: 'Log In' }
+    { to: '/user-log-in', label: 'Log In' },
+    { to: '/job-creation', label: 'Job Creation' },
+    { to: '/overview', label: 'Overview' },
+    { to: '/job-creation', label: 'Job Creation' },
+    { to: '/job-calendar', label: 'Job Calendar' }
   ];
 
   return (
@@ -31,9 +38,14 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/profile-creation" element={<ProfileCreation />} />
+            <Route path="/job-creation" element={<JobCreation />} />
             <Route path="/user-registration" element={<UserRegistration />} />
             <Route path="/contact-form" element={<ContactForm />} />
             <Route path="/user-log-in" element={<UserLogin />} />
+
+            <Route path="/overview" element={<Overview />} />
+
+            <Route path="/job-calendar" element={<JobCalendar />} />
           </Routes>
         </BrowserRouter>
       </>
