@@ -17,10 +17,60 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     background: $grayscale-light;
     border-radius: 0.25rem;
+
+    .bookings-short {
+      width: 450px;
+      height: calc(100% - 475px);
+      overflow: hidden;
+      overflow-y: auto;
+
+      :nth-child(even).job-short {
+        background: $kyky-primary-light;
+      }
+
+      :nth-child(odd).job-short {
+        background: $kyky-primary-lighter;
+      }
+
+      p {
+        text-align: center;
+        font-size: 1.5rem;
+        margin: 0.75rem;
+      }
+
+      .job-short {
+        display: flex;
+        width: 100%;
+        height: 50px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+
+        p {
+          font-size: 1rem;
+        }
+
+        .title {
+          font-weight: $font-weight-bold;
+          text-transform: capitalize;
+        }
+
+        .time {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 130px;
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
   }
 
   .time-table {
@@ -55,7 +105,7 @@
       position: absolute;
       width: calc(100% - 80px);
       left: 70px;
-      background: $kyky-primary-dark;
+      background: $kyky-primary-light;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -67,7 +117,7 @@
       }
 
       &.light {
-        filter: brightness(1.5);
+        background: $kyky-primary-lighter;
       }
     }
   }

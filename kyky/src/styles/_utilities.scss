@@ -23,10 +23,12 @@ $grayscale-dark: #1a1a1a;
 $grayscale-darker: #1b1b1b;
 $kyky-primary-dark: #387a70;
 $kyky-primary-default: #18c7ad;
+$kyky-primary-light: rgb(207, 240, 231);
+$kyky-primary-lighter: rgb(232, 254, 248);
 $alert-red: #f51720;
 
 // font families
-$font-family-default: 'Roboto', sans-serif;
+$font-family-default: "Roboto", sans-serif;
 
 // font sizes
 $base-font-size: 1rem; //--16px
@@ -46,8 +48,6 @@ $font-size-xxl: calc($base-font-size * 1.5); //--24px
 $heading-size-s: calc($base-font-size * 1.25); //--20px
 $heading-size-m: calc($base-font-size * 1.875); //--30px
 $heading-size-l: calc($base-font-size * 2.5); //--40px
-
-
 
 // font weights
 $font-weight-thin: 100;
@@ -71,7 +71,6 @@ $margin-medium-large: calc($base-margin * 1.563); //--25px
 $margin-large: calc($base-margin * 1.875); //--30px
 $margin-xlarge: calc($base-margin * 2.813); //--45px
 
-
 //paddings
 $base-padding: 1em; //--16px
 $padding-small: calc($base-padding * 0.469); //--7.5px
@@ -93,7 +92,7 @@ $medium: 930px;
 $small: 575px;
 
 //material icons
-$material-icons-font-path: './' !default;
+$material-icons-font-path: "./" !default;
 $material-icons-font-size: 24px !default;
 $material-icons-font-display: block !default;
 

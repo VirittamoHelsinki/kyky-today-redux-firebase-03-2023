@@ -34,9 +34,12 @@ const times = [
   '23.00'
 ];
 
+const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 function Overview() {
   const [date, setDate] = useState(new Date());
   const [bookings, setBookings] = useState([]);
+  const [allJobs, setAllJobs] = useState([]);
 
   useEffect(() => {
     const data = mockData.find((booking) => {
@@ -44,6 +47,16 @@ function Overview() {
     });
     if (data) {
       const jobs = checkOverlap(data.jobs);
+      const all_jobs = [];
+      jobs.forEach((job) => {
+        job.times.forEach((time) => {
+          all_jobs.push({ start: time.start, end: time.end, job: job.name });
+        });
+      });
+      all_jobs.sort((a, b) => {
+        return a.start - b.start;
+      });
+      setAllJobs(all_jobs);
       setBookings(jobs);
     } else {
       setBookings([]);
@@ -141,7 +154,24 @@ function Overview() {
     <main className="job-calendar-overview">
       <div className="side-bar">
         <Calendar date={date} setDate={setDate} />
-        <div className="bookings-short"></div>
+        <div className="bookings-short">
+          <p>
+            <strong>{weekDays[date.getDay()]}</strong> {date.toLocaleDateString('fi-fi')}
+          </p>
+          {allJobs.map((job) => {
+            return (
+              <div className="job-short">
+                <p className="title">{job.job}</p>
+                <div className="time">
+                  <i className="material-icons">calendar_month</i>
+                  <p className="value">
+                    {job.start} - {job.end}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="time-table">
         {times.map((time, index) => (
