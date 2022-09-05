@@ -27,10 +27,27 @@ export default function Calendar({ date, setDate, minYears = 5, maxYears = 50, l
     setCurrentMonth(date.getMonth());
     setCurrentYear(date.getFullYear());
     setDays(getDaysToDisplay(date.getFullYear(), date.getMonth()));
+
+    const firstDayOfMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
+    const lastDaysOfPreviousMonth = getLastDaysOfPreviousMonth(
+      date.getFullYear(),
+      date.getMonth() - 1,
+      firstDayOfMonth
+    );
+    setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 2);
   }, [date]);
 
   useEffect(() => {
-    if (selectedDay !== null) {
+    const firstDayOfMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
+    const lastDaysOfPreviousMonth = getLastDaysOfPreviousMonth(
+      date.getFullYear(),
+      date.getMonth() - 1,
+      firstDayOfMonth
+    );
+    if (
+      selectedDay !== null &&
+      selectedDay !== date.getDate() + lastDaysOfPreviousMonth.length - 2
+    ) {
       setDate(
         new Date(
           date.getFullYear(),
