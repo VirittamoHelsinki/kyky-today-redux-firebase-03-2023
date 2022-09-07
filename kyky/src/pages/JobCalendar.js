@@ -23,7 +23,8 @@ export default function JobCalendar() {
   const [date, setDate] = useState(new Date());
   const [days, setDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
-
+  const [currentMonth, setCurrentMonth] = useState(date.getMonth());
+  const [currentYear, setCurrentYear] = useState(date.getFullYear());
   useEffect(() => {
     setDays(getDaysToDisplay(date.getFullYear(), date.getMonth()));
   }, [date]);
@@ -46,13 +47,40 @@ export default function JobCalendar() {
     }
     return daysArr;
   }
+  useEffect(() => {
+    setCurrentMonth(date.getMonth());
+    setCurrentYear(date.getFullYear());
+    setDays(getDaysToDisplay(date.getFullYear(), date.getMonth()));
 
+    // const firstDayOfMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
+    // const lastDaysOfPreviousMonth = getLastDaysOfPreviousMonth(
+    //   date.getFullYear(),
+    //   date.getMonth() - 1,
+    //   firstDayOfMonth
+    // );
+    // setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 2);
+  }, [date]);
+  function changeMonth(month) {
+    let year = currentYear;
+    if (month > 11) {
+      month = 0;
+      year++;
+    }
+    if (month < 0) {
+      month = 11;
+      year--;
+    }
+    setDate(new Date(year, month, date.getDate()));
+  }
   return (
     <div>
       {' '}
       <div className="MainContainer">
         <div className="monthYear">
-          <button className="todayButton">Today</button>
+          <button className="todayButton">Today</button>{' '}
+          <button className="arrow" onClick={() => changeMonth(currentMonth - 1)}>
+            <i className="material-icons-outlined">chevron_left</i>
+          </button>
           <select
             className="month-select"
             value={date.getMonth()}
@@ -65,6 +93,9 @@ export default function JobCalendar() {
               </option>
             ))}
           </select>
+          <button className="arrow" onClick={() => changeMonth(currentMonth + 1)}>
+            <i className="material-icons-outlined">chevron_right</i>
+          </button>
           <select
             className="year-select"
             value={years.find((n) => {
@@ -100,7 +131,7 @@ export default function JobCalendar() {
           </div>
         </div>
         <div className="addScheduleContainer">
-          <button className= "scheduleButton">+ Add a schedule</button>
+          <button className="scheduleButton">+ Add a schedule</button>
         </div>
       </div>
     </div>
