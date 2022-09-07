@@ -2,6 +2,7 @@
 
 
 
+
 .todayButton{
   border-radius: 20px;
   background-color: $kyky-primary-dark;
@@ -14,7 +15,7 @@ width:470px;
 border-radius: 1;
 margin: 20px;
 align-items: center;
-justify-content: space-between;
+justify-content: space-around;
 position:relative;
 top:150px;
 
@@ -61,22 +62,40 @@ top:150px;
   justify-content:flex-start;
   align-items: flex-start;
   user-select: none;
+}.calendar-day:hover{
+  filter: brightness(125%);
+  box-sizing: border-box;
+  border: 6px solid rgb(65, 163, 163);
 }
+.calendar-day.selected {
+  box-sizing: border-box;
+  border: 6px solid rgb(65, 163, 163); 
+}
+.calendar-day.disbled{
+  opacity: 0.5;
+}
+
 .addScheduleContainer{
   display:flex;
-height: 750px;
+height: 800px;
 width: 600px;
-border:1px solid rgb(194, 183, 183);
+border:1px solid rgb(238, 230, 230);
+box-shadow: 2px 2px 1px rgb(238, 230, 230);
 position: relative;
 left:1240px;
-bottom:620px;}
+bottom:670px;}
 .scheduleButton{
   height:40px;
   width:150px;
   background-color: $kyky-primary-dark;
   color:white;
   border-radius: 20px;
-  position:relative;
+  position:absolute;
   top:430px;
   left:230px;
+}.scheduleDate{
+  font-size: 25px;
+  position: relative;
+  top:50px;
+  left:190px;
 }

@@ -77,7 +77,9 @@ export default function JobCalendar() {
       {' '}
       <div className="MainContainer">
         <div className="monthYear">
-          <button className="todayButton">Today</button>{' '}
+          <button className="todayButton" onClick={() => setDate(new Date())}>
+            Today
+          </button>{' '}
           <button className="arrow" onClick={() => changeMonth(currentMonth - 1)}>
             <i className="material-icons-outlined">chevron_left</i>
           </button>
@@ -130,7 +132,9 @@ export default function JobCalendar() {
             ))}
           </div>
         </div>
-        <div className="addScheduleContainer">
+        <div className="addScheduleContainer"> <p className="scheduleDate">
+            <strong>{weekDays[date.getDay()]}</strong> {date.toLocaleDateString('fi-fi')}
+          </p>
           <button className="scheduleButton">+ Add a schedule</button>
         </div>
       </div>
