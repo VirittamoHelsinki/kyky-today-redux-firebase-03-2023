@@ -13,7 +13,9 @@ import LandingPage from './pages/LandingPage';
 import JobCreation from './pages/JobCreation';
 import Overview from './pages/Overview';
 import JobCalendar from './pages/JobCalendar';
-import NewProfileCreation from './pages/NewProfileCreation';
+import Creation from './pages/ProfileCreation/Creation';
+import NewProfileCreation from './pages/ProfileCreation/NewProfileCreation';
+import GetStarted from './pages/ProfileCreation/GetStarted';
 
 const languages = { fi, en };
 function App() {
@@ -27,9 +29,8 @@ function App() {
     { to: '/user-log-in', label: 'Log In' },
     { to: '/job-creation', label: 'Job Creation' },
     { to: '/overview', label: 'Overview' },
-    { to: '/job-creation', label: 'Job Creation' },
     { to: '/job-calendar', label: 'Job Calendar' },
-    {to: '/new-profile-creation', label: 'New Profile Creation'}
+    { to: '/new-profile-creation', label: 'New Profile Creation' }
   ];
 
   return (
@@ -39,16 +40,20 @@ function App() {
           <Header languages={languages} lang={lang} setLang={setLang} navlinks={navlinks} />
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/profile-creation" element={<ProfileCreation />} />
-            <Route path="/job-creation" element={<JobCreation />} />
-            <Route path="/user-registration" element={<UserRegistration />} />
-            <Route path="/contact-form" element={<ContactForm />} />
-            <Route path="/user-log-in" element={<UserLogin />} />
+            <Route path="profile-creation" element={<ProfileCreation />} />
+            <Route path="job-creation" element={<JobCreation />} />
+            <Route path="user-registration" element={<UserRegistration />} />
+            <Route path="contact-form" element={<ContactForm />} />
+            <Route path="user-log-in" element={<UserLogin />} />
 
-            <Route path="/overview" element={<Overview />} />
+            <Route path="overview" element={<Overview />} />
 
-            <Route path="/job-calendar" element={<JobCalendar />} />
-            <Route path="/new-profile-creation" element= {<NewProfileCreation />} />
+            <Route path="job-calendar" element={<JobCalendar />} />
+            <Route path="new-profile-creation" element={<Creation />}>
+              <Route index element={<NewProfileCreation />} />
+              <Route path="get-started" element={<GetStarted />} />
+            </Route>
+            <Route path="get-started" element={<GetStarted />} />
           </Routes>
         </BrowserRouter>
       </>
