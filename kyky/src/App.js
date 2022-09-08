@@ -13,6 +13,7 @@ import LandingPage from './pages/LandingPage';
 import JobCreation from './pages/JobCreation';
 import Overview from './pages/Overview';
 import JobCalendar from './pages/JobCalendar';
+import NewProfileCreation from './pages/NewProfileCreation';
 
 const languages = { fi, en };
 function App() {
@@ -27,7 +28,8 @@ function App() {
     { to: '/job-creation', label: 'Job Creation' },
     { to: '/overview', label: 'Overview' },
     { to: '/job-creation', label: 'Job Creation' },
-    { to: '/job-calendar', label: 'Job Calendar' }
+    { to: '/job-calendar', label: 'Job Calendar' },
+    {to: '/new-profile-creation', label: 'New Profile Creation'}
   ];
 
   return (
@@ -46,6 +48,7 @@ function App() {
             <Route path="/overview" element={<Overview />} />
 
             <Route path="/job-calendar" element={<JobCalendar />} />
+            <Route path="/new-profile-creation" element= {<NewProfileCreation />} />
           </Routes>
         </BrowserRouter>
       </>

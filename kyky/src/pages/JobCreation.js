@@ -81,18 +81,18 @@ export default function JobCreation() {
           <p>{lang.job_creation.pictures}</p>
           <div className="picContainer">
             <div className="picBox">
-              <FileUpload2 className="fileUpload2"/>
+              <FileUpload2 className="fileUpload2" />
             </div>
             <div className="picBox">
               {' '}
-              <FileUpload2 className="fileUpload2"/>
+              <FileUpload2 className="fileUpload2" />
             </div>
             <div className="picBox">
-            <FileUpload2 className="fileUpload2"/>
+              <FileUpload2 className="fileUpload2" />
             </div>
             <div className="picBox">
               {' '}
-              <FileUpload2 className="fileUpload2"/>
+              <FileUpload2 className="fileUpload2" />
             </div>
           </div>
         </section>
