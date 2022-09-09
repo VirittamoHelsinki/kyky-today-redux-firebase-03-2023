@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Language from './language';
 import fi from './localisation/fi.json';
 import en from './localisation/en.json';
+import MyCalendar from './pages/MyCalendar';
 import ProfileCreation from './pages/ProfileCreation';
 import Header from './components/Header';
 import UserRegistration from './pages/UserRegistration';
@@ -27,9 +28,10 @@ function App() {
     { to: '/user-registration', label: 'User Registration' },
     { to: '/contact-form', label: 'Contact Form' },
     { to: '/user-log-in', label: 'Log In' },
+    { to: '/calendar', label: 'My Calendar' },
     { to: '/job-creation', label: 'Job Creation' },
-    { to: '/overview', label: 'Overview' },
-    { to: '/job-calendar', label: 'Job Calendar' },
+    { to: '/calendar/overview', label: 'Overview' },
+    { to: '/calendar', label: 'Job Calendar' },
     { to: '/new-profile-creation', label: 'New Profile Creation' }
   ];
 
@@ -45,15 +47,15 @@ function App() {
             <Route path="user-registration" element={<UserRegistration />} />
             <Route path="contact-form" element={<ContactForm />} />
             <Route path="user-log-in" element={<UserLogin />} />
+            <Route path="calendar" element={<MyCalendar />}>
+              <Route index element={<JobCalendar />} />
+              <Route path="overview" element={<Overview />} />
+            </Route>
 
-            <Route path="overview" element={<Overview />} />
-
-            <Route path="job-calendar" element={<JobCalendar />} />
             <Route path="new-profile-creation" element={<Creation />}>
               <Route index element={<NewProfileCreation />} />
               <Route path="get-started" element={<GetStarted />} />
             </Route>
-            <Route path="get-started" element={<GetStarted />} />
           </Routes>
         </BrowserRouter>
       </>

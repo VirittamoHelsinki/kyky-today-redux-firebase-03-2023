@@ -1,49 +1,43 @@
 @use "_utilities" as *;
 
-
-
-
-.todayButton{
+.todayButton {
   border-radius: 20px;
   background-color: $kyky-primary-dark;
-  color:white;
+  color: white;
 }
-.monthYear{
-display:flex;
-height:25px;
-width:470px;
-border-radius: 1;
-margin: 20px;
-align-items: center;
-justify-content: space-around;
-position:relative;
-top:150px;
-
-}
-.month-select,.year-select{
-  border-radius: 5px;
-
-
-
-
-}.weekDays{
-  display:flex;
-  height:fit-content;
-  width:1200px;
+.monthYear {
+  display: flex;
+  height: 25px;
+  width: 470px;
+  border-radius: 1;
+  margin: 20px;
+  align-items: center;
   justify-content: space-around;
   position: relative;
-  top:150px;
-
+  top: 150px;
 }
-.job-calendar{
+.month-select,
+.year-select {
+  border-radius: 5px;
+}
+.weekDays {
+  display: flex;
+  height: fit-content;
+  width: 1200px;
+  justify-content: space-around;
+  position: relative;
+  top: 150px;
+}
+.job-calendar {
   display: flex;
   height: 700px;
   width: 1190px;
-  margin:20px;
+  margin: 20px;
   border: 3.5px solid rgb(199, 191, 191);
   position: relative;
-  top:150px;
-} .calendar-days {
+  top: 150px;
+}
+.calendar-days {
   width: 100%;
   max-height: 100%;
   height: auto;
@@ -53,49 +47,52 @@ top:150px;
 }
 .calendar-day {
   width: 169px;
-  height:auto;
+  height: auto;
   padding: 10px;
   background: rgb(255, 251, 251);
-  border:1px solid rgb(194, 183, 183);
+  border: 1px solid rgb(194, 183, 183);
   font-weight: 700;
   display: flex;
-  justify-content:flex-start;
+  justify-content: flex-start;
   align-items: flex-start;
   user-select: none;
-}.calendar-day:hover{
+}
+.calendar-day:hover {
   filter: brightness(125%);
   box-sizing: border-box;
   border: 6px solid rgb(65, 163, 163);
 }
 .calendar-day.selected {
   box-sizing: border-box;
-  border: 6px solid rgb(65, 163, 163); 
+  border: 6px solid rgb(65, 163, 163);
 }
-.calendar-day.disbled{
+.calendar-day.disbled {
   opacity: 0.5;
 }
 
-.addScheduleContainer{
-  display:flex;
-height: 800px;
-width: 600px;
-border:1px solid rgb(238, 230, 230);
-box-shadow: 2px 2px 1px rgb(238, 230, 230);
-position: relative;
-left:1240px;
-bottom:670px;}
-.scheduleButton{
-  height:40px;
-  width:150px;
+.addScheduleContainer {
+  display: flex;
+  height: 800px;
+  width: 600px;
+  border: 1px solid rgb(238, 230, 230);
+  box-shadow: 2px 2px 1px rgb(238, 230, 230);
+  position: relative;
+  left: 1240px;
+  bottom: 670px;
+}
+.scheduleButton {
+  height: 40px;
+  width: 150px;
   background-color: $kyky-primary-dark;
-  color:white;
+  color: white;
   border-radius: 20px;
-  position:absolute;
-  top:430px;
-  left:230px;
-}.scheduleDate{
+  position: absolute;
+  top: 430px;
+  left: 230px;
+}
+.scheduleDate {
   font-size: 25px;
   position: relative;
-  top:50px;
-  left:190px;
+  top: 50px;
+  left: 190px;
 }

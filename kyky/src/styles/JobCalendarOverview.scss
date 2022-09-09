@@ -1,11 +1,11 @@
 @use "_utilities" as *;
 
 .job-calendar-overview {
-  position: absolute;
+  position: relative;
   left: 0;
-  top: 5rem;
+  top: 0;
   width: 100%;
-  height: calc(100vh - 5rem);
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
