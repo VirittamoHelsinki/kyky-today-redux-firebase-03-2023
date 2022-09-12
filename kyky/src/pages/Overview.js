@@ -2,6 +2,7 @@
 
 import Calendar from '../components/Calendar';
 import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 import '../styles/JobCalendarOverview.scss';
 
@@ -37,9 +38,14 @@ const times = [
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function Overview() {
+  const [setSelectedWindow] = useOutletContext();
   const [date, setDate] = useState(new Date());
   const [bookings, setBookings] = useState([]);
   const [allJobs, setAllJobs] = useState([]);
+
+  useEffect(() => {
+    setSelectedWindow('overview');
+  }, []);
 
   useEffect(() => {
     const data = mockData.find((booking) => {

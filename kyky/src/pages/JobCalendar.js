@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import '../styles/JobCalendar.scss';
 
 const months = [
@@ -20,6 +21,7 @@ const years = Array(50)
   .map((_, i) => i + 2019);
 const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 export default function JobCalendar() {
+  const [setSelectedWindow] = useOutletContext();
   const [date, setDate] = useState(new Date());
   const [days, setDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -47,6 +49,11 @@ export default function JobCalendar() {
     }
     return daysArr;
   }
+
+  useEffect(() => {
+    setSelectedWindow('job-calendar');
+  }, []);
+
   useEffect(() => {
     setCurrentMonth(date.getMonth());
     setCurrentYear(date.getFullYear());
@@ -132,7 +139,9 @@ export default function JobCalendar() {
             ))}
           </div>
         </div>
-        <div className="addScheduleContainer"> <p className="scheduleDate">
+        <div className="addScheduleContainer">
+          {' '}
+          <p className="scheduleDate">
             <strong>{weekDays[date.getDay()]}</strong> {date.toLocaleDateString('fi-fi')}
           </p>
           <button className="scheduleButton">+ Add a schedule</button>

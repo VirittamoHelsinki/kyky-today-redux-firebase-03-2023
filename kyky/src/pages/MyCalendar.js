@@ -9,7 +9,7 @@ export default function MyCalendar() {
   return (
     <div className="my-calendar">
       <CalendarHeader selectedWindow={selectedWindow} setSelectedWindow={setSelectedWindow} />
-      <Outlet />
+      <Outlet context={[setSelectedWindow]} />
     </div>
   );
 }
