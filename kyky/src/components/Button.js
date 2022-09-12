@@ -12,11 +12,19 @@ export default function Button({
   children
 }) {
   if (href) {
-    return <a href={href}>{children}</a>;
+    return (
+      <a className={`${className !== 'button-primary' ? className : ''}`} href={href}>
+        {children}
+      </a>
+    );
   }
 
   if (link) {
-    return <Link to={link}>{children}</Link>;
+    return (
+      <Link className={`${className !== 'button-primary' ? className : ''}`} to={link}>
+        {children}
+      </Link>
+    );
   }
 
   return (
