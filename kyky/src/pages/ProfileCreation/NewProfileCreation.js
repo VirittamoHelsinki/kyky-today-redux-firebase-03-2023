@@ -2,6 +2,7 @@ import '../../styles/NewProfileCreation.scss';
 import dogPic from '../../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
 import { ReactComponent as Star } from '../../image/star.svg';
 import { ReactComponent as ProfileIcon } from '../../image/profileIcon.svg';
+import Button from '../../components/Button';
 
 export default function NewProfileCreation() {
   return (
@@ -15,7 +16,9 @@ export default function NewProfileCreation() {
           <p>Make a profile to get noticed!</p>
         </div>
         <p>It only takes 5-10 minutes.</p>
-        <button className="getStarted">Get Started</button>
+        <Button link="get-started" className="getStarted">
+          Get Started
+        </Button>
         <h1> Or </h1>
         <button className="linkedIn">Fill with LinkedIn</button>
       </div>

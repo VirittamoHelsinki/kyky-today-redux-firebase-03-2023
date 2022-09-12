@@ -56,6 +56,7 @@ function App() {
               <Route index element={<NewProfileCreation />} />
               <Route path="get-started" element={<GetStarted />} />
             </Route>
+           
           </Routes>
         </BrowserRouter>
       </>
