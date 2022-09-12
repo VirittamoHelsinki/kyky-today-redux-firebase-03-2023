@@ -7,7 +7,7 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow }) {
     { to: '/calendar', label: 'Job Calendar', id: 'job-calendar' },
     { to: '/calendar/overview', label: 'Overview', id: 'overview' },
     { to: '/calendar/overview', label: ' Manage Schedules', id: 'manage-schedules' },
-    { to: '/calendar/overview', label: ' Settings', id: 'settings' }
+    { to: '/calendar/settings', label: ' Settings', id: 'settings' }
   ];
 
   function changeWindow(url, id) {
