@@ -88,6 +88,42 @@
     padding: 0.75rem;
   }
 
+  .settings {
+    .settings-container {
+      width: 95%;
+      height: 45%;
+      overflow: hidden;
+      margin: 1%;
+      border: 1px solid silver;
+      padding: 1rem;
+
+      .setting {
+        margin: 0.5rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 1rem;
+
+        .days {
+          display: flex;
+          gap: 1rem;
+        }
+
+        .switchy-switch {
+          // :)
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+      }
+
+      .title {
+        color: black;
+      }
+    }
+  }
+
   .title {
     color: $kyky-primary-dark;
   }
@@ -123,5 +159,9 @@
     height: 60%;
     flex-direction: column;
     justify-content: flex-start;
+
+    .disabled {
+      opacity: 0.3;
+    }
   }
 }
