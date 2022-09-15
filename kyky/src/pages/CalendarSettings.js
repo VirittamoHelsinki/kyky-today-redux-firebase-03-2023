@@ -19,6 +19,7 @@ export default function CalendarSettings() {
   const [switched, setSwitched] = useState(false);
   const [notifications, setNotifications] = useState(false);
   const [selectingJobs, setSelectingJobs] = useState(false);
+  const [purge, setPurge] = useState(false);
   return (
     <main className="job-calendar-settings">
       <div className="settings">
@@ -109,19 +110,23 @@ export default function CalendarSettings() {
         <h2 className="title">Export/Import Calendar</h2>
         <div className="buttons">
           <Button className="button-secondary">Import Calendar</Button>
-          <Button className="button-secondary">Export Calendar</Button>
+          <Button className="button-secondary bg-white">Export Calendar</Button>
         </div>
       </div>
       <div className="purge">
         <h2 className="title">Purge Calendar</h2>
-        <Input type="checkbox" label="">
+        <Input
+          type="checkbox"
+          className="input-container red"
+          label=""
+          onChange={() => setPurge(!purge)}>
           <p>
             Confirming this selection deletes all your current schedules from your calendar.
             <br></br>
             <span>This action cannot be undone.</span>
           </p>
         </Input>
-        <Button className="button-secondary">Confirm Purge</Button>
+        <Button className={`button-secondary ${purge ? 'red' : 'disabled'}`}>Confirm Purge</Button>
       </div>
     </main>
   );

@@ -552,6 +552,35 @@ form {
   border-radius: 1rem;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
-  color: white;
+  color: $white;
   background: $kyky-primary-dark;
+}
+
+.button-secondary {
+  border: 2px solid $kyky-primary-dark;
+  background: $kyky-primary-dark;
+  color: $white;
+  padding: 7px;
+  border-radius: 36px;
+  font-size: 1rem;
+  box-shadow: $base-box-shadow;
+
+  &.bg-white {
+    background: $white;
+    color: $kyky-primary-dark;
+  }
+
+  &.red {
+    background: red;
+    border: 2px solid red;
+    color: $white;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    background: grey;
+    border: 2px solid grey;
+    color: black;
+  }
 }
