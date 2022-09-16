@@ -72,13 +72,19 @@ export default function ManageScheduleModal() {
       </div>
       <div className="manage-schedule__footer">
         {step > 1 && (
-          <button className="button" onClick={() => setStep(step - 1)}>
+          <button className="prog_button prev" onClick={() => setStep(step - 1)}>
+            <i className="material-icons-outlined">chevron_left</i>
             Previous
           </button>
         )}
         {step < progression.length && (
-          <button className="button" onClick={() => setStep(step + 1)}>
-            Next
+          <button className="prog_button" onClick={() => setStep(step + 1)}>
+            Next <i className="material-icons-outlined">chevron_right</i>
+          </button>
+        )}
+        {step === progression.length && (
+          <button className="button">
+            Submit<i className="material-icons-outlined">done</i>
           </button>
         )}
       </div>

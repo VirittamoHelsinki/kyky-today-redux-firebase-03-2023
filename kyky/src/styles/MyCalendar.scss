@@ -291,4 +291,72 @@
       }
     }
   }
+
+  .manage-schedule__content {
+    width: 100%;
+    height: max-content;
+    padding: 1rem 0rem;
+    background: rgb(230, 230, 230);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .choose-job {
+      width: 100%;
+      height: 250px;
+      background: $white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+
+      p {
+        color: $kyky-primary-dark;
+        font-weight: bold;
+      }
+
+      select {
+        width: 250px;
+        height: 2rem;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+
+  .manage-schedule__footer {
+    width: 100%;
+    height: 80px;
+    background: rgb(219, 219, 219);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+
+    .prog_button {
+      width: 140px;
+      height: 40px;
+      font-size: 1.1rem;
+      border-radius: 36px;
+      border: 0.2rem solid $kyky-primary-dark;
+      background: $kyky-primary-dark;
+      color: $white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        font-size: 2.25rem !important;
+        margin-right: -0.25rem;
+        margin-left: -0.25rem;
+      }
+
+      &.prev {
+        background: $white;
+        color: $kyky-primary-dark;
+      }
+    }
+  }
 }
