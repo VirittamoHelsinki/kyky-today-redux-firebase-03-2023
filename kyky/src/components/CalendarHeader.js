@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function CalendarHeader({ selectedWindow, setSelectedWindow }) {
   const navigate = new useNavigate();
@@ -25,7 +26,9 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow }) {
           <div className="info">Pending</div>
           <div>|</div>
           <div className="info">Confirmed</div>
-          <button className="create-schedule">Create a Schedule</button>
+          <button className="create-schedule">
+            <Link to="schedule/create">Create a Schedule</Link>
+          </button>
         </div>
       </div>
       <div className="selection">

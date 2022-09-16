@@ -1,12 +1,12 @@
 /* This code is atrocious, PLEASE FIX IT */
 
-import Calendar from '../components/Calendar';
+import Calendar from '../../components/Calendar';
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
-import '../styles/JobCalendarOverview.scss';
+import '../../styles/JobCalendarOverview.scss';
 
-import mockData from '../mock_bookings.json';
+import mockData from '../../mock_bookings.json';
 
 const times = [
   '0.00',

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import '../styles/JobCalendar.scss';
+import '../../styles/JobCalendar.scss';
 
 const months = [
   'January',

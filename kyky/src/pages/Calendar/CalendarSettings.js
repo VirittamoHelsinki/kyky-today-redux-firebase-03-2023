@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import Button from '../components/Button';
-import Input from '../components/Input';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 import Switch from 'react-switch';
 
 export default function CalendarSettings() {
@@ -30,7 +30,9 @@ export default function CalendarSettings() {
             <span>Enable bookings made</span>
             <select name="enable-bookings" id="enable-bookings">
               {advanceTimes.map((time) => (
-                <option value={time.value}>{time.text}</option>
+                <option key={time.value} value={time.value}>
+                  {time.text}
+                </option>
               ))}
             </select>
             <span>in advance.</span>
@@ -87,13 +89,14 @@ export default function CalendarSettings() {
                 onChange={() => setNotifications(!notifications)}
               />
               <span>Only allow notifications between</span>
-              <input type="time" value="08:00" />
+              <input type="time" defaultValue="08:00" />
               <span>-</span>
-              <input type="time" value="21:00" />
+              <input type="time" defaultValue="21:00" />
             </label>
             <div className={`days ${notifications ? '' : 'disabled'}`}>
               {days.map((day) => (
                 <Input
+                  key={day}
                   type="checkbox"
                   name={day}
                   id={day}

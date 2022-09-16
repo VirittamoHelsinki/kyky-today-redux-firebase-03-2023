@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
-import CalendarHeader from '../components/CalendarHeader';
+import CalendarHeader from '../../components/CalendarHeader';
 
-import '../styles/MyCalendar.scss';
+import '../../styles/MyCalendar.scss';
 
 export default function MyCalendar() {
   const [selectedWindow, setSelectedWindow] = useState('job-calendar');

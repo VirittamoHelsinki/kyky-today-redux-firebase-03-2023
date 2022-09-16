@@ -1,10 +1,13 @@
 /* eslint-disable */
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+/* Language */
 import Language from './language';
 import fi from './localisation/fi.json';
 import en from './localisation/en.json';
-import MyCalendar from './pages/MyCalendar';
+
+/* Misc */
 import ProfileCreation from './pages/ProfileCreation';
 import Header from './components/Header';
 import UserRegistration from './pages/UserRegistration';
@@ -12,12 +15,18 @@ import ContactForm from './pages/ContactForm';
 import UserLogin from './pages/UserLogIn';
 import LandingPage from './pages/LandingPage';
 import JobCreation from './pages/JobCreation';
-import Overview from './pages/Overview';
-import JobCalendar from './pages/JobCalendar';
-import Creation from './pages/ProfileCreation/Creation';
+
+/* Profile creation */
 import NewProfileCreation from './pages/ProfileCreation/NewProfileCreation';
+import Creation from './pages/ProfileCreation/Creation';
 import GetStarted from './pages/ProfileCreation/GetStarted';
-import CalendarSettings from './pages/CalendarSettings';
+
+/* Calendar */
+import MyCalendar from './pages/Calendar/MyCalendar';
+import Overview from './pages/Calendar/Overview';
+import JobCalendar from './pages/Calendar/JobCalendar';
+import CalendarSettings from './pages/Calendar/CalendarSettings';
+import CreateSchedule from './pages/Calendar/CreateSchedule';
 
 const languages = { fi, en };
 function App() {
@@ -29,11 +38,10 @@ function App() {
     { to: '/user-registration', label: 'User Registration' },
     { to: '/contact-form', label: 'Contact Form' },
     { to: '/user-log-in', label: 'Log In' },
-    { to: '/calendar', label: 'My Calendar' },
     { to: '/job-creation', label: 'Job Creation' },
-    { to: '/calendar/overview', label: 'Overview' },
-    { to: '/calendar', label: 'Job Calendar' },
-    { to: '/new-profile-creation', label: 'New Profile Creation' }
+    { to: '/new-profile-creation', label: 'New Profile Creation' },
+    { to: '/calendar', label: 'My Calendar' },
+    { to: '/calendar/overview', label: 'Overview' }
   ];
 
   return (
@@ -52,6 +60,7 @@ function App() {
               <Route index element={<JobCalendar />} />
               <Route path="overview" element={<Overview />} />
               <Route path="settings" element={<CalendarSettings />} />
+              <Route path="schedule/create" element={<CreateSchedule />} />
             </Route>
 
             <Route path="new-profile-creation" element={<Creation />}>

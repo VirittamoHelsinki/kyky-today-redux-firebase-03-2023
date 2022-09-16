@@ -1,0 +1,38 @@
+[
+  {
+    "userId": "jiohjtr9405yj8h65h9rbg",
+    "jobId": "babysitting",
+    "startDate": "2022-09-02",
+    "endDate": "2022-12-02",
+    "days": ["mon", "tue", "fri"],
+    "startTime": "09:00",
+    "endTime": "22:00"
+  },
+  {
+    "userId": "jiohjtr9405yj8h65h9rbg",
+    "jobId": "plant_sitting",
+    "startDate": "2022-09-02",
+    "endDate": "2022-12-02",
+    "days": ["mon", "tue", "wed", "fri"],
+    "startTime": "09:00",
+    "endTime": "10:30"
+  },
+  {
+    "userId": "jiohjtr9405yj8h65h9rbg",
+    "jobId": "wordpress_designer",
+    "startDate": "2022-09-02",
+    "endDate": "2022-12-02",
+    "days": ["mon", "tue", "thu", "fri"],
+    "startTime": "08:00",
+    "endTime": "10:00"
+  },
+  {
+    "userId": "jiohjtr9405yj8h65h9rbg",
+    "jobId": "photography",
+    "startDate": "2022-09-02",
+    "endDate": "2022-12-02",
+    "days": ["mon", "tue", "fri"],
+    "startTime": "12:00",
+    "endTime": "18:30"
+  }
+]
