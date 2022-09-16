@@ -1,30 +1,56 @@
+/*
+  NOTE:
+  This is supposed to be a modal that is overlayed on top of the current page.
+  HOWEVER, it is currently being developed in its own page.
+  THUS, TODO: Make this a modal.
+*/
 import { useState } from 'react';
 
-export default function CreateSchedule() {
-  const [step, setStep] = useState(3);
+/* Step components */
+import ChooseJob from '../../components/ManageScheduleModal/ChooseJob';
+import DateAndTime from '../../components/ManageScheduleModal/DateAndTime';
+import BookingPreferences from '../../components/ManageScheduleModal/BookingPreferences';
+import PreviewAndSubmit from '../../components/ManageScheduleModal/PreviewAndSubmit';
+
+export default function ManageScheduleModal() {
+  const [step, setStep] = useState(1);
+  const [mode, setMode] = useState('create');
   const progression = [
     {
       id: 1,
-      title: 'Choose a Job'
+      title: 'Choose a Job',
+      component: <ChooseJob />
     },
     {
       id: 2,
-      title: 'Date & Time'
+      title: 'Date & Time',
+      component: <DateAndTime />
     },
     {
       id: 3,
-      title: 'Booking Preferences'
+      title: 'Booking Preferences',
+      component: <BookingPreferences />
     },
     {
       id: 4,
-      title: 'Preview & Submit'
+      title: 'Preview & Submit',
+      component: <PreviewAndSubmit />
     }
   ];
+
+  const modeProperties = {
+    create: {
+      title: 'Create Schedule'
+    },
+    edit: {
+      title: 'Edit Schedule'
+    }
+  };
 
   return (
     <main className="create-schedule">
       <div className="create-schedule__progression">
-        <h1>Create Schedule</h1>
+        <h1>{modeProperties[mode].title}</h1>
         <div className="steps">
           {progression.map(({ id, title }, index) => (
             <div className="step-container" key={id}>
@@ -40,6 +66,21 @@ export default function CreateSchedule() {
             </div>
           ))}
         </div>
+      </div>
+      <div className="manage-schedule__content">
+        {progression[progression.findIndex((item) => item.id === step)].component}
+      </div>
+      <div className="manage-schedule__footer">
+        {step > 1 && (
+          <button className="button" onClick={() => setStep(step - 1)}>
+            Previous
+          </button>
+        )}
+        {step < progression.length && (
+          <button className="button" onClick={() => setStep(step + 1)}>
+            Next
+          </button>
+        )}
       </div>
     </main>
   );

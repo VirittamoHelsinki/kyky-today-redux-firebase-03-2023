@@ -32,7 +32,7 @@
         align-items: center;
         gap: 1rem;
 
-        .create-schedule {
+        .create-schedule--button {
           color: white;
           background: $kyky-primary-dark;
           padding: 0.5rem 1rem;
@@ -176,8 +176,12 @@
 }
 
 .create-schedule {
+  position: absolute;
   width: min(1000px, 100%);
   height: max-content;
+  left: 50%;
+  top: 200px;
+  transform: translateX(-50%);
 
   .create-schedule__progression {
     width: 100%;
