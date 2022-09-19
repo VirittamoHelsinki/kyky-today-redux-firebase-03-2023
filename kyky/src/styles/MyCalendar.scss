@@ -321,6 +321,29 @@
         width: 250px;
         height: 2rem;
         border-radius: 0.5rem;
+
+        &.short {
+          width: auto;
+          padding: 0rem 0.5rem;
+        }
+      }
+
+      .input-container {
+        label {
+          margin-right: 0.5rem;
+          margin-left: 0.5rem;
+        }
+      }
+
+      .recurrence-days {
+        width: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        flex-wrap: wrap;
+
+        .recurrence-day {
+          text-transform: capitalize;
+        }
       }
     }
 

@@ -6,7 +6,11 @@ export default function ChooseJob() {
       <p>Choose a Job</p>
       <select className="select-basic">
         {Jobs.map((job) => {
-          return <option value={job.id}>{job.id}</option>;
+          return (
+            <option key={job.id} value={job.id}>
+              {job.id}
+            </option>
+          );
         })}
       </select>
     </div>
