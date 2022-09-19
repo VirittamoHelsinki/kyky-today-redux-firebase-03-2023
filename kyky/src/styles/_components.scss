@@ -163,6 +163,10 @@ form {
     }
   }
 
+  /*.select-container select option:checked {
+    background-color: blue;
+  }*/
+
   .input-label-required {
     &:after {
       content: " *";
