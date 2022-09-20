@@ -335,6 +335,8 @@
         }
       }
 
+      /* Date and Time */
+
       .recurrence-days {
         width: auto;
         display: grid;
@@ -343,6 +345,34 @@
 
         .recurrence-day {
           text-transform: capitalize;
+        }
+      }
+      /* Booking Preferences */
+
+      .buffers,
+      .limit-bookings {
+        padding: 5px;
+        height: 100px;
+        background: rgba(180, 180, 180, 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 12px;
+        border: 2px solid silver;
+        gap: 0.4rem;
+
+        .travel-time-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        &.selected {
+          border: 2px solid $kyky-primary-default;
+          background: rgba(25, 204, 177, 0.15);
         }
       }
     }

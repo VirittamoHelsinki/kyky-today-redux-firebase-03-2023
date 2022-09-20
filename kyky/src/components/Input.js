@@ -20,6 +20,7 @@ export default function Input({
   value = '',
   required,
   onChange = () => {},
+  checked,
   iconText = '',
   iconClassName = 'material-icons-outlined',
   iconIsButton = true,
@@ -39,6 +40,7 @@ export default function Input({
         autoComplete={autoComplete}
         required={required}
         onChange={onChange}
+        checked={checked}
       />
       {!labelOnFront && <label htmlFor={id}>{label}</label>}
       {iconText !== '' && !iconIsButton && <i className={`${iconClassName}`}>{iconText}</i>}

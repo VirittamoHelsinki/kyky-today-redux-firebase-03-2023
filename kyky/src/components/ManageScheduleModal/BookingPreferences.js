@@ -11,14 +11,21 @@ export default function BookingPreferences() {
     { value: 60, text: '1 hour' },
     { value: 120, text: '2 hours' }
   ];
+  const [limitBookings, setLimitBookings] = useState(false);
   const [travelTime, setTravelTime] = useState(false);
   return (
     <>
       <h2>Booking Preferences</h2>
       <div className="buffer-between container">
         <p>Buffer between bookings</p>
-        <div className="buffers">
-          <Input type="radio" name="buffer" id="none" label="">
+        <div className={`buffers ${!limitBookings ? 'selected' : ''}`}>
+          <Input
+            type="radio"
+            name="buffer"
+            id="buffer-bookings"
+            label=""
+            checked={!limitBookings}
+            onChange={() => setLimitBookings(false)}>
             <select className="short" defaultValue={15}>
               {bufferTimes.map((time) => (
                 <option key={time.value} value={time.value}>
@@ -27,18 +34,26 @@ export default function BookingPreferences() {
               ))}
             </select>
           </Input>
-          <Switch
-            width={32}
-            height={16}
-            handleDiameter={14}
-            name="travel-time"
-            checked={travelTime}
-            onChange={() => setTravelTime(!travelTime)}
-          />
-          <label htmlFor="travel-time">Include travel time</label>
+          <div className="travel-time-container">
+            <Switch
+              width={32}
+              height={16}
+              handleDiameter={14}
+              name="travel-time"
+              checked={travelTime}
+              onChange={() => setTravelTime(!travelTime)}
+            />
+            <label htmlFor="travel-time">Include travel time</label>
+          </div>
         </div>
-        <div className="no-buffers">
-          <Input type="radio" name="buffer" id="none" label="Allow only one booking per day" />
+        <div className={`limit-bookings ${limitBookings ? 'selected' : ''}`}>
+          <Input
+            type="radio"
+            name="buffer"
+            id="limit-bookings"
+            label="Allow only one booking per day"
+            checked={limitBookings}
+            onChange={() => setLimitBookings(true)}></Input>
         </div>
       </div>
     </>
