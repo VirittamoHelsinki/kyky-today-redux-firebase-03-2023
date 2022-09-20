@@ -304,17 +304,28 @@
     gap: 1rem;
 
     .container {
-      width: 100%;
+      width: 95%;
       background: $white;
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
+      justify-content: flex-start;
+      gap: 2rem;
 
       p {
         color: $kyky-primary-dark;
         font-weight: bold;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        /* Green button */
+        transform: scale(1.5);
+        filter: hue-rotate(290deg);
+      }
+
+      input[type="checkbox"] {
+        transform: scale(1.25);
       }
 
       select {
@@ -326,6 +337,10 @@
           width: auto;
           padding: 0rem 0.5rem;
         }
+      }
+
+      .disabled {
+        opacity: 0.5;
       }
 
       .input-container {
@@ -349,18 +364,32 @@
       }
       /* Booking Preferences */
 
-      .buffers,
-      .limit-bookings {
-        padding: 5px;
-        height: 100px;
+      .box {
+        padding: 5px 15px;
+        height: 70px;
         background: rgba(180, 180, 180, 0.2);
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         border-radius: 12px;
         border: 2px solid silver;
         gap: 0.4rem;
+
+        &.selected {
+          border: 2px solid $kyky-primary-default;
+          background: rgba(25, 204, 177, 0.15);
+        }
+
+        &.center {
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+
+      .buffers,
+      .limit-bookings {
+        height: 100px;
 
         .travel-time-container {
           display: flex;
@@ -369,11 +398,13 @@
           align-items: center;
           gap: 0.5rem;
         }
+      }
 
-        &.selected {
-          border: 2px solid $kyky-primary-default;
-          background: rgba(25, 204, 177, 0.15);
-        }
+      .allow {
+        width: 210px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
       }
     }
 
