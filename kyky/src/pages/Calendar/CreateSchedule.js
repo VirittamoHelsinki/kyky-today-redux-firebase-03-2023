@@ -4,7 +4,8 @@
   HOWEVER, it is currently being developed in its own page.
   THUS, TODO: Make this a modal.
 */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Button from '../../components/Button';
 
 /* Step components */
 import ChooseJob from '../../components/ManageScheduleModal/ChooseJob';
@@ -15,28 +16,49 @@ import PreviewAndSubmit from '../../components/ManageScheduleModal/PreviewAndSub
 export default function ManageScheduleModal() {
   const [step, setStep] = useState(1);
   const [mode, setMode] = useState('create');
+  const [View, setView] = useState(() => ChooseJob);
+  const [properties, setProperties] = useState({
+    jobId: '',
+    scheduleDuration: 0,
+    time: {
+      start: 8.0,
+      end: 16.0
+    },
+    recurring: {
+      isRecurring: false,
+      days: []
+    },
+    bufferBetweenBookings: 0,
+    travelTime: -1,
+    minimumBookingDuration: 0,
+    canOverlap: false
+  });
   const progression = [
     {
       id: 1,
       title: 'Choose a Job',
-      component: <ChooseJob />
+      component: ChooseJob
     },
     {
       id: 2,
       title: 'Date & Time',
-      component: <DateAndTime />
+      component: DateAndTime
     },
     {
       id: 3,
       title: 'Booking Preferences',
-      component: <BookingPreferences />
+      component: BookingPreferences
     },
     {
       id: 4,
       title: 'Preview & Submit',
-      component: <PreviewAndSubmit />
+      component: PreviewAndSubmit
     }
   ];
+
+  useEffect(() => {
+    setView(() => progression[progression.findIndex((item) => item.id === step)].component);
+  }, [step]);
 
   const modeProperties = {
     create: {
@@ -46,6 +68,10 @@ export default function ManageScheduleModal() {
       title: 'Edit Schedule'
     }
   };
+
+  function setField(field, value) {
+    setProperties((prev) => ({ ...prev, [field]: value }));
+  }
 
   return (
     <main className="create-schedule">
@@ -68,24 +94,24 @@ export default function ManageScheduleModal() {
         </div>
       </div>
       <div className="manage-schedule__content">
-        {progression[progression.findIndex((item) => item.id === step)].component}
+        <View properties={properties} setField={setField} />
       </div>
       <div className="manage-schedule__footer">
         {step > 1 && (
-          <button className="prog_button prev" onClick={() => setStep(step - 1)}>
+          <Button className="prog_button prev" onClick={() => setStep(step - 1)}>
             <i className="material-icons-outlined">chevron_left</i>
             Previous
-          </button>
+          </Button>
         )}
         {step < progression.length && (
-          <button className="prog_button" onClick={() => setStep(step + 1)}>
+          <Button className="prog_button" onClick={() => setStep(step + 1)}>
             Next <i className="material-icons-outlined">chevron_right</i>
-          </button>
+          </Button>
         )}
         {step === progression.length && (
-          <button className="button">
+          <Button>
             Submit<i className="material-icons-outlined">done</i>
-          </button>
+          </Button>
         )}
       </div>
     </main>

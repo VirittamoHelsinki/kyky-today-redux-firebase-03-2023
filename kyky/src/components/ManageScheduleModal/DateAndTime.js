@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import Input from '../Input';
 
-export default function DateAndTime() {
+export default function DateAndTime({ setField }) {
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
   // value is in months
   const advanceTimes = [
@@ -16,6 +16,9 @@ export default function DateAndTime() {
   const [schedule, setSchedule] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [startTime, setStartTime] = useState('08:00');
+  const [endTime, setEndTime] = useState('16:00');
+  const [recurringDays, setRecurringDays] = useState([]);
   return (
     <>
       <h2>Date & Time</h2>
@@ -29,7 +32,10 @@ export default function DateAndTime() {
             checked={!schedule}
             onChange={() => setSchedule(false)}
           />
-          <select className="short" defaultValue={3}>
+          <select
+            className="short"
+            defaultValue={3}
+            onChange={(e) => setField('scheduleDuration', e.target.value)}>
             {advanceTimes.map((time) => (
               <option key={time.value} value={time.value}>
                 {time.text}
@@ -50,6 +56,7 @@ export default function DateAndTime() {
             value={startDate.toLocaleDateString('sv-SV')}
             name="start-date"
             label="Start date"
+            onChange={(e) => setStartDate(e.target.date)}
             labelOnFront
           />
           <Input
@@ -57,14 +64,15 @@ export default function DateAndTime() {
             value={endDate.toLocaleDateString('sv-SV')}
             name="end-date"
             label="End date"
+            onChange={(e) => setEndDate(e.target.date)}
             labelOnFront
           />
         </div>
       </div>
       <div className="time container">
         <p>Time</p>
-        <Input type="time" value={'08:00'} label="Start:" labelOnFront />
-        <Input type="time" value={'16:00'} label="End:" labelOnFront />
+        <Input type="time" value={startTime} label="Start:" labelOnFront />
+        <Input type="time" value={endTime} label="End:" labelOnFront />
       </div>
       <div className="recurrence container">
         <p>Recurring</p>

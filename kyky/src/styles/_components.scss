@@ -23,6 +23,10 @@
   font-weight: $font-weight-bold;
   box-shadow: $base-box-shadow;
   margin: calc($base-margin * 1) 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
 
   a {
     color: unset;
@@ -33,6 +37,10 @@
     padding-bottom: 10px;
     left: 0%;
     top: 0%;
+  }
+
+  i {
+    font-size: 1.5rem !important;
   }
 }
 
