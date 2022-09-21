@@ -5,6 +5,9 @@ h1{
 h3{
     font-size:20px;
 }
+p{
+    font-family:"Poppins";
+}
 
 .leftContainer{
     font-family: "Ubuntu", sans-serif;
@@ -34,7 +37,10 @@ h3{
 }
 
 .getStarted{
+    display:flex;
     
+    justify-content: center;
+    align-items: center;
     font-family: "Ubuntu";
     font-size: 15px;
     height:40px;
@@ -97,14 +103,14 @@ h3{
     h1{
         font-size: 40px;
         text-align: center;
-        padding-top:150px;
+        padding-top:50px;
         padding-bottom:50px;
     }
     p{
         color:#387A70;
         text-align: center;
     }
-    input{
+    .getStartedInput{
         height:50px;
         width:400px;
         text-align: center;
@@ -122,7 +128,7 @@ h3{
         background-color: #387A70;
         position:relative;
         top:300px;
-        left:450px;
+        left:850px;
     }
     .addExperience{
         display: flex;
@@ -130,10 +136,13 @@ h3{
         justify-content: center;
         align-items: center;
         color:rgb(129, 123, 123);
-        height:300px;
-        width:300px;
+        height:250px;
+        width:400px;
         border: 2px dashed #387A70;
         border-radius: 10px;
+        position:relative;
+        top:100px;
+        left:750px;
     }
     .picIcon{
         
@@ -149,4 +158,54 @@ h3{
         
         
     }
-}
+    .workContainer,.educationContainer{
+        display:flex;
+        height:400px;
+        width:500px;
+        border:1px solid black;
+        border-radius:10px;
+        flex-direction: column;
+        padding:10px;
+        justify-content: space-around;
+    }
+    
+    
+    
+    .inputLong{
+        display:flex;
+        flex-direction: column;
+        height:50px;
+        width:400px;
+
+       
+    }
+    .inputShort{
+        display:flex;
+        flex-direction: column;
+        height:50px;
+        width:200px;
+        
+    }
+    
+    .countryList{
+        height:22px;
+        width:200px;
+        border:1px solid black;
+        position: relative;
+        bottom:80px;
+        left:250px;
+    }
+    .workCheck{
+    position:relative;
+    bottom:60px;
+    }
+    .saveButton{
+        
+        height:40px;
+        width:150px;
+        border-radius: 20px;
+        color:white;
+        background-color: #387A70;
+        position:relative;
+        left:300px;
+}}
