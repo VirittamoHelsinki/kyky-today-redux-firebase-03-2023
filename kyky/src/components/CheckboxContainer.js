@@ -24,7 +24,8 @@ export default function CheckboxContainer({
               type="button"
               key={item}
               className="checkbox-div-header-item"
-              onClick={() => setSelected(selected.filter((itm) => itm !== item))}>
+              onClick={() => setSelected(selected.filter((itm) => itm !== item))}
+            >
               {item}
             </button>
           ))}

@@ -7,7 +7,7 @@ export default function Step2(currentStep) {
       <div className="addExperience">
         Add experience{' '}
         <button type="button" className="picIcon">
-            +
+          +
         </button>
       </div>
     </div>

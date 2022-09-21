@@ -94,7 +94,8 @@ function UserRegistration() {
             onChange={(e) => {
               handleUsernameValidation(e);
               setUsername(e.target.value);
-            }}>
+            }}
+          >
             {usernameCheck && <i className="material-icons-outlined inside">done</i>}
           </Input>
           <Input
@@ -168,7 +169,8 @@ function UserRegistration() {
             className={`checkbox-container no-shadow ${termsAccepted ? '' : 'error'}`}
             onChange={(e) => {
               setTerms(e.target.checked);
-            }}>
+            }}
+          >
             {lang.registration.I_agree}
             <a className="primary" href="https://www.google.com/">
               {lang.registration.terms}

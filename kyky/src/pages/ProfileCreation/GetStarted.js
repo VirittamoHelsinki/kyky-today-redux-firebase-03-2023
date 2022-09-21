@@ -13,8 +13,8 @@ export default function GetStarted() {
 
   const tips = [
     "It's the very first thing clients see. Please describe your skills with your own words.",
-    "Relevant working experience will increase the chance of getting hired!",
-    "Your language skill can make client know you better."
+    'Relevant working experience will increase the chance of getting hired!',
+    'Your language skill can make client know you better.'
   ];
 
   const steps = 3;
@@ -37,16 +37,12 @@ export default function GetStarted() {
         {currentStep === 1 && <Step1 />}
         {currentStep === 2 && <Step2 />}
         {currentStep === 3 && <Step3 />}
-        {currentStep < steps &&
+        {currentStep < steps && (
           <button className="nextButton" onClick={nextPhase}>
             NEXT
           </button>
-        }
-        {currentStep === steps &&
-          <button className="submitButton">
-            Submit Profile
-          </button>
-        }
+        )}
+        {currentStep === steps && <button className="submitButton">Submit Profile</button>}
       </div>
     </div>
   );
