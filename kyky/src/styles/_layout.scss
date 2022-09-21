@@ -21,7 +21,7 @@ body {
 header {
   position: sticky;
   width: 100%;
-  background-color: $grayscale-medium;
+  background-color: white;
   padding: $base-padding;
   color: $white;
   font-size: $base-font-size;
@@ -32,7 +32,7 @@ header {
     //delete this after not needed anymore
     display: flex;
     padding: 10px;
-    border-bottom: 1px solid $grayscale-light;
+    border-bottom: 1px solid white;
     position: absolute;
     top: 0;
     left: 0;
