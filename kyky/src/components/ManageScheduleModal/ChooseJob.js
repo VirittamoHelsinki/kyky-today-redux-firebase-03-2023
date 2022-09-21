@@ -1,6 +1,10 @@
+import { useEffect } from 'react';
 import Jobs from '../../jobs.json';
 
 export default function ChooseJob({ setField }) {
+  useEffect(() => {
+    setField('jobId', Jobs[0].id);
+  }, []);
   return (
     <div className="choose-job container">
       <p>Choose a Job</p>

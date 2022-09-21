@@ -19,15 +19,16 @@ export default function ManageScheduleModal() {
   const [View, setView] = useState(() => ChooseJob);
   const [properties, setProperties] = useState({
     jobId: '',
-    scheduleDuration: 0,
+    scheduleDuration: {
+      months: 3,
+      startDate: null,
+      endDate: null
+    },
     time: {
       start: 8.0,
       end: 16.0
     },
-    recurring: {
-      isRecurring: false,
-      days: []
-    },
+    recurring: [],
     bufferBetweenBookings: 0,
     travelTime: -1,
     minimumBookingDuration: 0,
