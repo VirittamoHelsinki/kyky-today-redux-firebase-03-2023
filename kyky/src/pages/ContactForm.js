@@ -36,7 +36,6 @@ function ContactForm() {
     }
   }
 
-
   function submitButton() {
     return (
       <div className="contact-section">

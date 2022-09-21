@@ -36,7 +36,8 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow }) {
           <button
             key={id}
             className={`button ${selectedWindow === id ? 'selected' : ''}`}
-            onClick={() => changeWindow(to, id)}>
+            onClick={() => changeWindow(to, id)}
+          >
             {label}
           </button>
         ))}

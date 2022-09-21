@@ -90,7 +90,8 @@ export default function FileUpload({
               <button
                 className="file-remove"
                 type="button"
-                onClick={() => setFiles(files.filter((f) => f !== file))}>
+                onClick={() => setFiles(files.filter((f) => f !== file))}
+              >
                 <i className="material-icons-outlined">close</i>
               </button>
             </div>

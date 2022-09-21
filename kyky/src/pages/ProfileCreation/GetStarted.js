@@ -1,85 +1,48 @@
+import Step1 from './components/Step1';
+import Step2 from './components/Step2';
+import Step3 from './components/Step3';
 import '../../styles/NewProfileCreation.scss';
-import { useState, useEffect } from 'react';
-import Input from '../../components/Input';
-import Checkbox from '../../components/Checkbox';
+import { useState } from 'react';
 
 export default function GetStarted() {
-  const [title, setTitle] = useState('Please add a title about what you do.');
-  const [secondTitle, setSecondTitle] = useState(
-    "It's the very first thing clients see. Please describe your skills with your own words."
-  );
-  const [fieldChange, setFieldChange] = useState(
-    <input className="getStartedInput" placeholder="Example: Dogwalker"></input>
-  );
+  const titles = [
+    'Please add a title about what you do.',
+    'If you have relevant work experience, add it here',
+    'Good. Now tell us which languages you speak.'
+  ];
+
+  const tips = [
+    "It's the very first thing clients see. Please describe your skills with your own words.",
+    'Relevant working experience will increase the chance of getting hired!',
+    'Your language skill can make client know you better.'
+  ];
+
+  const steps = 3;
+
+  const [title, setTitle] = useState(0);
+  const [tip, setTip] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
+
   function nextPhase() {
-    setTitle('If you have relevant work experience, add it here.');
-    setFieldChange(
-      <div className="addExperience">
-        Add experience{' '}
-        <button type="button" className="picIcon">
-          +
-        </button>
-      </div>
-    );
-    setSecondTitle('Relevant working experience will increase the chance of getting hired!');
+    setTitle(title + 1);
+    setTip(tip + 1);
+    setCurrentStep(currentStep + 1);
   }
 
   return (
     <div className="get-started">
       <div className="mainContainer">
-        <h1>{title}</h1>
-        <p>{secondTitle}</p>
-        <div>{fieldChange}</div>
-        <button className="nextButton" onClick={nextPhase}>
-          NEXT
-        </button>
-        
-        <div className="workContainer">
-          <h3>Add Work Experience</h3>
-          <Input
-            className="inputLong"
-            label="Title/a heading for what you do*"
-            placeholder="Ex:Cleaner"
-            labelOnFront></Input>
-          <Input
-            className="inputLong"
-            label="Company"
-            placeholder="Ex:Frenska"
-            labelOnFront></Input>
-          <Input
-            className="inputShort"
-            label="Location*"
-            placeholder="Ex:Helsinki"
-            labelOnFront></Input>
-          <select className="countryList"></select>
-          <Checkbox className="workCheck">I am currently working in this role</Checkbox>
-          <button className="saveButton">Save</button>
-        </div>
-        <div className="educationContainer">
-          <h3>Add Education History</h3>
-          <Input
-            className="inputLong"
-            label="School"
-            placeholder="Ex: Business college Helsinki "
-            labelOnFront></Input>
-          <Input
-            className="inputLong"
-            label="Degree"
-            placeholder="Ex:Vocational Qualification"
-            labelOnFront></Input>
-          <Input
-            className="inputShort"
-            label="Field of Study"
-            placeholder="Ex:Helsinki"
-            labelOnFront></Input>
-          <Input
-            className="inputShort"
-            label="Graduation Date"
-            placeholder="mm/dd/yyyy"
-            labelOnFront></Input>
-
-          <button className="saveButton">Save</button>
-        </div>
+        <h1>{titles[title]}</h1>
+        <p>{tips[tip]}</p>
+        {currentStep === 1 && <Step1 />}
+        {currentStep === 2 && <Step2 />}
+        {currentStep === 3 && <Step3 />}
+        {currentStep < steps && (
+          <button className="nextButton" onClick={nextPhase}>
+            NEXT
+          </button>
+        )}
+        {currentStep === steps && <button className="submitButton">Submit Profile</button>}
       </div>
     </div>
   );

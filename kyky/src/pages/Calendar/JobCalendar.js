@@ -95,7 +95,8 @@ export default function JobCalendar() {
             value={date.getMonth()}
             onChange={(e) => {
               setDate(new Date(date.getFullYear(), e.target.value, date.getDate()));
-            }}>
+            }}
+          >
             {months.map((month, i) => (
               <option key={i} value={i}>
                 {month}
@@ -112,7 +113,8 @@ export default function JobCalendar() {
             })}
             onChange={(e) => {
               setDate(new Date(e.target.value, date.getMonth(), date.getDate()));
-            }}>
+            }}
+          >
             {years.map((year, i) => (
               <option key={i} value={year}>
                 {year}
@@ -133,7 +135,8 @@ export default function JobCalendar() {
                 className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
                   index > day ? 'disabled' : ''
                 }`}
-                onClick={() => setSelectedDay(index)}>
+                onClick={() => setSelectedDay(index)}
+              >
                 {day}
               </div>
             ))}

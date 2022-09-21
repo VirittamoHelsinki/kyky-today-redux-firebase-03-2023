@@ -73,20 +73,17 @@
     "country": "Maa"
   },
 
-"job_creation": {
-  "h1": "Työnlisäys",
-  "job_title": "Työnimike",
-  "name": "Nimi",
-  "job_description" : "Työn kuvaus",
-  "job_category": "Työkategoria",
-  "place": "Paikka",
-  "insurance": "Minulta löytyy vakuutus",
-  "standard_price": "Perushinta",
-  "include_alv": "Hinta sisältää ALV:in",
-  "add_price": "Lisähinta",
-  "pictures": "Kuvat"
-}
-
-
-
+  "job_creation": {
+    "h1": "Työnlisäys",
+    "job_title": "Työnimike",
+    "name": "Nimi",
+    "job_description": "Työn kuvaus",
+    "job_category": "Työkategoria",
+    "place": "Paikka",
+    "insurance": "Minulta löytyy vakuutus",
+    "standard_price": "Perushinta",
+    "include_alv": "Hinta sisältää ALV:in",
+    "add_price": "Lisähinta",
+    "pictures": "Kuvat"
+  }
 }

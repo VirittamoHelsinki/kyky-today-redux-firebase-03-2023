@@ -90,7 +90,8 @@ function Overview() {
             height: `${50 * time}px`,
             top: `${50 * startTime}px`,
             left: `${(100 / overlap) * overlapIndex}%`
-          }}>
+          }}
+        >
           <h3>{name}</h3>
           <p>
             {start} - {end}

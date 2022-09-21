@@ -49,7 +49,7 @@
     "h1": "Job addition",
     "job_title": "Job title",
     "name": "Name",
-    "job_description" : "Job description",
+    "job_description": "Job description",
     "job_category": "Job category",
     "place": "Place",
     "insurance": "I have an insurance",

@@ -113,14 +113,18 @@ p{
     .getStartedInput{
         height:50px;
         width:400px;
-        text-align: center;
+        text-align: left;
         border: 1px solid #00A088;
         border-radius: 10px;
         position:relative;
         left:750px;
         top:100px;
     }
-    .nextButton{
+    #titleInput{
+        text-align: center;
+    }
+    .nextButton,
+    .submitButton {
         height:40px;
         width:200px;
         border-radius: 20px;
@@ -216,4 +220,9 @@ p{
         background-color: #387A70;
         position:relative;
         left:300px;
-}}
+    }
+    .select-container input{
+        position: initial;
+        height: 25px;
+    }
+}

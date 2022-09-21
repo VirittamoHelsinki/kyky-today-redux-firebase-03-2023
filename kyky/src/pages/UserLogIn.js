@@ -55,7 +55,8 @@ function UserLogIn() {
           name="remember"
           value={remember}
           onChange={(e) => setRemember(e.target.checked)}
-          checked={remember}>
+          checked={remember}
+        >
           Pidä minut kirjautuneena
         </Checkbox>
         <Button type="submit" onClick={handleSubmit}>
