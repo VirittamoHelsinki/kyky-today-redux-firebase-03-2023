@@ -38,27 +38,46 @@ export default function GetStarted() {
           <Input
             className="inputLong"
             label="Title/a heading for what you do*"
-            placeholder="Ex:Cleaner"></Input>
-          <Input className="inputLong" label="Company" placeholder="Ex:Frenska"></Input>
-          <Input className="inputShort" label="Location*" placeholder="Ex:Helsinki"></Input>
+            placeholder="Ex:Cleaner"
+            labelOnFront></Input>
+          <Input
+            className="inputLong"
+            label="Company"
+            placeholder="Ex:Frenska"
+            labelOnFront></Input>
+          <Input
+            className="inputShort"
+            label="Location*"
+            placeholder="Ex:Helsinki"
+            labelOnFront></Input>
           <select className="countryList"></select>
           <Checkbox className="workCheck">I am currently working in this role</Checkbox>
-          <button className="saveButton">SAVE</button>
+          <button className="saveButton">Save</button>
         </div>
         <div className="educationContainer">
           <h3>Add Education History</h3>
           <Input
             className="inputLong"
             label="School"
-            placeholder="Ex: Business college Helsinki "></Input>
+            placeholder="Ex: Business college Helsinki "
+            labelOnFront></Input>
           <Input
             className="inputLong"
             label="Degree"
-            placeholder="Ex:Vocational Qualification"></Input>
-          <Input className="inputShort" label="Field of Study" placeholder="Ex:Helsinki"></Input>
-          <Input className="inputShort" label="Graduation Date" placeholder="mm/dd/yyyy"></Input>
+            placeholder="Ex:Vocational Qualification"
+            labelOnFront></Input>
+          <Input
+            className="inputShort"
+            label="Field of Study"
+            placeholder="Ex:Helsinki"
+            labelOnFront></Input>
+          <Input
+            className="inputShort"
+            label="Graduation Date"
+            placeholder="mm/dd/yyyy"
+            labelOnFront></Input>
 
-          <button className="saveButton">SAVE</button>
+          <button className="saveButton">Save</button>
         </div>
       </div>
     </div>

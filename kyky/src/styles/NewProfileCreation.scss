@@ -159,6 +159,7 @@ p{
         
     }
     .workContainer,.educationContainer{
+        font-family: "Inter";
         display:flex;
         height:400px;
         width:500px;
@@ -166,6 +167,7 @@ p{
         border-radius:10px;
         flex-direction: column;
         padding:10px;
+        margin: 20px;
         justify-content: space-around;
     }
     
@@ -174,25 +176,34 @@ p{
     .inputLong{
         display:flex;
         flex-direction: column;
-        height:50px;
+        
+        height:40px;
         width:400px;
-
+        label{
+            padding-bottom:5px;
+            background: none;
+            box-shadow: none;
+        }
        
     }
     .inputShort{
         display:flex;
         flex-direction: column;
-        height:50px;
+        height:fit-content;
         width:200px;
-        
+        label{
+            padding-bottom:5px;
+            background: none;
+            box-shadow: none;
+        }
     }
     
     .countryList{
-        height:22px;
+        height:20px;
         width:200px;
         border:1px solid black;
         position: relative;
-        bottom:80px;
+        bottom:43px;
         left:250px;
     }
     .workCheck{
