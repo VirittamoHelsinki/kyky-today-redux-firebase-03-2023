@@ -22,8 +22,7 @@ export default function Step3(currentStep) {
           placeholder={placeholder}
           options={[...options]}
         >
-          {' '}
-          {/* Creating new options array for each Select component with the same content. */}
+          {/* ^ Creating new options array for each Select component with the same content. */}
         </Select>
         <Select
           className="select-container"
