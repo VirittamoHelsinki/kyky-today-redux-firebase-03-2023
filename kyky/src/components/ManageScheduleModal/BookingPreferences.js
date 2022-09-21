@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Input from '../Input';
 import Switch from 'react-switch';
 
-export default function BookingPreferences() {
+export default function BookingPreferences({ setField }) {
   const bufferTimes = [
     { value: 0, text: 'None' },
     { value: 5, text: '5 minutes' },
@@ -22,9 +22,38 @@ export default function BookingPreferences() {
     { value: -1, text: 'Custom' }
   ];
   const [limitBookings, setLimitBookings] = useState(false);
+  const [bufferTime, setBufferTime] = useState(15);
   const [travelTime, setTravelTime] = useState(false);
+  const [minimumBookingDuration, setMinimumBookingDuration] = useState(1);
   const [allowOverlap, setAllowOverlap] = useState(false);
   const [overlapAnyType, setOverlapAnyType] = useState(true);
+
+  function changeMinimumDurationTime(val) {
+    if (val === -1) val = prompt('Enter time in hours (decimals allowed)');
+    if (typeof val !== 'number' || val < 0) val = 0;
+    setMinimumBookingDuration(val);
+    setField('minimumBookingDuration', val);
+  }
+
+  useEffect(() => {
+    if (limitBookings) {
+      setField('limitBookings', true);
+    } else {
+      setField('limitBookings', false);
+      setField('bufferBetweenBookings', bufferTime);
+      setField('includeTravelTime', travelTime);
+    }
+  }, [limitBookings, bufferTime, travelTime]);
+
+  useEffect(() => {
+    if (allowOverlap) {
+      setField('canOverlap', true);
+      setField('overlapType', overlapAnyType ? 'any' : 'same');
+    } else {
+      setField('canOverlap', false);
+    }
+  }, [allowOverlap, overlapAnyType]);
+
   return (
     <>
       <h2>Booking Preferences</h2>
@@ -38,7 +67,10 @@ export default function BookingPreferences() {
             label=""
             checked={!limitBookings}
             onChange={() => setLimitBookings(false)}>
-            <select className="short" defaultValue={15}>
+            <select
+              className="short"
+              value={bufferTime}
+              onChange={(e) => setBufferTime(+e.target.value)}>
               {bufferTimes.map((time) => (
                 <option key={time.value} value={time.value}>
                   {time.text}
@@ -70,7 +102,9 @@ export default function BookingPreferences() {
       </div>
       <div className="booking-duration container">
         <p>Minimum duration of a booking</p>
-        <select defaultValue={1}>
+        <select
+          defaultValue={minimumBookingDuration}
+          onChange={(e) => changeMinimumDurationTime(+e.target.value)}>
           {bookingTimes.map((time) => (
             <option key={time.value} value={time.value}>
               {time.text}
