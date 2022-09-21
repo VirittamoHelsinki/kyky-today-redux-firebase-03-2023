@@ -408,6 +408,21 @@
       }
     }
 
+    .preview-and-submit {
+      div {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2rem;
+
+        p {
+          width: 30%;
+          text-align: right;
+        }
+      }
+    }
+
     .choose-job {
       height: 250px;
     }
