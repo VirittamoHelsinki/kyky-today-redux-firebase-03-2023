@@ -21,9 +21,9 @@ body {
 header {
   position: sticky;
   width: 100%;
-  background-color: $grayscale-medium;
+  background-color: white;
   padding: $base-padding;
-  color: $white;
+  color: gray;
   font-size: $base-font-size;
   font-family: $font-family-default;
   z-index: 5;
@@ -32,7 +32,7 @@ header {
     //delete this after not needed anymore
     display: flex;
     padding: 10px;
-    border-bottom: 1px solid $grayscale-light;
+    border-bottom: 1px solid white;
     position: absolute;
     top: 0;
     left: 0;
@@ -41,7 +41,7 @@ header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
     nav.component-selector a {
-      color: $white;
+      color: gray;
       text-decoration: none;
     }
   }

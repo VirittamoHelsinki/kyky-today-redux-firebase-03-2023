@@ -33,6 +33,7 @@ export default function GetStarted() {
         <button className="nextButton" onClick={nextPhase}>
           NEXT
         </button>
+        
         <div className="workContainer">
           <h3>Add Work Experience</h3>
           <Input
