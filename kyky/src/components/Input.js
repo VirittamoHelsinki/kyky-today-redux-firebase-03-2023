@@ -26,6 +26,8 @@ export default function Input({
   iconIsButton = true,
   labelOnFront = false,
   iconOnClick = () => {},
+  min,
+  max,
   children
 }) {
   return (
@@ -41,6 +43,8 @@ export default function Input({
         required={required}
         onChange={onChange}
         checked={checked}
+        min={min}
+        max={max}
       />
       {!labelOnFront && <label htmlFor={id}>{label}</label>}
       {iconText !== '' && !iconIsButton && <i className={`${iconClassName}`}>{iconText}</i>}
