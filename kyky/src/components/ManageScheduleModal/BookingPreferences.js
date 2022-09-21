@@ -9,7 +9,8 @@ export default function BookingPreferences({ setField }) {
     { value: 15, text: '15 minutes' },
     { value: 30, text: '30 minutes' },
     { value: 60, text: '1 hour' },
-    { value: 120, text: '2 hours' }
+    { value: 120, text: '2 hours' },
+    { value: -1, text: 'Custom' }
   ];
   const bookingTimes = [
     // in hours
@@ -23,6 +24,7 @@ export default function BookingPreferences({ setField }) {
   ];
   const [limitBookings, setLimitBookings] = useState(false);
   const [bufferTime, setBufferTime] = useState(15);
+  const [customBuffertime, setCustomBuffertime] = useState(undefined);
   const [travelTime, setTravelTime] = useState(false);
   const [minimumBookingDuration, setMinimumBookingDuration] = useState(1);
   const [allowOverlap, setAllowOverlap] = useState(false);
@@ -33,6 +35,16 @@ export default function BookingPreferences({ setField }) {
     if (typeof val !== 'number' || val < 0) val = 0;
     setMinimumBookingDuration(val);
     setField('minimumBookingDuration', val);
+  }
+
+  function changeBufferTime(val) {
+    if (val === -1) {
+      setBufferTime(val);
+      setCustomBuffertime(1);
+    } else {
+      setBufferTime(val);
+      setCustomBuffertime(undefined);
+    }
   }
 
   useEffect(() => {
@@ -70,13 +82,29 @@ export default function BookingPreferences({ setField }) {
             <select
               className="short"
               value={bufferTime}
-              onChange={(e) => setBufferTime(+e.target.value)}>
+              onChange={(e) => changeBufferTime(+e.target.value)}>
               {bufferTimes.map((time) => (
                 <option key={time.value} value={time.value}>
                   {time.text}
                 </option>
               ))}
             </select>
+            {customBuffertime !== undefined && (
+              <>
+                <Input
+                  type="number"
+                  name="custom-buffer"
+                  id="custom-buffer"
+                  className="input-container short"
+                  label="hours"
+                  value={customBuffertime}
+                  onChange={(e) => setCustomBuffertime(+e.target.value)}
+                  min={1}
+                  max={23}
+                />
+                <span>The buffer time must be between 1-23 hours</span>
+              </>
+            )}
           </Input>
           <div className="travel-time-container">
             <Switch
