@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import LanguageSelect from './LanguageSelect';
-
+import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
 export default function Header({ languages, lang, setLang, navlinks }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,6 +17,7 @@ export default function Header({ languages, lang, setLang, navlinks }) {
 
   return (
     <header className="component-header">
+      <KykyLogo/>
       <LanguageSelect languages={languages} language={lang} setLanguage={setLang} />
 
       <nav className="component-selector">
