@@ -14,11 +14,28 @@ export default function DateAndTime({ setField }) {
     { value: 12, text: '12 months' }
   ];
   const [schedule, setSchedule] = useState(false);
+  const [months, setMonths] = useState(3);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [startTime, setStartTime] = useState('08:00');
   const [endTime, setEndTime] = useState('16:00');
   const [recurringDays, setRecurringDays] = useState([]);
+
+  useEffect(() => {
+    if (schedule) {
+      setField('scheduleDuration', {
+        months: null,
+        startDate: startDate,
+        endDate: endDate
+      });
+    } else {
+      setField('scheduleDuration', {
+        months: months,
+        startDate: null,
+        endDate: null
+      });
+    }
+  }, [schedule, months, startDate, endDate]);
 
   useEffect(() => {
     setField('time', { start: startTime, end: endTime });
@@ -40,10 +57,7 @@ export default function DateAndTime({ setField }) {
             checked={!schedule}
             onChange={() => setSchedule(false)}
           />
-          <select
-            className="short"
-            defaultValue={3}
-            onChange={(e) => setField('scheduleDuration', e.target.value)}>
+          <select className="short" value={months} onChange={(e) => setMonths(+e.target.value)}>
             {advanceTimes.map((time) => (
               <option key={time.value} value={time.value}>
                 {time.text}
@@ -64,7 +78,7 @@ export default function DateAndTime({ setField }) {
             value={startDate.toLocaleDateString('sv-SV')}
             name="start-date"
             label="Start date"
-            onChange={(e) => setStartDate(e.target.date)}
+            onChange={(e) => setStartDate(new Date(e.target.value))}
             labelOnFront
           />
           <Input
@@ -72,7 +86,7 @@ export default function DateAndTime({ setField }) {
             value={endDate.toLocaleDateString('sv-SV')}
             name="end-date"
             label="End date"
-            onChange={(e) => setEndDate(e.target.date)}
+            onChange={(e) => setEndDate(new Date(e.target.value))}
             labelOnFront
           />
         </div>

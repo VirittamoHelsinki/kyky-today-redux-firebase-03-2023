@@ -29,11 +29,14 @@ export default function ManageScheduleModal() {
       end: 16.0
     },
     recurring: [],
+    limitBookings: false,
     bufferBetweenBookings: 0,
-    travelTime: -1,
+    includeTravelTime: false,
     minimumBookingDuration: 0,
-    canOverlap: false
+    canOverlap: false,
+    overlapType: 'any'
   });
+  console.log(properties);
   const progression = [
     {
       id: 1,
