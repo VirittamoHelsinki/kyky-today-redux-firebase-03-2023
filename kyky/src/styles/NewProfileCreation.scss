@@ -1,3 +1,4 @@
+@use "_utilities" as *;
 
 h1{
     font-weight: 300;
@@ -221,23 +222,49 @@ p{
         position:relative;
         left:300px;
     }
-    .select-container input{
-        position: initial;
-        height: 25px;
-    }
 }
-.formContainer{
+
+.step {
+    margin: auto 20px;
+}
+
+.formContainer {
     font-family: "Inter";
-    display:flex;
-   
-    height:400px;
-    width:500px;
-    border:1px solid #387A70;
-    border-radius:10px;
+    display: flex;
+    height: 400px;
+    width: 500px;
+    border: 1px solid #387A70;
+    border-radius: 10px;
     flex-direction: column;
-    padding:10px;
+    padding: 10px;
     margin: 20px;
     justify-content: space-around;
+}
 
+.languageFormContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 50px 50px 50px 50px 50px;
+    grid-template-areas:
+        "header header"
+        "label select"
+        "button button";
+    width: auto;
+    max-width: 500px;
+    border: 1px solid $kyky-primary-dark;
+    border-radius: 10px;
+    margin: 30px auto 20px auto;
 
+    h3 {
+        grid-column-start: header;
+        grid-column-end: span 2;
+    }
+
+    label {
+        grid-column-start: label;
+    }
+
+    .select-container {
+        grid-column-start: select;
+    }
 }
