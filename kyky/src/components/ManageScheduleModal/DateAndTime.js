@@ -13,7 +13,7 @@ export default function DateAndTime({ properties, setField }) {
     { value: 6, text: '6 months' },
     { value: 12, text: '12 months' }
   ];
-  const [schedule, setSchedule] = useState(properties.scheduleDuration.months !== null);
+  const [schedule, setSchedule] = useState(properties.scheduleDuration.months === null);
   const [months, setMonths] = useState(properties.scheduleDuration.months || 3);
   const [startDate, setStartDate] = useState(properties.scheduleDuration.startDate || new Date());
   const [endDate, setEndDate] = useState(properties.scheduleDuration.endDate || new Date());
@@ -38,7 +38,6 @@ export default function DateAndTime({ properties, setField }) {
   }, [schedule, months, startDate, endDate]);
 
   useEffect(() => {
-    console.log(parseInt(startTime), parseInt(endTime));
     if (parseInt(startTime) >= parseInt(endTime)) {
       alert("Start time can't be later than end time!");
     } else {

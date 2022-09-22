@@ -25,8 +25,8 @@ export default function ManageScheduleModal({ setScheduleWindow }) {
       endDate: null
     },
     time: {
-      start: 8.0,
-      end: 16.0
+      start: '08:00',
+      end: '16:00'
     },
     recurring: [],
     limitBookings: false,
