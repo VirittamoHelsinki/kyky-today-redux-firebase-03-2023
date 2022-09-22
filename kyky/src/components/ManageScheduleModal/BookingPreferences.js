@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Input from '../Input';
 import Switch from 'react-switch';
 
-export default function BookingPreferences({ setField }) {
+export default function BookingPreferences({ properties, setField }) {
   const bufferTimes = [
     { value: 0, text: 'None' },
     { value: 5, text: '5 minutes' },
@@ -22,14 +22,16 @@ export default function BookingPreferences({ setField }) {
     { value: 10, text: '10 hours' },
     { value: -1, text: 'Custom' }
   ];
-  const [limitBookings, setLimitBookings] = useState(false);
-  const [bufferTime, setBufferTime] = useState(15);
+  const [limitBookings, setLimitBookings] = useState(properties.limitBookings);
+  const [bufferTime, setBufferTime] = useState(properties.bufferBetweenBookings);
   const [customBuffertime, setCustomBuffertime] = useState(undefined);
   const [customMinimumBookingDuration, setCustomMinimumBookingDuration] = useState(undefined);
-  const [travelTime, setTravelTime] = useState(false);
-  const [minimumBookingDuration, setMinimumBookingDuration] = useState(1);
-  const [allowOverlap, setAllowOverlap] = useState(false);
-  const [overlapAnyType, setOverlapAnyType] = useState(true);
+  const [travelTime, setTravelTime] = useState(properties.includeTravelTime);
+  const [minimumBookingDuration, setMinimumBookingDuration] = useState(
+    properties.minimumBookingDuration
+  );
+  const [allowOverlap, setAllowOverlap] = useState(properties.canOverlap);
+  const [overlapAnyType, setOverlapAnyType] = useState(properties.overlapType === 'any');
 
   function changeMinimumDurationTime(val) {
     if (val === -1) {
@@ -38,6 +40,7 @@ export default function BookingPreferences({ setField }) {
     } else {
       setMinimumBookingDuration(val);
       setCustomMinimumBookingDuration(undefined);
+      setField('minimumBookingDuration', val);
     }
   }
 

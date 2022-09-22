@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import Input from '../Input';
 
-export default function DateAndTime({ setField }) {
+export default function DateAndTime({ properties, setField }) {
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
   // value is in months
   const advanceTimes = [
@@ -13,13 +13,13 @@ export default function DateAndTime({ setField }) {
     { value: 6, text: '6 months' },
     { value: 12, text: '12 months' }
   ];
-  const [schedule, setSchedule] = useState(false);
-  const [months, setMonths] = useState(3);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [startTime, setStartTime] = useState('08:00');
-  const [endTime, setEndTime] = useState('16:00');
-  const [recurringDays, setRecurringDays] = useState([]);
+  const [schedule, setSchedule] = useState(properties.scheduleDuration.months !== null);
+  const [months, setMonths] = useState(properties.scheduleDuration.months || 3);
+  const [startDate, setStartDate] = useState(properties.scheduleDuration.startDate || new Date());
+  const [endDate, setEndDate] = useState(properties.scheduleDuration.endDate || new Date());
+  const [startTime, setStartTime] = useState(properties.time.start);
+  const [endTime, setEndTime] = useState(properties.time.end);
+  const [recurringDays, setRecurringDays] = useState(properties.recurring);
 
   useEffect(() => {
     if (schedule) {
