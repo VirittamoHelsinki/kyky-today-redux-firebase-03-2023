@@ -15,7 +15,7 @@ export default function Step3(currentStep) {
   return (
     <div className="step step3">
       <div className="formContainer">
-        <h2>Language</h2>
+        <h3>Language</h3>
         <Select
           className="select-container"
           name="finnishSelect"

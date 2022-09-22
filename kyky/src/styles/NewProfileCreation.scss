@@ -226,3 +226,18 @@ p{
         height: 25px;
     }
 }
+.formContainer{
+    font-family: "Inter";
+    display:flex;
+   
+    height:400px;
+    width:500px;
+    border:1px solid #387A70;
+    border-radius:10px;
+    flex-direction: column;
+    padding:10px;
+    margin: 20px;
+    justify-content: space-around;
+
+
+}

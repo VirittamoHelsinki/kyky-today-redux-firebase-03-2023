@@ -4,7 +4,7 @@ import React from 'react';
 export default function Step1(currentStep) {
   return (
     <div className="step step1">
-      <input
+      <input className= "getStartedInput"
         id="titleInput"
         name="titleInput"
         placeholder="Example: Dogwalker"
