@@ -7,7 +7,7 @@ import { useState } from 'react';
 export default function GetStarted() {
   const titles = [
     'Please add a title about what you do.',
-    'If you have relevant work experience, add it here',
+    'If you have relevant work and/or education experience, add it here.',
     'Good. Now tell us which languages you speak.'
   ];
 

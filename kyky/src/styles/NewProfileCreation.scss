@@ -3,102 +3,101 @@
 h1{
     font-weight: 300;
 }
-h3{
-    font-size:20px;
+h3 {
+  font-size: 20px;
 }
-p{
-    font-family:"Poppins";
-}
-
-.leftContainer{
-    font-family: "Ubuntu", sans-serif;
-    
-    
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-    
-   
-    
-    height:400px;
-    width: 600px;
-    //border: 2px solid black;
-    position: relative;
-    top:200px;
-    left:250px;
-} 
-.profileIcon{
-    position: relative;
-    top:48px;
-}
-.profileNotice{
-    color:#387A70;
-    position: relative;
-    left:35px;
+p {
+  font-family: 'Poppins';
 }
 
-.getStarted{
-    display:flex;
-    
-    justify-content: center;
-    align-items: center;
-    font-family: "Ubuntu";
-    font-size: 15px;
-    height:40px;
-    width:150px;
-    border:2px solid #00A088;
-    border-radius: 20px;
-    background:white;
+.leftContainer {
+  font-family: 'Ubuntu', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 400px;
+  width: 600px;
+  //border: 2px solid black;
+  position: relative;
+  top: 200px;
+  left: 250px;
 }
-.linkedIn{
-    font-family: "Ubuntu";
-    font-size: 15px;
-    height:40px;
-    width:150px;
-    border-radius: 20px;
-    color: white;
-    background-color: #0072B1;;
+.profileIcon {
+  position: relative;
+  top: 48px;
 }
-.rightContainer{
-    p{
-        text-align: center;
-    }
-    font-family: "Ubuntu", sans-serif;
+.profileNotice {
+  color: #387a70;
+  position: relative;
+  left: 35px;
+}
+
+.getStarted {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  font-family: 'Ubuntu';
+  font-size: 15px;
+  height: 40px;
+  width: 150px;
+  border: 2px solid #00a088;
+  border-radius: 20px;
+  background: white;
+}
+.linkedIn {
+  font-family: 'Ubuntu';
+  font-size: 15px;
+  height: 40px;
+  width: 150px;
+  border-radius: 20px;
+  color: white;
+  background-color: #0072b1;
+}
+.rightContainer {
+  p {
     text-align: center;
-    
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
+  }
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 10px;
+
+  height: 500px;
+  width: 400px;
+  border: 1px solid rgb(221, 206, 206);
+  position: relative;
+  bottom: 250px;
+  left: 1200px;
+  .dogPic {
     border-radius: 10px;
-   
-    
-    height:500px;
-    width: 400px;
-    border: 1px solid rgb(221, 206, 206);
     position: relative;
-    bottom:250px;
-    left:1200px;
-    .dogPic{
-        border-radius: 10px;
-        position:relative;
-        bottom:15px;
-    }
-.rating{
-    position:relative;
-    right:160px;
-    color:#387A70;
-}
-.price{
-    position:relative;
-    left:160px;
-    bottom:20px;
-}
-.quoteContainer{
+    bottom: 15px;
+  }
+  .rating {
+    position: relative;
+    right: 160px;
+    color: #387a70;
+  }
+  .price {
+    position: relative;
+    left: 160px;
+    bottom: 20px;
+  }
+  .quoteContainer {
     padding-left: 40px;
     padding-right: 40px;
-  
+  }
 }
-}
+
+/*
+.get-started styles, version 2
+
 .get-started{
    
     h1{
@@ -267,4 +266,155 @@ p{
     .select-container {
         grid-column-start: select;
     }
+}
+
+end of .get-started styles, version 2
+*/
+
+.get-started {
+  h1 {
+    font-size: 40px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  p {
+    color: #387a70;
+    text-align: center;
+  }
+  .getStartedInput {
+    height: 50px;
+    width: 400px;
+    text-align: left;
+    border: 1px solid #00a088;
+    border-radius: 10px;
+    position: relative;
+    left: 750px;
+    top: 100px;
+  }
+  #titleInput {
+    text-align: center;
+  }
+  .nextButton,
+  .submitButton {
+    font-size: 16px;
+    height: 40px;
+    width: 200px;
+    border-radius: 20px;
+    color: white;
+    background-color: #387a70;
+    position: relative;
+    top: 300px;
+    left: 850px;
+  }
+  .experienceContainer {
+    display: flex;
+    height: fit-content;
+    width: 1000px;
+    justify-content: space-around;
+    position: relative;
+    right: 300px;
+  }
+  .addExperience {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(129, 123, 123);
+    height: 250px;
+    width: 400px;
+    border: 2px dashed #387a70;
+    border-radius: 10px;
+    position: relative;
+    top: 100px;
+    left: 750px;
+  }
+  .picIcon {
+    position: relative;
+    margin: 10px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    border: 0.25rem solid black;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #387a70;
+  }
+  .workContainer,
+  .educationContainer {
+    font-family: 'Inter';
+    display: flex;
+    background-color: white;
+    height: 500px;
+    width: 700px;
+    border: 1px solid #387a70;
+    border-radius: 10px;
+    flex-direction: column;
+    padding-left: 100px;
+    padding-top: 20px;
+    margin: 20px;
+    justify-content: space-around;
+  }
+
+  .inputLong {
+    display: flex;
+    flex-direction: column;
+
+    height: 40px;
+    width: 400px;
+    label {
+      padding-bottom: 10px;
+      background: none;
+      box-shadow: none;
+    }
+  }
+  .inputShort {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 200px;
+    label {
+      padding-bottom: 5px;
+      background: none;
+      box-shadow: none;
+    }
+  }
+
+  .countryList {
+    display: flex;
+    height: 10px;
+    width: 200px;
+
+    left: 285px;
+    bottom: 70px;
+  }
+
+  .saveButton {
+    font-family: "Inter";
+    font-size: 16px;
+    height: 40px;
+    width: 150px;
+    border-radius: 20px;
+    color: white;
+    background-color: #387a70;
+    position: relative;
+    left: 300px;
+  }
+  .select-container input {
+    position: initial;
+    height: 25px;
+  }
+}
+.formContainer {
+  font-family: 'Inter';
+  display: flex;
+  background-color: white;
+  height: 400px;
+  width: 500px;
+  border: 1px solid #387a70;
+  border-radius: 10px;
+  flex-direction: column;
+  padding: 10px;
+  margin: 20px;
+  justify-content: space-around;
 }

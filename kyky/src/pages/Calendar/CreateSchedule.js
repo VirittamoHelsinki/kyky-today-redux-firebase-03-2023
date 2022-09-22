@@ -13,7 +13,7 @@ import DateAndTime from '../../components/ManageScheduleModal/DateAndTime';
 import BookingPreferences from '../../components/ManageScheduleModal/BookingPreferences';
 import PreviewAndSubmit from '../../components/ManageScheduleModal/PreviewAndSubmit';
 
-export default function ManageScheduleModal() {
+export default function ManageScheduleModal({ setScheduleWindow }) {
   const [step, setStep] = useState(1);
   const [mode, setMode] = useState('create');
   const [View, setView] = useState(() => ChooseJob);
@@ -25,8 +25,8 @@ export default function ManageScheduleModal() {
       endDate: null
     },
     time: {
-      start: 8.0,
-      end: 16.0
+      start: '08:00',
+      end: '16:00'
     },
     recurring: [],
     limitBookings: false,
@@ -98,9 +98,12 @@ export default function ManageScheduleModal() {
         </div>
       </div>
       <div className="manage-schedule__content">
-        <View properties={properties} setField={setField} />
+        <View properties={properties} setField={setField} setScheduleWindow={setScheduleWindow} />
       </div>
       <div className="manage-schedule__footer">
+        <Button className="cancel" onClick={() => setScheduleWindow(false)}>
+          <i className="material-icons-outlined">close</i> Cancel
+        </Button>
         {step > 1 && (
           <Button className="prog_button prev" onClick={() => setStep(step - 1)}>
             <i className="material-icons-outlined">chevron_left</i>
@@ -113,7 +116,7 @@ export default function ManageScheduleModal() {
           </Button>
         )}
         {step === progression.length && (
-          <Button>
+          <Button onClick={() => setScheduleWindow(false)}>
             Submit<i className="material-icons-outlined">done</i>
           </Button>
         )}

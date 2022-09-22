@@ -60,7 +60,6 @@ function App() {
               <Route index element={<JobCalendar />} />
               <Route path="overview" element={<Overview />} />
               <Route path="settings" element={<CalendarSettings />} />
-              <Route path="schedule/create" element={<CreateSchedule />} />
             </Route>
 
             <Route path="new-profile-creation" element={<Creation />}>
