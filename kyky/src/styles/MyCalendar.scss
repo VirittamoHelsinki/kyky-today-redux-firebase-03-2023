@@ -180,8 +180,9 @@
   width: min(1000px, 100%);
   height: max-content;
   left: 50%;
-  top: 200px;
+  top: 220px;
   transform: translateX(-50%);
+  box-shadow: 0 0 3rem 1rem rgb(32, 32, 32, 0.2);
 
   .create-schedule__progression {
     width: 100%;
@@ -355,11 +356,21 @@
       .recurrence-days {
         width: auto;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 100px);
+        justify-content: center;
+        align-items: center;
         flex-wrap: wrap;
+        gap: 0.5rem;
 
         .recurrence-day {
           text-transform: capitalize;
+          text-align: left;
+          display: flex;
+
+          &:nth-child(6),
+          &:nth-child(7) {
+            grid-row: 3;
+          }
         }
       }
       /* Booking Preferences */
@@ -457,6 +468,20 @@
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
+
+    .cancel {
+      border: none;
+      background: none;
+      outline: none;
+      color: $kyky-primary-dark;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.25rem;
+      position: absolute;
+      left: 2rem;
+    }
 
     .prog_button {
       width: 140px;

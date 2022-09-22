@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-export default function CalendarHeader({ selectedWindow, setSelectedWindow }) {
+export default function CalendarHeader({ selectedWindow, setSelectedWindow, setScheduleWindow }) {
   const navigate = new useNavigate();
 
   const navButtons = [
@@ -26,8 +26,8 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow }) {
           <div className="info">Pending</div>
           <div>|</div>
           <div className="info">Confirmed</div>
-          <button className="create-schedule--button">
-            <Link to="schedule/create">Create a Schedule</Link>
+          <button className="create-schedule--button" onClick={() => setScheduleWindow(true)}>
+            Create a Schedule
           </button>
         </div>
       </div>
@@ -36,8 +36,7 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow }) {
           <button
             key={id}
             className={`button ${selectedWindow === id ? 'selected' : ''}`}
-            onClick={() => changeWindow(to, id)}
-          >
+            onClick={() => changeWindow(to, id)}>
             {label}
           </button>
         ))}
