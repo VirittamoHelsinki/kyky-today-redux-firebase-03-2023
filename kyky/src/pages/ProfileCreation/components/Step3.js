@@ -11,28 +11,34 @@ export default function Step3(currentStep) {
   ];
 
   const placeholder = 'My level is';
+  const finnishSelectName = "finnishSelect";
+  const swedishSelectName = "swedishSelect";
+  const englishSelectName = "englishSelect";
 
   return (
     <div className="step step3">
-      <div className="formContainer">
+      <div className="formContainer languageFormContainer">
         <h3>Language</h3>
+        <label htmlFor={finnishSelectName}>Finnish</label>
         <Select
           className="select-container"
-          name="finnishSelect"
+          name={finnishSelectName}
           placeholder={placeholder}
           options={[...options]}
         >
           {/* ^ Creating new options array for each Select component with the same content. */}
         </Select>
+        <label htmlFor={swedishSelectName}>Swedish</label>
         <Select
           className="select-container"
-          name="swedishSelect"
+          name={swedishSelectName}
           placeholder={placeholder}
           options={[...options]}
         ></Select>
+        <label htmlFor={englishSelectName}>English</label>
         <Select
           className="select-container"
-          name="englishSelect"
+          name={englishSelectName}
           placeholder={placeholder}
           options={[...options]}
         ></Select>
