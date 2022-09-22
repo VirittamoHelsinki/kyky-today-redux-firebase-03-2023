@@ -38,7 +38,12 @@ export default function DateAndTime({ setField }) {
   }, [schedule, months, startDate, endDate]);
 
   useEffect(() => {
-    setField('time', { start: startTime, end: endTime });
+    console.log(parseInt(startTime), parseInt(endTime));
+    if (parseInt(startTime) >= parseInt(endTime)) {
+      alert("Start time can't be later than end time!");
+    } else {
+      setField('time', { start: startTime, end: endTime });
+    }
   }, [startTime, endTime]);
 
   useEffect(() => {
