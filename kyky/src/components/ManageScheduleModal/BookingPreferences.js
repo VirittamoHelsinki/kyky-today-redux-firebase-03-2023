@@ -25,16 +25,20 @@ export default function BookingPreferences({ setField }) {
   const [limitBookings, setLimitBookings] = useState(false);
   const [bufferTime, setBufferTime] = useState(15);
   const [customBuffertime, setCustomBuffertime] = useState(undefined);
+  const [customMinimumBookingDuration, setCustomMinimumBookingDuration] = useState(undefined);
   const [travelTime, setTravelTime] = useState(false);
   const [minimumBookingDuration, setMinimumBookingDuration] = useState(1);
   const [allowOverlap, setAllowOverlap] = useState(false);
   const [overlapAnyType, setOverlapAnyType] = useState(true);
 
   function changeMinimumDurationTime(val) {
-    if (val === -1) val = prompt('Enter time in hours (decimals allowed)');
-    if (typeof val !== 'number' || val < 0) val = 0;
-    setMinimumBookingDuration(val);
-    setField('minimumBookingDuration', val);
+    if (val === -1) {
+      setMinimumBookingDuration(val);
+      setCustomMinimumBookingDuration(1);
+    } else {
+      setMinimumBookingDuration(val);
+      setCustomMinimumBookingDuration(undefined);
+    }
   }
 
   function changeBufferTime(val) {
@@ -98,7 +102,10 @@ export default function BookingPreferences({ setField }) {
                   className="input-container short"
                   label="hours"
                   value={customBuffertime}
-                  onChange={(e) => setCustomBuffertime(+e.target.value)}
+                  onChange={(e) => {
+                    setCustomBuffertime(+e.target.value);
+                    setField('bufferBetweenBookings', +e.target.value * 60);
+                  }}
                   min={1}
                   max={23}
                 />
@@ -139,6 +146,25 @@ export default function BookingPreferences({ setField }) {
             </option>
           ))}
         </select>
+        {customMinimumBookingDuration !== undefined && (
+          <>
+            <Input
+              type="number"
+              name="custom-buffer"
+              id="custom-buffer"
+              className="input-container short"
+              label="hours"
+              value={customMinimumBookingDuration}
+              onChange={(e) => {
+                setCustomMinimumBookingDuration(+e.target.value);
+                setField('minimumBookingDuration', +e.target.value);
+              }}
+              min={1}
+              max={168}
+            />
+            <span>The duration must be between 1-168 hours</span>
+          </>
+        )}
       </div>
       <div className="overlapping-bookings container">
         <p>Overlapping bookings</p>

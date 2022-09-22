@@ -42,7 +42,9 @@ export default function DateAndTime({ setField }) {
   }, [startTime, endTime]);
 
   useEffect(() => {
-    setField('recurring', recurringDays);
+    if (recurringDays.length === 0) {
+      setField('recurringDays', days);
+    } else setField('recurring', recurringDays);
   }, [recurringDays]);
   return (
     <>

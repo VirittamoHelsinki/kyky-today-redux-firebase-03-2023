@@ -32,7 +32,7 @@ export default function ManageScheduleModal() {
     limitBookings: false,
     bufferBetweenBookings: 0,
     includeTravelTime: false,
-    minimumBookingDuration: 0,
+    minimumBookingDuration: 1,
     canOverlap: false,
     overlapType: 'any'
   });
