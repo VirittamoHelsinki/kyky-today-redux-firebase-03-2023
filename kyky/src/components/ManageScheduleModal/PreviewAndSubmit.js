@@ -21,6 +21,23 @@ export default function PreviewAndSubmit({ properties }) {
     } else return 'Overlapping not allowed';
   }
 
+  function displayLongerTime(minutes) {
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const mins = minutes % 60;
+    let text = '';
+    if (days > 0) {
+      text += `${days} days `;
+    }
+    if (hours > 0) {
+      text += `${hours % 24} hours `;
+    }
+    if (mins > 0) {
+      text += `${mins} minutes`;
+    }
+    return text;
+  }
+
   return (
     <div className="preview-and-submit container" style={{ flexDirection: 'column' }}>
       <h2>Preview & Submit</h2>
@@ -32,7 +49,7 @@ export default function PreviewAndSubmit({ properties }) {
       <div>
         <p>Schedule duration</p>
         <span style={{ color: 'black' }}>
-          {properties.months
+          {properties.scheduleDuration.months
             ? `${properties.scheduleDuration.months} months`
             : `${properties.scheduleDuration.startDate.toLocaleDateString(
                 'fi-FI'
@@ -47,12 +64,16 @@ export default function PreviewAndSubmit({ properties }) {
       </div>
       <div>
         <p>Recurring</p>
-        <span style={{ color: 'black' }}>
-          On selected weekdays:{' '}
-          {properties.recurring.map(
-            (d, index) => daysLong[d] + (index === properties.recurring.length - 1 ? '' : ', ')
-          )}
-        </span>
+        {properties.recurring.length === 0 ? (
+          <span style={{ color: 'black' }}>Every day</span>
+        ) : (
+          <span style={{ color: 'black' }}>
+            On selected weekdays:{' '}
+            {properties.recurring.map(
+              (d, index) => daysLong[d] + (index === properties.recurring.length - 1 ? '' : ', ')
+            )}
+          </span>
+        )}
       </div>
       <div>
         {properties.limitBookings ? (
@@ -61,7 +82,7 @@ export default function PreviewAndSubmit({ properties }) {
           <>
             <p>Buffer between bookings</p>
             <span style={{ color: 'black' }}>
-              {properties.bufferBetweenBookings} minutes{' '}
+              {displayLongerTime(properties.bufferBetweenBookings)}{' '}
               {!properties.includeTravelTime ? '(Travel time not included)' : ''}
             </span>
           </>
@@ -69,7 +90,9 @@ export default function PreviewAndSubmit({ properties }) {
       </div>
       <div>
         <p>Minimum duration of a booking</p>
-        <span style={{ color: 'black' }}>{properties.minimumBookingDuration} hours</span>
+        <span style={{ color: 'black' }}>
+          {displayLongerTime(properties.minimumBookingDuration * 60)}
+        </span>
       </div>
       <div>
         <p>Overlapping bookings</p>
