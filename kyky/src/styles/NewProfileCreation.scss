@@ -118,6 +118,7 @@ p {
   }
   .nextButton,
   .submitButton {
+    font-size: 16px;
     height: 40px;
     width: 200px;
     border-radius: 20px;
@@ -167,7 +168,7 @@ p {
     background-color: white;
     height: 500px;
     width: 700px;
-    border: 1px solid black;
+    border: 1px solid #387a70;
     border-radius: 10px;
     flex-direction: column;
     padding-left: 100px;
@@ -183,7 +184,7 @@ p {
     height: 40px;
     width: 400px;
     label {
-      padding-bottom: 5px;
+      padding-bottom: 10px;
       background: none;
       box-shadow: none;
     }
@@ -205,11 +206,13 @@ p {
     height: 10px;
     width: 200px;
 
-    left: 280px;
+    left: 285px;
     bottom: 70px;
   }
 
   .saveButton {
+    font-family: "Inter";
+    font-size: 16px;
     height: 40px;
     width: 150px;
     border-radius: 20px;
