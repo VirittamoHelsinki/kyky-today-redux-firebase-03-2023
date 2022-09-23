@@ -95,182 +95,6 @@ p {
   }
 }
 
-/*
-.get-started styles, version 2
-
-.get-started{
-   
-    h1{
-        font-size: 40px;
-        text-align: center;
-        padding-top:50px;
-        padding-bottom:50px;
-    }
-    p{
-        color:#387A70;
-        text-align: center;
-    }
-    .getStartedInput{
-        height:50px;
-        width:400px;
-        text-align: left;
-        border: 1px solid #00A088;
-        border-radius: 10px;
-        position:relative;
-        left:750px;
-        top:100px;
-    }
-    #titleInput{
-        text-align: center;
-    }
-    .nextButton,
-    .submitButton {
-        height:40px;
-        width:200px;
-        border-radius: 20px;
-        color:white;
-        background-color: #387A70;
-        position:relative;
-        top:300px;
-        left:850px;
-    }
-    .addExperience{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color:rgb(129, 123, 123);
-        height:250px;
-        width:400px;
-        border: 2px dashed #387A70;
-        border-radius: 10px;
-        position:relative;
-        top:100px;
-        left:750px;
-    }
-    .picIcon{
-        
-            position: relative;
-            margin:10px;
-            font-weight: 700;
-            font-size: 1.25rem;
-            border: 0.25rem solid black;
-            width: 35px;
-            height:35px;
-            border-radius: 50%;
-            background-color: #387A70;
-        
-        
-    }
-    .workContainer,.educationContainer{
-        font-family: "Inter";
-        display:flex;
-        height:400px;
-        width:500px;
-        border:1px solid black;
-        border-radius:10px;
-        flex-direction: column;
-        padding:10px;
-        margin: 20px;
-        justify-content: space-around;
-    }
-    
-    
-    
-    .inputLong{
-        display:flex;
-        flex-direction: column;
-        
-        height:40px;
-        width:400px;
-        label{
-            padding-bottom:5px;
-            background: none;
-            box-shadow: none;
-        }
-       
-    }
-    .inputShort{
-        display:flex;
-        flex-direction: column;
-        height:fit-content;
-        width:200px;
-        label{
-            padding-bottom:5px;
-            background: none;
-            box-shadow: none;
-        }
-    }
-    
-    .countryList{
-        height:20px;
-        width:200px;
-        border:1px solid black;
-        position: relative;
-        bottom:43px;
-        left:250px;
-    }
-    
-    .saveButton{
-        
-        height:40px;
-        width:150px;
-        border-radius: 20px;
-        color:white;
-        background-color: #387A70;
-        position:relative;
-        left:300px;
-    }
-}
-
-.step {
-    margin: auto 20px;
-}
-
-.formContainer {
-    font-family: "Inter";
-    display: flex;
-    height: 400px;
-    width: 500px;
-    border: 1px solid #387A70;
-    border-radius: 10px;
-    flex-direction: column;
-    padding: 10px;
-    margin: 20px;
-    justify-content: space-around;
-}
-
-.languageFormContainer {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 50px 50px 50px 50px 50px;
-    grid-template-areas:
-        "header header"
-        "label select"
-        "button button";
-    width: auto;
-    max-width: 500px;
-    border: 1px solid $kyky-primary-dark;
-    border-radius: 10px;
-    margin: 30px auto 20px auto;
-
-    h3 {
-        grid-column-start: header;
-        grid-column-end: span 2;
-    }
-
-    label {
-        grid-column-start: label;
-    }
-
-    .select-container {
-        grid-column-start: select;
-    }
-}
-
-end of .get-started styles, version 2
-*/
-
 .get-started {
   h1 {
     font-size: 40px;
@@ -400,11 +224,12 @@ end of .get-started styles, version 2
     position: relative;
     left: 300px;
   }
-  .select-container input {
-    position: initial;
-    height: 25px;
-  }
 }
+
+.step {
+  margin: auto 20px;
+}
+
 .formContainer {
   font-family: 'Inter';
   display: flex;
@@ -417,4 +242,32 @@ end of .get-started styles, version 2
   padding: 10px;
   margin: 20px;
   justify-content: space-around;
+}
+
+.languageFormContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 50px 50px 50px 50px 50px;
+  grid-template-areas:
+      "header header"
+      "label select"
+      "button button";
+  width: auto;
+  max-width: 500px;
+  border: 1px solid $kyky-primary-dark;
+  border-radius: 10px;
+  margin: 30px auto 20px auto;
+
+  h3 {
+      grid-column-start: header;
+      grid-column-end: span 2;
+  }
+
+  label {
+      grid-column-start: label;
+  }
+
+  .select-container {
+      grid-column-start: select;
+  }
 }
