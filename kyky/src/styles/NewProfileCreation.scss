@@ -258,7 +258,8 @@ p {
 .languageFormContainer {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 50px 50px 50px 50px 50px;
+  grid-template-rows: 50px 38px 38px 38px auto;
+  row-gap: 25px;
   grid-template-areas:
       "header header"
       "label select"
@@ -267,6 +268,7 @@ p {
   max-width: 500px;
   border: 1px solid $kyky-primary-dark;
   border-radius: 10px;
+  padding: 20px;
   margin: 30px auto 20px auto;
 
   h3 {
@@ -276,9 +278,11 @@ p {
 
   label {
       grid-column-start: label;
+      align-self: center;
   }
 
   .select-container {
       grid-column-start: select;
+      align-self: center;
   }
 }
