@@ -247,6 +247,10 @@ p {
   justify-content: space-around;
 }
 
+.step [class$="-indicatorSeparator"] {
+  background-color: initial;
+}
+
 .languageFormContainer {
   display: grid;
   grid-template-columns: 1fr 2fr;
