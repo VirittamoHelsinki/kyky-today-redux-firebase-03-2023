@@ -251,6 +251,10 @@ p {
   background-color: initial;
 }
 
+.step [class$="-indicatorContainer"] svg {
+  fill: $kyky-primary-dark;
+}
+
 .languageFormContainer {
   display: grid;
   grid-template-columns: 1fr 2fr;
