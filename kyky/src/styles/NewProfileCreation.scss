@@ -231,6 +231,14 @@ p {
 
 .step {
   margin: auto 20px;
+
+  [class$="-indicatorSeparator"] {
+    background-color: initial;
+  }
+  
+  [class$="-indicatorContainer"] svg {
+    fill: $kyky-primary-dark;
+  }
 }
 
 .formContainer {
@@ -245,14 +253,6 @@ p {
   padding: 10px;
   margin: 20px;
   justify-content: space-around;
-}
-
-.step [class$="-indicatorSeparator"] {
-  background-color: initial;
-}
-
-.step [class$="-indicatorContainer"] svg {
-  fill: $kyky-primary-dark;
 }
 
 .languageFormContainer {
