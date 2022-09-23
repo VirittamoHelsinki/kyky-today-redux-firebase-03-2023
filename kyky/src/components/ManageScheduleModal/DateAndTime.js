@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import Input from '../Input';
 
-export default function DateAndTime({ properties, setField }) {
+export default function DateAndTime({ properties, setField, canContinue, setCanContinue }) {
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
   // value is in months
   const advanceTimes = [
@@ -20,8 +20,11 @@ export default function DateAndTime({ properties, setField }) {
   const [startTime, setStartTime] = useState(properties.time.start);
   const [endTime, setEndTime] = useState(properties.time.end);
   const [recurringDays, setRecurringDays] = useState(properties.recurring);
+  const [dateFieldError, setDateFieldError] = useState(false);
+  const [timeFieldError, setTimeFieldError] = useState(false);
 
   useEffect(() => {
+    checkIfCanContinue();
     if (schedule) {
       setField('scheduleDuration', {
         months: null,
@@ -38,11 +41,8 @@ export default function DateAndTime({ properties, setField }) {
   }, [schedule, months, startDate, endDate]);
 
   useEffect(() => {
-    if (parseInt(startTime) >= parseInt(endTime)) {
-      alert("Start time can't be later than end time!");
-    } else {
-      setField('time', { start: startTime, end: endTime });
-    }
+    checkIfCanContinue();
+    setField('time', { start: startTime, end: endTime });
   }, [startTime, endTime]);
 
   useEffect(() => {
@@ -50,6 +50,27 @@ export default function DateAndTime({ properties, setField }) {
       setField('recurringDays', days);
     } else setField('recurring', recurringDays);
   }, [recurringDays]);
+
+  function checkIfCanContinue() {
+    let can = true;
+    if (schedule) {
+      if (startDate.getTime() > endDate.getTime()) {
+        can = false;
+        setDateFieldError(true);
+      } else {
+        setDateFieldError(false);
+      }
+    }
+    if (parseInt(startTime) > parseInt(endTime)) {
+      can = false;
+      setTimeFieldError(true);
+    } else {
+      setTimeFieldError(false);
+    }
+
+    setCanContinue(can);
+    return can;
+  }
   return (
     <>
       <h2>Date & Time</h2>
@@ -95,6 +116,19 @@ export default function DateAndTime({ properties, setField }) {
             onChange={(e) => setEndDate(new Date(e.target.value))}
             labelOnFront
           />
+          {dateFieldError && (
+            <div className="error">
+              <i className="material-icons-outlined">error_outline</i>
+              <div>
+                Check the fields.
+                <ul>
+                  <li>Start date can't be later than end date.</li>
+                  <li>Date must be in format: Day-Month-Year</li>
+                  <li>Date field cannot be empty</li>
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="time container">
@@ -113,6 +147,18 @@ export default function DateAndTime({ properties, setField }) {
           label="End:"
           labelOnFront
         />
+        {timeFieldError && (
+          <div className="error">
+            <i className="material-icons-outlined">error_outline</i>
+            <div>
+              Check the fields.
+              <ul>
+                <li>Start time can't be later than end time.</li>
+                <li>Time must be in format: hh:mm</li>
+              </ul>
+            </div>
+          </div>
+        )}
       </div>
       <div className="recurrence container">
         <p>Recurring</p>

@@ -26,7 +26,6 @@ import MyCalendar from './pages/Calendar/MyCalendar';
 import Overview from './pages/Calendar/Overview';
 import JobCalendar from './pages/Calendar/JobCalendar';
 import CalendarSettings from './pages/Calendar/CalendarSettings';
-import CreateSchedule from './pages/Calendar/CreateSchedule';
 
 const languages = { fi, en };
 function App() {
