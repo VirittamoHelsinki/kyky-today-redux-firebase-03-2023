@@ -25,6 +25,7 @@ import GetStarted from './pages/ProfileCreation/GetStarted';
 import MyCalendar from './pages/Calendar/MyCalendar';
 import Overview from './pages/Calendar/Overview';
 import JobCalendar from './pages/Calendar/JobCalendar';
+import ManageSchedules from './pages/Calendar/ManageSchedules';
 import CalendarSettings from './pages/Calendar/CalendarSettings';
 
 const languages = { fi, en };
@@ -58,6 +59,7 @@ function App() {
             <Route path="calendar" element={<MyCalendar />}>
               <Route index element={<JobCalendar />} />
               <Route path="overview" element={<Overview />} />
+              <Route path="schedule" element={<ManageSchedules />} />
               <Route path="settings" element={<CalendarSettings />} />
             </Route>
 
