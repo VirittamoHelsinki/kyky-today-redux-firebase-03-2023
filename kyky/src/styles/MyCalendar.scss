@@ -302,7 +302,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0rem;
 
     .container {
       width: 95%;
@@ -312,6 +312,7 @@
       align-items: center;
       justify-content: flex-start;
       gap: 2rem;
+      padding: 1.4rem;
 
       p {
         color: $kyky-primary-dark;
@@ -381,8 +382,8 @@
         background: rgba(180, 180, 180, 0.2);
         display: flex;
         flex-direction: column;
+        align-items: center;
         justify-content: center;
-        align-items: flex-start;
         border-radius: 12px;
         border: 2px solid silver;
         gap: 0.4rem;
@@ -395,6 +396,33 @@
         &.center {
           flex-direction: row;
           align-items: center;
+        }
+      }
+
+      .error {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(212, 82, 82, 0.3);
+        white-space: nowrap;
+        gap: 0.25rem;
+        padding: 0.25rem;
+        border-radius: 0.5rem;
+
+        i {
+          font-size: 1.75rem !important;
+        }
+
+        div,
+        i {
+          color: darkred;
+          font-size: 1rem;
+          font-weight: bold;
+
+          li {
+            font-weight: normal;
+            font-size: 0.8rem;
+          }
         }
       }
 
@@ -504,6 +532,12 @@
       &.prev {
         background: $white;
         color: $kyky-primary-dark;
+      }
+
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+        filter: grayscale(1);
       }
     }
   }

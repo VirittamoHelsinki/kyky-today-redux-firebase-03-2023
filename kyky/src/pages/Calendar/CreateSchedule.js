@@ -17,6 +17,7 @@ export default function ManageScheduleModal({ setScheduleWindow }) {
   const [step, setStep] = useState(1);
   const [mode, setMode] = useState('create');
   const [View, setView] = useState(() => ChooseJob);
+  const [canContinue, setCanContinue] = useState(true);
   const [properties, setProperties] = useState({
     jobId: '',
     scheduleDuration: {
@@ -30,13 +31,12 @@ export default function ManageScheduleModal({ setScheduleWindow }) {
     },
     recurring: [],
     limitBookings: false,
-    bufferBetweenBookings: 0,
+    bufferBetweenBookings: 15,
     includeTravelTime: false,
     minimumBookingDuration: 1,
     canOverlap: false,
     overlapType: 'any'
   });
-  console.log(properties);
   const progression = [
     {
       id: 1,
@@ -98,7 +98,13 @@ export default function ManageScheduleModal({ setScheduleWindow }) {
         </div>
       </div>
       <div className="manage-schedule__content">
-        <View properties={properties} setField={setField} setScheduleWindow={setScheduleWindow} />
+        <View
+          properties={properties}
+          setField={setField}
+          setScheduleWindow={setScheduleWindow}
+          canContinue={canContinue}
+          setCanContinue={setCanContinue}
+        />
       </div>
       <div className="manage-schedule__footer">
         <Button className="cancel" onClick={() => setScheduleWindow(false)}>
@@ -111,7 +117,9 @@ export default function ManageScheduleModal({ setScheduleWindow }) {
           </Button>
         )}
         {step < progression.length && (
-          <Button className="prog_button" onClick={() => setStep(step + 1)}>
+          <Button
+            className={`prog_button ${!canContinue && 'disabled'}`}
+            onClick={() => setStep(step + 1)}>
             Next <i className="material-icons-outlined">chevron_right</i>
           </Button>
         )}

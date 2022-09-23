@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Input from '../Input';
 import Switch from 'react-switch';
 
-export default function BookingPreferences({ properties, setField }) {
+export default function BookingPreferences({ properties, setField, canContinue, setCanContinue }) {
   const bufferTimes = [
     { value: 0, text: 'None' },
     { value: 5, text: '5 minutes' },
@@ -32,6 +32,29 @@ export default function BookingPreferences({ properties, setField }) {
   );
   const [allowOverlap, setAllowOverlap] = useState(properties.canOverlap);
   const [overlapAnyType, setOverlapAnyType] = useState(properties.overlapType === 'any');
+  const [bufferError, setBufferError] = useState(false);
+  const [bookingError, setBookingError] = useState(false);
+
+  useEffect(() => {
+    checkIfCanContinue();
+  }, [customBuffertime, customMinimumBookingDuration]);
+
+  function checkIfCanContinue() {
+    let can = true;
+    if (customBuffertime > 23) {
+      can = false;
+      setBufferError(true);
+    } else {
+      setBufferError(false);
+    }
+    if (customMinimumBookingDuration > 168) {
+      can = false;
+      setBookingError(true);
+    } else {
+      setBookingError(false);
+    }
+    setCanContinue(can);
+  }
 
   function changeMinimumDurationTime(val) {
     if (val === -1) {
@@ -115,6 +138,12 @@ export default function BookingPreferences({ properties, setField }) {
                 <span>The buffer time must be between 1-23 hours</span>
               </>
             )}
+            {bufferError && (
+              <div className="error">
+                <i className="material-icons-outlined">error_outline</i>
+                <div>Invalid buffer time. The buffer time must be between 1-23 hours.</div>
+              </div>
+            )}
           </Input>
           <div className="travel-time-container">
             <Switch
@@ -167,6 +196,12 @@ export default function BookingPreferences({ properties, setField }) {
             />
             <span>The duration must be between 1-168 hours</span>
           </>
+        )}
+        {bookingError && (
+          <div className="error">
+            <i className="material-icons-outlined">error_outline</i>
+            <div>Invalid booking duration. The duration must be between 1-168 hours.</div>
+          </div>
         )}
       </div>
       <div className="overlapping-bookings container">
