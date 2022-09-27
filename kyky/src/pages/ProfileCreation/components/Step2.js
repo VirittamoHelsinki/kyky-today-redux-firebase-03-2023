@@ -5,18 +5,18 @@ import { useState } from 'react';
 import WorkExperience from './WorkExperience';
 import EducationExperience from './EducationExperience';
 
-
-
 export default function Step2(currentStep) {
   const [experience, setExperience] = useState('');
-
+  const [saved, setSaved] = useState(false);
   const workExperience = () => {
-    setExperience(<WorkExperience />);
+   
+    /*setSaved(false);*/
+    setExperience(<WorkExperience saved={saved} setSaved={setSaved} />);
   };
 
   const educationExperience = () => {
-    setExperience(<EducationExperience/>)
-  }
+    setExperience(<EducationExperience />);
+  };
 
   return (
     <div className="step step2">
@@ -26,7 +26,6 @@ export default function Step2(currentStep) {
           <button type="button" className="picIcon" onClick={() => workExperience()}>
             +
           </button>
-          
         </div>
         <div className="addExperience">
           Add Education experience{' '}
@@ -34,7 +33,8 @@ export default function Step2(currentStep) {
             +
           </button>
         </div>
-      </div>{experience}
+      </div>
+      {experience}
     </div>
   );
 }
