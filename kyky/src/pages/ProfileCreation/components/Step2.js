@@ -34,6 +34,7 @@ export default function Step2(currentStep) {
           </button>
         </div>
       </div>
+      {!saved && <div className="dim"></div>}
       {!saved && experience}
     </div>
   );

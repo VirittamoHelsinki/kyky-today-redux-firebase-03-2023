@@ -1,17 +1,17 @@
 @use "_utilities" as *;
 
-h1{
-    font-weight: 300;
+h1 {
+  font-weight: 300;
 }
 h3 {
   font-size: 20px;
 }
 p {
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 .leftContainer {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 
   display: flex;
   flex-direction: column;
@@ -39,7 +39,7 @@ p {
 
   justify-content: center;
   align-items: center;
-  font-family: 'Ubuntu';
+  font-family: "Ubuntu";
   font-size: 15px;
   height: 40px;
   width: 150px;
@@ -48,7 +48,7 @@ p {
   background: white;
 }
 .linkedIn {
-  font-family: 'Ubuntu';
+  font-family: "Ubuntu";
   font-size: 15px;
   height: 40px;
   width: 150px;
@@ -60,7 +60,7 @@ p {
   p {
     text-align: center;
   }
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   text-align: center;
 
   display: flex;
@@ -98,7 +98,7 @@ p {
 .get-started {
   h1 {
     font-size: 40px;
-    
+
     padding-top: 50px;
     padding-bottom: 50px;
   }
@@ -109,17 +109,16 @@ p {
   .mainContainer {
     height: 900px;
     width: 100vw;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  .titleContainer{
+  .titleContainer {
     height: auto;
     width: 50%;
     margin: auto;
     text-align: center;
-    
   }
   .getStartedInput {
     height: 50px;
@@ -127,7 +126,6 @@ p {
     text-align: left;
     border: 1px solid #00a088;
     border-radius: 10px;
-   
   }
   #titleInput {
     text-align: center;
@@ -145,12 +143,11 @@ p {
   .experienceContainer {
     display: flex;
     height: fit-content;
-    width: min(1000px,100%);
+    width: min(1000px, 100%);
     justify-content: space-around;
     position: relative;
     gap: 80px;
     flex-wrap: wrap;
-   
   }
   .addExperience {
     display: flex;
@@ -163,8 +160,6 @@ p {
     border: 2px dashed #387a70;
     border-radius: 10px;
     position: relative;
-    
-    
   }
   .picIcon {
     position: relative;
@@ -179,7 +174,7 @@ p {
   }
   .workContainer,
   .educationContainer {
-    font-family: 'Inter';
+    font-family: "Inter";
     display: flex;
     background-color: white;
     height: 500px;
@@ -189,16 +184,12 @@ p {
     flex-direction: column;
     padding-left: 100px;
     padding-top: 20px;
-    
+    z-index: 11;
+
     justify-content: space-around;
     position: relative;
     bottom: 200px;
     left: 100px;
-
-    &.false,&.hidden{
-      display:none;
-      background-color: red;
-    }
   }
 
   .inputLong {
@@ -253,14 +244,14 @@ p {
   [class$="-indicatorSeparator"] {
     background-color: initial;
   }
-  
+
   [class$="-indicatorContainer"] svg {
     fill: $kyky-primary-dark;
   }
 }
 
 .formContainer {
-  font-family: 'Inter';
+  font-family: "Inter";
   display: flex;
   background-color: white;
   height: 400px;
@@ -279,27 +270,27 @@ p {
   grid-template-rows: 50px 38px 38px 38px auto;
   row-gap: 25px;
   grid-template-areas:
-      "header header"
-      "label select"
-      "button button";
+    "header header"
+    "label select"
+    "button button";
   border: 1px solid $kyky-primary-dark;
   border-radius: 10px;
   padding: 20px;
   margin: 30px auto 20px auto;
 
   h3 {
-      grid-column-start: header;
-      grid-column-end: span 2;
+    grid-column-start: header;
+    grid-column-end: span 2;
   }
 
   label {
-      grid-column-start: label;
-      align-self: center;
+    grid-column-start: label;
+    align-self: center;
   }
 
   .select-container {
-      grid-column-start: select;
-      align-self: center;
+    grid-column-start: select;
+    align-self: center;
   }
 }
 .workInput {
