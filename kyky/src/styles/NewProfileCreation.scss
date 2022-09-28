@@ -6,6 +6,9 @@ h1 {
 h3 {
   font-size: 20px;
 }
+h4{
+  font-family: "Poppins";
+}
 p {
   font-family: "Poppins";
 }
@@ -303,3 +306,27 @@ p {
   padding: 10px;
   resize: vertical;
 }
+.hourlyContainer{
+  display:flex;
+  height:50px;
+  width:550px;
+  justify-content: space-between;
+  position:relative;
+  bottom:120px;
+
+}
+.hourlyInput{
+  height: 50px;
+  width: 150px;
+  text-align: right;
+  border: 1px solid #00a088;
+  border-radius: 10px;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+.totalAmount{
+  color:#00a088;
+  position: relative;
+  bottom:100px;
+}
+

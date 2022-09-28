@@ -7,7 +7,7 @@ import EducationExperience from './EducationExperience';
 
 export default function Step2(currentStep) {
   const [experience, setExperience] = useState('');
-  const [saved, setSaved] = useState(false);
+  const [saved, setSaved] = useState(true);
   const workExperience = () => {
     setSaved(false);
     setExperience(<WorkExperience setSaved={setSaved} />);
