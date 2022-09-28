@@ -542,3 +542,54 @@
     }
   }
 }
+
+.manage-schedules {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .left-side {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 2.5%;
+
+    .schedule-unavailability {
+      background: $white;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 1rem;
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      .input-container {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.small-rounded {
+  padding: 0.25rem 0.45rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  color: $white;
+  background: $kyky-primary-dark;
+
+  &.disabled {
+    background: darkgrey;
+    color: grey;
+  }
+}

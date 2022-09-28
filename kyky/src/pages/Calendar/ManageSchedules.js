@@ -10,10 +10,10 @@ export default function ManageSchedules() {
     <main className="manage-schedules">
       <div className="left-side">
         <h1>Manage Schedules</h1>
-        <div className="schedule-unavailibility">
+        <div className="schedule-unavailability">
           <h2>Schedule Unavailability</h2>
-          <Input type="date" id="start-date" label="Start date" />
-          <Input type="date" id="end-date" label="End date">
+          <Input type="date" id="start-date" label="Start date:" labelOnFront />
+          <Input type="date" id="end-date" label="End date:" labelOnFront>
             <Switch
               width={32}
               height={16}
@@ -24,7 +24,10 @@ export default function ManageSchedules() {
             />
             <label htmlFor="indefinite">Indefinitely</label>
           </Input>
-          <Button>+ Add</Button>
+          <Button className="small-rounded">+ Add</Button>
+          <div className="unavailablities">
+            <p>Upcoming unavailablities</p>
+          </div>
         </div>
       </div>
       <div className="right-side"></div>
