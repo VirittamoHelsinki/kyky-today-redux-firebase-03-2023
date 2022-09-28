@@ -9,13 +9,13 @@ export default function Step2(currentStep) {
   const [experience, setExperience] = useState('');
   const [saved, setSaved] = useState(false);
   const workExperience = () => {
-   
-    /*setSaved(false);*/
-    setExperience(<WorkExperience saved={saved} setSaved={setSaved} />);
+    setSaved(false);
+    setExperience(<WorkExperience setSaved={setSaved} />);
   };
 
   const educationExperience = () => {
-    setExperience(<EducationExperience />);
+    setSaved(false);
+    setExperience(<EducationExperience setSaved={setSaved} />);
   };
 
   return (
@@ -34,7 +34,7 @@ export default function Step2(currentStep) {
           </button>
         </div>
       </div>
-      {experience}
+      {!saved && experience}
     </div>
   );
 }

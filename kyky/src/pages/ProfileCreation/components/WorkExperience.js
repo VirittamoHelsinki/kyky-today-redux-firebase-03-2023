@@ -3,22 +3,10 @@ import React from 'react';
 import Checkbox from '../../../components/Checkbox';
 import Input from '../../../components/Input';
 import Select from 'react-select';
-import { useState, useEffect } from 'react';
 
-export default function WorkExperience( {saved, setSaved }) {
-  console.log(saved, setSaved);
-
-  const saveWork = () => {
-    setSaved(true);
-    console.log(true)
-  };
-
-  useEffect(() => {
-    console.log(saved);
-  }, [saved]);
-
+export default function WorkExperience({ setSaved }) {
   return (
-    <div className={`workContainer ${saved ? 'hidden' : ''}`} style= {{display: saved ? "none" : "flex"}}>
+    <div className="workContainer">
       <h3>Add Work Experience</h3>
       <Input
         className="inputLong"
@@ -33,7 +21,7 @@ export default function WorkExperience( {saved, setSaved }) {
         labelOnFront></Input>
       <Select className="countryList" placeholder="Finland"></Select>
       <Checkbox className="workCheck">I am currently working in this role</Checkbox>
-      <button type="button" className="saveButton" onClick={() => saveWork()}>
+      <button type="button" className="saveButton" onClick={() => setSaved(true)}>
         Save
       </button>
     </div>

@@ -38,8 +38,10 @@ export default function GetStarted() {
   return (
     <div className="get-started">
       <div className="mainContainer">
-        <div class = "titleContainer"><h1>{titles[title]}</h1>
-        <p>{tips[tip]}</p></div>
+        <div className="titleContainer">
+          <h1>{titles[title]}</h1>
+          <p>{tips[tip]}</p>
+        </div>
         {currentStep === 1 && <Step1 />}
         {currentStep === 2 && <Step2 />}
         {currentStep === 3 && <Step3 />}
