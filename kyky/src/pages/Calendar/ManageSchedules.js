@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../../components/Button';
 
 import Input from '../../components/Input';
@@ -6,6 +6,13 @@ import Switch from 'react-switch';
 
 export default function ManageSchedules() {
   const [indefinite, setIndefinite] = useState(false);
+
+  useEffect(() => {
+    const keys = Object.keys(localStorage).filter((key) => key.includes('_schedules'));
+    console.log(keys);
+    const allSchedules = localStorage;
+  }, []);
+
   return (
     <main className="manage-schedules">
       <div className="left-side">

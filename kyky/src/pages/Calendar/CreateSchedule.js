@@ -77,6 +77,16 @@ export default function ManageScheduleModal({ setScheduleWindow }) {
     setProperties((prev) => ({ ...prev, [field]: value }));
   }
 
+  function SubmitDetails() {
+    const schedules = JSON.parse(localStorage.getItem(`${properties.jobId}_schedules`));
+    if (schedules) {
+      schedules.push(properties);
+      localStorage.setItem(`schedule-${properties.jobId}`, JSON.stringify(properties));
+    } else {
+      localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify([properties]));
+    }
+  }
+
   return (
     <main className="create-schedule">
       <div className="create-schedule__progression">
@@ -124,7 +134,11 @@ export default function ManageScheduleModal({ setScheduleWindow }) {
           </Button>
         )}
         {step === progression.length && (
-          <Button onClick={() => setScheduleWindow(false)}>
+          <Button
+            onClick={() => {
+              SubmitDetails();
+              setScheduleWindow(false);
+            }}>
             Submit<i className="material-icons-outlined">done</i>
           </Button>
         )}
