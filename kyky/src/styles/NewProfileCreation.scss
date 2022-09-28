@@ -107,7 +107,7 @@ p {
     text-align: center;
   }
   .mainContainer {
-    height: 1000px;
+    height: 900px;
     width: 100vw;
     display:flex;
     flex-direction: column;
@@ -193,7 +193,7 @@ p {
     justify-content: space-around;
     position: relative;
     bottom: 200px;
-    
+    left: 100px;
 
     &.false,&.hidden{
       display:none;
@@ -303,4 +303,14 @@ p {
       grid-column-start: select;
       align-self: center;
   }
+}
+.workInput {
+  display: flex;
+  height: 380px;
+  width: 700px;
+  border: 1px solid #00a088;
+  border-radius: 1%;
+  text-align: start;
+  padding: 10px;
+  resize: vertical;
 }
