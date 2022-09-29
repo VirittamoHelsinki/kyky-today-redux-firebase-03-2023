@@ -361,12 +361,13 @@ height: 600px;
   align-items: center;
 .uploadPhotoButton{
   font-size: 16px;
+  font-family: "Poppins";
   height: 40px;
   width: 200px;
   border-radius: 20px;
-  color: black;
+  color: #387a70;
   background-color: #ffffff;
-  border: 1px solid black;
+  border: 1px solid #387a70;
   margin: auto;
 }}
 .detailsContainer{
@@ -376,27 +377,44 @@ height: 600px;
   height: 500px;
   width: 450px;
   padding:10px;
-  border: 1px solid black;
+  
   position: relative;
   left: 100px;
+
+label{
+  color:#636262 
+}
 .detailsInput{
-  display:flex;
-  flex-direction: column;
- 
-  
+  width: 400px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #636232;
   
 }
-.detailsInput2{
-  width: 50px;
-  height: 20px;
-  position: relative;
-  left:200px;
+.detailsInputShort{
+  width: 180px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #636232;
+}
+.detailsInputPhone{
+  width: 400px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #636232;
+  position:relative;
+  bottom:50px;
+  text-align:center;
+
 }
 .select-container3{
   width:200px;
 }
 .select-container4{
-  width:90px;
+  width:110px;
+  z-index: 1;
+  border: 1px solid #636232;
+  border-radius: 5px;
 }
 }
 
