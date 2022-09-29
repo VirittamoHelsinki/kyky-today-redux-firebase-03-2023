@@ -355,8 +355,8 @@ height: 600px;
   display: flex;
   height: 600px;
   width:250px;
-  border: 1px solid black;
-  padding: 20px 20px 350px 20px;
+  border: 1px solid rgb(160, 158, 158);
+  padding: 30px 20px 350px 20px;
  flex-direction: column;
   align-items: center;
 .uploadPhotoButton{
@@ -411,6 +411,7 @@ label{
   width:200px;
 }
 .select-container4{
+  
   width:110px;
   z-index: 1;
   border: 1px solid #636232;
