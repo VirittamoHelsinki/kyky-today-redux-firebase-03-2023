@@ -117,35 +117,50 @@ export default function ManageSchedules() {
             console.log(schedule);
             return (
               <div className="schedule" key={schedule.id}>
-                <div className="schedule-date">
-                  <i className="material-icons">date_range</i>
-                  <span style={{ color: 'black' }}>
-                    {schedule.scheduleDuration.months
-                      ? `${schedule.scheduleDuration.months} months`
-                      : `${new Date(schedule.scheduleDuration.startDate).toLocaleDateString(
-                          'fi-FI'
-                        )} - ${new Date(schedule.scheduleDuration.endDate).toLocaleDateString(
-                          'fi-FI'
-                        )}`}
-                  </span>
+                <div className="corner">
+                  <Button className="but">
+                    <i className="material-icons">expand_more</i>
+                  </Button>
                 </div>
-                <span style={{ color: 'black' }}>
-                  <i className="material-icons">access_time</i>
-                  {schedule.time.start} - {schedule.time.end}
-                </span>
-                {schedule.recurring.length === 0 ? (
+                <div className="middle">
+                  <div className="schedule-date">
+                    <i className="material-icons">date_range</i>
+                    <span style={{ color: 'black' }}>
+                      {schedule.scheduleDuration.months
+                        ? `${schedule.scheduleDuration.months} months`
+                        : `${new Date(schedule.scheduleDuration.startDate).toLocaleDateString(
+                            'fi-FI'
+                          )} - ${new Date(schedule.scheduleDuration.endDate).toLocaleDateString(
+                            'fi-FI'
+                          )}`}
+                    </span>
+                  </div>
                   <span style={{ color: 'black' }}>
-                    <i className="material-icons">loop</i>
-                    Every day
+                    <i className="material-icons">access_time</i>
+                    {schedule.time.start} - {schedule.time.end}
                   </span>
-                ) : (
-                  <span style={{ color: 'black' }}>
-                    <i className="material-icons">loop</i>
-                    {schedule.recurring.map(
-                      (d, index) => d + (index === schedule.recurring.length - 1 ? '' : ', ')
-                    )}
-                  </span>
-                )}
+                  {schedule.recurring.length === 0 ? (
+                    <span style={{ color: 'black' }}>
+                      <i className="material-icons">loop</i>
+                      Every day
+                    </span>
+                  ) : (
+                    <span style={{ color: 'black' }}>
+                      <i className="material-icons">loop</i>
+                      {schedule.recurring.map(
+                        (d, index) => d + (index === schedule.recurring.length - 1 ? '' : ', ')
+                      )}
+                    </span>
+                  )}
+                </div>
+                <div className="corner">
+                  <Button className="but">
+                    <i className="material-icons">edit</i>
+                  </Button>
+                  <Button className="but">
+                    <i className="material-icons">delete_forever</i>
+                  </Button>
+                </div>
               </div>
             );
           })}
