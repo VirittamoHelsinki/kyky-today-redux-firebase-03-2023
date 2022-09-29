@@ -4,6 +4,7 @@ import Step3 from './components/Step3';
 import Step4 from './components/Step4';
 import Step5 from './components/Step5';
 import Step6 from './components/Step6';
+import Step7 from './components/Step7';
 import '../../styles/NewProfileCreation.scss';
 import { useState } from 'react';
 
@@ -14,7 +15,8 @@ export default function GetStarted() {
     'Good. Now tell us which languages you speak.',
     'Almost there! What work do you do here?',
     'What is the main service you offer?',
-    'Please add your hourly rate.'
+    'Please add your hourly rate.',
+    'Last details before you publish your profile'
   ];
 
   const tips = [
@@ -23,10 +25,11 @@ export default function GetStarted() {
     'Your language skill can make client know you better.',
     'Write down what you can offer to clients.',
     'Choose one service that best describes the type of work you do.',
-    'Clients will see this rate on your profile.'
+    'Clients will see this rate on your profile.',
+    'A professional photo helps build trust with your clients.'
   ];
 
-  const steps = 6;
+  const steps = 7;
 
   const [title, setTitle] = useState(0);
   const [tip, setTip] = useState(0);
@@ -51,6 +54,7 @@ export default function GetStarted() {
         {currentStep === 4 && <Step4 />}
         {currentStep === 5 && <Step5 />}
         {currentStep === 6 && <Step6 />}
+        {currentStep === 7 && <Step7 />}
         {currentStep < steps && (
           <button className="nextButton" onClick={nextPhase}>
             NEXT
