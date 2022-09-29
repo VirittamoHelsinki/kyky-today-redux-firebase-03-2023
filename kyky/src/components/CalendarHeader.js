@@ -7,8 +7,8 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
   const navButtons = [
     { to: '/calendar', label: 'Job Calendar', id: 'job-calendar' },
     { to: '/calendar/overview', label: 'Overview', id: 'overview' },
-    { to: '/calendar/schedule', label: ' Manage Schedules', id: 'manage-schedules' },
-    { to: '/calendar/settings', label: ' Settings', id: 'settings' }
+    { to: '/calendar/schedule', label: 'Manage Schedules', id: 'manage-schedules' },
+    { to: '/calendar/settings', label: 'Settings', id: 'settings' }
   ];
 
   function changeWindow(url, id) {
