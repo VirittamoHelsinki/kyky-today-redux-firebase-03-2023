@@ -5,8 +5,8 @@ import { ReactComponent as ProfileIcon } from '../../image/profileIcon.svg';
 import Button from '../../components/Button';
 
 export default function NewProfileCreation() {
-  return (
-    <div className="mainContainer">
+  return (<div className= "mainContainer">
+    <div className="mainContainer1">
       <div className="leftContainer">
         <h1>
           Hey FirstName. Ready for new<br></br> opportunities?
@@ -38,6 +38,6 @@ export default function NewProfileCreation() {
           "I love dogs. I enjoy their company. I would be happy to help you with walking your dog."
         </div>
       </div>
-    </div>
+    </div></div>
   );
 }

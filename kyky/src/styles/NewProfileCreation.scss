@@ -15,6 +15,15 @@ p {
 label{
   font-family: "Poppins";
 }
+.mainContainer1{
+  display:flex;
+  height: fit-content;
+  width: min (1200px, 100%);
+  flex-wrap: wrap;
+  position: relative;
+ align-items: center;
+ justify-content: center;
+}
 .leftContainer {
   font-family: "Ubuntu", sans-serif;
 
@@ -26,8 +35,7 @@ label{
   width: 600px;
   //border: 2px solid black;
   position: relative;
-  top: 200px;
-  left: 250px;
+  
 }
 .profileIcon {
   position: relative;
@@ -73,13 +81,14 @@ label{
   flex-wrap: wrap;
   justify-content: space-around;
   border-radius: 10px;
-
-  height: 500px;
-  width: 400px;
+  gap: 30px;
+ margin-top: 30px;
+ padding-bottom: 20px;
+  height: fit-content;
+  width: min(400px, 100%);
   border: 1px solid rgb(221, 206, 206);
   position: relative;
-  bottom: 250px;
-  left: 1000px;
+ 
   .dogPic {
     border-radius: 10px;
     position: relative;
