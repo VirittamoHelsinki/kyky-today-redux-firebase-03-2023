@@ -8,6 +8,7 @@ import '../../styles/MyCalendar.scss';
 export default function MyCalendar() {
   const [selectedWindow, setSelectedWindow] = useState('job-calendar');
   const [scheduleWindow, setScheduleWindow] = useState(false);
+  const [editing, setEditing] = useState(undefined);
   return (
     <div className="my-calendar">
       <CalendarHeader
@@ -15,8 +16,8 @@ export default function MyCalendar() {
         setSelectedWindow={setSelectedWindow}
         setScheduleWindow={setScheduleWindow}
       />
-      <Outlet context={[setSelectedWindow]} />
-      {scheduleWindow && <CreateSchedule setScheduleWindow={setScheduleWindow} />}
+      <Outlet context={[setSelectedWindow, setEditing, setScheduleWindow]} />
+      {scheduleWindow && <CreateSchedule setScheduleWindow={setScheduleWindow} editing={editing} />}
     </div>
   );
 }

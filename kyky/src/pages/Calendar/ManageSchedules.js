@@ -8,7 +8,7 @@ import Switch from 'react-switch';
 import ScheduleDetails from '../../components/ScheduleDetails';
 
 export default function ManageSchedules() {
-  const [setSelectedWindow] = useOutletContext();
+  const [setSelectedWindow, setEditing, setScheduleWindow] = useOutletContext();
   const [schedules, setSchedules] = useState({});
   const [selectedSchedules, setSelectedSchedules] = useState([]);
   const [indefinite, setIndefinite] = useState(false);
@@ -131,7 +131,12 @@ export default function ManageSchedules() {
                     )}
                   </div>
                   <div className="corner">
-                    <Button className="but">
+                    <Button
+                      className="but"
+                      onClick={() => {
+                        setEditing(schedule);
+                        setScheduleWindow(true);
+                      }}>
                       <i className="material-icons">edit</i>
                     </Button>
                     <Button className="but">

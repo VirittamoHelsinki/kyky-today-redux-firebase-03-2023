@@ -1,8 +1,5 @@
 /*
-  NOTE:
-  This is supposed to be a modal that is overlayed on top of the current page.
-  HOWEVER, it is currently being developed in its own page.
-  THUS, TODO: Make this a modal.
+  This is now a modal!
 */
 import { useEffect, useState } from 'react';
 import Button from '../../components/Button';
@@ -13,7 +10,7 @@ import DateAndTime from '../../components/ManageScheduleModal/DateAndTime';
 import BookingPreferences from '../../components/ManageScheduleModal/BookingPreferences';
 import PreviewAndSubmit from '../../components/ManageScheduleModal/PreviewAndSubmit';
 
-export default function ManageScheduleModal({ setScheduleWindow }) {
+export default function ManageScheduleModal({ setScheduleWindow, editing }) {
   const [step, setStep] = useState(1);
   const [mode, setMode] = useState('create');
   const [View, setView] = useState(() => ChooseJob);
@@ -64,6 +61,14 @@ export default function ManageScheduleModal({ setScheduleWindow }) {
     setView(() => progression[progression.findIndex((item) => item.id === step)].component);
   }, [step]);
 
+  useEffect(() => {
+    if (editing) {
+      setMode('edit');
+      setStep(2);
+      setProperties(editing);
+    }
+  }, [editing]);
+
   const modeProperties = {
     create: {
       title: 'Create Schedule'
@@ -79,11 +84,15 @@ export default function ManageScheduleModal({ setScheduleWindow }) {
 
   function SubmitDetails() {
     const schedules = JSON.parse(localStorage.getItem(`${properties.jobId}_schedules`));
-    if (schedules) {
-      schedules.push(properties);
-      localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
-    } else {
-      localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify([properties]));
+    if (mode === 'create') {
+      if (schedules) {
+        schedules.push(properties);
+        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
+      } else {
+        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify([properties]));
+      }
+    } else if (mode === 'edit') {
+      console.log('TODO');
     }
   }
 
