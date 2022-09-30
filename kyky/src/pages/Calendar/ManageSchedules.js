@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import Button from '../../components/Button';
 
@@ -18,6 +18,22 @@ export default function ManageSchedules() {
     setSelectedWindow('manage-schedules');
   }, []);
 
+  function deleteSchedule(schedule) {
+    const storage = JSON.parse(localStorage.getItem(`${schedule.jobId}_schedules`));
+    const index = storage.findIndex((item) => item._id === schedule._id) || 0;
+    const confirm = window.confirm('Are you sure you want to delete this schedule?');
+    if (confirm) {
+      storage.splice(index, 1);
+      localStorage.setItem(`${schedule.jobId}_schedules`, JSON.stringify(storage));
+      setSchedules((prev) => {
+        const newSchedules = { ...prev };
+        delete newSchedules[schedule._id];
+        return newSchedules;
+      });
+      window.location.reload();
+    }
+  }
+
   useEffect(() => {
     const keys = Object.keys(localStorage).filter((key) => key.includes('_schedules'));
     const allSchedules = keys.map((key) => {
@@ -34,6 +50,7 @@ export default function ManageSchedules() {
         schedulesObject[id].schedules.push(item);
       });
     });
+    console.log(schedulesObject);
     setSchedules(schedulesObject);
   }, []);
 
@@ -84,8 +101,8 @@ export default function ManageSchedules() {
           <h2>Schedules</h2>
           {selectedSchedules.map((schedule, index) => {
             return (
-              <>
-                <div className="schedule" key={index}>
+              <React.Fragment key={index}>
+                <div className="schedule">
                   <div className="corner">
                     <Button className="but">
                       {opened === index ? (
@@ -139,13 +156,13 @@ export default function ManageSchedules() {
                       }}>
                       <i className="material-icons">edit</i>
                     </Button>
-                    <Button className="but">
+                    <Button className="but" onClick={() => deleteSchedule(schedule)}>
                       <i className="material-icons">delete_forever</i>
                     </Button>
                   </div>
                 </div>
                 {opened === index && <ScheduleDetails schedule={schedule} />}
-              </>
+              </React.Fragment>
             );
           })}
         </div>

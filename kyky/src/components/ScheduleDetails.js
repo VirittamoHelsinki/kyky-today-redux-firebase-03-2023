@@ -41,7 +41,6 @@ export default function ScheduleDetails({ schedule }) {
   return (
     <div className="schedule-details-view">
       <h2>{schedule.jobId} details</h2>
-      {console.log(schedule)}
       <div>
         <p>Job type:</p>
         <span style={{ color: 'black' }}>{schedule.jobId}</span>

@@ -85,14 +85,22 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
   function SubmitDetails() {
     const schedules = JSON.parse(localStorage.getItem(`${properties.jobId}_schedules`));
     if (mode === 'create') {
+      const id = Math.random().toString(36).substring(2, 9); // generate random id
+      const data = { ...properties, _id: id };
+
       if (schedules) {
         schedules.push(properties);
-        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
+        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(data));
       } else {
-        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify([properties]));
+        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify([data]));
       }
     } else if (mode === 'edit') {
-      console.log('TODO');
+      const id = editing._id;
+      if (id) {
+        const index = schedules.findIndex((item) => item._id === id);
+        schedules[index] = { ...properties, _id: id };
+        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
+      }
     }
   }
 
