@@ -50,24 +50,29 @@
   height: auto;
   padding: 10px;
   background: rgb(255, 251, 251);
-  border: 1px solid rgb(194, 183, 183);
+  border: 6px solid rgba(194, 183, 183, 0);
+  outline: 1px solid rgb(194, 183, 183);
   font-weight: 700;
   display: flex;
+  box-sizing: border-box;
   justify-content: flex-start;
   align-items: flex-start;
   user-select: none;
-}
-.calendar-day:hover {
-  filter: brightness(125%);
-  box-sizing: border-box;
-  border: 6px solid rgb(65, 163, 163);
-}
-.calendar-day.selected {
-  box-sizing: border-box;
-  border: 6px solid rgb(65, 163, 163);
-}
-.calendar-day.disbled {
-  opacity: 0.5;
+
+  &:hover {
+    filter: brightness(125%);
+    border: 6px solid rgb(65, 163, 163);
+  }
+
+  &.selected {
+    box-sizing: border-box;
+    border: 6px solid rgb(65, 163, 163);
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    background: silver;
+  }
 }
 
 .addScheduleContainer {
