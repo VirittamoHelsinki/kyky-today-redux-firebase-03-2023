@@ -660,6 +660,7 @@
         background: #cff0e7;
         width: 90%;
         height: 3rem;
+        margin: 0.5rem;
 
         .middle {
           display: flex;
@@ -703,6 +704,21 @@
 
         span {
           text-transform: capitalize;
+        }
+      }
+
+      .schedule-details-view {
+        div {
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 2rem;
+
+          p {
+            width: 30%;
+            text-align: right;
+          }
         }
       }
     }
