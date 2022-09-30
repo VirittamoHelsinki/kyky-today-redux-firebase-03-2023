@@ -99,6 +99,7 @@ export default function Calendar({ date, setDate, minYears = 5, maxYears = 50, l
     }
     return days;
   }
+
   // Messy as hell, but it works (for now)
   function getDaysToDisplay(year, month) {
     const numberOfDays = getDaysInMonth(year, month);
@@ -142,8 +143,7 @@ export default function Calendar({ date, setDate, minYears = 5, maxYears = 50, l
               value={currentMonth}
               onChange={(e) => {
                 changeMonth(e.target.value);
-              }}
-            >
+              }}>
               {months.map((month, i) => (
                 <option key={i} value={i}>
                   {month}
@@ -165,8 +165,7 @@ export default function Calendar({ date, setDate, minYears = 5, maxYears = 50, l
               })}
               onChange={(e) => {
                 changeYear(e.target.value);
-              }}
-            >
+              }}>
               {years.map((year, i) => (
                 <option key={i} value={year}>
                   {year}
@@ -194,8 +193,7 @@ export default function Calendar({ date, setDate, minYears = 5, maxYears = 50, l
               className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
                 !day.isCurrentMonth ? 'disabled' : ''
               }`}
-              onClick={() => setSelectedDay(index)}
-            >
+              onClick={() => setSelectedDay(index)}>
               {day.day}
             </div>
           ))}

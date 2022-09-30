@@ -27,46 +27,89 @@ export default function JobCalendar() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(date.getMonth());
   const [currentYear, setCurrentYear] = useState(date.getFullYear());
-  useEffect(() => {
-    setDays(getDaysToDisplay(date.getFullYear(), date.getMonth()));
-  }, [date]);
-  useEffect(() => {
-    setDate(new Date(date.getFullYear(), date.getMonth(), selectedDay));
-  }, [selectedDay]);
-  function getDaysInMonth(year, month) {
-    return 32 - new Date(year, month, 32).getDate();
-  }
-
-  function getDaysToDisplay(year, month) {
-    const numberOfDays = getDaysInMonth(year, month);
-    const daysArr = Array(35).fill(null);
-    for (let i = 0; i < daysArr.length; i++) {
-      if (i + 1 > numberOfDays) {
-        daysArr[i] = i + 1 - numberOfDays;
-      } else {
-        daysArr[i] = i + 1;
-      }
-    }
-    return daysArr;
-  }
-
-  useEffect(() => {
-    setSelectedWindow('job-calendar');
-  }, []);
 
   useEffect(() => {
     setCurrentMonth(date.getMonth());
     setCurrentYear(date.getFullYear());
     setDays(getDaysToDisplay(date.getFullYear(), date.getMonth()));
 
-    // const firstDayOfMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
-    // const lastDaysOfPreviousMonth = getLastDaysOfPreviousMonth(
-    //   date.getFullYear(),
-    //   date.getMonth() - 1,
-    //   firstDayOfMonth
-    // );
-    // setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 2);
+    const firstDayOfMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
+    const lastDaysOfPreviousMonth = getLastDaysOfPreviousMonth(
+      date.getFullYear(),
+      date.getMonth() - 1,
+      firstDayOfMonth
+    );
+    setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 2);
   }, [date]);
+
+  useEffect(() => {
+    const firstDayOfMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
+    const lastDaysOfPreviousMonth = getLastDaysOfPreviousMonth(
+      date.getFullYear(),
+      date.getMonth() - 1,
+      firstDayOfMonth
+    );
+    if (
+      selectedDay !== null &&
+      selectedDay !== date.getDate() + lastDaysOfPreviousMonth.length - 2
+    ) {
+      setDate(
+        new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          selectedDay - (getFirstDayOfMonth(currentYear, currentMonth) - 2)
+        )
+      );
+    }
+  }, [selectedDay]);
+
+  function getDaysInMonth(year, month) {
+    return 32 - new Date(year, month, 32).getDate();
+  }
+
+  function getFirstDayOfMonth(year, month) {
+    return new Date(year, month, 1).getDay();
+  }
+
+  function getLastDaysOfPreviousMonth(year, month, howManyDays) {
+    const days = [];
+    const lastDayOfPreviousMonth = new Date(year, month, 0).getDate();
+    for (let i = lastDayOfPreviousMonth - howManyDays + 1; i <= lastDayOfPreviousMonth; i++) {
+      days.push(i);
+    }
+    return days;
+  }
+
+  function getDaysToDisplay(year, month) {
+    const numberOfDays = getDaysInMonth(year, month);
+    const firstDayOfMonth = getFirstDayOfMonth(year, month);
+    const lastDaysOfPreviousMonth = getLastDaysOfPreviousMonth(year, month - 1, firstDayOfMonth);
+    const daysTotal = Array(35).fill({ day: -1, isCurrentMonth: false });
+    daysTotal.forEach((_, i) => {
+      if (i + 1 < firstDayOfMonth) {
+        daysTotal[i] = {
+          day: lastDaysOfPreviousMonth[i + 1],
+          isCurrentMonth: false
+        };
+      } else if (i + 1 < numberOfDays + firstDayOfMonth) {
+        daysTotal[i] = {
+          day: i + 2 - firstDayOfMonth,
+          isCurrentMonth: true
+        };
+      } else {
+        daysTotal[i] = {
+          day: i + 2 - firstDayOfMonth - numberOfDays,
+          isCurrentMonth: false
+        };
+      }
+    });
+    return daysTotal;
+  }
+
+  useEffect(() => {
+    setSelectedWindow('job-calendar');
+  }, []);
+
   function changeMonth(month) {
     let year = currentYear;
     if (month > 11) {
@@ -95,8 +138,7 @@ export default function JobCalendar() {
             value={date.getMonth()}
             onChange={(e) => {
               setDate(new Date(date.getFullYear(), e.target.value, date.getDate()));
-            }}
-          >
+            }}>
             {months.map((month, i) => (
               <option key={i} value={i}>
                 {month}
@@ -113,8 +155,7 @@ export default function JobCalendar() {
             })}
             onChange={(e) => {
               setDate(new Date(e.target.value, date.getMonth(), date.getDate()));
-            }}
-          >
+            }}>
             {years.map((year, i) => (
               <option key={i} value={year}>
                 {year}
@@ -133,11 +174,10 @@ export default function JobCalendar() {
               <div
                 key={`day-${index}`}
                 className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
-                  index > day ? 'disabled' : ''
+                  !day.isCurrentMonth ? 'disabled' : ''
                 }`}
-                onClick={() => setSelectedDay(index)}
-              >
-                {day}
+                onClick={() => setSelectedDay(index)}>
+                {day.day}
               </div>
             ))}
           </div>
