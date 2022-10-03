@@ -1,5 +1,6 @@
 import '../../../styles/NewProfileCreation.scss';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
+import { ReactComponent as CheckMark } from '../../../image/check-mark.svg';
 import React from 'react';
 
 export default function Step3(currentStep) {
@@ -15,6 +16,14 @@ export default function Step3(currentStep) {
   const swedishSelectName = "swedishSelect";
   const englishSelectName = "englishSelect";
 
+  const { Option } = components;
+  const IconOption = props => (
+    <Option {...props}>
+      {<CheckMark></CheckMark>}
+      {props.data.label}
+    </Option>
+  );
+
   return (
     <div className="step step3">
       <div className="formContainer languageFormContainer">
@@ -25,6 +34,9 @@ export default function Step3(currentStep) {
           name={finnishSelectName}
           placeholder={placeholder}
           options={[...options]}
+          components={{ Option: IconOption }} // How to deliver isSelected props to IconOption
+                                              // for deciding whether to show svg file (green
+                                              // arrow) inside Option element?
         >
           {/* ^ Creating new options array for each Select component with the same content. */}
         </Select>
@@ -34,6 +46,7 @@ export default function Step3(currentStep) {
           name={swedishSelectName}
           placeholder={placeholder}
           options={[...options]}
+          components={{ Option: IconOption }}
         ></Select>
         <label htmlFor={englishSelectName}>English</label>
         <Select
@@ -41,6 +54,7 @@ export default function Step3(currentStep) {
           name={englishSelectName}
           placeholder={placeholder}
           options={[...options]}
+          components={{ Option: IconOption }}
         ></Select>
       </div>
     </div>
