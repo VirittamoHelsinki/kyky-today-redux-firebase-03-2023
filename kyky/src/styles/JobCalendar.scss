@@ -57,12 +57,16 @@
   background: rgb(255, 251, 251);
   border: 6px solid rgba(194, 183, 183, 0);
   outline: 1px solid rgb(194, 183, 183);
-  font-weight: 700;
   display: flex;
   box-sizing: border-box;
   justify-content: flex-start;
   align-items: flex-start;
   user-select: none;
+
+  span {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
 
   &:hover {
     filter: brightness(125%);
@@ -77,6 +81,17 @@
   &.disabled {
     opacity: 0.5;
     background: silver;
+  }
+
+  .current {
+    border-radius: 50%;
+    background: $kyky-primary-darker;
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 

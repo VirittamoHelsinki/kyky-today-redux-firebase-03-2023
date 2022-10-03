@@ -569,6 +569,38 @@
       width: 375px;
       gap: 1rem;
 
+      .unavailabilities {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 0.7rem;
+
+        .unavailability {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+          background: rgb(230, 230, 230);
+          padding: 0.5rem;
+
+          .duration {
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .close {
+            font-size: 1.2rem;
+            background: none;
+          }
+        }
+      }
+
       h2 {
         font-size: 1.25rem;
       }

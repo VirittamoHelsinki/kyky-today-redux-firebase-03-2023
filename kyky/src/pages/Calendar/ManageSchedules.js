@@ -11,6 +11,9 @@ export default function ManageSchedules() {
   const [setSelectedWindow, setEditing, setScheduleWindow] = useOutletContext();
   const [schedules, setSchedules] = useState({});
   const [selectedSchedules, setSelectedSchedules] = useState([]);
+  const [unavailabilities, setUnavailabilities] = useState([]);
+  const [unavailableStart, setUnavailableStart] = useState('');
+  const [unavailableEnd, setUnavailableEnd] = useState('');
   const [indefinite, setIndefinite] = useState(false);
   const [opened, setOpened] = useState(-1);
 
@@ -35,7 +38,9 @@ export default function ManageSchedules() {
   }
 
   useEffect(() => {
-    const keys = Object.keys(localStorage).filter((key) => key.includes('_schedules'));
+    const keys = Object.keys(localStorage).filter(
+      (key) => key.includes('_schedules') && !key.includes('unavailability')
+    );
     const allSchedules = keys.map((key) => {
       const schedule = JSON.parse(localStorage.getItem(key));
       return schedule;
@@ -50,9 +55,37 @@ export default function ManageSchedules() {
         schedulesObject[id].schedules.push(item);
       });
     });
-    console.log(schedulesObject);
     setSchedules(schedulesObject);
+    const unavailabilities = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
+    setUnavailabilities(unavailabilities);
   }, []);
+
+  function createUnavailability() {
+    const data = {
+      start: unavailableStart,
+      end: unavailableEnd,
+      indefinite
+    };
+    const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
+    storage.push(data);
+    localStorage.setItem('unavailability_schedules', JSON.stringify(storage));
+    window.location.reload();
+  }
+
+  function unavailabilityIsValid() {
+    if (unavailableStart === '') return false;
+    if (!indefinite) {
+      if (unavailableStart && unavailableEnd) {
+        const start = new Date(unavailableStart);
+        const end = new Date(unavailableEnd);
+        if (start < end) {
+          return true;
+        }
+      }
+      return false;
+    }
+    return true;
+  }
 
   return (
     <main className="manage-schedules">
@@ -60,8 +93,21 @@ export default function ManageSchedules() {
         <h1>Manage Schedules</h1>
         <div className="schedule-unavailability">
           <h2>Schedule Unavailability</h2>
-          <Input type="date" id="start-date" label="Start date:" labelOnFront />
-          <Input type="date" id="end-date" label="End date:" labelOnFront>
+          <Input
+            type="date"
+            id="start-date"
+            label="Start date:"
+            value={unavailableStart}
+            onChange={(e) => setUnavailableStart(e.target.value)}
+            labelOnFront
+          />
+          <Input
+            type="date"
+            id="end-date"
+            label="End date:"
+            value={unavailableEnd}
+            onChange={(e) => setUnavailableEnd(e.target.value)}
+            labelOnFront>
             <Switch
               width={32}
               height={16}
@@ -72,9 +118,45 @@ export default function ManageSchedules() {
             />
             <label htmlFor="indefinite">Indefinitely</label>
           </Input>
-          <Button className="small-rounded">+ Add</Button>
-          <div className="unavailablities">
-            <p>Upcoming unavailablities</p>
+          <Button
+            className={`small-rounded ${!unavailabilityIsValid() && 'disabled'}`}
+            onClick={createUnavailability}>
+            + Add
+          </Button>
+          <div className="unavailabilities">
+            <h2>Upcoming unavailablities</h2>
+            {unavailabilities.map((unavailability, index) => (
+              <div className="unavailability" key={index}>
+                <div className="duration">
+                  <span>{new Date(unavailability.start).toLocaleDateString('fi-FI')}</span>
+                  <span>-</span>
+                  <span>
+                    {unavailability.indefinite
+                      ? 'Indefinite'
+                      : new Date(unavailability.end).toLocaleDateString('fi-FI')}
+                  </span>
+                </div>
+                <div>
+                  <Button
+                    className="close"
+                    onClick={() => {
+                      const confirm = window.confirm(
+                        'Are you sure you want to delete this unavailability?'
+                      );
+                      if (confirm) {
+                        const storage = JSON.parse(
+                          localStorage.getItem('unavailability_schedules')
+                        );
+                        storage.splice(index, 1);
+                        localStorage.setItem('unavailability_schedules', JSON.stringify(storage));
+                        window.location.reload();
+                      }
+                    }}>
+                    X
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <div className="schedule-categories">
