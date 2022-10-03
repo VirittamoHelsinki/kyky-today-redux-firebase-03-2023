@@ -264,6 +264,22 @@ label{
   [class$="-indicatorContainer"] svg {
     fill: $kyky-primary-dark;
   }
+
+  [class$="-MenuList"] {
+    
+    [class$="-option"] {
+      display: flex;
+      flex-direction: row;
+      column-gap: 8px;
+
+      #checkMark,
+      #noCheckMark {
+        align-self: center;
+        width: 15px;
+        height: 12px;
+      }
+    }
+  }
 }
 
 .formContainer {

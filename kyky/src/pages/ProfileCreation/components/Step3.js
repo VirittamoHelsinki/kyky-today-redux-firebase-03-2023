@@ -19,8 +19,8 @@ export default function Step3(currentStep) {
   const { Option } = components;
   const IconOption = props => (
     <Option {...props}>
-      {props.isSelected === true && <CheckMark />}
-      {props.data.label}
+      {props.isSelected ? <CheckMark id="checkMark" /> : <div id="noCheckMark"></div>}
+      <span class="optionLabelText">{props.data.label}</span>
     </Option>
   );
 
