@@ -181,16 +181,19 @@ export default function JobCalendar() {
         </div>
         <div className="job-calendar">
           <div className="calendar-days">
-            {days.map((day, index) => (
-              <div
-                key={`day-${index}`}
-                className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
-                  !day.isCurrentMonth ? 'disabled' : ''
-                }`}
-                onClick={() => setSelectedDay(index)}>
-                {day.day}
-              </div>
-            ))}
+            {days.map((day, index) => {
+              const curr = day.isCurrentMonth && day.day === new Date().getDate();
+              return (
+                <div
+                  key={`day-${index}`}
+                  className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
+                    !day.isCurrentMonth ? 'disabled' : ''
+                  }`}
+                  onClick={() => setSelectedDay(index)}>
+                  <span className={curr && 'current'}>{day.day}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="addScheduleContainer">
