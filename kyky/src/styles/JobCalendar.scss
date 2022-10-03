@@ -1,5 +1,13 @@
 @use "_utilities" as *;
 
+.MainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: min-content;
+}
+
 .todayButton {
   border-radius: 20px;
   background-color: $kyky-primary-dark;
@@ -14,7 +22,6 @@
   align-items: center;
   justify-content: space-around;
   position: relative;
-  top: 150px;
 }
 .month-select,
 .year-select {
@@ -26,7 +33,6 @@
   width: 1200px;
   justify-content: space-around;
   position: relative;
-  top: 150px;
 }
 .job-calendar {
   display: flex;
@@ -35,7 +41,6 @@
   margin: 20px;
   border: 3.5px solid rgb(199, 191, 191);
   position: relative;
-  top: 150px;
 }
 .calendar-days {
   width: 100%;

@@ -19,7 +19,7 @@ const months = [
 const years = Array(50)
   .fill(0)
   .map((_, i) => i + 2019);
-const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 export default function JobCalendar() {
   const [setSelectedWindow] = useOutletContext();
   const [date, setDate] = useState(new Date());
