@@ -19,7 +19,7 @@ export default function Step3(currentStep) {
   const { Option } = components;
   const IconOption = props => (
     <Option {...props}>
-      {<CheckMark></CheckMark>}
+      {props.isSelected === true && <CheckMark />}
       {props.data.label}
     </Option>
   );
@@ -34,9 +34,7 @@ export default function Step3(currentStep) {
           name={finnishSelectName}
           placeholder={placeholder}
           options={[...options]}
-          components={{ Option: IconOption }} // How to deliver isSelected props to IconOption
-                                              // for deciding whether to show svg file (green
-                                              // arrow) inside Option element?
+          components={{ Option: IconOption }}
         >
           {/* ^ Creating new options array for each Select component with the same content. */}
         </Select>
