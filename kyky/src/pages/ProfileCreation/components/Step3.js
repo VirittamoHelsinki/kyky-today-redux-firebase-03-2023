@@ -1,7 +1,5 @@
-import '../../../styles/NewProfileCreation.scss';
 import Select, { components } from 'react-select';
 import { ReactComponent as CheckMark } from '../../../image/check-mark.svg';
-import React from 'react';
 
 export default function Step3(currentStep) {
   const options = [
@@ -61,6 +59,9 @@ export default function Step3(currentStep) {
           options={[...options]}
           components={{ Option: IconOption }}
         ></Select>
+        <button id="addLanguageButton">
+          <i className="material-icons-outlined">add_circle_outline</i>Add a language
+        </button>
       </div>
     </div>
   );

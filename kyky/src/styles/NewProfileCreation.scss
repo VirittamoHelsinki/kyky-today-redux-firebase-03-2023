@@ -257,6 +257,16 @@ label{
 .step {
   margin: auto 20px;
 
+  #addLanguageButton {
+    display: block;
+    padding: 0;
+    background: none;
+  }
+
+  .material-icons-outlined {
+    color: $kyky-primary-dark;
+  }
+
   [class$="-indicatorSeparator"] {
     background-color: initial;
   }
@@ -318,7 +328,6 @@ label{
 
   h3 {
     grid-column-start: header;
-    grid-column-end: span 2;
   }
 
   label {
@@ -329,6 +338,16 @@ label{
   .select-container {
     grid-column-start: select;
     align-self: center;
+  }
+
+  #addLanguageButton {
+    grid-column-start: button;
+    justify-self: start;
+  }
+
+  h3,
+  #addLanguageButton {
+    grid-column-end: span 2;
   }
 }
 .workInput {
