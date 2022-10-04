@@ -47,6 +47,7 @@ export default function ManageSchedules() {
     });
     const schedulesObject = {};
     allSchedules.forEach((schedule) => {
+      if (!schedule[0]) schedule = [schedule];
       schedule.forEach((item) => {
         const id = item.jobId;
         if (!schedulesObject[id]) {

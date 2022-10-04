@@ -2,9 +2,9 @@
 
 .MainContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   height: min-content;
 }
 
@@ -52,7 +52,7 @@
 }
 .calendar-day {
   width: 169px;
-  height: auto;
+  height: 139px;
   padding: 10px;
   background: rgb(255, 251, 251);
   border: 6px solid rgba(194, 183, 183, 0);
@@ -93,31 +93,114 @@
     justify-content: center;
     align-items: center;
   }
+
+  .activities {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 0.35rem;
+
+    .confirmed,
+    .pending {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-radius: 2rem;
+      padding: 5px;
+      font-weight: 700;
+      color: white;
+      gap: 0.25rem;
+
+      * {
+        font-size: 1rem;
+      }
+
+      i {
+        font-size: 1.25rem !important;
+      }
+    }
+
+    .confirmed {
+      background: #00b071;
+    }
+
+    .pending {
+      background: red;
+    }
+  }
 }
 
 .addScheduleContainer {
-  display: flex;
   height: 800px;
   width: 600px;
+  background: white;
   border: 1px solid rgb(238, 230, 230);
   box-shadow: 2px 2px 1px rgb(238, 230, 230);
   position: relative;
-  left: 1240px;
-  bottom: 670px;
-}
-.scheduleButton {
-  height: 40px;
-  width: 150px;
-  background-color: $kyky-primary-dark;
-  color: white;
-  border-radius: 20px;
-  position: absolute;
-  top: 430px;
-  left: 230px;
-}
-.scheduleDate {
-  font-size: 25px;
-  position: relative;
-  top: 50px;
-  left: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  .scheduleButton {
+    height: 40px;
+    width: 150px;
+    background-color: $kyky-primary-dark;
+    color: white;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .schedules {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    gap: 0.5rem;
+
+    .schedule {
+      width: 100%;
+
+      i {
+        font-size: 1.5rem !important;
+      }
+
+      .schedule-details {
+        width: 100%;
+        background: #e8fef8;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0.5rem;
+      }
+      .activities {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: space-between;
+
+        .activityInfo {
+          border: 1px solid grey;
+          box-sizing: border-box;
+          p {
+            margin-left: 1rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .scheduleDate {
+    font-size: 1.5rem;
+  }
 }
