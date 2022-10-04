@@ -370,9 +370,10 @@ label{
 
 .detailsMainContainer{
 display: flex;
+flex-wrap: wrap;
 align-items: flex-end;
-width:900px;
-height: 600px;
+width:min(1200px, 100%);
+height: fit-content;
 
 
 
@@ -448,5 +449,25 @@ label{
 
 
 
+}
+.addPhotoContainer{
+  height: 500px;
+  width: 500px;
+  display: flex;
+  border: 1px solid black;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  .selectImgButton{
+
+    border-radius: 20px;
+    height:40px;
+    width:400px;
+
+  }.addPhotoButton1, .addPhotoButton2{
+    border-radius: 20px;
+    height:40px;
+    width:120px;
+  }
 
 }
