@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import '../../styles/JobCalendar.scss';
+import Button from '../../components/Button';
 
 import activities from '../../activities.json';
-import { act } from 'react-dom/test-utils';
 
 const months = [
   'January',
@@ -35,7 +35,7 @@ const weekDaysHeader = [
 ];
 
 export default function JobCalendar() {
-  const [setSelectedWindow] = useOutletContext();
+  const [setSelectedWindow, setEditing, setScheduleWindow] = useOutletContext();
   const [date, setDate] = useState(new Date());
   const [days, setDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -214,7 +214,7 @@ export default function JobCalendar() {
                       setSelectedDay(index);
                       setCurrentActivities(activitiesToday);
                     }}>
-                    <span className={curr && 'current'}>{day.day}</span>
+                    <span className={curr ? 'current' : ''}>{day.day}</span>
                     {activitiesToday.length > 0 && (
                       <div className="activities">
                         {confirmed.length > 0 && (
@@ -248,7 +248,9 @@ export default function JobCalendar() {
                 return (
                   <div className="schedule" key={schedule.id}>
                     <div className="schedule-details">
-                      <i className="material-icons-outlined">expand_more</i>
+                      <Button className="expand">
+                        <i className="material-icons-outlined">expand_more</i>
+                      </Button>
                       <i className="material-icons-outlined">edit</i>
                       <p>
                         {schedule.time.start} - {schedule.time.end}
@@ -287,7 +289,9 @@ export default function JobCalendar() {
           ) : (
             <p>You have no activites for the selected day</p>
           )}
-          <button className="scheduleButton">+ Add a schedule</button>
+          <button className="scheduleButton" onClick={() => setScheduleWindow(true)}>
+            + Add a schedule
+          </button>
         </div>
       </div>
     </div>
