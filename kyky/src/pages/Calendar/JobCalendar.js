@@ -42,6 +42,8 @@ export default function JobCalendar() {
   const [currentMonth, setCurrentMonth] = useState(date.getMonth());
   const [currentYear, setCurrentYear] = useState(date.getFullYear());
   const [currentActivities, setCurrentActivities] = useState([]);
+  const [currentJob, setCurrentJob] = useState('babysitting');
+  const [schedules, setSchedules] = useState([]);
 
   useEffect(() => {
     setCurrentMonth(date.getMonth());
@@ -56,6 +58,11 @@ export default function JobCalendar() {
     );
     setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 2);
   }, [date]);
+
+  useEffect(() => {
+    const schedules = JSON.parse(localStorage.getItem(`${currentJob}_schedules`)) || [];
+    setSchedules(schedules);
+  }, [currentJob]);
 
   useEffect(() => {
     const firstDayOfMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
@@ -141,91 +148,93 @@ export default function JobCalendar() {
     <div>
       {' '}
       <div className="MainContainer">
-        <div className="monthYear">
-          <button className="todayButton" onClick={() => setDate(new Date())}>
-            Today
-          </button>{' '}
-          <button className="arrow" onClick={() => changeMonth(currentMonth - 1)}>
-            <i className="material-icons-outlined">chevron_left</i>
-          </button>
-          <select
-            className="month-select"
-            value={date.getMonth()}
-            onChange={(e) => {
-              setDate(new Date(date.getFullYear(), e.target.value, date.getDate()));
-            }}>
-            {months.map((month, i) => (
-              <option key={i} value={i}>
-                {month}
-              </option>
+        <div className="calendar-container">
+          <div className="monthYear">
+            <button className="todayButton" onClick={() => setDate(new Date())}>
+              Today
+            </button>{' '}
+            <button className="arrow" onClick={() => changeMonth(currentMonth - 1)}>
+              <i className="material-icons-outlined">chevron_left</i>
+            </button>
+            <select
+              className="month-select"
+              value={date.getMonth()}
+              onChange={(e) => {
+                setDate(new Date(date.getFullYear(), e.target.value, date.getDate()));
+              }}>
+              {months.map((month, i) => (
+                <option key={i} value={i}>
+                  {month}
+                </option>
+              ))}
+            </select>
+            <button className="arrow" onClick={() => changeMonth(currentMonth + 1)}>
+              <i className="material-icons-outlined">chevron_right</i>
+            </button>
+            <select
+              className="year-select"
+              value={years.find((n) => {
+                return n === date.getFullYear();
+              })}
+              onChange={(e) => {
+                setDate(new Date(e.target.value, date.getMonth(), date.getDate()));
+              }}>
+              {years.map((year, i) => (
+                <option key={i} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="weekDays">
+            {weekDaysHeader.map((week) => (
+              <span key={week}>{week}</span>
             ))}
-          </select>
-          <button className="arrow" onClick={() => changeMonth(currentMonth + 1)}>
-            <i className="material-icons-outlined">chevron_right</i>
-          </button>
-          <select
-            className="year-select"
-            value={years.find((n) => {
-              return n === date.getFullYear();
-            })}
-            onChange={(e) => {
-              setDate(new Date(e.target.value, date.getMonth(), date.getDate()));
-            }}>
-            {years.map((year, i) => (
-              <option key={i} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="weekDays">
-          {weekDaysHeader.map((week) => (
-            <span key={week}>{week}</span>
-          ))}
-        </div>
-        <div className="job-calendar">
-          <div className="calendar-days">
-            {days.map((day, index) => {
-              const curr = day.isCurrentMonth && day.day === new Date().getDate();
-              const activitiesToday = activities.filter(
-                (activity) =>
-                  new Date(activity.date).toISOString().slice(0, 10) ===
-                  new Date(date.getFullYear(), date.getMonth(), day.day + 1)
-                    .toISOString()
-                    .slice(0, 10)
-              );
-              const confirmed = activitiesToday.filter((activity) => activity.confirmed);
-              const pending = activitiesToday.filter((activity) => !activity.confirmed);
-              return (
-                <div
-                  key={`day-${index}`}
-                  className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
-                    !day.isCurrentMonth ? 'disabled' : ''
-                  }`}
-                  onClick={() => {
-                    setSelectedDay(index);
-                    setCurrentActivities(activitiesToday);
-                  }}>
-                  <span className={curr && 'current'}>{day.day}</span>
-                  {activitiesToday.length > 0 && (
-                    <div className="activities">
-                      {confirmed.length > 0 && (
-                        <div className="confirmed">
-                          <i className="material-icons-outlined">check_circle</i>
-                          <span>{confirmed.length} Confirmed</span>
-                        </div>
-                      )}
-                      {pending.length > 0 && (
-                        <div className="pending">
-                          <i className="material-icons-outlined">priority_high</i>
-                          <span>{pending.length} Pending</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+          </div>
+          <div className="job-calendar">
+            <div className="calendar-days">
+              {days.map((day, index) => {
+                const curr = day.isCurrentMonth && day.day === new Date().getDate();
+                const activitiesToday = activities.filter(
+                  (activity) =>
+                    new Date(activity.date).toISOString().slice(0, 10) ===
+                      new Date(date.getFullYear(), date.getMonth(), day.day + 1)
+                        .toISOString()
+                        .slice(0, 10) && activity.jobId === currentJob
+                );
+                const confirmed = activitiesToday.filter((activity) => activity.confirmed);
+                const pending = activitiesToday.filter((activity) => !activity.confirmed);
+                return (
+                  <div
+                    key={`day-${index}`}
+                    className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
+                      !day.isCurrentMonth ? 'disabled' : ''
+                    }`}
+                    onClick={() => {
+                      setSelectedDay(index);
+                      setCurrentActivities(activitiesToday);
+                    }}>
+                    <span className={curr && 'current'}>{day.day}</span>
+                    {activitiesToday.length > 0 && (
+                      <div className="activities">
+                        {confirmed.length > 0 && (
+                          <div className="confirmed">
+                            <i className="material-icons-outlined">check_circle</i>
+                            <span>{confirmed.length} Confirmed</span>
+                          </div>
+                        )}
+                        {pending.length > 0 && (
+                          <div className="pending">
+                            <i className="material-icons-outlined">priority_high</i>
+                            <span>{pending.length} Pending</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
         <div className="addScheduleContainer">
@@ -234,16 +243,46 @@ export default function JobCalendar() {
             <strong>{weekDays[date.getDay()]}</strong> {date.toLocaleDateString('fi-fi')}
           </p>
           {currentActivities.length > 0 ? (
-            <div className="activities">
-              {currentActivities.map((activity) => (
-                <div key={activity.id} className="activity">
-                  <div className="activityInfo">
-                    <p>
-                      {activity.time.start} - {activity.time.end}
-                    </p>
+            <div className="schedules">
+              {schedules.map((schedule) => {
+                return (
+                  <div className="schedule" key={schedule.id}>
+                    <div className="schedule-details">
+                      <i className="material-icons-outlined">expand_more</i>
+                      <i className="material-icons-outlined">edit</i>
+                      <p>
+                        {schedule.time.start} - {schedule.time.end}
+                      </p>
+                    </div>
+                    <div className="activities">
+                      {currentActivities.map((activity) => {
+                        /* This should eventually check the schedule actually matches week day, but not yet! */
+                        if (activity.time.start > schedule.time.end) return;
+                        return (
+                          <div key={activity.id} className="activity">
+                            <div className="activityInfo">
+                              <p>
+                                <i className="material-icons-outlined">schedule</i>{' '}
+                                {activity.time.start} - {activity.time.end}
+                              </p>
+                              <p>
+                                {' '}
+                                <i className="material-icons-outlined">location_on</i>
+                                {activity.location}
+                              </p>
+                              <p>
+                                {' '}
+                                <i className="material-icons-outlined">account_circle</i>
+                                {activity.user}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <p>You have no activites for the selected day</p>
