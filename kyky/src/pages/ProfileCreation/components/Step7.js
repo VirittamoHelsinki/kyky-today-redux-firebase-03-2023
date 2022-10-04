@@ -25,7 +25,7 @@ export default function Step7() {
           <label>Phone</label>
           <Select className="select-container4"></Select>
           <input className="detailsInputPhone" placeholder='type your number' maxLength={13}></input>
-        </div>
+        </div> 
       </div>
     </div>
   );
