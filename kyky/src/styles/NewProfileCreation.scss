@@ -265,9 +265,11 @@ label{
     fill: $kyky-primary-dark;
   }
 
-  [class$="-MenuList"] {
-    
-    [class$="-option"] {
+  [class$="-option"] {
+    background-color: initial;
+    color: initial;
+
+    .optionContainer {
       display: flex;
       flex-direction: row;
       column-gap: 8px;
@@ -277,6 +279,10 @@ label{
         align-self: center;
         width: 15px;
         height: 12px;
+      }
+
+      .optionLabelTextBold {
+        font-weight: 600;
       }
     }
   }
