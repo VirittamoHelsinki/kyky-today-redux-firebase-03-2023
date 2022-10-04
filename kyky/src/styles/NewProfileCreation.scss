@@ -1,4 +1,4 @@
-@use "_utilities" as *;
+@use '_utilities' as *;
 
 h1 {
   font-weight: 300;
@@ -6,26 +6,26 @@ h1 {
 h3 {
   font-size: 20px;
 }
-h4{
-  font-family: "Poppins";
+h4 {
+  font-family: 'Poppins';
 }
 p {
-  font-family: "Poppins";
+  font-family: 'Poppins';
 }
-label{
-  font-family: "Poppins";
+label {
+  font-family: 'Poppins';
 }
-.mainContainer1{
-  display:flex;
+.mainContainer1 {
+  display: flex;
   height: fit-content;
   width: min (1200px, 100%);
   flex-wrap: wrap;
   position: relative;
- align-items: center;
- justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 .leftContainer {
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 
   display: flex;
   flex-direction: column;
@@ -35,7 +35,6 @@ label{
   width: 600px;
   //border: 2px solid black;
   position: relative;
-  
 }
 .profileIcon {
   position: relative;
@@ -52,7 +51,7 @@ label{
 
   justify-content: center;
   align-items: center;
-  font-family: "Ubuntu";
+  font-family: 'Ubuntu';
   font-size: 15px;
   height: 40px;
   width: 150px;
@@ -61,7 +60,7 @@ label{
   background: white;
 }
 .linkedIn {
-  font-family: "Ubuntu";
+  font-family: 'Ubuntu';
   font-size: 15px;
   height: 40px;
   width: 150px;
@@ -73,7 +72,7 @@ label{
   p {
     text-align: center;
   }
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   text-align: center;
 
   display: flex;
@@ -82,13 +81,13 @@ label{
   justify-content: space-around;
   border-radius: 10px;
   gap: 30px;
- margin-top: 30px;
- padding-bottom: 20px;
+  margin-top: 30px;
+  padding-bottom: 20px;
   height: fit-content;
   width: min(400px, 100%);
   border: 1px solid rgb(221, 206, 206);
   position: relative;
- 
+
   .dogPic {
     border-radius: 10px;
     position: relative;
@@ -139,7 +138,7 @@ label{
     height: 50px;
     width: 400px;
     text-align: left;
-    font-family: "Poppins";
+    font-family: 'Poppins';
     border: 1px solid #00a088;
     border-radius: 10px;
   }
@@ -190,7 +189,7 @@ label{
   }
   .workContainer,
   .educationContainer {
-    font-family: "Inter";
+    font-family: 'Inter';
     display: flex;
     background-color: white;
     height: 500px;
@@ -242,7 +241,7 @@ label{
   }
 
   .saveButton {
-    font-family: "Inter";
+    font-family: 'Inter';
     font-size: 16px;
     height: 40px;
     width: 150px;
@@ -267,15 +266,15 @@ label{
     color: $kyky-primary-dark;
   }
 
-  [class$="-indicatorSeparator"] {
+  [class$='-indicatorSeparator'] {
     background-color: initial;
   }
 
-  [class$="-indicatorContainer"] svg {
+  [class$='-indicatorContainer'] svg {
     fill: $kyky-primary-dark;
   }
 
-  [class$="-option"] {
+  [class$='-option'] {
     background-color: initial;
     color: initial;
 
@@ -299,7 +298,7 @@ label{
 }
 
 .formContainer {
-  font-family: "Inter";
+  font-family: 'Inter';
   display: flex;
   background-color: white;
   height: 400px;
@@ -318,9 +317,9 @@ label{
   grid-template-rows: 50px 38px 38px 38px auto;
   row-gap: 25px;
   grid-template-areas:
-    "header header"
-    "label select"
-    "button button";
+    'header header'
+    'label select'
+    'button button';
   border: 1px solid $kyky-primary-dark;
   border-radius: 10px;
   padding: 20px;
@@ -357,121 +356,161 @@ label{
   border: 1px solid #00a088;
   border-radius: 1%;
   text-align: start;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   padding: 10px;
   resize: vertical;
 }
-.select-container2{
+.select-container2 {
   width: 400px;
- 
 }
-.hourlyContainer{
-  display:flex;
-  height:50px;
-  width:550px;
+.hourlyContainer {
+  display: flex;
+  height: 50px;
+  width: 550px;
   justify-content: space-between;
-  position:relative;
-  bottom:120px;
-
+  position: relative;
+  bottom: 120px;
 }
-.hourlyInput{
+.hourlyInput {
   height: 50px;
   width: 150px;
   text-align: right;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   border: 1px solid #00a088;
   border-radius: 10px;
   padding-left: 30px;
   padding-right: 10px;
 }
-.totalAmount{
-  color:#00a088;
+.totalAmount {
+  color: #00a088;
   position: relative;
-  bottom:100px;
+  bottom: 100px;
 }
 
-
-  
-
-.detailsMainContainer{
-display: flex;
-align-items: flex-end;
-width:900px;
-height: 600px;
-
-
-
-
-.photoContainer{
+.detailsMainContainer {
   display: flex;
-  height: 600px;
-  width:250px;
-  border: 1px solid rgb(160, 158, 158);
-  padding: 30px 20px 350px 20px;
- flex-direction: column;
-  align-items: center;
-.uploadPhotoButton{
-  font-size: 16px;
-  font-family: "Poppins";
-  height: 40px;
-  width: 200px;
-  border-radius: 20px;
-  color: #387a70;
-  background-color: #ffffff;
-  border: 1px solid #387a70;
-  margin: auto;
-}}
-.detailsContainer{
-  display: flex;
-  flex-direction: column;
-  justify-content:space-between;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  width: min(1200px, 100%);
+  height: fit-content;
+
+  .photoContainer {
+    display: flex;
+    height: 600px;
+    width: 250px;
+    border: 1px solid rgb(160, 158, 158);
+    padding: 30px 20px 350px 20px;
+    flex-direction: column;
+    align-items: center;
+    .uploadPhotoButton {
+      font-size: 16px;
+      font-family: 'Poppins';
+      height: 40px;
+      width: 200px;
+      border-radius: 20px;
+      color: #387a70;
+      background-color: #ffffff;
+      border: 1px solid #387a70;
+      margin: auto;
+    }
+  }
+  .detailsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 500px;
+    width: 450px;
+    padding: 10px;
+
+    position: relative;
+    left: 100px;
+
+    label {
+      color: #636262;
+    }
+    .detailsInput {
+      width: 400px;
+      height: 40px;
+      border-radius: 5px;
+      border: 1px solid #636232;
+    }
+    .detailsInputShort {
+      width: 180px;
+      height: 40px;
+      border-radius: 5px;
+      border: 1px solid #636232;
+    }
+    .detailsInputPhone {
+      width: 400px;
+      height: 40px;
+      border-radius: 5px;
+      border: 1px solid #636232;
+      position: relative;
+      bottom: 52px;
+      text-align: center;
+    }
+    .select-container3 {
+      width: 200px;
+    }
+    .select-container4 {
+      width: 110px;
+      z-index: 1;
+      border: 1px solid #636232;
+      border-radius: 5px;
+    }
+  }
+}
+.addPhotoContainer {
   height: 500px;
-  width: 450px;
-  padding:10px;
-  
-  position: relative;
-  left: 100px;
+  width: 530px;
+  display: flex;
+  border: 1px solid rgb(146, 143, 143);
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  .addPhotoTxtContainer {
+    height: 350px;
+    width: 250px;
+    display: flex;
 
-label{
-  color:#636262 
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    .selectImgButton {
+      font-family: 'Poppins';
+      border-radius: 20px;
+      height: 40px;
+      width: 200px;
+      background-color: #ffffff;
+      color: #00a088;
+      border: 1px solid black;
+    }
+  }
+  .addPhotoBtnContainer {
+    display: flex;
+    height: 45px;
+    width: 300px;
+    justify-content: space-between;
+    .addPhotoButton1 {
+      font-family: 'Poppins';
+      border-radius: 20px;
+      height: 40px;
+      width: 120px;
+      background-color: white;
+      color: #00a088;
+      border: 1px solid black;
+    }
+  }
+  .addPhotoButton2 {
+    font-family: 'Poppins';
+    border-radius: 20px;
+    height: 40px;
+    width: 120px;
+    background-color: #387a70;
+    color: white;
+    border: 1px solid black;
+  }
 }
-.detailsInput{
-  width: 400px;
-  height: 40px;
-  border-radius: 5px;
-  border: 1px solid #636232;
-  
-}
-.detailsInputShort{
-  width: 180px;
-  height: 40px;
-  border-radius: 5px;
-  border: 1px solid #636232;
-}
-.detailsInputPhone{
-  width: 400px;
-  height: 40px;
-  border-radius: 5px;
-  border: 1px solid #636232;
-  position:relative;
-  bottom:52px;
-  text-align:center;
-
-}
-.select-container3{
-  width:200px;
-}
-.select-container4{
-  
-  width:110px;
-  z-index: 1;
-  border: 1px solid #636232;
-  border-radius: 5px;
-}
-}
-
-
-
 
 
-}
