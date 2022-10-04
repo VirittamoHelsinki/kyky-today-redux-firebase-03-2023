@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import '../../styles/JobCalendar.scss';
 
+import activities from '../../activities.json';
+import { act } from 'react-dom/test-utils';
+
 const months = [
   'January',
   'February',
@@ -38,6 +41,7 @@ export default function JobCalendar() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(date.getMonth());
   const [currentYear, setCurrentYear] = useState(date.getFullYear());
+  const [currentActivities, setCurrentActivities] = useState([]);
 
   useEffect(() => {
     setCurrentMonth(date.getMonth());
@@ -183,14 +187,42 @@ export default function JobCalendar() {
           <div className="calendar-days">
             {days.map((day, index) => {
               const curr = day.isCurrentMonth && day.day === new Date().getDate();
+              const activitiesToday = activities.filter(
+                (activity) =>
+                  new Date(activity.date).toISOString().slice(0, 10) ===
+                  new Date(date.getFullYear(), date.getMonth(), day.day + 1)
+                    .toISOString()
+                    .slice(0, 10)
+              );
+              const confirmed = activitiesToday.filter((activity) => activity.confirmed);
+              const pending = activitiesToday.filter((activity) => !activity.confirmed);
               return (
                 <div
                   key={`day-${index}`}
                   className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
                     !day.isCurrentMonth ? 'disabled' : ''
                   }`}
-                  onClick={() => setSelectedDay(index)}>
+                  onClick={() => {
+                    setSelectedDay(index);
+                    setCurrentActivities(activitiesToday);
+                  }}>
                   <span className={curr && 'current'}>{day.day}</span>
+                  {activitiesToday.length > 0 && (
+                    <div className="activities">
+                      {confirmed.length > 0 && (
+                        <div className="confirmed">
+                          <i className="material-icons-outlined">check_circle</i>
+                          <span>{confirmed.length} Confirmed</span>
+                        </div>
+                      )}
+                      {pending.length > 0 && (
+                        <div className="pending">
+                          <i className="material-icons-outlined">priority_high</i>
+                          <span>{pending.length} Pending</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -201,6 +233,21 @@ export default function JobCalendar() {
           <p className="scheduleDate">
             <strong>{weekDays[date.getDay()]}</strong> {date.toLocaleDateString('fi-fi')}
           </p>
+          {currentActivities.length > 0 ? (
+            <div className="activities">
+              {currentActivities.map((activity) => (
+                <div key={activity.id} className="activity">
+                  <div className="activityInfo">
+                    <p>
+                      {activity.time.start} - {activity.time.end}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>You have no activites for the selected day</p>
+          )}
           <button className="scheduleButton">+ Add a schedule</button>
         </div>
       </div>
