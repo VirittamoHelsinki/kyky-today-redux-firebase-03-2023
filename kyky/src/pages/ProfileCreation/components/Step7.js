@@ -49,6 +49,7 @@ export default function Step7(currentStep) {
             maxLength={13}></input>
         </div>
       </div>
+     
       {!saved && upload}
     </div>
   );
