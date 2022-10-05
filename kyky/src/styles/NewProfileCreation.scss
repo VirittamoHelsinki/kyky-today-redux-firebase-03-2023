@@ -15,6 +15,9 @@ p {
 label {
   font-family: 'Poppins';
 }
+input{
+  font-family: "Roboto";
+}
 .mainContainer1 {
   display: flex;
   height: fit-content;
@@ -31,7 +34,7 @@ label {
   flex-direction: column;
   justify-content: space-between;
 
-  height: 400px;
+  height: 450px;
   width: 600px;
   //border: 2px solid black;
   position: relative;
@@ -196,6 +199,7 @@ label {
     width: 700px;
     border: 1px solid #387a70;
     border-radius: 10px;
+    box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.25);
     flex-direction: column;
     padding-left: 100px;
     padding-top: 20px;
@@ -453,7 +457,7 @@ label {
       border-radius: 5px;
       border: 1px solid #636232;
       position: relative;
-      bottom: 52px;
+      
       text-align: center;
     }
     .select-container3 {
@@ -466,6 +470,15 @@ label {
       border-radius: 5px;
     }
   }
+}
+.zipCode{
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: space-between;
+  position:relative;
+  bottom:98px;
+  left: 300px;
 }
 .addPhotoContainer {
   height: 500px;
@@ -480,6 +493,7 @@ label {
   background-color: white;
   position: relative;
   bottom: 400px;
+  left:100px;
   z-index: 10;
   .addPhotoTxtContainer {
     height: 350px;
