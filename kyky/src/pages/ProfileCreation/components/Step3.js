@@ -60,7 +60,8 @@ export default function Step3(currentStep) {
           components={{ Option: IconOption }}
         ></Select>
         <button id="addLanguageButton">
-          <i className="material-icons-outlined">add_circle_outline</i>Add a language
+          <i className="material-icons-outlined">add_circle_outline</i>
+          <p>Add a language</p>
         </button>
       </div>
     </div>
