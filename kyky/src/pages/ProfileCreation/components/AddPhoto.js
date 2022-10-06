@@ -12,7 +12,9 @@ export default function AddPhoto({ setSaved }) {
         <p> Your photo should show your face clearly, we suggest a neutral background.</p>
       </div>
       <div className="addPhotoBtnContainer">
-        <button className="addPhotoButton1">Cancel</button>
+        <button className="addPhotoButton1" onClick={() => setSaved(true)}>
+          Cancel
+        </button>
         <button className="addPhotoButton2" onClick={() => setSaved(true)}>
           Save
         </button>

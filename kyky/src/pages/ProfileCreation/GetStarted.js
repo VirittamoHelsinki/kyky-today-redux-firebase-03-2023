@@ -23,7 +23,7 @@ export default function GetStarted() {
     "It's the very first thing clients see. Please describe your skills with your own words.",
     'Relevant working experience will increase the chance of getting hired!',
     'Your language skill can make client know you better.',
-    'Write down what you can offer to clients.',
+    'Write down what you can offer to clients(maximum of 300 characters).',
     'Choose one service that best describes the type of work you do.',
     'Clients will see this rate on your profile.',
     'A professional photo helps build trust with your clients.'

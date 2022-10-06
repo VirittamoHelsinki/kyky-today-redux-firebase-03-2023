@@ -401,7 +401,7 @@ input{
 .detailsMainContainer {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: flex-start;
   width: min(1200px, 100%);
   height: fit-content;
 
@@ -428,10 +428,10 @@ input{
   .detailsContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 500px;
+    justify-content: space-evenly;
+    height: 550px;
     width: 450px;
-    padding: 10px;
+  
 
     position: relative;
     left: 100px;
@@ -477,8 +477,18 @@ input{
   height: 80px;
   justify-content: space-between;
   position:relative;
-  bottom:98px;
+  bottom: 95px;
   left: 300px;
+}
+.phoneContainer{
+  height:150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position:relative;
+  bottom: 80px;
+ 
+  
 }
 .addPhotoContainer {
   height: 500px;

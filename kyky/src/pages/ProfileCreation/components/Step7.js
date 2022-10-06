@@ -5,6 +5,7 @@ import Select, { components } from 'react-select';
 import { ReactComponent as CheckMark } from '../../../image/check-mark.svg';
 import React, { useState } from 'react';
 import Countries from '../../../countries.json';
+import CountriesWithDialCodes from '../../../countriesWithDialCodes.json';
 import { ReactComponent as ProfileIcon2 } from '../../../image/profileicon2.svg';
 import AddPhoto from './AddPhoto';
 
@@ -45,9 +46,10 @@ export default function Step7(currentStep) {
             <input className="detailsInputShort" type="text"></input>
           </div>
 
-          {/*<ReactFlagsSelect>selected={selected} onSelect={(code => setSelected(code))} </ReactFlagsSelect> */}
+          {/*<ReactFlagsSelect>selected={selected} onSelect={(code => setSelected(code))} </ReactFlagsSelect> */}<div className= "phoneContainer">
           <label>Phone</label>
-          <input className="detailsInputPhone" maxLength={13}></input>
+          <Select className = "select-container" options={CountriesWithDialCodes} getOptionLabel={(option) => [option.name, " ", option.dial_code]} getOptionValue={(option) => option.code}></Select>
+          <input className="detailsInputPhone" maxLength={13}></input></div>
         </div>
       </div>
       {!saved && <div className="dim2"></div>}
