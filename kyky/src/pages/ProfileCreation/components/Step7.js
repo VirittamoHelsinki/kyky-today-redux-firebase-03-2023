@@ -49,7 +49,7 @@ export default function Step7(currentStep) {
           {/*<ReactFlagsSelect>selected={selected} onSelect={(code => setSelected(code))} </ReactFlagsSelect> */}<div className= "phoneContainer">
           <label>Phone</label>
           <Select className = "select-container" options={CountriesWithDialCodes} getOptionLabel={(option) => [option.name, " ", option.dial_code]} getOptionValue={(option) => option.code}></Select>
-          <input className="detailsInputPhone" maxLength={13}></input></div>
+          <input className="detailsInputPhone" placeholder='type your number' maxLength={13}></input></div>
         </div>
       </div>
       {!saved && <div className="dim2"></div>}
