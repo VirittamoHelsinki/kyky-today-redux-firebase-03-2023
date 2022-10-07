@@ -259,7 +259,12 @@ export default function JobCalendar() {
                     <div className="activities">
                       {currentActivities.map((activity) => {
                         /* This should eventually check the schedule actually matches week day, but not yet! */
-                        if (activity.time.start > schedule.time.end) return;
+                        if (
+                          activity.time.start > schedule.time.end ||
+                          activity.time.end < schedule.time.start
+                        )
+                          return;
+                        console.log(activity.id);
                         return (
                           <div key={activity.id} className="activity">
                             <div className="activityInfo">
