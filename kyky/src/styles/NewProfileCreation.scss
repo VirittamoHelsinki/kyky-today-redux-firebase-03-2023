@@ -548,3 +548,18 @@ input{
     border: 1px solid black;
   }
 }
+.previewMainContainer{
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: fit-content;
+  position: relative;
+  top:100px;
+}
+.previewContainer1,.previewContainer2,.previewContainer3,.previewContainer4{
+display: flex;
+height: 300px;
+width: 800px;
+border: 1px solid rgb(123, 120, 120);
+
+}
