@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import jobs from '../../jobs';
 import '../../styles/JobCalendar.scss';
 import Button from '../../components/Button';
 
@@ -145,11 +146,24 @@ export default function JobCalendar() {
     }
     setDate(new Date(year, month, date.getDate()));
   }
+
   return (
     <div>
       {' '}
       <div className="MainContainer">
         <div className="calendar-container">
+          <div className="job-select">
+            <select
+              onChange={(e) => {
+                setCurrentJob(e.target.value);
+              }}>
+              {jobs.map((job) => (
+                <option key={job.id} value={job.id}>
+                  {job.jobTitle}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="monthYear">
             <button className="todayButton" onClick={() => setDate(new Date())}>
               Today

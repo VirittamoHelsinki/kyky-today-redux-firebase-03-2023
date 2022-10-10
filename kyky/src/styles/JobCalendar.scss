@@ -23,10 +23,12 @@
   justify-content: space-around;
   position: relative;
 }
+
 .month-select,
 .year-select {
   border-radius: 5px;
 }
+
 .weekDays {
   display: flex;
   height: fit-content;
@@ -34,6 +36,7 @@
   justify-content: space-around;
   position: relative;
 }
+
 .job-calendar {
   display: flex;
   height: 700px;
@@ -42,6 +45,16 @@
   border: 3.5px solid rgb(199, 191, 191);
   position: relative;
 }
+
+.job-select {
+  select {
+    font-size: 1rem;
+    padding: 0.5rem;
+    color: white;
+    background: $kyky-primary-darker;
+  }
+}
+
 .calendar-days {
   width: 100%;
   max-height: 100%;
@@ -50,6 +63,7 @@
   flex-wrap: wrap;
   gap: 0;
 }
+
 .calendar-day {
   width: 169px;
   height: 139px;
