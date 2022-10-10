@@ -178,12 +178,22 @@
         justify-content: flex-start;
         align-items: center;
         padding: 0.5rem;
+
+        .expand {
+          background: none;
+        }
       }
       .activities {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: space-between;
+        overflow: hidden;
+        height: 0;
+
+        &.open {
+          height: auto;
+        }
 
         .activityInfo {
           border: 1px solid grey;
