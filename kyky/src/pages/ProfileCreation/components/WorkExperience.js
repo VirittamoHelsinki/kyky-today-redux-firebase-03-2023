@@ -3,8 +3,12 @@ import React from 'react';
 import Checkbox from '../../../components/Checkbox';
 import Input from '../../../components/Input';
 import Select from 'react-select';
-
+import countries from '../../../countries.json';
 export default function WorkExperience({ setSaved }) {
+
+
+
+
   return (
     <div className="workContainer">
       <h3>Add Work Experience</h3>
@@ -19,7 +23,7 @@ export default function WorkExperience({ setSaved }) {
         label="Location*"
         placeholder="Ex:Helsinki"
         labelOnFront></Input>
-      <Select className="countryList" placeholder="Finland"></Select>
+      <Select className="countryList" placeholder="Finland" options={[...countries]}></Select>
       <Checkbox className="workCheck">I am currently working in this role</Checkbox>
       <button type="button" className="saveButton" onClick={() => setSaved(true)}>
         Save
