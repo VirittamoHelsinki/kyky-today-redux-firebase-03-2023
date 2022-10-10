@@ -44,6 +44,7 @@ export default function JobCalendar() {
   const [currentActivities, setCurrentActivities] = useState([]);
   const [currentJob, setCurrentJob] = useState('babysitting');
   const [schedules, setSchedules] = useState([]);
+  const [openedSchedules, setOpenedSchedules] = useState([]);
 
   useEffect(() => {
     setCurrentMonth(date.getMonth());
@@ -245,18 +246,29 @@ export default function JobCalendar() {
           {currentActivities.length > 0 ? (
             <div className="schedules">
               {schedules.map((schedule) => {
+                let _id = schedule.jobId + schedule.time.start;
                 return (
                   <div className="schedule" key={schedule.id}>
                     <div className="schedule-details">
                       <Button className="expand">
-                        <i className="material-icons-outlined">expand_more</i>
+                        <i
+                          className="material-icons-outlined"
+                          onClick={() => {
+                            if (openedSchedules.includes(_id)) {
+                              setOpenedSchedules(openedSchedules.filter((id) => id !== _id));
+                            } else {
+                              setOpenedSchedules([...openedSchedules, _id]);
+                            }
+                          }}>
+                          {openedSchedules.includes(_id) ? 'expand_less' : 'expand_more'}
+                        </i>
                       </Button>
                       <i className="material-icons-outlined">edit</i>
                       <p>
                         {schedule.time.start} - {schedule.time.end}
                       </p>
                     </div>
-                    <div className="activities">
+                    <div className={`activities${openedSchedules.includes(_id) ? ' open' : ''}`}>
                       {currentActivities.map((activity) => {
                         /* This should eventually check the schedule actually matches week day, but not yet! */
                         if (
@@ -264,7 +276,6 @@ export default function JobCalendar() {
                           activity.time.end < schedule.time.start
                         )
                           return;
-                        console.log(activity.id);
                         return (
                           <div key={activity.id} className="activity">
                             <div className="activityInfo">

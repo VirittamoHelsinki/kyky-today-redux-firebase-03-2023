@@ -144,22 +144,24 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
+  gap: 20%;
 
   .scheduleButton {
     height: 40px;
     width: 150px;
+    bottom: 40px;
     background-color: $kyky-primary-dark;
     color: white;
     border-radius: 20px;
-    position: relative;
+    position: absolute;
   }
 
   .schedules {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 80%;
     gap: 0.5rem;
@@ -178,12 +180,24 @@
         justify-content: flex-start;
         align-items: center;
         padding: 0.5rem;
+
+        .expand {
+          background: none;
+          border: none;
+          outline: none;
+        }
       }
       .activities {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: space-between;
+        overflow: hidden;
+        height: 0;
+
+        &.open {
+          height: auto;
+        }
 
         .activityInfo {
           border: 1px solid grey;
