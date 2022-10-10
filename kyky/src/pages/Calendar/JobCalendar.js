@@ -215,7 +215,7 @@ export default function JobCalendar() {
                       setSelectedDay(index);
                       setCurrentActivities(activitiesToday);
                     }}>
-                    <span className={curr ? 'current' : ''}>{day.day}</span>
+                    <span className={`date${curr ? ' current' : ''}`}>{day.day}</span>
                     {activitiesToday.length > 0 && (
                       <div className="activities">
                         {confirmed.length > 0 && (
@@ -247,6 +247,14 @@ export default function JobCalendar() {
             <div className="schedules">
               {schedules.map((schedule) => {
                 let _id = schedule.jobId + schedule.time.start;
+                const activitiesNow = currentActivities.filter(
+                  (activity) =>
+                    activity.time.start < schedule.time.end &&
+                    activity.time.end > schedule.time.start
+                );
+                if (activitiesNow.length === 0) {
+                  return null;
+                }
                 return (
                   <div className="schedule" key={schedule.id}>
                     <div className="schedule-details">
@@ -269,7 +277,7 @@ export default function JobCalendar() {
                       </p>
                     </div>
                     <div className={`activities${openedSchedules.includes(_id) ? ' open' : ''}`}>
-                      {currentActivities.map((activity) => {
+                      {activitiesNow.map((activity) => {
                         /* This should eventually check the schedule actually matches week day, but not yet! */
                         if (
                           activity.time.start > schedule.time.end ||

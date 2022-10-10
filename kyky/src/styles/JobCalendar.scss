@@ -63,7 +63,8 @@
   align-items: flex-start;
   user-select: none;
 
-  span {
+  .date {
+    position: absolute;
     font-size: 1.1rem;
     font-weight: 700;
   }
@@ -99,7 +100,8 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    width: 100%;
+    margin-left: 5%;
+    width: 90%;
     height: 100%;
     gap: 0.35rem;
 
