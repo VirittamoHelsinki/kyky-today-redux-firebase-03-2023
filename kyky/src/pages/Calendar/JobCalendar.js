@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import jobs from '../../jobs';
 import '../../styles/JobCalendar.scss';
 import Button from '../../components/Button';
 
@@ -44,6 +45,7 @@ export default function JobCalendar() {
   const [currentActivities, setCurrentActivities] = useState([]);
   const [currentJob, setCurrentJob] = useState('babysitting');
   const [schedules, setSchedules] = useState([]);
+  const [openedSchedules, setOpenedSchedules] = useState([]);
 
   useEffect(() => {
     setCurrentMonth(date.getMonth());
@@ -144,11 +146,24 @@ export default function JobCalendar() {
     }
     setDate(new Date(year, month, date.getDate()));
   }
+
   return (
     <div>
       {' '}
       <div className="MainContainer">
         <div className="calendar-container">
+          <div className="job-select">
+            <select
+              onChange={(e) => {
+                setCurrentJob(e.target.value);
+              }}>
+              {jobs.map((job) => (
+                <option key={job.id} value={job.id}>
+                  {job.jobTitle}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="monthYear">
             <button className="todayButton" onClick={() => setDate(new Date())}>
               Today
@@ -214,7 +229,7 @@ export default function JobCalendar() {
                       setSelectedDay(index);
                       setCurrentActivities(activitiesToday);
                     }}>
-                    <span className={curr ? 'current' : ''}>{day.day}</span>
+                    <span className={`date${curr ? ' current' : ''}`}>{day.day}</span>
                     {activitiesToday.length > 0 && (
                       <div className="activities">
                         {confirmed.length > 0 && (
@@ -245,21 +260,44 @@ export default function JobCalendar() {
           {currentActivities.length > 0 ? (
             <div className="schedules">
               {schedules.map((schedule) => {
+                let _id = schedule.jobId + schedule.time.start;
+                const activitiesNow = currentActivities.filter(
+                  (activity) =>
+                    activity.time.start < schedule.time.end &&
+                    activity.time.end > schedule.time.start
+                );
+                if (activitiesNow.length === 0) {
+                  return null;
+                }
                 return (
                   <div className="schedule" key={schedule.id}>
                     <div className="schedule-details">
                       <Button className="expand">
-                        <i className="material-icons-outlined">expand_more</i>
+                        <i
+                          className="material-icons-outlined"
+                          onClick={() => {
+                            if (openedSchedules.includes(_id)) {
+                              setOpenedSchedules(openedSchedules.filter((id) => id !== _id));
+                            } else {
+                              setOpenedSchedules([...openedSchedules, _id]);
+                            }
+                          }}>
+                          {openedSchedules.includes(_id) ? 'expand_less' : 'expand_more'}
+                        </i>
                       </Button>
                       <i className="material-icons-outlined">edit</i>
                       <p>
                         {schedule.time.start} - {schedule.time.end}
                       </p>
                     </div>
-                    <div className="activities">
-                      {currentActivities.map((activity) => {
+                    <div className={`activities${openedSchedules.includes(_id) ? ' open' : ''}`}>
+                      {activitiesNow.map((activity) => {
                         /* This should eventually check the schedule actually matches week day, but not yet! */
-                        if (activity.time.start > schedule.time.end) return;
+                        if (
+                          activity.time.start > schedule.time.end ||
+                          activity.time.end < schedule.time.start
+                        )
+                          return;
                         return (
                           <div key={activity.id} className="activity">
                             <div className="activityInfo">

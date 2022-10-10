@@ -354,6 +354,7 @@ input{
   border-radius: 1%;
   text-align: start;
   font-family: 'Poppins';
+  font-size: 20px;
   padding: 10px;
   resize: vertical;
 }
@@ -387,7 +388,7 @@ input{
 .detailsMainContainer {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: flex-start;
   width: min(1200px, 100%);
   height: fit-content;
 
@@ -414,10 +415,10 @@ input{
   .detailsContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 500px;
+    justify-content: space-evenly;
+    height: 550px;
     width: 450px;
-    padding: 10px;
+  
 
     position: relative;
     left: 100px;
@@ -463,8 +464,18 @@ input{
   height: 80px;
   justify-content: space-between;
   position:relative;
-  bottom:98px;
-  left: 300px;
+  bottom: 95px;
+  left: 270px;
+}
+.phoneContainer{
+  height:150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position:relative;
+  bottom: 80px;
+ 
+  
 }
 .addPhotoContainer {
   height: 500px;
@@ -522,4 +533,19 @@ input{
     color: white;
     border: 1px solid black;
   }
+}
+.previewMainContainer{
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: fit-content;
+  position: relative;
+  top:100px;
+}
+.previewContainer1,.previewContainer2,.previewContainer3,.previewContainer4{
+display: flex;
+height: 300px;
+width: 800px;
+border: 1px solid rgb(123, 120, 120);
+
 }
