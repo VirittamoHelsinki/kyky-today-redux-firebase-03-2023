@@ -90,7 +90,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
 
       if (schedules) {
         schedules.push(properties);
-        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(data));
+        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
       } else {
         localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify([data]));
       }

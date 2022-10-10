@@ -1,0 +1,38 @@
+[
+  {
+    "id": "aab45",
+    "user": "marypoppins64",
+    "location": "Vantaa",
+    "date": "2022-10-05",
+    "time": {
+      "start": "10:00",
+      "end": "11:00"
+    },
+    "jobId": "babysitting",
+    "confirmed": true
+  },
+  {
+    "id": "brh76",
+    "user": "johndoe1",
+    "location": "Helsinki",
+    "date": "2022-10-05",
+    "time": {
+      "start": "11:30",
+      "end": "14:00"
+    },
+    "jobId": "babysitting",
+    "confirmed": true
+  },
+  {
+    "id": "dars34",
+    "user": "vitan22",
+    "location": "Helsinki",
+    "date": "2022-10-05",
+    "time": {
+      "start": "01:30",
+      "end": "05:00"
+    },
+    "jobId": "babysitting",
+    "confirmed": false
+  }
+]

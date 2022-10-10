@@ -1,7 +1,5 @@
-import '../../../styles/NewProfileCreation.scss';
 import Select, { components } from 'react-select';
 import { ReactComponent as CheckMark } from '../../../image/check-mark.svg';
-import React from 'react';
 
 export default function Step3(currentStep) {
   const options = [
@@ -19,8 +17,15 @@ export default function Step3(currentStep) {
   const { Option } = components;
   const IconOption = props => (
     <Option {...props}>
-      {<CheckMark></CheckMark>}
-      {props.data.label}
+      {props.isSelected ?
+        <div class="optionContainer">
+          <CheckMark id="checkMark" />
+          <span class="optionLabelTextBold">{props.data.label}</span>
+        </div> :
+        <div class="optionContainer">
+          <div id="noCheckMark"></div>
+          <span class="optionLabelText">{props.data.label}</span>
+        </div>}
     </Option>
   );
 
@@ -34,9 +39,7 @@ export default function Step3(currentStep) {
           name={finnishSelectName}
           placeholder={placeholder}
           options={[...options]}
-          components={{ Option: IconOption }} // How to deliver isSelected props to IconOption
-                                              // for deciding whether to show svg file (green
-                                              // arrow) inside Option element?
+          components={{ Option: IconOption }}
         >
           {/* ^ Creating new options array for each Select component with the same content. */}
         </Select>
@@ -56,6 +59,10 @@ export default function Step3(currentStep) {
           options={[...options]}
           components={{ Option: IconOption }}
         ></Select>
+        <button id="addLanguageButton">
+          <i className="material-icons-outlined">add_circle_outline</i>
+          <p>Add a language</p>
+        </button>
       </div>
     </div>
   );
