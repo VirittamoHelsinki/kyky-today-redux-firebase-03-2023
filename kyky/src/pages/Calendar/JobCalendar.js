@@ -209,7 +209,13 @@ export default function JobCalendar() {
           <div className="job-calendar">
             <div className="calendar-days">
               {days.map((day, index) => {
-                const curr = day.isCurrentMonth && day.day === new Date().getDate();
+                const disabled = !day.isCurrentMonth || day.day < new Date().getDate();
+                /* Convoluted mess, just makes totally sure to display current day correctly */
+                const curr =
+                  day.isCurrentMonth &&
+                  day.day === new Date().getDate() &&
+                  date.getMonth() === new Date().getMonth() &&
+                  date.getFullYear() === new Date().getFullYear();
                 const activitiesToday = activities.filter(
                   (activity) =>
                     new Date(activity.date).toISOString().slice(0, 10) ===
@@ -222,12 +228,14 @@ export default function JobCalendar() {
                 return (
                   <div
                     key={`day-${index}`}
-                    className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
-                      !day.isCurrentMonth ? 'disabled' : ''
+                    className={`calendar-day${selectedDay === index ? ' selected' : ''}${
+                      disabled ? ' disabled' : ''
                     }`}
                     onClick={() => {
-                      setSelectedDay(index);
-                      setCurrentActivities(activitiesToday);
+                      if (!disabled) {
+                        setSelectedDay(index);
+                        setCurrentActivities(activitiesToday);
+                      }
                     }}>
                     <span className={`date${curr ? ' current' : ''}`}>{day.day}</span>
                     {activitiesToday.length > 0 && (
@@ -269,6 +277,8 @@ export default function JobCalendar() {
                 if (activitiesNow.length === 0) {
                   return null;
                 }
+                const confirmed = activitiesNow.filter((activity) => activity.confirmed);
+                const pending = activitiesNow.filter((activity) => !activity.confirmed);
                 return (
                   <div className="schedule" key={schedule.id}>
                     <div className="schedule-details">
@@ -288,6 +298,14 @@ export default function JobCalendar() {
                       <i className="material-icons-outlined">edit</i>
                       <p>
                         {schedule.time.start} - {schedule.time.end}
+                      </p>
+                      <p>
+                        <i className="material-icons-outlined">event_available</i>(
+                        {confirmed.length})
+                      </p>
+                      <p>
+                        <i className="material-icons-outlined">running_with_errors</i>(
+                        {pending.length})
                       </p>
                     </div>
                     <div className={`activities${openedSchedules.includes(_id) ? ' open' : ''}`}>
