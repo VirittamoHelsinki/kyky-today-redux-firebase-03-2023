@@ -1,5 +1,6 @@
 @use '_utilities' as *;
-
+$box-padding: 50px 50px 80px 50px;
+$box-border: 1px solid rgb(0, 0, 0, 0.4);
 h1 {
   font-weight: 300;
 }
@@ -375,7 +376,6 @@ input {
   width: 550px;
   justify-content: space-between;
   margin: 150px 0px 150px 0px;
- 
 }
 .hourlyInput {
   height: 50px;
@@ -383,7 +383,7 @@ input {
   text-align: right;
   font-family: 'Poppins';
   border: 1px solid #00a088;
- 
+
   border-radius: 10px;
   padding-left: 30px;
   padding-right: 10px;
@@ -540,17 +540,92 @@ input {
     border: 1px solid black;
   }
 }
-
-.previewContainer2 {
-  height:fit-content;
+.previewMainContainer {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
   width: 800px;
-  border: 1px solid black;
-  padding: 50px 50px 80px 50px;
+  margin: 30px 0px 60px 0px;
+  h2 {
+    font-family: 'Poppins';
+    font-size: 20px;
+  }
+}
+.previewContainer1 {
+  height: fit-content;
+  width: 800px;
+  border: $box-border;
+
+  padding: 20px 50px 0px 50px;
+  gap: 50px;
+
+  .bigContainer {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 500px;
+    height: 130px;
+
+    position: relative;
+    bottom: 200px;
+    left: 200px;
+    > * {
+      width: 50%;
+      align-items: center;
+      display: flex;
+      white-space: nowrap;
+      justify-content: center;
+      padding: 0;
+      gap: 1rem;
+    }
+  }
+  .jobTextArea {
+    display: flex;
+    height: 200px;
+    width: 450px;
+    position: relative;
+    bottom: 180px;
+    left: 235px;
+  }
+  .firstNameLastName {
+    display: flex;
+  }
+
+  .hourlyPriceContainer,
+  .jobTitleContainer,
+  .gpsLocation {
+    display: flex;
+  }
+
+  .editPhotoButtonContainer {
+    display: flex;
+    height: 200px;
+    width: fit-content;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    .editPhotoButton {
+      font-family: 'Poppins';
+      border-radius: 20px;
+      height: 40px;
+      width: 200px;
+      background-color: #ffffff;
+      color: #303030;
+      border: 1px solid black;
+    }
+  }
+}
+.previewContainer2 {
+  height: fit-content;
+  width: 800px;
+  border: $box-border;
+  padding: $box-padding;
   gap: 50px;
   .skillContainer {
     display: flex;
     width: 800px;
-    
+
     .skill {
       display: flex;
       height: fit-content;
