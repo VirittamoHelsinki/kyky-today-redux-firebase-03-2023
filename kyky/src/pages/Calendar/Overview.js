@@ -6,7 +6,7 @@ import { useOutletContext } from 'react-router-dom';
 
 import '../../styles/JobCalendarOverview.scss';
 
-import mockData from '../../mock_bookings.json';
+// import mockData from '../../mock_bookings.json';
 
 const times = [
   '0.00',
@@ -43,21 +43,59 @@ function Overview() {
   const [bookings, setBookings] = useState([]);
   const [allJobs, setAllJobs] = useState([]);
 
+  // This might not be used after all
+  function compareDates(date1, date2, options) {
+    if (options?.matchOnlyYear) {
+      return date1.getFullYear() === date2.getFullYear();
+    }
+
+    if (options?.matchOnlyMonth) {
+      return date1.getMonth() === date2.getMonth();
+    }
+
+    if (date1.getFullYear() === date2.getFullYear()) {
+      if (options?.dontMatchDay) {
+        return date1.getMonth() === date2.getMonth();
+      }
+      if (date1.getMonth() === date2.getMonth()) {
+        if (options?.preciseDate) {
+          return date1.getDate() === date2.getDate();
+        } else {
+          return date1.getDate() >= date2.getDate();
+        }
+      }
+    }
+  }
+
+  function checkSchedule(schedule) {
+    let { startDate: start, endDate: end } = schedule.scheduleDuration;
+    start = new Date(start).setHours(0, 0, 0, 0);
+    end = new Date(end).setHours(0, 0, 0, 0);
+    return start <= date.getTime() && end >= date.getTime();
+  }
+
   useEffect(() => {
     setSelectedWindow('overview');
   }, []);
 
   useEffect(() => {
-    const data = mockData.find((booking) => {
-      return new Date(booking.date).toLocaleDateString() === date.toLocaleDateString();
+    const scheduleKeys = Object.keys(localStorage).filter((key) => key.includes('_schedule'));
+    const allSchedules = scheduleKeys
+      .map((key) => {
+        const schedule = JSON.parse(localStorage.getItem(key));
+        return schedule;
+      })
+      .flat(Infinity);
+    const data = allSchedules.filter((schedule) => {
+      return checkSchedule(schedule);
     });
     if (data) {
-      const jobs = checkOverlap(data.jobs);
+      const jobs = checkOverlap(data);
       const all_jobs = [];
-      jobs.forEach((job) => {
-        job.times.forEach((time) => {
-          all_jobs.push({ start: time.start, end: time.end, job: job.name });
-        });
+      jobs?.forEach((job) => {
+        let time = job.time;
+
+        all_jobs.push({ start: time.start, end: time.end, job: job.jobId });
       });
       all_jobs.sort((a, b) => {
         return a.start - b.start;
@@ -71,87 +109,87 @@ function Overview() {
 
   function ConvertTimeStringToDecimal(time) {
     if (!time) return 0;
-    const timeArray = time.split('.');
+    const timeArray = time.split(':');
     return parseFloat(timeArray[0]) + parseFloat(timeArray[1]) / 60;
   }
 
   /* I should look for a different profession */
   // This code works, but is definitely NOT the way I would like to do it.
   function Booking({ booking }) {
-    const { name, times } = booking;
-    return times.map(({ start, end, overlap, overlapIndex }) => {
-      const startTime = ConvertTimeStringToDecimal(start);
-      const time = ConvertTimeStringToDecimal(end) - ConvertTimeStringToDecimal(start);
-      return (
-        <div
-          className={`booking  ${overlapIndex % 2 === 0 ? '' : 'light'}`}
-          style={{
-            width: `${100 / overlap}%`,
-            height: `${50 * time}px`,
-            top: `${50 * startTime}px`,
-            left: `${(100 / overlap) * overlapIndex}%`
-          }}>
-          <h3>{name}</h3>
-          <p>
-            {start} - {end}
-          </p>
-        </div>
-      );
-    });
+    const name = booking.jobId;
+    const { start, end, overlap, overlapIndex } = booking.time;
+    const startTime = ConvertTimeStringToDecimal(start);
+    console.log(start, end);
+    const time = ConvertTimeStringToDecimal(end) - ConvertTimeStringToDecimal(start);
+    return (
+      <div
+        className={`booking  ${overlapIndex % 2 === 0 ? '' : 'light'}`}
+        style={{
+          width: `${100 / overlap}%`,
+          height: `${50 * time}px`,
+          top: `${50 * startTime}px`,
+          left: `${(100 / overlap) * overlapIndex}%`
+        }}>
+        <h3>{name}</h3>
+        <p>
+          {start} - {end}
+        </p>
+      </div>
+    );
   }
 
   // I should be ashamed to even commit this function.
   function checkOverlap(jobs) {
+    console.log(jobs);
     // We start checking for overlaps by looping through each job
-    for (let i = 0; i < jobs.length; i++) {
+    for (let i = 0; i < jobs?.length; i++) {
       const { times } = jobs[i]; // get times array from job via destructuring
       // Now we loop through each time in the times array
-      times.forEach((time) => {
-        // this overlaps array is a dumb way to find out our overlap index
-        const overlaps = [];
-        // keep count of how many overlaps we have, start at 1 because it has to divide the actual width
-        // (you cant divide by 0!)
-        time.overlap = 1;
-        // This is the overlap index, it tells us where the booking should be placed horizontally
-        // (0 is the leftmost booking, 1 is the second leftmost booking, etc)
-        time.overlapIndex = 0;
-        // Convert start and end time strings to numbers, the function name doesn't lie
-        const startTime = ConvertTimeStringToDecimal(time.start);
-        const endTime = ConvertTimeStringToDecimal(time.end);
-        // Now we have to do a second loop to make sure this terribleness runs as badly as possible
-        for (let j = 0; j < jobs.length; j++) {
-          // no need to check ourselves, we know we cant overlap ourselves
-          if (i !== j) {
-            const { times: times2 } = jobs[j];
-            times2.forEach((time2) => {
-              // Loop through every other time than ours
-              // Convert start and end time strings to numbers, the function name doesn't lie part 2
-              const startTime2 = ConvertTimeStringToDecimal(time2.start);
-              const endTime2 = ConvertTimeStringToDecimal(time2.end);
-              // Our booking starts first or at the same time and but before or at the end time of the other booking
-              if (startTime >= startTime2 && startTime <= endTime2) {
-                // Increment overlap times since we got a match
-                time.overlap++;
-                // Grow the overlaps array
-                overlaps.push(0);
-              } else if (endTime > startTime2 && endTime <= endTime2) {
-                // The other booking starts before ours ends and ends later.
-                time.overlap++;
-                overlaps.push(0);
-              } else if (startTime2 >= startTime && startTime2 < endTime) {
-                // Still checking start times, yup
-                time.overlap++;
-                overlaps.push(0);
-              }
-            });
-          } else {
-            // instead we can now place ourselves in the overlap array
-            overlaps.push(1);
+      let time = jobs[i].time;
+
+      // this overlaps array is a dumb way to find out our overlap index
+      const overlaps = [];
+      // keep count of how many overlaps we have, start at 1 because it has to divide the actual width
+      // (you cant divide by 0!)
+      time.overlap = 1;
+      // This is the overlap index, it tells us where the booking should be placed horizontally
+      // (0 is the leftmost booking, 1 is the second leftmost booking, etc)
+      time.overlapIndex = 0;
+      // Convert start and end time strings to numbers, the function name doesn't lie
+      const startTime = ConvertTimeStringToDecimal(time.start);
+      const endTime = ConvertTimeStringToDecimal(time.end);
+      // Now we have to do a second loop to make sure this terribleness runs as badly as possible
+      for (let j = 0; j < jobs.length; j++) {
+        // no need to check ourselves, we know we cant overlap ourselves
+        if (i !== j) {
+          let time2 = jobs[j].time;
+
+          // Loop through every other time than ours
+          // Convert start and end time strings to numbers, the function name doesn't lie part 2
+          const startTime2 = ConvertTimeStringToDecimal(time2.start);
+          const endTime2 = ConvertTimeStringToDecimal(time2.end);
+          // Our booking starts first or at the same time and but before or at the end time of the other booking
+          if (startTime >= startTime2 && startTime <= endTime2) {
+            // Increment overlap times since we got a match
+            time.overlap++;
+            // Grow the overlaps array
+            overlaps.push(0);
+          } else if (endTime > startTime2 && endTime <= endTime2) {
+            // The other booking starts before ours ends and ends later.
+            time.overlap++;
+            overlaps.push(0);
+          } else if (startTime2 >= startTime && startTime2 < endTime) {
+            // Still checking start times, yup
+            time.overlap++;
+            overlaps.push(0);
           }
+        } else {
+          // instead we can now place ourselves in the overlap array
+          overlaps.push(1);
         }
-        // We can finally get the overlap index of this time
-        time.overlapIndex = overlaps.indexOf(1);
-      });
+      }
+      // We can finally get the overlap index of this time
+      time.overlapIndex = overlaps.indexOf(1);
     }
     return jobs;
   }
@@ -186,7 +224,7 @@ function Overview() {
           </div>
         ))}
         <div className="bookings">
-          {bookings.map((booking, index) => {
+          {bookings?.map((booking, index) => {
             return <Booking booking={booking} key={index} />;
           })}
         </div>

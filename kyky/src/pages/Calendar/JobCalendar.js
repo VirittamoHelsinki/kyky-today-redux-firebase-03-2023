@@ -47,6 +47,12 @@ export default function JobCalendar() {
   const [schedules, setSchedules] = useState([]);
   const [openedSchedules, setOpenedSchedules] = useState([]);
 
+  function getSchedules() {
+    const schedules = JSON.parse(localStorage.getItem(`${currentJob}_schedules`)) || [];
+    console.log(schedules);
+    setSchedules(schedules);
+  }
+
   useEffect(() => {
     setCurrentMonth(date.getMonth());
     setCurrentYear(date.getFullYear());
@@ -59,11 +65,11 @@ export default function JobCalendar() {
       firstDayOfMonth
     );
     setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 2);
+    getSchedules();
   }, [date]);
 
   useEffect(() => {
-    const schedules = JSON.parse(localStorage.getItem(`${currentJob}_schedules`)) || [];
-    setSchedules(schedules);
+    getSchedules();
   }, [currentJob]);
 
   useEffect(() => {

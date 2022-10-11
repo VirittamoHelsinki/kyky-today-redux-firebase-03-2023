@@ -87,6 +87,13 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
     if (mode === 'create') {
       const id = Math.random().toString(36).substring(2, 9); // generate random id
       const data = { ...properties, _id: id };
+      if (data.scheduleDuration.months) {
+        data.scheduleDuration.startDate = new Date();
+        data.scheduleDuration.endDate = new Date();
+        data.scheduleDuration.endDate.setMonth(
+          data.scheduleDuration.endDate.getMonth() + data.scheduleDuration.months
+        );
+      }
 
       if (schedules) {
         schedules.push(properties);
