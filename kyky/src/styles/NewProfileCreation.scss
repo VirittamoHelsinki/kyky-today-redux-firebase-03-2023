@@ -5,8 +5,8 @@ h1 {
 }
 h3 {
   font-size: 20px;
-  font-family: "Poppins";
-  color:#00a088;
+  font-family: 'Poppins';
+  color: #00a088;
 }
 h4 {
   font-family: 'Poppins';
@@ -17,8 +17,8 @@ p {
 label {
   font-family: 'Poppins';
 }
-input{
-  font-family: "Roboto";
+input {
+  font-family: 'Roboto';
 }
 .mainContainer1 {
   display: flex;
@@ -339,7 +339,9 @@ input{
       align-self: center;
     }
 
-    .select-container {flex-basis: 75%;}
+    .select-container {
+      flex-basis: 75%;
+    }
   }
 
   h3,
@@ -420,7 +422,6 @@ input{
     justify-content: space-evenly;
     height: 550px;
     width: 450px;
-  
 
     position: relative;
     left: 100px;
@@ -446,7 +447,7 @@ input{
       border-radius: 5px;
       border: 1px solid #636232;
       position: relative;
-      
+
       text-align: center;
     }
     .select-container3 {
@@ -460,24 +461,22 @@ input{
     }
   }
 }
-.zipCode{
+.zipCode {
   display: flex;
   flex-direction: column;
   height: 80px;
   justify-content: space-between;
-  position:relative;
+  position: relative;
   bottom: 95px;
   left: 270px;
 }
-.phoneContainer{
-  height:150px;
+.phoneContainer {
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position:relative;
+  position: relative;
   bottom: 80px;
- 
-  
 }
 .addPhotoContainer {
   height: 500px;
@@ -492,7 +491,7 @@ input{
   background-color: white;
   position: relative;
   bottom: 400px;
-  left:100px;
+  left: 100px;
   z-index: 10;
   .addPhotoTxtContainer {
     height: 350px;
@@ -537,19 +536,41 @@ input{
   }
 }
 
-  
+.previewContainer2 {
+  height:fit-content;
+  width: 800px;
+  border: 1px solid black;
+  padding: 50px 50px 80px 50px;
+  gap: 50px;
+  .skillContainer {
+    display: flex;
+    width: 800px;
+    
+    .skill {
+      display: flex;
+      height: fit-content;
+      width: fit-content;
+      border-radius: 13px;
+      margin: 20px;
+      padding: 10px 20px 10px 20px;
+      background-color: #063831;
+      color: #ffffff;
+    }
+  }
+}
 
- .previewContainer3, .previewContainer4{
+.previewContainer3,
+.previewContainer4 {
   display: flex;
   flex-direction: column;
   height: fit-content;
   width: 800px;
   border: 1px solid black;
-  margin: 20px;
   padding: 50px 50px 80px 50px;
- gap: 50px;
-  p{
+  gap: 50px;
+  p {
     text-align: start;
+    color: black;
+    opacity: 0.7;
   }
- } 
-
+}
