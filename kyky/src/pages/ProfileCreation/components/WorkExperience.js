@@ -54,6 +54,8 @@ export default function WorkExperience({ setSaved }) {
         <Select placeholder="Month" className="dateSelect" options={months}></Select>
         <Select placeholder="Year" className="dateSelect"></Select>
       </div>
+      <div className="description">Description</div>
+      <textarea className="descriptionArea"></textarea>
       <button type="button" className="saveButton" onClick={() => setSaved(true)}>
         Save
       </button>

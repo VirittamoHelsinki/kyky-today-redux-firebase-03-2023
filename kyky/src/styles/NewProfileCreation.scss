@@ -203,7 +203,7 @@ input {
     background-color: white;
     height: fit-content;
     width: 700px;
-
+    column-gap: 20px;
     border: 1px solid #387a70;
     border-radius: 10px;
     box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.25);
@@ -271,6 +271,11 @@ input {
       position: relative;
       left: 200px;
     }
+  }
+  .descriptionArea {
+    resize: vertical;
+    border-radius: 7px;
+    border: 1px solid #00a088;
   }
   .monthYearContainer {
     display: flex;
