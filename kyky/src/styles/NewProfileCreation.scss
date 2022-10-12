@@ -1,5 +1,5 @@
 @use '_utilities' as *;
-$box-padding: 50px 50px 80px 50px;
+$box-padding: 30px 30px 60px 30px;
 $box-border: 1px solid rgb(0, 0, 0, 0.4);
 h1 {
   font-weight: 300;
@@ -189,39 +189,51 @@ input {
     margin: 10px;
     font-weight: 700;
     font-size: 1.25rem;
-    border: 0.25rem solid black;
+    border: 0.25rem solid #00a088;
+    color: #00a088;
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background-color: #387a70;
+    background-color: #ffffff;
   }
   .workContainer,
   .educationContainer {
     font-family: 'Inter';
     display: flex;
     background-color: white;
-    height: 500px;
+    height: fit-content;
     width: 700px;
+
     border: 1px solid #387a70;
     border-radius: 10px;
     box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.25);
     flex-direction: column;
-    padding-left: 100px;
-    padding-top: 20px;
+    padding: 30px;
     z-index: 11;
 
-    justify-content: space-around;
+    justify-content: space-evenly;
     position: relative;
     bottom: 600px;
     left: 100px;
+
+    .countryLabel {
+      position: relative;
+
+      left: 280px;
+      bottom: 62px;
+    }
   }
 
   .inputLong {
     display: flex;
     flex-direction: column;
 
-    height: 40px;
     width: 400px;
+    input {
+      height: 35px;
+      border: 1px solid rgb(156, 151, 151);
+      border-radius: 5px;
+    }
     label {
       padding-bottom: 10px;
       background: none;
@@ -233,6 +245,11 @@ input {
     flex-direction: column;
     height: fit-content;
     width: 200px;
+    input {
+      height: 35px;
+      border: 1px solid rgb(156, 151, 151);
+      border-radius: 5px;
+    }
     label {
       padding-bottom: 5px;
       background: none;
@@ -245,10 +262,27 @@ input {
     height: 10px;
     width: 200px;
 
-    left: 285px;
-    bottom: 70px;
+    left: 280px;
+    bottom: 60px;
   }
-
+  .dateContainer {
+    display: flex;
+    .endDateLabel {
+      position: relative;
+      left: 200px;
+    }
+  }
+  .monthYearContainer {
+    display: flex;
+    height: auto;
+    width: 600px;
+    justify-content: space-between;
+  }
+  .dateSelect {
+    display: flex;
+    height: auto;
+    width: 120px;
+  }
   .saveButton {
     font-family: 'Inter';
     font-size: 16px;
@@ -494,9 +528,9 @@ input {
   align-items: center;
   justify-content: space-around;
   background-color: white;
-  position: relative;
-  bottom: 400px;
-  left: 100px;
+  position: fixed;
+  bottom: 100px;
+  left: 700px;
   z-index: 10;
   .addPhotoTxtContainer {
     height: 350px;
@@ -546,6 +580,7 @@ input {
   height: fit-content;
   width: 800px;
   margin: 30px 0px 60px 0px;
+  z-index: 4;
   h2 {
     font-family: 'Poppins';
     font-size: 20px;
@@ -580,20 +615,16 @@ input {
     }
   }
   .jobTextArea {
+    font-family: 'Poppins';
     display: flex;
     height: 200px;
     width: 450px;
+    padding: 10px;
     position: relative;
     bottom: 180px;
     left: 235px;
   }
   .firstNameLastName {
-    display: flex;
-  }
-
-  .hourlyPriceContainer,
-  .jobTitleContainer,
-  .gpsLocation {
     display: flex;
   }
 
@@ -622,6 +653,11 @@ input {
   border: $box-border;
   padding: $box-padding;
   gap: 50px;
+  .picIcon {
+    position: relative;
+    bottom: 38px;
+    left: 600px;
+  }
   .skillContainer {
     display: flex;
     width: 800px;
@@ -645,9 +681,14 @@ input {
   flex-direction: column;
   height: fit-content;
   width: 800px;
-  border: 1px solid black;
+  border: $box-border;
   padding: 50px 50px 80px 50px;
   gap: 50px;
+  .picIcon {
+    position: relative;
+    bottom: 92px;
+    left: 578px;
+  }
   p {
     text-align: start;
     color: black;

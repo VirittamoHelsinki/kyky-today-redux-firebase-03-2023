@@ -1,17 +1,28 @@
 import '../../../styles/NewProfileCreation.scss';
+import '../../../styles/_components.scss';
 import { ReactComponent as Pen } from '../../../image/pen.svg';
 import { ReactComponent as Gps } from '../../../image/gps.svg';
 import { ReactComponent as ProfileIcon2 } from '../../../image/profileicon2.svg';
-import React from 'react';
+import React, { useState } from 'react';
+import AddPhoto from './AddPhoto';
 
 export default function Step8(currentStep) {
+  const [upload, setUpload] = useState('');
+  const [saved, setSaved] = useState(true);
+
+  const addPhoto = () => {
+    setSaved(false);
+    setUpload(<AddPhoto setSaved={setSaved} />);
+    console.log(true);
+  };
+
   return (
     <div className="step step8">
       <div className="previewMainContainer">
         <div className="previewContainer1">
           <div className="editPhotoButtonContainer">
             <ProfileIcon2 />
-            <button className="editPhotoButton">
+            <button className="editPhotoButton" onClick={addPhoto}>
               <Pen />
               Edit Photo
             </button>
@@ -37,6 +48,7 @@ export default function Step8(currentStep) {
         </div>
         <div className="previewContainer2">
           <h3>Skills</h3>
+          <button className="picIcon">+</button>
           <div className="skillContainer">
             <div className="skill Html">HTML5</div>
             <div className="skill Css">CSS 3</div>
@@ -47,13 +59,17 @@ export default function Step8(currentStep) {
         <div className="previewContainer3">
           {' '}
           <h3>Work Experience</h3>
+          <button className="picIcon">+</button>
           <p>No items to display.</p>
         </div>
         <div className="previewContainer4">
           <h3>Education History</h3>
+          <button className="picIcon">+</button>
           <p>No items to display.</p>
         </div>
-      </div>
+        {!saved && <div className="dim3"></div>}
+        {!saved && upload}
+      </div>{' '}
     </div>
   );
 }
