@@ -116,6 +116,7 @@ function Overview() {
   function ConvertTimeStringToDecimal(time) {
     if (!time) return 0;
     const timeArray = time.split(':');
+    console.log(parseFloat(timeArray[0]) + parseFloat(timeArray[1]) / 60);
     return parseFloat(timeArray[0]) + parseFloat(timeArray[1]) / 60;
   }
 
@@ -126,6 +127,7 @@ function Overview() {
     const { start, end, overlap, overlapIndex } = booking.time;
     const startTime = ConvertTimeStringToDecimal(start);
     const time = ConvertTimeStringToDecimal(end) - ConvertTimeStringToDecimal(start);
+    console.log(booking);
     return (
       <div
         className={`booking  ${overlapIndex % 2 === 0 ? '' : 'light'}`}
@@ -147,6 +149,9 @@ function Overview() {
   function checkOverlap(jobs) {
     // We start checking for overlaps by looping through each job
     for (let i = 0; i < jobs?.length; i++) {
+      console.log(jobs[i]);
+      if (!checkWeekdaySchedule(jobs[i], weekDaysArray[date.getDay()])) continue;
+      console.log(jobs[i].jobId);
       // Get start end time of the job
       let time = jobs[i].time;
 
@@ -165,6 +170,7 @@ function Overview() {
       for (let j = 0; j < jobs.length; j++) {
         // no need to check ourselves, we know we cant overlap ourselves
         if (i !== j) {
+          if (!checkWeekdaySchedule(jobs[j], weekDaysArray[date.getDay()])) continue;
           let time2 = jobs[j].time;
 
           // Loop through every other time than ours
@@ -228,7 +234,9 @@ function Overview() {
         ))}
         <div className="bookings">
           {bookings?.map((booking, index) => {
-            return <Booking booking={booking} key={index} />;
+            if (checkWeekdaySchedule(booking, weekDaysArray[date.getDay()])) {
+              return <Booking booking={booking} key={index} />;
+            } else return null;
           })}
         </div>
       </div>
