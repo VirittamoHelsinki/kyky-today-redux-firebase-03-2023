@@ -521,6 +521,10 @@ form {
         align-items: center;
         user-select: none;
 
+        &.highlight {
+          background: $kyky-primary-lighter;
+        }
+
         &:hover {
           filter: brightness(125%);
           box-sizing: border-box;
@@ -614,6 +618,7 @@ form {
   height: 100vh;
   z-index: 5;
 }
+
 .dim3 {
   background: black;
   opacity: 0.2;
