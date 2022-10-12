@@ -36,6 +36,7 @@ const times = [
 ];
 
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const weekDaysArray = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']; // americans..
 
 function Overview() {
   const [setSelectedWindow] = useOutletContext();
@@ -71,7 +72,12 @@ function Overview() {
     let { startDate: start, endDate: end } = schedule.scheduleDuration;
     start = new Date(start).setHours(0, 0, 0, 0);
     end = new Date(end).setHours(0, 0, 0, 0);
-    return start <= date.getTime() && end >= date.getTime();
+    let result = start <= date.getTime() && end >= date.getTime();
+    return result;
+  }
+
+  function checkWeekdaySchedule(schedule, weekDay) {
+    return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
   }
 
   useEffect(() => {
@@ -119,7 +125,6 @@ function Overview() {
     const name = booking.jobId;
     const { start, end, overlap, overlapIndex } = booking.time;
     const startTime = ConvertTimeStringToDecimal(start);
-    console.log(start, end);
     const time = ConvertTimeStringToDecimal(end) - ConvertTimeStringToDecimal(start);
     return (
       <div
@@ -140,11 +145,9 @@ function Overview() {
 
   // I should be ashamed to even commit this function.
   function checkOverlap(jobs) {
-    console.log(jobs);
     // We start checking for overlaps by looping through each job
     for (let i = 0; i < jobs?.length; i++) {
-      const { times } = jobs[i]; // get times array from job via destructuring
-      // Now we loop through each time in the times array
+      // Get start end time of the job
       let time = jobs[i].time;
 
       // this overlaps array is a dumb way to find out our overlap index
@@ -197,14 +200,14 @@ function Overview() {
   return (
     <main className="job-calendar-overview">
       <div className="side-bar">
-        <Calendar date={date} setDate={setDate} />
+        <Calendar date={date} setDate={setDate} schedule={bookings} />
         <div className="bookings-short">
           <p>
             <strong>{weekDays[date.getDay()]}</strong> {date.toLocaleDateString('fi-fi')}
           </p>
-          {allJobs.map((job) => {
+          {allJobs.map((job, index) => {
             return (
-              <div className="job-short">
+              <div className="job-short" key={job.job + index}>
                 <p className="title">{job.job}</p>
                 <div className="time">
                   <i className="material-icons">calendar_month</i>
