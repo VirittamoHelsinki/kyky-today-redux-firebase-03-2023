@@ -43,6 +43,7 @@ function Overview() {
   const [date, setDate] = useState(new Date());
   const [bookings, setBookings] = useState([]);
   const [allJobs, setAllJobs] = useState([]);
+  const [daysWithJobs, setDaysWithJobs] = useState([]);
 
   // This might not be used after all
   function compareDates(date1, date2, options) {
@@ -100,12 +101,22 @@ function Overview() {
       const all_jobs = [];
       jobs?.forEach((job) => {
         let time = job.time;
-
         all_jobs.push({ start: time.start, end: time.end, job: job.jobId });
       });
       all_jobs.sort((a, b) => {
         return a.start - b.start;
       });
+      // FIXME - this doesn't work
+      // This does not check if the schedule is active, just what weekdays it is active on
+      const highlightDays = [];
+      jobs.forEach((job) => {
+        job.recurring.forEach((day) => {
+          if (highlightDays.indexOf(day) === -1) {
+            highlightDays.push(day);
+          }
+        });
+      });
+      setDaysWithJobs(highlightDays);
       setAllJobs(all_jobs);
       setBookings(jobs);
     } else {
@@ -116,7 +127,6 @@ function Overview() {
   function ConvertTimeStringToDecimal(time) {
     if (!time) return 0;
     const timeArray = time.split(':');
-    console.log(parseFloat(timeArray[0]) + parseFloat(timeArray[1]) / 60);
     return parseFloat(timeArray[0]) + parseFloat(timeArray[1]) / 60;
   }
 
@@ -127,7 +137,6 @@ function Overview() {
     const { start, end, overlap, overlapIndex } = booking.time;
     const startTime = ConvertTimeStringToDecimal(start);
     const time = ConvertTimeStringToDecimal(end) - ConvertTimeStringToDecimal(start);
-    console.log(booking);
     return (
       <div
         className={`booking  ${overlapIndex % 2 === 0 ? '' : 'light'}`}
@@ -149,9 +158,7 @@ function Overview() {
   function checkOverlap(jobs) {
     // We start checking for overlaps by looping through each job
     for (let i = 0; i < jobs?.length; i++) {
-      console.log(jobs[i]);
       if (!checkWeekdaySchedule(jobs[i], weekDaysArray[date.getDay()])) continue;
-      console.log(jobs[i].jobId);
       // Get start end time of the job
       let time = jobs[i].time;
 
@@ -200,13 +207,14 @@ function Overview() {
       // We can finally get the overlap index of this time
       time.overlapIndex = overlaps.indexOf(1);
     }
+
     return jobs;
   }
 
   return (
     <main className="job-calendar-overview">
       <div className="side-bar">
-        <Calendar date={date} setDate={setDate} schedule={bookings} />
+        <Calendar date={date} setDate={setDate} highlightWeekDays={daysWithJobs} />
         <div className="bookings-short">
           <p>
             <strong>{weekDays[date.getDay()]}</strong> {date.toLocaleDateString('fi-fi')}

@@ -16,7 +16,14 @@ const months = [
 ];
 const weekDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
-export default function Calendar({ date, setDate, minYears = 5, maxYears = 50, locale = 'fi' }) {
+export default function Calendar({
+  date,
+  setDate,
+  minYears = 5,
+  maxYears = 50,
+  locale = 'fi',
+  highlightWeekDays = []
+}) {
   const [days, setDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(date.getMonth());
@@ -99,6 +106,7 @@ export default function Calendar({ date, setDate, minYears = 5, maxYears = 50, l
     }
     return days;
   }
+  console.log(highlightWeekDays);
 
   // Messy as hell, but it works (for now)
   function getDaysToDisplay(year, month) {
@@ -115,6 +123,7 @@ export default function Calendar({ date, setDate, minYears = 5, maxYears = 50, l
       } else if (i + 1 < numberOfDays + firstDayOfMonth) {
         daysTotal[i] = {
           day: i + 2 - firstDayOfMonth,
+          weekDay: weekDays[i % 7],
           isCurrentMonth: true
         };
       } else {
@@ -192,7 +201,7 @@ export default function Calendar({ date, setDate, minYears = 5, maxYears = 50, l
               key={`day-${index}`}
               className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
                 !day.isCurrentMonth ? 'disabled' : ''
-              }`}
+              }${highlightWeekDays.includes(day.weekDay) ? ' highlight' : ''}`}
               onClick={() => setSelectedDay(index)}>
               {day.day}
             </div>
