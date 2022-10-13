@@ -114,16 +114,16 @@ function Overview() {
       // FIXME - this doesn't work
       // This does not check if the schedule is active, just what weekdays it is active on
       const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
-      //console.log(allDaysOfMonth);
-      const highlightDays = [];
-      jobs.forEach((job) => {
-        job.recurring.forEach((day) => {
-          if (highlightDays.indexOf(day) === -1) {
-            highlightDays.push(day);
-          }
+      const daysToHighlight = [];
+      allDaysOfMonth.forEach((day) => {
+        const dayOfWeek = day.getDay();
+        const dayOfWeekString = weekDaysArray[dayOfWeek];
+        const schedules = data.filter((schedule) => {
+          return checkWeekdaySchedule(schedule, dayOfWeekString);
         });
+        daysToHighlight.push({ day, highlight: schedules.length > 0 });
       });
-      setDaysWithJobs(highlightDays);
+      setDaysWithJobs(daysToHighlight);
       setAllJobs(all_jobs);
       setBookings(jobs);
     } else {
@@ -221,7 +221,7 @@ function Overview() {
   return (
     <main className="job-calendar-overview">
       <div className="side-bar">
-        <Calendar date={date} setDate={setDate} highlightWeekDays={daysWithJobs} />
+        <Calendar date={date} setDate={setDate} highlightDays={daysWithJobs} />
         <div className="bookings-short">
           <p>
             <strong>{weekDays[date.getDay()]}</strong> {date.toLocaleDateString('fi-fi')}

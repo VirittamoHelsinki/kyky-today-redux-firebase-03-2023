@@ -22,7 +22,7 @@ export default function Calendar({
   minYears = 5,
   maxYears = 50,
   locale = 'fi',
-  highlightWeekDays = []
+  highlightDays = []
 }) {
   const [days, setDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -211,16 +211,21 @@ export default function Calendar({
       </div>
       <div className="calendar-body">
         <div className="calendar-days">
-          {days.map((day, index) => (
-            <div
-              key={`day-${index}`}
-              className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
-                day.getMonth() !== date.getMonth() ? 'disabled' : ''
-              }${highlightWeekDays.includes(day.weekDay) ? ' highlight' : ''}`}
-              onClick={() => setSelectedDay(index)}>
-              {day.getDate()}
-            </div>
-          ))}
+          {days.map((day, index) => {
+            console.log(highlightDays);
+            const isCurrentMonth = day.getMonth() === currentMonth;
+            const highlight = isCurrentMonth && highlightDays[day.getDate() - 1]?.highlight;
+            return (
+              <div
+                key={`day-${index}`}
+                className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
+                  !isCurrentMonth ? 'disabled' : ''
+                }${highlight ? ' highlight' : ''}`}
+                onClick={() => setSelectedDay(index)}>
+                {day.getDate()}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
