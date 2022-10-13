@@ -45,30 +45,6 @@ function Overview() {
   const [allJobs, setAllJobs] = useState([]);
   const [daysWithJobs, setDaysWithJobs] = useState([]);
 
-  // This might not be used after all
-  function compareDates(date1, date2, options) {
-    if (options?.matchOnlyYear) {
-      return date1.getFullYear() === date2.getFullYear();
-    }
-
-    if (options?.matchOnlyMonth) {
-      return date1.getMonth() === date2.getMonth();
-    }
-
-    if (date1.getFullYear() === date2.getFullYear()) {
-      if (options?.dontMatchDay) {
-        return date1.getMonth() === date2.getMonth();
-      }
-      if (date1.getMonth() === date2.getMonth()) {
-        if (options?.preciseDate) {
-          return date1.getDate() === date2.getDate();
-        } else {
-          return date1.getDate() >= date2.getDate();
-        }
-      }
-    }
-  }
-
   function checkSchedule(schedule) {
     let { startDate: start, endDate: end } = schedule.scheduleDuration;
     start = new Date(start).setHours(0, 0, 0, 0);

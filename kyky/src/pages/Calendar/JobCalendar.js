@@ -34,6 +34,7 @@ const weekDaysHeader = [
   'Saturday',
   'Sunday'
 ];
+const weekDaysArray = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
 export default function JobCalendar() {
   const [setSelectedWindow, setEditing, setScheduleWindow] = useOutletContext();
@@ -46,12 +47,30 @@ export default function JobCalendar() {
   const [currentJob, setCurrentJob] = useState('babysitting');
   const [schedules, setSchedules] = useState([]);
   const [openedSchedules, setOpenedSchedules] = useState([]);
+  const [highlightDays, setHighlightDays] = useState([]);
 
   function getSchedules() {
     const schedules = JSON.parse(localStorage.getItem(`${currentJob}_schedules`)) || [];
-    console.log(schedules);
     setSchedules(schedules);
   }
+
+  function checkWeekdaySchedule(schedule, weekDay) {
+    return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
+  }
+
+  useEffect(() => {
+    const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
+    const daysToHighlight = [];
+    allDaysOfMonth.forEach((day) => {
+      const dayOfWeek = day.getDay();
+      const dayOfWeekString = weekDaysArray[dayOfWeek];
+      const _schedules = schedules.filter((schedule) => {
+        return checkWeekdaySchedule(schedule, dayOfWeekString);
+      });
+      daysToHighlight.push({ day, highlight: _schedules.length > 0 });
+    });
+    setHighlightDays(daysToHighlight);
+  }, [schedules]);
 
   useEffect(() => {
     setCurrentMonth(date.getMonth());
@@ -103,37 +122,37 @@ export default function JobCalendar() {
 
   function getLastDaysOfPreviousMonth(year, month, howManyDays) {
     const days = [];
-    const lastDayOfPreviousMonth = new Date(year, month, 0).getDate();
-    for (let i = lastDayOfPreviousMonth - howManyDays + 1; i <= lastDayOfPreviousMonth; i++) {
-      days.push(i);
+    const lastDayOfPreviousMonth = new Date(year, month + 1, 0).getDate();
+    for (let i = lastDayOfPreviousMonth - howManyDays; i < lastDayOfPreviousMonth; i++) {
+      days.push(new Date(year, month, i + 1));
     }
     return days;
   }
 
+  function getTrueDay(date) {
+    let day = date.getDay();
+    if (day === 0) return 6;
+    return day - 1;
+  }
+
+  function getDaysInMonthAsArray(year, month) {
+    const lastDay = new Date(year, month + 1, 0).getDate();
+    return new Array(lastDay).fill(0).map((_, i) => new Date(year, month, i + 1));
+  }
+
   function getDaysToDisplay(year, month) {
-    const numberOfDays = getDaysInMonth(year, month);
-    const firstDayOfMonth = getFirstDayOfMonth(year, month);
+    // Get the first day of the month
+    const firstDayOfMonth = getTrueDay(new Date(year, month, 1));
+
+    // Get list of the last days in the previous month (to fill the first row)
     const lastDaysOfPreviousMonth = getLastDaysOfPreviousMonth(year, month - 1, firstDayOfMonth);
-    const daysTotal = Array(35).fill({ day: -1, isCurrentMonth: false });
-    daysTotal.forEach((_, i) => {
-      if (i + 1 < firstDayOfMonth) {
-        daysTotal[i] = {
-          day: lastDaysOfPreviousMonth[i + 1],
-          isCurrentMonth: false
-        };
-      } else if (i + 1 < numberOfDays + firstDayOfMonth) {
-        daysTotal[i] = {
-          day: i + 2 - firstDayOfMonth,
-          isCurrentMonth: true
-        };
-      } else {
-        daysTotal[i] = {
-          day: i + 2 - firstDayOfMonth - numberOfDays,
-          isCurrentMonth: false
-        };
-      }
-    });
-    return daysTotal;
+
+    // Get the bulk of the days in the current month
+    const daysInMonth = getDaysInMonthAsArray(year, month);
+
+    // Merge first row with the bulk of the days
+    let days = [...lastDaysOfPreviousMonth, ...daysInMonth];
+    return days;
   }
 
   useEffect(() => {
@@ -215,17 +234,18 @@ export default function JobCalendar() {
           <div className="job-calendar">
             <div className="calendar-days">
               {days.map((day, index) => {
-                const disabled = !day.isCurrentMonth || day.day < new Date().getDate();
+                const isCurrentMonth = day.getMonth() === date.getMonth();
+                const disabled = !isCurrentMonth || day.getDate() < new Date().getDate();
                 /* Convoluted mess, just makes totally sure to display current day correctly */
                 const curr =
-                  day.isCurrentMonth &&
-                  day.day === new Date().getDate() &&
+                  isCurrentMonth &&
+                  day.getDate() === new Date().getDate() &&
                   date.getMonth() === new Date().getMonth() &&
                   date.getFullYear() === new Date().getFullYear();
                 const activitiesToday = activities.filter(
                   (activity) =>
                     new Date(activity.date).toISOString().slice(0, 10) ===
-                      new Date(date.getFullYear(), date.getMonth(), day.day + 1)
+                      new Date(date.getFullYear(), date.getMonth(), day.getDate())
                         .toISOString()
                         .slice(0, 10) && activity.jobId === currentJob
                 );
@@ -236,14 +256,14 @@ export default function JobCalendar() {
                     key={`day-${index}`}
                     className={`calendar-day${selectedDay === index ? ' selected' : ''}${
                       disabled ? ' disabled' : ''
-                    }`}
+                    }${highlightDays[day.getDate()]?.highlight ? ' highlight' : ''}`}
                     onClick={() => {
                       if (!disabled) {
                         setSelectedDay(index);
                         setCurrentActivities(activitiesToday);
                       }
                     }}>
-                    <span className={`date${curr ? ' current' : ''}`}>{day.day}</span>
+                    <span className={`date${curr ? ' current' : ''}`}>{day.getDate()}</span>
                     {activitiesToday.length > 0 && (
                       <div className="activities">
                         {confirmed.length > 0 && (

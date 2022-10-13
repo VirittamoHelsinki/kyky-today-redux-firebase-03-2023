@@ -126,7 +126,6 @@ export default function Calendar({
     return days;
   }
 
-  // Messy as hell, but it works (for now)
   function getDaysToDisplay(year, month) {
     // Get the first day of the month
     const firstDayOfMonth = getTrueDay(new Date(year, month, 1));
@@ -212,7 +211,6 @@ export default function Calendar({
       <div className="calendar-body">
         <div className="calendar-days">
           {days.map((day, index) => {
-            console.log(highlightDays);
             const isCurrentMonth = day.getMonth() === currentMonth;
             const highlight = isCurrentMonth && highlightDays[day.getDate() - 1]?.highlight;
             return (
