@@ -105,15 +105,15 @@ export default function Calendar({
 
   function getTrueDay(date) {
     let day = date.getDay();
-    if (day === 0) return 7;
+    if (day === 0) return 6;
     return day - 1;
   }
 
   function getLastDaysOfPreviousMonth(year, month, howManyDays) {
     const days = [];
-    const lastDayOfPreviousMonth = new Date(year, month, 0).getDate();
+    const lastDayOfPreviousMonth = new Date(year, month + 1, 0).getDate();
     for (let i = lastDayOfPreviousMonth - howManyDays; i < lastDayOfPreviousMonth; i++) {
-      days.push(new Date(year, month, i));
+      days.push(new Date(year, month, i + 1));
     }
     return days;
   }
@@ -128,34 +128,26 @@ export default function Calendar({
 
   // Messy as hell, but it works (for now)
   function getDaysToDisplay(year, month) {
-    // const numberOfDays = getDaysInMonth(year, month);
+    // Get the first day of the month
     const firstDayOfMonth = getTrueDay(new Date(year, month, 1));
+
+    // Get list of the last days in the previous month (to fill the first row)
     const lastDaysOfPreviousMonth = getLastDaysOfPreviousMonth(year, month - 1, firstDayOfMonth);
-    // const daysTotal = Array(42).fill({ day: -1, isCurrentMonth: false });
+
+    // Get the bulk of the days in the current month
     const daysInMonth = getDaysInMonthAsArray(year, month);
+
+    // Merge first row with the bulk of the days
     let days = [...lastDaysOfPreviousMonth, ...daysInMonth];
+
+    // Calculate how many days are needed to fill the last row
     const daysFromNextMonth = 42 - days.length;
+
+    // Get the first days of the next month (to fill the last row)
     const firstDaysOfNextMonth = getFirstDaysOfNextMonth(year, month + 1, daysFromNextMonth);
+
+    // Merge the last row with the bulk of the days
     days = [...days, ...firstDaysOfNextMonth];
-    // daysTotal.forEach((_, i) => {
-    //   if (i + 1 < firstDayOfMonth) {
-    //     daysTotal[i] = {
-    //       day: 21,
-    //       isCurrentMonth: false
-    //     };
-    //   } else if (i + 1 < numberOfDays + firstDayOfMonth) {
-    //     daysTotal[i] = {
-    //       day: i + 2 - firstDayOfMonth,
-    //       weekDay: weekDays[i % 7],
-    //       isCurrentMonth: true
-    //     };
-    //   } else {
-    //     daysTotal[i] = {
-    //       day: i + 2 - firstDayOfMonth - numberOfDays,
-    //       isCurrentMonth: false
-    //     };
-    //   }
-    // });
     return days;
   }
 
