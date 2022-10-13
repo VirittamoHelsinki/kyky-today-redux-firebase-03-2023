@@ -105,14 +105,13 @@ function Overview() {
       const jobs = checkOverlap(data);
       const all_jobs = [];
       jobs?.forEach((job) => {
+        if (!checkWeekdaySchedule(job, weekDaysArray[date.getDay()])) return;
         let time = job.time;
         all_jobs.push({ start: time.start, end: time.end, job: job.jobId });
       });
       all_jobs.sort((a, b) => {
         return a.start - b.start;
       });
-      // FIXME - this doesn't work
-      // This does not check if the schedule is active, just what weekdays it is active on
       const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
       const daysToHighlight = [];
       allDaysOfMonth.forEach((day) => {

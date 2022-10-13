@@ -27,7 +27,11 @@ export default function ManageSchedules() {
     const confirm = window.confirm('Are you sure you want to delete this schedule?');
     if (confirm) {
       storage.splice(index, 1);
-      localStorage.setItem(`${schedule.jobId}_schedules`, JSON.stringify(storage));
+      if (storage.length === 0) {
+        localStorage.removeItem(`${schedule.jobId}_schedules`);
+      } else {
+        localStorage.setItem(`${schedule.jobId}_schedules`, JSON.stringify(storage));
+      }
       setSchedules((prev) => {
         const newSchedules = { ...prev };
         delete newSchedules[schedule._id];

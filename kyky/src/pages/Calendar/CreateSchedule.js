@@ -111,6 +111,22 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
     }
   }
 
+  function deleteSchedule(schedule) {
+    const storage = JSON.parse(localStorage.getItem(`${schedule.jobId}_schedules`));
+    const index = storage.findIndex((item) => item._id === schedule._id) || 0;
+    const confirm = window.confirm('Are you sure you want to delete this schedule?');
+    if (confirm) {
+      storage.splice(index, 1);
+      setScheduleWindow(false);
+      if (storage.length === 0) {
+        localStorage.removeItem(`${schedule.jobId}_schedules`);
+      } else {
+        localStorage.setItem(`${schedule.jobId}_schedules`, JSON.stringify(storage));
+      }
+      window.location.reload();
+    }
+  }
+
   return (
     <main className="create-schedule">
       <div className="create-schedule__progression">
@@ -164,6 +180,11 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
               setScheduleWindow(false);
             }}>
             Submit<i className="material-icons-outlined">done</i>
+          </Button>
+        )}
+        {editing && (
+          <Button className="delete" onClick={() => deleteSchedule(properties)}>
+            Delete Schedule<i className="material-icons">delete_forever</i>
           </Button>
         )}
       </div>
