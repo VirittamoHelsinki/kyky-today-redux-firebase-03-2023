@@ -215,7 +215,9 @@ input {
     position: relative;
     bottom: 600px;
     left: 100px;
-
+    h3{
+      margin-bottom: 20px;
+    }
     .countryLabel {
       position: relative;
 
@@ -223,11 +225,13 @@ input {
       bottom: 62px;
     }
   }
-
+.workCheck{
+  margin-bottom: 30px;
+}
   .inputLong {
     display: flex;
     flex-direction: column;
-
+    margin-bottom: 30px;
     width: 400px;
     input {
       height: 35px;
@@ -270,12 +274,17 @@ input {
     .endDateLabel {
       position: relative;
       left: 200px;
+      margin-bottom: 10px;
     }
   }
   .descriptionArea {
     resize: vertical;
+    height: 140px;
+    padding: 10px;
     border-radius: 7px;
     border: 1px solid #00a088;
+    margin-top: 10px;
+    margin-bottom:  30px;
   }
   .monthYearContainer {
     display: flex;
@@ -287,6 +296,7 @@ input {
     display: flex;
     height: auto;
     width: 120px;
+    margin-bottom: 30px;
   }
   .saveButton {
     font-family: 'Inter';
