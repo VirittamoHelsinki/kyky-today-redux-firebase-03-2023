@@ -81,6 +81,11 @@ function Overview() {
     return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
   }
 
+  function getDaysInMonthAsArray(year, month) {
+    const lastDay = new Date(year, month + 1, 0).getDate();
+    return new Array(lastDay).fill(0).map((_, i) => new Date(year, month, i + 1));
+  }
+
   useEffect(() => {
     setSelectedWindow('overview');
   }, []);
@@ -108,6 +113,8 @@ function Overview() {
       });
       // FIXME - this doesn't work
       // This does not check if the schedule is active, just what weekdays it is active on
+      const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
+      //console.log(allDaysOfMonth);
       const highlightDays = [];
       jobs.forEach((job) => {
         job.recurring.forEach((day) => {

@@ -94,46 +94,69 @@ export default function Calendar({
     return new Date(year, month, 1).getDay();
   }
 
+  function getDaysInMonthAsArray(year, month) {
+    const lastDay = new Date(year, month + 1, 0).getDate();
+    return new Array(lastDay).fill(0).map((_, i) => new Date(year, month, i + 1));
+  }
+
   function getDaysInMonth(year, month) {
     return 32 - new Date(year, month, 32).getDate();
+  }
+
+  function getTrueDay(date) {
+    let day = date.getDay();
+    if (day === 0) return 7;
+    return day - 1;
   }
 
   function getLastDaysOfPreviousMonth(year, month, howManyDays) {
     const days = [];
     const lastDayOfPreviousMonth = new Date(year, month, 0).getDate();
-    for (let i = lastDayOfPreviousMonth - howManyDays + 1; i <= lastDayOfPreviousMonth; i++) {
-      days.push(i);
+    for (let i = lastDayOfPreviousMonth - howManyDays; i < lastDayOfPreviousMonth; i++) {
+      days.push(new Date(year, month, i));
     }
     return days;
   }
-  console.log(highlightWeekDays);
+
+  function getFirstDaysOfNextMonth(year, month, howManyDays) {
+    const days = [];
+    for (let i = 1; i <= howManyDays; i++) {
+      days.push(new Date(year, month, i));
+    }
+    return days;
+  }
 
   // Messy as hell, but it works (for now)
   function getDaysToDisplay(year, month) {
-    const numberOfDays = getDaysInMonth(year, month);
-    const firstDayOfMonth = getFirstDayOfMonth(year, month);
+    // const numberOfDays = getDaysInMonth(year, month);
+    const firstDayOfMonth = getTrueDay(new Date(year, month, 1));
     const lastDaysOfPreviousMonth = getLastDaysOfPreviousMonth(year, month - 1, firstDayOfMonth);
-    const daysTotal = Array(35).fill({ day: -1, isCurrentMonth: false });
-    daysTotal.forEach((_, i) => {
-      if (i + 1 < firstDayOfMonth) {
-        daysTotal[i] = {
-          day: lastDaysOfPreviousMonth[i + 1],
-          isCurrentMonth: false
-        };
-      } else if (i + 1 < numberOfDays + firstDayOfMonth) {
-        daysTotal[i] = {
-          day: i + 2 - firstDayOfMonth,
-          weekDay: weekDays[i % 7],
-          isCurrentMonth: true
-        };
-      } else {
-        daysTotal[i] = {
-          day: i + 2 - firstDayOfMonth - numberOfDays,
-          isCurrentMonth: false
-        };
-      }
-    });
-    return daysTotal;
+    // const daysTotal = Array(42).fill({ day: -1, isCurrentMonth: false });
+    const daysInMonth = getDaysInMonthAsArray(year, month);
+    let days = [...lastDaysOfPreviousMonth, ...daysInMonth];
+    const daysFromNextMonth = 42 - days.length;
+    const firstDaysOfNextMonth = getFirstDaysOfNextMonth(year, month + 1, daysFromNextMonth);
+    days = [...days, ...firstDaysOfNextMonth];
+    // daysTotal.forEach((_, i) => {
+    //   if (i + 1 < firstDayOfMonth) {
+    //     daysTotal[i] = {
+    //       day: 21,
+    //       isCurrentMonth: false
+    //     };
+    //   } else if (i + 1 < numberOfDays + firstDayOfMonth) {
+    //     daysTotal[i] = {
+    //       day: i + 2 - firstDayOfMonth,
+    //       weekDay: weekDays[i % 7],
+    //       isCurrentMonth: true
+    //     };
+    //   } else {
+    //     daysTotal[i] = {
+    //       day: i + 2 - firstDayOfMonth - numberOfDays,
+    //       isCurrentMonth: false
+    //     };
+    //   }
+    // });
+    return days;
   }
 
   return (
@@ -200,10 +223,10 @@ export default function Calendar({
             <div
               key={`day-${index}`}
               className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
-                !day.isCurrentMonth ? 'disabled' : ''
+                day.getMonth() !== date.getMonth() ? 'disabled' : ''
               }${highlightWeekDays.includes(day.weekDay) ? ' highlight' : ''}`}
               onClick={() => setSelectedDay(index)}>
-              {day.day}
+              {day.getDate()}
             </div>
           ))}
         </div>
