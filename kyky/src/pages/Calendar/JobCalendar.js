@@ -140,6 +140,14 @@ export default function JobCalendar() {
     return new Array(lastDay).fill(0).map((_, i) => new Date(year, month, i + 1));
   }
 
+  function getFirstDaysOfNextMonth(year, month, howManyDays) {
+    const days = [];
+    for (let i = 1; i <= howManyDays; i++) {
+      days.push(new Date(year, month, i));
+    }
+    return days;
+  }
+
   function getDaysToDisplay(year, month) {
     // Get the first day of the month
     const firstDayOfMonth = getTrueDay(new Date(year, month, 1));
@@ -152,6 +160,15 @@ export default function JobCalendar() {
 
     // Merge first row with the bulk of the days
     let days = [...lastDaysOfPreviousMonth, ...daysInMonth];
+
+    // Calculate how many days are needed to fill the last row
+    const daysFromNextMonth = 35 - days.length;
+
+    // Get the first days of the next month (to fill the last row)
+    const firstDaysOfNextMonth = getFirstDaysOfNextMonth(year, month + 1, daysFromNextMonth);
+
+    // Merge the last row with the bulk of the days
+    days = [...days, ...firstDaysOfNextMonth];
     return days;
   }
 
@@ -235,7 +252,13 @@ export default function JobCalendar() {
             <div className="calendar-days">
               {days.map((day, index) => {
                 const isCurrentMonth = day.getMonth() === date.getMonth();
-                const disabled = !isCurrentMonth || day.getDate() < new Date().getDate();
+                const disabled =
+                  !isCurrentMonth ||
+                  (day.getDate() < new Date().getDate() &&
+                    day.getMonth() <= new Date().getMonth() &&
+                    day.getFullYear() <= new Date().getFullYear()) ||
+                  (day.getMonth() < new Date().getMonth() &&
+                    day.getFullYear() <= new Date().getFullYear());
                 /* Convoluted mess, just makes totally sure to display current day correctly */
                 const curr =
                   isCurrentMonth &&
