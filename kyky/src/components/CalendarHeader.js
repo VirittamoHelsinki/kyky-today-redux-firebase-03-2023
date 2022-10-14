@@ -5,10 +5,20 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
   const navigate = new useNavigate();
 
   const navButtons = [
-    { to: '/calendar', label: 'Job Calendar', id: 'job-calendar' },
-    { to: '/calendar/overview', label: 'Overview', id: 'overview' },
-    { to: '/calendar/schedule', label: 'Manage Schedules', id: 'manage-schedules' },
-    { to: '/calendar/settings', label: 'Settings', id: 'settings' }
+    { to: '/calendar', label: 'Job Calendar', id: 'job-calendar', icon: 'calendar_month' },
+    {
+      to: '/calendar/overview',
+      label: 'Overview',
+      id: 'overview',
+      icon: 'preview'
+    },
+    {
+      to: '/calendar/schedule',
+      label: 'Manage Schedules',
+      id: 'manage-schedules',
+      icon: 'build'
+    },
+    { to: '/calendar/settings', label: 'Settings', id: 'settings', icon: 'settings' }
   ];
 
   function changeWindow(url, id) {
@@ -32,11 +42,12 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
         </div>
       </div>
       <div className="selection">
-        {navButtons.map(({ to, label, id }) => (
+        {navButtons.map(({ to, label, id, icon }) => (
           <button
             key={id}
             className={`button ${selectedWindow === id ? 'selected' : ''}`}
             onClick={() => changeWindow(to, id)}>
+            <i className="material-icons">{icon}</i>
             {label}
           </button>
         ))}
