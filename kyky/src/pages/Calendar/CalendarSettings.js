@@ -16,6 +16,15 @@ export default function CalendarSettings() {
   ];
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+  function purgeCalendar() {
+    if (window.confirm('Are you sure you want to purge the calendar?')) {
+      const keys = Object.keys(localStorage).filter(
+        (key) => key.includes('_schedules') && !key.includes('unavailability')
+      );
+      keys.forEach((key) => localStorage.removeItem(key));
+    }
+  }
+
   const [switched, setSwitched] = useState(false);
   const [notifications, setNotifications] = useState(false);
   const [selectingJobs, setSelectingJobs] = useState(false);
@@ -129,7 +138,11 @@ export default function CalendarSettings() {
             <span>This action cannot be undone.</span>
           </p>
         </Input>
-        <Button className={`button-secondary ${purge ? 'red' : 'disabled'}`}>Confirm Purge</Button>
+        <Button
+          className={`button-secondary ${purge ? 'red' : 'disabled'}`}
+          onClick={purgeCalendar}>
+          Confirm Purge
+        </Button>
       </div>
     </main>
   );
