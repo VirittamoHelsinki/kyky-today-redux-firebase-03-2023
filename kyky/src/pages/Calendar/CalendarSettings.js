@@ -90,9 +90,6 @@ export default function CalendarSettings() {
                 setSwitched(true);
               }}
             />
-            <select name="selected-jobs" className={`${selectingJobs ? '' : 'disabled'}`}>
-              <option value={null}>Select</option>
-            </select>
             <MultipleSelect options={jobOptions} />
           </div>
         </div>
