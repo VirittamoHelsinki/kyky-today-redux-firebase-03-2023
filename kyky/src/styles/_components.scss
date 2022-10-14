@@ -1,4 +1,4 @@
-@use '_utilities' as *;
+@use "_utilities" as *;
 
 /* Reusable components:
 - buttons
@@ -85,7 +85,7 @@
     margin-left: 20px;
   }
 
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     width: 17px;
     height: 17px;
     border-radius: none;
@@ -173,7 +173,7 @@ form {
 
   .input-label-required {
     &:after {
-      content: ' *';
+      content: " *";
       color: red;
     }
   }
@@ -251,7 +251,7 @@ form {
       border-radius: 7px;
 
       &::after {
-        content: 'x';
+        content: "x";
         margin-left: 10px;
         font-weight: 600;
         font-size: 1rem;
@@ -285,7 +285,7 @@ form {
       width: auto;
     }
 
-    input[type='text'] {
+    input[type="text"] {
       width: 110px;
       border: none;
       border-bottom: 1px solid black;
@@ -594,6 +594,73 @@ form {
     background: grey;
     border: 2px solid grey;
     color: black;
+  }
+}
+
+.multiple-select {
+  width: 280px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .select-value {
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    background: $white;
+
+    .values {
+      width: 80%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem;
+      min-height: 38px;
+
+      span {
+        position: relative;
+        background: $kyky-primary-darker;
+        color: $white;
+        display: flex;
+        white-space: nowrap;
+        align-items: center;
+        padding: 0.25rem;
+        user-select: none;
+        z-index: 2;
+
+        i {
+          font-size: 1.2rem !important;
+          user-select: none;
+          cursor: pointer;
+        }
+      }
+    }
+
+    i {
+      width: 20%;
+      user-select: none;
+    }
+  }
+
+  .select-options {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    background: $white;
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0.5rem;
+    gap: 0.25rem;
+
+    .checkbox-container {
+      margin: 0;
+    }
   }
 }
 
