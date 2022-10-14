@@ -1,5 +1,7 @@
+import { useState, useEffect } from 'react';
 import ReactSelect from 'react-select';
 import IconOption from './IconOption';
+import Languages from '../../../languages.json';
 
 /*
 Custom react-select Select component with Option component which has check mark icon indicating the chosen option in dropdown menu.
@@ -14,17 +16,25 @@ components – custom react-select Option components with check mark icon
 export function GenericSelect({
     name,
     placeholder,
-    options
+    options,
+    getOptionLabel,
+    getOptionValue
 }) {
-  return (
-    <ReactSelect
-        className="select-container"
-        name={name}
-        placeholder={placeholder}
-        options={[...options]}
-        components={{ Option: IconOption }}
-    />
-  );
+    const renderReactSelect = () => {
+        return (
+            <ReactSelect
+                className="select-container"
+                name={name}
+                placeholder={placeholder}
+                options={[...options]}
+                getOptionLabel={getOptionLabel ? getOptionLabel : (option) => option.label}
+                getOptionValue={getOptionValue ? getOptionValue : (option) => option.value}
+                components={{ Option: IconOption }}
+            />
+        );
+    };
+
+  return renderReactSelect();
 }
 
 /*
@@ -33,21 +43,68 @@ Component for creating multiple 'HTML label element – react-select Select comp
 export function LanguagesSelect({
     selectAttributes,
     placeholder,
-    options
+    options,
+    handleClick
 }) {
-  return (
-    <>
-        {selectAttributes.map( language => {
-            return (
-                <div className="languageRow" key={language.name}>
-                    <label htmlFor={language.name}>{language.label}</label>
-                    <GenericSelect 
-                        name={language.name}
-                        placeholder={placeholder}
-                        options={[...options]}
-                    />
-                </div>
-            );
-        })}
-    </>
-)}
+
+  const [languages, setLanguages] = useState();
+  useEffect( () => {
+    setLanguages(Object.keys(Languages)
+                       .map(key => { return { value: key, label: Languages[key].name } }));
+  }, [selectAttributes, Languages]);
+
+  const renderIfThereIsLanguagesData = () => {
+    if (typeof languages !== undefined) {
+        return (
+            <>
+                {selectAttributes.map( language => {
+                    if (language.visible && language.name !== 'otherSelect') {
+                        return (
+                            <div className="languageRow" key={language.name}>
+                                <label htmlFor={language.name}>{language.label}</label>
+                                <GenericSelect 
+                                    name={language.name}
+                                    placeholder={placeholder}
+                                    options={[...options]}
+                                />
+                            </div>
+                        );
+                    } else if (language.visible && language.name === 'otherSelect') {
+                        return (
+                            <div className="languageRow" key={language.name}>
+                                <GenericSelect 
+                                    name={language.name}
+                                    placeholder={placeholder}
+                                    options={languages}
+                                    getOptionLabel={option => option.name}
+                                    getOptionValue={option => option.value}
+                                />
+                                <GenericSelect 
+                                    name={language.name}
+                                    placeholder={placeholder}
+                                    options={[...options]}
+                                />
+                            </div>
+                        );
+                    } else {
+                        return (
+                            <button id="addLanguageButton" onClick={handleClick} key="addLanguageButton">
+                                <i className="material-icons-outlined">add_circle_outline</i>
+                                <p>Add a language</p>
+                            </button>
+                        );
+                    }
+                })}
+            </>
+        )
+    } else {
+        return (
+            <div className="languageRow">
+                <p>Loading languages...</p>
+            </div>
+        )
+    }
+  }
+
+  return renderIfThereIsLanguagesData();
+}
