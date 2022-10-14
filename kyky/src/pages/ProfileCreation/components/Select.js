@@ -11,18 +11,14 @@ options – options in Select component (dropdown menu), list of value-label pai
     [...options] is for creating new options array for each Select component with the same content.
 components – custom react-select Option components with check mark icon
 */
-export function GenericSelect({
-    name,
-    placeholder,
-    options
-}) {
+export function GenericSelect({ name, placeholder, options, className = 'select-container' }) {
   return (
     <ReactSelect
-        className="select-container"
-        name={name}
-        placeholder={placeholder}
-        options={[...options]}
-        components={{ Option: IconOption }}
+      className={`${className !== 'select-container' ? className : 'select-container'}`}
+      name={name}
+      placeholder={placeholder}
+      options={[...options]}
+      components={{ Option: IconOption }}
     />
   );
 }
@@ -30,24 +26,17 @@ export function GenericSelect({
 /*
 Component for creating multiple 'HTML label element – react-select Select component' pairs in profile creation Languges section.
 */
-export function LanguagesSelect({
-    selectAttributes,
-    placeholder,
-    options
-}) {
+export function LanguagesSelect({ selectAttributes, placeholder, options }) {
   return (
     <>
-        {selectAttributes.map( language => {
-            return (
-                <div className="languageRow" key={language.name}>
-                    <label htmlFor={language.name}>{language.label}</label>
-                    <GenericSelect 
-                        name={language.name}
-                        placeholder={placeholder}
-                        options={[...options]}
-                    />
-                </div>
-            );
-        })}
+      {selectAttributes.map((language) => {
+        return (
+          <div className="languageRow" key={language.name}>
+            <label htmlFor={language.name}>{language.label}</label>
+            <GenericSelect name={language.name} placeholder={placeholder} options={[...options]} />
+          </div>
+        );
+      })}
     </>
-)}
+  );
+}
