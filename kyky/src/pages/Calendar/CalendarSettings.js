@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Switch from 'react-switch';
+import MultipleSelect from '../../components/MultipleSelect';
+
+import jobs from '../../jobs';
 
 export default function CalendarSettings() {
+  const [switched, setSwitched] = useState(false);
+  const [notifications, setNotifications] = useState(false);
+  const [selectingJobs, setSelectingJobs] = useState(false);
+  const [purge, setPurge] = useState(false);
+  const [jobOptions, setJobOptions] = useState([]);
+
   // value is in months
   const advanceTimes = [
     { value: 0.5, text: '2 weeks' },
@@ -14,7 +23,12 @@ export default function CalendarSettings() {
     { value: 6, text: '6 months' },
     { value: 12, text: '12 months' }
   ];
+
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+  useEffect(() => {
+    setJobOptions(jobs.map((job) => ({ value: job.id, label: job.jobTitle })));
+  }, []);
 
   function purgeCalendar() {
     if (window.confirm('Are you sure you want to purge the calendar?')) {
@@ -25,10 +39,6 @@ export default function CalendarSettings() {
     }
   }
 
-  const [switched, setSwitched] = useState(false);
-  const [notifications, setNotifications] = useState(false);
-  const [selectingJobs, setSelectingJobs] = useState(false);
-  const [purge, setPurge] = useState(false);
   return (
     <main className="job-calendar-settings">
       <div className="settings">
@@ -83,6 +93,7 @@ export default function CalendarSettings() {
             <select name="selected-jobs" className={`${selectingJobs ? '' : 'disabled'}`}>
               <option value={null}>Select</option>
             </select>
+            <MultipleSelect options={jobOptions} />
           </div>
         </div>
         <div className="settings-container">
