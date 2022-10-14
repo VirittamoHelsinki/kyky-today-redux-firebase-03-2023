@@ -5,15 +5,28 @@ import { ReactComponent as Gps } from '../../../image/gps.svg';
 import { ReactComponent as ProfileIcon2 } from '../../../image/profileicon2.svg';
 import React, { useState } from 'react';
 import AddPhoto from './AddPhoto';
+import WorkExperience from './WorkExperience';
+import EducationExperience from './EducationExperience';
 
 export default function Step8(currentStep) {
   const [upload, setUpload] = useState('');
   const [saved, setSaved] = useState(true);
+  const [experience, setExperience] = useState('');
 
   const addPhoto = () => {
     setSaved(false);
     setUpload(<AddPhoto setSaved={setSaved} />);
     console.log(true);
+  };
+
+  const workExperience = () => {
+    setSaved(false);
+    setExperience(<WorkExperience setSaved={setSaved} />);
+  };
+
+  const educationExperience = () => {
+    setSaved(false);
+    setExperience(<EducationExperience setSaved={setSaved} />);
   };
 
   return (
@@ -59,17 +72,23 @@ export default function Step8(currentStep) {
         <div className="previewContainer3">
           {' '}
           <h3>Work Experience</h3>
-          <button className="picIcon">+</button>
+          <button className="picIcon" onClick={() => workExperience()}>
+            +
+          </button>
           <p>No items to display.</p>
         </div>
         <div className="previewContainer4">
           <h3>Education History</h3>
-          <button className="picIcon">+</button>
+          <button className="picIcon" onClick={() => educationExperience()}>
+            +
+          </button>
           <p>No items to display.</p>
         </div>
         {!saved && <div className="dim3"></div>}
         {!saved && upload}
       </div>{' '}
+      {!saved && <div className="dim"></div>}
+      {!saved && experience}
     </div>
   );
 }
