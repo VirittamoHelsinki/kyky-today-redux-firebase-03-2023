@@ -2,8 +2,9 @@ import '../../../styles/NewProfileCreation.scss';
 import React from 'react';
 import Checkbox from '../../../components/Checkbox';
 import Input from '../../../components/Input';
-import Select from 'react-select';
+
 import Countries from '../../../countries.json';
+import { GenericSelect } from './Select';
 export default function WorkExperience({ setSaved }) {
   const months = [
     { value: 'january', label: 'January' },
@@ -82,23 +83,23 @@ export default function WorkExperience({ setSaved }) {
         placeholder="Ex:Helsinki"
         labelOnFront></Input>
       <label className="countryLabel">Country</label>
-      <Select
+      <GenericSelect
         label="Country"
         className="countryList"
         placeholder="Finland"
         options={Countries}
         getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.code}></Select>
+        getOptionValue={(option) => option.code}></GenericSelect>
       <Checkbox className="workCheck">I am currently working in this role</Checkbox>
       <div className="dateContainer">
         <div className="startDateLabel">Start Date*</div>
         <div className="endDateLabel">End Date*</div>
       </div>
       <div className="monthYearContainer">
-        <Select placeholder="Month" className="dateSelect" options={months}></Select>
-        <Select placeholder="Year" className="dateSelect" options={years}></Select>
-        <Select placeholder="Month" className="dateSelect" options={months}></Select>
-        <Select placeholder="Year" className="dateSelect" options={years}></Select>
+        <GenericSelect placeholder="Month" className="dateSelect" options={months}></GenericSelect>
+        <GenericSelect placeholder="Year" className="dateSelect" options={years}></GenericSelect>
+        <GenericSelect placeholder="Month" className="dateSelect" options={months}></GenericSelect>
+        <GenericSelect placeholder="Year" className="dateSelect" options={years}></GenericSelect>
       </div>
       <div className="description">Description</div>
       <textarea className="descriptionArea"></textarea>

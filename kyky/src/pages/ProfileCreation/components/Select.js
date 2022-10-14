@@ -14,6 +14,7 @@ options – options in Select component (dropdown menu), list of value-label pai
 components – custom react-select Option components with check mark icon
 */
 export function GenericSelect({
+    className = "select-container",
     name,
     placeholder,
     options,
@@ -23,7 +24,7 @@ export function GenericSelect({
     const renderReactSelect = () => {
         return (
             <ReactSelect
-                className="select-container"
+                className={`${className !== 'select-container' ? className : 'select-container'}`}
                 name={name}
                 placeholder={placeholder}
                 options={[...options]}
