@@ -2,7 +2,7 @@ import React from 'react';
 import '../../../styles/NewProfileCreation.scss';
 import { ReactComponent as ProfileIcon2 } from '../../../image/profileicon2.svg';
 
-export default function AddPhoto({ setSaved }) {
+export default function AddPhoto({ setSaved2 }) {
   return (
     <div className="addPhotoContainer">
       <div className="addPhotoTxtContainer">
@@ -12,10 +12,10 @@ export default function AddPhoto({ setSaved }) {
         <p> Your photo should show your face clearly, we suggest a neutral background.</p>
       </div>
       <div className="addPhotoBtnContainer">
-        <button className="addPhotoButton1" onClick={() => setSaved(true)}>
+        <button className="addPhotoButton1" onClick={() => setSaved2(true)}>
           Cancel
         </button>
-        <button className="addPhotoButton2" onClick={() => setSaved(true)}>
+        <button className="addPhotoButton2" onClick={() => setSaved2(true)}>
           Save
         </button>
       </div>

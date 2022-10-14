@@ -12,14 +12,14 @@ import AddPhoto from './AddPhoto';
 export default function Step7(currentStep) {
   /*const [selected, setSelected] = useState('');*/
   const [upload, setUpload] = useState('');
-  const [saved, setSaved] = useState(true);
+  const [saved2, setSaved2] = useState(true);
 
   const addPhoto = () => {
-    setSaved(false);
-    setUpload(<AddPhoto setSaved={setSaved} />);
+    setSaved2(false);
+    setUpload(<AddPhoto setSaved2={setSaved2} />);
     console.log(true);
   };
- 
+
   return (
     <div className="step step7">
       <div className="detailsMainContainer">
@@ -35,8 +35,7 @@ export default function Step7(currentStep) {
             className="select-container3"
             options={Countries}
             getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.code}>
-            </Select>
+            getOptionValue={(option) => option.code}></Select>
           <label>Street Address*(won’t show on profile)</label>
           <input className="detailsInput"></input>
           <label>City*</label>
@@ -46,17 +45,23 @@ export default function Step7(currentStep) {
             <input className="detailsInputShort" type="text"></input>
           </div>
 
-          {/*<ReactFlagsSelect>selected={selected} onSelect={(code => setSelected(code))} </ReactFlagsSelect> */}<div className= "phoneContainer">
-          <label>Phone</label>
-          <Select className = "select-container" 
-            options={CountriesWithDialCodes} 
-            getOptionLabel={(option) => [option.name, " ", option.dial_code]}
-            getOptionValue={(option) => option.code}></Select>
-          <input className="detailsInputPhone" placeholder='type your number' maxLength={13}></input></div>
+          {/*<ReactFlagsSelect>selected={selected} onSelect={(code => setSelected(code))} </ReactFlagsSelect> */}
+          <div className="phoneContainer">
+            <label>Phone</label>
+            <Select
+              className="select-container"
+              options={CountriesWithDialCodes}
+              getOptionLabel={(option) => [option.name, ' ', option.dial_code]}
+              getOptionValue={(option) => option.code}></Select>
+            <input
+              className="detailsInputPhone"
+              placeholder="type your number"
+              maxLength={13}></input>
+          </div>
         </div>
       </div>
-      {!saved && <div className="dim2"></div>}
-      {!saved && upload}
+      {!saved2 && <div className="dim2"></div>}
+      {!saved2 && upload}
     </div>
   );
 }

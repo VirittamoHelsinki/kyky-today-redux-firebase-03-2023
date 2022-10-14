@@ -11,11 +11,12 @@ import EducationExperience from './EducationExperience';
 export default function Step8(currentStep) {
   const [upload, setUpload] = useState('');
   const [saved, setSaved] = useState(true);
+  const [saved2, setSaved2] = useState(true);
   const [experience, setExperience] = useState('');
 
   const addPhoto = () => {
-    setSaved(false);
-    setUpload(<AddPhoto setSaved={setSaved} />);
+    setSaved2(false);
+    setUpload(<AddPhoto setSaved2={setSaved2} />);
     console.log(true);
   };
 
@@ -84,8 +85,8 @@ export default function Step8(currentStep) {
           </button>
           <p>No items to display.</p>
         </div>
-        {!saved && <div className="dim3"></div>}
-        {!saved && upload}
+        {!saved2 && <div className="dim3"></div>}
+        {!saved2 && upload}
       </div>{' '}
       {!saved && <div className="dim"></div>}
       {!saved && experience}
