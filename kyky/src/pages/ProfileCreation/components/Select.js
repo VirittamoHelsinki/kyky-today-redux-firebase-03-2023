@@ -6,12 +6,14 @@ import Languages from '../../../languages.json';
 /*
 Custom react-select Select component with Option component which has check mark icon indicating the chosen option in dropdown menu.
 Attributes:
-name – name that connects the Select component with HTML label element's htmlFor attribute
-placeholder – placeholder text in Select component
-options – options in Select component (dropdown menu), list of value-label pairs inside objects:
+className – CSS class name for the Select component, "select-container" being the default (optional)
+name – name that connects the Select component with HTML label element's htmlFor attribute (required)
+placeholder – placeholder text in Select component (required)
+options – options in Select component (dropdown menu), list of value-label pairs inside objects (required):
     { value: '...', label: '...' }, { value: '...', label: '...' }, ...
-    [...options] is for creating new options array for each Select component with the same content.
-components – custom react-select Option components with check mark icon
+[...options] is for creating new options array for each Select component with the same content
+getOptionLabel – function to define how the labels of Option components are being fetched (optional)
+getOptionValue – function to define how the values of Option components are being fetched (optional)
 */
 export function GenericSelect({
     className = "select-container",
