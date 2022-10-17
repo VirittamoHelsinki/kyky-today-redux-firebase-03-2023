@@ -326,14 +326,58 @@ input {
 .step {
   margin: auto 20px;
 
-  #addLanguageButton {
+  .formContainer {
+    font-family: 'Inter';
     display: flex;
-    column-gap: 15px;
-    padding: 0;
-    background: none;
+    background-color: white;
+    height: 400px;
+    width: 500px;
+    border: 1px solid #387a70;
+    border-radius: 10px;
+    flex-direction: column;
+    padding: 10px;
+    margin: 20px;
+    justify-content: space-around;
+  }
+  
+  .languageFormContainer {
+    height: auto;
+    width: auto;
+    gap: 25px;
+    border: 1px solid $kyky-primary-dark;
+    border-radius: 10px;
+    padding: 65px;
+    margin: 40px;
+  
+    > *:first-child,
+    > *:last-child {
+      margin-bottom: 30px;
+    }
+  
+    .languageRow {
+      display: flex;
+      flex-direction: row;
+      gap: 25px;
+  
+      label {
+        width: 200px;
+        align-self: center;
+      }
+  
+      .select-container {
+        width: $selectContainerWidth;
+      }
+    }
 
-    * {
-      align-self: center;
+    #addLanguageButton {
+      display: flex;
+      column-gap: 15px;
+      padding: 0;
+      background: none;
+  
+      * {
+        align-self: center;
+      }
     }
   }
 
@@ -374,50 +418,6 @@ input {
       .optionLabelTextBold {
         font-weight: 600;
       }
-    }
-  }
-}
-
-.formContainer {
-  font-family: 'Inter';
-  display: flex;
-  background-color: white;
-  height: 400px;
-  width: 500px;
-  border: 1px solid #387a70;
-  border-radius: 10px;
-  flex-direction: column;
-  padding: 10px;
-  margin: 20px;
-  justify-content: space-around;
-}
-
-.languageFormContainer {
-  height: auto;
-  width: auto;
-  gap: 25px;
-  border: 1px solid $kyky-primary-dark;
-  border-radius: 10px;
-  padding: 65px;
-  margin: 40px;
-
-  > *:first-child,
-  > *:last-child {
-    margin-bottom: 30px;
-  }
-
-  .languageRow {
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
-
-    label {
-      width: 200px;
-      align-self: center;
-    }
-
-    .select-container {
-      width: $selectContainerWidth;
     }
   }
 }
