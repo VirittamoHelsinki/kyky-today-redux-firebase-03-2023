@@ -77,8 +77,6 @@ export function LanguagesSelect({
                                     name={language.name}
                                     placeholder={placeholder}
                                     options={languages}
-                                    getOptionLabel={option => option.name}
-                                    getOptionValue={option => option.value}
                                 />
                                 <GenericSelect 
                                     name={language.name}
