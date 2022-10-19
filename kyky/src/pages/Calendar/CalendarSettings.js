@@ -13,6 +13,7 @@ export default function CalendarSettings() {
   const [selectingJobs, setSelectingJobs] = useState(false);
   const [purge, setPurge] = useState(false);
   const [jobOptions, setJobOptions] = useState([]);
+  const [selectedJobsAuto, setSelectedJobsAuto] = useState([]);
 
   // value is in months
   const advanceTimes = [
@@ -29,6 +30,10 @@ export default function CalendarSettings() {
   useEffect(() => {
     setJobOptions(jobs.map((job) => ({ value: job.id, label: job.jobTitle })));
   }, []);
+
+  useEffect(() => {
+    console.log('selectedJobsAuto', selectedJobsAuto);
+  }, [selectedJobsAuto]);
 
   function purgeCalendar() {
     if (window.confirm('Are you sure you want to purge the calendar?')) {
@@ -90,7 +95,13 @@ export default function CalendarSettings() {
                 setSwitched(true);
               }}
             />
-            <MultipleSelect options={jobOptions} />
+            <MultipleSelect
+              options={jobOptions}
+              disabled={!selectingJobs}
+              onChange={(values) => {
+                setSelectedJobsAuto(values);
+              }}
+            />
           </div>
         </div>
         <div className="settings-container">

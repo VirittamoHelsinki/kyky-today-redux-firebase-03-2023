@@ -1,15 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Checkbox from './Checkbox';
 
-export default function MultipleSelect({ className = 'multiple-select', options }) {
+/* 
+  Options array must have these properties:
+    [
+      {value: 'value', label: 'label'},
+    ]
+  Label is the text that will be displayed
+  Value is the actual value that will be stored
+ */
+
+/*
+ This is an example of an onChange function:
+  (values)=>{setState(values)}
+  Using this function, you can pass the values to the parent component
+ */
+export default function MultipleSelect({
+  className = 'multiple-select',
+  options, // Array of options
+  disabled = false, // Determines if the select component should be interactable
+  onChange = () => {} // Callback function to send the values to the parent component
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState([]);
+
+  /* Whenever selected changes, the onChange function is called with selected passed as argument */
+  useEffect(() => {
+    onChange(selected);
+  }, [selected]);
+
   return (
-    <div className={className}>
+    <div className={`${className}${disabled ? ' disabled' : ''}`}>
       <div
         className="select-value"
-        onClick={() => {
-          setIsOpen(!isOpen);
+        onClick={(e) => {
+          if (e.target.classList.contains('values') || e.target.textContent.includes('expand_')) {
+            setIsOpen(!isOpen);
+          }
         }}>
         <div className="values">
           {selected.map((option) => (
