@@ -13,10 +13,10 @@
  */
 
 // UI colors
-$black: #000000;
-$white: #ffffff;
+$black: #000;
+$white: #fff;
 $grayscale-light: #f8f9f8;
-$grayscale-medium-light: #cccccc;
+$grayscale-medium-light: #ccc;
 $grayscale-medium: #808080;
 $grayscale-medium-dark: #25282b;
 $grayscale-dark: #1a1a1a;
@@ -24,8 +24,8 @@ $grayscale-darker: #1b1b1b;
 $kyky-primary-dark: #387a70;
 $kyky-primary-darker: #0b4a41;
 $kyky-primary-default: #18c7ad;
-$kyky-primary-light: rgb(207, 240, 231);
-$kyky-primary-lighter: rgb(232, 254, 248);
+$kyky-primary-light: rgb(207 240 231);
+$kyky-primary-lighter: rgb(232 254 248);
 $alert-red: #f51720;
 
 // font families
@@ -81,7 +81,7 @@ $padding-large: calc($base-padding * 1.875); //--30px
 $padding-xlarge: calc($base-padding * 2.813); //--45px
 
 // shadows
-$base-box-shadow: 0px 4px 4px 0px #00000040;
+$base-box-shadow: 0 4px 4px 0 #00000040;
 
 // borders
 $base-border-thickness: 1px;

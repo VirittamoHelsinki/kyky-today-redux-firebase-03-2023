@@ -38,7 +38,7 @@ header {
     left: 0;
     gap: 1em;
     z-index: 1;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgb(0 0 0 / 20%);
 
     nav.component-selector a {
       color: gray;
@@ -83,7 +83,7 @@ form,
   }
 }
 
-/* Wrapper class, used to center elements e.g. in the main component*/
+/* Wrapper class, used to center elements e.g. in the main component */
 
 .wrapper {
   display: flex;
