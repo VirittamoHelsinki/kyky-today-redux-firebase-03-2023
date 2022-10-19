@@ -669,6 +669,8 @@ input {
   }
 }
 .previewContainer2 {
+  display: flex;
+  flex-wrap: wrap;
   height: fit-content;
   width: 800px;
   border: $box-border;
@@ -676,16 +678,17 @@ input {
   gap: 50px;
   .picIcon {
     position: relative;
-    bottom: 38px;
-    left: 600px;
+    left: 500px;
   }
   .skillContainer {
     display: flex;
+    flex-wrap: wrap;
     width: 800px;
 
     .skill {
       display: flex;
-      height: fit-content;
+      flex-wrap: wrap;
+      height: 45px;
       width: fit-content;
       border-radius: 13px;
       margin: 20px;
