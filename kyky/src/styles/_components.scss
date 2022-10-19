@@ -603,6 +603,11 @@ form {
   display: flex;
   flex-direction: column;
 
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.75;
+  }
+
   .select-value {
     display: flex;
     border: 1px solid rgba(0, 0, 0, 0.5);

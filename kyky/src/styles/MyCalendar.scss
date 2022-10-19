@@ -122,6 +122,11 @@
           gap: 1rem;
         }
 
+        .input-container {
+          display: flex;
+          gap: 0.5rem;
+        }
+
         .switchy-switch {
           // :)
           display: flex;
@@ -172,7 +177,7 @@
   }
 
   .settings {
-    height: 60%;
+    min-height: 60%;
     flex-direction: column;
     justify-content: flex-start;
 
@@ -802,4 +807,11 @@
     background: darkgrey;
     color: grey;
   }
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  /* Green button */
+  transform: scale(1.25);
+  filter: hue-rotate(290deg);
 }
