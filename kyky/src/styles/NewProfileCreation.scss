@@ -1,6 +1,13 @@
 @use '_utilities' as *;
+
 $box-padding: 30px 30px 60px 30px;
 $box-border: 1px solid rgb(0, 0, 0, 0.2);
+
+$selectContainerWidth: 250px;
+$optionPaddingLeftRight: 12px;
+$optionContainerColumnGap: 8px;
+$checkMarkWidth: 15px;
+
 h1 {
   font-weight: 300;
 }
@@ -319,14 +326,58 @@ input {
 .step {
   margin: auto 20px;
 
-  #addLanguageButton {
+  .formContainer {
+    font-family: 'Inter';
     display: flex;
-    column-gap: 15px;
-    padding: 0;
-    background: none;
+    background-color: white;
+    height: 400px;
+    width: 500px;
+    border: 1px solid #387a70;
+    border-radius: 10px;
+    flex-direction: column;
+    padding: 10px;
+    margin: 20px;
+    justify-content: space-around;
+  }
+  
+  .languageFormContainer {
+    height: auto;
+    width: auto;
+    gap: 25px;
+    border: 1px solid $kyky-primary-dark;
+    border-radius: 10px;
+    padding: 65px;
+    margin: 40px;
+  
+    > *:first-child,
+    > *:last-child {
+      margin-bottom: 30px;
+    }
+  
+    .languageRow {
+      display: flex;
+      flex-direction: row;
+      gap: 25px;
+  
+      label {
+        width: 200px;
+        align-self: center;
+      }
+  
+      .select-container {
+        width: $selectContainerWidth;
+      }
+    }
 
-    * {
-      align-self: center;
+    #addLanguageButton {
+      display: flex;
+      column-gap: 15px;
+      padding: 0;
+      background: none;
+  
+      * {
+        align-self: center;
+      }
     }
   }
 
@@ -345,65 +396,29 @@ input {
   [class$='-option'] {
     background-color: initial;
     color: initial;
+    padding: 8px 12px;
 
     .optionContainer {
       display: flex;
       flex-direction: row;
-      column-gap: 8px;
+      column-gap: $optionContainerColumnGap;
 
       #checkMark,
       #noCheckMark {
         align-self: center;
-        width: 15px;
-        height: 12px;
+        width: $checkMarkWidth;
+      }
+
+      .optionLabelText,
+      .optionLabelTextBold {
+        display: block;
+        width: calc($selectContainerWidth - $optionPaddingLeftRight - $optionContainerColumnGap - $checkMarkWidth);
       }
 
       .optionLabelTextBold {
         font-weight: 600;
       }
     }
-  }
-}
-
-.formContainer {
-  font-family: 'Inter';
-  display: flex;
-  background-color: white;
-  height: 400px;
-  width: 500px;
-  border: 1px solid #387a70;
-  border-radius: 10px;
-  flex-direction: column;
-  padding: 10px;
-  margin: 20px;
-  justify-content: space-around;
-}
-
-.languageFormContainer {
-  height: auto;
-  gap: 25px;
-  border: 1px solid $kyky-primary-dark;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 30px auto 20px auto;
-
-  .languageRow {
-    display: flex;
-    flex-direction: row;
-
-    label {
-      flex-basis: 25%;
-      align-self: center;
-    }
-
-    .select-container {
-      flex-basis: 75%;
-    }
-  }
-
-  h3,
-  #addLanguageButton {
-    margin: 10px 0;
   }
 }
 

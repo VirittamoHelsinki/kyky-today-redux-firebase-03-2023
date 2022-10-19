@@ -10,28 +10,33 @@ export default function Step3(currentStep) {
   ];
 
   const initialSelectAttributes = [
-    { name: 'finnishSelect', label: 'Finnish' },
-    { name: 'swedishSelect', label: 'Swedish' },
-    { name: 'englishSelect', label: 'English' }
+    { name: 'finnishSelect', label: 'Finnish', visible: true },
+    { name: 'swedishSelect', label: 'Swedish', visible: true },
+    { name: 'englishSelect', label: 'English', visible: true },
+    { name: 'otherSelect', label: 'Other language', visible: false }
   ];
 
   const [selectAttributes, setSelectAttributes] = useState(initialSelectAttributes);
 
   const handleClick = () => {
-    setSelectAttributes(initialSelectAttributes.concat(
-      { name: 'otherSelect', label: 'Other language' }
-    ))
+    setSelectAttributes(initialSelectAttributes.map(({ name, label, visible }) => {
+      if (!visible) {
+        return { name, label, visible: true };
+      } else {
+        return { name, label, visible };
+      }
+    }))
   }
 
   return (
     <div className="step step3">
       <div className="formContainer languageFormContainer">
         <h3>Language</h3>
-        <LanguagesSelect options={options} selectAttributes={selectAttributes} placeholder="My level is" />
-        <button id="addLanguageButton" onClick={handleClick}>
-          <i className="material-icons-outlined">add_circle_outline</i>
-          <p>Add a language</p>
-        </button>
+        <LanguagesSelect
+          options={options}
+          selectAttributes={selectAttributes}
+          placeholder="My level is"
+          handleClick={handleClick} />
       </div>
     </div>
   );
