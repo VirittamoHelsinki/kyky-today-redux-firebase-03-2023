@@ -172,12 +172,13 @@ input {
     .box {
       text-align: center;
       border: 1px solid black;
-      border-radius: 10px;
+      border-radius: 20px;
       margin: 3px;
-      width: 20rem;
+      height: 40px;
+      width: 300px;
       padding-left: 10px;
       position: relative;
-      left: 185px;
+      left: 195px;
       p {
         color: black;
       }

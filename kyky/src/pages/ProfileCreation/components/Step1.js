@@ -23,7 +23,7 @@ export default function Step1(currentStep) {
         {Skills.filter((post) => {
           if (query === '') {
             return '';
-          } else if (post.skill.toLowerCase().includes(query.toLowerCase())) {
+          } else if (post.skill.toLowerCase().startsWith(query.toLowerCase())) {
             return post;
           }
         }).map((post, index) => (
