@@ -156,7 +156,7 @@ input {
   .getStartedInput {
     height: 50px;
     width: 700px;
-    margin: 20px 0px 20px 0px;
+    margin: 20px 0;
     text-align: left;
     font-family: Poppins, sans-serif;
     border: 1px solid #00a088;
@@ -166,15 +166,17 @@ input {
   #titleInput {
     text-align: center;
   }
+
   .addSkills {
     width: 700px;
     height: 300px;
-    background-color: #ffffff;
+    background-color: #fff;
     text-align: center;
     padding-top: 30px;
     margin-bottom: 30px;
     border: 1px solid #00a088;
     border-radius: 10px;
+
     .box {
       text-align: center;
       border: 1px solid black;
@@ -185,10 +187,12 @@ input {
       padding-left: 10px;
       position: relative;
       left: 195px;
+
       p {
         color: black;
       }
     }
+
     .addSkillsInput {
       height: 40px;
       width: 300px;
@@ -199,6 +203,7 @@ input {
       padding-right: 50px;
     }
   }
+
   .magGlass {
     height: 20px;
     width: 20px;
@@ -206,6 +211,7 @@ input {
     bottom: 365px;
     left: 820px;
   }
+
   .nextButton,
   .submitButton {
     font-size: 16px;
