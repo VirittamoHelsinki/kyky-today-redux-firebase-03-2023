@@ -34,11 +34,13 @@ export default function Step1(currentStep) {
             return post;
           }
         }).map((post, index) => (
-          <button className="box" key={index} onClick={handleClick} value={skills}>
-            <p>{post.skill}</p>
+          <button className="box" key={index} onClick={handleClick} value={post.skill}>
+            <p onClick={handleClick} value={post.skill}>
+              {post.skill}
+            </p>
           </button>
         ))}
-        <div className="addedSkill">{setSkills}</div>
+        <div className="addedSkill">{skills}</div>
         <div className="magGlass">
           <MagGlass />
         </div>

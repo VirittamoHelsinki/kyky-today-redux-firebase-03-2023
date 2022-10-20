@@ -198,9 +198,10 @@ input {
       padding-right: 50px;
     }
     .addedSkill {
+      display: flex;
       height: 40px;
-      width: 50px;
-      border: 1px solid black;
+      width: 60px;
+      background-color: #00a088;
     }
   }
   .magGlass {
