@@ -6,6 +6,13 @@ import React from 'react';
 
 export default function Step1(currentStep) {
   const [query, setQuery] = useState('');
+  const [skills, setSkills] = useState('');
+
+  const handleClick = (event) => {
+    setSkills(event.target.value);
+    console.log(true);
+  };
+
   return (
     <div className="step step1">
       <input
@@ -27,10 +34,13 @@ export default function Step1(currentStep) {
             return post;
           }
         }).map((post, index) => (
-          <button className="box" key={index}>
-            <p>{post.skill}</p>
+          <button className="box" key={index} onClick={handleClick} value={post.skill}>
+            <p onClick={handleClick} value={post.skill}>
+              {post.skill}
+            </p>
           </button>
         ))}
+        <div className="addedSkill">{skills}</div>
         <div className="magGlass">
           <MagGlass />
         </div>
