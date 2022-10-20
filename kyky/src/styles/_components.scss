@@ -624,7 +624,7 @@ form {
       padding: 0.25rem;
       min-height: 38px;
 
-      span {
+      span:not(.placeholder) {
         position: relative;
         background: $kyky-primary-darker;
         color: $white;

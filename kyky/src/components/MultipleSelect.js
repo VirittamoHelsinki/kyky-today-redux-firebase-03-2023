@@ -19,6 +19,7 @@ export default function MultipleSelect({
   className = 'multiple-select',
   options, // Array of options
   disabled = false, // Determines if the select component should be interactable
+  defaultValue = 'Select', // Default value of the select component
   onChange = () => {} // Callback function to send the values to the parent component
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +40,7 @@ export default function MultipleSelect({
           }
         }}>
         <div className="values">
+          {selected.length === 0 && <span className="placeholder">{defaultValue}</span>}
           {selected.map((option) => (
             <span key={option.value}>
               {option.label}

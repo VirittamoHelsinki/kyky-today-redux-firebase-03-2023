@@ -12,8 +12,12 @@ export default function CalendarSettings() {
   const [notifications, setNotifications] = useState(false);
   const [selectingJobs, setSelectingJobs] = useState(false);
   const [purge, setPurge] = useState(false);
+  const [bookingsAdvance, setBookingsAdvance] = useState(3);
   const [jobOptions, setJobOptions] = useState([]);
   const [selectedJobsAuto, setSelectedJobsAuto] = useState([]);
+  const [notificationDays, setNotificationDays] = useState([]);
+  const [notificationStartTime, setNotificationStartTime] = useState('08.00');
+  const [notificationEndTime, setNotificationEndTime] = useState('21.00');
 
   // value is in months
   const advanceTimes = [
@@ -29,6 +33,18 @@ export default function CalendarSettings() {
 
   useEffect(() => {
     setJobOptions(jobs.map((job) => ({ value: job.id, label: job.jobTitle })));
+    const settings = localStorage.getItem('kyky-calendar_settings');
+    if (settings) {
+      const parsedSettings = JSON.parse(settings);
+      setSwitched(parsedSettings.switched);
+      setNotifications(parsedSettings.notifications);
+      setSelectingJobs(parsedSettings.selectingJobs);
+      setSelectedJobsAuto(parsedSettings.selectedJobsAuto);
+      setBookingsAdvance(parsedSettings.bookingsAdvance);
+      setNotificationDays(parsedSettings.notificationDays);
+      setNotificationStartTime(parsedSettings.notificationStartTime);
+      setNotificationEndTime(parsedSettings.notificationEndTime);
+    }
   }, []);
 
   useEffect(() => {
@@ -44,6 +60,21 @@ export default function CalendarSettings() {
     }
   }
 
+  function confirmChanges() {
+    const settings = {
+      switched,
+      notifications,
+      selectingJobs,
+      selectedJobsAuto,
+      bookingsAdvance,
+      notificationDays,
+      notificationStartTime,
+      notificationEndTime
+    };
+    localStorage.setItem('kyky-calendar_settings', JSON.stringify(settings));
+    window.location.reload();
+  }
+
   return (
     <main className="job-calendar-settings">
       <div className="settings">
@@ -52,7 +83,11 @@ export default function CalendarSettings() {
           <h3 className="title">Booking Settings</h3>
           <div className="setting">
             <span>Enable bookings made</span>
-            <select name="enable-bookings" id="enable-bookings">
+            <select
+              name="enable-bookings"
+              id="enable-bookings"
+              value={bookingsAdvance}
+              onChange={(e) => setBookingsAdvance(e.target.value)}>
               {advanceTimes.map((time) => (
                 <option key={time.value} value={time.value}>
                   {time.text}
@@ -117,9 +152,17 @@ export default function CalendarSettings() {
                 onChange={() => setNotifications(!notifications)}
               />
               <span>Only allow notifications between</span>
-              <input type="time" defaultValue="08:00" />
+              <input
+                type="time"
+                defaultValue="08:00"
+                onChange={(e) => setNotificationStartTime(e.target.time)}
+              />
               <span>-</span>
-              <input type="time" defaultValue="21:00" />
+              <input
+                type="time"
+                defaultValue="21:00"
+                onChange={(e) => setNotificationEndTime(e.target.time)}
+              />
             </label>
             <div className={`days ${notifications ? '' : 'disabled'}`}>
               {days.map((day) => (
@@ -129,13 +172,21 @@ export default function CalendarSettings() {
                   name={day}
                   id={day}
                   label={day.substring(0, 3)}
-                  onChange={() => setNotifications(true)}
+                  checked={notificationDays.includes(day)}
+                  onChange={() => {
+                    setNotifications(true);
+                    if (notificationDays.includes(day)) {
+                      setNotificationDays(notificationDays.filter((d) => d !== day));
+                    } else {
+                      setNotificationDays([...notificationDays, day]);
+                    }
+                  }}
                 />
               ))}
             </div>
           </div>
         </div>
-        <Button>Confirm Changes</Button>
+        <Button onClick={confirmChanges}>Confirm Changes</Button>
       </div>
       <div className="export-import">
         <h2 className="title">Export/Import Calendar</h2>
