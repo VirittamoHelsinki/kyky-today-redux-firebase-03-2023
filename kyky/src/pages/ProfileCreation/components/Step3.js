@@ -19,14 +19,16 @@ export default function Step3(currentStep) {
   const [selectAttributes, setSelectAttributes] = useState(initialSelectAttributes);
 
   const handleClick = () => {
-    setSelectAttributes(initialSelectAttributes.map(({ name, label, visible }) => {
-      if (!visible) {
-        return { name, label, visible: true };
-      } else {
-        return { name, label, visible };
-      }
-    }))
-  }
+    setSelectAttributes(
+      initialSelectAttributes.map(({ name, label, visible }) => {
+        if (!visible) {
+          return { name, label, visible: true };
+        } else {
+          return { name, label, visible };
+        }
+      })
+    );
+  };
 
   return (
     <div className="step step3">
@@ -36,7 +38,9 @@ export default function Step3(currentStep) {
           options={options}
           selectAttributes={selectAttributes}
           placeholder="My level is"
-          handleClick={handleClick} />
+          fourthLanguageSelectPlaceholder="Select language"
+          handleClick={handleClick}
+        />
       </div>
     </div>
   );

@@ -43,7 +43,13 @@ export function GenericSelect({
 /*
 Component for creating multiple 'HTML label element – react-select Select component' pairs in profile creation Languges section.
 */
-export function LanguagesSelect({ selectAttributes, placeholder, options, handleClick }) {
+export function LanguagesSelect({
+  selectAttributes,
+  placeholder,
+  options,
+  handleClick,
+  fourthLanguageSelectPlaceholder
+}) {
   const [languages, setLanguages] = useState();
   useEffect(() => {
     setLanguages(
@@ -73,8 +79,9 @@ export function LanguagesSelect({ selectAttributes, placeholder, options, handle
               return (
                 <div className="languageRow" key={language.name}>
                   <GenericSelect
+                    className="fourth-language-select-container"
                     name={language.name}
-                    placeholder={placeholder}
+                    placeholder={fourthLanguageSelectPlaceholder}
                     options={languages}
                   />
                   <GenericSelect

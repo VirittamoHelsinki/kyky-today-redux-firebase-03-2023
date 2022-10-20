@@ -6,6 +6,9 @@ $selectContainerWidth: 250px;
 $optionPaddingLeftRight: 12px;
 $optionContainerColumnGap: 8px;
 $checkMarkWidth: 15px;
+$option-label-text-width: calc(
+  $selectContainerWidth - $optionPaddingLeftRight - $optionContainerColumnGap - $checkMarkWidth
+);
 
 h1 {
   font-weight: 300;
@@ -439,8 +442,12 @@ input {
       gap: 25px;
 
       label {
-        width: 200px;
         align-self: center;
+      }
+
+      label,
+      .fourth-language-select-container {
+        width: 200px;
       }
 
       .select-container {
@@ -491,10 +498,7 @@ input {
       .optionLabelText,
       .optionLabelTextBold {
         display: block;
-        width: calc(
-          $selectContainerWidth - $optionPaddingLeftRight - $optionContainerColumnGap -
-            $checkMarkWidth
-        );
+        width: $option-label-text-width;
       }
 
       .optionLabelTextBold {
