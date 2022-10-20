@@ -21,7 +21,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "check-scss": "npx stylelint '**/*.scss'",
+    "fix-scss": "npx stylelint --fix '**/*.scss'"
   },
   "eslintConfig": {
     "extends": [
