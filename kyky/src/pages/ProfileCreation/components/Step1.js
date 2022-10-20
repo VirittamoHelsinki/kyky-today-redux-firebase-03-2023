@@ -27,9 +27,9 @@ export default function Step1(currentStep) {
             return post;
           }
         }).map((post, index) => (
-          <div className="box" key={index}>
+          <button className="box" key={index}>
             <p>{post.skill}</p>
-          </div>
+          </button>
         ))}
         <div className="magGlass">
           <MagGlass />
