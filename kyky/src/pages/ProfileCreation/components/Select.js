@@ -16,26 +16,26 @@ getOptionLabel – function to define how the labels of Option components are be
 getOptionValue – function to define how the values of Option components are being fetched (optional)
 */
 export function GenericSelect({
-    className = "select-container",
-    name,
-    placeholder,
-    options,
-    getOptionLabel,
-    getOptionValue
+  className = 'select-container',
+  name,
+  placeholder,
+  options,
+  getOptionLabel,
+  getOptionValue
 }) {
-    const renderReactSelect = () => {
-        return (
-            <ReactSelect
-                className={`${className !== 'select-container' ? className : 'select-container'}`}
-                name={name}
-                placeholder={placeholder}
-                options={[...options]}
-                getOptionLabel={getOptionLabel ? getOptionLabel : (option) => option.label}
-                getOptionValue={getOptionValue ? getOptionValue : (option) => option.value}
-                components={{ Option: IconOption }}
-            />
-        );
-    };
+  const renderReactSelect = () => {
+    return (
+      <ReactSelect
+        className={`${className !== 'select-container' ? className : 'select-container'}`}
+        name={name}
+        placeholder={placeholder}
+        options={[...options]}
+        getOptionLabel={getOptionLabel ? getOptionLabel : (option) => option.label}
+        getOptionValue={getOptionValue ? getOptionValue : (option) => option.value}
+        components={{ Option: IconOption }}
+      />
+    );
+  };
 
   return renderReactSelect();
 }
@@ -43,69 +43,66 @@ export function GenericSelect({
 /*
 Component for creating multiple 'HTML label element – react-select Select component' pairs in profile creation Languges section.
 */
-export function LanguagesSelect({
-    selectAttributes,
-    placeholder,
-    options,
-    handleClick
-}) {
-
+export function LanguagesSelect({ selectAttributes, placeholder, options, handleClick }) {
   const [languages, setLanguages] = useState();
-  useEffect( () => {
-    setLanguages(Object.keys(Languages)
-                       .map(key => { return { value: key, label: Languages[key].name } }));
+  useEffect(() => {
+    setLanguages(
+      Object.keys(Languages).map((key) => {
+        return { value: key, label: Languages[key].name };
+      })
+    );
   }, [selectAttributes, Languages]);
 
   const renderIfThereIsLanguagesData = () => {
     if (typeof languages !== undefined) {
-        return (
-            <>
-                {selectAttributes.map( language => {
-                    if (language.visible && language.name !== 'otherSelect') {
-                        return (
-                            <div className="languageRow" key={language.name}>
-                                <label htmlFor={language.name}>{language.label}</label>
-                                <GenericSelect 
-                                    name={language.name}
-                                    placeholder={placeholder}
-                                    options={[...options]}
-                                />
-                            </div>
-                        );
-                    } else if (language.visible && language.name === 'otherSelect') {
-                        return (
-                            <div className="languageRow" key={language.name}>
-                                <GenericSelect 
-                                    name={language.name}
-                                    placeholder={placeholder}
-                                    options={languages}
-                                />
-                                <GenericSelect 
-                                    name={language.name}
-                                    placeholder={placeholder}
-                                    options={[...options]}
-                                />
-                            </div>
-                        );
-                    } else {
-                        return (
-                            <button id="addLanguageButton" onClick={handleClick} key="addLanguageButton">
-                                <i className="material-icons-outlined">add_circle_outline</i>
-                                <p>Add a language</p>
-                            </button>
-                        );
-                    }
-                })}
-            </>
-        )
+      return (
+        <>
+          {selectAttributes.map((language) => {
+            if (language.visible && language.name !== 'otherSelect') {
+              return (
+                <div className="languageRow" key={language.name}>
+                  <label htmlFor={language.name}>{language.label}</label>
+                  <GenericSelect
+                    name={language.name}
+                    placeholder={placeholder}
+                    options={[...options]}
+                  />
+                </div>
+              );
+            } else if (language.visible && language.name === 'otherSelect') {
+              return (
+                <div className="languageRow" key={language.name}>
+                  <GenericSelect
+                    name={language.name}
+                    placeholder={placeholder}
+                    options={languages}
+                  />
+                  <GenericSelect
+                    name={language.name}
+                    placeholder={placeholder}
+                    options={[...options]}
+                  />
+                </div>
+              );
+            } else {
+              return (
+                <button id="addLanguageButton" onClick={handleClick} key="addLanguageButton">
+                  <i className="material-icons-outlined">add_circle_outline</i>
+                  <p>Add a language</p>
+                </button>
+              );
+            }
+          })}
+        </>
+      );
     } else {
-        return (
-            <div className="languageRow">
-                <p>Loading languages...</p>
-            </div>
-        )
+      return (
+        <div className="languageRow">
+          <p>Loading languages...</p>
+        </div>
+      );
     }
-  }
+  };
 
   return renderIfThereIsLanguagesData();
 }

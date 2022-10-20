@@ -5,9 +5,7 @@
 // Profile creation styles
 
 .profile {
-
   form {
-
     section {
       width: 65%;
       text-align: center;
@@ -74,7 +72,7 @@
 }
 
 .input-label-required {
-  &:after {
+  &::after {
     content: " *";
     color: red;
   }

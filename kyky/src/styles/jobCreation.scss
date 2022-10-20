@@ -6,8 +6,8 @@ p {
     display: flex;
     height: 300px;
     width: 625px;
-    margin: 12px 0 12px 0;
-    padding: 0px 20px 265px 20px;
+    margin: 12px 0;
+    padding: 0 20px 265px;
     border-radius: 8px;
     border: solid 1px gainsboro;
     box-shadow: 2px 2px 9px gainsboro;
@@ -33,22 +33,25 @@ p {
     top: 20px;
     right: 20px;
 }
+
 .picContainer {
     display: flex;
     height: fit-content;
     width: auto;
     justify-content: space-between;
 }
+
 .picBox {
     display: flex;
     height: 140px;
     width: 130px;
-    margin: 12px 0px 12px 0px;
+    margin: 12px 0;
     border: 1px solid gainsboro;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
 }
+
 .picIcon {
     position: relative;
     font-weight: 700;
