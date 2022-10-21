@@ -38,6 +38,12 @@ export default function GetStarted() {
   const [tip, setTip] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
 
+  function previousPhase() {
+    setTitle(title - 1);
+    setTip(tip - 1);
+    setCurrentStep(currentStep - 1);
+  }
+
   function nextPhase() {
     setTitle(title + 1);
     setTip(tip + 1);
@@ -59,12 +65,19 @@ export default function GetStarted() {
         {currentStep === 6 && <Step6 />}
         {currentStep === 7 && <Step7 />}
         {currentStep === 8 && <Step8 />}
-        {currentStep < steps && (
-          <button className="nextButton" onClick={nextPhase}>
-            NEXT
-          </button>
-        )}
-        {currentStep === steps && <button className="submitButton">Submit Profile</button>}
+        <div>
+          {currentStep > 1 && (
+            <button className="previousButton" onClick={previousPhase}>
+              Previous
+            </button>
+          )}
+          {currentStep < steps && (
+            <button className="nextButton" onClick={nextPhase}>
+              Next
+            </button>
+          )}
+          {currentStep === steps && <button className="submitButton">Submit Profile</button>}
+        </div>
       </div>
     </div>
   );
