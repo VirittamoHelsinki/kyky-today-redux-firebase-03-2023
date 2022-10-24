@@ -227,7 +227,7 @@ input {
   .magGlass {
     height: 20px;
     width: 20px;
-    position: absolute;
+    position: sticky;
     bottom: 365px;
     left: 845px;
   }
@@ -863,3 +863,4 @@ input {
     opacity: 0.7;
   }
 }
+

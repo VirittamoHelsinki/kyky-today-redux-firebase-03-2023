@@ -6,6 +6,7 @@ import Step5 from './components/Step5';
 import Step6 from './components/Step6';
 import Step7 from './components/Step7';
 import Step8 from './components/Step8';
+import Step9 from './components/Step9';
 import '../../styles/NewProfileCreation.scss';
 import { useState } from 'react';
 
@@ -18,7 +19,8 @@ export default function GetStarted() {
     'What is the main service you offer?',
     'Please add your hourly rate.',
     'Last details before you publish your profile',
-    'Preview Profile'
+    'Preview Profile',
+    ' '
   ];
 
   const tips = [
@@ -29,10 +31,11 @@ export default function GetStarted() {
     'Choose one service that best describes the type of work you do.',
     'Clients will see this rate on your profile.',
     'A professional photo helps build trust with your clients.',
-    'You can still edit your profile as you want.'
+    'You can still edit your profile as you want.',
+    ' '
   ];
 
-  const steps = 8;
+  const steps = 9;
 
   const [title, setTitle] = useState(0);
   const [tip, setTip] = useState(0);
@@ -65,6 +68,7 @@ export default function GetStarted() {
         {currentStep === 6 && <Step6 />}
         {currentStep === 7 && <Step7 />}
         {currentStep === 8 && <Step8 />}
+        {currentStep === 9 && <Step9 />}
         <div>
           {currentStep > 1 && (
             <button className="previousButton" onClick={previousPhase}>
