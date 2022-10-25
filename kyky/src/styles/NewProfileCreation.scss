@@ -864,18 +864,20 @@ input {
   }
 }
 .step9 {
-  height: 70vh;
+  .mainContainer1 {
+    margin-bottom: 50px;
+  }
   .leftContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: start;
-    height: 400px;
+    height: fit-content;
     width: 600px;
+    margin-right: 50px;
 
     position: relative;
-    right: 240px;
-    bottom: 90px;
+    bottom: 100px;
     text-align: start;
     .success {
       font-size: 1.875rem;
@@ -888,22 +890,31 @@ input {
     flex-direction: column;
     height: fit-content;
     width: 400px;
-    border: 1px solid black;
+    border: $box-border;
 
     position: relative;
-    left: 500px;
-    bottom: 450px;
 
     .devPhoto {
       border-radius: 10px;
     }
     .profileContainer {
       display: flex;
-      flex-direction: row;
+
       margin-left: 20px;
       align-items: center;
+
       position: relative;
       bottom: 40px;
+
+      .profileIcon {
+        width: 50px;
+        height: auto;
+      }
+      .firstName {
+        position: relative;
+        top: 50px;
+        left: 20px;
+      }
     }
     .text1,
     .text2,
