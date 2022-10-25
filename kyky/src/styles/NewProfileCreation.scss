@@ -883,13 +883,32 @@ input {
   }
   .rightContainer {
     display: flex;
-    flex-wrap: wrap;
+
     flex-direction: column;
     height: fit-content;
     width: 400px;
     border: 1px solid black;
+
     position: relative;
     left: 500px;
     bottom: 450px;
+
+    .devPhoto {
+      border-radius: 10px;
+    }
+    .profileContainer {
+      display: flex;
+      flex-direction: row;
+      margin-left: 20px;
+      align-items: center;
+      position: relative;
+      bottom: 40px;
+    }
+    .text1,
+    .text2,
+    .text3 {
+      text-align: left;
+      padding-left: 30px;
+    }
   }
 }
