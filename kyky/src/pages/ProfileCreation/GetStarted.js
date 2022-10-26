@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import '../../styles/NewProfileCreation.scss';
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
@@ -7,8 +9,6 @@ import Step6 from './components/Step6';
 import Step7 from './components/Step7';
 import Step8 from './components/Step8';
 import Step9 from './components/Step9';
-import '../../styles/NewProfileCreation.scss';
-import { useState } from 'react';
 
 export default function GetStarted() {
   const titles = [

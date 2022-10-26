@@ -1,16 +1,13 @@
 import '../../../styles/NewProfileCreation.scss';
 import '../../../styles/_components.scss';
-import Select, { components } from 'react-select';
-/*import ReactFlagsSelect from 'react-flags-select';*/
-import { ReactComponent as CheckMark } from '../../../image/check-mark.svg';
+import Select from 'react-select';
 import React, { useState } from 'react';
 import Countries from '../../../countries.json';
 import CountriesWithDialCodes from '../../../countriesWithDialCodes.json';
 import { ReactComponent as ProfileIcon2 } from '../../../image/profileicon2.svg';
 import AddPhoto from './AddPhoto';
 
-export default function Step7(currentStep) {
-  /*const [selected, setSelected] = useState('');*/
+export default function Step7() {
   const [upload, setUpload] = useState('');
   const [saved2, setSaved2] = useState(true);
 
@@ -45,7 +42,6 @@ export default function Step7(currentStep) {
             <input className="detailsInputShort" type="text"></input>
           </div>
 
-          {/*<ReactFlagsSelect>selected={selected} onSelect={(code => setSelected(code))} </ReactFlagsSelect> */}
           <div className="phoneContainer">
             <label>Phone</label>
             <Select
