@@ -2,7 +2,7 @@ import '../../../styles/NewProfileCreation.scss';
 import React from 'react';
 import Select from 'react-select';
 import Input from '../../../components/Input';
-
+import { GenericSelect } from './Select';
 export default function EducationExperience({ setSaved }) {
   const months = [
     { value: 'january', label: 'January' },
@@ -86,10 +86,10 @@ export default function EducationExperience({ setSaved }) {
         <div className="endDateLabel">End Date*</div>
       </div>
       <div className="monthYearContainer">
-        <Select placeholder="Month" className="dateSelect" options={months}></Select>
-        <Select placeholder="Year" className="dateSelect" options={years}></Select>
-        <Select placeholder="Month" className="dateSelect" options={months}></Select>
-        <Select placeholder="Year" className="dateSelect" options={years}></Select>
+        <GenericSelect placeholder="Month" className="dateSelect" options={months}></GenericSelect>
+        <GenericSelect placeholder="Year" className="dateSelect" options={years}></GenericSelect>
+        <GenericSelect placeholder="Month" className="dateSelect" options={months}></GenericSelect>
+        <GenericSelect placeholder="Year" className="dateSelect" options={years}></GenericSelect>
       </div>
 
       <button type="button" className="saveButton" onClick={() => setSaved(true)}>

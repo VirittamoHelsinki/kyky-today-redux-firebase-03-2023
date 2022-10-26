@@ -1,6 +1,7 @@
 import '../../../styles/NewProfileCreation.scss';
 import '../../../styles/_components.scss';
 import Select from 'react-select';
+import { GenericSelect } from './Select';
 import React, { useState } from 'react';
 import Countries from '../../../countries.json';
 import CountriesWithDialCodes from '../../../countriesWithDialCodes.json';
@@ -28,11 +29,11 @@ export default function Step7() {
         </div>
         <div className="detailsContainer">
           <label>Country*</label>
-          <Select
+          <GenericSelect
             className="select-container3"
             options={Countries}
             getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.code}></Select>
+            getOptionValue={(option) => option.code}></GenericSelect>
           <label>Street Address*(won’t show on profile)</label>
           <input className="detailsInput"></input>
           <label>City*</label>

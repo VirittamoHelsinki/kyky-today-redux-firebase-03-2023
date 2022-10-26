@@ -218,9 +218,14 @@ input {
 
     .addedSkill {
       display: flex;
-      height: 40px;
-      width: 60px;
-      background-color: #00a088;
+      flex-wrap: wrap;
+      height: 45px;
+      width: fit-content;
+      border-radius: 13px;
+      margin: 20px;
+      padding: 10px 20px;
+      background-color: #063831;
+      color: #fff;
     }
   }
 
@@ -324,6 +329,9 @@ input {
   .educationContainer {
     .inputShort {
       margin-bottom: 50px;
+    }
+    .inputShort2 {
+      margin-bottom: 20px;
     }
   }
 
@@ -580,9 +588,10 @@ input {
 
   .photoContainer {
     display: flex;
-    height: 600px;
+    height: 500px;
     width: 250px;
     border: 1px solid rgb(160 158 158);
+    margin-top: 20px;
     padding: 30px 20px 350px;
     flex-direction: column;
     align-items: center;
@@ -596,7 +605,7 @@ input {
       color: #387a70;
       background-color: #fff;
       border: 1px solid #387a70;
-      margin: auto;
+      margin-top: 20px;
     }
   }
 
@@ -864,17 +873,20 @@ input {
   }
 }
 .step9 {
+  .mainContainer1 {
+    margin-bottom: 50px;
+  }
   .leftContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    height: 400px;
+    height: fit-content;
     width: 600px;
+    margin-right: 50px;
 
     position: relative;
-    right: 240px;
-    bottom: 90px;
+    bottom: 100px;
     text-align: start;
     .success {
       font-size: 1.875rem;
@@ -883,13 +895,41 @@ input {
   }
   .rightContainer {
     display: flex;
-    flex-wrap: wrap;
+
     flex-direction: column;
     height: fit-content;
     width: 400px;
-    border: 1px solid black;
+    border: $box-border;
+
     position: relative;
-    left: 500px;
-    bottom: 450px;
+
+    .devPhoto {
+      border-radius: 10px;
+    }
+    .profileContainer {
+      display: flex;
+
+      margin-left: 20px;
+      align-items: center;
+
+      position: relative;
+      bottom: 40px;
+
+      .profileIcon {
+        width: 50px;
+        height: auto;
+      }
+      .firstName {
+        position: relative;
+        top: 50px;
+        left: 20px;
+      }
+    }
+    .text1,
+    .text2,
+    .text3 {
+      text-align: left;
+      padding-left: 30px;
+    }
   }
 }
