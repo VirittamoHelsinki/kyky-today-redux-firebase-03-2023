@@ -30,6 +30,8 @@ input {
   font-family: Roboto, sans-serif;
 }
 
+//NewProfileCreation.js starts here
+
 .mainContainer1 {
   display: flex;
   height: fit-content;
@@ -47,8 +49,6 @@ input {
   justify-content: space-between;
   height: 450px;
   width: 600px;
-
-  // border: 2px solid black;
   position: relative;
 }
 
@@ -129,6 +129,9 @@ input {
     padding-right: 40px;
   }
 }
+
+//Step1.js starts here
+
 
 .get-started {
   h1 {
@@ -236,6 +239,7 @@ input {
     bottom: 365px;
     left: 845px;
   }
+    //buttons for GetStarted.js
 
   .previousButton,
   .nextButton,
@@ -258,6 +262,8 @@ input {
     background-color: white;
     color: #00a088;
   }
+
+    //Step2.js starts here
 
   .experienceContainer {
     display: flex;
@@ -295,6 +301,7 @@ input {
     border-radius: 50%;
     background-color: #fff;
   }
+    //WorkExperience.js & EducationExperience.js starts here
 
   .workContainer,
   .educationContainer {
@@ -432,6 +439,8 @@ input {
   }
 }
 
+  //Step3.js starts here
+
 .step {
   margin: auto 20px;
 
@@ -535,6 +544,8 @@ input {
   }
 }
 
+  //Step4.js starts here
+
 .workInput {
   display: flex;
   height: 380px;
@@ -549,10 +560,14 @@ input {
   resize: vertical;
 }
 
+  //Step5.js starts here
+
 .select-container2 {
   width: 400px;
   margin: 50px 0 200px;
 }
+
+  //Step6.js starts here
 
 .hourlyContainer {
   display: flex;
@@ -578,6 +593,8 @@ input {
   position: relative;
   bottom: 100px;
 }
+
+  //Step7.js & AddPhoto.js starts here
 
 .detailsMainContainer {
   display: flex;
@@ -740,6 +757,8 @@ input {
   }
 }
 
+  //Step8.js starts here
+
 .previewMainContainer {
   display: flex;
   flex-direction: column;
@@ -872,6 +891,9 @@ input {
     opacity: 0.7;
   }
 }
+
+  //Step9.js starts here
+  
 .step9 {
   .mainContainer1 {
     margin-bottom: 50px;
