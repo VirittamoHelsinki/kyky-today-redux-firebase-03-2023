@@ -6,11 +6,10 @@ import Skills from '../../../mock_skills.json';
 
 export default function Step1() {
   const [query, setQuery] = useState('');
-  const [skills, setSkills] = useState('');
+  const [skills, setSkills] = useState([]);
 
   const handleClick = (event) => {
-    setSkills(event.target.value);
-    console.log(true);
+    setSkills(skills.concat(event.target.value));
   };
 
   return (
@@ -33,15 +32,27 @@ export default function Step1() {
           } else if (post.skill.toLowerCase().startsWith(query.toLowerCase())) {
             return post;
           }
-        }).map((post, index) => (
-          <button className="box" key={index} onClick={handleClick} value={post.skill}>
-            <p onClick={handleClick} value={post.skill}>
-              {post.skill}
-            </p>
-          </button>
-        ))}
+        }).map((post, index) => {
+          console.log(index);
+          return (
+            <button className="box" key={index} onClick={handleClick}>
+              <p value={post.skill} key={index}>
+                {post.skill}
+              </p>
+            </button>
+          );
+        })}
 
-        <div className="addedSkill">{skills}</div>
+        <div className="addSkill">
+          {skills.map((skill, index) => {
+            return (
+              <span className="addedSkill" key={index}>
+                {skills}
+              </span>
+            );
+          })}
+        </div>
+
         <div className="magGlass">
           <MagGlass />
         </div>

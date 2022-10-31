@@ -30,7 +30,7 @@ input {
   font-family: Roboto, sans-serif;
 }
 
-//NewProfileCreation.js starts here
+// NewProfileCreation.js starts here
 
 .mainContainer1 {
   display: flex;
@@ -130,8 +130,7 @@ input {
   }
 }
 
-//Step1.js starts here
-
+// Step1.js starts here
 
 .get-started {
   h1 {
@@ -239,7 +238,8 @@ input {
     bottom: 365px;
     left: 845px;
   }
-    //buttons for GetStarted.js
+
+  // buttons for GetStarted.js
 
   .previousButton,
   .nextButton,
@@ -263,7 +263,7 @@ input {
     color: #00a088;
   }
 
-    //Step2.js starts here
+  // Step2.js starts here
 
   .experienceContainer {
     display: flex;
@@ -301,7 +301,8 @@ input {
     border-radius: 50%;
     background-color: #fff;
   }
-    //WorkExperience.js & EducationExperience.js starts here
+
+  // WorkExperience.js & EducationExperience.js starts here
 
   .workContainer,
   .educationContainer {
@@ -337,6 +338,7 @@ input {
     .inputShort {
       margin-bottom: 50px;
     }
+
     .inputShort2 {
       margin-bottom: 20px;
     }
@@ -439,7 +441,7 @@ input {
   }
 }
 
-  //Step3.js starts here
+// Step3.js starts here
 
 .step {
   margin: auto 20px;
@@ -544,7 +546,7 @@ input {
   }
 }
 
-  //Step4.js starts here
+// Step4.js starts here
 
 .workInput {
   display: flex;
@@ -560,14 +562,14 @@ input {
   resize: vertical;
 }
 
-  //Step5.js starts here
+// Step5.js starts here
 
 .select-container2 {
   width: 400px;
   margin: 50px 0 200px;
 }
 
-  //Step6.js starts here
+// Step6.js starts here
 
 .hourlyContainer {
   display: flex;
@@ -594,7 +596,7 @@ input {
   bottom: 100px;
 }
 
-  //Step7.js & AddPhoto.js starts here
+// Step7.js & AddPhoto.js starts here
 
 .detailsMainContainer {
   display: flex;
@@ -757,7 +759,7 @@ input {
   }
 }
 
-  //Step8.js starts here
+// Step8.js starts here
 
 .previewMainContainer {
   display: flex;
@@ -892,12 +894,13 @@ input {
   }
 }
 
-  //Step9.js starts here
-  
+// Step9.js starts here
+
 .step9 {
   .mainContainer1 {
     margin-bottom: 50px;
   }
+
   .leftContainer {
     display: flex;
     flex-direction: column;
@@ -906,34 +909,32 @@ input {
     height: fit-content;
     width: 600px;
     margin-right: 50px;
-
     position: relative;
     bottom: 100px;
     text-align: start;
+
     .success {
       font-size: 1.875rem;
       text-align: left;
     }
   }
+
   .rightContainer {
     display: flex;
-
     flex-direction: column;
     height: fit-content;
     width: 400px;
     border: $box-border;
-
     position: relative;
 
     .devPhoto {
       border-radius: 10px;
     }
+
     .profileContainer {
       display: flex;
-
       margin-left: 20px;
       align-items: center;
-
       position: relative;
       bottom: 40px;
 
@@ -941,12 +942,14 @@ input {
         width: 50px;
         height: auto;
       }
+
       .firstName {
         position: relative;
         top: 50px;
         left: 20px;
       }
     }
+
     .text1,
     .text2,
     .text3 {
