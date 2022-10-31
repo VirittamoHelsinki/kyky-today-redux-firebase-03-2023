@@ -1,6 +1,6 @@
 import '../../../styles/NewProfileCreation.scss';
 import React from 'react';
-import Select from 'react-select';
+
 import Input from '../../../components/Input';
 import { GenericSelect } from './Select';
 export default function EducationExperience({ setSaved }) {

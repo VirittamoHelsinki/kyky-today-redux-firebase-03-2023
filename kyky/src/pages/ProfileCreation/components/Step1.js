@@ -40,6 +40,7 @@ export default function Step1(currentStep) {
             </p>
           </button>
         ))}
+
         <div className="addedSkill">{skills}</div>
         <div className="magGlass">
           <MagGlass />
