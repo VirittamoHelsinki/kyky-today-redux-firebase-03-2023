@@ -1,10 +1,10 @@
+import React from 'react';
+import { useState } from 'react';
 import '../../../styles/NewProfileCreation.scss';
 import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
-import { useState } from 'react';
-import React from 'react';
 
-export default function Step1(currentStep) {
+export default function Step1() {
   const [query, setQuery] = useState('');
   const [skills, setSkills] = useState('');
 

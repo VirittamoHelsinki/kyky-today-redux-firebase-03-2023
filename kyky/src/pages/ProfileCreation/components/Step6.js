@@ -2,7 +2,7 @@ import '../../../styles/NewProfileCreation.scss';
 
 import React from 'react';
 
-export default function Step6(currentStep) {
+export default function Step6() {
   return (
     <div className="step step6">
       <div className="hourlyContainer">

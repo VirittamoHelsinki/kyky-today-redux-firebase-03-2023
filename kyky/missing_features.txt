@@ -1,0 +1,31 @@
+This file lists some missing features in the Job Calendar section of the app.
+
+Currently the entire calendar solely relies on localStorage to work, this should be changed to use the database instead.
+This should go without saying, but any bugs that are found should be ironed out!
+
+Job Calendar:
+  - Confirmation modal does not exist:
+    When confirming pending jobs, there should be a modal to confirm the action.
+    Currently, there's not even a way to confirm jobs, ADD THIS!
+  - Pending jobs are not differentiated from confirmed jobs:
+    Pending jobs should be listed and have a confirmation button.
+  - Move job select input to header:
+    It is currently at the middle of the page.
+
+  Refer to the figma of the job calendar for more details.
+
+Settings:
+  - Export/Import does nothing:
+    The export/import buttons do nothing.
+    They should export/import the data to/from a file.
+  - Settings are not actually used by the app:
+    They are saved to localStorage, but the app does not use them.
+
+Needs overhauling:
+Jobs are saved as a json file called "jobs.json".
+This shouldn't be the case! Instead user should be able to add jobs from the app itself.
+Jobs should be stored in the database and then used from there. 
+
+Once the jobs.json file is removed and replaced with the database, an alert should be shown in the app to the user if they have not yet added any jobs.
+
+These are probably not all of the issues, but these are the most glaring ones. Refer to the figma design and compare it with the app to see what's missing.

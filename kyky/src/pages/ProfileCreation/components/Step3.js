@@ -1,7 +1,7 @@
 import { LanguagesSelect } from './Select';
 import { useState } from 'react';
 
-export default function Step3(currentStep) {
+export default function Step3() {
   const options = [
     { value: 'basic', label: 'Basic' },
     { value: 'conversational', label: 'Conversational' },

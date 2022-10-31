@@ -8,7 +8,7 @@ import AddPhoto from './AddPhoto';
 import WorkExperience from './WorkExperience';
 import EducationExperience from './EducationExperience';
 
-export default function Step8(currentStep) {
+export default function Step8() {
   const [upload, setUpload] = useState('');
   const [saved, setSaved] = useState(true);
   const [saved2, setSaved2] = useState(true);
