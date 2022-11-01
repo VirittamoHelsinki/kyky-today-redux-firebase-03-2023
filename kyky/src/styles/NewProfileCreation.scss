@@ -218,6 +218,14 @@ input {
       padding-right: 50px;
     }
 
+    .addSkill {
+      height: fit-content;
+      width: auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
     .addedSkill {
       display: flex;
       flex-wrap: wrap;

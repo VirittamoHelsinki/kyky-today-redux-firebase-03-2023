@@ -44,7 +44,9 @@ export default function Step1() {
         })}
 
         <div className="addSkill">
-          {skills.map((skill, index) => {
+          {' '}
+          {skills.map((post, index) => {
+            console.log(skills);
             return (
               <span className="addedSkill" key={index}>
                 {skills}
