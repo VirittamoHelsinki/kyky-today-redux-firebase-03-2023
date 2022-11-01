@@ -29,26 +29,26 @@ $kyky-primary-lighter: rgb(232 254 248);
 $alert-red: #f51720;
 
 // font families
-$font-family-default: "Roboto", sans-serif;
+$font-family-default: 'Roboto', sans-serif;
 
 // font sizes
-$base-font-size: 1rem; //--16px
+$base-font-size: 1rem; // --16px
 
 // paragraph, label, etc. text sizes
 
-$font-size-xxs: calc($base-font-size * 0.75); //--12px
-$font-size-xs: calc($base-font-size * 0.813); //--13px
-$font-size-s: calc($base-font-size * 0.875); //--14px
-$font-size-m: calc($base-font-size * 1); //--16px
-$font-size-l: calc($base-font-size * 1.125); //--18px
-$font-size-xl: calc($base-font-size * 1.25); //--20px
-$font-size-xxl: calc($base-font-size * 1.5); //--24px
+$font-size-xxs: calc($base-font-size * 0.75); // --12px
+$font-size-xs: calc($base-font-size * 0.813); // --13px
+$font-size-s: calc($base-font-size * 0.875); // --14px
+$font-size-m: calc($base-font-size * 1); // --16px
+$font-size-l: calc($base-font-size * 1.125); // --18px
+$font-size-xl: calc($base-font-size * 1.25); // --20px
+$font-size-xxl: calc($base-font-size * 1.5); // --24px
 
 // header sizes
 
-$heading-size-s: calc($base-font-size * 1.25); //--20px
-$heading-size-m: calc($base-font-size * 1.875); //--30px
-$heading-size-l: calc($base-font-size * 2.5); //--40px
+$heading-size-s: calc($base-font-size * 1.25); // --20px
+$heading-size-m: calc($base-font-size * 1.875); // --30px
+$heading-size-l: calc($base-font-size * 2.5); // --40px
 
 // font weights
 $font-weight-thin: 100;
@@ -61,24 +61,24 @@ $font-weight-bold: 700;
 $font-weight-extra-bold: 800;
 $font-weight-black: 900;
 
-//line-height
+// line-height
 $base-line-height: 20px;
 
-//margins
-$base-margin: 1em; //--16px
-$margin-small: calc($base-margin * 0.469); //--7.5px
-$margin-medium: calc($base-margin * 0.844); //--13.5px
-$margin-medium-large: calc($base-margin * 1.563); //--25px
-$margin-large: calc($base-margin * 1.875); //--30px
-$margin-xlarge: calc($base-margin * 2.813); //--45px
+// margins
+$base-margin: 1em; // --16px
+$margin-small: calc($base-margin * 0.469); // --7.5px
+$margin-medium: calc($base-margin * 0.844); // --13.5px
+$margin-medium-large: calc($base-margin * 1.563); // --25px
+$margin-large: calc($base-margin * 1.875); // --30px
+$margin-xlarge: calc($base-margin * 2.813); // --45px
 
-//paddings
+// paddings
 $base-padding: 1em; //--16px
-$padding-small: calc($base-padding * 0.469); //--7.5px
-$padding-medium: calc($base-padding * 0.844); //--13.5px
-$padding-medium-large: calc($base-padding * 1.563); //--25px
-$padding-large: calc($base-padding * 1.875); //--30px
-$padding-xlarge: calc($base-padding * 2.813); //--45px
+$padding-small: calc($base-padding * 0.469); // --7.5px
+$padding-medium: calc($base-padding * 0.844); // --13.5px
+$padding-medium-large: calc($base-padding * 1.563); // --25px
+$padding-large: calc($base-padding * 1.875); // --30px
+$padding-xlarge: calc($base-padding * 2.813); // --45px
 
 // shadows
 $base-box-shadow: 0 4px 4px 0 #00000040;
@@ -87,22 +87,22 @@ $base-box-shadow: 0 4px 4px 0 #00000040;
 $base-border-thickness: 1px;
 $base-border-radius: 10px;
 
-//element widths
+// element widths
 $wide: 1185px;
 $medium: 930px;
 $small: 575px;
 
-//material icons
-$material-icons-font-path: "./" !default;
+// material icons
+$material-icons-font-path: './' !default;
 $material-icons-font-size: 24px !default;
 $material-icons-font-display: block !default;
 
-//mixins
+// mixins
 
 @mixin fontScale($size) {
-    font-size: calc($size * $base-font-size);
+  font-size: calc($size * $base-font-size);
 }
 
 @mixin elemWidth($size) {
-    width: clamp(270px, 100%, $size); // size: $wide, $medium, $small
+  width: clamp(270px, 100%, $size); // size: $wide, $medium, $small
 }
