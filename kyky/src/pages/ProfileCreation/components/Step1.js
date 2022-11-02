@@ -1,15 +1,16 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, createRef } from 'react';
 import '../../../styles/NewProfileCreation.scss';
 import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
 
 export default function Step1() {
+  const inputRef = createRef();
   const [query, setQuery] = useState('');
   const [skills, setSkills] = useState([]);
 
   const handleClick = (event) => {
-    setSkills((skills) => skills.concat(event.target.value));
+    setSkills(skills.concat(event.target.value));
   };
 
   return (
@@ -32,28 +33,28 @@ export default function Step1() {
           } else if (post.skill.toLowerCase().startsWith(query.toLowerCase())) {
             return post;
           }
-        }).map((post, index) => {
-          console.log(index);
+        }).map((post) => {
           return (
-            <button className="skillBox" key={index} value={post.skill} onClick={handleClick}>
-              <p value={post.skill} key={index}>
+            <button className="skillBox" key={post.id} value={post.skill} onClick={handleClick}>
+              <p value={post.skill} key={post.id}>
                 {post.skill}
               </p>
             </button>
           );
-        })}{' '}
-        <div className="addSkill">
-          {' '}
-          {skills.map((post, index) => {
+        })}
+
+        <ul className="addSkill">
+          {skills.map((skill) => {
             console.log(skills);
-            console.log(index);
+
+            console.log(skill);
             return (
-              <span className="addedSkill" key={index} value={post.skill}>
-                {skills}
-              </span>
+              <li className="addedSkill" key={skill} value={skill}>
+                {skill}
+              </li>
             );
           })}
-        </div>
+        </ul>
         <div className="magGlass">
           <MagGlass />
         </div>
