@@ -9,7 +9,7 @@ export default function Step1() {
   const [skills, setSkills] = useState([]);
 
   const handleClick = (event) => {
-    setSkills(skills.concat(event.target.value));
+    setSkills((skills) => skills.concat(event.target.value));
   };
 
   return (
@@ -35,7 +35,7 @@ export default function Step1() {
         }).map((post, index) => {
           console.log(index);
           return (
-            <button className="box" id="skillBox" key={index} onClick={handleClick}>
+            <button className="skillBox" key={index} value={post.skill} onClick={handleClick}>
               <p value={post.skill} key={index}>
                 {post.skill}
               </p>
@@ -46,7 +46,12 @@ export default function Step1() {
           {' '}
           {skills.map((post, index) => {
             console.log(skills);
-            return <span className="addedSkill" key={index}></span>;
+            console.log(index);
+            return (
+              <span className="addedSkill" key={index} value={post.skill}>
+                {skills}
+              </span>
+            );
           })}
         </div>
         <div className="magGlass">
