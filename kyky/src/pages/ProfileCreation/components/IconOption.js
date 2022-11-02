@@ -1,9 +1,9 @@
 import { components } from 'react-select';
 import { ReactComponent as CheckMark } from '../../../image/check-mark.svg';
 
-const { Option } = components;
-
 export default function IconOption(props) {
+  const { Option } = components;
+
   return (
     <Option {...props}>
       {props.isSelected ? (

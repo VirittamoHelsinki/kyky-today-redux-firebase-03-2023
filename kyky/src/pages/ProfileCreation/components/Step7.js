@@ -1,6 +1,5 @@
 import '../../../styles/NewProfileCreation.scss';
 import '../../../styles/_components.scss';
-import Select from 'react-select';
 import { GenericSelect } from './Select';
 import React, { useState } from 'react';
 import Countries from '../../../countries.json';
@@ -31,9 +30,10 @@ export default function Step7() {
           <label>Country*</label>
           <GenericSelect
             className="select-container3"
-            options={Countries}
-            getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.code}></GenericSelect>
+            name="countrySelect"
+            placeholder="Select..."
+            options={Countries.map((country) => ({ value: country.code, label: country.name }))}
+          />
           <label>Street Address*(won’t show on profile)</label>
           <input className="detailsInput"></input>
           <label>City*</label>
@@ -45,11 +45,15 @@ export default function Step7() {
 
           <div className="phoneContainer">
             <label>Phone</label>
-            <Select
+            <GenericSelect
               className="select-container"
-              options={CountriesWithDialCodes}
-              getOptionLabel={(option) => [option.name, ' ', option.dial_code]}
-              getOptionValue={(option) => option.code}></Select>
+              name="phoneSelect"
+              placeholder="Select..."
+              options={CountriesWithDialCodes.map((country) => ({
+                value: country.code,
+                label: [country.name, ' ', country.dial_code]
+              }))}
+            />
             <input
               className="detailsInputPhone"
               placeholder="type your number"

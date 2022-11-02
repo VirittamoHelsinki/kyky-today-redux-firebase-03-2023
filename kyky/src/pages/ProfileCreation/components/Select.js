@@ -12,32 +12,17 @@ placeholder – placeholder text in Select component (required)
 options – options in Select component (dropdown menu), list of value-label pairs inside objects (required):
     { value: '...', label: '...' }, { value: '...', label: '...' }, ...
 [...options] is for creating new options array for each Select component with the same content
-getOptionLabel – function to define how the labels of Option components are being fetched (optional)
-getOptionValue – function to define how the values of Option components are being fetched (optional)
 */
-export function GenericSelect({
-  className = 'select-container',
-  name,
-  placeholder,
-  options,
-  getOptionLabel,
-  getOptionValue
-}) {
-  const renderReactSelect = () => {
-    return (
-      <ReactSelect
-        className={`${className !== 'select-container' ? className : 'select-container'}`}
-        name={name}
-        placeholder={placeholder}
-        options={[...options]}
-        getOptionLabel={getOptionLabel ? getOptionLabel : (option) => option.label}
-        getOptionValue={getOptionValue ? getOptionValue : (option) => option.value}
-        components={{ Option: IconOption }}
-      />
-    );
-  };
-
-  return renderReactSelect();
+export function GenericSelect({ className = 'select-container', name, placeholder, options }) {
+  return (
+    <ReactSelect
+      className={`${className !== 'select-container' ? className : 'select-container'}`}
+      name={name}
+      placeholder={placeholder}
+      options={[...options]}
+      components={{ Option: IconOption }}
+    />
+  );
 }
 
 /*
