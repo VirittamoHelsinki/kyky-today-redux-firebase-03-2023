@@ -35,26 +35,20 @@ export default function Step1() {
         }).map((post, index) => {
           console.log(index);
           return (
-            <button className="box" key={index} onClick={handleClick}>
+            <button className="box" id="skillBox" key={index} onClick={handleClick}>
               <p value={post.skill} key={index}>
                 {post.skill}
               </p>
             </button>
           );
-        })}
-
+        })}{' '}
         <div className="addSkill">
           {' '}
           {skills.map((post, index) => {
             console.log(skills);
-            return (
-              <span className="addedSkill" key={index}>
-                {skills}
-              </span>
-            );
+            return <span className="addedSkill" key={index}></span>;
           })}
         </div>
-
         <div className="magGlass">
           <MagGlass />
         </div>
