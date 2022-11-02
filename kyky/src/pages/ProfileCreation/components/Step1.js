@@ -1,11 +1,10 @@
 import React from 'react';
-import { useState, createRef } from 'react';
+import { useState } from 'react';
 import '../../../styles/NewProfileCreation.scss';
 import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
 
 export default function Step1() {
-  const inputRef = createRef();
   const [query, setQuery] = useState('');
   const [skills, setSkills] = useState([]);
 
@@ -23,6 +22,9 @@ export default function Step1() {
         aria-label="Please add a title about what you do"></input>
       <h1>Please add skills you have.</h1>
       <div className="addSkills">
+        <div className="magGlass">
+          <MagGlass />
+        </div>
         <input
           className="addSkillsInput"
           placeholder="Add Skills"
@@ -36,18 +38,13 @@ export default function Step1() {
         }).map((post) => {
           return (
             <button className="skillBox" key={post.id} value={post.skill} onClick={handleClick}>
-              <p value={post.skill} key={post.id}>
-                {post.skill}
-              </p>
+              {post.skill}
             </button>
           );
         })}
 
         <ul className="addSkill">
           {skills.map((skill) => {
-            console.log(skills);
-
-            console.log(skill);
             return (
               <li className="addedSkill" key={skill} value={skill}>
                 {skill}
@@ -55,9 +52,6 @@ export default function Step1() {
             );
           })}
         </ul>
-        <div className="magGlass">
-          <MagGlass />
-        </div>
       </div>
     </div>
   );
