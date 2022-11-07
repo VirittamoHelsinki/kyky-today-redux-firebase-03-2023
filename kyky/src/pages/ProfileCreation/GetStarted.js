@@ -40,6 +40,7 @@ export default function GetStarted() {
   const [title, setTitle] = useState(0);
   const [tip, setTip] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
+  const [step1FormData, setStep1FormData] = useState([{ titleInput: null, skills: [] }]);
 
   function previousPhase() {
     setTitle(title - 1);
@@ -53,6 +54,17 @@ export default function GetStarted() {
     setCurrentStep(currentStep + 1);
   }
 
+  function handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    setStep1FormData([{ [name]: value }]);
+  }
+
+  function sendForm(event) {
+    event.preventDefault();
+    console.log('Form sent');
+  }
+
   return (
     <div className="get-started">
       <div className="mainContainer">
@@ -60,28 +72,34 @@ export default function GetStarted() {
           <h1>{titles[title]}</h1>
           <p>{tips[tip]}</p>
         </div>
-        {currentStep === 1 && <Step1 />}
-        {currentStep === 2 && <Step2 />}
-        {currentStep === 3 && <Step3 />}
-        {currentStep === 4 && <Step4 />}
-        {currentStep === 5 && <Step5 />}
-        {currentStep === 6 && <Step6 />}
-        {currentStep === 7 && <Step7 />}
-        {currentStep === 8 && <Step8 />}
-        {currentStep === 9 && <Step9 />}
-        <div>
-          {currentStep > 1 && (
-            <button className="previousButton" onClick={previousPhase}>
-              Previous
-            </button>
-          )}
-          {currentStep < steps && (
-            <button className="nextButton" onClick={nextPhase}>
-              Next
-            </button>
-          )}
-          {currentStep === steps && <button className="submitButton">Submit Profile</button>}
-        </div>
+        <form onSubmit={sendForm}>
+          {currentStep === 1 && <Step1 step1FormData={step1FormData} handleChange={handleChange} />}
+          {currentStep === 2 && <Step2 />}
+          {currentStep === 3 && <Step3 />}
+          {currentStep === 4 && <Step4 />}
+          {currentStep === 5 && <Step5 />}
+          {currentStep === 6 && <Step6 />}
+          {currentStep === 7 && <Step7 />}
+          {currentStep === 8 && <Step8 />}
+          {currentStep === 9 && <Step9 />}
+          <div>
+            {currentStep > 1 && (
+              <button className="previousButton" onClick={previousPhase}>
+                Previous
+              </button>
+            )}
+            {currentStep < steps && (
+              <button className="nextButton" onClick={nextPhase}>
+                Next
+              </button>
+            )}
+            {currentStep === steps && (
+              <button className="submitButton" type="submit">
+                Submit Profile
+              </button>
+            )}
+          </div>
+        </form>
       </div>
     </div>
   );
