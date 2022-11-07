@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import AddPhoto from './AddPhoto';
 import WorkExperience from './WorkExperience';
 import EducationExperience from './EducationExperience';
+import AddSkills from './AddSkills';
 
 export default function Step8() {
   const [upload, setUpload] = useState('');
@@ -28,6 +29,11 @@ export default function Step8() {
   const educationExperience = () => {
     setSaved(false);
     setExperience(<EducationExperience setSaved={setSaved} />);
+  };
+
+  const addSkills= () => {
+    setSaved(false);
+    setExperience(<AddSkills setSaved={setSaved}/>)
   };
 
   return (
@@ -62,7 +68,7 @@ export default function Step8() {
         </div>
         <div className="previewContainer2">
           <h3>Skills</h3>
-          <button className="picIcon">+</button>
+          <button className="picIcon" onClick={() => addSkills()}>+</button>
           <div className="skillContainer">
             <div className="skill Html">HTML5</div>
             <div className="skill Css">CSS 3</div>
