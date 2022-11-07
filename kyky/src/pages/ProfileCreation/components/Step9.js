@@ -8,7 +8,7 @@ import { ReactComponent as ProfileIcon2 } from '../../../image/profileicon2.svg'
 export default function Step9() {
   return (
     <div className="step step9">
-      <div classname="mainContainer">
+      <div className="mainContainer">
         <div className="mainContainer1">
           <div className="leftContainer">
             <h1 className="success">Your profile has been successfully created, FirstName !</h1>
