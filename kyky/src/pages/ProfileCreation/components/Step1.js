@@ -5,11 +5,13 @@ import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
 
 export default function Step1() {
+  const [clearSkills, setClearSkills] = useState(Skills);
   const [query, setQuery] = useState('');
   const [skills, setSkills] = useState([]);
 
   const handleClick = (event) => {
     setSkills(skills.concat(event.target.value));
+    setClearSkills(clearSkills); //in progress
   };
 
   return (
@@ -37,7 +39,12 @@ export default function Step1() {
           }
         }).map((post) => {
           return (
-            <button className="skillBox" key={post.id} value={post.skill} onClick={handleClick}>
+            <button
+              className="skillBox"
+              id="skillBox"
+              key={post.id}
+              value={post.skill}
+              onClick={handleClick}>
               {post.skill}
             </button>
           );

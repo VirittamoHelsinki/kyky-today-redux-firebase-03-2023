@@ -87,9 +87,8 @@ export default function WorkExperience({ setSaved }) {
         label="Country"
         className="countryList"
         placeholder="Finland"
-        options={Countries}
-        getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.code}></GenericSelect>
+        options={Countries.map((country) => ({ value: country.code, label: country.name }))}
+      />
       <Checkbox className="workCheck">I am currently working in this role</Checkbox>
       <div className="dateContainer">
         <div className="startDateLabel">Start Date*</div>
