@@ -11,7 +11,10 @@ export default function Step1({ step1FormData, handleChange }) {
 
   const handleClick = (event) => {
     setSkills(skills.concat(event.target.value));
-    setClearSkills(clearSkills); //in progress
+    setClearSkills((Skills = []));
+    if (Skills === '') {
+      return clearSkills;
+    }
   };
 
   return (
