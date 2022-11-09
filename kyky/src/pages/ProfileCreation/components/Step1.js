@@ -6,15 +6,13 @@ import Skills from '../../../mock_skills.json';
 
 export default function Step1({ step1FormData, handleChange }) {
   const [clearSkills, setClearSkills] = useState(Skills);
+
   const [query, setQuery] = useState('');
   const [skills, setSkills] = useState([]);
 
   const handleClick = (event) => {
     setSkills(skills.concat(event.target.value));
-    setClearSkills((Skills = []));
-    if (Skills === '') {
-      return clearSkills;
-    }
+    setClearSkills(clearSkills.filter((post) => post.skill !== Skills.skill));
   };
 
   return (
