@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import LanguageSelect from './LanguageSelect';
 import "../styles/header.scss"
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
-export default function Header({ languages, lang, setLang, navlinks }) {
 
+const Header = ({ languages, lang, setLang, navlinks }) => {
   return (
     <div className="component-header">
       <nav className="nav-bar">
@@ -18,20 +17,18 @@ export default function Header({ languages, lang, setLang, navlinks }) {
           </li>
           <li className="dropdown">
             <span className="material-icons">menu</span>
-            <div className="dropdown-content">
-              <a>
+            <div className="dropdown-content">              
                 {navlinks.map(({ to, label }) => (
-                  <div key={to}>
+                  <a key={to}>
                     <Link to={to}>{label}</Link>
-                  </div>
-                ))}
-              </a>
+                  </a>
+                ))}            
             </div>
           </li>
-          
-
         </ul>
       </nav>
     </div>
   );
 }
+
+export default Header;
