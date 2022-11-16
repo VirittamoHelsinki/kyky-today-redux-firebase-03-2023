@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import LanguageSelect from './LanguageSelect';
+import "../styles/header.scss"
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
 export default function Header({ languages, lang, setLang, navlinks }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,26 +17,34 @@ export default function Header({ languages, lang, setLang, navlinks }) {
   };
 
   return (
-    <header className="component-header">
-      <KykyLogo/>
-      <LanguageSelect languages={languages} language={lang} setLanguage={setLang} />
+    <div className="component-header">
+      <nav className="nav-bar">
+        <ul>
+          <li>
+            <KykyLogo/>
+          </li>
+          <li>
+            <LanguageSelect languages={languages} language={lang} setLanguage={setLang} />
+          </li>
+          <li className="dropdown">
+            <span className="material-icons">menu</span>
+            <div className="dropdown-content">
+            {isOpen && (
+              <a>
+                  {navlinks.map(({ to, label }) => (
+                    <div key={to}>
+                      <Link to={to}>{label}</Link>
+                    </div>
+                  ))}
+                
+              </a>
+            )}
+            </div>
+          </li>
+          
 
-      <nav className="component-selector">
-        <button type="button" onClick={toggle}>
-          ** Select **
-        </button>
-        {isOpen && (
-          <div>
-            <ul>
-              {navlinks.map(({ to, label }) => (
-                <li key={to}>
-                  <Link to={to}>{label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        </ul>
       </nav>
-    </header>
+    </div>
   );
 }
