@@ -5,14 +5,14 @@ import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
 
 export default function Step1({ step1FormData, handleChange }) {
-  const [clearSkills, setClearSkills] = useState(Skills);
-
   const [query, setQuery] = useState('');
   const [skills, setSkills] = useState([]);
+  const [clearSkills, setClearSkills] = useState(Skills);
 
   const handleClick = (event) => {
     setSkills(skills.concat(event.target.value));
-    setClearSkills(clearSkills.filter((post) => post.skill !== Skills.skill));
+    setClearSkills(clearSkills.filter((post) => post.skill !== query));
+    console.log(clearSkills);
   };
 
   return (
