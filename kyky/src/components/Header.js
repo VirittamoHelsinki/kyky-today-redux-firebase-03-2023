@@ -4,19 +4,17 @@ import LanguageSelect from './LanguageSelect';
 import "../styles/header.scss"
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
 
-const Header = ({ languages, lang, setLang, navlinks }) => {
+const Header = ({ navlinks }) => {
   return (
-    <div className="component-header">
-      <nav className="nav-bar">
+    <header>
+      <h1 className="nav-title"><a href="/"><KykyLogo/></a></h1>
+      <nav>
         <ul>
           <li>
-            <KykyLogo/>
+            <a><Link to="/user-registration">Rekisteröidy</Link></a>
           </li>
-          <li>
-            <LanguageSelect languages={languages} language={lang} setLanguage={setLang} />
-          </li>
-          <li className="dropdown">
-            <span className="material-icons">menu</span>
+          <li className="dropdown items">
+            <span className="material-icons-outlined">menu</span>
             <div className="dropdown-content">              
                 {navlinks.map(({ to, label }) => (
                   <a key={to}>
@@ -25,9 +23,14 @@ const Header = ({ languages, lang, setLang, navlinks }) => {
                 ))}            
             </div>
           </li>
+          <li>
+            <span class="material-icons-outlined">
+              account_circle
+            </span>
+          </li>     
         </ul>
       </nav>
-    </div>
+    </header>
   );
 }
 
