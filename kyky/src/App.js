@@ -29,7 +29,8 @@ import ManageSchedules from './pages/Calendar/ManageSchedules';
 import CalendarSettings from './pages/Calendar/CalendarSettings';
 
 const languages = { fi, en };
-function App() {
+
+const App = () => {
   const [lang, setLang] = useState(languages.fi);
 
   const navlinks = [
@@ -46,32 +47,30 @@ function App() {
 
   return (
     <Language.Provider value={{ lang }}>
-      <>
-        <BrowserRouter>
-          <Header languages={languages} lang={lang} setLang={setLang} navlinks={navlinks} />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="profile-creation" element={<ProfileCreation />} />
-            <Route path="job-creation" element={<JobCreation />} />
-            <Route path="user-registration" element={<UserRegistration />} />
-            <Route path="contact-form" element={<ContactForm />} />
-            <Route path="user-log-in" element={<UserLogin />} />
-            <Route path="calendar" element={<MyCalendar />}>
-              <Route index element={<JobCalendar />} />
-              <Route path="overview" element={<Overview />} />
-              <Route path="schedule" element={<ManageSchedules />} />
-              <Route path="settings" element={<CalendarSettings />} />
-            </Route>
+      <BrowserRouter>
+        <Header navlinks={navlinks} />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="profile-creation" element={<ProfileCreation />} />
+          <Route path="job-creation" element={<JobCreation />} />
+          <Route path="user-registration" element={<UserRegistration />} />
+          <Route path="contact-form" element={<ContactForm />} />
+          <Route path="user-log-in" element={<UserLogin />} />
+          <Route path="calendar" element={<MyCalendar />}>
+            <Route index element={<JobCalendar />} />
+            <Route path="overview" element={<Overview />} />
+            <Route path="schedule" element={<ManageSchedules />} />
+            <Route path="settings" element={<CalendarSettings />} />
+          </Route>
 
-            <Route path="new-profile-creation" element={<Creation />}>
-              <Route index element={<NewProfileCreation />} />
-              <Route path="get-started" element={<GetStarted />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </>
+          <Route path="new-profile-creation" element={<Creation />}>
+            <Route index element={<NewProfileCreation />} />
+            <Route path="get-started" element={<GetStarted />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </Language.Provider>
   );
-}
+};
 
 export default App;
