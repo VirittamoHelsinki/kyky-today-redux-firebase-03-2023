@@ -5,21 +5,33 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  background: #387A701A;
 }
 
 .landing-page-nav-and-image-container {
   display: flex;
   margin-left: 5em;
-  margin-top: 5em;
+  margin-top: 3em;
 }
 
-.landing-page-navigation li {
+.landing-page-navigation {
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-page-navigation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 20vw;
+}
+
+.landing-page-navigation-container button {
   font-family: Poppins, sans-serif;
   font-size: 24px;
   font-weight: 500;
   line-height: 36px;
   border-bottom: #00A088 1px solid;
-  height: 100%;
   margin-bottom: 1em;
 }
 
@@ -29,8 +41,10 @@
 }
 
 .landing-page-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  text-align: center;
 }
 
 .landing-page-image h1 {
@@ -40,7 +54,6 @@
   letter-spacing: 0.03em;
   color: #063831;
 }
-
 
 .landing-page-footer button {
   display: flex;
@@ -54,8 +67,73 @@
   border: 1px solid #00A088;
   border-radius: 91px;
   height: 3em;
-  margin-left: 3em;
-  margin-right: 3em;
+  width: 15%;
   padding: 1em;
+  margin-right: 3em;
+  margin-left: 3em;
+  justify-content: center;
 }
 
+.image1 {
+  background-image: url("../../public/images/dog-walker.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image2 {
+  background-image: url("../../public/images/celebration.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image3 {
+  background-image: url("../../public/images/cooking.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image4 {
+  background-image: url("../../public/images/technology.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image5 {
+  background-image: url("../../public/images/gardening.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image6 {
+  background-image: url("../../public/images/photography.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image7 {
+  background-image: url("../../public/images/teaching.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image8 {
+  background-image: url("../../public/images/teaching.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
