@@ -5,7 +5,7 @@ import Input from '../../../components/Input';
 
 import Countries from '../../../countries.json';
 import { GenericSelect } from './Select';
-export default function WorkExperience({ setSaved }) {
+export default function WorkExperience({ formData, handleChange, setSaved }) {
   const months = [
     { value: 'january', label: 'January' },
     { value: 'february', label: 'February' },
@@ -71,12 +71,23 @@ export default function WorkExperience({ setSaved }) {
     <div className="workContainer">
       <h3>Add Work Experience</h3>
       <Input
-        className="inputLong"
-        type="text"
+        className="step2 inputLong"
+        id="titleInput"
+        name="titleInput"
+        value={formData?.step2?.titleInput}
+        onChange={handleChange}
         label="Title*"
         placeholder="Ex:Cleaner"
         labelOnFront></Input>
-      <Input className="inputLong" label="Company" placeholder="Ex:Frenska" labelOnFront></Input>
+      <Input
+        className="step2 inputLong"
+        id="companyInput"
+        name="companyInput"
+        value={formData?.step2?.companyInput}
+        onChange={handleChange}
+        label="Company"
+        placeholder="Ex:Frenska"
+        labelOnFront></Input>
       <Input
         className="inputShort"
         label="Location*"

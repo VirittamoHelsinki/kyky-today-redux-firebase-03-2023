@@ -40,7 +40,16 @@ export default function GetStarted() {
   const [title, setTitle] = useState(0);
   const [tip, setTip] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
-  const [step1FormData, setStep1FormData] = useState([{ titleInput: null, skills: [] }]);
+  const [formData, setFormData] = useState({
+    step1: {
+      titleInput: 'Web Designer',
+      skills: ['JavaScript', 'Java']
+    },
+    step2: {
+      titleInput: 'Junior Software Engineer',
+      companyInput: 'GoFore'
+    }
+  });
 
   function previousPhase() {
     setTitle(title - 1);
@@ -55,9 +64,52 @@ export default function GetStarted() {
   }
 
   function handleChange(event) {
+    const stepNumber = event.target.className.match('step[0-9]')[0];
     const name = event.target.name;
     const value = event.target.value;
-    setStep1FormData([{ [name]: value }]);
+    console.log('stepNumber in GetStarted.js handleChange function:', stepNumber);
+    console.log('name in GetStarted.js handleChange function:', name);
+    console.log('value in GetStarted.js handleChange function:', value);
+
+    /*
+    1.
+    const [formData, setFormData] = useState([
+      { step1TitleInput: '', step1Skills: [] },
+      { step2TitleInput: '', step2CompanyInput: '' }
+    ]);
+    
+    2.
+    {
+      step1: {
+        titleInput: 'Web Designer',
+        skills: ['JavaScript', 'Java'],
+      },
+      step2: {
+        titleInput: 'Junior Software Engineer',
+        companyInput: 'GoFore',
+        ...
+      },
+      ...
+    }
+
+    ^ How to update only one variable in state and keep rest of the fields untouched?
+
+    */
+    const newFormData =
+      Object.keys(formData).length !== 0
+        ? Object.keys(formData).map((step) => {
+            // map returns array instead of object?
+            if (step === stepNumber) {
+              Object.keys(step).map((key) => {
+                // map returns array instead of object?
+                if (key === name) return { ...formData[step], [name]: value };
+                return key;
+              });
+            } else return step;
+          })
+        : { step1: { [name]: value } };
+    console.log('newFormData in handleChange function:', newFormData);
+    setFormData(newFormData);
   }
 
   function sendForm(event) {
@@ -73,8 +125,8 @@ export default function GetStarted() {
           <p>{tips[tip]}</p>
         </div>
         <form onSubmit={sendForm}>
-          {currentStep === 1 && <Step1 step1FormData={step1FormData} handleChange={handleChange} />}
-          {currentStep === 2 && <Step2 />}
+          {currentStep === 1 && <Step1 formData={formData} handleChange={handleChange} />}
+          {currentStep === 2 && <Step2 formData={formData} handleChange={handleChange} />}
           {currentStep === 3 && <Step3 />}
           {currentStep === 4 && <Step4 />}
           {currentStep === 5 && <Step5 />}
