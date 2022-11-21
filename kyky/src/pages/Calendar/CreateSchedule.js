@@ -2,6 +2,8 @@
   This is now a modal!
 */
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createJobByDate } from '../../redux/calendarSlice';
 import Button from '../../components/Button';
 
 /* Step components */
@@ -57,6 +59,8 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
     }
   ];
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setView(() => progression[progression.findIndex((item) => item.id === step)].component);
   }, [step]);
@@ -98,8 +102,10 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
       if (schedules) {
         schedules.push(properties);
         localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
+        dispatch(createJobByDate(schedules));
       } else {
         localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify([data]));
+        dispatch(createJobByDate([data]));
       }
     } else if (mode === 'edit') {
       const id = editing._id;
@@ -107,6 +113,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
         const index = schedules.findIndex((item) => item._id === id);
         schedules[index] = { ...properties, _id: id };
         localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
+        dispatch(createJobByDate(schedules));
       }
     }
   }

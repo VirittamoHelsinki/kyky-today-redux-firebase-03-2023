@@ -4,14 +4,7 @@ import './styles/index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import { formSlice } from './reducers/formReducer';
-
-const store = configureStore({
-  reducer: {
-    form: formSlice
-  }
-});
+import store from './redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
