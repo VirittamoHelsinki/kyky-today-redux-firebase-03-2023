@@ -1,43 +1,49 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const createJobByDate = createAsyncThunk('calendar/createJobByDate', async (date) => {
-  try {
-    console.log(date);
-  } catch (error) {
-    console.log(error);
+export const createScheduleByDate = createAsyncThunk(
+  'calendar/createScheduleByDate',
+  async (date) => {
+    try {
+      console.log(date);
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
-export const fetchJobsByMonth = createAsyncThunk('calendar/fetchJobsByMonth', async (month) => {
-  try {
-    console.log(month);
-  } catch (error) {
-    console.log(error);
+export const fetchSchedulesByMonth = createAsyncThunk(
+  'calendar/fetchSchedulesByMonth',
+  async (month) => {
+    try {
+      console.log(month);
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 export const calendarSlice = createSlice({
-  name: 'forms',
+  name: 'Schedules',
   initialState: [],
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(createJobByDate.pending, (state, action) => {
+      .addCase(createScheduleByDate.pending, (state, action) => {
         console.log(state, action);
       })
-      .addCase(createJobByDate.fulfilled, (state, action) => {
+      .addCase(createScheduleByDate.fulfilled, (state, action) => {
         console.log(state, action);
       })
-      .addCase(createJobByDate.rejected, (state, action) => {
+      .addCase(createScheduleByDate.rejected, (state, action) => {
         console.log(state, action);
       })
-      .addCase(fetchJobsByMonth.pending, (state, action) => {
+      .addCase(fetchSchedulesByMonth.pending, (state, action) => {
         console.log(state, action);
       })
-      .addCase(fetchJobsByMonth.fulfilled, (state, action) => {
+      .addCase(fetchSchedulesByMonth.fulfilled, (state, action) => {
         console.log(state, action);
       })
-      .addCase(fetchJobsByMonth.rejected, (state, action) => {
+      .addCase(fetchSchedulesByMonth.rejected, (state, action) => {
         console.log(state, action);
       });
   }
