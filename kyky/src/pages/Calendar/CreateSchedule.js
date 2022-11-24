@@ -3,7 +3,7 @@
 */
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createScheduleByDate } from '../../redux/calendarSlice';
+import { createSchedule, removeSchedule } from '../../redux/scheduleSlice';
 import Button from '../../components/Button';
 
 /* Step components */
@@ -101,36 +101,34 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
 
       if (schedules) {
         schedules.push(properties);
-        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
-        dispatch(createScheduleByDate(schedules));
+        dispatch(createSchedule({ jobId: properties.jobId, data: schedules }));
       } else {
-        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify([data]));
-        dispatch(createScheduleByDate([data]));
+        dispatch(createSchedule({ jobId: properties.jobId, data: [data] }));
       }
     } else if (mode === 'edit') {
       const id = editing._id;
       if (id) {
         const index = schedules.findIndex((item) => item._id === id);
         schedules[index] = { ...properties, _id: id };
-        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
-        dispatch(createScheduleByDate(schedules));
+        dispatch(createSchedule({ jobId: properties.jobId, data: schedules }));
       }
     }
   }
 
   function deleteSchedule(schedule) {
-    const storage = JSON.parse(localStorage.getItem(`${schedule.jobId}_schedules`));
-    const index = storage.findIndex((item) => item._id === schedule._id) || 0;
+    const schedules = JSON.parse(localStorage.getItem(`${schedule.jobId}_schedules`));
+    const index = schedules.findIndex((item) => item._id === schedule._id) || 0;
     const confirm = window.confirm('Are you sure you want to delete this schedule?');
     if (confirm) {
-      storage.splice(index, 1);
+      schedules.splice(index, 1);
       setScheduleWindow(false);
-      if (storage.length === 0) {
-        localStorage.removeItem(`${schedule.jobId}_schedules`);
+      if (schedules.length === 0) {
+        dispatch(removeSchedule(properties.jobId));
       } else {
-        localStorage.setItem(`${schedule.jobId}_schedules`, JSON.stringify(storage));
+        dispatch(createSchedule({ jobId: properties.jobId, data: schedules }));
+        //localStorage.setItem(`${schedule.jobId}_schedules`, JSON.stringify(storage));
       }
-      window.location.reload();
+      //window.location.reload();
     }
   }
 

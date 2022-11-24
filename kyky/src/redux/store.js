@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import calendarReducer from './calendarSlice';
+import scheduleReducer from './scheduleSlice';
 
 export default configureStore({
   reducer: {
-    calendar: calendarReducer
-  }
+    schedule: scheduleReducer
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    })
 });

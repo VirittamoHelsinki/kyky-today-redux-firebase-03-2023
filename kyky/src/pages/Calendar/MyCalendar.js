@@ -1,11 +1,18 @@
 import { Outlet } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchSchedules } from '../../redux/scheduleSlice';
 import CalendarHeader from '../../components/CalendarHeader';
 import CreateSchedule from './CreateSchedule';
-
 import '../../styles/MyCalendar.scss';
 
 export default function MyCalendar() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchSchedules());
+  }, []);
+
   const [selectedWindow, setSelectedWindow] = useState('job-calendar');
   const [scheduleWindow, setScheduleWindow] = useState(false);
   const [editing, setEditing] = useState(undefined);
