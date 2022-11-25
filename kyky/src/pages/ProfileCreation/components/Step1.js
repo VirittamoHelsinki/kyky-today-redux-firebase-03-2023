@@ -4,7 +4,7 @@ import '../../../styles/NewProfileCreation.scss';
 import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
 
-export default function Step1({ formData, handleChange }) {
+export default function Step1({ step1Data, handleChange }) {
   const [clearSkills, setClearSkills] = useState(Skills);
   const [query, setQuery] = useState('');
   const [skills, setSkills] = useState([]);
@@ -21,7 +21,7 @@ export default function Step1({ formData, handleChange }) {
         className="step1 getStartedInput"
         id="titleInput"
         name="titleInput"
-        value={formData?.step1?.titleInput}
+        value={step1Data?.titleInput}
         onChange={handleChange}
         placeholder="Example: Dogwalker"
         aria-label="Please add a title about what you do"></input>

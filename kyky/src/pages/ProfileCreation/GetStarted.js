@@ -40,16 +40,8 @@ export default function GetStarted() {
   const [title, setTitle] = useState(0);
   const [tip, setTip] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
-    step1: {
-      titleInput: 'Web Designer',
-      skills: ['JavaScript', 'Java']
-    },
-    step2: {
-      titleInput: 'Junior Software Engineer',
-      companyInput: 'GoFore'
-    }
-  });
+  const [step1Data, setStep1Data] = useState({});
+  const [step2Data, setStep2Data] = useState({});
 
   function previousPhase() {
     setTitle(title - 1);
@@ -65,51 +57,78 @@ export default function GetStarted() {
 
   function handleChange(event) {
     const stepNumber = event.target.className.match('step[0-9]')[0];
-    const name = event.target.name;
-    const value = event.target.value;
     console.log('stepNumber in GetStarted.js handleChange function:', stepNumber);
+
+    const returnStepData = () => {
+      switch (stepNumber) {
+        case 'step1':
+          return step1Data;
+        case 'step2':
+          return step2Data;
+        default:
+          console.error('Error: No form step found.');
+      }
+    };
+    const name = event.target.name;
     console.log('name in GetStarted.js handleChange function:', name);
+    const value = event.target.value;
     console.log('value in GetStarted.js handleChange function:', value);
+    const stepContainsData = Object.keys(returnStepData()).length !== 0; // returns boolean
+    console.log('stepContainsData in GetStarted.js handleChange function:', stepContainsData);
+    for (const [inputKey, inputValue] of Object.entries(returnStepData())) {
+      console.log('inputKey:', inputKey, 'inputValue:', inputValue);
+    }
+    const inputExists = Object.keys(returnStepData()).includes(name); // returns boolean
+    console.log('inputExists in GetStarted.js handleChange function:', inputExists);
+    const inputData =
+      stepContainsData && inputExists
+        ? Object.fromEntries([
+            Object.entries(returnStepData()).find(
+              (input) => input[0] === name && input[1] !== undefined
+            )
+          ])
+        : false; // returns object / boolean
+    console.log('inputData in GetStarted.js handleChange function:', inputData);
 
     /*
-    1.
-    const [formData, setFormData] = useState([
-      { step1TitleInput: '', step1Skills: [] },
-      { step2TitleInput: '', step2CompanyInput: '' }
-    ]);
-    
-    2.
-    {
-      step1: {
-        titleInput: 'Web Designer',
-        skills: ['JavaScript', 'Java'],
-      },
-      step2: {
-        titleInput: 'Junior Software Engineer',
-        companyInput: 'GoFore',
-        ...
-      },
-      ...
+    a) Jos step1Data ei ole tyhjä...
+      aa) ja parametrinä olevaa name:a vastaava input-kenttä löytyy, muokataan sitä ja jätetään 
+          muut kentät ennalleen.
+      ab) Jos parametrina olevaa name:a vastaava input-kenttä ei löydy, luodaan se ja siihen kuuluva value.
+    b) Jos step1Data on tyhjä, luodaan parametrina olevaa stepNumberia vastaava objekti eli step1 
+       ja sille name ja value.
+    */
+
+    const editStepData = () => {
+      return stepContainsData && inputExists
+        ? Object.fromEntries(
+            Object.entries(returnStepData()).map(([inputKey, inputValue]) => {
+              if (inputKey === name) return [name, value];
+              else return [inputKey, inputValue];
+            })
+          )
+        : stepContainsData && !inputExists
+        ? Object.fromEntries(Object.entries(returnStepData()).concat([name, value]))
+        : !stepContainsData && !inputExists
+        ? { [name]: value }
+        : {};
+    };
+
+    switch (stepNumber) {
+      case 'step1':
+        editStepData()
+          ? setStep1Data(editStepData())
+          : console.error('Error: Setting form state failed in step1.', editStepData());
+      case 'step2':
+        editStepData()
+          ? setStep2Data(editStepData())
+          : console.error('Error: Setting form state failed in step2.', editStepData());
+      default:
+        console.error('Error: Setting form state failed in default.', editStepData());
     }
 
-    ^ How to update only one variable in state and keep rest of the fields untouched?
-
-    */
-    const newFormData =
-      Object.keys(formData).length !== 0
-        ? Object.keys(formData).map((step) => {
-            // map returns array instead of object?
-            if (step === stepNumber) {
-              Object.keys(step).map((key) => {
-                // map returns array instead of object?
-                if (key === name) return { ...formData[step], [name]: value };
-                return key;
-              });
-            } else return step;
-          })
-        : { step1: { [name]: value } };
-    console.log('newFormData in handleChange function:', newFormData);
-    setFormData(newFormData);
+    console.log('step1Data in handleChange function:', step1Data);
+    console.log('step2Data in handleChange function:', step2Data);
   }
 
   function sendForm(event) {
@@ -125,8 +144,8 @@ export default function GetStarted() {
           <p>{tips[tip]}</p>
         </div>
         <form onSubmit={sendForm}>
-          {currentStep === 1 && <Step1 formData={formData} handleChange={handleChange} />}
-          {currentStep === 2 && <Step2 formData={formData} handleChange={handleChange} />}
+          {currentStep === 1 && <Step1 step1Data={step1Data} handleChange={handleChange} />}
+          {currentStep === 2 && <Step2 step2Data={step2Data} handleChange={handleChange} />}
           {currentStep === 3 && <Step3 />}
           {currentStep === 4 && <Step4 />}
           {currentStep === 5 && <Step5 />}

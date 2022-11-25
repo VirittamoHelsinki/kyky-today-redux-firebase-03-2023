@@ -5,13 +5,13 @@ import { useState } from 'react';
 import WorkExperience from './WorkExperience';
 import EducationExperience from './EducationExperience';
 
-export default function Step2({ formData, handleChange }) {
+export default function Step2({ step2Data, handleChange }) {
   const [experience, setExperience] = useState('');
   const [saved, setSaved] = useState(true);
   const workExperience = () => {
     setSaved(false);
     setExperience(
-      <WorkExperience formData={formData} handleChange={handleChange} setSaved={setSaved} />
+      <WorkExperience step2Data={step2Data} handleChange={handleChange} setSaved={setSaved} />
     );
   };
 
