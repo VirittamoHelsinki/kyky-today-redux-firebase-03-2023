@@ -116,17 +116,17 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
   }
 
   function deleteSchedule(schedule) {
-    const schedules = JSON.parse(localStorage.getItem(`${schedule.jobId}_schedules`));
-    const index = schedules.findIndex((item) => item._id === schedule._id) || 0;
+    const storage = JSON.parse(localStorage.getItem(`${schedule.jobId}_schedules`));
+    const index = storage.findIndex((item) => item._id === schedule._id) || 0;
     const confirm = window.confirm('Are you sure you want to delete this schedule?');
     if (confirm) {
-      schedules.splice(index, 1);
+      storage.splice(index, 1);
       setScheduleWindow(false);
-      if (schedules.length === 0) {
-        dispatch(removeSchedule(properties.jobId));
+      if (storage.length === 0) {
+        console.log(schedule.jobId);
+        dispatch(removeSchedule(schedule.jobId));
       } else {
-        dispatch(createSchedule({ jobId: properties.jobId, data: schedules }));
-        //localStorage.setItem(`${schedule.jobId}_schedules`, JSON.stringify(storage));
+        dispatch(createSchedule({ jobId: schedule.jobId, data: storage }));
       }
       //window.location.reload();
     }

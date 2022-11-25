@@ -30,7 +30,7 @@ export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async
 
 export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async (schedule) => {
   try {
-    await deleteDoc(doc(db, uid, `${schedule}_schedules`));
+    await deleteDoc(doc(db, uid, schedule));
     return schedule;
   } catch (error) {
     console.log(error);

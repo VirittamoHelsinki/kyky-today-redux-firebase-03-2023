@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchSchedules } from '../../redux/scheduleSlice';
 import { useOutletContext } from 'react-router-dom';
 import jobs from '../../jobs';
 import '../../styles/JobCalendar.scss';
@@ -48,6 +50,8 @@ export default function JobCalendar() {
   const [schedules, setSchedules] = useState([]);
   const [openedSchedules, setOpenedSchedules] = useState([]);
   const [highlightDays, setHighlightDays] = useState([]);
+
+  const dispatch = useDispatch();
 
   function getSchedules() {
     const schedules = JSON.parse(localStorage.getItem(`${currentJob}_schedules`)) || [];
@@ -111,6 +115,10 @@ export default function JobCalendar() {
       );
     }
   }, [selectedDay]);
+
+  useEffect(() => {
+    dispatch(fetchSchedules());
+  }, []);
 
   function getDaysInMonth(year, month) {
     return 32 - new Date(year, month, 32).getDate();
