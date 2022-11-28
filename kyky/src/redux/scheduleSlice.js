@@ -6,7 +6,7 @@ const uid = 'uorthtrg'; //testing only
 
 export const createSchedule = createAsyncThunk('schedules/createSchedule', async (schedules) => {
   try {
-    await setDoc(doc(db, `${uid}/${schedules.jobId}`), {
+    await setDoc(doc(db, `users/${uid}/schedules/${schedules.jobId}`), {
       data: schedules.data
     });
     return schedules;
@@ -18,7 +18,7 @@ export const createSchedule = createAsyncThunk('schedules/createSchedule', async
 export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async () => {
   try {
     const scheduleList = [];
-    const schedules = await getDocs(collection(db, uid));
+    const schedules = await getDocs(collection(db, 'users', uid, 'schedules'));
     schedules.forEach((schedule) => {
       scheduleList.push({ id: schedule.id, data: schedule.data() });
     });
@@ -30,7 +30,7 @@ export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async
 
 export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async (schedule) => {
   try {
-    await deleteDoc(doc(db, uid, schedule));
+    await deleteDoc(doc(db, 'users', uid, 'schedules', schedule));
     return schedule;
   } catch (error) {
     console.log(error);
@@ -82,7 +82,6 @@ export const scheduleSlice = createSlice({
       })
       .addCase(removeSchedule.fulfilled, (state, action) => {
         localStorage.removeItem(`${action.payload}_schedules`);
-        console.log(state, action);
       })
       .addCase(removeSchedule.rejected, (state, action) => {
         console.log(state, action);
