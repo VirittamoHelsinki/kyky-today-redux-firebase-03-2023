@@ -1,4 +1,6 @@
 import { useState, useContext } from 'react';
+import { useDispatch } from 'react-redux';
+import { signInEmailAndPassword } from '../redux/userSlice';
 import Language from '../language';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';
@@ -13,11 +15,19 @@ function UserLogIn() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [creditalError] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username === '' || password === '') {
       return;
     }
+    dispatch(
+      signInEmailAndPassword({
+        email: username,
+        password: password
+      })
+    );
     console.log('username:', username, 'password:', password, 'remember me:', remember);
     alert(`Matching username and password: ${creditalError}`);
   };
@@ -55,8 +65,7 @@ function UserLogIn() {
           name="remember"
           value={remember}
           onChange={(e) => setRemember(e.target.checked)}
-          checked={remember}
-        >
+          checked={remember}>
           Pidä minut kirjautuneena
         </Checkbox>
         <Button type="submit" onClick={handleSubmit}>

@@ -8,7 +8,7 @@ import {
 import { collection, addDoc } from 'firebase/firestore';
 import { db, auth } from '../firebase/firebase';
 
-export const signUp = createAsyncThunk('users/signUp', async (payload) => {
+export const signUpEmailAndPassword = createAsyncThunk('user/signUp', async (payload) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, payload.email, payload.password);
     const user = res.user;
@@ -26,8 +26,9 @@ export const signUp = createAsyncThunk('users/signUp', async (payload) => {
   }
 });
 
-export const signIn = createAsyncThunk('users/signIn', async (payload) => {
+export const signInEmailAndPassword = createAsyncThunk('user/signIn', async (payload) => {
   try {
+    console.log(payload);
     const res = await signInWithEmailAndPassword(auth, payload.email, payload.password);
     return res;
   } catch (error) {
@@ -35,7 +36,7 @@ export const signIn = createAsyncThunk('users/signIn', async (payload) => {
   }
 });
 
-export const logOut = createAsyncThunk('users/logOut', async () => {
+export const logOut = createAsyncThunk('user/logOut', async () => {
   try {
     const res = signOut(auth);
     return res;
@@ -45,28 +46,36 @@ export const logOut = createAsyncThunk('users/logOut', async () => {
 });
 
 export const userSlice = createSlice({
-  name: 'users',
+  name: 'user',
   initialState: [],
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(signUp.pending, (state, action) => {
+      .addCase(signUpEmailAndPassword.pending, (state, action) => {
         console.log(state, action);
       })
-      .addCase(signUp.fulfilled, (state, action) => {
-        console.log(state, action);
+      .addCase(signUpEmailAndPassword.fulfilled, (state, action) => {
+        localStorage.setItem('user', JSON.stringify(action.payload.user));
+        return (state = {
+          ...state,
+          user: action.payload.user
+        });
       })
-      .addCase(signUp.rejected, (state, action) => {
+      .addCase(signUpEmailAndPassword.rejected, (state, action) => {
         console.log(state, action);
       })
 
-      .addCase(signIn.pending, (state, action) => {
+      .addCase(signInEmailAndPassword.pending, (state, action) => {
         console.log(state, action);
       })
-      .addCase(signIn.fulfilled, (state, action) => {
-        console.log(state, action);
+      .addCase(signInEmailAndPassword.fulfilled, (state, action) => {
+        localStorage.setItem('user', JSON.stringify(action.payload.user));
+        return (state = {
+          ...state,
+          user: action.payload.user
+        });
       })
-      .addCase(signIn.rejected, (state, action) => {
+      .addCase(signInEmailAndPassword.rejected, (state, action) => {
         console.log(state, action);
       })
 
@@ -75,6 +84,11 @@ export const userSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state, action) => {
         console.log(state, action);
+        localStorage.removeItem('user');
+        return (state = {
+          ...state,
+          user: null
+        });
       })
       .addCase(logOut.rejected, (state, action) => {
         console.log(state, action);

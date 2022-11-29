@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signUp } from '../redux/userSlice';
+import { signUpEmailAndPassword } from '../redux/userSlice';
 import Language from '../language';
 import Input from '../components/Input';
 import 'material-icons/iconfont/material-icons.css';
@@ -41,7 +41,7 @@ function UserRegistration() {
       console.log('submit');
       console.log(username, email, password, passwordConfirm, company, subscribe, termsAccepted);
       dispatch(
-        signUp({
+        signUpEmailAndPassword({
           username: username,
           email: email,
           password: password,
