@@ -18,6 +18,7 @@ export default function ManageSchedules() {
   const [unavailableEnd, setUnavailableEnd] = useState('');
   const [indefinite, setIndefinite] = useState(false);
   const [opened, setOpened] = useState(-1);
+  const [user, setUser] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -32,9 +33,9 @@ export default function ManageSchedules() {
     if (confirm) {
       storage.splice(index, 1);
       if (storage.length === 0) {
-        dispatch(removeSchedule(schedule.jobId));
+        dispatch(removeSchedule({ uid: user.uid, schedule: schedule.jobId }));
       } else {
-        dispatch(createSchedule({ jobId: schedule.jobId, data: storage }));
+        dispatch(createSchedule({ uid: user.uid, jobId: schedule.jobId, data: storage }));
       }
       setSchedules((prev) => {
         const newSchedules = { ...prev };
@@ -67,6 +68,11 @@ export default function ManageSchedules() {
     setSchedules(schedulesObject);
     const unavailabilities = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
     setUnavailabilities(unavailabilities);
+  }, []);
+
+  useEffect(() => {
+    const _user = localStorage.getItem('user');
+    setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
   }, []);
 
   function createUnavailability() {

@@ -2,23 +2,22 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { doc, setDoc, collection, getDocs, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
-const uid = 'uorthtrg'; //testing only
-
-export const createSchedule = createAsyncThunk('schedules/createSchedule', async (schedules) => {
+export const createSchedule = createAsyncThunk('schedules/createSchedule', async (payload) => {
   try {
-    await setDoc(doc(db, `users/${uid}/schedules/${schedules.jobId}`), {
-      data: schedules.data
+    await setDoc(doc(db, `users/${payload.uid}/schedules/${payload.jobId}`), {
+      data: payload.data
     });
-    return schedules;
+    return payload;
   } catch (error) {
     console.log(error);
   }
 });
 
-export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async () => {
+export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async (uid) => {
   try {
+    console.log(uid);
     const scheduleList = [];
-    const schedules = await getDocs(collection(db, 'users', uid, 'schedules'));
+    const schedules = await getDocs(collection(db, `users/${uid}/schedules/`));
     schedules.forEach((schedule) => {
       scheduleList.push({ id: schedule.id, data: schedule.data() });
     });
@@ -28,15 +27,16 @@ export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async
   }
 });
 
-export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async (schedule) => {
+export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async (payload) => {
   try {
-    await deleteDoc(doc(db, 'users', uid, 'schedules', schedule));
-    return schedule;
+    await deleteDoc(doc(db, `users/${payload.uid}/schedules/${payload.schedule}`));
+    return payload.schedule;
   } catch (error) {
     console.log(error);
   }
 });
 
+// createAsyncThunk() generates automatically pending -, fulfilled - and rejected handling cases
 export const scheduleSlice = createSlice({
   name: 'Schedules',
   initialState: [],
@@ -58,7 +58,7 @@ export const scheduleSlice = createSlice({
       .addCase(createSchedule.rejected, (state, action) => {
         console.log(state, action);
       })
-
+      /////////////////////////////////////////////////////
       .addCase(fetchSchedules.pending, (state, action) => {
         console.log(state, action);
       })
@@ -76,7 +76,7 @@ export const scheduleSlice = createSlice({
       .addCase(fetchSchedules.rejected, (state, action) => {
         console.log(state, action);
       })
-
+      ////////////////////////////////////////////////////
       .addCase(removeSchedule.pending, (state, action) => {
         console.log(state, action);
       })

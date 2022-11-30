@@ -1,10 +1,10 @@
 /* eslint-disable */
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { auth } from './firebase/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
-import { logOut } from './redux/userSlice';
+// import { useDispatch } from 'react-redux';
+// import { auth } from './firebase/firebase';
+// import { onAuthStateChanged } from 'firebase/auth';
+// import { logOut } from './redux/userSlice';
 
 /* Language */
 import Language from './language';
@@ -49,15 +49,15 @@ const App = () => {
     { to: '/calendar/overview', label: 'Overview' }
   ];
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (userAuth) => {
-      if (!userAuth) {
-        dispatch(logOut());
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (userAuth) => {
+  //     if (!userAuth) {
+  //       dispatch(logOut());
+  //     }
+  //   });
+  // }, []);
 
   return (
     <Language.Provider value={{ lang }}>

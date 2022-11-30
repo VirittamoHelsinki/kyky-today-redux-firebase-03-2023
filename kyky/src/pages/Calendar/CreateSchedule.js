@@ -16,6 +16,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
   const [step, setStep] = useState(1);
   const [mode, setMode] = useState('create');
   const [View, setView] = useState(() => ChooseJob);
+  const [user, setUser] = useState([]);
   const [canContinue, setCanContinue] = useState(true);
   const [properties, setProperties] = useState({
     jobId: '',
@@ -73,6 +74,11 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
     }
   }, [editing]);
 
+  useEffect(() => {
+    const _user = localStorage.getItem('user');
+    setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
+  }, []);
+
   const modeProperties = {
     create: {
       title: 'Create Schedule'
@@ -101,16 +107,16 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
 
       if (schedules) {
         schedules.push(properties);
-        dispatch(createSchedule({ jobId: properties.jobId, data: schedules }));
+        dispatch(createSchedule({ uid: user.uid, jobId: properties.jobId, data: schedules }));
       } else {
-        dispatch(createSchedule({ jobId: properties.jobId, data: [data] }));
+        dispatch(createSchedule({ uid: user.uid, jobId: properties.jobId, data: [data] }));
       }
     } else if (mode === 'edit') {
       const id = editing._id;
       if (id) {
         const index = schedules.findIndex((item) => item._id === id);
         schedules[index] = { ...properties, _id: id };
-        dispatch(createSchedule({ jobId: properties.jobId, data: schedules }));
+        dispatch(createSchedule({ uid: user.uid, jobId: properties.jobId, data: schedules }));
       }
     }
   }
@@ -126,7 +132,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
         console.log(schedule.jobId);
         dispatch(removeSchedule(schedule.jobId));
       } else {
-        dispatch(createSchedule({ jobId: schedule.jobId, data: storage }));
+        dispatch(createSchedule({ uid: user.uid, jobId: schedule.jobId, data: storage }));
       }
       //window.location.reload();
     }

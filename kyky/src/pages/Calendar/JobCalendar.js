@@ -50,6 +50,7 @@ export default function JobCalendar() {
   const [schedules, setSchedules] = useState([]);
   const [openedSchedules, setOpenedSchedules] = useState([]);
   const [highlightDays, setHighlightDays] = useState([]);
+  const [user, setUser] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -117,8 +118,13 @@ export default function JobCalendar() {
   }, [selectedDay]);
 
   useEffect(() => {
-    dispatch(fetchSchedules());
+    const _user = localStorage.getItem('user');
+    setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchSchedules(user.uid));
+  }, [dispatch]);
 
   function getDaysInMonth(year, month) {
     return 32 - new Date(year, month, 32).getDate();
