@@ -2,6 +2,8 @@
   This is now a modal!
 */
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createSchedule, removeSchedule } from '../../redux/scheduleSlice';
 import Button from '../../components/Button';
 
 /* Step components */
@@ -57,6 +59,8 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
     }
   ];
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setView(() => progression[progression.findIndex((item) => item.id === step)].component);
   }, [step]);
@@ -97,16 +101,16 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
 
       if (schedules) {
         schedules.push(properties);
-        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
+        dispatch(createSchedule({ jobId: properties.jobId, data: schedules }));
       } else {
-        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify([data]));
+        dispatch(createSchedule({ jobId: properties.jobId, data: [data] }));
       }
     } else if (mode === 'edit') {
       const id = editing._id;
       if (id) {
         const index = schedules.findIndex((item) => item._id === id);
         schedules[index] = { ...properties, _id: id };
-        localStorage.setItem(`${properties.jobId}_schedules`, JSON.stringify(schedules));
+        dispatch(createSchedule({ jobId: properties.jobId, data: schedules }));
       }
     }
   }
@@ -119,11 +123,12 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
       storage.splice(index, 1);
       setScheduleWindow(false);
       if (storage.length === 0) {
-        localStorage.removeItem(`${schedule.jobId}_schedules`);
+        console.log(schedule.jobId);
+        dispatch(removeSchedule(schedule.jobId));
       } else {
-        localStorage.setItem(`${schedule.jobId}_schedules`, JSON.stringify(storage));
+        dispatch(createSchedule({ jobId: schedule.jobId, data: storage }));
       }
-      window.location.reload();
+      //window.location.reload();
     }
   }
 

@@ -1,4 +1,6 @@
 import { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signUpEmailAndPassword } from '../redux/userSlice';
 import Language from '../language';
 import Input from '../components/Input';
 import 'material-icons/iconfont/material-icons.css';
@@ -24,6 +26,8 @@ function UserRegistration() {
   const [passwordConfirmIsValid, setPasswordConfirmIsValid] = useState(true);
   const [termsAccepted, setTermsAccepted] = useState(true);
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,6 +40,16 @@ function UserRegistration() {
     ) {
       console.log('submit');
       console.log(username, email, password, passwordConfirm, company, subscribe, termsAccepted);
+      dispatch(
+        signUpEmailAndPassword({
+          username: username,
+          email: email,
+          password: password,
+          company: company,
+          subscribe: subscribe,
+          termasAccepted: termsAccepted
+        })
+      );
     }
   };
 
@@ -94,8 +108,7 @@ function UserRegistration() {
             onChange={(e) => {
               handleUsernameValidation(e);
               setUsername(e.target.value);
-            }}
-          >
+            }}>
             {usernameCheck && <i className="material-icons-outlined inside">done</i>}
           </Input>
           <Input
@@ -169,8 +182,7 @@ function UserRegistration() {
             className={`checkbox-container no-shadow ${termsAccepted ? '' : 'error'}`}
             onChange={(e) => {
               setTerms(e.target.checked);
-            }}
-          >
+            }}>
             {lang.registration.I_agree}
             <a className="primary" href="https://www.google.com/">
               {lang.registration.terms}

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createSchedule, removeSchedule } from '../../redux/scheduleSlice';
 import Button from '../../components/Button';
 
 import Input from '../../components/Input';
@@ -17,6 +19,8 @@ export default function ManageSchedules() {
   const [indefinite, setIndefinite] = useState(false);
   const [opened, setOpened] = useState(-1);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setSelectedWindow('manage-schedules');
   }, []);
@@ -28,16 +32,16 @@ export default function ManageSchedules() {
     if (confirm) {
       storage.splice(index, 1);
       if (storage.length === 0) {
-        localStorage.removeItem(`${schedule.jobId}_schedules`);
+        dispatch(removeSchedule(schedule.jobId));
       } else {
-        localStorage.setItem(`${schedule.jobId}_schedules`, JSON.stringify(storage));
+        dispatch(createSchedule({ jobId: schedule.jobId, data: storage }));
       }
       setSchedules((prev) => {
         const newSchedules = { ...prev };
         delete newSchedules[schedule._id];
         return newSchedules;
       });
-      window.location.reload();
+      //window.location.reload();
     }
   }
 

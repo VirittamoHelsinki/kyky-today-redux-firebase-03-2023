@@ -2,7 +2,6 @@ import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import CalendarHeader from '../../components/CalendarHeader';
 import CreateSchedule from './CreateSchedule';
-
 import '../../styles/MyCalendar.scss';
 
 export default function MyCalendar() {
