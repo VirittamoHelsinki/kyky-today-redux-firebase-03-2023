@@ -16,12 +16,12 @@ export const createSchedule = createAsyncThunk('schedules/createSchedule', async
 export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async (uid) => {
   try {
     console.log(uid);
-    const scheduleList = [];
+    const list = [];
     const schedules = await getDocs(collection(db, `users/${uid}/schedules/`));
     schedules.forEach((schedule) => {
-      scheduleList.push({ id: schedule.id, data: schedule.data() });
+      list.push({ id: schedule.id, data: schedule.data() });
     });
-    return scheduleList;
+    return list;
   } catch (error) {
     console.log(error);
   }
@@ -63,15 +63,21 @@ export const scheduleSlice = createSlice({
         console.log(state, action);
       })
       .addCase(fetchSchedules.fulfilled, (state, action) => {
+        const jobs = [];
         action.payload.forEach((job) => {
-          const name = job.id;
-          const list = [];
-          const data = job.data.data;
-          data.forEach((d) => {
-            list.push(d);
+          jobs.push({
+            id: job.id,
+            categories: [job.id],
+            cities: ['Helsinki'],
+            jobTitle: job.id
           });
-          localStorage.setItem(`${name}_schedules`, JSON.stringify(list));
+          const schedules = [];
+          job.data.data.forEach((d) => {
+            schedules.push(d);
+          });
+          localStorage.setItem(`${job.id}_schedules`, JSON.stringify(schedules));
         });
+        localStorage.setItem('jobs', JSON.stringify(jobs));
       })
       .addCase(fetchSchedules.rejected, (state, action) => {
         console.log(state, action);
