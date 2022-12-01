@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchSchedules } from '../../redux/scheduleSlice';
 import { useOutletContext } from 'react-router-dom';
-import jobs from '../../jobs';
 import '../../styles/JobCalendar.scss';
 import Button from '../../components/Button';
 
@@ -46,11 +45,22 @@ export default function JobCalendar() {
   const [currentMonth, setCurrentMonth] = useState(date.getMonth());
   const [currentYear, setCurrentYear] = useState(date.getFullYear());
   const [currentActivities, setCurrentActivities] = useState([]);
-  const [currentJob, setCurrentJob] = useState('babysitting');
+  const [currentJob, setCurrentJob] = useState('');
   const [schedules, setSchedules] = useState([]);
   const [openedSchedules, setOpenedSchedules] = useState([]);
   const [highlightDays, setHighlightDays] = useState([]);
+  const [jobs, setJobs] = useState([]);
   const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    const _jobs = localStorage.getItem('jobs');
+    setJobs(_jobs ? JSON.parse(localStorage.getItem('jobs')) : []);
+  }, []);
+
+  useEffect(() => {
+    const _user = localStorage.getItem('user');
+    setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -118,13 +128,8 @@ export default function JobCalendar() {
   }, [selectedDay]);
 
   useEffect(() => {
-    const _user = localStorage.getItem('user');
-    setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
-  }, []);
-
-  useEffect(() => {
     dispatch(fetchSchedules(user.uid));
-  }, [dispatch]);
+  }, [user]);
 
   function getDaysInMonth(year, month) {
     return 32 - new Date(year, month, 32).getDate();
