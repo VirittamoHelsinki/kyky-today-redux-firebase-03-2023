@@ -75,6 +75,7 @@ export default function WorkExperience({ setSaved }) {
         type="text"
         label="Title*"
         placeholder="Ex:Cleaner"
+        value=""
         labelOnFront></Input>
       <Input className="inputLong" label="Company" placeholder="Ex:Frenska" labelOnFront></Input>
       <Input

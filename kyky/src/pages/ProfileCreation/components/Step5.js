@@ -1,41 +1,46 @@
 import '../../../styles/NewProfileCreation.scss';
-import Select, { components } from 'react-select';
-import React from 'react';
-import { ReactComponent as CheckMark } from '../../../image/check-mark.svg';
-export default function Step5() {
-  const options = [
-    { value: 'itAndNetworking', label: 'IT & Networking' },
-    { value: 'salesAndMarketing', label: 'Sales & marketing' },
-    { value: 'writing', label: 'Writing' },
-    { value: 'webMobileAndSoftwareDev ', label: 'Web, Mobile & Software Dev' }
-  ];
 
-  const placeholder = 'Search for a service';
-  const { Option } = components;
-  const IconOption = (props) => (
-    <Option {...props}>
-      {props.isSelected ? (
-        <div class="optionContainer">
-          <CheckMark id="checkMark" />
-          <span class="optionLabelTextBold">{props.data.label}</span>
-        </div>
-      ) : (
-        <div class="optionContainer">
-          <div id="noCheckMark"></div>
-          <span class="optionLabelText">{props.data.label}</span>
-        </div>
-      )}
-    </Option>
-  );
+import { GenericSelect } from './Select';
+import { useState, React } from 'react';
+
+export default function Step5() {
+  const [selectValue, setSelectValue] = useState('');
+  const showCategory = () => {
+    setSelectValue(
+      <GenericSelect
+        className="select-container2"
+        placeholder="Choose a subcategory"
+        options={[...subCategory1]}></GenericSelect>
+    );
+    //console.log('hello');
+  };
+  const categories = [
+    { value: 'homeMaintenanceAndRepairs', label: 'Home Maintenance & Repairs', id: 1 },
+    { value: 'movingAndCleaning', label: 'Moving & Cleaning', id: 2 },
+    { value: 'careAndWellness', label: 'Care & Wellness', id: 3 },
+    { value: 'creativeAndIt', label: 'Creative & IT', id: 4 },
+    { value: 'learningandCoaching', label: 'Learning & Coaching', id: 5 }
+  ];
+  const subCategory1 = [
+    { value: 'handyman', label: 'Handyman' },
+    { value: 'painter', label: 'Painter' },
+    { value: 'electrician', label: 'Electrician' },
+    { value: 'plumber', label: 'Plumber' },
+    { value: 'carpenter', label: 'Carpenter' },
+    { value: 'snowManagement', label: 'Snow Management' },
+    { value: 'gardeningAndLandscaping', label: 'Gardening & Landscaping' },
+    { value: 'chimneyOrGutterMaintenance', label: 'Chimney / Gutter Maintenance' }
+  ];
 
   return (
     <div className="step step5">
-      <Select
+      <GenericSelect
         className="select-container2"
-        placeholder={placeholder}
-        options={[...options]}
-        components={{ Option: IconOption }}
+        placeholder="Choose a main category"
+        options={[...categories]}
+        onChange={showCategory}
       />
+      {selectValue}
     </div>
   );
 }
