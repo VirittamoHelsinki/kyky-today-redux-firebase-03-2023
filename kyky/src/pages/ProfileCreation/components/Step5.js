@@ -1,11 +1,11 @@
 import '../../../styles/NewProfileCreation.scss';
-
+import { GetOptionValue } from 'react-select';
 import { GenericSelect } from './Select';
 import { useState, React } from 'react';
 
 export default function Step5() {
   const [selectValue, setSelectValue] = useState('');
-  const showCategory = () => {
+  const showCategory = (GetOptionValue) => {
     setSelectValue(
       <GenericSelect
         className="select-container2"
