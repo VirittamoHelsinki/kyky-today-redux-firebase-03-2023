@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/scheduleSlice';
 import { useOutletContext } from 'react-router-dom';
 import '../../styles/JobCalendar.scss';
@@ -52,10 +52,12 @@ export default function JobCalendar() {
   const [jobs, setJobs] = useState([]);
   const [user, setUser] = useState([]);
 
+  const jobsChanged = useSelector((state) => state.schedule);
+
   useEffect(() => {
     const _jobs = localStorage.getItem('jobs');
     setJobs(_jobs ? JSON.parse(localStorage.getItem('jobs')) : []);
-  }, []);
+  }, [jobsChanged]);
 
   useEffect(() => {
     const _user = localStorage.getItem('user');
