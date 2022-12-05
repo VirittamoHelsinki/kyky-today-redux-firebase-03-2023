@@ -27,7 +27,7 @@ export const signUpEmailAndPassword = createAsyncThunk(
       });
       return user;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -39,7 +39,7 @@ export const signInEmailAndPassword = createAsyncThunk(
       const res = await signInWithEmailAndPassword(auth, payload.email, payload.password);
       return res;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -52,7 +52,7 @@ export const signInGoogleAuthProvider = createAsyncThunk(
       const res = await signInWithPopup(auth, provider);
       return res;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -65,7 +65,7 @@ export const signInFacebookAuthProvider = createAsyncThunk(
       const res = await signInWithPopup(auth, provider);
       return res;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -78,7 +78,7 @@ export const signInAppleAuthProvider = createAsyncThunk(
       const res = await signInWithPopup(auth, provider);
       return res;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -88,7 +88,7 @@ export const logOut = createAsyncThunk('user/logOut', async () => {
     const res = signOut(auth);
     return res;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 });
 

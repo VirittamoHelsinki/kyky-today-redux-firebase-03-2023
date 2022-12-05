@@ -9,7 +9,7 @@ export const createSchedule = createAsyncThunk('schedules/createSchedule', async
     });
     return payload;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 });
 
@@ -23,7 +23,7 @@ export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async
     });
     return list;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 });
 
@@ -32,7 +32,7 @@ export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async
     await deleteDoc(doc(db, `users/${payload.uid}/schedules/${payload.schedule}`));
     return payload.schedule;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 });
 
@@ -53,7 +53,10 @@ export const scheduleSlice = createSlice({
           list.push(d);
         });
         localStorage.setItem(`${name}_schedules`, JSON.stringify(list));
-        console.log(state, action);
+        return (state = {
+          ...state,
+          status: 'schedule created'
+        });
       })
       .addCase(createSchedule.rejected, (state, action) => {
         console.log(state, action);
@@ -78,6 +81,10 @@ export const scheduleSlice = createSlice({
           localStorage.setItem(`${job.id}_schedules`, JSON.stringify(schedules));
         });
         localStorage.setItem('jobs', JSON.stringify(jobs));
+        return (state = {
+          ...state,
+          status: 'schedules fetched'
+        });
       })
       .addCase(fetchSchedules.rejected, (state, action) => {
         console.log(state, action);
@@ -88,6 +95,10 @@ export const scheduleSlice = createSlice({
       })
       .addCase(removeSchedule.fulfilled, (state, action) => {
         localStorage.removeItem(`${action.payload}_schedules`);
+        return (state = {
+          ...state,
+          status: 'schedule removed'
+        });
       })
       .addCase(removeSchedule.rejected, (state, action) => {
         console.log(state, action);

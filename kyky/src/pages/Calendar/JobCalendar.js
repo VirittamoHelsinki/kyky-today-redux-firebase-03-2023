@@ -214,16 +214,22 @@ export default function JobCalendar() {
       <div className="MainContainer">
         <div className="calendar-container">
           <div className="job-select">
-            <select
-              onChange={(e) => {
-                setCurrentJob(e.target.value);
-              }}>
-              {jobs.map((job) => (
-                <option key={job.id} value={job.id}>
-                  {job.jobTitle}
-                </option>
-              ))}
-            </select>
+            {jobs.length === 0 ? (
+              <select disabled>
+                <option value="none">None selected</option>
+              </select>
+            ) : (
+              <select
+                onChange={(e) => {
+                  setCurrentJob(e.target.value);
+                }}>
+                {jobs.map((job) => (
+                  <option key={job.id} value={job.id}>
+                    {job.jobTitle}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
           <div className="monthYear">
             <button className="todayButton" onClick={() => setDate(new Date())}>

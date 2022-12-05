@@ -127,14 +127,11 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
     const confirm = window.confirm('Are you sure you want to delete this schedule?');
     if (confirm) {
       storage.splice(index, 1);
-      setScheduleWindow(false);
       if (storage.length === 0) {
-        console.log(schedule.jobId);
-        dispatch(removeSchedule(schedule.jobId));
+        dispatch(removeSchedule({ uid: user.uid, schedule: schedule.jobId }));
       } else {
         dispatch(createSchedule({ uid: user.uid, jobId: schedule.jobId, data: storage }));
       }
-      //window.location.reload();
     }
   }
 
