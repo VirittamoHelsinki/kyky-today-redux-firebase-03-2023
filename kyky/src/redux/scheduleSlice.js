@@ -2,41 +2,41 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { doc, setDoc, collection, getDocs, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
-const uid = 'uorthtrg'; //testing only
-
-export const createSchedule = createAsyncThunk('schedules/createSchedule', async (schedules) => {
+export const createSchedule = createAsyncThunk('schedules/createSchedule', async (payload) => {
   try {
-    await setDoc(doc(db, `users/${uid}/schedules/${schedules.jobId}`), {
-      data: schedules.data
+    await setDoc(doc(db, `users/${payload.uid}/schedules/${payload.jobId}`), {
+      data: payload.data
     });
-    return schedules;
+    return payload;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 });
 
-export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async () => {
+export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async (uid) => {
   try {
-    const scheduleList = [];
-    const schedules = await getDocs(collection(db, 'users', uid, 'schedules'));
+    console.log(uid);
+    const list = [];
+    const schedules = await getDocs(collection(db, `users/${uid}/schedules/`));
     schedules.forEach((schedule) => {
-      scheduleList.push({ id: schedule.id, data: schedule.data() });
+      list.push({ id: schedule.id, data: schedule.data() });
     });
-    return scheduleList;
+    return list;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 });
 
-export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async (schedule) => {
+export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async (payload) => {
   try {
-    await deleteDoc(doc(db, 'users', uid, 'schedules', schedule));
-    return schedule;
+    await deleteDoc(doc(db, `users/${payload.uid}/schedules/${payload.schedule}`));
+    return payload.schedule;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 });
 
+// createAsyncThunk() generates automatically pending -, fulfilled - and rejected handling cases
 export const scheduleSlice = createSlice({
   name: 'Schedules',
   initialState: [],
@@ -53,35 +53,52 @@ export const scheduleSlice = createSlice({
           list.push(d);
         });
         localStorage.setItem(`${name}_schedules`, JSON.stringify(list));
-        console.log(state, action);
+        return (state = {
+          ...state,
+          status: 'schedule created'
+        });
       })
       .addCase(createSchedule.rejected, (state, action) => {
         console.log(state, action);
       })
-
+      /////////////////////////////////////////////////////
       .addCase(fetchSchedules.pending, (state, action) => {
         console.log(state, action);
       })
       .addCase(fetchSchedules.fulfilled, (state, action) => {
+        const jobs = [];
         action.payload.forEach((job) => {
-          const name = job.id;
-          const list = [];
-          const data = job.data.data;
-          data.forEach((d) => {
-            list.push(d);
+          jobs.push({
+            id: job.id,
+            categories: [job.id],
+            cities: ['Helsinki'],
+            jobTitle: job.id
           });
-          localStorage.setItem(`${name}_schedules`, JSON.stringify(list));
+          const schedules = [];
+          job.data.data.forEach((d) => {
+            schedules.push(d);
+          });
+          localStorage.setItem(`${job.id}_schedules`, JSON.stringify(schedules));
+        });
+        localStorage.setItem('jobs', JSON.stringify(jobs));
+        return (state = {
+          ...state,
+          status: 'schedules fetched'
         });
       })
       .addCase(fetchSchedules.rejected, (state, action) => {
         console.log(state, action);
       })
-
+      ////////////////////////////////////////////////////
       .addCase(removeSchedule.pending, (state, action) => {
         console.log(state, action);
       })
       .addCase(removeSchedule.fulfilled, (state, action) => {
         localStorage.removeItem(`${action.payload}_schedules`);
+        return (state = {
+          ...state,
+          status: 'schedule removed'
+        });
       })
       .addCase(removeSchedule.rejected, (state, action) => {
         console.log(state, action);

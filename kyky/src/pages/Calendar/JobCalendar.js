@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/scheduleSlice';
 import { useOutletContext } from 'react-router-dom';
-import jobs from '../../jobs';
 import '../../styles/JobCalendar.scss';
 import Button from '../../components/Button';
 
@@ -46,10 +45,24 @@ export default function JobCalendar() {
   const [currentMonth, setCurrentMonth] = useState(date.getMonth());
   const [currentYear, setCurrentYear] = useState(date.getFullYear());
   const [currentActivities, setCurrentActivities] = useState([]);
-  const [currentJob, setCurrentJob] = useState('babysitting');
+  const [currentJob, setCurrentJob] = useState('');
   const [schedules, setSchedules] = useState([]);
   const [openedSchedules, setOpenedSchedules] = useState([]);
   const [highlightDays, setHighlightDays] = useState([]);
+  const [jobs, setJobs] = useState([]);
+  const [user, setUser] = useState([]);
+
+  const jobsChanged = useSelector((state) => state.schedule);
+
+  useEffect(() => {
+    const _jobs = localStorage.getItem('jobs');
+    setJobs(_jobs ? JSON.parse(localStorage.getItem('jobs')) : []);
+  }, [jobsChanged]);
+
+  useEffect(() => {
+    const _user = localStorage.getItem('user');
+    setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -117,8 +130,8 @@ export default function JobCalendar() {
   }, [selectedDay]);
 
   useEffect(() => {
-    dispatch(fetchSchedules());
-  }, []);
+    dispatch(fetchSchedules(user.uid));
+  }, [user]);
 
   function getDaysInMonth(year, month) {
     return 32 - new Date(year, month, 32).getDate();
@@ -203,16 +216,22 @@ export default function JobCalendar() {
       <div className="MainContainer">
         <div className="calendar-container">
           <div className="job-select">
-            <select
-              onChange={(e) => {
-                setCurrentJob(e.target.value);
-              }}>
-              {jobs.map((job) => (
-                <option key={job.id} value={job.id}>
-                  {job.jobTitle}
-                </option>
-              ))}
-            </select>
+            {jobs.length === 0 ? (
+              <select disabled>
+                <option value="none">None selected</option>
+              </select>
+            ) : (
+              <select
+                onChange={(e) => {
+                  setCurrentJob(e.target.value);
+                }}>
+                {jobs.map((job) => (
+                  <option key={job.id} value={job.id}>
+                    {job.jobTitle}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
           <div className="monthYear">
             <button className="todayButton" onClick={() => setDate(new Date())}>

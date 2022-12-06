@@ -1,6 +1,6 @@
 This file lists some missing features in the Job Calendar section of the app.
 
-Currently the entire calendar solely relies on localStorage to work, this should be changed to use the database instead.
+Currently the entire calendar solely relies on localStorage to work, this should be changed to use the database instead. --------DONE
 This should go without saying, but any bugs that are found should be ironed out!
 
 Job Calendar:
@@ -23,8 +23,8 @@ Settings:
 
 Needs overhauling:
 Jobs are saved as a json file called "jobs.json".
-This shouldn't be the case! Instead user should be able to add jobs from the app itself.
-Jobs should be stored in the database and then used from there. 
+This shouldn't be the case! Instead user should be able to add jobs from the app itself. -------------DONE
+Jobs should be stored in the database and then used from there. --------------------------------------DONE
 
 Once the jobs.json file is removed and replaced with the database, an alert should be shown in the app to the user if they have not yet added any jobs.
 

@@ -45,13 +45,13 @@ function Overview() {
   const [allJobs, setAllJobs] = useState([]);
   const [daysWithJobs, setDaysWithJobs] = useState([]);
 
-  function checkSchedule(schedule) {
-    let { startDate: start, endDate: end } = schedule.scheduleDuration;
-    start = new Date(start).setHours(0, 0, 0, 0);
-    end = new Date(end).setHours(0, 0, 0, 0);
-    let result = start <= date.getTime() && end >= date.getTime();
-    return result;
-  }
+  // function checkSchedule(schedule) {
+  //   let { startDate: start, endDate: end } = schedule.scheduleDuration;
+  //   start = new Date(start).setHours(0, 0, 0, 0);
+  //   end = new Date(end).setHours(0, 0, 0, 0);
+  //   let result = start <= date.getTime() && end >= date.getTime();
+  //   return result;
+  // }
 
   function checkWeekdaySchedule(schedule, weekDay) {
     return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
@@ -67,16 +67,16 @@ function Overview() {
   }, []);
 
   useEffect(() => {
-    const scheduleKeys = Object.keys(localStorage).filter((key) => key.includes('_schedule'));
-    const allSchedules = scheduleKeys
+    const scheduleKeys = Object.keys(localStorage).filter((key) => key.includes('_schedules'));
+    const data = scheduleKeys
       .map((key) => {
         const schedule = JSON.parse(localStorage.getItem(key));
         return schedule;
       })
       .flat(Infinity);
-    const data = allSchedules.filter((schedule) => {
-      return checkSchedule(schedule);
-    });
+    // const data = allSchedules.filter((schedule) => {
+    //   return checkSchedule(schedule);
+    // });
     if (data) {
       const jobs = checkOverlap(data);
       const all_jobs = [];

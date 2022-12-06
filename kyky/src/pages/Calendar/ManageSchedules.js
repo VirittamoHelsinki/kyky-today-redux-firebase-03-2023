@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createSchedule, removeSchedule } from '../../redux/scheduleSlice';
 import Button from '../../components/Button';
 
@@ -18,8 +18,11 @@ export default function ManageSchedules() {
   const [unavailableEnd, setUnavailableEnd] = useState('');
   const [indefinite, setIndefinite] = useState(false);
   const [opened, setOpened] = useState(-1);
+  const [user, setUser] = useState([]);
 
   const dispatch = useDispatch();
+
+  const scheduleChanged = useSelector((state) => state.schedule);
 
   useEffect(() => {
     setSelectedWindow('manage-schedules');
@@ -32,17 +35,12 @@ export default function ManageSchedules() {
     if (confirm) {
       storage.splice(index, 1);
       if (storage.length === 0) {
-        dispatch(removeSchedule(schedule.jobId));
+        dispatch(removeSchedule({ uid: user.uid, schedule: schedule.jobId }));
       } else {
-        dispatch(createSchedule({ jobId: schedule.jobId, data: storage }));
+        dispatch(createSchedule({ uid: user.uid, jobId: schedule.jobId, data: storage }));
       }
-      setSchedules((prev) => {
-        const newSchedules = { ...prev };
-        delete newSchedules[schedule._id];
-        return newSchedules;
-      });
-      //window.location.reload();
     }
+    setSelectedSchedules(storage);
   }
 
   useEffect(() => {
@@ -67,6 +65,11 @@ export default function ManageSchedules() {
     setSchedules(schedulesObject);
     const unavailabilities = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
     setUnavailabilities(unavailabilities);
+  }, [scheduleChanged]);
+
+  useEffect(() => {
+    const _user = localStorage.getItem('user');
+    setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
   }, []);
 
   function createUnavailability() {

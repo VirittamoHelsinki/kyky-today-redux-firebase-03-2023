@@ -13,13 +13,20 @@ options – options in Select component (dropdown menu), list of value-label pai
     { value: '...', label: '...' }, { value: '...', label: '...' }, ...
 [...options] is for creating new options array for each Select component with the same content
 */
-export function GenericSelect({ className = 'select-container', name, placeholder, options }) {
+export function GenericSelect({
+  className = 'select-container',
+  name,
+  placeholder,
+  options,
+  onChange = () => {}
+}) {
   return (
     <ReactSelect
       className={`${className !== 'select-container' ? className : 'select-container'}`}
       name={name}
       placeholder={placeholder}
       options={[...options]}
+      onChange={onChange}
       components={{ Option: IconOption }}
     />
   );
