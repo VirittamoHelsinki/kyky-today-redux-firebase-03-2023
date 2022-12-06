@@ -15,6 +15,7 @@ import ContactForm from './pages/ContactForm';
 import UserLogin from './pages/UserLogIn';
 import LandingPage from './pages/LandingPage';
 import JobCreation from './pages/JobCreation';
+import ServiceBooking from "./pages/ServiceBooking";
 
 /* Profile creation */
 import NewProfileCreation from './pages/ProfileCreation/NewProfileCreation';
@@ -28,22 +29,23 @@ import JobCalendar from './pages/Calendar/JobCalendar';
 import ManageSchedules from './pages/Calendar/ManageSchedules';
 import CalendarSettings from './pages/Calendar/CalendarSettings';
 
-const languages = { fi, en };
+const languages = {fi, en};
 
 const App = () => {
-  const [lang, setLang] = useState(languages.fi);
+    const [lang, setLang] = useState(languages.fi);
 
-  const navlinks = [
-    { to: '/', label: 'Home' },
-    { to: '/profile-creation', label: 'Profile Creation' },
-    { to: '/user-registration', label: 'User Registration' },
-    { to: '/contact-form', label: 'Contact Form' },
-    { to: '/user-log-in', label: 'Log In' },
-    { to: '/job-creation', label: 'Job Creation' },
-    { to: '/new-profile-creation', label: 'New Profile Creation' },
-    { to: '/calendar', label: 'My Calendar' },
-    { to: '/calendar/overview', label: 'Overview' }
-  ];
+    const navlinks = [
+        {to: '/', label: 'Home'},
+        {to: '/profile-creation', label: 'Profile Creation'},
+        {to: '/user-registration', label: 'User Registration'},
+        {to: '/contact-form', label: 'Contact Form'},
+        {to: '/user-log-in', label: 'Log In'},
+        {to: '/job-creation', label: 'Job Creation'},
+        {to: '/new-profile-creation', label: 'New Profile Creation'},
+        {to: '/calendar', label: 'My Calendar'},
+        {to: '/calendar/overview', label: 'Overview'},
+        {to: '/service-booking', label: 'Service Booking'}
+    ];
 
   return (
     <Language.Provider value={{ lang }}>
@@ -63,14 +65,15 @@ const App = () => {
             <Route path="settings" element={<CalendarSettings />} />
           </Route>
 
-          <Route path="new-profile-creation" element={<Creation />}>
-            <Route index element={<NewProfileCreation />} />
-            <Route path="get-started" element={<GetStarted />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </Language.Provider>
-  );
+                    <Route path="new-profile-creation" element={<Creation/>}>
+                        <Route index element={<NewProfileCreation/>}/>
+                        <Route path="get-started" element={<GetStarted/>}/>
+                    </Route>
+                    <Route path="service-booking" element={<ServiceBooking/>}/>
+                </Routes>
+            </BrowserRouter>
+        </Language.Provider>
+    );
 };
 
 export default App;
