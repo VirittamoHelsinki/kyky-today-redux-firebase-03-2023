@@ -5,13 +5,16 @@ import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
 
 export default function AddSkills({ setSaved }) {
-  const [clearSkills, setClearSkills] = useState(Skills);
-  const [query, setQuery] = useState('');
   const [skills, setSkills] = useState([]);
+  const [query, setQuery] = useState('');
 
   const handleClick = (event) => {
+    for (const skill of skills) {
+      if (event.target.value === skill) {
+        return;
+      }
+    }
     setSkills(skills.concat(event.target.value));
-    setClearSkills(clearSkills); //in progress
   };
 
   return (
