@@ -75,7 +75,7 @@ export default function Step5() {
     { value: 'dietitian', label: 'Dietitian' },
     { value: 'meditation', label: 'Meditation' },
     { value: 'sportsAndFitnessTrainer', label: 'Sports & Fitness trainer' },
-    { value: 'massageTherapist', label: 'MassageTherapist' },
+    { value: 'massageTherapist', label: 'Massage Therapist' },
     { value: 'fitnessCoach', label: 'Fitness Coach' }
   ];
 
