@@ -56,7 +56,14 @@ export default function JobCalendar() {
 
   useEffect(() => {
     const _jobs = localStorage.getItem('jobs');
+    if (jobs.length > 1) {
+      // sort jobs alphabetically by job name
+      jobs.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0));
+    }
     setJobs(_jobs ? JSON.parse(localStorage.getItem('jobs')) : []);
+    if ((currentJob === '') & (jobs.length > 0)) {
+      setCurrentJob(jobs[0].id);
+    }
   }, [jobsChanged]);
 
   useEffect(() => {
