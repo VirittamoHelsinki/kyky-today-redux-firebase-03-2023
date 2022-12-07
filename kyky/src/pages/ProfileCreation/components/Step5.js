@@ -1,18 +1,47 @@
 import '../../../styles/NewProfileCreation.scss';
-import { GetOptionValue } from 'react-select';
+
 import { GenericSelect } from './Select';
 import { useState, React } from 'react';
 
 export default function Step5() {
   const [selectValue, setSelectValue] = useState('');
-  const showCategory = (GetOptionValue) => {
-    setSelectValue(
-      <GenericSelect
-        className="select-container2"
-        placeholder="Choose a subcategory"
-        options={[...subCategory1]}></GenericSelect>
-    );
-    //console.log('hello');
+
+  const showCategory = (categories) => {
+    if (categories.value === 'homeMaintenanceAndRepairs')
+      setSelectValue(
+        <GenericSelect
+          className="select-container2"
+          placeholder="Choose a subcategory"
+          options={[...subCategory1]}></GenericSelect>
+      );
+    else if (categories.value === 'movingAndCleaning')
+      setSelectValue(
+        <GenericSelect
+          className="select-container2"
+          placeholder="Choose a subcategory"
+          options={[...subCategory2]}></GenericSelect>
+      );
+    else if (categories.value === 'careAndWellness')
+      setSelectValue(
+        <GenericSelect
+          className="select-container2"
+          placeholder="Choose a subcategory"
+          options={[...subCategory3]}></GenericSelect>
+      );
+    else if (categories.value === 'creativeAndIt')
+      setSelectValue(
+        <GenericSelect
+          className="select-container2"
+          placeholder="Choose a subcategory"
+          options={[...subCategory4]}></GenericSelect>
+      );
+    else
+      setSelectValue(
+        <GenericSelect
+          className="select-container2"
+          placeholder="Choose a subcategory"
+          options={[...subCategory5]}></GenericSelect>
+      );
   };
   const categories = [
     { value: 'homeMaintenanceAndRepairs', label: 'Home Maintenance & Repairs', id: 1 },
@@ -79,6 +108,8 @@ export default function Step5() {
   return (
     <div className="step step5">
       <GenericSelect
+        key={categories.value}
+        value={categories.value}
         className="select-container2"
         placeholder="Choose a main category"
         options={[...categories]}
