@@ -81,6 +81,32 @@
   }
 }
 
-.minified-calendar {
+.recurring-tab-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 3rem;
+  .checkbox-and-price {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 3rem;
+    h3 {
+      margin-left: 0.4rem;
+      margin-right: 0.4rem;
+    }
+  }
+}
 
+.css-b62m3t-container {
+  width: 9rem;
+}
+
+.checkbox {
+  box-shadow: none;
+  font-size: 20px;
+}
+
+.checkbox-label {
+  font-size: 1.25rem;
 }
