@@ -29,6 +29,9 @@ import JobCalendar from './pages/Calendar/JobCalendar';
 import ManageSchedules from './pages/Calendar/ManageSchedules';
 import CalendarSettings from './pages/Calendar/CalendarSettings';
 
+/* Buyer's Rating*/
+import BuyersRating from './pages/BuyersRating';
+
 const languages = { fi, en };
 
 const App = () => {
@@ -44,7 +47,8 @@ const App = () => {
     { to: '/new-profile-creation', label: 'New Profile Creation' },
     { to: '/calendar', label: 'My Calendar' },
     { to: '/calendar/overview', label: 'Overview' },
-    { to: '/service-booking', label: 'Service Booking' }
+    { to: '/service-booking', label: 'Service Booking' },
+    { to: '/buyers-rating', label: 'Buyers Rating' }
   ];
 
   return (
@@ -70,6 +74,7 @@ const App = () => {
             <Route path="get-started" element={<GetStarted />} />
           </Route>
           <Route path="service-booking" element={<ServiceBooking />} />
+          <Route path="buyers-rating" element={<BuyersRating />} />
         </Routes>
       </BrowserRouter>
     </Language.Provider>

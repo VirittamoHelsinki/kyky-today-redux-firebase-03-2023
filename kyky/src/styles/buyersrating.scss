@@ -1,0 +1,77 @@
+.buyersRatingMainContainer {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  width: 100vw;
+
+  .buyerSideBar {
+    h3 {
+      color: white;
+    }
+
+    height: 100vh;
+    width: 150px;
+    background-color: #166d60;
+  }
+
+  .buyersRatingContainer1 {
+    h3 {
+      font-family: Roboto, sans-serif;
+      color: black;
+    }
+
+    width: 50vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 5%;
+    margin-right: 5%;
+  }
+
+  .buyerAttributes {
+    display: flex;
+    margin-right: 15px;
+    font-size: larger;
+    justify-content: center;
+    align-items: center;
+    font-family: Roboto, sans-serif;
+    height: 65px;
+    width: 140px;
+    background-color: #bce5df;
+    box-shadow: 1px 1px 1px #9ec0bb;
+    border-radius: 13px;
+  }
+
+  .buyerTextArea {
+    width: 50vw;
+    height: 15vh;
+    border: 1px solid rgb(182 181 181);
+    border-radius: 8px;
+    font-family: Roboto, sans-serif;
+  }
+
+  .buyersRatingContainer2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h3 {
+      color: black;
+    }
+
+    .submitButton {
+      color: white;
+      background-color: #387a70;
+      font-size: 1rem;
+      height: 40px;
+      width: 150px;
+      border-radius: 10px;
+      margin: 0 25px;
+    }
+  }
+
+  .starContainer {
+    display: flex;
+  }
+}
