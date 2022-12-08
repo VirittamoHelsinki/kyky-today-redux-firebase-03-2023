@@ -4,7 +4,7 @@ import '../../../styles/NewProfileCreation.scss';
 import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
 
-export default function Step1({ step1Data, handleChange }) {
+export default function Step1({ formData, handleChange }) {
   const [clearSkills, setClearSkills] = useState(Skills);
   const [query, setQuery] = useState('');
   const [skills, setSkills] = useState([]);
@@ -17,12 +17,12 @@ export default function Step1({ step1Data, handleChange }) {
 
   return (
     <div className="step step1">
-      <input // How to pass information about current step to handleChange function?
-        className="step1 getStartedInput"
-        id="titleInput"
-        name="titleInput"
-        value={step1Data?.titleInput}
-        onChange={handleChange}
+      <input
+        className="getStartedInput"
+        id="s1TitleInput"
+        name="s1TitleInput"
+        value={formData?.s1TitleInput}
+        onChange={(event) => handleChange(event.target.name, event.target.value)}
         placeholder="Example: Dogwalker"
         aria-label="Please add a title about what you do"></input>
       <h1>Please add skills you have.</h1>
