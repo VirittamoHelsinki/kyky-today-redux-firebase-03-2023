@@ -12,7 +12,11 @@ export default function Step6() {
   return (
     <div className="step step6">
       <div className="hourlyContainer">
-        <GenericSelect placeholder="Choose your currency" options={[...currencies]} />
+        <GenericSelect
+          className="step6Select"
+          placeholder="Choose your currency"
+          options={[...currencies]}
+        />
         <input
           type="number"
           className="hourlyInput"

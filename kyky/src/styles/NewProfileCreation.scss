@@ -674,6 +674,10 @@ input {
   margin: 150px 0;
 }
 
+.step6Select {
+  margin-left: 30px;
+}
+
 .hourlyInput {
   height: 50px;
   width: 150px;
@@ -681,11 +685,14 @@ input {
   font-family: Poppins, sans-serif;
   border: 1px solid #00a088;
   border-radius: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 .totalAmount {
+  text-align: center;
   color: #00a088;
   position: relative;
   bottom: 100px;
