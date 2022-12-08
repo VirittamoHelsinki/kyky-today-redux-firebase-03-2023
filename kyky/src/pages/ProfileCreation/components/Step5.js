@@ -10,35 +10,35 @@ export default function Step5() {
     if (categories.value === 'homeMaintenanceAndRepairs')
       setSelectValue(
         <GenericSelect
-          className="select-container2"
+          className="select-container2b"
           placeholder="Choose a subcategory"
           options={[...subCategory1]}></GenericSelect>
       );
     else if (categories.value === 'movingAndCleaning')
       setSelectValue(
         <GenericSelect
-          className="select-container2"
+          className="select-container2b"
           placeholder="Choose a subcategory"
           options={[...subCategory2]}></GenericSelect>
       );
     else if (categories.value === 'careAndWellness')
       setSelectValue(
         <GenericSelect
-          className="select-container2"
+          className="select-container2b"
           placeholder="Choose a subcategory"
           options={[...subCategory3]}></GenericSelect>
       );
     else if (categories.value === 'creativeAndIt')
       setSelectValue(
         <GenericSelect
-          className="select-container2"
+          className="select-container2b"
           placeholder="Choose a subcategory"
           options={[...subCategory4]}></GenericSelect>
       );
     else
       setSelectValue(
         <GenericSelect
-          className="select-container2"
+          className="select-container2b"
           placeholder="Choose a subcategory"
           options={[...subCategory5]}></GenericSelect>
       );

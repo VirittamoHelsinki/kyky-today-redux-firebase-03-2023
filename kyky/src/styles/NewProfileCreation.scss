@@ -653,9 +653,15 @@ input {
 
 // Step5.js starts here
 
-.select-container2 {
+.select-container2,
+.select-container2b {
   width: 400px;
   margin: 50px 0 200px;
+}
+
+.select-container2b {
+  position: relative;
+  bottom: 120px;
 }
 
 // Step6.js starts here
