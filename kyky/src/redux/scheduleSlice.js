@@ -15,7 +15,6 @@ export const createSchedule = createAsyncThunk('schedules/createSchedule', async
 
 export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async (uid) => {
   try {
-    console.log(uid);
     const list = [];
     const schedules = await getDocs(collection(db, `users/${uid}/schedules/`));
     schedules.forEach((schedule) => {
@@ -36,16 +35,14 @@ export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async
   }
 });
 
-// createAsyncThunk() generates automatically pending -, fulfilled - and rejected handling cases
+// createAsyncThunk() generates automatically pending -, fulfilled - and rejected handling cases.
+// Add pending and rejected cases when needed.
 export const scheduleSlice = createSlice({
   name: 'Schedules',
   initialState: [],
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(createSchedule.pending, (state, action) => {
-        console.log(state, action);
-      })
       .addCase(createSchedule.fulfilled, (state, action) => {
         const name = action.payload.jobId;
         const list = [];
@@ -57,13 +54,6 @@ export const scheduleSlice = createSlice({
           ...state,
           status: 'schedule created'
         });
-      })
-      .addCase(createSchedule.rejected, (state, action) => {
-        console.log(state, action);
-      })
-      /////////////////////////////////////////////////////
-      .addCase(fetchSchedules.pending, (state, action) => {
-        console.log(state, action);
       })
       .addCase(fetchSchedules.fulfilled, (state, action) => {
         const jobs = [];
@@ -86,22 +76,12 @@ export const scheduleSlice = createSlice({
           status: 'schedules fetched'
         });
       })
-      .addCase(fetchSchedules.rejected, (state, action) => {
-        console.log(state, action);
-      })
-      ////////////////////////////////////////////////////
-      .addCase(removeSchedule.pending, (state, action) => {
-        console.log(state, action);
-      })
       .addCase(removeSchedule.fulfilled, (state, action) => {
         localStorage.removeItem(`${action.payload}_schedules`);
         return (state = {
           ...state,
           status: 'schedule removed'
         });
-      })
-      .addCase(removeSchedule.rejected, (state, action) => {
-        console.log(state, action);
       });
   }
 });

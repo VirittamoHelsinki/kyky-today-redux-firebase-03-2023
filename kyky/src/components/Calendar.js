@@ -158,9 +158,15 @@ export default function Calendar({
             Today
           </button>
           <div className="calendar-select">
-            <button className="arrow" onClick={() => changeMonth(currentMonth - 1)}>
-              <i className="material-icons-outlined">chevron_left</i>
-            </button>
+            {currentMonth === 0 && currentYear === new Date().getFullYear() - minYears ? (
+              <button className="arrow" disabled>
+                <i className="material-icons-outlined">chevron_left</i>
+              </button>
+            ) : (
+              <button className="arrow" onClick={() => changeMonth(currentMonth - 1)}>
+                <i className="material-icons-outlined">chevron_left</i>
+              </button>
+            )}
             <select
               className="month-select rounded-select"
               value={currentMonth}
@@ -178,9 +184,15 @@ export default function Calendar({
             </button>
           </div>
           <div className="calendar-select">
-            <button className="arrow" onClick={() => changeYear(currentYear - 1)}>
-              <i className="material-icons-outlined">chevron_left</i>
-            </button>
+            {currentYear === new Date().getFullYear() - minYears ? (
+              <button className="arrow" disabled>
+                <i className="material-icons-outlined">chevron_left</i>
+              </button>
+            ) : (
+              <button className="arrow" onClick={() => changeYear(currentYear - 1)}>
+                <i className="material-icons-outlined">chevron_left</i>
+              </button>
+            )}
             <select
               className="year-select rounded-select"
               value={years.find((n) => {

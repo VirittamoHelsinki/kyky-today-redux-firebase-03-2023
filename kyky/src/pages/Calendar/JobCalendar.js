@@ -137,7 +137,9 @@ export default function JobCalendar() {
   }, [selectedDay]);
 
   useEffect(() => {
-    dispatch(fetchSchedules(user.uid));
+    if (user.uid) {
+      dispatch(fetchSchedules(user.uid));
+    }
   }, [user]);
 
   function getDaysInMonth(year, month) {
