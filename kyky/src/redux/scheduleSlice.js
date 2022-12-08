@@ -36,7 +36,7 @@ export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async
 });
 
 // createAsyncThunk() generates automatically pending -, fulfilled - and rejected handling cases.
-// Add pending and rejected cases when needed.
+// Add pending and rejected cases when needed
 export const scheduleSlice = createSlice({
   name: 'Schedules',
   initialState: [],
