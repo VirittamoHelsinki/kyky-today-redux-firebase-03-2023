@@ -58,7 +58,7 @@ export const signInEmailAndPassword = createAsyncThunk(
 );
 
 export const recoverPasswordResetEmail = createAsyncThunk(
-  'user/sendPasswordResetEmail',
+  'user/srecoverPasswordResetEmail',
   async (payload) => {
     try {
       const res = await sendPasswordResetEmail(auth, payload);

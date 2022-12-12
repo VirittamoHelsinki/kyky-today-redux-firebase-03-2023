@@ -14,7 +14,8 @@ const ForgotPassword = () => {
     e.preventDefault();
     if (email !== '') {
       dispatch(recoverPasswordResetEmail(email));
-      alert('the email has been sent');
+      alert('An email, if exists, has been sent');
+      setEmail('');
     }
   };
 
