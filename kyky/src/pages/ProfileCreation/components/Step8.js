@@ -70,11 +70,7 @@ export default function Step8() {
           <h3>Skills</h3>
           <button className="picIcon" onClick={() => addSkills()}>+</button>
           <div className="skillContainer">
-            <div className="skill Html">HTML5</div>
-            <div className="skill Css">CSS 3</div>
-            <div className="skill Figma">Figma</div>
-            <div className="skill Proto">Prototype Design</div>
-            <div className="skill softwareDev">Software Development</div>
+           
           </div>
         </div>
         <div className="previewContainer3">
