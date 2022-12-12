@@ -70,10 +70,6 @@ export default function GetStarted() {
   }
 
   function handleChange(name, value) {
-    console.log('GetStarted.js handleChange function:');
-    console.log('name:', name);
-    console.log('value:', value);
-
     setFormData({ ...formData, [name]: value });
   }
 
