@@ -130,3 +130,9 @@
 .checkbox-container {
   box-shadow: none !important;
 }
+
+.calendar-modal {
+  background: white;
+  position: absolute;
+  z-index: 1000;
+}

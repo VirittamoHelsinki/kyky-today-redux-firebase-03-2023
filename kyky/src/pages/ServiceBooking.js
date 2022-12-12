@@ -118,7 +118,7 @@ function ServiceBooking() {
                                 onChange={() => check('onceEveryMonth')} />
                     </div>
                     <div className='recurring-price'>{job.prices.weekend} €/h</div>
-                    {isChecked.checked === 'onceEveryMonth' && <SelectDays selectedDays={selectedDays} />}
+                    {isChecked.checked === 'onceEveryMonth' && <div className="calendar-modal"><Calendar date={date} setDate={setDate} minYears={0} maxYears={5}/><Button>Confirm selection</Button></div>}
                   </div>
                 </div>
               </div>
