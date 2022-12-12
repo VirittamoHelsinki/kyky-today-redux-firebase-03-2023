@@ -22,8 +22,8 @@ export const fetchCalendarSettings = createAsyncThunk(
   async (uid) => {
     try {
       const settings = await getDoc(doc(db, `users/${uid}/settings/calendar-settings/`));
-      console.log(settings.data());
-      return settings.data();
+      console.log(settings.data()[0]);
+      return settings.data()[0];
     } catch (error) {
       return error;
     }

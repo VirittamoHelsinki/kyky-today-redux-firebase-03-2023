@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signInEmailAndPassword, signInGoogleAuthProvider } from '../redux/userSlice';
 import Language from '../language';
@@ -104,15 +105,10 @@ function UserLogIn() {
           }}>
           Kirjaudu Applella
         </Button>
-        <span className="login-help">
-          <a className="primary" href="https://www.google.com/">
-            {lang.registration.sign_in}
-          </a>
-          {lang.registration.or}
-          <a className="primary" href="https://www.google.com/">
-            {lang.registration.recover_password}
-          </a>
-        </span>
+
+        <div className="primary">
+          <Link to="/recover-password">{lang.registration.recover_password}</Link>
+        </div>
       </form>
     </main>
   );

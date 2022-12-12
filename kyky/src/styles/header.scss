@@ -1,11 +1,12 @@
-body {
-  background-color: white;
-}
-
 #navheader {
   display: flex;
+  position: sticky;
   justify-content: flex-end;
   align-items: center;
+  background-color: white;
+  top: 0;
+  z-index: 1;
+  height: 80px;
   padding: 0 40px;
 }
 
@@ -26,10 +27,10 @@ nav ul {
 }
 
 .dropdown-content {
-  display: none;
+  display: block;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: 100px;
   box-shadow: 0 8px 16px 0 darkgray;
   z-index: 1;
 }
@@ -44,8 +45,4 @@ nav ul {
 
 .dropdown-content a:hover {
   background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
 }

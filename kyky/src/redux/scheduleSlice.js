@@ -5,7 +5,7 @@ import { db } from '../firebase/firebase';
 export const createSchedule = createAsyncThunk('schedules/createSchedule', async (payload) => {
   try {
     await setDoc(doc(db, `users/${payload.uid}/schedules/${payload.jobId}`), {
-      data: payload.data
+      ...payload.data
     });
     return payload;
   } catch (error) {
@@ -15,12 +15,18 @@ export const createSchedule = createAsyncThunk('schedules/createSchedule', async
 
 export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async (uid) => {
   try {
-    const list = [];
+    const list_of_schedules = [];
     const schedules = await getDocs(collection(db, `users/${uid}/schedules/`));
-    schedules.forEach((schedule) => {
-      list.push({ id: schedule.id, data: schedule.data() });
+    schedules.docs.map((doc) => {
+      let temp_schedules = [];
+      let i = 0;
+      while (doc.data()[i]) {
+        temp_schedules.push(doc.data()[i]);
+        i++;
+      }
+      list_of_schedules.push({ id: doc.id, data: temp_schedules });
     });
-    return list;
+    return list_of_schedules;
   } catch (error) {
     return error;
   }
@@ -35,7 +41,7 @@ export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async
   }
 });
 
-// createAsyncThunk() generates automatically pending -, fulfilled - and rejected handling cases.
+// createAsyncThunk() generates automatically pending, fulfilled and rejected handling cases.
 // Add pending and rejected cases when needed
 export const scheduleSlice = createSlice({
   name: 'Schedules',
@@ -44,18 +50,17 @@ export const scheduleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createSchedule.fulfilled, (state, action) => {
-        const name = action.payload.jobId;
-        const list = [];
-        action.payload.data.forEach((d) => {
-          list.push(d);
-        });
-        localStorage.setItem(`${name}_schedules`, JSON.stringify(list));
+        localStorage.setItem(
+          `${action.payload.jobId}_schedules`,
+          JSON.stringify(action.payload.data)
+        );
         return (state = {
           ...state,
           status: 'schedule created'
         });
       })
       .addCase(fetchSchedules.fulfilled, (state, action) => {
+        console.log(action.payload);
         const jobs = [];
         action.payload.forEach((job) => {
           jobs.push({
@@ -64,11 +69,7 @@ export const scheduleSlice = createSlice({
             cities: ['Helsinki'],
             jobTitle: job.id
           });
-          const schedules = [];
-          job.data.data.forEach((d) => {
-            schedules.push(d);
-          });
-          localStorage.setItem(`${job.id}_schedules`, JSON.stringify(schedules));
+          localStorage.setItem(`${job.id}_schedules`, JSON.stringify(job.data));
         });
         localStorage.setItem('jobs', JSON.stringify(jobs));
         return (state = {
