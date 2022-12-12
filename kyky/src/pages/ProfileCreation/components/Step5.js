@@ -1,41 +1,121 @@
 import '../../../styles/NewProfileCreation.scss';
-import Select, { components } from 'react-select';
-import React from 'react';
-import { ReactComponent as CheckMark } from '../../../image/check-mark.svg';
+
+import { GenericSelect } from './Select';
+import { useState, React } from 'react';
+
 export default function Step5() {
-  const options = [
-    { value: 'itAndNetworking', label: 'IT & Networking' },
-    { value: 'salesAndMarketing', label: 'Sales & marketing' },
-    { value: 'writing', label: 'Writing' },
-    { value: 'webMobileAndSoftwareDev ', label: 'Web, Mobile & Software Dev' }
+  const [selectValue, setSelectValue] = useState('');
+
+  const showCategory = (categories) => {
+    if (categories.value === 'homeMaintenanceAndRepairs')
+      setSelectValue(
+        <GenericSelect
+          className="select-container2b"
+          placeholder="Choose a subcategory"
+          options={[...subCategory1]}></GenericSelect>
+      );
+    else if (categories.value === 'movingAndCleaning')
+      setSelectValue(
+        <GenericSelect
+          className="select-container2b"
+          placeholder="Choose a subcategory"
+          options={[...subCategory2]}></GenericSelect>
+      );
+    else if (categories.value === 'careAndWellness')
+      setSelectValue(
+        <GenericSelect
+          className="select-container2b"
+          placeholder="Choose a subcategory"
+          options={[...subCategory3]}></GenericSelect>
+      );
+    else if (categories.value === 'creativeAndIt')
+      setSelectValue(
+        <GenericSelect
+          className="select-container2b"
+          placeholder="Choose a subcategory"
+          options={[...subCategory4]}></GenericSelect>
+      );
+    else
+      setSelectValue(
+        <GenericSelect
+          className="select-container2b"
+          placeholder="Choose a subcategory"
+          options={[...subCategory5]}></GenericSelect>
+      );
+  };
+  const categories = [
+    { value: 'homeMaintenanceAndRepairs', label: 'Home Maintenance & Repairs', id: 1 },
+    { value: 'movingAndCleaning', label: 'Moving & Cleaning', id: 2 },
+    { value: 'careAndWellness', label: 'Care & Wellness', id: 3 },
+    { value: 'creativeAndIt', label: 'Creative & IT', id: 4 },
+    { value: 'learningandCoaching', label: 'Learning & Coaching', id: 5 }
+  ];
+  const subCategory1 = [
+    { value: 'handyman', label: 'Handyman' },
+    { value: 'painter', label: 'Painter' },
+    { value: 'electrician', label: 'Electrician' },
+    { value: 'plumber', label: 'Plumber' },
+    { value: 'carpenter', label: 'Carpenter' },
+    { value: 'snowManagement', label: 'Snow Management' },
+    { value: 'gardeningAndLandscaping', label: 'Gardening & Landscaping' },
+    { value: 'chimneyOrGutterMaintenance', label: 'Chimney / Gutter Maintenance' }
   ];
 
-  const placeholder = 'Search for a service';
-  const { Option } = components;
-  const IconOption = (props) => (
-    <Option {...props}>
-      {props.isSelected ? (
-        <div class="optionContainer">
-          <CheckMark id="checkMark" />
-          <span class="optionLabelTextBold">{props.data.label}</span>
-        </div>
-      ) : (
-        <div class="optionContainer">
-          <div id="noCheckMark"></div>
-          <span class="optionLabelText">{props.data.label}</span>
-        </div>
-      )}
-    </Option>
-  );
+  const subCategory2 = [
+    { value: 'movingServices', label: 'Moving Services' },
+    { value: 'cleaningServices', label: 'Cleaning Services' },
+    { value: 'carpetCleaning', label: 'Carpet Cleaning' }
+  ];
+
+  const subCategory3 = [
+    { value: 'babysitting', label: 'Babysitting' },
+    { value: 'nurse', label: 'Nurse' },
+    { value: 'eldelryCare', label: 'Eldelry Care' },
+    { value: 'yoga', label: 'Yoga' },
+    { value: 'dietitian', label: 'Dietitian' },
+    { value: 'meditation', label: 'Meditation' },
+    { value: 'sportsAndFitnessTrainer', label: 'Sports & Fitness trainer' },
+    { value: 'massageTherapist', label: 'Massage Therapist' },
+    { value: 'fitnessCoach', label: 'Fitness Coach' }
+  ];
+
+  const subCategory4 = [
+    { value: 'photographer', label: 'Photographer' },
+    { value: 'graphicDesigner', label: 'Graphic Designer' },
+    { value: 'contentWriter', label: 'ContentWriter' },
+    { value: 'translators', label: 'Translators' },
+    { value: 'artAndCrafts', label: 'Art & Crafts' },
+    { value: 'music', label: 'Music' },
+    { value: 'itDeveloper', label: 'IT Developer' },
+    { value: 'itDesigner', label: 'IT Designer' },
+    { value: 'programmer', label: 'Programmer' },
+    { value: 'technicians', label: 'Technicians' },
+    { value: 'socialMedia', label: 'Social Media' }
+  ];
+
+  const subCategory5 = [
+    { value: 'teachersAndTutors', label: 'Teachers & Tutors' },
+    { value: 'lifeCoach', label: 'Life Coach' },
+    { value: 'virtualAssistent', label: 'Virtual Assistent' },
+    { value: 'accountant', label: 'Accountant' },
+    { value: 'businessConsultant', label: 'Business Consultant' },
+    { value: 'lawyer', label: 'Lawyer' },
+    { value: 'itDeveloper', label: 'IT Developer' },
+    { value: 'taxAndFinanceConsultant', label: 'Tax & Finance Consultant' },
+    { value: 'architect', label: 'Architect' }
+  ];
 
   return (
     <div className="step step5">
-      <Select
+      <GenericSelect
+        key={categories.value}
+        value={categories.value}
         className="select-container2"
-        placeholder={placeholder}
-        options={[...options]}
-        components={{ Option: IconOption }}
+        placeholder="Choose a main category"
+        options={[...categories]}
+        onChange={showCategory}
       />
+      {selectValue}
     </div>
   );
 }

@@ -25,7 +25,7 @@ export default function Button({
         {children}
       </Link>
     );
-  }
+  }0
 
   return (
     <button type={type} onClick={onClick} className={className}>

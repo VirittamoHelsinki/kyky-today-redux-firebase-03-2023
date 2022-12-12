@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+.landing-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #387A701A;
+}
+
+.landing-page-nav-and-image-container {
+  display: flex;
+  margin-left: 5em;
+  margin-top: 3em;
+}
+
+.landing-page-navigation {
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-page-navigation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 20vw;
+}
+
+.landing-page-navigation-container button {
+  font-family: Poppins, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  border-bottom: #00A088 1px solid;
+  margin-bottom: 1em;
+}
+
+.landing-page-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.landing-page-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.landing-page-image h1 {
+  font-family: 'Lilita One', cursive;
+  font-weight: 400;
+  font-size: 64px;
+  letter-spacing: 0.03em;
+  color: #063831;
+}
+
+.landing-page-footer button {
+  display: flex;
+  align-items: center;
+  font-family: Ubuntu, sans-serif;
+  font-size: 1.5vw;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #002520;
+  background: rgba(6, 56, 49, 0.1);
+  border: 1px solid #00A088;
+  border-radius: 91px;
+  height: 3em;
+  width: 15%;
+  padding: 1em;
+  margin-right: 3em;
+  margin-left: 3em;
+  justify-content: center;
+}
+
+.image1 {
+  background-image: url("../../public/images/dog-walker.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image2 {
+  background-image: url("../../public/images/celebration.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image3 {
+  background-image: url("../../public/images/cooking.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image4 {
+  background-image: url("../../public/images/technology.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image5 {
+  background-image: url("../../public/images/gardening.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image6 {
+  background-image: url("../../public/images/photography.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image7 {
+  background-image: url("../../public/images/teaching.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}
+
+.image8 {
+  background-image: url("../../public/images/teaching.png");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  width: 600px;
+}

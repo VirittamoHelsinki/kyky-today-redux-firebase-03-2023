@@ -1,41 +1,62 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import LanguageSelect from './LanguageSelect';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../redux/userSlice';
+import SearchBar from './SearchBar';
+import '../styles/header.scss';
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
-export default function Header({ languages, lang, setLang, navlinks }) {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
+const Header = ({ navlinks }) => {
+  const dispatch = useDispatch();
 
-  const handleChange = (lang) => {
-    setLang(lang);
-    toggle();
+  const onLogoutClick = () => {
+    dispatch(logOut());
   };
 
   return (
-    <header className="component-header">
-      <KykyLogo/>
-      <LanguageSelect languages={languages} language={lang} setLanguage={setLang} />
+    <div id="navheader">
+      <div className="nav-title">
+        <a href="/">
+          <KykyLogo />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <SearchBar />
+          </li>
 
-      <nav className="component-selector">
-        <button type="button" onClick={toggle}>
-          ** Select **
-        </button>
-        {isOpen && (
-          <div>
-            <ul>
+          <li>
+            <Link to="/user-registration">Rekisteröidy</Link>
+          </li>
+
+          <li className="dropdown">
+            <span className="material-icons-outlined">menu</span>
+            <div className="dropdown-content">
               {navlinks.map(({ to, label }) => (
-                <li key={to}>
+                <div key={to}>
                   <Link to={to}>{label}</Link>
-                </li>
+                </div>
               ))}
-            </ul>
-          </div>
-        )}
+            </div>
+          </li>
+
+          <li className="dropdown">
+            <span className="material-icons-outlined">account_circle</span>
+            <div className="dropdown-content">
+              <div
+                className="logout"
+                onClick={() => {
+                  onLogoutClick();
+                }}>
+                Log out
+              </div>
+            </div>
+          </li>
+        </ul>
       </nav>
-    </header>
+    </div>
   );
-}
+};
+
+export default Header;

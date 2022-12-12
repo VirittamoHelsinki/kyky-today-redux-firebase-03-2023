@@ -15,6 +15,7 @@ import ContactForm from './pages/ContactForm';
 import UserLogin from './pages/UserLogIn';
 import LandingPage from './pages/LandingPage';
 import JobCreation from './pages/JobCreation';
+import ServiceBooking from './pages/ServiceBooking';
 
 /* Profile creation */
 import NewProfileCreation from './pages/ProfileCreation/NewProfileCreation';
@@ -28,8 +29,12 @@ import JobCalendar from './pages/Calendar/JobCalendar';
 import ManageSchedules from './pages/Calendar/ManageSchedules';
 import CalendarSettings from './pages/Calendar/CalendarSettings';
 
+/* Buyer's Rating*/
+import BuyersRating from './pages/BuyersRating';
+
 const languages = { fi, en };
-function App() {
+
+const App = () => {
   const [lang, setLang] = useState(languages.fi);
 
   const navlinks = [
@@ -41,37 +46,39 @@ function App() {
     { to: '/job-creation', label: 'Job Creation' },
     { to: '/new-profile-creation', label: 'New Profile Creation' },
     { to: '/calendar', label: 'My Calendar' },
-    { to: '/calendar/overview', label: 'Overview' }
+    { to: '/calendar/overview', label: 'Overview' },
+    { to: '/service-booking', label: 'Service Booking' },
+    { to: '/buyers-rating', label: 'Buyers Rating' }
   ];
 
   return (
     <Language.Provider value={{ lang }}>
-      <>
-        <BrowserRouter>
-          <Header languages={languages} lang={lang} setLang={setLang} navlinks={navlinks} />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="profile-creation" element={<ProfileCreation />} />
-            <Route path="job-creation" element={<JobCreation />} />
-            <Route path="user-registration" element={<UserRegistration />} />
-            <Route path="contact-form" element={<ContactForm />} />
-            <Route path="user-log-in" element={<UserLogin />} />
-            <Route path="calendar" element={<MyCalendar />}>
-              <Route index element={<JobCalendar />} />
-              <Route path="overview" element={<Overview />} />
-              <Route path="schedule" element={<ManageSchedules />} />
-              <Route path="settings" element={<CalendarSettings />} />
-            </Route>
+      <BrowserRouter>
+        <Header navlinks={navlinks} />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="profile-creation" element={<ProfileCreation />} />
+          <Route path="job-creation" element={<JobCreation />} />
+          <Route path="user-registration" element={<UserRegistration />} />
+          <Route path="contact-form" element={<ContactForm />} />
+          <Route path="user-log-in" element={<UserLogin />} />
+          <Route path="calendar" element={<MyCalendar />}>
+            <Route index element={<JobCalendar />} />
+            <Route path="overview" element={<Overview />} />
+            <Route path="schedule" element={<ManageSchedules />} />
+            <Route path="settings" element={<CalendarSettings />} />
+          </Route>
 
-            <Route path="new-profile-creation" element={<Creation />}>
-              <Route index element={<NewProfileCreation />} />
-              <Route path="get-started" element={<GetStarted />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </>
+          <Route path="new-profile-creation" element={<Creation />}>
+            <Route index element={<NewProfileCreation />} />
+            <Route path="get-started" element={<GetStarted />} />
+          </Route>
+          <Route path="service-booking" element={<ServiceBooking />} />
+          <Route path="buyers-rating" element={<BuyersRating />} />
+        </Routes>
+      </BrowserRouter>
     </Language.Provider>
   );
-}
+};
 
 export default App;

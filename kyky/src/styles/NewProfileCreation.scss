@@ -653,9 +653,15 @@ input {
 
 // Step5.js starts here
 
-.select-container2 {
+.select-container2,
+.select-container2b {
   width: 400px;
   margin: 50px 0 200px;
+}
+
+.select-container2b {
+  position: relative;
+  bottom: 120px;
 }
 
 // Step6.js starts here
@@ -668,18 +674,26 @@ input {
   margin: 150px 0;
 }
 
+.step6Select {
+  margin-left: 45px;
+  margin-bottom: 50px;
+}
+
 .hourlyInput {
-  height: 50px;
+  height: 40px;
   width: 150px;
-  text-align: right;
+  text-align: left;
   font-family: Poppins, sans-serif;
   border: 1px solid #00a088;
   border-radius: 10px;
-  padding-left: 30px;
+  margin-right: 50px;
+  margin-bottom: 70px;
+  padding-left: 10px;
   padding-right: 10px;
 }
 
 .totalAmount {
+  text-align: center;
   color: #00a088;
   position: relative;
   bottom: 100px;
