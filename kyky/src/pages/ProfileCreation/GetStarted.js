@@ -40,7 +40,22 @@ export default function GetStarted() {
   const [title, setTitle] = useState(0);
   const [tip, setTip] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
-  const [step1FormData, setStep1FormData] = useState([{ titleInput: null, skills: [] }]);
+  const [formData, setFormData] = useState({
+    // Step 1
+    s1TitleInput: '',
+    s1Skills: [],
+    // Step 2 work experience
+    s2WorkExperienceTitle: '',
+    s2WorkExperienceCompany: '',
+    s2WorkExperienceLocation: '',
+    s2WorkExperienceCountry: '',
+    s2WorkExperienceCurrentlyWorking: false,
+    s2WorkExperienceStartMonths: '',
+    s2WorkExperienceStartYears: '',
+    s2WorkExperienceEndMonths: '',
+    s2WorkExperienceEndYears: '',
+    s2WorkExperienceDescription: ''
+  });
 
   function previousPhase() {
     setTitle(title - 1);
@@ -54,15 +69,16 @@ export default function GetStarted() {
     setCurrentStep(currentStep + 1);
   }
 
-  function handleChange(event) {
-    const name = event.target.name;
-    const value = event.target.value;
-    setStep1FormData([{ [name]: value }]);
+  function handleChange(name, value) {
+    console.log('GetStarted.js handleChange function:');
+    console.log('name:', name);
+    console.log('value:', value);
+
+    setFormData({ ...formData, [name]: value });
   }
 
   function sendForm(event) {
     event.preventDefault();
-    console.log('Form sent');
   }
 
   return (
@@ -73,8 +89,8 @@ export default function GetStarted() {
           <p>{tips[tip]}</p>
         </div>
         <form onSubmit={sendForm}>
-          {currentStep === 1 && <Step1 step1FormData={step1FormData} handleChange={handleChange} />}
-          {currentStep === 2 && <Step2 />}
+          {currentStep === 1 && <Step1 formData={formData} handleChange={handleChange} />}
+          {currentStep === 2 && <Step2 formData={formData} handleChange={handleChange} />}
           {currentStep === 3 && <Step3 />}
           {currentStep === 4 && <Step4 />}
           {currentStep === 5 && <Step5 />}
