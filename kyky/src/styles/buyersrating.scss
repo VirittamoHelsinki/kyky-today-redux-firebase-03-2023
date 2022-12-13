@@ -1,67 +1,96 @@
 .buyersRatingMainContainer {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  margin: auto;
+  height: 93vh;
+  width: 60vw;
+  background-color: #eef5f4;
+  padding-left: 10px;
 
-  height: 100vh;
-  width: 100vw;
+  h3 {
+    display: flex;
+    margin: auto;
+    flex-direction: row;
+    height: fit-content;
+    width: auto;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    color: black;
+  }
 
   .buyerSideBar {
+    height: 100vh;
+    width: fit-content;
+    background-color: #166d60;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+
     h3 {
       color: white;
     }
-
-    height: 100vh;
-    width: 150px;
-    background-color: #166d60;
   }
 
   .buyersRatingContainer1 {
-    h3 {
-      font-family: Roboto, sans-serif;
-      color: black;
-    }
-
-    width: 50vw;
+    width: 65vw;
     height: fit-content;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 5%;
-    margin-right: 5%;
+    margin: auto;
+    margin-top: 1%;
+    padding-top: 20px;
+    padding-bottom: 10px;
   }
 
   .buyerAttributes {
     display: flex;
-    margin-right: 15px;
+    margin-right: 25px;
     font-size: larger;
     justify-content: center;
     align-items: center;
     font-family: Roboto, sans-serif;
     height: 65px;
     width: 140px;
-    background-color: #bce5df;
+    margin-bottom: 20px;
+    background-color: #bfd3d0;
     box-shadow: 1px 1px 1px #9ec0bb;
     border-radius: 13px;
+  }
+
+  .buyerAttributes:hover {
+    background-color: #063831;
+    color: white;
   }
 
   .buyerTextArea {
     width: 50vw;
     height: 15vh;
     border: 1px solid rgb(182 181 181);
-    border-radius: 8px;
+    border-radius: 5px;
     font-family: Roboto, sans-serif;
+    font-size: 18px;
+    margin: auto;
+    margin-top: 80px;
   }
 
   .buyersRatingContainer2 {
-    margin-top: 20%;
-    margin-right: 20%;
+    height: fit-content;
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    bottom: 30px;
 
     h3 {
       color: black;
+    }
+
+    .star:hover {
+      cursor: pointer;
+      box-shadow: -1px -1px 10px 10px #00a088;
     }
 
     .submitButton {

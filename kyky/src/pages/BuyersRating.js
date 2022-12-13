@@ -1,17 +1,12 @@
 import React from 'react';
 import { ReactComponent as Star2 } from '../image/star2.svg';
 import '../styles/buyersrating.scss';
-
 export default function BuyersRating() {
   return (
     <div>
       <div className="buyersRatingMainContainer">
-        <div className="buyerSideBar">
-          <h3>UI/UX Designer</h3>
-        </div>
-
+        <h3>What did FirstName do well and made you happy?</h3>
         <div className="buyersRatingContainer1">
-          <h3>What did FirstName do well and made you happy?</h3>
           <button className="buyerAttributes">Punctual</button>
           <button className="buyerAttributes">Friendly</button>
           <button className="buyerAttributes">Responsible</button>
@@ -34,6 +29,9 @@ export default function BuyersRating() {
           </div>
           <button className="submitButton">Submit</button>
         </div>
+        {/*<div className="buyerSideBar">
+          <h3>UI/UX Designer</h3>
+  </div> */}
       </div>
     </div>
   );
