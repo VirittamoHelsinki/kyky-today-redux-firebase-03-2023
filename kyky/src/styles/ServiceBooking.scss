@@ -105,7 +105,7 @@
     .checkbox-wrapper-row {
       display: flex;
       align-items: center;
-      height: 40px;
+      min-height: 40px;
 
       .recurring-text {
         width: 45%;
@@ -136,4 +136,14 @@
   position: absolute;
   z-index: 1000;
   right: 20rem;
+  display: flex;
+  flex-direction: column;
+
+  .calendar-modal-buttons-container {
+    display: flex;
+
+    .calendar-modal-button {
+
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import dogPic from '../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Calendar from '../components/Calendar';
 import SelectDays from '../components/SelectDays';
@@ -23,26 +23,43 @@ const defaultJob = {
   }
 };
 
-const defaultCheckedState = {
-  checked: '', selectedDays: []
+const defaultBookingValue = {
+  checked: '', selectedDays: [], selectedDates: []
 };
 
 function ServiceBooking() {
   const [job, setJob] = useState(defaultJob);
   const [currentTab, setCurrentTab] = useState(Tabs.Once);
-  const [isChecked, setIsChecked] = useState(defaultCheckedState);
+  const [booking, setBooking] = useState(defaultBookingValue);
   const [date, setDate] = useState(new Date());
+  const [showCalendarModal, setShowCalendarModal] = useState(false);
 
-  console.log(isChecked);
-  console.log(date);
+  console.log(booking);
+
+  useEffect(()=>{
+    selectedCalendarDay(date);
+  }, [date]);
+
+  function selectedCalendarDay(date){
+    setBooking({...booking, selectedDays: [], selectedDates: [date]});
+  }
+
+  function checkOnceEveryMonth(){
+    check('onceEveryMonth');
+    setShowCalendarModal(true);
+  }
 
   function check(value) {
-    setIsChecked({ ...isChecked, checked: value });
+    setBooking({ ...booking, checked: value });
   }
 
   function selectedDays(e) {
-    let newArray = e;
-    setIsChecked({ ...isChecked, selectedDays: e });
+    setBooking({ ...booking, selectedDays: e, selectedDates: [] });
+  }
+
+  function selectedTab(currentTab){
+    setCurrentTab(currentTab);
+    setBooking(defaultBookingValue);
   }
 
 
@@ -62,10 +79,10 @@ function ServiceBooking() {
             <div className='service-booking-right-panel-content'>
               <div className='service-booking-right-panel-buttons'>
                 <div className={`panel-button ${currentTab === Tabs.Once ? 'selected' : ''}`}
-                     onClick={() => setCurrentTab(Tabs.Once)}>Once
+                     onClick={() => selectedTab(Tabs.Once)}>Once
                 </div>
                 <div className={`panel-button ${currentTab === Tabs.Recurring ? 'selected' : ''}`}
-                     onClick={() => setCurrentTab(Tabs.Recurring)}>Recurring
+                     onClick={() => selectedTab(Tabs.Recurring)}>Recurring
                 </div>
               </div>
 
@@ -77,51 +94,55 @@ function ServiceBooking() {
                   <div className='checkbox-wrapper-row'>
                     <div className='recurring-text'>
                       <Checkbox className='checkbox' label='Every weekday'
-                                checked={isChecked.checked === 'weekday'} onChange={() => check('weekday')} />
+                                checked={booking.checked === 'weekday'} onChange={() => check('weekday')} />
                     </div>
                     <div className='recurring-price'>{job.prices.weekday} €/h</div>
-                    {isChecked.checked === 'weekday' && <SelectDays selectedDays={selectedDays} />}
+                    {booking.checked === 'weekday' && <SelectDays selectedDays={selectedDays} />}
                   </div>
 
                   <div className='checkbox-wrapper-row'>
                     <div className='recurring-text'>
                       <Checkbox className='checkbox' label='Every weekend'
-                                checked={isChecked.checked === 'weekend'} onChange={() => check('weekend')} />
+                                checked={booking.checked === 'weekend'} onChange={() => check('weekend')} />
                     </div>
                     <div className='recurring-price'>{job.prices.weekend} €/h</div>
-                    {isChecked.checked === 'weekend' && <SelectDays selectedDays={selectedDays} />}
+                    {booking.checked === 'weekend' && <SelectDays selectedDays={selectedDays} />}
                   </div>
 
                   <div className='checkbox-wrapper-row'>
                     <div className='recurring-text'>
                       <Checkbox className='checkbox' label='Every other weekday'
-                                checked={isChecked.checked === 'everyOtherWeekday'}
+                                checked={booking.checked === 'everyOtherWeekday'}
                                 onChange={() => check('everyOtherWeekday')} />
                     </div>
                     <div className='recurring-price'>{job.prices.weekend} €/h</div>
-                    {isChecked.checked === 'everyOtherWeekday' && <SelectDays selectedDays={selectedDays} />}
+                    {booking.checked === 'everyOtherWeekday' && <SelectDays selectedDays={selectedDays} />}
                   </div>
 
                   <div className='checkbox-wrapper-row'>
                     <div className='recurring-text'>
                       <Checkbox className='checkbox' label='Every other weekend'
-                                checked={isChecked.checked === 'everyOtherWeekend'}
+                                checked={booking.checked === 'everyOtherWeekend'}
                                 onChange={() => check('everyOtherWeekend')} />
                     </div>
                     <div className='recurring-price'>{job.prices.weekend} €/h</div>
-                    {isChecked.checked === 'everyOtherWeekend' && <SelectDays selectedDays={selectedDays} />}
+                    {booking.checked === 'everyOtherWeekend' && <SelectDays selectedDays={selectedDays} />}
                   </div>
 
                   <div className='checkbox-wrapper-row'>
                     <div className='recurring-text'>
                       <Checkbox className='checkbox' label='Once every month'
-                                checked={isChecked.checked === 'onceEveryMonth'}
-                                onChange={() => check('onceEveryMonth')} />
+                                checked={booking.checked === 'onceEveryMonth'}
+                                onChange={() => checkOnceEveryMonth()} />
                     </div>
                     <div className='recurring-price'>{job.prices.weekend} €/h</div>
-                    {isChecked.checked === 'onceEveryMonth' &&
-                    <div className='calendar-modal'><Calendar date={date} setDate={setDate} minYears={0} maxYears={5} /><Button>Confirm
-                      selection</Button></div>}
+                    {booking.checked === 'onceEveryMonth' && showCalendarModal &&
+                    <div className='calendar-modal'><Calendar date={date} setDate={setDate} minYears={0} maxYears={5} />
+                      <div className="calendar-modal-buttons-container">
+                        <Button className="calendar-modal-button" onClick={()=> setShowCalendarModal(false)}>Confirm selection</Button>
+                        <Button className="calendar-modal-button" onClick={()=>setBooking(defaultBookingValue)}>Cancel</Button>
+                      </div>
+                    </div>}
                   </div>
                 </div>
               </div>
@@ -129,7 +150,7 @@ function ServiceBooking() {
 
             </div>
             <Button
-              onClick={() => alert(`Thank you for booking the job ${defaultJob.job}! You have booked ${defaultJob.job} for ${isChecked.checked} for the following days: ${isChecked.selectedDays.map(day => day.label)}`)}
+              onClick={() => {alert(`Thank you for booking the job ${defaultJob.job}! You have booked ${defaultJob.job} for the following days: ${booking.selectedDays.map(day => day.label)}${booking.selectedDates}`); setBooking(defaultBookingValue)}}
               children={<div>Continue</div>} />
           </div>
         </div>
