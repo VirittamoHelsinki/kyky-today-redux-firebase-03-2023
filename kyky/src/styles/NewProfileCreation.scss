@@ -959,6 +959,7 @@ input {
     display: flex;
     flex-wrap: wrap;
     width: 800px;
+    padding: $box-padding;
 
     .skill {
       display: flex;
