@@ -41,7 +41,7 @@ export const signInEmailAndPassword = createAsyncThunk(
   async (payload) => {
     try {
       const res = await signInWithEmailAndPassword(auth, payload.email, payload.password);
-      if (res.uid && !res.emailVerified) {
+      if (res.user.uid && !res.user.emailVerified) {
         const confirm = window.confirm(
           'Please verify your email address\n\nPress OK to send a new verification link to your email'
         );

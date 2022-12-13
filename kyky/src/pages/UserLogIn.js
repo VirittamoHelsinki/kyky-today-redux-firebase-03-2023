@@ -14,7 +14,7 @@ function UserLogIn() {
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [creditalError] = useState(false);
+  //const [creditalError] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -29,8 +29,9 @@ function UserLogIn() {
         password: password
       })
     );
-    console.log('username:', username, 'password:', password, 'remember me:', remember);
-    alert(`Matching username and password: ${creditalError}`);
+    setUsername('');
+    setPassword('');
+    setRemember(false);
   };
 
   const onGoogleClick = () => {
