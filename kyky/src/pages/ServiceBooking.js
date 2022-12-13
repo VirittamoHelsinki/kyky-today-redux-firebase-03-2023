@@ -34,6 +34,7 @@ function ServiceBooking() {
   const [date, setDate] = useState(new Date());
 
   console.log(isChecked);
+  console.log(date);
 
   function check(value) {
     setIsChecked({ ...isChecked, checked: value });
@@ -47,7 +48,7 @@ function ServiceBooking() {
 
   return (
     <>
-      <div className="booking-page-content">
+      <div className='booking-page-content'>
         <div className='service-booking-container'>
 
           <div className='service-booking-left-panel'>
@@ -118,7 +119,9 @@ function ServiceBooking() {
                                 onChange={() => check('onceEveryMonth')} />
                     </div>
                     <div className='recurring-price'>{job.prices.weekend} €/h</div>
-                    {isChecked.checked === 'onceEveryMonth' && <div className="calendar-modal"><Calendar date={date} setDate={setDate} minYears={0} maxYears={5}/><Button>Confirm selection</Button></div>}
+                    {isChecked.checked === 'onceEveryMonth' &&
+                    <div className='calendar-modal'><Calendar date={date} setDate={setDate} minYears={0} maxYears={5} /><Button>Confirm
+                      selection</Button></div>}
                   </div>
                 </div>
               </div>
