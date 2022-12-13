@@ -147,3 +147,13 @@
     }
   }
 }
+
+.vat-terms {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .checkbox-label {
+    margin-left: 6px;
+  }
+}

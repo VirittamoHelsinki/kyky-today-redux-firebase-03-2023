@@ -36,15 +36,15 @@ function ServiceBooking() {
 
   console.log(booking);
 
-  useEffect(()=>{
+  useEffect(() => {
     selectedCalendarDay(date);
   }, [date]);
 
-  function selectedCalendarDay(date){
-    setBooking({...booking, selectedDays: [], selectedDates: [date]});
+  function selectedCalendarDay(date) {
+    setBooking({ ...booking, selectedDays: [], selectedDates: [date] });
   }
 
-  function checkOnceEveryMonth(){
+  function checkOnceEveryMonth() {
     check('onceEveryMonth');
     setShowCalendarModal(true);
   }
@@ -57,7 +57,7 @@ function ServiceBooking() {
     setBooking({ ...booking, selectedDays: e, selectedDates: [] });
   }
 
-  function selectedTab(currentTab){
+  function selectedTab(currentTab) {
     setCurrentTab(currentTab);
     setBooking(defaultBookingValue);
   }
@@ -138,19 +138,24 @@ function ServiceBooking() {
                     <div className='recurring-price'>{job.prices.weekend} €/h</div>
                     {booking.checked === 'onceEveryMonth' && showCalendarModal &&
                     <div className='calendar-modal'><Calendar date={date} setDate={setDate} minYears={0} maxYears={5} />
-                      <div className="calendar-modal-buttons-container">
-                        <Button className="calendar-modal-button" onClick={()=> setShowCalendarModal(false)}>Confirm selection</Button>
-                        <Button className="calendar-modal-button" onClick={()=>setBooking(defaultBookingValue)}>Cancel</Button>
+                      <div className='calendar-modal-buttons-container'>
+                        <Button className='calendar-modal-button' onClick={() => setShowCalendarModal(false)}>Confirm
+                          selection</Button>
+                        <Button className='calendar-modal-button'
+                                onClick={() => setBooking(defaultBookingValue)}>Cancel</Button>
                       </div>
                     </div>}
                   </div>
                 </div>
+                <div className="vat-terms"><Checkbox className="checkbox" label={`I have read VAT (sales tax) terms`}/></div>
               </div>
               }
-
             </div>
             <Button
-              onClick={() => {alert(`Thank you for booking the job ${defaultJob.job}! You have booked ${defaultJob.job} for the following days: ${booking.selectedDays.map(day => day.label)}${booking.selectedDates}`); setBooking(defaultBookingValue)}}
+              onClick={() => {
+                alert(`Thank you for booking the job ${defaultJob.job}! You have booked ${defaultJob.job} for the following days: ${booking.selectedDays.map(day => day.label)}${booking.selectedDates}`);
+                setBooking(defaultBookingValue);
+              }}
               children={<div>Continue</div>} />
           </div>
         </div>
