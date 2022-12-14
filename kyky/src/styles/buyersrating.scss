@@ -22,8 +22,7 @@
   .howDoYouRate {
     display: flex;
     position: relative;
-    top: 0;
-    right: 300px;
+    margin-right: 60%;
   }
 
   .buyerSideBar {
@@ -61,6 +60,7 @@
     font-family: Roboto, sans-serif;
     height: 65px;
     width: 20%;
+    min-width: none;
     margin-bottom: 20px;
     background-color: #bfd3d0;
     box-shadow: 1px 1px 1px #9ec0bb;
@@ -80,6 +80,7 @@
     font-family: Roboto, sans-serif;
     height: 65px;
     width: 20%;
+    min-width: none;
     margin-bottom: 20px;
     background-color: #063831;
     color: white;
@@ -95,6 +96,7 @@
     font-family: Roboto, sans-serif;
     font-size: 18px;
     margin-top: 80px;
+    padding: 5px;
   }
 
   .buyersRatingContainer2 {
@@ -129,7 +131,7 @@
 
   .starContainer {
     display: flex;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 25px;
+    padding-bottom: 25px;
   }
 }
