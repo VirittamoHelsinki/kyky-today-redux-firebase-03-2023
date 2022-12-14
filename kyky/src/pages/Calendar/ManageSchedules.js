@@ -29,8 +29,7 @@ export default function ManageSchedules() {
   }, []);
 
   function deleteSchedule(schedule) {
-    const _storage = _schedules[schedule.jobId + '_schedules'];
-    const storage = [..._storage];
+    const storage = [..._schedules[schedule.jobId + '_schedules']];
     const index = storage.findIndex((item) => item._id === schedule._id) || 0;
     const confirm = window.confirm('Are you sure you want to delete this schedule?');
     if (confirm) {

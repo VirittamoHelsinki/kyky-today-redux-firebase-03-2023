@@ -70,14 +70,10 @@ function Overview() {
   }, []);
 
   useEffect(() => {
-    // const scheduleKeys =
-    //   _schedules.length !== 0
-    //     ? Object.keys(_schedules).filter((key) => key.includes('_schedules'))
-    //     : Object.keys(localStorage).filter((key) => key.includes('_schedules'));
     const scheduleKeys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
     const data = scheduleKeys
       .map((key) => {
-        const schedule = JSON.parse(localStorage.getItem(key));
+        const schedule = _schedules[key];
         return schedule;
       })
       .flat(Infinity);

@@ -2,7 +2,7 @@
   This is now a modal!
 */
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createSchedule, removeSchedule } from '../../redux/scheduleSlice';
 import Button from '../../components/Button';
 
@@ -62,6 +62,8 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
 
   const dispatch = useDispatch();
 
+  const _schedules = useSelector((state) => state.schedule);
+
   useEffect(() => {
     setView(() => progression[progression.findIndex((item) => item.id === step)].component);
   }, [step]);
@@ -93,7 +95,8 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
   }
 
   function SubmitDetails() {
-    const schedules = JSON.parse(localStorage.getItem(`${properties.jobId}_schedules`));
+    const schedules = [..._schedules[properties.jobId + '_schedules']];
+    //const schedules = JSON.parse(localStorage.getItem(`${properties.jobId}_schedules`));
     if (mode === 'create') {
       const id = Math.random().toString(36).substring(2, 9); // generate random id
       const data = { ...properties, _id: id };
