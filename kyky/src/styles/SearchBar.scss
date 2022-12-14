@@ -1,0 +1,21 @@
+.searchStyling {
+  display: flex;
+  align-items: stretch;
+}
+
+.barStyling {
+  width: 20rem;
+  border-width: 0.5px;
+  border-color: #808080;
+  border-radius: 5px 0 0 5px;
+}
+
+.btnStyling {
+  display: flex;
+  align-items: center;
+  background-color: #063831;
+  color: white;
+  padding: 5px;
+  border-radius: 0 5px 5px 0;
+  width: 48px;
+}
