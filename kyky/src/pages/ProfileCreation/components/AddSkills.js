@@ -1,11 +1,11 @@
 import '../../../styles/NewProfileCreation.scss';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
 
-export default function AddSkills({ setSaved }) {
-  const [skills, setSkills] = useState([]);
+export default function AddSkills({ setSaved, formData, handleChange }) {
+  const [skills, setSkills] = useState(formData?.s1Skills);
   const [query, setQuery] = useState('');
 
   const handleClick = (event) => {
@@ -16,6 +16,11 @@ export default function AddSkills({ setSaved }) {
     }
     setSkills(skills.concat(event.target.value));
   };
+
+  // Updates GetStarted component's form state when 'skills' changes
+  useEffect(() => {
+    handleChange('s1Skills', skills);
+  }, [skills]);
 
   return (
     <div className="AddSkillsContainer">

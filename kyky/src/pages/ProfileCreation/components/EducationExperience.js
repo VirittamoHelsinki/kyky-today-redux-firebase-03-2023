@@ -1,33 +1,10 @@
 import '../../../styles/NewProfileCreation.scss';
 import React from 'react';
-
 import Input from '../../../components/Input';
 import { GenericSelect } from './Select';
+import { months, years } from './Time';
+
 export default function EducationExperience({ setSaved }) {
-  const months = [
-    { value: 'january', label: 'January' },
-    { value: 'february', label: 'February' },
-    { value: 'march', label: 'March' },
-    { value: 'april', label: 'April' },
-    { value: 'may', label: 'May' },
-    { value: 'june', label: 'June' },
-    { value: 'july', label: 'July' },
-    { value: 'august', label: 'August' },
-    { value: 'september', label: 'September' },
-    { value: 'october', label: 'October' },
-    { value: 'november', label: 'November' },
-    { value: 'december', label: 'December' }
-  ];
-
-  let firstyear = 1960;
-  let currentyear = new Date().getFullYear();
-
-  let years = [];
-
-  for (let i = firstyear; i <= currentyear; i++) {
-    years.push({ value: i, label: i });
-  }
-
   return (
     <div className="educationContainer">
       <h3>Add Education History</h3>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../../../styles/NewProfileCreation.scss';
 import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
 
 export default function Step1({ formData, handleChange }) {
   const [query, setQuery] = useState('');
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState(formData?.s1Skills);
 
   const handleClick = (event) => {
     for (const skill of skills) {
@@ -16,6 +16,11 @@ export default function Step1({ formData, handleChange }) {
     }
     setSkills(skills.concat(event.target.value));
   };
+
+  // Updates GetStarted component's form state when 'skills' changes
+  useEffect(() => {
+    handleChange('s1Skills', skills);
+  }, [skills]);
 
   return (
     <div className="step step1">

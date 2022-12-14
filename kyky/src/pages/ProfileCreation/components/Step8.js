@@ -9,7 +9,7 @@ import WorkExperience from './WorkExperience';
 import EducationExperience from './EducationExperience';
 import AddSkills from './AddSkills';
 
-export default function Step8() {
+export default function Step8({ formData, handleChange }) {
   const [upload, setUpload] = useState('');
   const [saved, setSaved] = useState(true);
   const [saved2, setSaved2] = useState(true);
@@ -31,9 +31,11 @@ export default function Step8() {
     setExperience(<EducationExperience setSaved={setSaved} />);
   };
 
-  const addSkills= () => {
+  const addSkills = () => {
     setSaved(false);
-    setExperience(<AddSkills setSaved={setSaved}/>)
+    setExperience(
+      <AddSkills setSaved={setSaved} formData={formData} handleChange={handleChange} />
+    );
   };
 
   return (
@@ -68,10 +70,10 @@ export default function Step8() {
         </div>
         <div className="previewContainer2">
           <h3>Skills</h3>
-          <button className="picIcon" onClick={() => addSkills()}>+</button>
-          <div className="skillContainer">
-           
-          </div>
+          <button className="picIcon" onClick={() => addSkills()}>
+            +
+          </button>
+          <div className="skillContainer"></div>
         </div>
         <div className="previewContainer3">
           {' '}

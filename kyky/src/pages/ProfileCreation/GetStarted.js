@@ -92,7 +92,7 @@ export default function GetStarted() {
           {currentStep === 5 && <Step5 />}
           {currentStep === 6 && <Step6 />}
           {currentStep === 7 && <Step7 />}
-          {currentStep === 8 && <Step8 />}
+          {currentStep === 8 && <Step8 formData={formData} handleChange={handleChange} />}
           {currentStep === 9 && <Step9 />}
           <div>
             {currentStep > 1 && (
