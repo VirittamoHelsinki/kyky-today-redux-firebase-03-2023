@@ -52,7 +52,7 @@ export default function JobCalendar() {
   const [jobs, setJobs] = useState([]);
   const [user, setUser] = useState([]);
 
-  const jobsChanged = useSelector((state) => state.schedule);
+  const _schedules = useSelector((state) => state.schedule);
 
   useEffect(() => {
     const _jobs = localStorage.getItem('jobs');
@@ -64,7 +64,7 @@ export default function JobCalendar() {
     if ((currentJob === '') & (jobs.length > 0)) {
       setCurrentJob(jobs[0].id);
     }
-  }, [jobsChanged]);
+  }, [_schedules]);
 
   useEffect(() => {
     const _user = localStorage.getItem('user');
@@ -74,7 +74,8 @@ export default function JobCalendar() {
   const dispatch = useDispatch();
 
   function getSchedules() {
-    const schedules = JSON.parse(localStorage.getItem(`${currentJob}_schedules`)) || [];
+    const schedules = _schedules[currentJob + '_schedules'] || [];
+    //const schedules1 = JSON.parse(localStorage.getItem(`${currentJob}_schedules`)) || [];
     setSchedules(schedules);
   }
 
@@ -113,7 +114,7 @@ export default function JobCalendar() {
 
   useEffect(() => {
     getSchedules();
-  }, [currentJob]);
+  }, [currentJob, _schedules]);
 
   useEffect(() => {
     const firstDayOfMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());

@@ -24,7 +24,7 @@ export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async
         temp_schedules.push(doc.data()[i]);
         i++;
       }
-      list_of_schedules.push({ id: doc.id, data: temp_schedules });
+      list_of_schedules.push({ [doc.id]: temp_schedules });
     });
     return list_of_schedules;
   } catch (error) {
@@ -56,25 +56,32 @@ export const scheduleSlice = createSlice({
         );
         return (state = {
           ...state,
-          status: 'schedule created'
+          [action.payload.jobId + '_schedules']: action.payload.data
         });
       })
       .addCase(fetchSchedules.fulfilled, (state, action) => {
-        console.log(action.payload);
         const jobs = [];
         action.payload.forEach((job) => {
           jobs.push({
-            id: job.id,
-            categories: [job.id],
+            id: Object.keys(job),
+            categories: [Object.keys(job)],
             cities: ['Helsinki'],
-            jobTitle: job.id
+            jobTitle: Object.keys(job)
           });
-          localStorage.setItem(`${job.id}_schedules`, JSON.stringify(job.data));
+          localStorage.setItem(
+            `${Object.keys(job)}_schedules`,
+            JSON.stringify(Object.values(job)[0])
+          );
         });
         localStorage.setItem('jobs', JSON.stringify(jobs));
+        action.payload.forEach((job) => {
+          state = {
+            ...state,
+            [Object.keys(job) + '_schedules']: Object.values(job)[0]
+          };
+        });
         return (state = {
-          ...state,
-          status: 'schedules fetched'
+          ...state
         });
       })
       .addCase(removeSchedule.fulfilled, (state, action) => {

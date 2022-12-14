@@ -3,6 +3,7 @@
 import Calendar from '../../components/Calendar';
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import '../../styles/JobCalendarOverview.scss';
 
@@ -45,6 +46,8 @@ function Overview() {
   const [allJobs, setAllJobs] = useState([]);
   const [daysWithJobs, setDaysWithJobs] = useState([]);
 
+  const _schedules = useSelector((state) => state.schedule);
+
   // function checkSchedule(schedule) {
   //   let { startDate: start, endDate: end } = schedule.scheduleDuration;
   //   start = new Date(start).setHours(0, 0, 0, 0);
@@ -67,7 +70,11 @@ function Overview() {
   }, []);
 
   useEffect(() => {
-    const scheduleKeys = Object.keys(localStorage).filter((key) => key.includes('_schedules'));
+    // const scheduleKeys =
+    //   _schedules.length !== 0
+    //     ? Object.keys(_schedules).filter((key) => key.includes('_schedules'))
+    //     : Object.keys(localStorage).filter((key) => key.includes('_schedules'));
+    const scheduleKeys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
     const data = scheduleKeys
       .map((key) => {
         const schedule = JSON.parse(localStorage.getItem(key));
