@@ -53,6 +53,7 @@ export default function WorkExperience({ formData, handleChange, setSaved }) {
         className="workCheck"
         name="s2WorkExperienceCurrentlyWorking"
         value={formData?.s2WorkExperienceCurrentlyWorking}
+        checked={formData?.s2WorkExperienceCurrentlyWorking}
         onChange={(event) => handleChange(event.target.name, event.target.checked)}>
         I am currently working in this role
       </Checkbox>
