@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #387A701A;
+  background: #387a701a;
 }
 
 .landing-page-nav-and-image-container {
@@ -31,7 +31,7 @@
   font-size: 24px;
   font-weight: 500;
   line-height: 36px;
-  border-bottom: #00A088 1px solid;
+  border-bottom: #00a088 1px solid;
   margin-bottom: 1em;
 }
 
@@ -45,6 +45,13 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+
+  img {
+    background-position: center;
+    background-size: cover;
+    height: 600px;
+    width: 600px;
+  }
 }
 
 .landing-page-image h1 {
@@ -64,7 +71,7 @@
   letter-spacing: 0.01em;
   color: #002520;
   background: rgba(6, 56, 49, 0.1);
-  border: 1px solid #00A088;
+  border: 1px solid #00a088;
   border-radius: 91px;
   height: 3em;
   width: 15%;
@@ -72,68 +79,4 @@
   margin-right: 3em;
   margin-left: 3em;
   justify-content: center;
-}
-
-.image1 {
-  background-image: url("../../public/images/dog-walker.png");
-  background-position: center;
-  background-size: cover;
-  height: 600px;
-  width: 600px;
-}
-
-.image2 {
-  background-image: url("../../public/images/celebration.png");
-  background-position: center;
-  background-size: cover;
-  height: 600px;
-  width: 600px;
-}
-
-.image3 {
-  background-image: url("../../public/images/cooking.png");
-  background-position: center;
-  background-size: cover;
-  height: 600px;
-  width: 600px;
-}
-
-.image4 {
-  background-image: url("../../public/images/technology.png");
-  background-position: center;
-  background-size: cover;
-  height: 600px;
-  width: 600px;
-}
-
-.image5 {
-  background-image: url("../../public/images/gardening.png");
-  background-position: center;
-  background-size: cover;
-  height: 600px;
-  width: 600px;
-}
-
-.image6 {
-  background-image: url("../../public/images/photography.png");
-  background-position: center;
-  background-size: cover;
-  height: 600px;
-  width: 600px;
-}
-
-.image7 {
-  background-image: url("../../public/images/teaching.png");
-  background-position: center;
-  background-size: cover;
-  height: 600px;
-  width: 600px;
-}
-
-.image8 {
-  background-image: url("../../public/images/teaching.png");
-  background-position: center;
-  background-size: cover;
-  height: 600px;
-  width: 600px;
 }
