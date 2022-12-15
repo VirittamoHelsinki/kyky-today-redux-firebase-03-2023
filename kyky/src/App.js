@@ -31,6 +31,7 @@ import CalendarSettings from './pages/Calendar/CalendarSettings';
 
 /* Buyer's Rating*/
 import BuyersRating from './pages/BuyersRating';
+import ThanksForRating from './pages/ProfileCreation/components/ThanksForRating';
 
 const languages = { fi, en };
 
@@ -48,7 +49,8 @@ const App = () => {
     { to: '/calendar', label: 'My Calendar' },
     { to: '/calendar/overview', label: 'Overview' },
     { to: '/service-booking', label: 'Service Booking' },
-    { to: '/buyers-rating', label: 'Buyers Rating' }
+    { to: '/buyers-rating', label: 'Buyers Rating' },
+    { to: '/buyers-rating/thanks-for-rating', label: 'Thanks For Rating' }
   ];
 
   return (
@@ -75,6 +77,7 @@ const App = () => {
           </Route>
           <Route path="service-booking" element={<ServiceBooking />} />
           <Route path="buyers-rating" element={<BuyersRating />} />
+          <Route path="buyers-rating/thanks-for-rating" element={<ThanksForRating />} />
         </Routes>
       </BrowserRouter>
     </Language.Provider>

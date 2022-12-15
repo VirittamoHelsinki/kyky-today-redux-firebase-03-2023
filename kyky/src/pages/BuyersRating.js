@@ -2,6 +2,8 @@ import { React, useState } from 'react';
 import { ReactComponent as Star2 } from '../image/star2.svg';
 import { ReactComponent as ProfileIcon2 } from '../image/profileicon2.svg';
 import '../styles/buyersrating.scss';
+import Button from '../components/Button';
+
 export default function BuyersRating() {
   const [selected1, setSelected1] = useState('buyerAttributes');
   const [selected2, setSelected2] = useState('buyerAttributes');
@@ -12,6 +14,7 @@ export default function BuyersRating() {
   const [selected7, setSelected7] = useState('buyerAttributes');
   const [selected8, setSelected8] = useState('buyerAttributes');
   const [selected9, setSelected9] = useState('buyerAttributes');
+
   const selectAttribute1 = () => {
     setSelected1('buyerAttributes2');
   };
@@ -39,6 +42,7 @@ export default function BuyersRating() {
   const selectAttribute9 = () => {
     setSelected9('buyerAttributes2');
   };
+
   return (
     <div className="buyersRating">
       <div className="buyerSideBar">
@@ -87,7 +91,9 @@ export default function BuyersRating() {
             <Star2 className="star" />
             <Star2 className="star" />
           </div>
-          <button className="submitButton">Submit</button>
+          <Button className="submitButton" link="thanks-for-rating">
+            Submit
+          </Button>
         </div>
       </div>
     </div>

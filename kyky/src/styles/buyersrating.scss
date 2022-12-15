@@ -1,3 +1,4 @@
+/* Styles for BuyersRating.js starts here. */
 .buyersRating {
   display: flex;
   flex-direction: row;
@@ -9,7 +10,7 @@
     flex-direction: column;
     margin: auto;
     height: 94vh;
-    width: 85vw;
+    width: 87vw;
     background-color: #eef5f4;
     padding-left: 40px;
     padding-right: 40px;
@@ -28,7 +29,7 @@
     .howDoYouRate {
       display: flex;
       position: relative;
-      margin-right: 60%;
+      margin-right: 62%;
     }
 
     .buyersRatingContainer1 {
@@ -112,6 +113,9 @@
       }
 
       .submitButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: white;
         background-color: #387a70;
         font-size: 1rem;
@@ -134,7 +138,7 @@
     flex-direction: column;
     align-items: center;
     height: 94vh;
-    width: 15vw;
+    width: 13vw;
     background-color: #166d60;
     z-index: 1;
     margin: 0;
@@ -150,5 +154,64 @@
       width: 150px;
       padding: 40px 0 20px;
     }
+  }
+}
+
+/* Styles for ThanksForRating.js starts here. */
+
+.thanksForRating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #eef5f4;
+
+  .heart1 {
+    position: relative;
+    top: 100px;
+    left: 50px;
+  }
+
+  .heart2 {
+    position: relative;
+    top: -100px;
+    left: -50px;
+  }
+
+  .heart3 {
+    position: relative;
+    top: 150px;
+    left: 250px;
+  }
+
+  .heart4 {
+    position: relative;
+    top: 200px;
+    left: 550px;
+  }
+
+  .heart5 {
+    position: relative;
+    top: -300px;
+    left: 150px;
+  }
+
+  .heart6 {
+    position: relative;
+    top: -200px;
+    left: 450px;
+  }
+
+  .heart7 {
+    position: relative;
+    top: 400px;
+    left: 350px;
+  }
+
+  .heart8 {
+    position: relative;
+    top: 200px;
+    left: 650px;
   }
 }
