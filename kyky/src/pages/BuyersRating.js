@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import { ReactComponent as Star2 } from '../image/star2.svg';
+import { ReactComponent as ProfileIcon2 } from '../image/profileicon2.svg';
 import '../styles/buyersrating.scss';
 export default function BuyersRating() {
   const [selected1, setSelected1] = useState('buyerAttributes');
@@ -39,7 +40,11 @@ export default function BuyersRating() {
     setSelected9('buyerAttributes2');
   };
   return (
-    <div>
+    <div className="buyersRating">
+      <div className="buyerSideBar">
+        <ProfileIcon2 className="profilePic" />
+        <h3>UI/UX Designer</h3>
+      </div>
       <div className="buyersRatingMainContainer">
         <h3 className="howDoYouRate">What did FirstName do well and made you happy?</h3>
         <div className="buyersRatingContainer1">
@@ -84,9 +89,6 @@ export default function BuyersRating() {
           </div>
           <button className="submitButton">Submit</button>
         </div>
-        {/*<div className="buyerSideBar">
-          <h3>UI/UX Designer</h3>
-  </div> */}
       </div>
     </div>
   );
