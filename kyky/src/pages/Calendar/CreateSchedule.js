@@ -95,8 +95,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
   }
 
   function SubmitDetails() {
-    const schedules = [..._schedules[properties.jobId + '_schedules']];
-    //const schedules = JSON.parse(localStorage.getItem(`${properties.jobId}_schedules`));
+    const schedules = _schedules[properties.jobId + '_schedules'];
     if (mode === 'create') {
       const id = Math.random().toString(36).substring(2, 9); // generate random id
       const data = { ...properties, _id: id };

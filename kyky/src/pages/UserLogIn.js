@@ -1,7 +1,8 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signInEmailAndPassword, signInGoogleAuthProvider } from '../redux/userSlice';
+import { fetchSchedules } from '../redux/scheduleSlice';
 import Language from '../language';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';
@@ -18,6 +19,8 @@ function UserLogIn() {
 
   const dispatch = useDispatch();
 
+  const _user = useSelector((state) => state.user.user);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username === '' || password === '') {
@@ -33,6 +36,13 @@ function UserLogIn() {
     setPassword('');
     setRemember(false);
   };
+
+  useEffect(() => {
+    console.log(_user);
+    if (_user) {
+      dispatch(fetchSchedules(_user.uid));
+    }
+  }, [_user]);
 
   const onGoogleClick = () => {
     dispatch(signInGoogleAuthProvider());

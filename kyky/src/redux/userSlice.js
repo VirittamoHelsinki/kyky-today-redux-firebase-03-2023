@@ -120,7 +120,7 @@ export const logOut = createAsyncThunk('user/logOut', async () => {
 // createAsyncThunk() generates automatically pending -, fulfilled - and rejected handling cases
 export const userSlice = createSlice({
   name: 'user',
-  initialState: [],
+  initialState: {},
   reducers: {},
   extraReducers: (builder) => {
     builder

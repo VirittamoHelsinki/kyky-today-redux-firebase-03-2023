@@ -50,10 +50,6 @@ export const scheduleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createSchedule.fulfilled, (state, action) => {
-        localStorage.setItem(
-          `${action.payload.jobId}_schedules`,
-          JSON.stringify(action.payload.data)
-        );
         return (state = {
           ...state,
           [action.payload.jobId + '_schedules']: action.payload.data
@@ -68,28 +64,24 @@ export const scheduleSlice = createSlice({
             cities: ['Helsinki'],
             jobTitle: Object.keys(job)
           });
-          localStorage.setItem(
-            `${Object.keys(job)}_schedules`,
-            JSON.stringify(Object.values(job)[0])
-          );
-        });
-        localStorage.setItem('jobs', JSON.stringify(jobs));
-        action.payload.forEach((job) => {
           state = {
             ...state,
             [Object.keys(job) + '_schedules']: Object.values(job)[0]
           };
         });
         return (state = {
-          ...state
+          ...state,
+          jobslist: jobs
         });
       })
       .addCase(removeSchedule.fulfilled, (state, action) => {
-        localStorage.removeItem(`${action.payload}_schedules`);
-        return (state = {
-          ...state,
-          status: 'schedule removed'
-        });
+        const new_state = { ...state };
+        delete new_state[action.payload + '_schedules'];
+        return new_state;
+        // return (state = {
+        //   ...state,
+        //   status: 'schedule removed'
+        // });
       });
   }
 });
