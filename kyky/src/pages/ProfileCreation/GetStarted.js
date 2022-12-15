@@ -43,6 +43,13 @@ export default function GetStarted() {
     setFormData({ ...formData, [name]: value });
   }
 
+  function handleChangeReactSelect(optionName, optionComponent) {
+    setFormData({
+      ...formData,
+      [optionName]: { label: optionComponent.label, value: optionComponent.value }
+    });
+  }
+
   function sendForm(event) {
     event.preventDefault();
   }
