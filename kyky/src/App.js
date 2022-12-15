@@ -49,8 +49,7 @@ const App = () => {
     { to: '/calendar', label: 'My Calendar' },
     { to: '/calendar/overview', label: 'Overview' },
     { to: '/service-booking', label: 'Service Booking' },
-    { to: '/buyers-rating', label: 'Buyers Rating' },
-    { to: '/buyers-rating/thanks-for-rating', label: 'Thanks For Rating' }
+    { to: '/buyers-rating', label: 'Buyers Rating' }
   ];
 
   return (
