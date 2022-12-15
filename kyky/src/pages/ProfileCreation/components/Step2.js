@@ -24,7 +24,14 @@ export default function Step2({ formData, handleChange, handleChangeReactSelect 
         />
       );
     } else if (experience === 'educationExperience') {
-      return <EducationExperience setSaved={setSaved} />;
+      return (
+        <EducationExperience
+          formData={formData}
+          handleChange={handleChange}
+          handleChangeReactSelect={handleChangeReactSelect}
+          setSaved={setSaved}
+        />
+      );
     } else {
       console.error("User interface doesn't know which experience modal window to show.");
     }

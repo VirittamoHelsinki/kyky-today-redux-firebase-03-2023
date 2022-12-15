@@ -54,7 +54,15 @@ export default function GetStarted() {
     s2WorkExperienceStartYears: '',
     s2WorkExperienceEndMonths: '',
     s2WorkExperienceEndYears: '',
-    s2WorkExperienceDescription: ''
+    s2WorkExperienceDescription: '',
+    // Step 2 education experience
+    s2EducationExperienceSchool: '',
+    s2EducationExperienceDegree: '',
+    s2EducationExperienceField: '',
+    s2EducationExperienceStartMonths: '',
+    s2EducationExperienceStartYears: '',
+    s2EducationExperienceEndMonths: '',
+    s2EducationExperienceEndYears: ''
   });
 
   function previousPhase() {
