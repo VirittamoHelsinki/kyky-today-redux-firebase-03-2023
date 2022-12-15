@@ -6,7 +6,12 @@ import Countries from '../../../countries.json';
 import { GenericSelect } from './Select';
 import { months, years } from './Time';
 
-export default function WorkExperience({ formData, handleChange, setSaved }) {
+export default function WorkExperience({
+  formData,
+  handleChange,
+  handleChangeReactSelect,
+  setSaved
+}) {
   const countryOptions = Countries.map((country) => ({ value: country.code, label: country.name }));
 
   return (
@@ -46,7 +51,10 @@ export default function WorkExperience({ formData, handleChange, setSaved }) {
         className="countryList"
         name="countryList"
         placeholder="Finland"
-        onChange={(selectOption) => handleChange('s2WorkExperienceCountry', selectOption.value)}
+        defaultValue={formData?.s2WorkExperienceCountry}
+        onChange={(selectOption) =>
+          handleChangeReactSelect('s2WorkExperienceCountry', selectOption)
+        }
         options={countryOptions}
       />
       <Checkbox
@@ -66,8 +74,9 @@ export default function WorkExperience({ formData, handleChange, setSaved }) {
           className="dateSelect"
           name="startMonthsSelect"
           placeholder="Month"
+          defaultValue={formData?.s2WorkExperienceStartMonths}
           onChange={(selectOption) =>
-            handleChange('s2WorkExperienceStartMonths', selectOption.value)
+            handleChangeReactSelect('s2WorkExperienceStartMonths', selectOption)
           }
           options={months}
         />
@@ -75,8 +84,9 @@ export default function WorkExperience({ formData, handleChange, setSaved }) {
           className="dateSelect"
           name="startYearsSelect"
           placeholder="Year"
+          defaultValue={formData?.s2WorkExperienceStartYears}
           onChange={(selectOption) =>
-            handleChange('s2WorkExperienceStartYears', selectOption.value)
+            handleChangeReactSelect('s2WorkExperienceStartYears', selectOption)
           }
           options={years}
         />
@@ -84,14 +94,20 @@ export default function WorkExperience({ formData, handleChange, setSaved }) {
           className="dateSelect"
           name="endMonthsSelect"
           placeholder="Month"
-          onChange={(selectOption) => handleChange('s2WorkExperienceEndMonths', selectOption.value)}
+          defaultValue={formData?.s2WorkExperienceEndMonths}
+          onChange={(selectOption) =>
+            handleChangeReactSelect('s2WorkExperienceEndMonths', selectOption)
+          }
           options={months}
         />
         <GenericSelect
           className="dateSelect"
           name="endYearsSelect"
           placeholder="Year"
-          onChange={(selectOption) => handleChange('s2WorkExperienceEndYears', selectOption.value)}
+          defaultValue={formData?.s2WorkExperienceEndYears}
+          onChange={(selectOption) =>
+            handleChangeReactSelect('s2WorkExperienceEndYears', selectOption)
+          }
           options={years}
         />
       </div>

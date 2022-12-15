@@ -19,6 +19,7 @@ export function GenericSelect({
   name,
   placeholder,
   options,
+  defaultValue = '',
   onChange = () => {}
 }) {
   return (
@@ -27,6 +28,7 @@ export function GenericSelect({
       name={name}
       placeholder={placeholder}
       options={[...options]}
+      defaultValue={defaultValue}
       onChange={onChange}
       components={{ Option: IconOption }}
     />

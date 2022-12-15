@@ -73,6 +73,13 @@ export default function GetStarted() {
     setFormData({ ...formData, [name]: value });
   }
 
+  function handleChangeReactSelect(optionName, optionComponent) {
+    setFormData({
+      ...formData,
+      [optionName]: { label: optionComponent.label, value: optionComponent.value }
+    });
+  }
+
   function sendForm(event) {
     event.preventDefault();
   }
@@ -86,7 +93,13 @@ export default function GetStarted() {
         </div>
         <form onSubmit={sendForm}>
           {currentStep === 1 && <Step1 formData={formData} handleChange={handleChange} />}
-          {currentStep === 2 && <Step2 formData={formData} handleChange={handleChange} />}
+          {currentStep === 2 && (
+            <Step2
+              formData={formData}
+              handleChange={handleChange}
+              handleChangeReactSelect={handleChangeReactSelect}
+            />
+          )}
           {currentStep === 3 && <Step3 />}
           {currentStep === 4 && <Step4 />}
           {currentStep === 5 && <Step5 />}

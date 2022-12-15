@@ -4,7 +4,7 @@ import { useState } from 'react';
 import WorkExperience from './WorkExperience';
 import EducationExperience from './EducationExperience';
 
-export default function Step2({ formData, handleChange }) {
+export default function Step2({ formData, handleChange, handleChangeReactSelect }) {
   const [experience, setExperience] = useState();
   const [saved, setSaved] = useState(true);
   const chooseExperience = (event) => {
@@ -15,7 +15,14 @@ export default function Step2({ formData, handleChange }) {
 
   const renderExperience = () => {
     if (experience === 'workExperience') {
-      return <WorkExperience formData={formData} handleChange={handleChange} setSaved={setSaved} />;
+      return (
+        <WorkExperience
+          formData={formData}
+          handleChange={handleChange}
+          handleChangeReactSelect={handleChangeReactSelect}
+          setSaved={setSaved}
+        />
+      );
     } else if (experience === 'educationExperience') {
       return <EducationExperience setSaved={setSaved} />;
     } else {
