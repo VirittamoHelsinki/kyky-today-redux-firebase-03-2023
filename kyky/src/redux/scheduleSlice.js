@@ -55,6 +55,12 @@ export const scheduleSlice = createSlice({
           [action.payload.jobId + '_schedules']: action.payload.data
         });
       })
+      .addCase(fetchSchedules.pending, (state, action) => {
+        return (state = {
+          ...state,
+          loading: true
+        });
+      })
       .addCase(fetchSchedules.fulfilled, (state, action) => {
         const jobs = [];
         action.payload.forEach((job) => {
@@ -71,6 +77,7 @@ export const scheduleSlice = createSlice({
         });
         return (state = {
           ...state,
+          loading: false,
           jobslist: jobs
         });
       })
@@ -78,10 +85,6 @@ export const scheduleSlice = createSlice({
         const new_state = { ...state };
         delete new_state[action.payload + '_schedules'];
         return new_state;
-        // return (state = {
-        //   ...state,
-        //   status: 'schedule removed'
-        // });
       });
   }
 });

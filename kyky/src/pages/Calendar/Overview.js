@@ -9,32 +9,11 @@ import '../../styles/JobCalendarOverview.scss';
 
 // import mockData from '../../mock_bookings.json';
 
-const times = [
-  '0.00',
-  '1.00',
-  '2.00',
-  '3.00',
-  '4.00',
-  '5.00',
-  '6.00',
-  '7.00',
-  '8.00',
-  '9.00',
-  '10.00',
-  '11.00',
-  '12.00',
-  '13.00',
-  '14.00',
-  '15.00',
-  '16.00',
-  '17.00',
-  '18.00',
-  '19.00',
-  '20.00',
-  '21.00',
-  '22.00',
-  '23.00'
-];
+const times = [];
+
+for (let i = 0; i <= 23; i++) {
+  times.push(i + ':00');
+}
 
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const weekDaysArray = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']; // americans..
@@ -48,13 +27,11 @@ function Overview() {
 
   const _schedules = useSelector((state) => state.schedule);
 
-  // function checkSchedule(schedule) {
-  //   let { startDate: start, endDate: end } = schedule.scheduleDuration;
-  //   start = new Date(start).setHours(0, 0, 0, 0);
-  //   end = new Date(end).setHours(0, 0, 0, 0);
-  //   let result = start <= date.getTime() && end >= date.getTime();
-  //   return result;
-  // }
+  function checkSchedule(schedule) {
+    let { startDate: start, endDate: end } = schedule.scheduleDuration;
+    let result = start.seconds <= date.getTime() / 1000 && end.seconds >= date.getTime() / 1000;
+    return result;
+  }
 
   function checkWeekdaySchedule(schedule, weekDay) {
     return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
@@ -71,15 +48,16 @@ function Overview() {
 
   useEffect(() => {
     const scheduleKeys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
-    const data = scheduleKeys
+    const allSchedules = scheduleKeys
       .map((key) => {
-        const schedule = _schedules[key];
+        // makes copy of the object to allow modifications because Firebase returns Object.freeze()
+        const schedule = JSON.parse(JSON.stringify(_schedules[key]));
         return schedule;
       })
       .flat(Infinity);
-    // const data = allSchedules.filter((schedule) => {
-    //   return checkSchedule(schedule);
-    // });
+    const data = allSchedules.filter((schedule) => {
+      return checkSchedule(schedule);
+    });
     if (data) {
       const jobs = checkOverlap(data);
       const all_jobs = [];

@@ -38,7 +38,6 @@ function UserLogIn() {
   };
 
   useEffect(() => {
-    console.log(_user);
     if (_user) {
       dispatch(fetchSchedules(_user.uid));
     }
