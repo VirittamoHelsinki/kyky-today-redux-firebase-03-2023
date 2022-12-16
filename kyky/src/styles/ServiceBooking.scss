@@ -6,9 +6,10 @@
 .service-booking-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   width: 100%;
-  padding-top: 100px;
+  padding-top: 5%;
+  gap: 10%;
+  justify-content: center;
 
   h1 {
     font-family: 'Poppins', sans-serif;
@@ -17,7 +18,9 @@
   }
 
   .service-booking-left-panel {
-    margin-right: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     h2 {
       font-size: 16px;
@@ -42,14 +45,23 @@
   }
 
   .service-booking-right-panel {
-    margin-left: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    button {
-      box-shadow: none;
+    .service-booking-right-panel-continue-button {
+      display: flex;
+      justify-content: center;
+
+      button {
+        box-shadow: none;
+        width: 80%;
+      }
+
     }
 
     .service-booking-right-panel-content {
-      height: 54vh;
+      min-height: 54vh;
       width: 34vw;
       border: 1px solid #C4C4C4;
       border-radius: 5px;
@@ -57,10 +69,49 @@
       flex-direction: column;
       align-items: center;
 
-      .service-booking-right-panel-buttons {
+      .service-booking-right-panel-tabs {
         display: flex;
         width: 100%;
         text-align: center;
+      }
+
+      .recurring-tab-container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+
+        .checkbox-wrapper {
+          display: flex;
+          flex-direction: column;
+          padding: 2rem;
+
+          .checkbox-wrapper-row {
+            display: flex;
+            align-items: center;
+            min-height: 40px;
+
+            .recurring-text {
+              width: 45%;
+              font-size: 20px;
+
+              .checkbox {
+                margin-right: 1rem;
+              }
+            }
+
+            .recurring-price {
+              width: 10%;
+              font-family: 'Poppins', sans-serif;
+              font-weight: bold;
+              color: #00A088;
+            }
+
+            .multiple-select {
+              width: 45%;
+            }
+          }
+        }
       }
 
       .panel-button {
@@ -84,48 +135,26 @@
 .service-booking-footer {
   display: flex;
   justify-content: center;
-  height: 50px;
 
-  button {
-    box-shadow: none;
-  }
-}
-
-.recurring-tab-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-
-  .checkbox-wrapper {
+  .service-booking-footer-button {
     display: flex;
-    flex-direction: column;
-    padding: 2rem;
+    justify-content: center;
+    width: 100%;
 
-    .checkbox-wrapper-row {
-      display: flex;
-      align-items: center;
-      min-height: 40px;
+    button {
+      box-shadow: none;
+      background-color: white;
+      border: #C4C4C4 solid 1px;
+      color: #C4C4C4;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      font-size: 1.4rem;
 
-      .recurring-text {
-        width: 45%;
-        font-size: 20px;
-
-        .checkbox {
-          margin-right: 1rem;
-        }
-      }
-
-      .recurring-price {
-        width: 10%;
-      }
-
-      .multiple-select {
-        width: 45%;
-      }
     }
   }
 }
+
+
 
 .checkbox-container {
   box-shadow: none !important;
@@ -141,8 +170,15 @@
 
   .calendar-modal-buttons-container {
     display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
 
     .calendar-modal-button {
+      background-color: #387a70;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      border-radius: 7px;
+      margin: 2px;
 
     }
   }
