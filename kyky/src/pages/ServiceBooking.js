@@ -70,6 +70,15 @@ function ServiceBooking() {
         }
     }
 
+    function confirmBooking(){
+        if (!booking.termsAccepted) {
+            alert('Please read the VAT (sales tax) terms before continuing!');
+        } else {
+            alert(`Thank you for booking the job ${defaultJob.job}! You have booked ${defaultJob.job} for the following days: ${booking.selectedDays.map(day => day.label)}${booking.selectedDates}`);
+            setBooking(defaultBookingValue);
+        }
+    }
+
 
     return (
         <>
@@ -169,10 +178,7 @@ function ServiceBooking() {
                             }
                         </div>
                         <div className="service-booking-right-panel-continue-button"><Button
-                            onClick={() => {
-                                alert(`Thank you for booking the job ${defaultJob.job}! You have booked ${defaultJob.job} for the following days: ${booking.selectedDays.map(day => day.label)}${booking.selectedDates}`);
-                                setBooking(defaultBookingValue);
-                            }}
+                            onClick={() => confirmBooking()}
                             children={<div>Continue</div>}/>
                         </div>
                     </div>
