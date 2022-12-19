@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSchedule, removeSchedule } from '../../redux/scheduleSlice';
+import { createSchedule, removeSchedule } from '../../redux/sellers/calendarScheduleSlice';
 import Button from '../../components/Button';
 
 import Input from '../../components/Input';
@@ -71,6 +71,10 @@ export default function ManageSchedules() {
     const _user = localStorage.getItem('user');
     setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
   }, []);
+
+  useEffect(() => {
+    document.getElementById('end-date').disabled = indefinite;
+  }, [indefinite]);
 
   function createUnavailability() {
     const data = {

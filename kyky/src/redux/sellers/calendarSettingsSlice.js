@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { db } from '../firebase/firebase';
+import { db } from '../../firebase/firebase';
 
 export const saveCalendarSettings = createAsyncThunk(
   'calendar-settings/saveCalendarSettings',

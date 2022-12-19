@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
-import { recoverPasswordResetEmail } from '../redux/userSlice';
+import { recoverPasswordResetEmail } from '../redux/auth/userSlice';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import 'material-icons/iconfont/material-icons.css';

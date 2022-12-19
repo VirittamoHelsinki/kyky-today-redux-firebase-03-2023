@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../redux/userSlice';
+import { logOut } from '../redux/auth/userSlice';
 import SearchBar from './SearchBar';
 import '../styles/header.scss';
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';

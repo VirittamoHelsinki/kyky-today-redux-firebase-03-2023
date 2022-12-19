@@ -1,19 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { doc, setDoc, collection, getDocs, deleteDoc } from 'firebase/firestore';
-import { db } from '../firebase/firebase';
+import { db } from '../../firebase/firebase';
 
-export const createSchedule = createAsyncThunk('schedules/createSchedule', async (payload) => {
-  try {
-    await setDoc(doc(db, `users/${payload.uid}/schedules/${payload.jobId}`), {
-      ...payload.data
-    });
-    return payload;
-  } catch (error) {
-    return error;
+export const createSchedule = createAsyncThunk(
+  'calendarSchedules/createSchedule',
+  async (payload) => {
+    try {
+      await setDoc(doc(db, `users/${payload.uid}/schedules/${payload.jobId}`), {
+        ...payload.data
+      });
+      return payload;
+    } catch (error) {
+      return error;
+    }
   }
-});
+);
 
-export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async (uid) => {
+export const fetchSchedules = createAsyncThunk('calendarSchedules/fetchSchedules', async (uid) => {
   try {
     const list_of_schedules = [];
     const schedules = await getDocs(collection(db, `users/${uid}/schedules/`));
@@ -32,19 +35,22 @@ export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async
   }
 });
 
-export const removeSchedule = createAsyncThunk('schedules/removeSchedule', async (payload) => {
-  try {
-    await deleteDoc(doc(db, `users/${payload.uid}/schedules/${payload.schedule}`));
-    return payload.schedule;
-  } catch (error) {
-    return error;
+export const removeSchedule = createAsyncThunk(
+  'calendarSchedules/removeSchedule',
+  async (payload) => {
+    try {
+      await deleteDoc(doc(db, `users/${payload.uid}/schedules/${payload.schedule}`));
+      return payload.schedule;
+    } catch (error) {
+      return error;
+    }
   }
-});
+);
 
 // createAsyncThunk() generates automatically pending, fulfilled and rejected handling cases.
 // Add pending and rejected cases when needed
-export const scheduleSlice = createSlice({
-  name: 'Schedules',
+export const calendarScheduleSlice = createSlice({
+  name: 'calendarSchedules',
   initialState: [],
   reducers: {},
   extraReducers: (builder) => {
@@ -89,4 +95,4 @@ export const scheduleSlice = createSlice({
   }
 });
 
-export default scheduleSlice.reducer;
+export default calendarScheduleSlice.reducer;

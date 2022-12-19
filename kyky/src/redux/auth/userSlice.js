@@ -11,7 +11,7 @@ import {
   signOut
 } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
-import { db, auth } from '../firebase/firebase';
+import { db, auth } from '../../firebase/firebase';
 
 export const signUpEmailAndPassword = createAsyncThunk(
   'user/signUpEmailAndPassword',

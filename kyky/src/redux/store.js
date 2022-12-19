@@ -3,8 +3,8 @@ import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
-import userReducer from './userSlice';
-import scheduleReducer from './scheduleSlice';
+import userReducer from './auth/userSlice';
+import scheduleReducer from './sellers/calendarScheduleSlice';
 
 const reducers = combineReducers({
   user: userReducer,

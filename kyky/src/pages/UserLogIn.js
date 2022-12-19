@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInEmailAndPassword, signInGoogleAuthProvider } from '../redux/userSlice';
-import { fetchSchedules } from '../redux/scheduleSlice';
+import { signInEmailAndPassword, signInGoogleAuthProvider } from '../redux/auth/userSlice';
+import { fetchSchedules } from '../redux/sellers/calendarScheduleSlice';
 import Language from '../language';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';

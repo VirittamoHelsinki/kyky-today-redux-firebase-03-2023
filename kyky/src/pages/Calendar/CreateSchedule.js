@@ -3,7 +3,7 @@
 */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSchedule, removeSchedule } from '../../redux/scheduleSlice';
+import { createSchedule, removeSchedule } from '../../redux/sellers/calendarScheduleSlice';
 import Button from '../../components/Button';
 
 /* Step components */

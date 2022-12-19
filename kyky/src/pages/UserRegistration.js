@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signUpEmailAndPassword } from '../redux/userSlice';
+import { signUpEmailAndPassword } from '../redux/auth/userSlice';
 import Language from '../language';
 import Input from '../components/Input';
 import 'material-icons/iconfont/material-icons.css';
