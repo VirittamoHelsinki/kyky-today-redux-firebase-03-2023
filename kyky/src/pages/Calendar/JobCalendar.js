@@ -62,7 +62,10 @@ export default function JobCalendar() {
   }, [currentJob, _schedules]);
 
   useEffect(() => {
-    const _list = _jobslist === 'undefined' ? [] : _jobslist;
+    let _list = [];
+    if (_jobslist) {
+      _list = _jobslist;
+    }
     const _jobs = [..._list];
     if (_jobs.length > 1) {
       // sort jobs alphabetically by job name

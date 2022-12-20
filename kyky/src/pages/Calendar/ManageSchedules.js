@@ -65,8 +65,8 @@ export default function ManageSchedules() {
       });
     });
     setSchedules(schedulesObject);
-    const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
-    //const storage = _schedules['unavailabilities'] || [];
+    //const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
+    const storage = _schedules['unavailabilities'] || [];
     setUnavailabilities(storage);
   }, [_schedules]);
 
@@ -85,11 +85,11 @@ export default function ManageSchedules() {
       end: unavailableEnd,
       indefinite
     };
-    const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
-    //const storage = _schedules['unavailabilities'] || [];
+    //const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
+    const storage = _schedules['unavailabilities'] || [];
     storage.push(data);
-    //dispatch(createUnavailability({ uid: user.uid, data: storage }));
-    localStorage.setItem('unavailability_schedules', JSON.stringify(storage));
+    dispatch(createUnavailability({ uid: user.uid, data: storage }));
+    //localStorage.setItem('unavailability_schedules', JSON.stringify(storage));
   }
 
   function unavailabilityIsValid() {

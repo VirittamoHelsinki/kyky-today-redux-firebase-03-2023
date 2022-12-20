@@ -95,6 +95,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
   }
 
   function SubmitDetails() {
+    // makes copy of the object to allow modifications because Firebase returns Object.freeze()
     const schedules = JSON.parse(JSON.stringify(_schedules[properties.jobId + '_schedules']));
     if (mode === 'create') {
       const id = Math.random().toString(36).substring(2, 9); // generate random id

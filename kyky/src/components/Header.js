@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../redux/auth/userSlice';
 import SearchBar from './SearchBar';
 import '../styles/header.scss';
@@ -12,13 +12,20 @@ const Header = ({ navlinks }) => {
   const [profileOpen, setProfileOpen] = useState(false);
 
   const menuRef = useRef();
-  const profileRef = useRef();
+  const noImgRef = useRef();
+  const imgRef = useRef();
 
   const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.user.user);
+
   useEffect(() => {
     const closeDropdown = (e) => {
-      if (e.path[0] !== menuRef.current && e.path[0] !== profileRef.current) {
+      if (
+        e.path[0] !== menuRef.current &&
+        e.path[0] !== noImgRef.current &&
+        e.path[0] !== imgRef.current
+      ) {
         setMenuOpen(false);
         setProfileOpen(false);
       }
@@ -74,9 +81,18 @@ const Header = ({ navlinks }) => {
           </li>
 
           <li className="dropdown" onClick={profileToggle}>
-            <span className="material-icons-outlined" ref={profileRef}>
-              account_circle
-            </span>
+            {user ? (
+              <img
+                src={user.photoURL}
+                className="profile-img"
+                ref={imgRef}
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <span className="material-icons-outlined" ref={noImgRef}>
+                account_circle
+              </span>
+            )}
             {profileOpen && (
               <div className="dropdown-content">
                 <div
