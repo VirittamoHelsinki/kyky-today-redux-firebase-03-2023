@@ -160,7 +160,6 @@ export const userSlice = createSlice({
         });
       })
       .addCase(logOut.fulfilled, (state, action) => {
-        console.log(state, action);
         localStorage.removeItem('user');
         return (state = {
           ...state,

@@ -4,11 +4,11 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import userReducer from './auth/userSlice';
-import scheduleReducer from './sellers/calendarScheduleSlice';
+import calendarScheduleReducer from './sellers/calendarScheduleSlice';
 
 const reducers = combineReducers({
   user: userReducer,
-  schedule: scheduleReducer
+  schedule: calendarScheduleReducer
 });
 
 const persistConfig = {

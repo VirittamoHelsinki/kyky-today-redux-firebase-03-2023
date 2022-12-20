@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSchedule, removeSchedule } from '../../redux/sellers/calendarScheduleSlice';
+import {
+  createSchedule,
+  removeSchedule,
+  createUnavailability
+} from '../../redux/sellers/calendarScheduleSlice';
 import Button from '../../components/Button';
 
 import Input from '../../components/Input';
@@ -44,9 +48,7 @@ export default function ManageSchedules() {
   }
 
   useEffect(() => {
-    const keys = Object.keys(_schedules).filter(
-      (key) => key.includes('_schedules') && !key.includes('unavailability')
-    );
+    const keys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
     const allSchedules = keys.map((key) => {
       const schedule = _schedules[key];
       return schedule;
@@ -63,8 +65,9 @@ export default function ManageSchedules() {
       });
     });
     setSchedules(schedulesObject);
-    const unavailabilities = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
-    setUnavailabilities(unavailabilities);
+    const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
+    //const storage = _schedules['unavailabilities'] || [];
+    setUnavailabilities(storage);
   }, [_schedules]);
 
   useEffect(() => {
@@ -83,9 +86,10 @@ export default function ManageSchedules() {
       indefinite
     };
     const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
+    //const storage = _schedules['unavailabilities'] || [];
     storage.push(data);
+    //dispatch(createUnavailability({ uid: user.uid, data: storage }));
     localStorage.setItem('unavailability_schedules', JSON.stringify(storage));
-    window.location.reload();
   }
 
   function unavailabilityIsValid() {
