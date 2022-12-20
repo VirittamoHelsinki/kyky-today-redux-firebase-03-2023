@@ -106,7 +106,13 @@ function ServiceBooking() {
                             </div>
 
                             {currentTab === Tabs.Once &&
-                            <Calendar date={date} setDate={setDate} minYears={0} maxYears={5}/>}
+                            <div>
+                                <Calendar date={date} setDate={setDate} minYears={0} maxYears={5}/>
+                                <div className="vat-terms"><Checkbox className="checkbox"
+                                                                     label={`I have read VAT (sales tax) terms`}
+                                                                     onChange={() => checkTerms()}/></div>
+                            </div>
+                            }
 
                             {currentTab === Tabs.Recurring && <div className='recurring-tab-container'>
                                 <div className='checkbox-wrapper'>
@@ -173,7 +179,8 @@ function ServiceBooking() {
                                     </div>
                                 </div>
                                 <div className="vat-terms"><Checkbox className="checkbox"
-                                                                     label={`I have read VAT (sales tax) terms`} onChange={()=> checkTerms()}/></div>
+                                                                     label={`I have read VAT (sales tax) terms`}
+                                                                     onChange={() => checkTerms()}/></div>
                             </div>
                             }
                         </div>
