@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSchedule, removeSchedule } from '../../redux/scheduleSlice';
+import {
+  createSchedule,
+  removeSchedule,
+  createUnavailability
+} from '../../redux/sellers/calendarScheduleSlice';
 import Button from '../../components/Button';
 
 import Input from '../../components/Input';
@@ -22,14 +26,14 @@ export default function ManageSchedules() {
 
   const dispatch = useDispatch();
 
-  const scheduleChanged = useSelector((state) => state.schedule);
+  const _schedules = useSelector((state) => state.schedule);
 
   useEffect(() => {
     setSelectedWindow('manage-schedules');
   }, []);
 
   function deleteSchedule(schedule) {
-    const storage = JSON.parse(localStorage.getItem(`${schedule.jobId}_schedules`));
+    const storage = [..._schedules[schedule.jobId + '_schedules']];
     const index = storage.findIndex((item) => item._id === schedule._id) || 0;
     const confirm = window.confirm('Are you sure you want to delete this schedule?');
     if (confirm) {
@@ -44,11 +48,9 @@ export default function ManageSchedules() {
   }
 
   useEffect(() => {
-    const keys = Object.keys(localStorage).filter(
-      (key) => key.includes('_schedules') && !key.includes('unavailability')
-    );
+    const keys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
     const allSchedules = keys.map((key) => {
-      const schedule = JSON.parse(localStorage.getItem(key));
+      const schedule = _schedules[key];
       return schedule;
     });
     const schedulesObject = {};
@@ -63,14 +65,19 @@ export default function ManageSchedules() {
       });
     });
     setSchedules(schedulesObject);
-    const unavailabilities = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
-    setUnavailabilities(unavailabilities);
-  }, [scheduleChanged]);
+    const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
+    //const storage = _schedules['unavailabilities'] || [];
+    setUnavailabilities(storage);
+  }, [_schedules]);
 
   useEffect(() => {
     const _user = localStorage.getItem('user');
     setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
   }, []);
+
+  useEffect(() => {
+    document.getElementById('end-date').disabled = indefinite;
+  }, [indefinite]);
 
   function createUnavailability() {
     const data = {
@@ -79,9 +86,10 @@ export default function ManageSchedules() {
       indefinite
     };
     const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
+    //const storage = _schedules['unavailabilities'] || [];
     storage.push(data);
+    //dispatch(createUnavailability({ uid: user.uid, data: storage }));
     localStorage.setItem('unavailability_schedules', JSON.stringify(storage));
-    window.location.reload();
   }
 
   function unavailabilityIsValid() {

@@ -1,6 +1,8 @@
-import { useState, useContext } from 'react';
-import { useDispatch } from 'react-redux';
-import { signInEmailAndPassword, signInGoogleAuthProvider } from '../redux/userSlice';
+import { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInEmailAndPassword, signInGoogleAuthProvider } from '../redux/auth/userSlice';
+import { fetchSchedules } from '../redux/sellers/calendarScheduleSlice';
 import Language from '../language';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';
@@ -13,9 +15,11 @@ function UserLogIn() {
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [creditalError] = useState(false);
+  //const [creditalError] = useState(false);
 
   const dispatch = useDispatch();
+
+  const _user = useSelector((state) => state.user.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,9 +32,16 @@ function UserLogIn() {
         password: password
       })
     );
-    console.log('username:', username, 'password:', password, 'remember me:', remember);
-    alert(`Matching username and password: ${creditalError}`);
+    setUsername('');
+    setPassword('');
+    setRemember(false);
   };
+
+  useEffect(() => {
+    if (_user) {
+      dispatch(fetchSchedules(_user.uid));
+    }
+  }, [_user]);
 
   const onGoogleClick = () => {
     dispatch(signInGoogleAuthProvider());
@@ -104,15 +115,10 @@ function UserLogIn() {
           }}>
           Kirjaudu Applella
         </Button>
-        <span className="login-help">
-          <a className="primary" href="https://www.google.com/">
-            {lang.registration.sign_in}
-          </a>
-          {lang.registration.or}
-          <a className="primary" href="https://www.google.com/">
-            {lang.registration.recover_password}
-          </a>
-        </span>
+
+        <div className="primary">
+          <Link to="/recover-password">{lang.registration.recover_password}</Link>
+        </div>
       </form>
     </main>
   );

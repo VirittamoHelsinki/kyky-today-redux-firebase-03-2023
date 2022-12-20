@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { db } from '../firebase/firebase';
+import { db } from '../../firebase/firebase';
 
 export const saveCalendarSettings = createAsyncThunk(
   'calendar-settings/saveCalendarSettings',
@@ -22,8 +22,8 @@ export const fetchCalendarSettings = createAsyncThunk(
   async (uid) => {
     try {
       const settings = await getDoc(doc(db, `users/${uid}/settings/calendar-settings/`));
-      console.log(settings.data());
-      return settings.data();
+      console.log(settings.data()[0]);
+      return settings.data()[0];
     } catch (error) {
       return error;
     }

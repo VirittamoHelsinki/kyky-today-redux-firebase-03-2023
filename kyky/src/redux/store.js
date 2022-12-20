@@ -1,14 +1,27 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './userSlice';
-import scheduleReducer from './scheduleSlice';
+import storage from 'redux-persist/lib/storage';
+import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import thunk from 'redux-thunk';
+import userReducer from './auth/userSlice';
+import calendarScheduleReducer from './sellers/calendarScheduleSlice';
 
-export default configureStore({
-  reducer: {
-    user: userReducer,
-    schedule: scheduleReducer
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false
-    })
+const reducers = combineReducers({
+  user: userReducer,
+  schedule: calendarScheduleReducer
 });
+
+const persistConfig = {
+  key: 'root',
+  storage
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: [thunk]
+});
+
+export default store;

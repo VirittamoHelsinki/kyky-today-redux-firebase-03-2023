@@ -13,6 +13,7 @@ import Header from './components/Header';
 import UserRegistration from './pages/UserRegistration';
 import ContactForm from './pages/ContactForm';
 import UserLogin from './pages/UserLogIn';
+import RecoverPassword from './pages/RecoverPassword';
 import LandingPage from './pages/LandingPage';
 import JobCreation from './pages/JobCreation';
 import ServiceBooking from './pages/ServiceBooking';
@@ -63,6 +64,7 @@ const App = () => {
           <Route path="user-registration" element={<UserRegistration />} />
           <Route path="contact-form" element={<ContactForm />} />
           <Route path="user-log-in" element={<UserLogin />} />
+          <Route path="recover-password" element={<RecoverPassword />} />
           <Route path="calendar" element={<MyCalendar />}>
             <Route index element={<JobCalendar />} />
             <Route path="overview" element={<Overview />} />

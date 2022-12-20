@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
+  sendPasswordResetEmail,
   GoogleAuthProvider,
   FacebookAuthProvider,
   OAuthProvider,
@@ -9,7 +11,7 @@ import {
   signOut
 } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
-import { db, auth } from '../firebase/firebase';
+import { db, auth } from '../../firebase/firebase';
 
 export const signUpEmailAndPassword = createAsyncThunk(
   'user/signUpEmailAndPassword',
@@ -25,6 +27,8 @@ export const signUpEmailAndPassword = createAsyncThunk(
         subscribe: payload.subscribe,
         authProvider: 'local'
       });
+      await sendEmailVerification(auth.currentUser);
+      alert('A verification link is sent to your email!');
       return user;
     } catch (error) {
       return error;
@@ -37,6 +41,27 @@ export const signInEmailAndPassword = createAsyncThunk(
   async (payload) => {
     try {
       const res = await signInWithEmailAndPassword(auth, payload.email, payload.password);
+      if (res.user.uid && !res.user.emailVerified) {
+        const confirm = window.confirm(
+          'Please verify your email address\n\nPress OK to send a new verification link to your email'
+        );
+        if (confirm) {
+          await sendEmailVerification(auth.currentUser);
+          alert('A new verification link is sent to your email!');
+        }
+      }
+      return res;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
+export const recoverPasswordResetEmail = createAsyncThunk(
+  'user/srecoverPasswordResetEmail',
+  async (payload) => {
+    try {
+      const res = await sendPasswordResetEmail(auth, payload);
       return res;
     } catch (error) {
       return error;
@@ -95,26 +120,16 @@ export const logOut = createAsyncThunk('user/logOut', async () => {
 // createAsyncThunk() generates automatically pending -, fulfilled - and rejected handling cases
 export const userSlice = createSlice({
   name: 'user',
-  initialState: [],
+  initialState: {},
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(signUpEmailAndPassword.pending, (state, action) => {
-        console.log(state, action);
-      })
       .addCase(signUpEmailAndPassword.fulfilled, (state, action) => {
         localStorage.setItem('user', JSON.stringify(action.payload));
         return (state = {
           ...state,
           user: action.payload
         });
-      })
-      .addCase(signUpEmailAndPassword.rejected, (state, action) => {
-        console.log(state, action);
-      })
-      /////////////////////////////////////
-      .addCase(signInEmailAndPassword.pending, (state, action) => {
-        console.log(state, action);
       })
       .addCase(signInEmailAndPassword.fulfilled, (state, action) => {
         localStorage.setItem('user', JSON.stringify(action.payload.user));
@@ -123,26 +138,12 @@ export const userSlice = createSlice({
           user: action.payload.user
         });
       })
-      .addCase(signInEmailAndPassword.rejected, (state, action) => {
-        console.log(state, action);
-      })
-      /////////////////////////////////////
-      .addCase(signInGoogleAuthProvider.pending, (state, action) => {
-        console.log(state, action);
-      })
       .addCase(signInGoogleAuthProvider.fulfilled, (state, action) => {
         localStorage.setItem('user', JSON.stringify(action.payload.user));
         return (state = {
           ...state,
           user: action.payload.user
         });
-      })
-      .addCase(signInGoogleAuthProvider.rejected, (state, action) => {
-        console.log(state, action);
-      })
-      //////////////////////////////////////
-      .addCase(signInFacebookAuthProvider.pending, (state, action) => {
-        console.log(state, action);
       })
       .addCase(signInFacebookAuthProvider.fulfilled, (state, action) => {
         localStorage.setItem('user', JSON.stringify(action.payload.user));
@@ -151,13 +152,6 @@ export const userSlice = createSlice({
           user: action.payload.user
         });
       })
-      .addCase(signInFacebookAuthProvider.rejected, (state, action) => {
-        console.log(state, action);
-      })
-      ////////////////////////////////////////
-      .addCase(signInAppleAuthProvider.pending, (state, action) => {
-        console.log(state, action);
-      })
       .addCase(signInAppleAuthProvider.fulfilled, (state, action) => {
         localStorage.setItem('user', JSON.stringify(action.payload.user));
         return (state = {
@@ -165,23 +159,12 @@ export const userSlice = createSlice({
           user: action.payload.user
         });
       })
-      .addCase(signInAppleAuthProvider.rejected, (state, action) => {
-        console.log(state, action);
-      })
-      //////////////////////////////////////////
-      .addCase(logOut.pending, (state, action) => {
-        console.log(state, action);
-      })
       .addCase(logOut.fulfilled, (state, action) => {
-        console.log(state, action);
         localStorage.removeItem('user');
         return (state = {
           ...state,
           user: null
         });
-      })
-      .addCase(logOut.rejected, (state, action) => {
-        console.log(state, action);
       });
   }
 });

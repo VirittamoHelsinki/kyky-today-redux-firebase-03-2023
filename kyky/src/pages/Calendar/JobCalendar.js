@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSchedules } from '../../redux/scheduleSlice';
+import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
 import { useOutletContext } from 'react-router-dom';
 import '../../styles/JobCalendar.scss';
 import Button from '../../components/Button';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 import activities from '../../activities.json';
 
@@ -52,19 +53,26 @@ export default function JobCalendar() {
   const [jobs, setJobs] = useState([]);
   const [user, setUser] = useState([]);
 
-  const jobsChanged = useSelector((state) => state.schedule);
+  const _schedules = useSelector((state) => state.schedule);
+  const _jobslist = useSelector((state) => state.schedule.jobslist);
+  const isLoading = useSelector((state) => state.schedule.loading);
 
   useEffect(() => {
-    const _jobs = localStorage.getItem('jobs');
-    if (jobs.length > 1) {
+    getSchedules();
+  }, [currentJob, _schedules]);
+
+  useEffect(() => {
+    const _list = _jobslist === 'undefined' ? [] : _jobslist;
+    const _jobs = [..._list];
+    if (_jobs.length > 1) {
       // sort jobs alphabetically by job name
-      jobs.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0));
+      _jobs.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0));
     }
-    setJobs(_jobs ? JSON.parse(localStorage.getItem('jobs')) : []);
+    setJobs(_jobs);
     if ((currentJob === '') & (jobs.length > 0)) {
       setCurrentJob(jobs[0].id);
     }
-  }, [jobsChanged]);
+  }, [_schedules]);
 
   useEffect(() => {
     const _user = localStorage.getItem('user');
@@ -74,7 +82,7 @@ export default function JobCalendar() {
   const dispatch = useDispatch();
 
   function getSchedules() {
-    const schedules = JSON.parse(localStorage.getItem(`${currentJob}_schedules`)) || [];
+    const schedules = _schedules[currentJob + '_schedules'] || [];
     setSchedules(schedules);
   }
 
@@ -110,10 +118,6 @@ export default function JobCalendar() {
     setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 2);
     getSchedules();
   }, [date]);
-
-  useEffect(() => {
-    getSchedules();
-  }, [currentJob]);
 
   useEffect(() => {
     const firstDayOfMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
@@ -284,66 +288,70 @@ export default function JobCalendar() {
               <span key={week}>{week}</span>
             ))}
           </div>
-          <div className="job-calendar">
-            <div className="calendar-days">
-              {days.map((day, index) => {
-                const isCurrentMonth = day.getMonth() === date.getMonth();
-                const disabled =
-                  !isCurrentMonth ||
-                  (day.getDate() < new Date().getDate() &&
-                    day.getMonth() <= new Date().getMonth() &&
-                    day.getFullYear() <= new Date().getFullYear()) ||
-                  (day.getMonth() < new Date().getMonth() &&
-                    day.getFullYear() <= new Date().getFullYear());
-                /* Convoluted mess, just makes totally sure to display current day correctly */
-                const curr =
-                  isCurrentMonth &&
-                  day.getDate() === new Date().getDate() &&
-                  date.getMonth() === new Date().getMonth() &&
-                  date.getFullYear() === new Date().getFullYear();
-                const activitiesToday = activities.filter(
-                  (activity) =>
-                    new Date(activity.date).toISOString().slice(0, 10) ===
-                      new Date(date.getFullYear(), date.getMonth(), day.getDate())
-                        .toISOString()
-                        .slice(0, 10) && activity.jobId === currentJob
-                );
-                const confirmed = activitiesToday.filter((activity) => activity.confirmed);
-                const pending = activitiesToday.filter((activity) => !activity.confirmed);
-                return (
-                  <div
-                    key={`day-${index}`}
-                    className={`calendar-day${selectedDay === index ? ' selected' : ''}${
-                      disabled ? ' disabled' : ''
-                    }${highlightDays[day.getDate()]?.highlight ? ' highlight' : ''}`}
-                    onClick={() => {
-                      if (!disabled) {
-                        setSelectedDay(index);
-                        setCurrentActivities(activitiesToday);
-                      }
-                    }}>
-                    <span className={`date${curr ? ' current' : ''}`}>{day.getDate()}</span>
-                    {activitiesToday.length > 0 && (
-                      <div className="activities">
-                        {confirmed.length > 0 && (
-                          <div className="confirmed">
-                            <i className="material-icons-outlined">check_circle</i>
-                            <span>{confirmed.length} Confirmed</span>
-                          </div>
-                        )}
-                        {pending.length > 0 && (
-                          <div className="pending">
-                            <i className="material-icons-outlined">priority_high</i>
-                            <span>{pending.length} Pending</span>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <div className="job-calendar">
+              <div className="calendar-days">
+                {days.map((day, index) => {
+                  const isCurrentMonth = day.getMonth() === date.getMonth();
+                  const disabled =
+                    !isCurrentMonth ||
+                    (day.getDate() < new Date().getDate() &&
+                      day.getMonth() <= new Date().getMonth() &&
+                      day.getFullYear() <= new Date().getFullYear()) ||
+                    (day.getMonth() < new Date().getMonth() &&
+                      day.getFullYear() <= new Date().getFullYear());
+                  /* Convoluted mess, just makes totally sure to display current day correctly */
+                  const curr =
+                    isCurrentMonth &&
+                    day.getDate() === new Date().getDate() &&
+                    date.getMonth() === new Date().getMonth() &&
+                    date.getFullYear() === new Date().getFullYear();
+                  const activitiesToday = activities.filter(
+                    (activity) =>
+                      new Date(activity.date).toISOString().slice(0, 10) ===
+                        new Date(date.getFullYear(), date.getMonth(), day.getDate())
+                          .toISOString()
+                          .slice(0, 10) && activity.jobId === currentJob
+                  );
+                  const confirmed = activitiesToday.filter((activity) => activity.confirmed);
+                  const pending = activitiesToday.filter((activity) => !activity.confirmed);
+                  return (
+                    <div
+                      key={`day-${index}`}
+                      className={`calendar-day${selectedDay === index ? ' selected' : ''}${
+                        disabled ? ' disabled' : ''
+                      }${highlightDays[day.getDate()]?.highlight ? ' highlight' : ''}`}
+                      onClick={() => {
+                        if (!disabled) {
+                          setSelectedDay(index);
+                          setCurrentActivities(activitiesToday);
+                        }
+                      }}>
+                      <span className={`date${curr ? ' current' : ''}`}>{day.getDate()}</span>
+                      {activitiesToday.length > 0 && (
+                        <div className="activities">
+                          {confirmed.length > 0 && (
+                            <div className="confirmed">
+                              <i className="material-icons-outlined">check_circle</i>
+                              <span>{confirmed.length} Confirmed</span>
+                            </div>
+                          )}
+                          {pending.length > 0 && (
+                            <div className="pending">
+                              <i className="material-icons-outlined">priority_high</i>
+                              <span>{pending.length} Pending</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="addScheduleContainer">
           {' '}

@@ -1,17 +1,23 @@
 import MultipleSelect from './MultipleSelect';
 
-function SelectDays({ selectedDays }) {
+function SelectDays({ selectedDays, booking }) {
 
-  const options = [
-    { value: 'monday', label: 'Monday' },
-    { value: 'tuesday', label: 'Tuesday' },
-    { value: 'wednesday', label: 'Wednesday' },
-    { value: 'thursday', label: 'Thursday' },
-    { value: 'friday', label: 'Friday' },
-    { value: 'saturday', label: 'Saturday' },
-    { value: 'sunday', label: 'Sunday' }
-  ];
+  let options = [];
 
+  if (booking.checked === "weekday" || booking.checked === "everyOtherWeekday") {
+    options = [
+      { value: 'monday', label: 'Monday' },
+      { value: 'tuesday', label: 'Tuesday' },
+      { value: 'wednesday', label: 'Wednesday' },
+      { value: 'thursday', label: 'Thursday' },
+      { value: 'friday', label: 'Friday' }
+    ]
+  } else {
+    options =  [
+        { value: 'saturday', label: 'Saturday' },
+        { value: 'sunday', label: 'Sunday' }
+    ]
+  }
 
   return (
     <>
