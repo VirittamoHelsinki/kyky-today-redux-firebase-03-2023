@@ -33,6 +33,7 @@ import CalendarSettings from './pages/Calendar/CalendarSettings';
 /* Buyer's Rating*/
 import BuyersRating from './pages/BuyersRating';
 import ThanksForRating from './pages/ProfileCreation/components/ThanksForRating';
+import NPS from './pages/ProfileCreation/components/NPS';
 
 const languages = { fi, en };
 
@@ -79,6 +80,7 @@ const App = () => {
           <Route path="service-booking" element={<ServiceBooking />} />
           <Route path="buyers-rating" element={<BuyersRating />} />
           <Route path="buyers-rating/thanks-for-rating" element={<ThanksForRating />} />
+          <Route path="buyers-rating/thanks-for-rating/nps" element={<NPS />} />
         </Routes>
       </BrowserRouter>
     </Language.Provider>

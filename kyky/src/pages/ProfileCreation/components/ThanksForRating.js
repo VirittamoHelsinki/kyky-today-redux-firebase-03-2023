@@ -1,6 +1,7 @@
 import React from 'react';
 import { ReactComponent as Heart } from '../../../image/heart.svg';
 import '../../../styles/buyersrating.scss';
+import Button from '../../../components/Button';
 
 export default function ThanksForRating() {
   return (
@@ -14,6 +15,9 @@ export default function ThanksForRating() {
       <Heart className="heart7" />
       <Heart className="heart8" />
       <h1 style={{ maxWidth: 460 }}>Thank you for rating, you just helped FirstName to improve!</h1>
+      <Button className="submitButton" link="nps">
+        Continue
+      </Button>
     </div>
   );
 }

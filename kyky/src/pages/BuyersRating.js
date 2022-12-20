@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import { ReactComponent as Star2 } from '../image/star2.svg';
+
 import { ReactComponent as ProfileIcon2 } from '../image/profileicon2.svg';
 import StarRating from '../components/StarRating';
 
