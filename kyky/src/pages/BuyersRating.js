@@ -1,6 +1,8 @@
 import { React, useState } from 'react';
 import { ReactComponent as Star2 } from '../image/star2.svg';
 import { ReactComponent as ProfileIcon2 } from '../image/profileicon2.svg';
+import StarRating from '../components/StarRating';
+
 import '../styles/buyersrating.scss';
 import Button from '../components/Button';
 
@@ -85,12 +87,9 @@ export default function BuyersRating() {
         <div className="buyersRatingContainer2">
           <h3>How do you rate FirstName?</h3>
           <div className="starContainer">
-            <Star2 className="star" />
-            <Star2 className="star" />
-            <Star2 className="star" />
-            <Star2 className="star" />
-            <Star2 className="star" />
+            <StarRating className="star-rating" />
           </div>
+
           <Button className="submitButton" link="thanks-for-rating">
             Submit
           </Button>
