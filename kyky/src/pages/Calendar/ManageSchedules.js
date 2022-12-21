@@ -65,7 +65,6 @@ export default function ManageSchedules() {
       });
     });
     setSchedules(schedulesObject);
-    //const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
     const storage = _schedules['unavailabilities'] || [];
     setUnavailabilities(storage);
   }, [_schedules]);
@@ -79,17 +78,15 @@ export default function ManageSchedules() {
     document.getElementById('end-date').disabled = indefinite;
   }, [indefinite]);
 
-  function createUnavailability() {
+  function addUnavailability() {
     const data = {
       start: unavailableStart,
       end: unavailableEnd,
       indefinite
     };
-    //const storage = JSON.parse(localStorage.getItem('unavailability_schedules')) || [];
     const storage = _schedules['unavailabilities'] || [];
     storage.push(data);
     dispatch(createUnavailability({ uid: user.uid, data: storage }));
-    //localStorage.setItem('unavailability_schedules', JSON.stringify(storage));
   }
 
   function unavailabilityIsValid() {
@@ -140,7 +137,7 @@ export default function ManageSchedules() {
           </Input>
           <Button
             className={`small-rounded ${!unavailabilityIsValid() && 'disabled'}`}
-            onClick={createUnavailability}>
+            onClick={addUnavailability}>
             + Add
           </Button>
           <div className="unavailabilities">
