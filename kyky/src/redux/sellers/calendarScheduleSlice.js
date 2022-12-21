@@ -61,18 +61,6 @@ export const createUnavailability = createAsyncThunk(
   }
 );
 
-export const removeUnavailability = createAsyncThunk(
-  'calendarUnavailabilities/removeUnavailability',
-  async (payload) => {
-    try {
-      await deleteDoc(doc(db, `users/${payload.uid}/schedules/unavailabilities`));
-      return payload.schedule;
-    } catch (error) {
-      return error;
-    }
-  }
-);
-
 const initialState = [];
 
 // createAsyncThunk() generates automatically pending, fulfilled and rejected handling cases.
@@ -86,7 +74,7 @@ export const calendarScheduleSlice = createSlice({
       .addCase(createSchedule.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          [action.payload.jobId + '_schedules']: action.payload.data
+          [action.payload.jobId]: action.payload.data
         });
       })
       .addCase(fetchSchedules.pending, (state, action) => {
@@ -96,24 +84,16 @@ export const calendarScheduleSlice = createSlice({
         });
       })
       .addCase(fetchSchedules.fulfilled, (state, action) => {
-        const jobs = [];
         state = initialState;
         action.payload.forEach((job) => {
-          jobs.push({
-            id: Object.keys(job),
-            categories: [Object.keys(job)],
-            cities: ['Helsinki'],
-            jobTitle: Object.keys(job)
-          });
           state = {
             ...state,
-            [Object.keys(job) + '_schedules']: Object.values(job)[0]
+            [Object.keys(job)]: Object.values(job)[0]
           };
         });
         return (state = {
           ...state,
-          loading: false,
-          jobslist: jobs
+          loading: false
         });
       })
       .addCase(removeSchedule.fulfilled, (state, action) => {
@@ -126,11 +106,6 @@ export const calendarScheduleSlice = createSlice({
           ...state,
           unavailabilities: action.payload.data
         });
-      })
-      .addCase(removeUnavailability.fulfilled, (state, action) => {
-        const new_state = { ...state };
-        delete new_state['unavailabilities'];
-        return new_state;
       });
   }
 });

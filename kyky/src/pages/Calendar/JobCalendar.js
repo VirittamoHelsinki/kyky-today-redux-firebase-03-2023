@@ -54,7 +54,6 @@ export default function JobCalendar() {
   const [user, setUser] = useState([]);
 
   const _schedules = useSelector((state) => state.schedule);
-  const _jobslist = useSelector((state) => state.schedule.jobslist);
   const isLoading = useSelector((state) => state.schedule.loading);
 
   useEffect(() => {
@@ -62,19 +61,22 @@ export default function JobCalendar() {
   }, [currentJob, _schedules]);
 
   useEffect(() => {
-    let _list = [];
-    if (_jobslist) {
-      _list = _jobslist;
+    const keys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
+    setJobs(keys);
+    // let _list = [];
+    // if (_jobslist) {
+    //   _list = _jobslist;
+    // }
+    // const _jobs = [..._list];
+    // if (_jobs.length > 1) {
+    //   // sort jobs alphabetically by job name
+    //   _jobs.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0));
+    // }
+    // setJobs(_jobs);
+    if (currentJob === '' && jobs.length > 0) {
+      setCurrentJob(jobs[0]);
     }
-    const _jobs = [..._list];
-    if (_jobs.length > 1) {
-      // sort jobs alphabetically by job name
-      _jobs.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0));
-    }
-    setJobs(_jobs);
-    if ((currentJob === '') & (jobs.length > 0)) {
-      setCurrentJob(jobs[0].id);
-    }
+    console.log(currentJob);
   }, [_schedules]);
 
   useEffect(() => {

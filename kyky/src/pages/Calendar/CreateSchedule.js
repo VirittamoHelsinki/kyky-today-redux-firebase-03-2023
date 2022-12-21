@@ -96,7 +96,9 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
 
   function SubmitDetails() {
     // makes copy of the object to allow modifications because Firebase returns Object.freeze()
-    const schedules = JSON.parse(JSON.stringify(_schedules[properties.jobId + '_schedules']));
+    const schedules = _schedules[properties.jobId + '_schedules']
+      ? JSON.parse(JSON.stringify(_schedules[properties.jobId + '_schedules']))
+      : [];
     if (mode === 'create') {
       const id = Math.random().toString(36).substring(2, 9); // generate random id
       const data = { ...properties, _id: id };
@@ -110,16 +112,22 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
 
       if (schedules) {
         schedules.push(properties);
-        dispatch(createSchedule({ uid: user.uid, jobId: properties.jobId, data: schedules }));
+        dispatch(
+          createSchedule({ uid: user.uid, jobId: properties.jobId + '_schedules', data: schedules })
+        );
       } else {
-        dispatch(createSchedule({ uid: user.uid, jobId: properties.jobId, data: [data] }));
+        dispatch(
+          createSchedule({ uid: user.uid, jobId: properties.jobId + '_schedules', data: [data] })
+        );
       }
     } else if (mode === 'edit') {
       const id = editing._id;
       if (id) {
         const index = schedules.findIndex((item) => item._id === id);
         schedules[index] = { ...properties, _id: id };
-        dispatch(createSchedule({ uid: user.uid, jobId: properties.jobId, data: schedules }));
+        dispatch(
+          createSchedule({ uid: user.uid, jobId: properties.jobId + '_schedules', data: schedules })
+        );
       }
     }
   }
