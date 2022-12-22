@@ -62,21 +62,15 @@ export default function JobCalendar() {
 
   useEffect(() => {
     const keys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
-    setJobs(keys);
-    // let _list = [];
-    // if (_jobslist) {
-    //   _list = _jobslist;
-    // }
-    // const _jobs = [..._list];
-    // if (_jobs.length > 1) {
-    //   // sort jobs alphabetically by job name
-    //   _jobs.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0));
-    // }
-    // setJobs(_jobs);
+    const job_list = [];
+    keys.forEach((k) => {
+      k = k.slice(0, -10);
+      job_list.push(k);
+    });
+    setJobs(job_list.sort());
     if (currentJob === '' && jobs.length > 0) {
       setCurrentJob(jobs[0]);
     }
-    console.log(currentJob);
   }, [_schedules]);
 
   useEffect(() => {
@@ -244,8 +238,8 @@ export default function JobCalendar() {
                   setCurrentJob(e.target.value);
                 }}>
                 {jobs.map((job) => (
-                  <option key={job.id} value={job.id}>
-                    {job.jobTitle}
+                  <option key={job} value={job}>
+                    {job}
                   </option>
                 ))}
               </select>

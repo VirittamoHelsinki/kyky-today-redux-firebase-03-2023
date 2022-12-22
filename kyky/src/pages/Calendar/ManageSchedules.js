@@ -84,7 +84,7 @@ export default function ManageSchedules() {
       end: unavailableEnd,
       indefinite
     };
-    const storage = _schedules['unavailabilities'] || [];
+    const storage = JSON.parse(JSON.stringify(_schedules['unavailabilities'])) || [];
     storage.push(data);
     dispatch(createUnavailability({ uid: user.uid, data: storage }));
   }
@@ -161,12 +161,9 @@ export default function ManageSchedules() {
                         'Are you sure you want to delete this unavailability?'
                       );
                       if (confirm) {
-                        const storage = JSON.parse(
-                          localStorage.getItem('unavailability_schedules')
-                        );
+                        const storage = [..._schedules['unavailabilities']];
                         storage.splice(index, 1);
-                        localStorage.setItem('unavailability_schedules', JSON.stringify(storage));
-                        window.location.reload();
+                        dispatch(createUnavailability({ uid: user.uid, data: storage }));
                       }
                     }}>
                     X
