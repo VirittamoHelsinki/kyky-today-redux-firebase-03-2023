@@ -71,6 +71,7 @@
       min-height: 59vh;
       width: 34vw;
       border: 1px solid #c4c4c4;
+      border: 1px solid #c4c4c4;
       border-radius: 5px;
       display: flex;
       flex-direction: column;
@@ -112,6 +113,7 @@
               font-family: 'Poppins', sans-serif;
               font-weight: bold;
               color: #00a088;
+              color: #00a088;
             }
 
             .multiple-select {
@@ -128,11 +130,14 @@
         color: #808080;
         border-right: 0.5px solid #c4c4c4;
         border-bottom: #c4c4c4 solid 2px;
+        border-right: 0.5px solid #c4c4c4;
+        border-bottom: #c4c4c4 solid 2px;
         flex: 1 1 0;
         padding: 1rem;
       }
 
       .selected {
+        border-bottom: #00a088 solid 7px;
         border-bottom: #00a088 solid 7px;
       }
     }
@@ -151,6 +156,8 @@
     button {
       box-shadow: none;
       background-color: white;
+      border: #c4c4c4 solid 1px;
+      color: #c4c4c4;
       border: #c4c4c4 solid 1px;
       color: #c4c4c4;
       font-family: 'Poppins', sans-serif;
@@ -204,26 +211,5 @@
 
   .checkbox-label {
     margin-left: 6px;
-  }
-}
-
-@media (max-width: 1500px) {
-  .service-booking-container {
-    flex-direction: column;
-    align-items: center;
-
-    .service-booking-right-panel {
-      margin-top: 2rem;
-
-      .service-booking-right-panel-content {
-        width: 521px;
-      }
-
-      .service-booking-right-panel-tabs {
-        .panel-button {
-          font-size: 2vw;
-        }
-      }
-    }
   }
 }
