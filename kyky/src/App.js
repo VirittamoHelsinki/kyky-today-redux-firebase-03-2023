@@ -17,6 +17,8 @@ import RecoverPassword from './pages/RecoverPassword';
 import LandingPage from './pages/LandingPage';
 import JobCreation from './pages/JobCreation';
 import ServiceBooking from './pages/ServiceBooking';
+import UserRoute from './routes/UserRoute';
+import GuestRoute from './routes/GuestRoute';
 
 /* Profile creation */
 import NewProfileCreation from './pages/ProfileCreation/NewProfileCreation';
@@ -60,27 +62,136 @@ const App = () => {
         <Header navlinks={navlinks} />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="profile-creation" element={<ProfileCreation />} />
-          <Route path="job-creation" element={<JobCreation />} />
-          <Route path="user-registration" element={<UserRegistration />} />
-          <Route path="contact-form" element={<ContactForm />} />
-          <Route path="user-log-in" element={<UserLogin />} />
-          <Route path="recover-password" element={<RecoverPassword />} />
-          <Route path="calendar" element={<MyCalendar />}>
-            <Route index element={<JobCalendar />} />
-            <Route path="overview" element={<Overview />} />
-            <Route path="schedule" element={<ManageSchedules />} />
-            <Route path="settings" element={<CalendarSettings />} />
+          <Route
+            path="profile-creation"
+            element={
+              <UserRoute>
+                <ProfileCreation />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="job-creation"
+            element={
+              <UserRoute>
+                <JobCreation />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="calendar"
+            element={
+              <UserRoute>
+                <MyCalendar />
+              </UserRoute>
+            }>
+            <Route
+              index
+              element={
+                <UserRoute>
+                  <JobCalendar />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="overview"
+              element={
+                <UserRoute>
+                  <Overview />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="schedule"
+              element={
+                <UserRoute>
+                  <ManageSchedules />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="settings"
+              element={
+                <UserRoute>
+                  <CalendarSettings />
+                </UserRoute>
+              }
+            />
           </Route>
 
-          <Route path="new-profile-creation" element={<Creation />}>
-            <Route index element={<NewProfileCreation />} />
-            <Route path="get-started" element={<GetStarted />} />
+          <Route
+            path="new-profile-creation"
+            element={
+              <UserRoute>
+                <Creation />
+              </UserRoute>
+            }>
+            <Route
+              index
+              element={
+                <UserRoute>
+                  <NewProfileCreation />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="get-started"
+              element={
+                <UserRoute>
+                  <GetStarted />
+                </UserRoute>
+              }
+            />
           </Route>
-          <Route path="service-booking" element={<ServiceBooking />} />
-          <Route path="buyers-rating" element={<BuyersRating />} />
-          <Route path="buyers-rating/thanks-for-rating" element={<ThanksForRating />} />
-          <Route path="buyers-rating/thanks-for-rating/nps" element={<NPS />} />
+          <Route
+            path="service-booking"
+            element={
+              <UserRoute>
+                <ServiceBooking />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="buyers-rating"
+            element={
+              <UserRoute>
+                <BuyersRating />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="buyers-rating/thanks-for-rating"
+            element={
+              <UserRoute>
+                <ThanksForRating />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="user-registration"
+            element={
+              <GuestRoute>
+                <UserRegistration />
+              </GuestRoute>
+            }
+          />
+          <Route path="contact-form" element={<ContactForm />} />
+          <Route
+            path="user-log-in"
+            element={
+              <GuestRoute>
+                <UserLogin />
+              </GuestRoute>
+            }
+          />
+          <Route
+            path="recover-password"
+            element={
+              <GuestRoute>
+                <RecoverPassword />
+              </GuestRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </Language.Provider>

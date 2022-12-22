@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-const UserRoute = ({ children }) => {
+const GuestRoute = ({ children }) => {
   const auth = useSelector((state) => state.user.user);
 
-  return auth ? { ...children } : <Navigate to="/user-log-in" />;
+  return !auth ? { ...children } : <Navigate to="/" />;
 };
 
-export default UserRoute;
+export default GuestRoute;
