@@ -167,30 +167,10 @@ const App = () => {
               }
             />
           </Route>
-          <Route
-            path="service-booking"
-            element={
-              <UserRoute>
-                <ServiceBooking />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="buyers-rating"
-            element={
-              <UserRoute>
-                <BuyersRating />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="buyers-rating/thanks-for-rating"
-            element={
-              <UserRoute>
-                <ThanksForRating />
-              </UserRoute>
-            }
-          />
+          <Route path="service-booking" element={<ServiceBooking />} />
+          <Route path="buyers-rating" element={<BuyersRating />} />
+          <Route path="buyers-rating/thanks-for-rating" element={<ThanksForRating />} />
+          <Route path="buyers-rating/thanks-for-rating/nps" element={<NPS />} />
         </Routes>
       </BrowserRouter>
     </Language.Provider>
