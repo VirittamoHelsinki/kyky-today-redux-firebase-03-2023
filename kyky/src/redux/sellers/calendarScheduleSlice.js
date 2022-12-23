@@ -6,6 +6,8 @@ export const createSchedule = createAsyncThunk(
   'calendarSchedules/createSchedule',
   async (payload) => {
     try {
+      /* inserts a schedule object (located in payload.data) to a schedule collection 
+      and returns both schedule name and object if succesfull */
       await setDoc(doc(db, `users/${payload.uid}/schedules/${payload.jobId}`), {
         ...payload.data
       });
@@ -16,29 +18,36 @@ export const createSchedule = createAsyncThunk(
   }
 );
 
-export const fetchSchedules = createAsyncThunk('calendarSchedules/fetchSchedules', async (uid) => {
-  try {
-    const list_of_schedules = [];
-    const schedules = await getDocs(collection(db, `users/${uid}/schedules/`));
-    schedules.docs.map((doc) => {
-      let temp_schedules = [];
-      let i = 0;
-      while (doc.data()[i]) {
-        temp_schedules.push(doc.data()[i]);
-        i++;
-      }
-      list_of_schedules.push({ [doc.id]: temp_schedules });
-    });
-    return list_of_schedules;
-  } catch (error) {
-    return error;
+export const fetchSchedules = createAsyncThunk(
+  'calendarSchedules/fetchSchedules',
+  async (payload) => {
+    try {
+      /* creates an object with the document name as a key and the list of contents 
+      as a value, checking if the content exists, returns a list of documents */
+      const documents = [];
+      const snap = await getDocs(collection(db, `users/${payload}/schedules/`));
+      snap.docs.map((doc) => {
+        let content = [];
+        let i = 0;
+        while (doc.data()[i]) {
+          content.push(doc.data()[i]);
+          i++;
+        }
+        documents.push({ [doc.id]: content });
+      });
+      return documents;
+    } catch (error) {
+      return error;
+    }
   }
-});
+);
 
 export const removeSchedule = createAsyncThunk(
   'calendarSchedules/removeSchedule',
   async (payload) => {
     try {
+      /* deletes a document in collection by a name of the document, returns deleted name
+      for a reducer */
       await deleteDoc(doc(db, `users/${payload.uid}/schedules/${payload.schedule}`));
       return payload.schedule;
     } catch (error) {
@@ -51,6 +60,8 @@ export const createUnavailability = createAsyncThunk(
   'calendarUnavailabilities/createUnavailability',
   async (payload) => {
     try {
+      /* inserts a calendar unavailability to a schedule collection, 
+      returns the unavailability object  */
       await setDoc(doc(db, `users/${payload.uid}/schedules/unavailabilities`), {
         ...payload.data
       });
