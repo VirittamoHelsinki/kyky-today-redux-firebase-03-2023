@@ -56,56 +56,69 @@ const Header = ({ navlinks }) => {
         </a>
       </div>
       <nav>
-        <ul>
-          <li>
-            <SearchBar />
-          </li>
-
-          <li>
-            <Link to="/user-registration">Rekisteröidy</Link>
-          </li>
-
-          <li className="dropdown" onClick={menuToggle}>
-            <span className="material-icons-outlined" ref={menuRef}>
-              menu
-            </span>
-            {menuOpen && (
-              <div className="dropdown-content">
-                {navlinks.map(({ to, label }) => (
-                  <div key={to}>
-                    <Link to={to}>{label}</Link>
-                  </div>
-                ))}
-              </div>
-            )}
-          </li>
-
-          <li className="dropdown" onClick={profileToggle}>
-            {user ? (
+        {user ? (
+          <ul>
+            <li>
+              <SearchBar />
+            </li>
+            <li>
+              <span className="material-icons-outlined">notifications</span>
+            </li>
+            <li>
+              <Link to="/user-registration">Orders</Link>
+            </li>
+            <li className="dropdown" onClick={menuToggle}>
+              <span className="material-icons-outlined" ref={menuRef}>
+                menu
+              </span>
+              {menuOpen && (
+                <div className="dropdown-content">
+                  {navlinks.map(({ to, label }) => (
+                    <div key={to}>
+                      <Link to={to}>{label}</Link>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </li>
+            <li className="dropdown" onClick={profileToggle}>
               <img
                 src={user.photoURL}
                 className="profile-img"
                 ref={imgRef}
                 referrerPolicy="no-referrer"
               />
-            ) : (
+              {profileOpen && (
+                <div className="dropdown-content">
+                  <div
+                    className="logout"
+                    onClick={() => {
+                      onLogoutClick();
+                    }}>
+                    Log out
+                  </div>
+                </div>
+              )}
+            </li>
+          </ul>
+        ) : (
+          <ul>
+            <li>
+              <SearchBar />
+            </li>
+            <li>
+              <Link to="/user-registration">Sign up</Link>
+            </li>
+            <li>
+              <Link to="/user-log-in">Sign in</Link>
+            </li>
+            <li className="dropdown" onClick={profileToggle}>
               <span className="material-icons-outlined" ref={noImgRef}>
                 account_circle
               </span>
-            )}
-            {profileOpen && (
-              <div className="dropdown-content">
-                <div
-                  className="logout"
-                  onClick={() => {
-                    onLogoutClick();
-                  }}>
-                  Log out
-                </div>
-              </div>
-            )}
-          </li>
-        </ul>
+            </li>
+          </ul>
+        )}
       </nav>
     </div>
   );
