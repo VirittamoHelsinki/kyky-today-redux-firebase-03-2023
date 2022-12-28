@@ -1,19 +1,21 @@
 import { useRef, useState, useEffect, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { uploadImage } from '../redux/storage/fileUploadSlice';
+import Spinner from './ImageSpinner';
 import Language from '../language';
 
-export default function FileUpload2({
-  title,
-  subTitle,
-  showDropArea,
-  filesNumber = 'x',
-  size = 'x',
-  className = 'file-upload'
-}) {
+export default function FileUpload2({ filesNumber = 'x', getImageUrl }) {
   const fileInput = useRef(null);
-  const drop = useRef(null);
-  const [files, setFiles] = useState([]);
+  const [file, setFile] = useState(null);
+  const [name, setName] = useState('');
+  const [size, setSize] = useState('');
   const [text, setText] = useState('');
   const { lang } = useContext(Language);
+
+  const isLoading = useSelector((state) => state.upload.loading);
+  const url = useSelector((state) => state.upload.url);
+
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     fileInput.current.click();
@@ -21,22 +23,15 @@ export default function FileUpload2({
 
   const handleChange = (e) => {
     const filesEvent = e.target.files[0];
-    const filesArray = [...files];
-    filesArray.push(filesEvent);
-    setFiles(filesArray);
+    setFile(filesEvent);
+    setName(filesEvent.name);
+    setSize(filesEvent.size);
+    dispatch(uploadImage(filesEvent));
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const filesEvent = e.dataTransfer.files[0];
-    const filesArray = [...files];
-    filesArray.push(filesEvent);
-    setFiles(filesArray);
-  };
+  useEffect(() => {
+    getImageUrl(url);
+  }, [url]);
 
   useEffect(() => {
     const rawText = '';
@@ -45,39 +40,33 @@ export default function FileUpload2({
   }, [lang]);
 
   useEffect(() => {
-    console.log(files);
-    if (files.length > 0) {
-      console.log('excuse me WTF');
-      fileInput.current.value = '';
-    }
-  }, [files]);
+    fileInput.current.value = '';
+  }, [file]);
 
   return (
-    <div className={className}>
-      <div className="file-upload-texts">
-        <h3 className="file-upload-title">{title}</h3>
-        <p className="file-upload-subtitle">{subTitle}</p>
-        <p className="files-info">{text}</p>
-      </div>
+    <div className="file-upload">
+      {' '}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div className="files">
+          <div key={name} className="file">
+            <p className="file-name">{name}</p>
+            <p className="file-size">{size / 1000}kb</p>
 
-      <div className="files">
-        {files.map((file) => {
-          return (
-            <div key={file.name} className="file">
-              <p className="file-name">{file.name}</p>
-              <p className="file-size">{file.size / 1000}kb</p>
-
-              <button
-                className="file-remove"
-                type="button"
-                onClick={() => setFiles(files.filter((f) => f !== file))}
-              >
-                <i className="material-icons-outlined">close</i>
-              </button>
-            </div>
-          );
-        })}
-      </div>
+            <button
+              className="file-remove"
+              type="button"
+              onClick={() => {
+                setFile(null);
+                setName('');
+                setSize('');
+              }}>
+              <i className="material-icons-outlined">close</i>
+            </button>
+          </div>
+        </div>
+      )}
       <button type="button" className="picIcon" onClick={handleClick}>
         +
       </button>

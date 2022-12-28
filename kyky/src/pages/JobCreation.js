@@ -1,4 +1,5 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
+import { useSelector } from 'react-redux';
 import Language from '../language';
 
 import Input from '../components/Input';
@@ -7,6 +8,12 @@ import '../styles/jobCreation.scss';
 import FileUpload2 from '../components/FileUpload2';
 
 export default function JobCreation() {
+  const [url, setUrl] = useState('');
+
+  const getImageUrl = (imgurl) => {
+    setUrl(imgurl);
+  };
+
   const { lang } = useContext(Language);
   return (
     <main className="wrapper fixed-centered profile">
@@ -79,20 +86,10 @@ export default function JobCreation() {
         </section>
         <section>
           <p>{lang.job_creation.pictures}</p>
+          <p>{url}</p>
           <div className="picContainer">
             <div className="picBox">
-              <FileUpload2 className="fileUpload2" />
-            </div>
-            <div className="picBox">
-              {' '}
-              <FileUpload2 className="fileUpload2" />
-            </div>
-            <div className="picBox">
-              <FileUpload2 className="fileUpload2" />
-            </div>
-            <div className="picBox">
-              {' '}
-              <FileUpload2 className="fileUpload2" />
+              <FileUpload2 getImageUrl={getImageUrl} />
             </div>
           </div>
         </section>

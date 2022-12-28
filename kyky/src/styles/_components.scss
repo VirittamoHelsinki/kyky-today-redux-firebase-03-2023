@@ -1,4 +1,4 @@
-@use "_utilities" as *;
+@use '_utilities' as *;
 
 /* Reusable components:
 - buttons
@@ -85,7 +85,7 @@
     margin-left: 20px;
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     width: 17px;
     height: 17px;
     border-radius: none;
@@ -173,7 +173,7 @@ form {
 
   .input-label-required {
     &::after {
-      content: " *";
+      content: ' *';
       color: red;
     }
   }
@@ -251,7 +251,7 @@ form {
       border-radius: 7px;
 
       &::after {
-        content: "x";
+        content: 'x';
         margin-left: 10px;
         font-weight: 600;
         font-size: 1rem;
@@ -285,7 +285,7 @@ form {
       width: auto;
     }
 
-    input[type="text"] {
+    input[type='text'] {
       width: 110px;
       border: none;
       border-bottom: 1px solid black;
@@ -358,7 +358,7 @@ form {
       margin: 5px;
       width: 100%;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-between;
       align-items: center;
 

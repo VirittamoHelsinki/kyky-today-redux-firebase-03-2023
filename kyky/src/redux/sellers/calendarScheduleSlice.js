@@ -74,8 +74,8 @@ export const createUnavailability = createAsyncThunk(
 
 const initialState = [];
 
-// createAsyncThunk() generates automatically pending, fulfilled and rejected handling cases.
-// Add pending and rejected cases when needed
+/* createAsyncThunk() generates automatically pending, fulfilled and rejected handling cases.
+Add pending and rejected cases when needed */
 export const calendarScheduleSlice = createSlice({
   name: 'calendarSchedules',
   initialState: initialState,

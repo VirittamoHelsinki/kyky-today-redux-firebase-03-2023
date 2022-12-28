@@ -5,10 +5,12 @@ import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import userReducer from './auth/userSlice';
 import calendarScheduleReducer from './sellers/calendarScheduleSlice';
+import fileUploadReducer from './storage/fileUploadSlice';
 
 const reducers = combineReducers({
   user: userReducer,
-  schedule: calendarScheduleReducer
+  schedule: calendarScheduleReducer,
+  upload: fileUploadReducer
 });
 
 const persistConfig = {
