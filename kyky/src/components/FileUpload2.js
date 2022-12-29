@@ -4,7 +4,7 @@ import { uploadImage } from '../redux/storage/fileUploadSlice';
 import Spinner from './ImageSpinner';
 import Language from '../language';
 
-export default function FileUpload2({ filesNumber = 'x', getImageUrl }) {
+export default function FileUpload2({ filesNumber = 'x', urlToForm }) {
   const fileInput = useRef(null);
   const [file, setFile] = useState(null);
   const [name, setName] = useState('');
@@ -30,7 +30,7 @@ export default function FileUpload2({ filesNumber = 'x', getImageUrl }) {
   };
 
   useEffect(() => {
-    getImageUrl(url);
+    urlToForm(url);
   }, [url]);
 
   useEffect(() => {
@@ -61,6 +61,7 @@ export default function FileUpload2({ filesNumber = 'x', getImageUrl }) {
                 setFile(null);
                 setName('');
                 setSize('');
+                urlToForm('');
               }}>
               <i className="material-icons-outlined">close</i>
             </button>

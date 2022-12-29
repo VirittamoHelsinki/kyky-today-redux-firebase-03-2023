@@ -6,11 +6,13 @@ import thunk from 'redux-thunk';
 import userReducer from './auth/userSlice';
 import calendarScheduleReducer from './sellers/calendarScheduleSlice';
 import fileUploadReducer from './storage/fileUploadSlice';
+import jobCreationFormReducer from './sellers/jobCreationFormSlice';
 
 const reducers = combineReducers({
   user: userReducer,
   schedule: calendarScheduleReducer,
-  upload: fileUploadReducer
+  upload: fileUploadReducer,
+  jobCreationForm: jobCreationFormReducer
 });
 
 const persistConfig = {

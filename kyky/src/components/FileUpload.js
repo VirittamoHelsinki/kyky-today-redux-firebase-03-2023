@@ -1,21 +1,28 @@
 /* eslint-disable react/prop-types */
 import { useRef, useState, useEffect, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { uploadImage } from '../redux/storage/fileUploadSlice';
+import Spinner from './ImageSpinner';
 import Language from '../language';
 import Button from './Button';
 
 export default function FileUpload({
   title,
   subTitle,
-  showDropArea,
   filesNumber = 'x',
   size = 'x',
-  className = 'file-upload'
+  className = 'file-upload',
+  urlToForm
 }) {
   const fileInput = useRef(null);
-  const drop = useRef(null);
   const [files, setFiles] = useState([]);
   const [text, setText] = useState('');
   const { lang } = useContext(Language);
+
+  const isLoading = useSelector((state) => state.upload.loading);
+  const url = useSelector((state) => state.upload.url);
+
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     fileInput.current.click();
@@ -26,31 +33,12 @@ export default function FileUpload({
     const filesArray = [...files];
     filesArray.push(filesEvent);
     setFiles(filesArray);
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const filesEvent = e.dataTransfer.files[0];
-    const filesArray = [...files];
-    filesArray.push(filesEvent);
-    setFiles(filesArray);
+    dispatch(uploadImage(filesEvent));
   };
 
   useEffect(() => {
-    if (showDropArea) {
-      drop?.current?.addEventListener('dragover', handleDragOver);
-      drop?.current?.addEventListener('drop', handleDrop);
-      return () => {
-        drop?.current?.removeEventListener('dragover', handleDragOver);
-        drop?.current?.removeEventListener('drop', handleDrop);
-      };
-    }
-    return undefined;
-  }, [showDropArea]);
+    urlToForm(url);
+  }, [url]);
 
   useEffect(() => {
     const rawText = lang.common.max_files;
@@ -73,13 +61,7 @@ export default function FileUpload({
         <p className="file-upload-subtitle">{subTitle}</p>
         <p className="files-info">{text}</p>
       </div>
-      {showDropArea && (
-        <div className="file-upload-drop-area" ref={drop}>
-          <i className="material-icons-outlined" style={{ fontSize: '8rem' }}>
-            file_upload
-          </i>
-        </div>
-      )}
+
       <div className="files">
         {files.map((file) => {
           return (
@@ -90,8 +72,7 @@ export default function FileUpload({
               <button
                 className="file-remove"
                 type="button"
-                onClick={() => setFiles(files.filter((f) => f !== file))}
-              >
+                onClick={() => setFiles(files.filter((f) => f !== file))}>
                 <i className="material-icons-outlined">close</i>
               </button>
             </div>
