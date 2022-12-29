@@ -8,15 +8,30 @@ import Button from '../components/Button';
 import '../styles/jobCreation.scss';
 import FileUpload2 from '../components/FileUpload2';
 
+const categories = [
+  'Home & Repairs',
+  'Beauty & Fashion',
+  'Education & Languages',
+  'Wellness',
+  'Food & Events',
+  'Pets',
+  'Creativity & IT',
+  'Consultant'
+];
+
+const units = ['hour', 'km', 'm2', 'person', 'slice'];
+
 export default function JobCreation() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setGategory] = useState('');
+  const [category, setGategory] = useState(categories[0]);
   const [place, setPlace] = useState('');
   const [insurance, setIncurance] = useState(false);
   const [price, setPrice] = useState('');
+  const [unit, setUnit] = useState(units[0]);
   const [includeVAT, setIncludeVAT] = useState(false);
   const [addPrice, setAddPrice] = useState('');
+  const [addUnit, setAddUnit] = useState(units[0]);
   const [url, setUrl] = useState('');
 
   const dispatch = useDispatch();
@@ -34,8 +49,10 @@ export default function JobCreation() {
         place: place,
         insurance: insurance,
         price: price,
+        unit: unit,
         includeVAT: includeVAT,
         addPrice: addPrice,
+        addUnit: addUnit,
         url: url
       })
     );
@@ -61,6 +78,9 @@ export default function JobCreation() {
               setTitle(e.target.value);
             }}
           />
+        </section>
+
+        <section>
           <p>{lang.job_creation.job_description}</p>
           <input
             className="inputLarge"
@@ -73,16 +93,22 @@ export default function JobCreation() {
               setDescription(e.target.value);
             }}
           />
-          <Input
-            type="text"
-            name="job_category"
-            value={category}
+        </section>
+        <section>
+          <p>{lang.job_creation.job_category}</p>
+          <select
             label={lang.job_creation.job_category}
-            placeholder={lang.job_creation.name}
             onChange={(e) => {
               setGategory(e.target.value);
-            }}
-          />
+            }}>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </section>
+        <section>
           <Input
             type="text"
             name="place"
@@ -116,8 +142,17 @@ export default function JobCreation() {
                 setPrice(e.target.value);
               }}
             />
-            /<input className="inputShort"></input>
-            <p>/h /km /m2 /person /slice</p>
+            /
+            <select
+              onChange={(e) => {
+                setUnit(e.target.value);
+              }}>
+              {units.map((unit) => (
+                <option key={unit} value={unit}>
+                  {unit}
+                </option>
+              ))}
+            </select>
           </div>
         </section>
         <section>
@@ -130,7 +165,7 @@ export default function JobCreation() {
         </section>
         <section>
           <p>{lang.job_creation.add_price} </p>
-          <div className="inputContainer2">
+          <div className="inputContainer">
             <input
               className="inputShort"
               type="text"
@@ -142,7 +177,17 @@ export default function JobCreation() {
                 setAddPrice(e.target.value);
               }}
             />
-            /<input className="inputShort"></input>
+            /
+            <select
+              onChange={(e) => {
+                setAddUnit(e.target.value);
+              }}>
+              {units.map((unit) => (
+                <option key={unit} value={unit}>
+                  {unit}
+                </option>
+              ))}
+            </select>
           </div>
         </section>
         <section>
