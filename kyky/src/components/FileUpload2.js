@@ -1,19 +1,14 @@
-import { useRef, useState, useEffect, useContext } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImage } from '../redux/storage/fileUploadSlice';
 import Spinner from './ImageSpinner';
-import Language from '../language';
 
-export default function FileUpload2({ filesNumber = 'x', urlToForm }) {
+export default function FileUpload2({ addUrl }) {
+  const [receivingUrl, setReceivingUrl] = useState(false);
   const fileInput = useRef(null);
-  const [file, setFile] = useState(null);
-  const [name, setName] = useState('');
-  const [size, setSize] = useState('');
-  const [text, setText] = useState('');
-  const { lang } = useContext(Language);
 
   const isLoading = useSelector((state) => state.upload.loading);
-  const url = useSelector((state) => state.upload.url);
+  const _url = useSelector((state) => state.upload.url);
 
   const dispatch = useDispatch();
 
@@ -23,54 +18,29 @@ export default function FileUpload2({ filesNumber = 'x', urlToForm }) {
 
   const handleChange = (e) => {
     const filesEvent = e.target.files[0];
-    setFile(filesEvent);
-    setName(filesEvent.name);
-    setSize(filesEvent.size);
+    setReceivingUrl(true);
     dispatch(uploadImage(filesEvent));
   };
 
   useEffect(() => {
-    urlToForm(url);
-  }, [url]);
-
-  useEffect(() => {
-    const rawText = '';
-    const parsedText = rawText.replace('{filesNumber}', filesNumber).replace('{size}', size);
-    setText(parsedText);
-  }, [lang]);
-
-  useEffect(() => {
-    fileInput.current.value = '';
-  }, [file]);
+    if (receivingUrl) {
+      addUrl(_url);
+      fileInput.current.value = '';
+      setReceivingUrl(false);
+    }
+  }, [_url]);
 
   return (
     <div className="file-upload">
-      {' '}
       {isLoading ? (
         <Spinner />
       ) : (
         <div className="files">
-          <div key={name} className="file">
-            <p className="file-name">{name}</p>
-            <p className="file-size">{size / 1000}kb</p>
-
-            <button
-              className="file-remove"
-              type="button"
-              onClick={() => {
-                setFile(null);
-                setName('');
-                setSize('');
-                urlToForm('');
-              }}>
-              <i className="material-icons-outlined">close</i>
-            </button>
-          </div>
+          <button type="button" className="picIcon" onClick={handleClick}>
+            +
+          </button>
         </div>
       )}
-      <button type="button" className="picIcon" onClick={handleClick}>
-        +
-      </button>
       <input type="file" ref={fileInput} onChange={handleChange} hidden />
     </div>
   );

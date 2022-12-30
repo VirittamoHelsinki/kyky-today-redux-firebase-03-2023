@@ -1,64 +1,67 @@
 p {
-    text-align: start;
+  text-align: start;
 }
 
 .inputLarge {
-    display: flex;
-    height: 300px;
-    width: 625px;
-    margin: 12px 0;
-    padding: 0 20px 265px;
-    border-radius: 8px;
-    border: solid 1px gainsboro;
-    box-shadow: 2px 2px 9px gainsboro;
-    text-align: start;
+  display: flex;
+  height: 300px;
+  width: 625px;
+  margin: 12px 0;
+  padding: 0 20px 265px;
+  border-radius: 8px;
+  border: solid 1px gainsboro;
+  box-shadow: 2px 2px 9px gainsboro;
+  text-align: start;
 }
 
 .inputContainer {
-    height: auto;
-    width: 420px;
-    display: flex;
-    justify-content: space-evenly;
-    position: relative;
-    top: 20px;
-    right: 20px;
+  height: auto;
+  width: 420px;
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  top: 20px;
+  right: 20px;
 }
 
 .inputContainer2 {
-    height: auto;
-    width: 210px;
-    display: flex;
-    justify-content: space-evenly;
-    position: relative;
-    top: 20px;
-    right: 20px;
+  height: auto;
+  width: 210px;
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  top: 20px;
+  right: 20px;
 }
 
 .picContainer {
-    display: flex;
-    height: fit-content;
-    width: auto;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  width: auto;
+  justify-content: space-between;
 }
 
 .picBox {
-    display: flex;
-    height: 140px;
-    width: 130px;
-    margin: 12px 0;
-    border: 1px solid gainsboro;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  height: 140px;
+  width: 130px;
+  margin: 12px 0;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .picIcon {
-    position: relative;
-    font-weight: 700;
-    font-size: 1.25rem;
-    border: 0.25rem solid black;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: #808080;
+  position: relative;
+  font-weight: 700;
+  font-size: 1.25rem;
+  border: 0.25rem solid black;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #808080;
+  justify-content: center;
+  align-items: center;
 }

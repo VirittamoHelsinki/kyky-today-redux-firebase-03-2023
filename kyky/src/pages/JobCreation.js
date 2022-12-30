@@ -7,24 +7,15 @@ import Checkbox from '../components/Checkbox';
 import Button from '../components/Button';
 import '../styles/jobCreation.scss';
 import FileUpload2 from '../components/FileUpload2';
-
-const categories = [
-  'Home & Repairs',
-  'Beauty & Fashion',
-  'Education & Languages',
-  'Wellness',
-  'Food & Events',
-  'Pets',
-  'Creativity & IT',
-  'Consultant'
-];
+import Categories from '../components/SubCategorySelect';
 
 const units = ['hour', 'km', 'm2', 'person', 'slice'];
 
 export default function JobCreation() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setGategory] = useState(categories[0]);
+  const [category, setCategory] = useState('');
+  const [subCategory, setSubCategory] = useState('');
   const [place, setPlace] = useState('');
   const [insurance, setIncurance] = useState(false);
   const [price, setPrice] = useState('');
@@ -32,7 +23,7 @@ export default function JobCreation() {
   const [includeVAT, setIncludeVAT] = useState(false);
   const [addPrice, setAddPrice] = useState('');
   const [addUnit, setAddUnit] = useState(units[0]);
-  const [url, setUrl] = useState('');
+  const [urls, setUrls] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -46,6 +37,7 @@ export default function JobCreation() {
         title: title,
         description: description,
         category: category,
+        subCategory: subCategory,
         place: place,
         insurance: insurance,
         price: price,
@@ -53,13 +45,23 @@ export default function JobCreation() {
         includeVAT: includeVAT,
         addPrice: addPrice,
         addUnit: addUnit,
-        url: url
+        urls: urls
       })
     );
   };
 
-  const urlToForm = (u) => {
-    setUrl(u);
+  const addUrl = (u) => {
+    const urlsArray = [...urls];
+    urlsArray.push(u);
+    setUrls(urlsArray);
+  };
+
+  const changeMainCat = (cat) => {
+    setCategory(cat);
+  };
+
+  const changeSubCat = (cat) => {
+    setSubCategory(cat);
   };
 
   const { lang } = useContext(Language);
@@ -96,17 +98,7 @@ export default function JobCreation() {
         </section>
         <section>
           <p>{lang.job_creation.job_category}</p>
-          <select
-            label={lang.job_creation.job_category}
-            onChange={(e) => {
-              setGategory(e.target.value);
-            }}>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
+          <Categories changeSubCat={changeSubCat} changeMainCat={changeMainCat} />
         </section>
         <section>
           <Input
@@ -194,8 +186,25 @@ export default function JobCreation() {
           <p>{lang.job_creation.pictures}</p>
           <div className="picContainer">
             <div className="picBox">
-              <FileUpload2 urlToForm={urlToForm} />
+              <FileUpload2 addUrl={addUrl} />
             </div>
+            {urls.map((u) => {
+              return (
+                <div key={u} className="picBox">
+                  <div className="file-upload">
+                    <img src={u} alt="" />
+                  </div>
+                  <button
+                    className="file-remove"
+                    type="button"
+                    onClick={() => {
+                      setUrls(urls.filter((url) => url !== u));
+                    }}>
+                    <i className="material-icons-outlined">close</i>
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </section>
         <section>
