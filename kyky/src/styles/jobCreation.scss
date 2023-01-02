@@ -36,10 +36,10 @@ p {
 
 .picContainer {
   display: flex;
-  flex-direction: row;
   height: fit-content;
   width: auto;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 30px;
 }
 
 .picBox {

@@ -51,8 +51,8 @@ export default function JobCalendar() {
   const [openedSchedules, setOpenedSchedules] = useState([]);
   const [highlightDays, setHighlightDays] = useState([]);
   const [jobs, setJobs] = useState([]);
-  const [user, setUser] = useState([]);
 
+  const user = useSelector((state) => state.user.user);
   const _schedules = useSelector((state) => state.schedule);
   const isLoading = useSelector((state) => state.schedule.loading);
 
@@ -72,11 +72,6 @@ export default function JobCalendar() {
       setCurrentJob(jobs[0]);
     }
   }, [_schedules]);
-
-  useEffect(() => {
-    const _user = localStorage.getItem('user');
-    setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
-  }, []);
 
   const dispatch = useDispatch();
 

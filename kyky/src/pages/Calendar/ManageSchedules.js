@@ -22,10 +22,10 @@ export default function ManageSchedules() {
   const [unavailableEnd, setUnavailableEnd] = useState('');
   const [indefinite, setIndefinite] = useState(false);
   const [opened, setOpened] = useState(-1);
-  const [user, setUser] = useState([]);
 
   const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.user.user);
   const _schedules = useSelector((state) => state.schedule);
 
   useEffect(() => {
@@ -68,11 +68,6 @@ export default function ManageSchedules() {
     const storage = _schedules['unavailabilities'] || [];
     setUnavailabilities(storage);
   }, [_schedules]);
-
-  useEffect(() => {
-    const _user = localStorage.getItem('user');
-    setUser(_user ? JSON.parse(localStorage.getItem('user')) : []);
-  }, []);
 
   useEffect(() => {
     document.getElementById('end-date').disabled = indefinite;

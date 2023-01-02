@@ -199,3 +199,4 @@ const App = () => {
 };
 
 export default App;
+//<Route path="categories/:category" element={<Category />} />

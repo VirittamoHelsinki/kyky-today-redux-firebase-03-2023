@@ -34,6 +34,7 @@ export default function JobCreation() {
     dispatch(
       createJobForm({
         uid: user.uid,
+        name: user.displayName,
         title: title,
         description: description,
         category: category,

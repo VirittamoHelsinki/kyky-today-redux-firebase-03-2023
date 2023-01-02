@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uploadImage } from '../redux/storage/fileUploadSlice';
 import Spinner from './ImageSpinner';
 
-export default function FileUpload2({ addUrl }) {
-  const [receivingUrl, setReceivingUrl] = useState(false);
+const FileUpload2 = ({ addUrl }) => {
+  const [receiveUrl, setReceiveUrl] = useState(false);
+
   const fileInput = useRef(null);
 
   const isLoading = useSelector((state) => state.upload.loading);
@@ -18,15 +19,15 @@ export default function FileUpload2({ addUrl }) {
 
   const handleChange = (e) => {
     const filesEvent = e.target.files[0];
-    setReceivingUrl(true);
+    setReceiveUrl(true);
     dispatch(uploadImage(filesEvent));
   };
 
   useEffect(() => {
-    if (receivingUrl) {
+    if (receiveUrl) {
       addUrl(_url);
       fileInput.current.value = '';
-      setReceivingUrl(false);
+      setReceiveUrl(false);
     }
   }, [_url]);
 
@@ -44,4 +45,6 @@ export default function FileUpload2({ addUrl }) {
       <input type="file" ref={fileInput} onChange={handleChange} hidden />
     </div>
   );
-}
+};
+
+export default FileUpload2;

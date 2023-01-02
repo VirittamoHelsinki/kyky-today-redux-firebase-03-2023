@@ -29,7 +29,8 @@ export const signUpEmailAndPassword = createAsyncThunk(
         authProvider: 'local'
       });
       await updateProfile(user, {
-        photoURL: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp'
+        photoURL: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp',
+        displayName: payload.username
       });
       await sendEmailVerification(auth.currentUser);
       alert('A verification link is sent to your email!');
