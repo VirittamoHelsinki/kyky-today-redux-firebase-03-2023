@@ -101,7 +101,7 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      
+      bottom: 40px;
 
       h3 {
         color: black;
@@ -254,7 +254,8 @@
   justify-content: center;
   height: 92vh;
   width: 100vw;
-  background-color: #387A70;
+  background-color: #387a70;
+
   .npsMainContainer {
     display: flex;
     flex-direction: column;
@@ -266,12 +267,23 @@
     opacity: 0.9;
     border: 1px solid white;
     border-radius: 19px;
+
     .emojiContainer {
       display: flex;
       flex-direction: row;
-      margin-top: 20px;
-      margin-bottom: 20px;
+      margin-top: 4%;
+      margin-bottom: 4%;
+
+      .emojiAttributes1 {
+        fill-opacity: 50%;
+      }
+
+      .emojiAttributes1:hover {
+        cursor: pointer;
+        fill-opacity: 100%;
+      }
     }
+
     .submitButton {
       display: flex;
       align-items: center;
@@ -286,4 +298,3 @@
     }
   }
 }
-
