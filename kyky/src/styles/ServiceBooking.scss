@@ -61,7 +61,7 @@
     }
 
     .service-booking-right-panel-content {
-      min-height: 54vh;
+      min-height: 59vh;
       width: 34vw;
       border: 1px solid #C4C4C4;
       border-radius: 5px;
@@ -192,5 +192,29 @@
 
   .checkbox-label {
     margin-left: 6px;
+  }
+}
+
+@media (max-width: 1500px) {
+
+  .service-booking-container {
+
+    flex-direction: column;
+
+    .service-booking-right-panel {
+
+      margin-top: 2rem;
+
+      .service-booking-right-panel-content {
+        width: 521px;
+      }
+
+      .service-booking-right-panel-tabs {
+
+        .panel-button {
+          font-size: 2vw;
+        }
+      }
+    }
   }
 }
