@@ -36,6 +36,7 @@ export default function GetStarted() {
     setTitle(title + 1);
     setTip(tip + 1);
     setCurrentStep(currentStep + 1);
+    dispatch(addStep({ ...formData }));
   }
 
   function handleChange(name, value) {
