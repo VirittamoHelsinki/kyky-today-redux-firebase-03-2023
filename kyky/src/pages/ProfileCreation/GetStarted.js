@@ -25,6 +25,8 @@ export default function GetStarted() {
 
   const dispatch = useDispatch();
 
+  const steps = 9;
+
   function previousPhase() {
     setTitle(title - 1);
     setTip(tip - 1);
@@ -36,18 +38,11 @@ export default function GetStarted() {
     setTitle(title + 1);
     setTip(tip + 1);
     setCurrentStep(currentStep + 1);
-    dispatch(addStep({ ...formData }));
+    dispatch(updateSteps({ ...formData }));
   }
 
   function handleChange(name, value) {
     setFormData({ ...formData, [name]: value });
-  }
-
-  function handleChangeReactSelect(optionName, optionComponent) {
-    setFormData({
-      ...formData,
-      [optionName]: { label: optionComponent.label, value: optionComponent.value }
-    });
   }
 
   function sendForm(event) {
@@ -104,3 +99,35 @@ export default function GetStarted() {
     </div>
   );
 }
+
+// {
+//   // Step 1
+//   s1TitleInput: '',
+//   s1Skills: [],
+//   // Step 2 work experience
+//   s2WorkExperienceTitle: '',
+//   s2WorkExperienceCompany: '',
+//   s2WorkExperienceLocation: '',
+//   s2WorkExperienceCountry: '',
+//   s2WorkExperienceCurrentlyWorking: false,
+//   s2WorkExperienceStartMonths: '',
+//   s2WorkExperienceStartYears: '',
+//   s2WorkExperienceEndMonths: '',
+//   s2WorkExperienceEndYears: '',
+//   s2WorkExperienceDescription: '',
+//   // Step 2 education experience
+//   s2EducationExperienceSchool: '',
+//   s2EducationExperienceDegree: '',
+//   s2EducationExperienceField: '',
+//   s2EducationExperienceStartMonths: '',
+//   s2EducationExperienceStartYears: '',
+//   s2EducationExperienceEndMonths: '',
+//   s2EducationExperienceEndYears: ''
+// }
+
+// function handleChangeReactSelect(optionName, optionComponent) {
+//   setFormData({
+//     ...formData,
+//     [optionName]: { label: optionComponent.label, value: optionComponent.value }
+//   });
+// }

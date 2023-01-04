@@ -167,10 +167,63 @@ const App = () => {
               }
             />
           </Route>
-          <Route path="service-booking" element={<ServiceBooking />} />
-          <Route path="buyers-rating" element={<BuyersRating />} />
-          <Route path="buyers-rating/thanks-for-rating" element={<ThanksForRating />} />
-          <Route path="buyers-rating/thanks-for-rating/nps" element={<NPS />} />
+          <Route
+            path="service-booking"
+            element={
+              <UserRoute>
+                <ServiceBooking />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="buyers-rating"
+            element={
+              <UserRoute>
+                <BuyersRating />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="buyers-rating/thanks-for-rating"
+            element={
+              <UserRoute>
+                <ThanksForRating />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="buyers-rating/thanks-for-rating/nps"
+            element={
+              <UserRoute>
+                <NPS />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="user-registration"
+            element={
+              <GuestRoute>
+                <UserRegistration />
+              </GuestRoute>
+            }
+          />
+          <Route path="contact-form" element={<ContactForm />} />
+          <Route
+            path="user-log-in"
+            element={
+              <GuestRoute>
+                <UserLogin />
+              </GuestRoute>
+            }
+          />
+          <Route
+            path="recover-password"
+            element={
+              <GuestRoute>
+                <RecoverPassword />
+              </GuestRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </Language.Provider>

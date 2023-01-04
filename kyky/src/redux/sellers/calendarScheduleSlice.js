@@ -107,6 +107,12 @@ export const calendarScheduleSlice = createSlice({
           loading: false
         });
       })
+      .addCase(fetchSchedules.rejected, (state, action) => {
+        return (state = {
+          ...state,
+          loading: false
+        });
+      })
       .addCase(removeSchedule.fulfilled, (state, action) => {
         const new_state = { ...state };
         delete new_state[action.payload + '_schedules'];
