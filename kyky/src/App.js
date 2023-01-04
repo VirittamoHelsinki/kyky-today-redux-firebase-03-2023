@@ -191,31 +191,6 @@ const App = () => {
               </UserRoute>
             }
           />
-          <Route
-            path="user-registration"
-            element={
-              <GuestRoute>
-                <UserRegistration />
-              </GuestRoute>
-            }
-          />
-          <Route path="contact-form" element={<ContactForm />} />
-          <Route
-            path="user-log-in"
-            element={
-              <GuestRoute>
-                <UserLogin />
-              </GuestRoute>
-            }
-          />
-          <Route
-            path="recover-password"
-            element={
-              <GuestRoute>
-                <RecoverPassword />
-              </GuestRoute>
-            }
-          />
         </Routes>
       </BrowserRouter>
     </Language.Provider>

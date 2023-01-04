@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, React } from 'react';
 import Button from '../../../components/Button';
 import { ReactComponent as Happy } from '../../../image/npsHappy.svg';
@@ -65,5 +66,15 @@ export default function NPS() {
         </Button>
       </div>
     </div>
+=======
+import React from 'react';
+import Button from '../../../components/Button';
+
+export default function NPS() {
+  return (
+    <Button className="submitButton" link="nps">
+      Submit
+    </Button>
+>>>>>>> c0eba8f (mods for merge)
   );
 }
