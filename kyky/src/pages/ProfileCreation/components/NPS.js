@@ -3,7 +3,7 @@ import Button from '../../../components/Button';
 import { ReactComponent as Happy } from '../../../image/npsHappy.svg';
 import { ReactComponent as VeryHappy } from '../../../image/npsVeryHappy.svg';
 import { ReactComponent as Neutral } from '../../../image/npsNeutral.svg';
-import { ReactComponent as Sad } from '../../../image/npsSad.svg';
+import { ReactComponent as Sad } from '../../../image/sad-face-icon.svg';
 import { ReactComponent as VerySad } from '../../../image/npsVerySad.svg';
 import '../../../styles/buyersrating.scss';
 
