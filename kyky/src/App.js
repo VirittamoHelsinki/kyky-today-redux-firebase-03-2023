@@ -168,6 +168,14 @@ const App = () => {
             }
           />
           <Route
+            path="buyers-rating/thanks-for-rating/nps"
+            element={
+              <UserRoute>
+                <NPS />
+              </UserRoute>
+            }
+          />
+          <Route
             path="user-registration"
             element={
               <GuestRoute>
