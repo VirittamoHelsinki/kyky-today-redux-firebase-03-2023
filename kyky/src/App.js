@@ -57,6 +57,7 @@ const App = () => {
   ];
 
   return (
+
     <Language.Provider value={{ lang }}>
       <BrowserRouter>
         <Header navlinks={navlinks} />

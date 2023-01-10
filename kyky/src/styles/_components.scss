@@ -71,6 +71,99 @@
   background-color: $white;
 }
 
+.user-card > div {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  background: $white;
+  width: 316px;
+  min-height: 452px;
+  margin: 1rem;
+  border-radius: 11px;
+  border: $grayscale-medium solid 1px;
+
+
+  .user-card--image {
+    object-fit: cover;
+    height: 195px;
+  }
+
+  .rating-and-price {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    .rating-and-price--star-icon-and-rating {
+      display: flex;
+    }
+  }
+
+  .user-card--username-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    min-height: 47px;
+
+    .user-card--title {
+      display: flex;
+      align-items: center;
+
+      .user-card--profile-image {
+        width: 31px;
+        height: 31px;
+        margin-right: 0.5rem;
+        border-radius: 50px;
+      }
+    }
+
+  }
+
+  .user-card--job-title {
+    margin-top: 1rem;
+  }
+
+  .user-card--bolded-font {
+    font-family: Poppins, sans-serif;
+    font-weight: bold;
+    color: $kyky-primary-dark;
+    font-size: 16px;
+  }
+
+  .user-card--content {
+    display: flex;
+    width: 100%;
+  }
+
+  .user-card--buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3.5rem;
+
+    .heart-icon {
+      height: 25px;
+    }
+
+    .upload-icon {
+      height: 25px;
+    }
+
+    button {
+      width: 160px;
+      height: 57px;
+      border: $kyky-primary-default solid 1px;
+      border-radius: 11px;
+      background: $white;
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+    }
+  }
+}
+
 // checkboxes
 
 .checkbox-container {

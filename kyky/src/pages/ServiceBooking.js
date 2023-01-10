@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import Calendar from '../components/Calendar';
 import SelectDays from '../components/SelectDays';
 import Checkbox from '../components/Checkbox';
+import Card from "../components/Card";
 
 const Tabs = {
     Once: 'Once',
