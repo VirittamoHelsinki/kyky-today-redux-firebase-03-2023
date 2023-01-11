@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createJobForm } from '../redux/sellers/jobCreationFormSlice';
+import { createJobForm } from '../redux/sellers/jobFormSlice';
 import Language from '../language';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';
@@ -9,7 +9,11 @@ import '../styles/jobCreation.scss';
 import FileUpload2 from '../components/FileUpload2';
 import Categories from '../components/SubCategorySelect';
 
-const units = ['hour', 'km', 'm2', 'person', 'slice'];
+const currencies = [
+  { value: '€', label: 'Hourly Rate(€)' },
+  { value: '$', label: 'Hourly Rate($)' },
+  { value: '£', label: 'Hourly Rate(£)' }
+];
 
 export default function JobCreation() {
   const [title, setTitle] = useState('');
@@ -19,10 +23,10 @@ export default function JobCreation() {
   const [place, setPlace] = useState('');
   const [insurance, setIncurance] = useState(false);
   const [price, setPrice] = useState('');
-  const [unit, setUnit] = useState(units[0]);
+  const [unit, setUnit] = useState(currencies[0]);
   const [includeVAT, setIncludeVAT] = useState(false);
   const [addPrice, setAddPrice] = useState('');
-  const [addUnit, setAddUnit] = useState(units[0]);
+  const [addUnit, setAddUnit] = useState(currencies[0]);
   const [urls, setUrls] = useState([]);
 
   const dispatch = useDispatch();
@@ -42,10 +46,10 @@ export default function JobCreation() {
         place: place,
         insurance: insurance,
         price: price,
-        unit: unit,
+        unit: unit.value,
         includeVAT: includeVAT,
         addPrice: addPrice,
-        addUnit: addUnit,
+        addUnit: addUnit.value,
         urls: urls
       })
     );
@@ -135,14 +139,13 @@ export default function JobCreation() {
                 setPrice(e.target.value);
               }}
             />
-            /
             <select
               onChange={(e) => {
                 setUnit(e.target.value);
               }}>
-              {units.map((unit) => (
-                <option key={unit} value={unit}>
-                  {unit}
+              {currencies.map((unit) => (
+                <option key={unit.value} value={unit.value}>
+                  {unit.value}
                 </option>
               ))}
             </select>
@@ -170,14 +173,13 @@ export default function JobCreation() {
                 setAddPrice(e.target.value);
               }}
             />
-            /
             <select
               onChange={(e) => {
                 setAddUnit(e.target.value);
               }}>
-              {units.map((unit) => (
-                <option key={unit} value={unit}>
-                  {unit}
+              {currencies.map((unit) => (
+                <option key={unit.value} value={unit.value}>
+                  {unit.value}
                 </option>
               ))}
             </select>

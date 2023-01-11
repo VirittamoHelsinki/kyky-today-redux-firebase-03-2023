@@ -21,16 +21,14 @@ export const fetchJobsByQuery = createAsyncThunk(
   'jobcreation-forms/fetchJobsByQuery',
   async (payload) => {
     try {
-      /* */
       const documents = [];
       const jobsRef = collection(db, 'jobs');
-      const q = query(jobsRef, where(`${payload.key} == ${payload.value}`));
+      const q = query(jobsRef, where(payload.key, '==', payload.value));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
         documents.push(doc.data());
       });
-      console.log(documents);
-      return 'ok';
+      return documents;
     } catch (error) {
       return error;
     }
@@ -50,7 +48,10 @@ export const jobCreationFormSlice = createSlice({
         console.log(action.payload);
       })
       .addCase(fetchJobsByQuery.fulfilled, (state, action) => {
-        console.log(action.payload);
+        return (state = {
+          ...state,
+          cards: action.payload
+        });
       });
   }
 });

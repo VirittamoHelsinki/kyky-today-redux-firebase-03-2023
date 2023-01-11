@@ -17,6 +17,7 @@ import RecoverPassword from './pages/RecoverPassword';
 import LandingPage from './pages/LandingPage';
 import JobCreation from './pages/JobCreation';
 import ServiceBooking from './pages/ServiceBooking';
+import CategoryPage from './pages/CategoryPage';
 import UserRoute from './routes/UserRoute';
 import GuestRoute from './routes/GuestRoute';
 
@@ -57,12 +58,12 @@ const App = () => {
   ];
 
   return (
-
     <Language.Provider value={{ lang }}>
       <BrowserRouter>
         <Header navlinks={navlinks} />
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="categories/:category" element={<CategoryPage />} />
           <Route
             path="profile-creation"
             element={
@@ -208,4 +209,3 @@ const App = () => {
 };
 
 export default App;
-//<Route path="categories/:category" element={<Category />} />
