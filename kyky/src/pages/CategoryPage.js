@@ -35,11 +35,6 @@ const CategoryPage = () => {
     flexDirection: 'row'
   };
 
-  const imgstyle = {
-    width: '400px',
-    height: '300px'
-  };
-
   return (
     <div>
       <h1>{category_with_spaces}</h1>
