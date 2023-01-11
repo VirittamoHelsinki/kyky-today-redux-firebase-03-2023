@@ -19,9 +19,11 @@ export default function Step3({
   const [languages, setLanguages] = useState();
   useEffect(() => {
     setLanguages(
-      Object.keys(Languages).map((key) => {
-        return { value: key, label: Languages[key].name };
-      })
+      Object.keys(Languages)
+        .filter((key) => key !== 'fi' && key !== 'sv' && key !== 'en')
+        .map((key) => {
+          return { value: key, label: Languages[key].name };
+        })
     );
   }, []);
 
