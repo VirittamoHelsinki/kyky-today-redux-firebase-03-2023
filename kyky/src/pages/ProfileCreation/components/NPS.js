@@ -16,18 +16,38 @@ export default function NPS() {
 
   const selectVerySad = () => {
     setVerySad('emojiAttributes2');
+    setSad('emojiAttributes1');
+    setNeutral('emojiAttributes1');
+    setHappy('emojiAttributes1');
+    setVeryHappy('emojiAttributes1');
   };
   const selectSad = () => {
     setSad('emojiAttributes2');
+    setVerySad('emojiAttributes1');
+    setNeutral('emojiAttributes1');
+    setHappy('emojiAttributes1');
+    setVeryHappy('emojiAttributes1');
   };
   const selectNeutral = () => {
     setNeutral('emojiAttributes2');
+    setSad('emojiAttributes1');
+    setVerySad('emojiAttributes1');
+    setHappy('emojiAttributes1');
+    setVeryHappy('emojiAttributes1');
   };
   const selectHappy = () => {
     setHappy('emojiAttributes2');
+    setSad('emojiAttributes1');
+    setNeutral('emojiAttributes1');
+    setVerySad('emojiAttributes1');
+    setVeryHappy('emojiAttributes1');
   };
   const selectVeryHappy = () => {
     setVeryHappy('emojiAttributes2');
+    setSad('emojiAttributes1');
+    setNeutral('emojiAttributes1');
+    setHappy('emojiAttributes1');
+    setVerySad('emojiAttributes1');
   };
   return (
     <div className="nps">
