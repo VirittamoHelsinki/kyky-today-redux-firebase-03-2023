@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchJobsByQuery } from '../redux/sellers/jobFormSlice';
+import Card from '../components/Card';
 
 const CategoryPage = () => {
   const [cards, setCards] = useState([]);
@@ -44,12 +45,7 @@ const CategoryPage = () => {
       <h1>{category_with_spaces}</h1>
       <div style={styles}>
         {cards.map((card, index) => (
-          <div key={index}>
-            <img src={card.urls[0]} alt="" style={imgstyle} />
-            <div>{card.name}</div>
-            <div>{card.place}</div>
-            <div>{card.description}</div>
-          </div>
+          <Card job={card} key={index} />
         ))}
       </div>
     </div>
