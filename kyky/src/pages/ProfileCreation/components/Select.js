@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
 import ReactSelect from 'react-select';
 import IconOption from './IconOption';
-import Languages from '../../../languages.json';
 
 /*
 Custom react-select Select component with Option component which has check mark icon indicating the chosen option in dropdown menu.
@@ -39,62 +37,85 @@ export function GenericSelect({
 Component for creating multiple 'HTML label element – react-select Select component' pairs in profile creation Languges section.
 */
 export function LanguagesSelect({
-  selectAttributes,
+  formData,
   placeholder,
+  languages,
   options,
-  handleClick,
+  handleChangeReactSelect,
+  handleClickAddLanguage,
+  toggleAddLanguageButton,
   fourthLanguageSelectPlaceholder
 }) {
-  const [languages, setLanguages] = useState();
-  useEffect(() => {
-    setLanguages(
-      Object.keys(Languages).map((key) => {
-        return { value: key, label: Languages[key].name };
-      })
-    );
-  }, [selectAttributes, Languages]);
-
   const renderIfThereIsLanguagesData = () => {
-    if (typeof languages !== undefined) {
+    if (languages !== undefined) {
       return (
         <>
-          {selectAttributes.map((language) => {
-            if (language.visible && language.name !== 'otherSelect') {
-              return (
-                <div className="languageRow" key={language.name}>
-                  <label htmlFor={language.name}>{language.label}</label>
-                  <GenericSelect
-                    name={language.name}
-                    placeholder={placeholder}
-                    options={[...options]}
-                  />
-                </div>
-              );
-            } else if (language.visible && language.name === 'otherSelect') {
-              return (
-                <div className="languageRow" key={language.name}>
-                  <GenericSelect
-                    className="fourth-language-select-container"
-                    name={language.name}
-                    placeholder={fourthLanguageSelectPlaceholder}
-                    options={languages}
-                  />
-                  <GenericSelect
-                    name={language.name}
-                    placeholder={placeholder}
-                    options={[...options]}
-                  />
-                </div>
-              );
-            } else {
-              return (
-                <button id="addLanguageButton" onClick={handleClick} key="addLanguageButton">
-                  <i className="material-icons-outlined">add_circle_outline</i>
-                  <p>Add a language</p>
-                </button>
-              );
-            }
-          })}
+          <div className="languageRow">
+            <label htmlFor="finnish">Finnish</label>
+            <GenericSelect
+              name="finnish"
+              placeholder={placeholder}
+              options={[...options]}
+              defaultValue={formData?.s3LanguageFI}
+              onChange={(selectOption) => handleChangeReactSelect('s3LanguageFI', selectOption)}
+            />
+          </div>
+          <div className="languageRow">
+            <label htmlFor="swedish">Swedish</label>
+            <GenericSelect
+              name="swedish"
+              placeholder={placeholder}
+              options={[...options]}
+              defaultValue={formData?.s3LanguageSV}
+              onChange={(selectOption) => handleChangeReactSelect('s3LanguageSV', selectOption)}
+            />
+          </div>
+          <div className="languageRow">
+            <label htmlFor="english">English</label>
+            <GenericSelect
+              name="english"
+              placeholder={placeholder}
+              options={[...options]}
+              defaultValue={formData?.s3LanguageEN}
+              onChange={(selectOption) => handleChangeReactSelect('s3LanguageEN', selectOption)}
+            />
+          </div>
+
+          {toggleAddLanguageButton === true && (
+            <button
+              id="addLanguageButton"
+              onClick={() => {
+                handleClickAddLanguage();
+              }}
+              key="addLanguageButton">
+              <i className="material-icons-outlined">add_circle_outline</i>
+              <p>Add a language</p>
+            </button>
+          )}
+
+          {toggleAddLanguageButton === false && (
+            <div className="languageRow">
+              <GenericSelect
+                className="fourth-language-select-container"
+                name="otherLanguage"
+                placeholder={fourthLanguageSelectPlaceholder}
+                options={languages}
+                defaultValue={formData?.s3LanguageOther}
+                onChange={(selectOption) =>
+                  handleChangeReactSelect('s3LanguageOther', selectOption)
+                }
+              />
+              <GenericSelect
+                name="otherLanguageProficiency"
+                placeholder={placeholder}
+                options={[...options]}
+                defaultValue={formData?.s3LanguageOtherProficiency}
+                onChange={(selectOption) =>
+                  handleChangeReactSelect('s3LanguageOtherProficiency', selectOption)
+                }
+              />
+            </div>
+          )}
         </>
       );
     } else {

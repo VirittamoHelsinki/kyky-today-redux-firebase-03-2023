@@ -1,45 +1,43 @@
 import { LanguagesSelect } from './Select';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Languages from '../../../languages.json';
 
-export default function Step3() {
+export default function Step3({
+  formData,
+  handleChangeReactSelect,
+  handleClickAddLanguage,
+  toggleAddLanguageButton
+}) {
   const options = [
+    { value: 'noSelection', label: '---' },
     { value: 'basic', label: 'Basic' },
     { value: 'conversational', label: 'Conversational' },
     { value: 'fluent', label: 'Fluent' },
     { value: 'nativeOrBilingual', label: 'Native or Bilingual' }
   ];
 
-  const initialSelectAttributes = [
-    { name: 'finnishSelect', label: 'Finnish', visible: true },
-    { name: 'swedishSelect', label: 'Swedish', visible: true },
-    { name: 'englishSelect', label: 'English', visible: true },
-    { name: 'otherSelect', label: 'Other language', visible: false }
-  ];
-
-  const [selectAttributes, setSelectAttributes] = useState(initialSelectAttributes);
-
-  const handleClick = () => {
-    setSelectAttributes(
-      initialSelectAttributes.map(({ name, label, visible }) => {
-        if (!visible) {
-          return { name, label, visible: true };
-        } else {
-          return { name, label, visible };
-        }
+  const [languages, setLanguages] = useState();
+  useEffect(() => {
+    setLanguages(
+      Object.keys(Languages).map((key) => {
+        return { value: key, label: Languages[key].name };
       })
     );
-  };
+  }, []);
 
   return (
     <div className="step step3">
       <div className="formContainer languageFormContainer">
         <h3>Language</h3>
         <LanguagesSelect
+          languages={languages}
           options={options}
-          selectAttributes={selectAttributes}
+          formData={formData}
           placeholder="My level is"
           fourthLanguageSelectPlaceholder="Select language"
-          handleClick={handleClick}
+          handleChangeReactSelect={handleChangeReactSelect}
+          handleClickAddLanguage={handleClickAddLanguage}
+          toggleAddLanguageButton={toggleAddLanguageButton}
         />
       </div>
     </div>

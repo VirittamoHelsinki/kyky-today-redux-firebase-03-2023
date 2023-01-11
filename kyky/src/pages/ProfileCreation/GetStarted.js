@@ -40,8 +40,9 @@ export default function GetStarted() {
   const [title, setTitle] = useState(0);
   const [tip, setTip] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
+  const [toggleAddLanguageButton, setToggleAddLanguageButton] = useState(true);
   const [formData, setFormData] = useState({
-    // Step 1
+    // Step 1 title & skills
     s1TitleInput: '',
     s1Skills: [],
     // Step 2 work experience
@@ -62,7 +63,13 @@ export default function GetStarted() {
     s2EducationExperienceStartMonths: '',
     s2EducationExperienceStartYears: '',
     s2EducationExperienceEndMonths: '',
-    s2EducationExperienceEndYears: ''
+    s2EducationExperienceEndYears: '',
+    // Step 3 languages
+    s3LanguageFI: '',
+    s3LanguageSV: '',
+    s3LanguageEN: '',
+    s3LanguageOther: '',
+    s3LanguageOtherProficiency: ''
   });
 
   function previousPhase() {
@@ -88,6 +95,10 @@ export default function GetStarted() {
     });
   }
 
+  function handleClickAddLanguage() {
+    setToggleAddLanguageButton(!toggleAddLanguageButton);
+  }
+
   function sendForm(event) {
     event.preventDefault();
   }
@@ -108,7 +119,14 @@ export default function GetStarted() {
               handleChangeReactSelect={handleChangeReactSelect}
             />
           )}
-          {currentStep === 3 && <Step3 />}
+          {currentStep === 3 && (
+            <Step3
+              formData={formData}
+              handleChangeReactSelect={handleChangeReactSelect}
+              handleClickAddLanguage={handleClickAddLanguage}
+              toggleAddLanguageButton={toggleAddLanguageButton}
+            />
+          )}
           {currentStep === 4 && <Step4 />}
           {currentStep === 5 && <Step5 />}
           {currentStep === 6 && <Step6 />}
