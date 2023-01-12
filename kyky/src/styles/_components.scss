@@ -82,12 +82,13 @@
   background: $white;
   width: 316px;
   min-height: 452px;
+  box-sizing: border-box;
   margin: 1rem;
   border-radius: 11px;
   border: $grayscale-medium solid 1px;
 
-
   .user-card--image {
+    border-radius: 11px 11px 0 0;
     object-fit: cover;
     height: 195px;
   }
@@ -119,11 +120,11 @@
         border-radius: 50px;
       }
     }
-
   }
 
   .user-card--job-title {
     margin-top: 1rem;
+    max-height: 1rem;
   }
 
   .user-card--bolded-font {

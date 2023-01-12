@@ -32,7 +32,8 @@ const CategoryPage = () => {
   const styles = {
     display: 'flex',
     flexWrap: 'wrap',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderRadiusTop: '20px'
   };
 
   return (
