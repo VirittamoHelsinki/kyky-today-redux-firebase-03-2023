@@ -41,7 +41,7 @@ export default function Calendar({
       date.getMonth() - 1,
       firstDayOfMonth
     );
-    setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 2);
+    setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 1);
   }, [date]);
 
   useEffect(() => {
@@ -53,13 +53,13 @@ export default function Calendar({
     );
     if (
       selectedDay !== null &&
-      selectedDay !== date.getDate() + lastDaysOfPreviousMonth.length - 2
+      selectedDay !== date.getDate() + lastDaysOfPreviousMonth.length - 1
     ) {
       setDate(
         new Date(
           date.getFullYear(),
           date.getMonth(),
-          selectedDay - (getFirstDayOfMonth(currentYear, currentMonth) - 2)
+          selectedDay - (getFirstDayOfMonth(currentYear, currentMonth) - 1)
         )
       );
     }
@@ -91,16 +91,12 @@ export default function Calendar({
   }
 
   function getFirstDayOfMonth(year, month) {
-    return new Date(year, month, 1).getDay();
+    return getTrueDay(new Date(year, month, 1));
   }
 
   function getDaysInMonthAsArray(year, month) {
     const lastDay = new Date(year, month + 1, 0).getDate();
     return new Array(lastDay).fill(0).map((_, i) => new Date(year, month, i + 1));
-  }
-
-  function getDaysInMonth(year, month) {
-    return 32 - new Date(year, month, 32).getDate();
   }
 
   function getTrueDay(date) {

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import profileIcon from '../image/profileicon2.svg';
 import starIcon from '../image/star.svg';
 import heartIcon from '../image/heartIcon.png';
@@ -29,7 +30,9 @@ export default function Card({ job }) {
       </div>
       <div className="user-card--buttons">
         <img src={heartIcon} className="heart-icon" alt={'heartIcon'} />
-        <button className="user-card--bolded-font">Learn More</button>
+        <Link to={'/service-booking'} state={{ ...job }}>
+          <button className="user-card--bolded-font">Learn More</button>
+        </Link>
         <img src={uploadIcon} className="upload-icon" alt={'uploadIcon'} />
       </div>
     </div>

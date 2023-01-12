@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import dogIMG from '../image/dog-walker.png';
-import celebrationIMG from '../image/celebration.png';
 import cookingIMG from '../image/cooking.png';
 import technologyIMG from '../image/technology.png';
 import gardeningIMG from '../image/gardening.png';
 import photographyIMG from '../image/photography.png';
-import teachingIMG from '../image/teaching.png';
 
 function LandingPage() {
   const [landingPageImage, setLandingPageImage] = useState(dogIMG);
