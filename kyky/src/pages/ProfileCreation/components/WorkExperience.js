@@ -1,18 +1,70 @@
-import '../../../styles/NewProfileCreation.scss';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import Checkbox from '../../../components/Checkbox';
 import Input from '../../../components/Input';
 import Countries from '../../../countries.json';
 import { GenericSelect } from './Select';
 import { months, years } from './Time';
+import '../../../styles/NewProfileCreation.scss';
 
-export default function WorkExperience({
-  formData,
-  handleChange,
-  handleChangeReactSelect,
-  setSaved
-}) {
-  const countryOptions = Countries.map((country) => ({ value: country.code, label: country.name }));
+const countries = Countries.map((country) => ({ value: country.code, label: country.name }));
+
+export default function WorkExperience({ addWorkExperience, setModalClosed }) {
+  const [workExperience, setWorkExperience] = useState({});
+  const [title, setTitle] = useState('');
+  const [company, setCompany] = useState('');
+  const [location, setLocation] = useState('');
+  const [country, setCountry] = useState(countries[0]);
+  const [currentlyWorking, setCurrentlyWorking] = useState(false);
+  const [startMonth, setStartMonth] = useState(months[0]);
+  const [startYear, setStartYear] = useState(years[0]);
+  const [endMonth, setEndMonth] = useState(months[0]);
+  const [endYear, setEndYear] = useState(years[0]);
+  const [description, setDescription] = useState('');
+
+  useEffect(() => {
+    setWorkExperience({ ...workExperience, title: title });
+  }, [title]);
+
+  useEffect(() => {
+    setWorkExperience({ ...workExperience, company: company });
+  }, [company]);
+
+  useEffect(() => {
+    setWorkExperience({ ...workExperience, location: location });
+  }, [location]);
+
+  useEffect(() => {
+    setWorkExperience({ ...workExperience, country: country });
+  }, [country]);
+
+  useEffect(() => {
+    setWorkExperience({ ...workExperience, currentlyWorking: currentlyWorking });
+  }, [currentlyWorking]);
+
+  useEffect(() => {
+    setWorkExperience({ ...workExperience, startMonth: startMonth });
+  }, [startMonth]);
+
+  useEffect(() => {
+    setWorkExperience({ ...workExperience, startYear: startYear });
+  }, [startYear]);
+
+  useEffect(() => {
+    setWorkExperience({ ...workExperience, endMonth: endMonth });
+  }, [endMonth]);
+
+  useEffect(() => {
+    setWorkExperience({ ...workExperience, endYear: endYear });
+  }, [endYear]);
+
+  useEffect(() => {
+    setWorkExperience({ ...workExperience, description: description });
+  }, [description]);
+
+  const saveAndClose = () => {
+    addWorkExperience({ ...workExperience });
+    setModalClosed(true);
+  };
 
   return (
     <div className="workContainer">
@@ -21,8 +73,8 @@ export default function WorkExperience({
         className="inputLong"
         id="s2WorkExperienceTitle"
         name="s2WorkExperienceTitle"
-        value={formData?.s2WorkExperienceTitle}
-        onChange={(event) => handleChange(event.target.name, event.target.value)}
+        value={title}
+        onChange={(event) => setTitle(event.target.value)}
         label="Title*"
         placeholder="Ex:Cleaner"
         labelOnFront></Input>
@@ -30,8 +82,8 @@ export default function WorkExperience({
         className="inputLong"
         id="s2WorkExperienceCompany"
         name="s2WorkExperienceCompany"
-        value={formData?.s2WorkExperienceCompany}
-        onChange={(event) => handleChange(event.target.name, event.target.value)}
+        value={company}
+        onChange={(event) => setCompany(event.target.value)}
         label="Company"
         placeholder="Ex:Frenska"
         labelOnFront></Input>
@@ -39,8 +91,8 @@ export default function WorkExperience({
         className="inputShort"
         id="s2WorkExperienceLocation"
         name="s2WorkExperienceLocation"
-        value={formData?.s2WorkExperienceLocation}
-        onChange={(event) => handleChange(event.target.name, event.target.value)}
+        value={location}
+        onChange={(event) => setLocation(event.target.value)}
         label="Location*"
         placeholder="Ex:Helsinki"
         labelOnFront></Input>
@@ -51,18 +103,16 @@ export default function WorkExperience({
         className="countryList"
         name="countryList"
         placeholder="Finland"
-        defaultValue={formData?.s2WorkExperienceCountry}
-        onChange={(selectOption) =>
-          handleChangeReactSelect('s2WorkExperienceCountry', selectOption)
-        }
-        options={countryOptions}
+        value={country}
+        onChange={(value) => setCountry(value)}
+        options={countries}
       />
       <Checkbox
         className="workCheck"
         name="s2WorkExperienceCurrentlyWorking"
-        value={formData?.s2WorkExperienceCurrentlyWorking}
-        checked={formData?.s2WorkExperienceCurrentlyWorking}
-        onChange={(event) => handleChange(event.target.name, event.target.checked)}>
+        value={currentlyWorking}
+        checked={currentlyWorking}
+        onChange={(event) => setCurrentlyWorking(event.target.checked)}>
         I am currently working in this role
       </Checkbox>
       <div className="dateContainer">
@@ -74,40 +124,32 @@ export default function WorkExperience({
           className="dateSelect"
           name="startMonthsSelect"
           placeholder="Month"
-          defaultValue={formData?.s2WorkExperienceStartMonths}
-          onChange={(selectOption) =>
-            handleChangeReactSelect('s2WorkExperienceStartMonths', selectOption)
-          }
+          value={startMonth}
+          onChange={(value) => setStartMonth(value)}
           options={months}
         />
         <GenericSelect
           className="dateSelect"
           name="startYearsSelect"
           placeholder="Year"
-          defaultValue={formData?.s2WorkExperienceStartYears}
-          onChange={(selectOption) =>
-            handleChangeReactSelect('s2WorkExperienceStartYears', selectOption)
-          }
+          value={startYear}
+          onChange={(value) => setStartYear(value)}
           options={years}
         />
         <GenericSelect
           className="dateSelect"
           name="endMonthsSelect"
           placeholder="Month"
-          defaultValue={formData?.s2WorkExperienceEndMonths}
-          onChange={(selectOption) =>
-            handleChangeReactSelect('s2WorkExperienceEndMonths', selectOption)
-          }
+          value={endMonth}
+          onChange={(value) => setEndMonth(value)}
           options={months}
         />
         <GenericSelect
           className="dateSelect"
           name="endYearsSelect"
           placeholder="Year"
-          defaultValue={formData?.s2WorkExperienceEndYears}
-          onChange={(selectOption) =>
-            handleChangeReactSelect('s2WorkExperienceEndYears', selectOption)
-          }
+          value={endYear}
+          onChange={(value) => setEndYear(value)}
           options={years}
         />
       </div>
@@ -115,10 +157,13 @@ export default function WorkExperience({
       <textarea
         className="descriptionArea"
         name="s2WorkExperienceDescription"
-        value={formData?.s2WorkExperienceDescription}
-        onChange={(event) => handleChange(event.target.name, event.target.value)}
+        value={description}
+        onChange={(event) => setDescription(event.target.value)}
       />
-      <button type="button" className="saveButton" onClick={() => setSaved(true)}>
+      <button type="button" className="cancelButton" onClick={() => setModalClosed(true)}>
+        Cancel
+      </button>
+      <button type="button" className="saveButton" onClick={() => saveAndClose()}>
         Save
       </button>
     </div>

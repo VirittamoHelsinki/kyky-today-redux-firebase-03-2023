@@ -1,100 +1,150 @@
+import { ReactComponent as Gps } from '../../../image/gps.svg';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import '../../../styles/NewProfileCreation.scss';
 import '../../../styles/_components.scss';
-import { ReactComponent as Pen } from '../../../image/pen.svg';
-import { ReactComponent as Gps } from '../../../image/gps.svg';
-import { ReactComponent as ProfileIcon2 } from '../../../image/profileicon2.svg';
-import React, { useState } from 'react';
-import AddPhoto from './AddPhoto';
-import WorkExperience from './WorkExperience';
-import EducationExperience from './EducationExperience';
-import AddSkills from './AddSkills';
 
-export default function Step8({ formData, handleChange }) {
-  const [upload, setUpload] = useState('');
-  const [saved, setSaved] = useState(true);
-  const [saved2, setSaved2] = useState(true);
-  const [experience, setExperience] = useState('');
+export default function Step8() {
+  const [title, setTitle] = useState('');
+  const [skills, setSkills] = useState([]);
+  const [workExp, setWorkExp] = useState([]);
+  const [educExp, setEducExp] = useState([]);
+  const [text, setText] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [currency, setCurrency] = useState('€');
+  const [city, setCity] = useState('');
+  const [profileIcon, setProfileIcon] = useState(
+    'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp'
+  );
 
-  const addPhoto = () => {
-    setSaved2(false);
-    setUpload(<AddPhoto setSaved2={setSaved2} />);
-    console.log(true);
-  };
+  const user = useSelector((state) => state.user.user);
+  const _title = useSelector((state) => state.profile.s1Title);
+  const _skills = useSelector((state) => state.profile.s1Skills);
+  const _workExp = useSelector((state) => state.profile.s2WorkExperiences);
+  const _educExp = useSelector((state) => state.profile.s2EducationExperiences);
+  const _text = useSelector((state) => state.profile.s4WorkInput);
+  const _amount = useSelector((state) => state.profile.s6HourlyInput);
+  const _currency = useSelector((state) => state.profile.s6Currency);
+  const _city = useSelector((state) => state.profile.s7City);
+  const _profileIcon = useSelector((state) => state.profile.s7Url);
 
-  const workExperience = () => {
-    setSaved(false);
-    setExperience(<WorkExperience setSaved={setSaved} />);
-  };
+  useEffect(() => {
+    if (_title) {
+      setTitle(_title);
+    }
+  }, [_title]);
 
-  const educationExperience = () => {
-    setSaved(false);
-    setExperience(<EducationExperience setSaved={setSaved} />);
-  };
+  useEffect(() => {
+    if (_skills) {
+      setSkills(_skills);
+    }
+  }, [_skills]);
 
-  const addSkills = () => {
-    setSaved(false);
-    setExperience(
-      <AddSkills setSaved={setSaved} formData={formData} handleChange={handleChange} />
-    );
-  };
+  useEffect(() => {
+    if (_workExp) {
+      setWorkExp(_workExp);
+    }
+  }, [_workExp]);
+
+  useEffect(() => {
+    if (_educExp) {
+      setEducExp(_educExp);
+    }
+  }, [_educExp]);
+
+  useEffect(() => {
+    if (_text) {
+      setText(_text);
+    }
+  }, [_text]);
+
+  useEffect(() => {
+    if (_amount) {
+      setAmount(_amount);
+    }
+  }, [_amount]);
+
+  useEffect(() => {
+    if (_currency) {
+      setCurrency(_currency);
+    }
+  }, [_currency]);
+
+  useEffect(() => {
+    if (_city) {
+      setCity(_city);
+    }
+  }, [_city]);
+
+  useEffect(() => {
+    if (_profileIcon) {
+      setProfileIcon(_profileIcon);
+    }
+  }, [_profileIcon]);
 
   return (
     <div className="step step8">
       <div className="previewMainContainer">
         <div className="previewContainer1">
           <div className="editPhotoButtonContainer">
-            <ProfileIcon2 />
-            <button className="editPhotoButton" onClick={addPhoto}>
-              <Pen />
-              Edit Photo
-            </button>
+            <img src={profileIcon} alt="" />
           </div>
           <div className="bigContainer">
             <div className="nameContainer">
-              <h2 className="firstNameLastName">FirstName LastName</h2>
+              <h2 className="firstNameLastName">{user.displayName}</h2>
             </div>
             <div className="gpsLocation">
               <Gps />
-              <p className="currentLocation">Helsinki, Uusimaa</p>
+              <p className="currentLocation">{city}</p>
             </div>{' '}
             <div className="jobTitleContainer">
-              <h3 className="jobTitle">UI/UX Designer</h3>
-              <Pen />
+              <h3 className="jobTitle">{title}</h3>
             </div>
             <div className="hourlyPriceContainer">
-              <p className="hourlyPrice">€30/h</p>
-              <Pen />
+              <p className="hourlyPrice">
+                {amount}
+                {currency}/h
+              </p>
             </div>
           </div>
-          <textarea className="jobTextArea"></textarea>
+          <div>{text}</div>
         </div>
         <div className="previewContainer2">
           <h3>Skills</h3>
-          <button className="picIcon" onClick={() => addSkills()}>
-            +
-          </button>
-          <div className="skillContainer"></div>
+          <div className="skillContainer">
+            {skills.map((skill, index) => (
+              <div key={index}>{skill}</div>
+            ))}
+          </div>
         </div>
         <div className="previewContainer3">
           {' '}
           <h3>Work Experience</h3>
-          <button className="picIcon" onClick={() => workExperience()}>
-            +
-          </button>
-          <p>No items to display.</p>
+          {workExp.map((exp, index) => (
+            <span key={index}>
+              <div>{exp.title}</div>
+              <div>
+                {exp.startMonth.label}/{exp.startYear.label} - {exp.endMonth.label}/
+                {exp.endYear.label}
+              </div>
+            </span>
+          ))}
+          {workExp.length === 0 && <p>No items to display.</p>}
         </div>
         <div className="previewContainer4">
           <h3>Education History</h3>
-          <button className="picIcon" onClick={() => educationExperience()}>
-            +
-          </button>
-          <p>No items to display.</p>
+          {educExp.map((exp, index) => (
+            <span key={index}>
+              <div>{exp.degree}</div>
+              <div>
+                {exp.startMonth.label}/{exp.startYear.label} - {exp.endMonth.label}/
+                {exp.endYear.label}
+              </div>
+            </span>
+          ))}
+          {workExp.length === 0 && <p>No items to display.</p>}
         </div>
-        {!saved2 && <div className="dim3"></div>}
-        {!saved2 && upload}
-      </div>{' '}
-      {!saved && <div className="dim"></div>}
-      {!saved && experience}
+      </div>
     </div>
   );
 }

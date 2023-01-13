@@ -1,10 +1,43 @@
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { GenericSelect } from './Select';
+import {
+  categories,
+  subCategory1,
+  subCategory2,
+  subCategory3,
+  subCategory4,
+  subCategory5
+} from './Features';
 import '../../../styles/NewProfileCreation.scss';
 
-import { GenericSelect } from './Select';
-import { useState, React } from 'react';
-
-export default function Step5() {
+export default function Step5({ handleChange }) {
   const [selectValue, setSelectValue] = useState('');
+  const [mainCategory, setMainCategory] = useState({ value: '', label: '' });
+  const [subCategory, setSubCategory] = useState({ value: '', label: '' });
+
+  const _mainCategory = useSelector((state) => state.profile.s5MainCategory);
+  const _subCategory = useSelector((state) => state.profile.s5SubCategory);
+
+  useEffect(() => {
+    handleChange('s5MainCategory', mainCategory);
+  }, [mainCategory]);
+
+  useEffect(() => {
+    handleChange('s5SubCategory', subCategory);
+  }, [subCategory]);
+
+  useEffect(() => {
+    if (_mainCategory) {
+      setMainCategory(_mainCategory);
+    }
+  }, [_mainCategory]);
+
+  useEffect(() => {
+    if (_subCategory) {
+      setSubCategory(_subCategory);
+    }
+  }, [_subCategory]);
 
   const showCategory = (categories) => {
     if (categories.value === 'homeMaintenanceAndRepairs')
@@ -12,108 +45,60 @@ export default function Step5() {
         <GenericSelect
           className="select-container2b"
           placeholder="Choose a subcategory"
-          options={[...subCategory1]}></GenericSelect>
+          options={[...subCategory1]}
+          value={subCategory1.filter(({ label }) => label === subCategory.label)}
+          onChange={(value) => setSubCategory(value)}></GenericSelect>
       );
     else if (categories.value === 'movingAndCleaning')
       setSelectValue(
         <GenericSelect
           className="select-container2b"
           placeholder="Choose a subcategory"
-          options={[...subCategory2]}></GenericSelect>
+          options={[...subCategory2]}
+          value={subCategory2.filter(({ label }) => label === subCategory.label)}
+          onChange={(value) => setSubCategory(value)}></GenericSelect>
       );
     else if (categories.value === 'careAndWellness')
       setSelectValue(
         <GenericSelect
           className="select-container2b"
           placeholder="Choose a subcategory"
-          options={[...subCategory3]}></GenericSelect>
+          options={[...subCategory3]}
+          value={subCategory3.filter(({ label }) => label === subCategory.label)}
+          onChange={(value) => setSubCategory(value)}></GenericSelect>
       );
     else if (categories.value === 'creativeAndIt')
       setSelectValue(
         <GenericSelect
           className="select-container2b"
           placeholder="Choose a subcategory"
-          options={[...subCategory4]}></GenericSelect>
+          options={[...subCategory4]}
+          value={subCategory4.filter(({ label }) => label === subCategory.label)}
+          onChange={(value) => setSubCategory(value)}></GenericSelect>
       );
     else
       setSelectValue(
         <GenericSelect
           className="select-container2b"
           placeholder="Choose a subcategory"
-          options={[...subCategory5]}></GenericSelect>
+          options={[...subCategory5]}
+          value={subCategory5.filter(({ label }) => label === subCategory.label)}
+          onChange={(value) => setSubCategory(value)}></GenericSelect>
       );
   };
-  const categories = [
-    { value: 'homeMaintenanceAndRepairs', label: 'Home Maintenance & Repairs', id: 1 },
-    { value: 'movingAndCleaning', label: 'Moving & Cleaning', id: 2 },
-    { value: 'careAndWellness', label: 'Care & Wellness', id: 3 },
-    { value: 'creativeAndIt', label: 'Creative & IT', id: 4 },
-    { value: 'learningandCoaching', label: 'Learning & Coaching', id: 5 }
-  ];
-  const subCategory1 = [
-    { value: 'handyman', label: 'Handyman' },
-    { value: 'painter', label: 'Painter' },
-    { value: 'electrician', label: 'Electrician' },
-    { value: 'plumber', label: 'Plumber' },
-    { value: 'carpenter', label: 'Carpenter' },
-    { value: 'snowManagement', label: 'Snow Management' },
-    { value: 'gardeningAndLandscaping', label: 'Gardening & Landscaping' },
-    { value: 'chimneyOrGutterMaintenance', label: 'Chimney / Gutter Maintenance' }
-  ];
-
-  const subCategory2 = [
-    { value: 'movingServices', label: 'Moving Services' },
-    { value: 'cleaningServices', label: 'Cleaning Services' },
-    { value: 'carpetCleaning', label: 'Carpet Cleaning' }
-  ];
-
-  const subCategory3 = [
-    { value: 'babysitting', label: 'Babysitting' },
-    { value: 'nurse', label: 'Nurse' },
-    { value: 'eldelryCare', label: 'Eldelry Care' },
-    { value: 'yoga', label: 'Yoga' },
-    { value: 'dietitian', label: 'Dietitian' },
-    { value: 'meditation', label: 'Meditation' },
-    { value: 'sportsAndFitnessTrainer', label: 'Sports & Fitness trainer' },
-    { value: 'massageTherapist', label: 'Massage Therapist' },
-    { value: 'fitnessCoach', label: 'Fitness Coach' }
-  ];
-
-  const subCategory4 = [
-    { value: 'photographer', label: 'Photographer' },
-    { value: 'graphicDesigner', label: 'Graphic Designer' },
-    { value: 'contentWriter', label: 'ContentWriter' },
-    { value: 'translators', label: 'Translators' },
-    { value: 'artAndCrafts', label: 'Art & Crafts' },
-    { value: 'music', label: 'Music' },
-    { value: 'itDeveloper', label: 'IT Developer' },
-    { value: 'itDesigner', label: 'IT Designer' },
-    { value: 'programmer', label: 'Programmer' },
-    { value: 'technicians', label: 'Technicians' },
-    { value: 'socialMedia', label: 'Social Media' }
-  ];
-
-  const subCategory5 = [
-    { value: 'teachersAndTutors', label: 'Teachers & Tutors' },
-    { value: 'lifeCoach', label: 'Life Coach' },
-    { value: 'virtualAssistent', label: 'Virtual Assistent' },
-    { value: 'accountant', label: 'Accountant' },
-    { value: 'businessConsultant', label: 'Business Consultant' },
-    { value: 'lawyer', label: 'Lawyer' },
-    { value: 'itDeveloper', label: 'IT Developer' },
-    { value: 'taxAndFinanceConsultant', label: 'Tax & Finance Consultant' },
-    { value: 'architect', label: 'Architect' }
-  ];
 
   return (
     <div className="step step5">
       <GenericSelect
         key={categories.value}
-        value={categories.value}
+        value={categories.filter(({ label }) => label === mainCategory.label)}
         className="select-container2"
         placeholder="Choose a main category"
         options={[...categories]}
-        onChange={showCategory}
+        onChange={(value) => {
+          showCategory(value);
+          setMainCategory(value);
+        }}
       />
       {selectValue}
     </div>

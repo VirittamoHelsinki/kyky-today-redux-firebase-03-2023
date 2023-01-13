@@ -1,35 +1,62 @@
-import '../../../styles/NewProfileCreation.scss';
-import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import WorkExperience from './WorkExperience';
 import EducationExperience from './EducationExperience';
+import '../../../styles/NewProfileCreation.scss';
 
-export default function Step2({ formData, handleChange, handleChangeReactSelect }) {
+export default function Step2({ handleChange }) {
   const [experience, setExperience] = useState();
-  const [saved, setSaved] = useState(true);
+  const [workExperiences, setWorkExperiences] = useState([]);
+  const [educExperiences, setEducExperiences] = useState([]);
+  const [modalClosed, setModalClosed] = useState(true);
+
+  const _workExp = useSelector((state) => state.profile.s2WorkExperiences);
+  const _educExp = useSelector((state) => state.profile.s2EducationExperiences);
+
+  useEffect(() => {
+    handleChange('s2WorkExperiences', workExperiences);
+  }, [workExperiences]);
+
+  useEffect(() => {
+    handleChange('s2EducationExperiences', educExperiences);
+  }, [educExperiences]);
+
+  useEffect(() => {
+    if (_workExp) {
+      setWorkExperiences(_workExp);
+    }
+  }, [_workExp]);
+
+  useEffect(() => {
+    if (_educExp) {
+      setEducExperiences(_educExp);
+    }
+  }, [_educExp]);
+
   const chooseExperience = (event) => {
     const experienceType = event.target.id;
-    setSaved(false);
+    setModalClosed(false);
     setExperience(experienceType);
+  };
+
+  const AddWorkExperience = (new_workExperience) => {
+    setWorkExperiences([...workExperiences, new_workExperience]);
+  };
+
+  const AddEducExperience = (new_educExperience) => {
+    setEducExperiences([...educExperiences, new_educExperience]);
   };
 
   const renderExperience = () => {
     if (experience === 'workExperience') {
       return (
-        <WorkExperience
-          formData={formData}
-          handleChange={handleChange}
-          handleChangeReactSelect={handleChangeReactSelect}
-          setSaved={setSaved}
-        />
+        <WorkExperience addWorkExperience={AddWorkExperience} setModalClosed={setModalClosed} />
       );
     } else if (experience === 'educationExperience') {
       return (
         <EducationExperience
-          formData={formData}
-          handleChange={handleChange}
-          handleChangeReactSelect={handleChangeReactSelect}
-          setSaved={setSaved}
+          addEducExperience={AddEducExperience}
+          setModalClosed={setModalClosed}
         />
       );
     } else {
@@ -49,6 +76,20 @@ export default function Step2({ formData, handleChange, handleChangeReactSelect 
             onClick={(e) => chooseExperience(e)}>
             +
           </button>
+          {workExperiences.map((exp, index) => (
+            <span key={index}>
+              <div>{exp.title}</div>
+              <div>
+                {exp.startMonth.label}/{exp.startYear.label} - {exp.endMonth.label}/
+                {exp.endYear.label}
+              </div>
+              <span
+                className="material-icons-outlined"
+                onClick={() => setWorkExperiences(workExperiences.filter((f) => f !== exp))}>
+                delete
+              </span>
+            </span>
+          ))}
         </div>
         <div className="addExperience">
           Add Education experience{' '}
@@ -59,10 +100,24 @@ export default function Step2({ formData, handleChange, handleChangeReactSelect 
             onClick={(e) => chooseExperience(e)}>
             +
           </button>
+          {educExperiences.map((exp, index) => (
+            <span key={index}>
+              <div>{exp.degree}</div>
+              <div>
+                {exp.startMonth.label}/{exp.startYear.label} - {exp.endMonth.label}/
+                {exp.endYear.label}
+              </div>
+              <span
+                className="material-icons-outlined"
+                onClick={() => setEducExperiences(educExperiences.filter((f) => f !== exp))}>
+                delete
+              </span>
+            </span>
+          ))}
         </div>
       </div>
-      {!saved && <div className="dim"></div>}
-      {!saved && experience && renderExperience()}
+      {!modalClosed && <div className="dim"></div>}
+      {!modalClosed && experience && renderExperience()}
     </div>
   );
 }

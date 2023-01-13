@@ -1,15 +1,52 @@
-import '../../../styles/NewProfileCreation.scss';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import Input from '../../../components/Input';
 import { GenericSelect } from './Select';
 import { months, years } from './Time';
+import '../../../styles/NewProfileCreation.scss';
 
-export default function EducationExperience({
-  formData,
-  handleChange,
-  handleChangeReactSelect,
-  setSaved
-}) {
+export default function EducationExperience({ addEducExperience, setModalClosed }) {
+  const [educExperience, setEducExperience] = useState({});
+  const [school, setSchool] = useState('');
+  const [degree, setDegree] = useState('');
+  const [location, setLocation] = useState('');
+  const [startMonth, setStartMonth] = useState(months[0]);
+  const [startYear, setStartYear] = useState(years[0]);
+  const [endMonth, setEndMonth] = useState(months[0]);
+  const [endYear, setEndYear] = useState(years[0]);
+
+  useEffect(() => {
+    setEducExperience({ ...educExperience, school: school });
+  }, [school]);
+
+  useEffect(() => {
+    setEducExperience({ ...educExperience, degree: degree });
+  }, [degree]);
+
+  useEffect(() => {
+    setEducExperience({ ...educExperience, location: location });
+  }, [location]);
+
+  useEffect(() => {
+    setEducExperience({ ...educExperience, startMonth: startMonth });
+  }, [startMonth]);
+
+  useEffect(() => {
+    setEducExperience({ ...educExperience, startYear: startYear });
+  }, [startYear]);
+
+  useEffect(() => {
+    setEducExperience({ ...educExperience, endMonth: endMonth });
+  }, [endMonth]);
+
+  useEffect(() => {
+    setEducExperience({ ...educExperience, endYear: endYear });
+  }, [endYear]);
+
+  const saveAndClose = () => {
+    addEducExperience({ ...educExperience });
+    setModalClosed(true);
+  };
+
   return (
     <div className="educationContainer">
       <h3>Add Education History</h3>
@@ -17,8 +54,8 @@ export default function EducationExperience({
         className="inputLong"
         id="s2EducationExperienceSchool"
         name="s2EducationExperienceSchool"
-        value={formData?.s2EducationExperienceSchool}
-        onChange={(event) => handleChange(event.target.name, event.target.value)}
+        value={school}
+        onChange={(event) => setSchool(event.target.value)}
         label="School"
         placeholder="Ex:Business College Helsinki"
         labelOnFront></Input>
@@ -26,8 +63,8 @@ export default function EducationExperience({
         className="inputLong"
         id="s2EducationExperienceDegree"
         name="s2EducationExperienceDegree"
-        value={formData?.s2EducationExperienceDegree}
-        onChange={(event) => handleChange(event.target.name, event.target.value)}
+        value={degree}
+        onChange={(event) => setDegree(event.target.value)}
         label="Degree"
         placeholder="Ex:Vocational Qualification"
         labelOnFront></Input>
@@ -35,8 +72,8 @@ export default function EducationExperience({
         className="inputShort"
         id="s2EducationExperienceField"
         name="s2EducationExperienceField"
-        value={formData?.s2EducationExperienceField}
-        onChange={(event) => handleChange(event.target.name, event.target.value)}
+        value={location}
+        onChange={(event) => setLocation(event.target.value)}
         label="Field of Study"
         placeholder="Ex:Helsinki"
         labelOnFront></Input>
@@ -49,45 +86,40 @@ export default function EducationExperience({
           className="dateSelect"
           name="startMonthsSelect"
           placeholder="Month"
-          defaultValue={formData?.s2EducationExperienceStartMonths}
-          onChange={(selectOption) =>
-            handleChangeReactSelect('s2EducationExperienceStartMonths', selectOption)
-          }
+          value={startMonth}
+          onChange={(value) => setStartMonth(value)}
           options={months}
         />
         <GenericSelect
           className="dateSelect"
           name="startYearsSelect"
           placeholder="Year"
-          defaultValue={formData?.s2EducationExperienceStartYears}
-          onChange={(selectOption) =>
-            handleChangeReactSelect('s2EducationExperienceStartYears', selectOption)
-          }
+          value={startYear}
+          onChange={(value) => setStartYear(value)}
           options={years}
         />
         <GenericSelect
           className="dateSelect"
           name="endMonthsSelect"
           placeholder="Month"
-          defaultValue={formData?.s2EducationExperienceEndMonths}
-          onChange={(selectOption) =>
-            handleChangeReactSelect('s2EducationExperienceEndMonths', selectOption)
-          }
+          value={endMonth}
+          onChange={(value) => setEndMonth(value)}
           options={months}
         />
         <GenericSelect
           className="dateSelect"
           name="endYearsSelect"
           placeholder="Year"
-          defaultValue={formData?.s2EducationExperienceEndYears}
-          onChange={(selectOption) =>
-            handleChangeReactSelect('s2EducationExperienceEndYears', selectOption)
-          }
+          value={endYear}
+          onChange={(value) => setEndYear(value)}
           options={years}
         />
       </div>
 
-      <button type="button" className="saveButton" onClick={() => setSaved(true)}>
+      <button type="button" className="cancelButton" onClick={() => setModalClosed(true)}>
+        Cancel
+      </button>
+      <button type="button" className="saveButton" onClick={() => saveAndClose()}>
         Save
       </button>
     </div>

@@ -15,6 +15,6 @@ export const months = [
 
 export const years = [];
 
-for (let i = 1960; i <= new Date().getFullYear(); i++) {
+for (let i = new Date().getFullYear(); i >= 1960; i--) {
   years.push({ value: i, label: i });
 }

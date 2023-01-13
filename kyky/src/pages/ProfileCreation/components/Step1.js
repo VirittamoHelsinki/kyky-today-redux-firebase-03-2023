@@ -1,12 +1,36 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
-import '../../../styles/NewProfileCreation.scss';
+import { useSelector } from 'react-redux';
 import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
 import Skills from '../../../mock_skills.json';
+import '../../../styles/NewProfileCreation.scss';
 
-export default function Step1({ formData, handleChange }) {
+export default function Step1({ handleChange }) {
   const [query, setQuery] = useState('');
-  const [skills, setSkills] = useState(formData?.s1Skills);
+  const [title, setTitle] = useState('');
+  const [skills, setSkills] = useState([]);
+
+  const _title = useSelector((state) => state.profile.s1Title);
+  const _skills = useSelector((state) => state.profile.s1Skills);
+
+  useEffect(() => {
+    handleChange('s1Title', title);
+  }, [title]);
+
+  useEffect(() => {
+    handleChange('s1Skills', skills);
+  }, [skills]);
+
+  useEffect(() => {
+    if (_title) {
+      setTitle(_title);
+    }
+  }, [_title]);
+
+  useEffect(() => {
+    if (_skills) {
+      setSkills(_skills);
+    }
+  }, [_skills]);
 
   const handleClick = (event) => {
     for (const skill of skills) {
@@ -17,19 +41,14 @@ export default function Step1({ formData, handleChange }) {
     setSkills(skills.concat(event.target.value));
   };
 
-  // Updates GetStarted component's form state when 'skills' changes
-  useEffect(() => {
-    handleChange('s1Skills', skills);
-  }, [skills]);
-
   return (
     <div className="step step1">
       <input
         className="getStartedInput"
         id="s1TitleInput"
         name="s1TitleInput"
-        value={formData?.s1TitleInput}
-        onChange={(event) => handleChange(event.target.name, event.target.value)}
+        value={title}
+        onChange={(event) => setTitle(event.target.value)}
         placeholder="Example: Dogwalker"
         aria-label="Please add a title about what you do"></input>
       <h1>Please add skills you have.</h1>

@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateSteps, addProfileForm } from '../../redux/sellers/profileFormSlice';
+import { titles, tips } from './components/Features';
 import '../../styles/NewProfileCreation.scss';
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
@@ -11,66 +14,16 @@ import Step8 from './components/Step8';
 import Step9 from './components/Step9';
 
 export default function GetStarted() {
-  const titles = [
-    'Please add a title about what you do.',
-    'If you have relevant work and/or education experience, add it here.',
-    'Good. Now tell us which languages you speak.',
-    'Almost there! What work do you do here?',
-    'What is the main service you offer?',
-    'Please add your hourly rate.',
-    'Last details before you publish your profile',
-    'Preview Profile',
-    ' '
-  ];
-
-  const tips = [
-    "It's the very first thing clients see. Please describe your skills with your own words.",
-    'Relevant working experience will increase the chance of getting hired!',
-    'Your language skill can make client know you better.',
-    'Write down what you can offer to clients(maximum of 300 characters).',
-    'Choose one service that best describes the type of work you do.',
-    'Clients will see this rate on your profile.',
-    'A professional photo helps build trust with your clients.',
-    'You can still edit your profile as you want.',
-    ' '
-  ];
-
-  const steps = 9;
-
   const [title, setTitle] = useState(0);
   const [tip, setTip] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
-  const [toggleAddLanguageButton, setToggleAddLanguageButton] = useState(true);
-  const [formData, setFormData] = useState({
-    // Step 1 title & skills
-    s1TitleInput: '',
-    s1Skills: [],
-    // Step 2 work experience
-    s2WorkExperienceTitle: '',
-    s2WorkExperienceCompany: '',
-    s2WorkExperienceLocation: '',
-    s2WorkExperienceCountry: '',
-    s2WorkExperienceCurrentlyWorking: false,
-    s2WorkExperienceStartMonths: '',
-    s2WorkExperienceStartYears: '',
-    s2WorkExperienceEndMonths: '',
-    s2WorkExperienceEndYears: '',
-    s2WorkExperienceDescription: '',
-    // Step 2 education experience
-    s2EducationExperienceSchool: '',
-    s2EducationExperienceDegree: '',
-    s2EducationExperienceField: '',
-    s2EducationExperienceStartMonths: '',
-    s2EducationExperienceStartYears: '',
-    s2EducationExperienceEndMonths: '',
-    s2EducationExperienceEndYears: '',
-    // Step 3 languages
-    s3LanguageFI: '',
-    s3LanguageSV: '',
-    s3LanguageEN: '',
-    s3LanguageOther: '',
-    s3LanguageOtherProficiency: ''
-  });
+  const [formData, setFormData] = useState({});
+
+  const steps = 9;
+
+  const user = useSelector((state) => state.user.user);
+
+  const dispatch = useDispatch();
 
   function previousPhase() {
     setTitle(title - 1);
@@ -79,6 +32,7 @@ export default function GetStarted() {
   }
 
   function nextPhase() {
+    dispatch(updateSteps({ ...formData }));
     setTitle(title + 1);
     setTip(tip + 1);
     setCurrentStep(currentStep + 1);
@@ -88,19 +42,19 @@ export default function GetStarted() {
     setFormData({ ...formData, [name]: value });
   }
 
-  function handleChangeReactSelect(optionName, optionComponent) {
-    setFormData({
-      ...formData,
-      [optionName]: { label: optionComponent.label, value: optionComponent.value }
-    });
-  }
-
-  function handleClickAddLanguage() {
-    setToggleAddLanguageButton(!toggleAddLanguageButton);
-  }
-
   function sendForm(event) {
     event.preventDefault();
+  }
+
+  function submitform() {
+    nextPhase();
+    dispatch(
+      addProfileForm({
+        ...formData,
+        uid: user.uid,
+        name: user.displayName
+      })
+    );
   }
 
   return (
@@ -111,41 +65,28 @@ export default function GetStarted() {
           <p>{tips[tip]}</p>
         </div>
         <form onSubmit={sendForm}>
-          {currentStep === 1 && <Step1 formData={formData} handleChange={handleChange} />}
-          {currentStep === 2 && (
-            <Step2
-              formData={formData}
-              handleChange={handleChange}
-              handleChangeReactSelect={handleChangeReactSelect}
-            />
-          )}
-          {currentStep === 3 && (
-            <Step3
-              formData={formData}
-              handleChangeReactSelect={handleChangeReactSelect}
-              handleClickAddLanguage={handleClickAddLanguage}
-              toggleAddLanguageButton={toggleAddLanguageButton}
-            />
-          )}
-          {currentStep === 4 && <Step4 />}
-          {currentStep === 5 && <Step5 />}
-          {currentStep === 6 && <Step6 />}
-          {currentStep === 7 && <Step7 />}
-          {currentStep === 8 && <Step8 formData={formData} handleChange={handleChange} />}
+          {currentStep === 1 && <Step1 handleChange={handleChange} />}
+          {currentStep === 2 && <Step2 handleChange={handleChange} />}
+          {currentStep === 3 && <Step3 handleChange={handleChange} />}
+          {currentStep === 4 && <Step4 handleChange={handleChange} />}
+          {currentStep === 5 && <Step5 handleChange={handleChange} />}
+          {currentStep === 6 && <Step6 handleChange={handleChange} />}
+          {currentStep === 7 && <Step7 handleChange={handleChange} />}
+          {currentStep === 8 && <Step8 />}
           {currentStep === 9 && <Step9 />}
           <div>
-            {currentStep > 1 && (
+            {currentStep > 1 && currentStep < steps && (
               <button className="previousButton" onClick={previousPhase}>
                 Previous
               </button>
             )}
-            {currentStep < steps && (
+            {currentStep <= steps - 2 && (
               <button className="nextButton" onClick={nextPhase}>
                 Next
               </button>
             )}
-            {currentStep === steps && (
-              <button className="submitButton" type="submit">
+            {currentStep === steps - 1 && (
+              <button className="submitButton" type="button" onClick={submitform}>
                 Submit Profile
               </button>
             )}
