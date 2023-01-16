@@ -26,7 +26,7 @@ export const fetchJobsByQuery = createAsyncThunk(
       const q = query(jobsRef, where(payload.key, '==', payload.value));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
-        documents.push(doc.data());
+        documents.push({ ...doc.data(), id: doc.id });
       });
       return documents;
     } catch (error) {

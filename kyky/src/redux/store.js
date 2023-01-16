@@ -8,13 +8,15 @@ import calendarScheduleReducer from './sellers/calendarScheduleSlice';
 import fileUploadReducer from './storage/fileUploadSlice';
 import profileFormReducer from './sellers/profileFormSlice';
 import jobFormReducer from './sellers/jobFormSlice';
+import serviceBookingReducer from './buyers/serviceBookingSlice';
 
 const reducers = combineReducers({
   user: userReducer,
   schedule: calendarScheduleReducer,
   upload: fileUploadReducer,
   profile: profileFormReducer,
-  jobs: jobFormReducer
+  jobs: jobFormReducer,
+  booking: serviceBookingReducer
 });
 
 const persistConfig = {

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createBooking } from '../redux/buyers/serviceBookingSlice';
 import Button from '../components/Button';
 import Calendar from '../components/Calendar';
 import SelectDays from '../components/SelectDays';
 import Checkbox from '../components/Checkbox';
-import dogPic from '../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
-import Card from '../components/Card';
 
 const Tabs = {
   Once: 'Once',
@@ -38,16 +38,19 @@ function ServiceBooking() {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
   const [unit, setUnit] = useState('€');
-
-  const [job, setJob] = useState(defaultJob);
   const [currentTab, setCurrentTab] = useState(Tabs.Once);
   const [booking, setBooking] = useState(defaultBookingValue);
   const [date, setDate] = useState(new Date());
   const [showCalendarModal, setShowCalendarModal] = useState(false);
 
+  const dispatch = useDispatch();
+
   const location = useLocation();
 
   const state_exists = location.state !== null;
+
+  /* temporary, remove when db fetching implemented */
+  const job = defaultJob;
 
   useEffect(() => {
     if (state_exists) {
