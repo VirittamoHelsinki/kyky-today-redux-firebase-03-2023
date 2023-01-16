@@ -22,9 +22,9 @@ const Header = ({ navlinks }) => {
   useEffect(() => {
     const closeDropdown = (e) => {
       if (
-        e.path[0] !== menuRef.current &&
-        e.path[0] !== noImgRef.current &&
-        e.path[0] !== imgRef.current
+        e.target !== menuRef.current &&
+        e.target !== noImgRef.current &&
+        e.target !== imgRef.current
       ) {
         setMenuOpen(false);
         setProfileOpen(false);

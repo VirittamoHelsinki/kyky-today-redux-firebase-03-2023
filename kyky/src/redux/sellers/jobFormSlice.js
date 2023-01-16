@@ -44,9 +44,6 @@ export const jobCreationFormSlice = createSlice({
       .addCase(createJobForm.fulfilled, (state, action) => {
         console.log(action.payload);
       })
-      .addCase(fetchJobsByQuery.pending, (state, action) => {
-        console.log(action.payload);
-      })
       .addCase(fetchJobsByQuery.fulfilled, (state, action) => {
         return (state = {
           ...state,

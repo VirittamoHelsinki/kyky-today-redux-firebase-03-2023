@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchJobsByQuery } from '../redux/sellers/jobFormSlice';
 import Card from '../components/Card';
+import '../styles/CategoryPage.scss';
 
 const CategoryPage = () => {
   const [cards, setCards] = useState([]);
@@ -29,17 +30,10 @@ const CategoryPage = () => {
     }
   }, [_cards]);
 
-  const styles = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    borderRadiusTop: '20px'
-  };
-
   return (
-    <div>
+    <div className="category-main">
       <h1>{category_with_spaces}</h1>
-      <div style={styles}>
+      <div className="card-row">
         {cards.map((card, index) => (
           <Card job={card} key={index} />
         ))}
