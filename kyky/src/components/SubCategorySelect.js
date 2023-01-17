@@ -14,54 +14,54 @@ export default function SubCategorySelect({ changeMainCat, changeSubCat }) {
       <option value="DEFAULT" hidden disabled>
         -- select a category --
       </option>
-      <optgroup label="Home & Repairs">
-        <option value="cleaning services">cleaning services</option>
-        <option value="moving services">moving services</option>
-        <option value="home repairs & maintenance">home repairs & maintenance</option>
-        <option value="gardeners">gardeners</option>
-        <option value="interior design">interior design</option>
+      <optgroup label="Home maintenance and repairs">
+        <option value="Handyman">handyman</option>
+        <option value="Painter">painter</option>
+        <option value="Electrician">electrician</option>
+        <option value="Plumber">plumber</option>
+        <option value="Carpenter">carpenter</option>
+        <option value="Snow management">snow management</option>
+        <option value="Gardening and landscaping">gardening and landscaping</option>
+        <option value="Chimney/gutter maintenance">chimney/gutter maintenance</option>
       </optgroup>
-      <optgroup label="Beauty & Fashion">
-        <option value="hairdressers">hairdressers</option>
-        <option value="makeup artists & cosmetologists">makeup artist & cosmetologists</option>
-        <option value="manicure & pedicure">manicure & pedicure</option>
-        <option value="other beauty related">other beauty related</option>
-        <option value="tailors">tailors</option>
+      <optgroup label="moving and cleaning">
+        <option value="Moving services">moving services</option>
+        <option value="Cleaning services">cleaning services</option>
+        <option value="Carpet cleaning">carpet cleaning</option>
       </optgroup>
-      <optgroup label="Education & Languages">
-        <option value="school tutors">school tutors</option>
-        <option value="language mentors">language mentors</option>
-        <option value="music mentors">music mentors</option>
-        <option value="others">others</option>
+      <optgroup label="care and wellness">
+        <option value="Babysitting">babysitting</option>
+        <option value="Nurse">nurse</option>
+        <option value="Eldelry care">eldelry care</option>
+        <option value="Yoga">yoga</option>
+        <option value="Dietitia">dietitia</option>
+        <option value="Meditation">meditation</option>
+        <option value="Sports and fitness trainer">sports & fitness trainer</option>
+        <option value="Massage therapist">massage therapist</option>
+        <option value="Fitness coach">fitness coach</option>
       </optgroup>
-      <optgroup label="Wellness">
-        <option value="mind coach">mind coach</option>
-        <option value="health coach">health coach</option>
-        <option value="sport coach">sport coach</option>
-        <option value="nutrition coach">nutrition coach</option>
-        <option value="eldercare">eldercare</option>
+      <optgroup label="creative and it">
+        <option value="Photographer">photographer</option>
+        <option value="Graphic designer">graphic designer</option>
+        <option value="Content writer">content writer</option>
+        <option value="Translators">translators</option>
+        <option value="Art and crafts">art and crafts</option>
+        <option value="Music">music</option>
+        <option value="IT developer">IT developer</option>
+        <option value="IT designer">IT designer</option>
+        <option value="Programmer">programmer</option>
+        <option value="Technicians">technicians</option>
+        <option value="Social media">social media</option>
       </optgroup>
-      <optgroup label="Food & Events">
-        <option value="photographers">photographers</option>
-        <option value="party planning">party planning</option>
-        <option value="wedding planning">wedding planning</option>
-        <option value="chef & catering">chef & catering</option>
-      </optgroup>
-      <optgroup label="Pets">
-        <option value="pet training">pet training</option>
-        <option value="fur grooming">fur grooming</option>
-        <option value="dog walking">dog walking</option>
-        <option value="animal attendants">animal attendants</option>
-      </optgroup>
-      <optgroup label="Creativity & IT">
-        <option value="bloggers">bloggers</option>
-        <option value="DIY">DIY</option>
-        <option value="sightseeings">sightseeings</option>
-        <option value="other hobbies">other hobbies</option>
-      </optgroup>
-      <optgroup label="Consultant">
-        <option value="accountings">accountings</option>
-        <option value="car & bicycle maintenance">car & bicycle maintenance</option>
+      <optgroup label="learning and coaching">
+        <option value="Teachers and tutors">teachers and tutors</option>
+        <option value="Life coach">life coach</option>
+        <option value="Virtual assistent">virtual assistent</option>
+        <option value="Accountant">accountant</option>
+        <option value="Business consultant">business consultant</option>
+        <option value="Lawyer">lawyer</option>
+        <option value="Tax and finance consultant">tax and finance consultant</option>
+        <option value="Architect">architect</option>
       </optgroup>
     </select>
   );

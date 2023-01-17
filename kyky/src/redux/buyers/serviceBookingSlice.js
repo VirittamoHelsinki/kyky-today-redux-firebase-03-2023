@@ -18,7 +18,7 @@ export const fetchBookingsByQuery = createAsyncThunk(
     try {
       const bookings = [];
       const ref = collection(db, 'bookings');
-      const q = query(ref, where(payload, '==', 'uid'));
+      const q = query(ref, where('uid', '==', payload));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
         bookings.push({ ...doc.data(), id: doc.id });

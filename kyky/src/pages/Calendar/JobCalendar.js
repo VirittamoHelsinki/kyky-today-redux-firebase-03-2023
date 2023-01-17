@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
+import { fetchJobsByQuery } from '../../redux/sellers/jobFormSlice';
 import { fetchBookingsByQuery } from '../../redux/buyers/serviceBookingSlice';
 import { useOutletContext } from 'react-router-dom';
 import '../../styles/JobCalendar.scss';
 import Button from '../../components/Button';
 import LoadingSpinner from '../../components/LoadingSpinner';
-
-import activities from '../../activities.json';
 
 const months = [
   'January',
@@ -52,14 +51,14 @@ export default function JobCalendar() {
   const [openedSchedules, setOpenedSchedules] = useState([]);
   const [highlightDays, setHighlightDays] = useState([]);
   const [jobs, setJobs] = useState([]);
+  const [titles, setTitles] = useState([]);
   const [activities, setActivities] = useState([]);
 
   const user = useSelector((state) => state.user.user);
   const _schedules = useSelector((state) => state.schedule);
+  const _titles = useSelector((state) => state.jobs.cards);
   const _bookings = useSelector((state) => state.booking.bookings);
   const isLoading = useSelector((state) => state.schedule.loading);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     getSchedules();
@@ -78,11 +77,16 @@ export default function JobCalendar() {
     }
   }, [_schedules]);
 
-  useEffect(() => {
-    if (_bookings) {
-      setActivities(_bookings);
-    }
-  }, [_bookings]);
+  const dispatch = useDispatch();
+
+  function getSchedules() {
+    const schedules = _schedules[currentJob + '_schedules'] || [];
+    setSchedules(schedules);
+  }
+
+  function checkWeekdaySchedule(schedule, weekDay) {
+    return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
+  }
 
   useEffect(() => {
     const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
@@ -141,21 +145,24 @@ export default function JobCalendar() {
   }, [user]);
 
   useEffect(() => {
+    dispatch(fetchJobsByQuery({ key: 'uid', value: user.uid }));
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchBookingsByQuery(user.uid));
   }, []);
 
-  function getSchedules() {
-    const schedules = _schedules[currentJob + '_schedules'] || [];
-    setSchedules(schedules);
-  }
+  useEffect(() => {
+    if (_titles) {
+      setTitles(_titles);
+    }
+  }, [_titles]);
 
-  function checkWeekdaySchedule(schedule, weekDay) {
-    return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
-  }
-
-  function getDaysInMonth(year, month) {
-    return 32 - new Date(year, month, 32).getDate();
-  }
+  useEffect(() => {
+    if (_bookings) {
+      setActivities(_bookings);
+    }
+  }, [_bookings]);
 
   function getFirstDayOfMonth(year, month) {
     return new Date(year, month, 1).getDay();
@@ -245,8 +252,8 @@ export default function JobCalendar() {
                 onChange={(e) => {
                   setCurrentJob(e.target.value);
                 }}>
-                {jobs.map((job) => (
-                  <option key={job} value={job}>
+                {jobs.map((job, i) => (
+                  <option key={i} value={job}>
                     {job}
                   </option>
                 ))}
@@ -317,7 +324,7 @@ export default function JobCalendar() {
                     date.getFullYear() === new Date().getFullYear();
                   const activitiesToday = activities.filter(
                     (activity) =>
-                      new Date(activity.date).toISOString().slice(0, 10) ===
+                      new Date(activity.date.seconds * 1000).toISOString().slice(0, 10) ===
                         new Date(date.getFullYear(), date.getMonth(), day.getDate())
                           .toISOString()
                           .slice(0, 10) && activity.jobId === currentJob
@@ -445,9 +452,15 @@ export default function JobCalendar() {
           ) : (
             <p>You have no activites for the selected day</p>
           )}
-          <button className="scheduleButton" onClick={() => setScheduleWindow(true)}>
-            + Add a schedule
-          </button>
+          {titles.length > 0 ? (
+            <button className="scheduleButton" onClick={() => setScheduleWindow(true)}>
+              + Add a schedule
+            </button>
+          ) : (
+            <button className="scheduleButton-disabled" disabled>
+              + Add a schedule
+            </button>
+          )}
         </div>
       </div>
     </div>
