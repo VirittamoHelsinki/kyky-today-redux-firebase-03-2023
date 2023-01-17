@@ -79,9 +79,12 @@ export default function ManageSchedules() {
       end: unavailableEnd,
       indefinite
     };
-    const storage = JSON.parse(JSON.stringify(_schedules['unavailabilities'])) || [];
+    const temp_storage = _schedules['unavailabilities'] || [];
+    const storage = [...temp_storage];
     storage.push(data);
     dispatch(createUnavailability({ uid: user.uid, data: storage }));
+    setUnavailableStart('');
+    setUnavailableEnd('');
   }
 
   function unavailabilityIsValid() {

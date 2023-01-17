@@ -106,6 +106,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
       }
 
       if (schedules) {
+        console.log(properties);
         schedules.push(properties);
         dispatch(
           createSchedule({ uid: user.uid, jobId: properties.jobId + '_schedules', data: schedules })

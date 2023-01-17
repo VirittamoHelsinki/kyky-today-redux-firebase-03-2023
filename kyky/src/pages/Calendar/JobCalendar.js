@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
 import { fetchBookingsByQuery } from '../../redux/buyers/serviceBookingSlice';
+import { fetchJobsByQuery } from '../../redux/sellers/jobFormSlice';
 import { useOutletContext } from 'react-router-dom';
 import '../../styles/JobCalendar.scss';
 import Button from '../../components/Button';
@@ -78,6 +79,7 @@ export default function JobCalendar() {
     if (currentJob === '' && jobs.length > 0) {
       setCurrentJob(jobs[0]);
     }
+    console.log(jobs);
   }, [_schedules]);
 
   useEffect(() => {
@@ -141,6 +143,10 @@ export default function JobCalendar() {
       dispatch(fetchSchedules(user.uid));
     }
   }, [user]);
+
+  useEffect(() => {
+    dispatch(fetchJobsByQuery({ key: 'uid', value: user.uid }));
+  }, []);
 
   useEffect(() => {
     dispatch(fetchBookingsByQuery(user.uid));

@@ -28,6 +28,7 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
   useEffect(() => {
     if (_titles) {
       setTitles(_titles);
+      console.log(_titles);
     }
   }, [_titles]);
 

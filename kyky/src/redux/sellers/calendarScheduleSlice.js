@@ -47,8 +47,9 @@ for a reducer */
 export const removeSchedule = createAsyncThunk(
   'calendarSchedules/removeSchedule',
   async (payload) => {
+    console.log(payload);
     try {
-      await deleteDoc(doc(db, `users/${payload.uid}/schedules/${payload.schedule}`));
+      await deleteDoc(doc(db, `users/${payload.uid}/schedules/${payload.schedule}_schedules`));
       return payload.schedule;
     } catch (error) {
       return error;

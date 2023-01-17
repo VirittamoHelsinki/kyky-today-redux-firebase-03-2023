@@ -8,11 +8,10 @@ const defaultJob = {
   jobTitle: ''
 };
 
-export default function ChooseJob({ setField }) {
+export default function ChooseJob({ properties, setField }) {
   const [job, setJob] = useState('');
   const [jobs, setJobs] = useState([defaultJob]);
 
-  const user = useSelector((state) => state.user.user);
   const _jobs = useSelector((state) => state.jobs.cards);
 
   useEffect(() => {
@@ -30,11 +29,16 @@ export default function ChooseJob({ setField }) {
       });
       setJobs(job_list);
       if (job === '' && jobs.length > 0) {
-        setJob(jobs[0]);
+        setJob(job_list[0].id);
       }
-      console.log(job_list);
     }
-  }, [_jobs]);
+  }, []);
+
+  useEffect(() => {
+    if (properties.jobId) {
+      setField('jobId', properties.jobId);
+    } else setField('jobId', jobs[0].id);
+  }, [jobs]);
 
   return (
     <div className="choose-job container">
