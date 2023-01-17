@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
+import { fetchBookingsByQuery } from '../../redux/buyers/serviceBookingSlice';
 import { useOutletContext } from 'react-router-dom';
 import '../../styles/JobCalendar.scss';
 import Button from '../../components/Button';
@@ -51,10 +52,14 @@ export default function JobCalendar() {
   const [openedSchedules, setOpenedSchedules] = useState([]);
   const [highlightDays, setHighlightDays] = useState([]);
   const [jobs, setJobs] = useState([]);
+  const [activities, setActivities] = useState([]);
 
   const user = useSelector((state) => state.user.user);
   const _schedules = useSelector((state) => state.schedule);
+  const _bookings = useSelector((state) => state.booking.bookings);
   const isLoading = useSelector((state) => state.schedule.loading);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getSchedules();
@@ -73,16 +78,11 @@ export default function JobCalendar() {
     }
   }, [_schedules]);
 
-  const dispatch = useDispatch();
-
-  function getSchedules() {
-    const schedules = _schedules[currentJob + '_schedules'] || [];
-    setSchedules(schedules);
-  }
-
-  function checkWeekdaySchedule(schedule, weekDay) {
-    return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
-  }
+  useEffect(() => {
+    if (_bookings) {
+      setActivities(_bookings);
+    }
+  }, [_bookings]);
 
   useEffect(() => {
     const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
@@ -139,6 +139,19 @@ export default function JobCalendar() {
       dispatch(fetchSchedules(user.uid));
     }
   }, [user]);
+
+  useEffect(() => {
+    dispatch(fetchBookingsByQuery(user.uid));
+  }, []);
+
+  function getSchedules() {
+    const schedules = _schedules[currentJob + '_schedules'] || [];
+    setSchedules(schedules);
+  }
+
+  function checkWeekdaySchedule(schedule, weekDay) {
+    return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
+  }
 
   function getDaysInMonth(year, month) {
     return 32 - new Date(year, month, 32).getDate();

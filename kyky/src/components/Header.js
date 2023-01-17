@@ -87,6 +87,7 @@ const Header = ({ navlinks }) => {
                 className="profile-img"
                 ref={imgRef}
                 referrerPolicy="no-referrer"
+                alt=""
               />
               {profileOpen && (
                 <div className="dropdown-content">

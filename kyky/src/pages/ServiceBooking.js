@@ -12,6 +12,13 @@ const Tabs = {
   Recurring: 'Recurring'
 };
 
+const defaultBookingValue = {
+  checked: '',
+  selectedDays: [],
+  selectedDates: [],
+  termsAccepted: false
+};
+
 const defaultJob = {
   job: 'Dog Walker',
   title: 'I will walk your dog with love and care',
@@ -23,13 +30,6 @@ const defaultJob = {
     everyOtherWeekend: 25,
     onceEveryMonth: 25
   }
-};
-
-const defaultBookingValue = {
-  checked: '',
-  selectedDays: [],
-  selectedDates: [],
-  termsAccepted: false
 };
 
 function ServiceBooking() {
@@ -47,10 +47,9 @@ function ServiceBooking() {
 
   const location = useLocation();
 
-  const state_exists = location.state !== null;
-
-  /* temporary, remove when db fetching implemented */
   const job = defaultJob;
+
+  const state_exists = location.state !== null;
 
   useEffect(() => {
     if (state_exists) {
@@ -101,11 +100,28 @@ function ServiceBooking() {
       alert('Please read the VAT (sales tax) terms before continuing!');
     } else {
       alert(
-        `Thank you for booking the job ${defaultJob.job}! You have booked ${
-          defaultJob.job
+        `Thank you for booking the job ${location.state.subCategory}! You have booked ${
+          location.state.subCategory
         } for the following days: ${booking.selectedDays.map((day) => day.label)}${
           booking.selectedDates
         }`
+      );
+      dispatch(
+        createBooking({
+          ...booking,
+          id: location.state.id,
+          uid: location.state.uid,
+          user: location.state.name,
+          location: location.state.place,
+          date: date,
+          time: {
+            start: '09:30',
+            end: '12:00'
+          },
+          jobId: location.state.subCategory,
+          confirmed: false,
+          unread: true
+        })
       );
       setBooking(defaultBookingValue);
     }
@@ -278,3 +294,16 @@ function ServiceBooking() {
 }
 
 export default ServiceBooking;
+
+// const defaultJob = {
+//   job: 'Dog Walker',
+//   title: 'I will walk your dog with love and care',
+//   comment: { author: 'John Doe', comment: 'Punctual, friendly, dog lover, caring, responsible' },
+//   prices: {
+//     weekday: 25,
+//     weekend: 30,
+//     everyOtherWeekday: 22,
+//     everyOtherWeekend: 25,
+//     onceEveryMonth: 25
+//   }
+// };

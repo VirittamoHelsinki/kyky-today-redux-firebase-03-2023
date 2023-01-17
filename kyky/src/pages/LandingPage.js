@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import dogIMG from '../image/dog-walker.png';
 import cookingIMG from '../image/cooking.png';
