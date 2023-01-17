@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
-import { fetchJobsByQuery } from '../../redux/sellers/jobFormSlice';
 import { fetchBookingsByQuery } from '../../redux/buyers/serviceBookingSlice';
 import { useOutletContext } from 'react-router-dom';
 import '../../styles/JobCalendar.scss';
 import Button from '../../components/Button';
 import LoadingSpinner from '../../components/LoadingSpinner';
+
+import activities from '../../activities.json';
 
 const months = [
   'January',
@@ -51,14 +52,16 @@ export default function JobCalendar() {
   const [openedSchedules, setOpenedSchedules] = useState([]);
   const [highlightDays, setHighlightDays] = useState([]);
   const [jobs, setJobs] = useState([]);
-  const [titles, setTitles] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [titles, setTitles] = useState([]);
 
   const user = useSelector((state) => state.user.user);
   const _schedules = useSelector((state) => state.schedule);
-  const _titles = useSelector((state) => state.jobs.cards);
   const _bookings = useSelector((state) => state.booking.bookings);
+  const _titles = useSelector((state) => state.jobs.cards);
   const isLoading = useSelector((state) => state.schedule.loading);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getSchedules();
@@ -77,16 +80,11 @@ export default function JobCalendar() {
     }
   }, [_schedules]);
 
-  const dispatch = useDispatch();
-
-  function getSchedules() {
-    const schedules = _schedules[currentJob + '_schedules'] || [];
-    setSchedules(schedules);
-  }
-
-  function checkWeekdaySchedule(schedule, weekDay) {
-    return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
-  }
+  useEffect(() => {
+    if (_bookings) {
+      setActivities(_bookings);
+    }
+  }, [_bookings]);
 
   useEffect(() => {
     const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
@@ -113,7 +111,7 @@ export default function JobCalendar() {
       date.getMonth() - 1,
       firstDayOfMonth
     );
-    setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 2);
+    setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 1);
     getSchedules();
   }, [date]);
 
@@ -126,13 +124,13 @@ export default function JobCalendar() {
     );
     if (
       selectedDay !== null &&
-      selectedDay !== date.getDate() + lastDaysOfPreviousMonth.length - 2
+      selectedDay !== date.getDate() + lastDaysOfPreviousMonth.length - 1
     ) {
       setDate(
         new Date(
           date.getFullYear(),
           date.getMonth(),
-          selectedDay - (getFirstDayOfMonth(currentYear, currentMonth) - 2)
+          selectedDay - (getFirstDayOfMonth(currentYear, currentMonth) - 1)
         )
       );
     }
@@ -145,10 +143,6 @@ export default function JobCalendar() {
   }, [user]);
 
   useEffect(() => {
-    dispatch(fetchJobsByQuery({ key: 'uid', value: user.uid }));
-  }, []);
-
-  useEffect(() => {
     dispatch(fetchBookingsByQuery(user.uid));
   }, []);
 
@@ -158,14 +152,17 @@ export default function JobCalendar() {
     }
   }, [_titles]);
 
-  useEffect(() => {
-    if (_bookings) {
-      setActivities(_bookings);
-    }
-  }, [_bookings]);
+  function getSchedules() {
+    const schedules = _schedules[currentJob + '_schedules'] || [];
+    setSchedules(schedules);
+  }
+
+  function checkWeekdaySchedule(schedule, weekDay) {
+    return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
+  }
 
   function getFirstDayOfMonth(year, month) {
-    return new Date(year, month, 1).getDay();
+    return getTrueDay(new Date(year, month, 1));
   }
 
   function getLastDaysOfPreviousMonth(year, month, howManyDays) {
@@ -239,7 +236,6 @@ export default function JobCalendar() {
 
   return (
     <div>
-      {' '}
       <div className="MainContainer">
         <div className="calendar-container">
           <div className="job-select">
@@ -252,8 +248,8 @@ export default function JobCalendar() {
                 onChange={(e) => {
                   setCurrentJob(e.target.value);
                 }}>
-                {jobs.map((job, i) => (
-                  <option key={i} value={job}>
+                {jobs.map((job, index) => (
+                  <option key={index} value={job}>
                     {job}
                   </option>
                 ))}
@@ -336,7 +332,7 @@ export default function JobCalendar() {
                       key={`day-${index}`}
                       className={`calendar-day${selectedDay === index ? ' selected' : ''}${
                         disabled ? ' disabled' : ''
-                      }${highlightDays[day.getDate()]?.highlight ? ' highlight' : ''}`}
+                      }${highlightDays[day.getDate() - 1]?.highlight ? ' highlight' : ''}`}
                       onClick={() => {
                         if (!disabled) {
                           setSelectedDay(index);
@@ -368,13 +364,12 @@ export default function JobCalendar() {
           )}
         </div>
         <div className="addScheduleContainer">
-          {' '}
           <p className="scheduleDate">
             <strong>{weekDays[date.getDay()]}</strong> {date.toLocaleDateString('fi-fi')}
           </p>
           {currentActivities.length > 0 ? (
             <div className="schedules">
-              {schedules.map((schedule) => {
+              {schedules.map((schedule, index) => {
                 let _id = schedule.jobId + schedule.time.start;
                 const activitiesNow = currentActivities.filter(
                   (activity) =>
@@ -387,7 +382,7 @@ export default function JobCalendar() {
                 const confirmed = activitiesNow.filter((activity) => activity.confirmed);
                 const pending = activitiesNow.filter((activity) => !activity.confirmed);
                 return (
-                  <div className="schedule" key={schedule.id}>
+                  <div className="schedule" key={index}>
                     <div className="schedule-details">
                       <Button className="expand">
                         <i
@@ -450,7 +445,7 @@ export default function JobCalendar() {
               })}
             </div>
           ) : (
-            <p>You have no activites for the selected day</p>
+            <p>You have no activities for the selected day</p>
           )}
           {titles.length > 0 ? (
             <button className="scheduleButton" onClick={() => setScheduleWindow(true)}>
