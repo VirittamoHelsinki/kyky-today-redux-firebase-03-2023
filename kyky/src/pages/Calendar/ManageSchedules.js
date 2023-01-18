@@ -79,6 +79,7 @@ export default function ManageSchedules() {
       end: unavailableEnd,
       indefinite
     };
+    /* copy the array to allow modifications because Firebase returns Object.freeze() */
     const temp_storage = _schedules['unavailabilities'] || [];
     const storage = [...temp_storage];
     storage.push(data);

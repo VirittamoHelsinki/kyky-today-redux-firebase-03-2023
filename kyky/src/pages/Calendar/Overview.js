@@ -50,7 +50,7 @@ function Overview() {
     const scheduleKeys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
     const allSchedules = scheduleKeys
       .map((key) => {
-        // makes copy of the object to allow modifications because Firebase returns Object.freeze()
+        /* copy the object to allow modifications because Firebase returns Object.freeze() */
         const schedule = JSON.parse(JSON.stringify(_schedules[key]));
         return schedule;
       })
