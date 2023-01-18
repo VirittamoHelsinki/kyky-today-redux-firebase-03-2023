@@ -19,8 +19,6 @@ export default function GetStarted() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
 
-  const steps = 9;
-
   const user = useSelector((state) => state.user.user);
 
   const dispatch = useDispatch();

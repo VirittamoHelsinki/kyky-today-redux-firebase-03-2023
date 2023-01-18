@@ -63,6 +63,7 @@ const App = () => {
         <Header navlinks={navlinks} />
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="categories/:category" element={<CategoryPage />} />
           <Route
             path="profile-creation"
             element={
@@ -120,29 +121,6 @@ const App = () => {
             />
           </Route>
 
-          <Route
-            path="new-profile-creation"
-            element={
-              <UserRoute>
-                <Creation />
-              </UserRoute>
-            }>
-            <Route
-              index
-              element={
-                <UserRoute>
-                  <NewProfileCreation />
-                </UserRoute>
-              }
-            />
-            <Route
-              path="get-started"
-              element={
-                <UserRoute>
-                  <GetStarted />
-                </UserRoute>
-              }
-            />
           <Route
             path="new-profile-creation"
             element={
