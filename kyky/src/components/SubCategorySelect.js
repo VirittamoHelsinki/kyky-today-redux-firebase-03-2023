@@ -14,7 +14,7 @@ export default function SubCategorySelect({ changeMainCat, changeSubCat }) {
       <option value="DEFAULT" hidden disabled>
         -- select a category --
       </option>
-      <optgroup label="Home maintenance and repairs">
+      <optgroup label="home maintenance and repairs">
         <option value="Handyman">handyman</option>
         <option value="Painter">painter</option>
         <option value="Electrician">electrician</option>
