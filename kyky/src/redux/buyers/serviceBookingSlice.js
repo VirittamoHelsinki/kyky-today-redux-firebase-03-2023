@@ -39,7 +39,7 @@ export const serviceBookingSlice = createSlice({
       .addCase(createBooking.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          bookings: action.payload
+          newbooking: action.payload.jobId
         });
       })
       .addCase(fetchBookingsByQuery.fulfilled, (state, action) => {
