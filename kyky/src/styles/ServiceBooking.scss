@@ -12,7 +12,7 @@
   justify-content: center;
 
   h1 {
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins, sans-serif;
     font-weight: bold;
     font-size: 2rem;
   }
@@ -71,7 +71,6 @@
       min-height: 59vh;
       width: 34vw;
       border: 1px solid #c4c4c4;
-      border: 1px solid #c4c4c4;
       border-radius: 5px;
       display: flex;
       flex-direction: column;
@@ -110,9 +109,8 @@
 
             .recurring-price {
               width: 10%;
-              font-family: 'Poppins', sans-serif;
+              font-family: Poppins, sans-serif;
               font-weight: bold;
-              color: #00a088;
               color: #00a088;
             }
 
@@ -124,12 +122,10 @@
       }
 
       .panel-button {
-        font-family: 'Poppins', sans-serif;
+        font-family: Poppins, sans-serif;
         font-weight: bold;
         font-size: 1vw;
         color: #808080;
-        border-right: 0.5px solid #c4c4c4;
-        border-bottom: #c4c4c4 solid 2px;
         border-right: 0.5px solid #c4c4c4;
         border-bottom: #c4c4c4 solid 2px;
         flex: 1 1 0;
@@ -137,7 +133,6 @@
       }
 
       .selected {
-        border-bottom: #00a088 solid 7px;
         border-bottom: #00a088 solid 7px;
       }
     }
@@ -158,9 +153,7 @@
       background-color: white;
       border: #c4c4c4 solid 1px;
       color: #c4c4c4;
-      border: #c4c4c4 solid 1px;
-      color: #c4c4c4;
-      font-family: 'Poppins', sans-serif;
+      font-family: Poppins, sans-serif;
       font-weight: 400;
       font-size: 1.4rem;
     }
@@ -197,7 +190,7 @@
     .calendar-modal-button {
       background-color: #387a70;
       color: white;
-      font-family: 'Poppins', sans-serif;
+      font-family: Poppins, sans-serif;
       border-radius: 7px;
       margin: 2px;
     }
