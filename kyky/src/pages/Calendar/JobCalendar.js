@@ -4,11 +4,9 @@ import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
 import { fetchBookingsByQuery } from '../../redux/buyers/serviceBookingSlice';
 import { fetchJobsByQuery } from '../../redux/sellers/jobFormSlice';
 import { useOutletContext } from 'react-router-dom';
-import '../../styles/JobCalendar.scss';
 import Button from '../../components/Button';
 import LoadingSpinner from '../../components/LoadingSpinner';
-
-import activities from '../../activities.json';
+import '../../styles/JobCalendar.scss';
 
 const months = [
   'January',

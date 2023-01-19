@@ -65,7 +65,9 @@ const Header = ({ navlinks }) => {
               <span className="material-icons-outlined">notifications</span>
             </li>
             <li>
-              <Link to="/user-registration">Orders</Link>
+              <Link to="calendar">
+                <span className="material-icons-outlined">calendar_month</span>
+              </Link>
             </li>
             <li className="dropdown" onClick={menuToggle}>
               <span className="material-icons-outlined" ref={menuRef}>

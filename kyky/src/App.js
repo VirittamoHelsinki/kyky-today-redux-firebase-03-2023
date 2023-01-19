@@ -45,16 +45,10 @@ const App = () => {
 
   const navlinks = [
     { to: '/', label: 'Home' },
-    { to: '/profile-creation', label: 'Profile Creation' },
-    { to: '/user-registration', label: 'User Registration' },
-    { to: '/contact-form', label: 'Contact Form' },
-    { to: '/user-log-in', label: 'Log In' },
+    { to: '/new-profile-creation', label: 'Profile Creation' },
     { to: '/job-creation', label: 'Job Creation' },
-    { to: '/new-profile-creation', label: 'New Profile Creation' },
-    { to: '/calendar', label: 'My Calendar' },
-    { to: '/calendar/overview', label: 'Overview' },
-    { to: '/service-booking', label: 'Service Booking' },
-    { to: '/buyers-rating', label: 'Buyers Rating' }
+    { to: '/buyers-rating', label: 'Buyers Rating' },
+    { to: '/contact-form', label: 'Contact Form' }
   ];
 
   return (
@@ -64,6 +58,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="categories/:category" element={<CategoryPage />} />
+          <Route path="service-booking" element={<ServiceBooking />} />
           <Route
             path="profile-creation"
             element={
@@ -145,14 +140,6 @@ const App = () => {
               }
             />
           </Route>
-          <Route
-            path="service-booking"
-            element={
-              <UserRoute>
-                <ServiceBooking />
-              </UserRoute>
-            }
-          />
           <Route
             path="buyers-rating"
             element={

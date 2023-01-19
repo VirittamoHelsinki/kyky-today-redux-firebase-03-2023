@@ -128,25 +128,25 @@ function ServiceBooking() {
   }
 
   return (
-    <div className='booking-page-content'>
+    <div className="booking-page-content">
       {!state_exists ? (
         <div>No job profile to show, please navigate back to the category page</div>
       ) : (
-        <div className='service-booking-container'>
-          <div className='service-booking-left-panel'>
-            <div className='service-booking-left-panel-header'>
+        <div className="service-booking-container">
+          <div className="service-booking-left-panel">
+            <div className="service-booking-left-panel-header">
               <h1>{description}</h1>
-              <div className='username-commented-as'>
+              <div className="username-commented-as">
                 <h2>{name}</h2> was commented as:
               </div>
               <p>{job.comment.comment}</p>
             </div>
-            <img src={urls[0]} className='service-booking-left-panel-image' alt={'jobImage'} />
+            <img src={urls[0]} className="service-booking-left-panel-image" alt={'jobImage'} />
           </div>
 
-          <div className='service-booking-right-panel'>
-            <div className='service-booking-right-panel-content'>
-              <div className='service-booking-right-panel-tabs'>
+          <div className="service-booking-right-panel">
+            <div className="service-booking-right-panel-content">
+              <div className="service-booking-right-panel-tabs">
                 <div
                   className={`panel-button ${currentTab === Tabs.Once ? 'selected' : ''}`}
                   onClick={() => selectedTab(Tabs.Once)}>
@@ -162,9 +162,9 @@ function ServiceBooking() {
               {currentTab === Tabs.Once && (
                 <div>
                   <Calendar date={date} setDate={setDate} minYears={0} maxYears={5} />
-                  <div className='vat-terms'>
+                  <div className="vat-terms">
                     <Checkbox
-                      className='checkbox'
+                      className="checkbox"
                       label={`I have read VAT (sales tax) terms`}
                       onChange={() => checkTerms()}
                     />
@@ -173,18 +173,18 @@ function ServiceBooking() {
               )}
 
               {currentTab === Tabs.Recurring && (
-                <div className='recurring-tab-container'>
-                  <div className='checkbox-wrapper'>
-                    <div className='checkbox-wrapper-row'>
-                      <div className='recurring-text'>
+                <div className="recurring-tab-container">
+                  <div className="checkbox-wrapper">
+                    <div className="checkbox-wrapper-row">
+                      <div className="recurring-text">
                         <Checkbox
-                          className='checkbox'
-                          label='Every weekday'
+                          className="checkbox"
+                          label="Every weekday"
                           checked={booking.checked === 'weekday'}
                           onChange={() => check('weekday')}
                         />
                       </div>
-                      <div className='recurring-price'>
+                      <div className="recurring-price">
                         {price} {unit}/h
                       </div>
                       {booking.checked === 'weekday' && (
@@ -192,73 +192,73 @@ function ServiceBooking() {
                       )}
                     </div>
 
-                    <div className='checkbox-wrapper-row'>
-                      <div className='recurring-text'>
+                    <div className="checkbox-wrapper-row">
+                      <div className="recurring-text">
                         <Checkbox
-                          className='checkbox'
-                          label='Every weekend'
+                          className="checkbox"
+                          label="Every weekend"
                           checked={booking.checked === 'weekend'}
                           onChange={() => check('weekend')}
                         />
                       </div>
-                      <div className='recurring-price'>{job.prices.weekend} €/h</div>
+                      <div className="recurring-price">{job.prices.weekend} €/h</div>
                       {booking.checked === 'weekend' && (
                         <SelectDays selectedDays={selectedDays} booking={booking} />
                       )}
                     </div>
 
-                    <div className='checkbox-wrapper-row'>
-                      <div className='recurring-text'>
+                    <div className="checkbox-wrapper-row">
+                      <div className="recurring-text">
                         <Checkbox
-                          className='checkbox'
-                          label='Every other weekday'
+                          className="checkbox"
+                          label="Every other weekday"
                           checked={booking.checked === 'everyOtherWeekday'}
                           onChange={() => check('everyOtherWeekday')}
                         />
                       </div>
-                      <div className='recurring-price'>{job.prices.weekend} €/h</div>
+                      <div className="recurring-price">{job.prices.weekend} €/h</div>
                       {booking.checked === 'everyOtherWeekday' && (
                         <SelectDays selectedDays={selectedDays} booking={booking} />
                       )}
                     </div>
 
-                    <div className='checkbox-wrapper-row'>
-                      <div className='recurring-text'>
+                    <div className="checkbox-wrapper-row">
+                      <div className="recurring-text">
                         <Checkbox
-                          className='checkbox'
-                          label='Every other weekend'
+                          className="checkbox"
+                          label="Every other weekend"
                           checked={booking.checked === 'everyOtherWeekend'}
                           onChange={() => check('everyOtherWeekend')}
                         />
                       </div>
-                      <div className='recurring-price'>{job.prices.weekend} €/h</div>
+                      <div className="recurring-price">{job.prices.weekend} €/h</div>
                       {booking.checked === 'everyOtherWeekend' && (
                         <SelectDays selectedDays={selectedDays} booking={booking} />
                       )}
                     </div>
 
-                    <div className='checkbox-wrapper-row'>
-                      <div className='recurring-text'>
+                    <div className="checkbox-wrapper-row">
+                      <div className="recurring-text">
                         <Checkbox
-                          className='checkbox'
-                          label='Once every month'
+                          className="checkbox"
+                          label="Once every month"
                           checked={booking.checked === 'onceEveryMonth'}
                           onChange={() => checkOnceEveryMonth()}
                         />
                       </div>
-                      <div className='recurring-price'>{job.prices.weekend} €/h</div>
+                      <div className="recurring-price">{job.prices.weekend} €/h</div>
                       {booking.checked === 'onceEveryMonth' && showCalendarModal && (
-                        <div className='calendar-modal transparent-background'>
-                          <div className='calendar-modal'>
+                        <div className="calendar-modal transparent-background">
+                          <div className="calendar-modal">
                             <Calendar date={date} setDate={setDate} minYears={0} maxYears={5} />
-                            <div className='calendar-modal-buttons-container'>
+                            <div className="calendar-modal-buttons-container">
                               <Button
-                                className='calendar-modal-button'
+                                className="calendar-modal-button"
                                 onClick={() => setShowCalendarModal(false)}>
                                 Confirm selection
                               </Button>
                               <Button
-                                className='calendar-modal-button'
+                                className="calendar-modal-button"
                                 onClick={() => setBooking(defaultBookingValue)}>
                                 Cancel
                               </Button>
@@ -268,9 +268,9 @@ function ServiceBooking() {
                       )}
                     </div>
                   </div>
-                  <div className='vat-terms'>
+                  <div className="vat-terms">
                     <Checkbox
-                      className='checkbox'
+                      className="checkbox"
                       label={`I have read VAT (sales tax) terms`}
                       onChange={() => checkTerms()}
                     />
@@ -278,14 +278,14 @@ function ServiceBooking() {
                 </div>
               )}
             </div>
-            <div className='service-booking-right-panel-continue-button'>
+            <div className="service-booking-right-panel-continue-button">
               <Button onClick={() => confirmBooking()} children={<div>Continue</div>} />
             </div>
           </div>
         </div>
       )}
-      <div className='service-booking-footer'>
-        <div className='service-booking-footer-button'>
+      <div className="service-booking-footer">
+        <div className="service-booking-footer-button">
           <Button children={<div>Contact Seller</div>} />
         </div>
       </div>
@@ -294,16 +294,3 @@ function ServiceBooking() {
 }
 
 export default ServiceBooking;
-
-// const defaultJob = {
-//   job: 'Dog Walker',
-//   title: 'I will walk your dog with love and care',
-//   comment: { author: 'John Doe', comment: 'Punctual, friendly, dog lover, caring, responsible' },
-//   prices: {
-//     weekday: 25,
-//     weekend: 30,
-//     everyOtherWeekday: 22,
-//     everyOtherWeekend: 25,
-//     onceEveryMonth: 25
-//   }
-// };
