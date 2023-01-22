@@ -107,6 +107,14 @@ const App = () => {
               }
             />
             <Route
+              path="job-creation"
+              element={
+                <UserRoute>
+                  <JobCreation />
+                </UserRoute>
+              }
+            />
+            <Route
               path="settings"
               element={
                 <UserRoute>

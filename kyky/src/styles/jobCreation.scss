@@ -2,16 +2,32 @@ p {
   text-align: start;
 }
 
-.inputLarge {
+.inputTitle {
   display: flex;
-  height: 300px;
   width: 625px;
   margin: 12px 0;
-  padding: 0 20px 265px;
-  border-radius: 8px;
+  padding: 0 20px 10px;
+  border-radius: 4px;
   border: solid 1px gainsboro;
-  box-shadow: 2px 2px 9px gainsboro;
   text-align: start;
+}
+
+.inputLarge {
+  display: flex;
+  width: 625px;
+  margin: 12px 0;
+  padding: 0 20px 100px;
+  border-radius: 4px;
+  border: solid 1px gainsboro;
+  text-align: start;
+}
+
+.inputPrice {
+  background-color: #fff;
+  border: solid 1px gainsboro;
+  text-align: right;
+  width: 44px;
+  height: 30px;
 }
 
 .inputContainer {
@@ -45,12 +61,13 @@ p {
 .picBox {
   display: flex;
   height: 140px;
-  width: 130px;
   margin: 12px 0;
   border: 1px solid gainsboro;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
+  overflow: visible;
+  position: relative;
 }
 
 .picIcon {
@@ -64,4 +81,88 @@ p {
   background-color: #808080;
   justify-content: center;
   align-items: center;
+}
+
+.select-button {
+  background-color: #fff;
+  border: solid 1px gainsboro;
+  width: 250px;
+  height: 30px;
+}
+
+.select-unit {
+  background-color: #fff;
+  border: solid 1px gainsboro;
+  width: 40px;
+  height: 30px;
+}
+
+.recurrent-switch {
+  display: flex;
+  gap: 4px;
+  padding-top: 8px;
+}
+
+.recurrents {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1em;
+
+  .disabled {
+    opacity: 0.3;
+  }
+}
+
+.recurrent {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: solid 1px gainsboro;
+  padding: 1px;
+}
+
+.recurrent-text {
+  font-size: 0.875rem;
+}
+
+.job-creation-setting {
+  margin: 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.buttons {
+  display: flex;
+}
+
+.transparent-background {
+  background: rgb(0 0 0 / 70%) !important;
+  border: none !important;
+  width: 100%;
+  height: 100%;
+}
+
+.preview-modal {
+  background: white;
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  border: 1px #9c9797 solid;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.file-upload-image {
+  height: 130px;
+}
+
+.file-remove {
+  position: absolute;
+  top: 10px;
+  right: 40px;
 }

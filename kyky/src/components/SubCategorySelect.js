@@ -1,9 +1,11 @@
 import React from 'react';
+import '../styles/jobCreation.scss';
 
 export default function SubCategorySelect({ changeMainCat, changeSubCat }) {
   return (
     <select
       name="subcategories"
+      className="select-button"
       defaultValue={'DEFAULT'}
       onChange={(e) => {
         changeSubCat(e.target.value);

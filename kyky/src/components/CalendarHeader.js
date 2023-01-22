@@ -22,13 +22,13 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
       id: 'manage-schedules',
       icon: 'build'
     },
+    { to: '/calendar/job-creation', label: 'Create a job', id: 'job-creation', icon: 'add_task' },
     { to: '/calendar/settings', label: 'Settings', id: 'settings', icon: 'settings' }
   ];
 
   useEffect(() => {
     if (_titles) {
       setTitles(_titles);
-      console.log(_titles);
     }
   }, [_titles]);
 
