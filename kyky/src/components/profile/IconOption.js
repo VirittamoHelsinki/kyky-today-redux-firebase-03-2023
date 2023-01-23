@@ -1,5 +1,5 @@
 import { components } from 'react-select';
-import { ReactComponent as CheckMark } from '../../../image/check-mark.svg';
+import { ReactComponent as CheckMark } from '../../image/check-mark.svg';
 
 export default function IconOption(props) {
   const { Option } = components;

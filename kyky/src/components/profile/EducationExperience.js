@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import Input from '../../../components/Input';
+import Input from '../../components/Input';
 import { GenericSelect } from './Select';
 import { months, years } from './Time';
-import '../../../styles/NewProfileCreation.scss';
+import '../../styles/NewProfileCreation.scss';
 
 export default function EducationExperience({ addEducExperience, setModalClosed }) {
   const [educExperience, setEducExperience] = useState({});

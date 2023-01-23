@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import WorkExperience from './WorkExperience';
 import EducationExperience from './EducationExperience';
-import '../../../styles/NewProfileCreation.scss';
+import '../../styles/NewProfileCreation.scss';
 
 export default function Step2({ handleChange }) {
   const [experience, setExperience] = useState();

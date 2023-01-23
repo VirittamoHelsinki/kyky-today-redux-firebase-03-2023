@@ -35,8 +35,8 @@ import CalendarSettings from './pages/Calendar/CalendarSettings';
 
 /* Buyer's Rating*/
 import BuyersRating from './pages/BuyersRating';
-import ThanksForRating from './pages/ProfileCreation/components/ThanksForRating';
-import NPS from './pages/ProfileCreation/components/NPS';
+import ThanksForRating from './components/profile/ThanksForRating';
+import NPS from './components/profile/NPS';
 
 const languages = { fi, en };
 

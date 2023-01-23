@@ -9,7 +9,7 @@ import {
   subCategory4,
   subCategory5
 } from './Features';
-import '../../../styles/NewProfileCreation.scss';
+import '../../styles/NewProfileCreation.scss';
 
 export default function Step5({ handleChange }) {
   const [selectValue, setSelectValue] = useState('');

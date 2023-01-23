@@ -1,9 +1,9 @@
-import '../../../styles/NewProfileCreation.scss';
-import '../../../styles/_components.scss';
+import '../../styles/NewProfileCreation.scss';
+import '../../styles/_components.scss';
 import React from 'react';
-import { ReactComponent as Like } from '../../../image/like.svg';
-import devPhoto from '../../../image/devPhoto.jpg';
-import { ReactComponent as ProfileIcon2 } from '../../../image/profileicon2.svg';
+import { ReactComponent as Like } from '../../image/like.svg';
+import devPhoto from '../../image/devPhoto.jpg';
+import { ReactComponent as ProfileIcon2 } from '../../image/profileicon2.svg';
 
 export default function Step9() {
   return (

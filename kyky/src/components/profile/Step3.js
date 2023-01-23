@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { GenericSelect } from './Select';
 import { language_options } from './Features';
-import Languages from '../../../languages.json';
+import Languages from '../../languages.json';
 
 export default function Step3({ handleChange }) {
   const [finnish, setFinnish] = useState(language_options[0]);

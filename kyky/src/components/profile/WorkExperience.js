@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import Checkbox from '../../../components/Checkbox';
-import Input from '../../../components/Input';
-import Countries from '../../../countries.json';
+import Checkbox from '../../components/Checkbox';
+import Input from '../../components/Input';
+import Countries from '../../countries.json';
 import { GenericSelect } from './Select';
 import { months, years } from './Time';
-import '../../../styles/NewProfileCreation.scss';
+import '../../styles/NewProfileCreation.scss';
 
 const countries = Countries.map((country) => ({ value: country.code, label: country.name }));
 

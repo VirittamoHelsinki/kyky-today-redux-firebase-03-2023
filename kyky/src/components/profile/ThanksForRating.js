@@ -1,7 +1,7 @@
 import React from 'react';
-import { ReactComponent as Heart } from '../../../image/heart.svg';
-import '../../../styles/buyersrating.scss';
-import Button from '../../../components/Button';
+import { ReactComponent as Heart } from '../../image/heart.svg';
+import '../../styles/buyersrating.scss';
+import Button from '../Button';
 
 export default function ThanksForRating() {
   return (

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImage } from '../../../redux/storage/fileUploadSlice';
-import '../../../styles/NewProfileCreation.scss';
+import { uploadImage } from '../../redux/storage/fileUploadSlice';
+import '../../styles/NewProfileCreation.scss';
 
 export default function AddPhoto({ setModalClosed, addUrl }) {
   const [selectedImage, setSelectedImage] = useState('');

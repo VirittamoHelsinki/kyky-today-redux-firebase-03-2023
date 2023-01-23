@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { ReactComponent as MagGlass } from '../../../image/mag-glass.svg';
-import Skills from '../../../mock_skills.json';
-import '../../../styles/NewProfileCreation.scss';
+import { ReactComponent as MagGlass } from '../../image/mag-glass.svg';
+import Skills from '../../mock_skills.json';
+import '../../styles/NewProfileCreation.scss';
 
 export default function Step1({ handleChange }) {
   const [query, setQuery] = useState('');

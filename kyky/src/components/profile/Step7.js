@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { GenericSelect } from './Select';
-import Countries from '../../../countries.json';
-import CountriesWithDialCodes from '../../../countriesWithDialCodes.json';
+import Countries from '../../countries.json';
+import CountriesWithDialCodes from '../../countriesWithDialCodes.json';
 import AddPhoto from './AddPhoto';
-import '../../../styles/NewProfileCreation.scss';
-import '../../../styles/_components.scss';
+import '../../styles/NewProfileCreation.scss';
+import '../../styles/_components.scss';
 
 export default function Step7({ handleChange }) {
   const [upload, setUpload] = useState('');

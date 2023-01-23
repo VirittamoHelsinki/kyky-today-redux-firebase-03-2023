@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { GenericSelect } from './Select';
-import '../../../styles/NewProfileCreation.scss';
+import '../../styles/NewProfileCreation.scss';
 
 const currencies = [
   { value: '€', label: 'Hourly Rate(€)' },
