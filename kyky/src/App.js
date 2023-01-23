@@ -15,7 +15,7 @@ import ContactForm from './pages/ContactForm';
 import UserLogin from './pages/UserLogIn';
 import RecoverPassword from './pages/RecoverPassword';
 import LandingPage from './pages/LandingPage';
-import JobCreation from './pages/JobCreation';
+import JobCreation from './pages/Calendar/JobCreation';
 import ServiceBooking from './pages/ServiceBooking';
 import CategoryPage from './pages/CategoryPage';
 import UserRoute from './routes/UserRoute';

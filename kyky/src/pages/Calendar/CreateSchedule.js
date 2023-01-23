@@ -7,10 +7,10 @@ import { createSchedule, removeSchedule } from '../../redux/sellers/calendarSche
 import Button from '../../components/Button';
 
 /* Step components */
-import ChooseJob from '../../components/ManageScheduleModal/ChooseJob';
-import DateAndTime from '../../components/ManageScheduleModal/DateAndTime';
-import BookingPreferences from '../../components/ManageScheduleModal/BookingPreferences';
-import PreviewAndSubmit from '../../components/ManageScheduleModal/PreviewAndSubmit';
+import ChooseJob from '../../components/calendar/ChooseJob';
+import DateAndTime from '../../components/calendar/DateAndTime';
+import BookingPreferences from '../../components/calendar/BookingPreferences';
+import PreviewAndSubmit from '../../components/calendar/PreviewAndSubmit';
 
 export default function ManageScheduleModal({ setScheduleWindow, editing }) {
   const [step, setStep] = useState(1);

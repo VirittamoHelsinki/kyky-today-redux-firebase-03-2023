@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createBooking } from '../redux/buyers/serviceBookingSlice';
 import Button from '../components/Button';
-import Calendar from '../components/Calendar';
+import Calendar from '../components/calendar/Calendar';
 import SelectDays from '../components/SelectDays';
 import Checkbox from '../components/Checkbox';
 

@@ -1,6 +1,6 @@
 /* This code is atrocious, PLEASE FIX IT */
 
-import Calendar from '../../components/Calendar';
+import Calendar from '../../components/calendar/Calendar';
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { useSelector } from 'react-redux';

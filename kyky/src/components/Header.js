@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../redux/auth/userSlice';
+import ProfileDropdown from './ProfileDropdown';
 import SearchBar from './SearchBar';
 import '../styles/header.scss';
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
@@ -64,14 +65,9 @@ const Header = ({ navlinks }) => {
             <li>
               <span className="material-icons-outlined">notifications</span>
             </li>
-            <li>
-              <Link to="calendar">
-                <span className="material-icons-outlined">calendar_month</span>
-              </Link>
-            </li>
             <li className="dropdown" onClick={menuToggle}>
               <span className="material-icons-outlined" ref={menuRef}>
-                menu
+                dashboard
               </span>
               {menuOpen && (
                 <div className="dropdown-content">
@@ -83,6 +79,11 @@ const Header = ({ navlinks }) => {
                 </div>
               )}
             </li>
+            <li>
+              <Link to="calendar">
+                <span className="material-icons-outlined">calendar_month</span>
+              </Link>
+            </li>
             <li className="dropdown" onClick={profileToggle}>
               <img
                 src={user.photoURL}
@@ -93,13 +94,7 @@ const Header = ({ navlinks }) => {
               />
               {profileOpen && (
                 <div className="dropdown-content">
-                  <div
-                    className="logout"
-                    onClick={() => {
-                      onLogoutClick();
-                    }}>
-                    Log out
-                  </div>
+                  <ProfileDropdown user={user} />
                 </div>
               )}
             </li>

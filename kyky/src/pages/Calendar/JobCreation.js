@@ -1,15 +1,15 @@
 import { useState, useContext, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createJobForm } from '../redux/sellers/jobFormSlice';
+import { createJobForm } from '../../redux/sellers/jobFormSlice';
 import Switch from 'react-switch';
-import Language from '../language';
-import Checkbox from '../components/Checkbox';
-import Button from '../components/Button';
-import Card from '../components/Card';
-import FileUpload2 from '../components/FileUpload2';
-import Categories from '../components/SubCategorySelect';
-import '../styles/jobCreation.scss';
+import Language from '../../language';
+import Checkbox from '../../components/Checkbox';
+import Button from '../../components/Button';
+import Card from '../../components/Card';
+import FileUpload2 from '../../components/calendar/AddPhotoArray';
+import Categories from '../../components/SubCategorySelect';
+import '../../styles/jobCreation.scss';
 
 const currencies = [
   { value: '€', label: 'Hourly Rate(€)' },
@@ -275,7 +275,7 @@ export default function JobCreation() {
                         onClick={() => {
                           setUrls(urls.filter((url) => url !== u));
                         }}>
-                        <i className="material-icons-outlined">close</i>
+                        X
                       </button>
                     </div>
                   </div>

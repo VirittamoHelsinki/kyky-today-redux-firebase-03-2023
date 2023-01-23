@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImage } from '../redux/storage/fileUploadSlice';
-import Spinner from './ImageSpinner';
+import { uploadImage } from '../../redux/storage/fileUploadSlice';
+import Spinner from '../ImageSpinner';
 
 const FileUpload2 = ({ addUrl }) => {
   const [receiveUrl, setReceiveUrl] = useState(false);
