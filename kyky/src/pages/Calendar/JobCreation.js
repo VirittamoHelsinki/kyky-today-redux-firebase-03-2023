@@ -304,7 +304,9 @@ export default function JobCreation() {
                 unit: unit
               }}
             />
-            <Button onClick={() => setShowPreviewModal(false)}>Close</Button>
+            <button className="close-button" onClick={() => setShowPreviewModal(false)}>
+              Close
+            </button>
           </div>
         </div>
       )}
