@@ -53,3 +53,27 @@ nav ul {
 .dropdown-content a:hover {
   background-color: #f1f1f1;
 }
+
+.calendar-icon-hovertext {
+  position: relative;
+  display: inline-block;
+}
+
+.calendar-icon-hovertext .hovertext {
+  visibility: hidden;
+  text-align: center;
+  border: 1px #9c9797 solid;
+  position: absolute;
+  font-size: 13px;
+  padding: 2px;
+  z-index: 1;
+  top: 40px;
+  left: -9px;
+  transition-property: visibility;
+  transition-delay: 0s;
+}
+
+.calendar-icon-hovertext:hover .hovertext {
+  visibility: visible;
+  transition-delay: 0.3s;
+}

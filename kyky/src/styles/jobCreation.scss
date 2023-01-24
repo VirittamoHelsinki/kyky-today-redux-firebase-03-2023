@@ -162,9 +162,13 @@ p {
 }
 
 .file-remove {
+  background: gray;
+  color: white;
   position: absolute;
+  border-radius: 8px;
   font-size: 20px;
   font-weight: bold;
+  width: 20px;
   top: 0;
   right: 0;
 }

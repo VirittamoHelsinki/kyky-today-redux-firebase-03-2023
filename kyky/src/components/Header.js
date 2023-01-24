@@ -81,7 +81,10 @@ const Header = ({ navlinks }) => {
             </li>
             <li>
               <Link to="calendar">
-                <span className="material-icons-outlined">calendar_month</span>
+                <div className="calendar-icon-hovertext">
+                  <span className="material-icons-outlined">calendar_month</span>
+                  <span class="hovertext">Calendar</span>
+                </div>
               </Link>
             </li>
             <li className="dropdown" onClick={profileToggle}>
