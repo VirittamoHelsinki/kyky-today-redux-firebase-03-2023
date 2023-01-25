@@ -14,41 +14,83 @@
   h1 {
     font-family: Poppins, sans-serif;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 24px;
   }
 
   .service-booking-left-panel {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 40rem;
 
-    .service-booking-left-panel-header {
+    .service-booking-left-panel-content {
       display: flex;
-      flex-direction: column;
-      width: 100%;
-      margin-bottom: 1rem;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .service-booking-left-panel-header {
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        margin-bottom: 1rem;
+
+        h2 {
+          font-size: 16px;
+          margin-right: 5px;
+        }
+
+        .username-commented-as {
+          display: flex;
+        }
+
+        .service-booking-left-panel-image {
+          width: 100%;
+          height: 470px;
+          object-fit: cover;
+        }
+
+        p {
+          font-style: italic;
+          font-size: 16px;
+          color: #063831;
+        }
+      }
+
+      .service-booking-left-panel-price {
+        display: flex;
+
+        .price {
+          display: flex;
+          align-items: center;
+          font-size: 26px;
+        }
+      }
     }
 
-    h2 {
-      font-size: 16px;
-      margin-right: 5px;
-    }
+    .service-booking-left-panel-image-content {
+      position: relative;
+      height: 500px;
 
-    .username-commented-as {
-      display: flex;
-    }
+      .service-booking-left-panel-image {
+        width: 100%;
+      }
 
-    .service-booking-left-panel-image {
-      width: 100%;
-      height: 470px;
-      object-fit: cover;
-    }
+      .arrow-left {
+        position: absolute;
+        background: #bfbfbf;
+        color: white;
+        top: 47%;
+        right: 93%;
+        cursor: pointer;
+      }
 
-    p {
-      font-style: italic;
-      font-size: 16px;
-      color: #063831;
+      .arrow-right {
+        position: absolute;
+        background: #bfbfbf;
+        color: white;
+        top: 47%;
+        right: 1%;
+        cursor: pointer;
+      }
     }
   }
 
@@ -99,8 +141,8 @@
             min-height: 40px;
 
             .recurring-text {
-              width: 60%;
-              font-size: 20px;
+              width: 50%;
+              font-size: 16px;
 
               .checkbox {
                 margin-right: 1rem;
@@ -108,14 +150,14 @@
             }
 
             .recurring-price {
-              width: 20%;
+              width: 15%;
               font-family: Poppins, sans-serif;
               font-weight: bold;
               color: #00a088;
             }
 
             .multiple-select {
-              width: 45%;
+              width: 35%;
             }
           }
         }

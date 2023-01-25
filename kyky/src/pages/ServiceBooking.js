@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createBooking } from '../redux/buyers/serviceBookingSlice';
 import Button from '../components/Button';
@@ -34,9 +34,15 @@ const defaultJob = {
 
 function ServiceBooking() {
   const [urls, setUrls] = useState([]);
+  const [urlIndex, setUrlIndex] = useState(0);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
+  const [weekday, setWeekday] = useState(0);
+  const [weekend, setWeekend] = useState(0);
+  const [everyOtherWeekday, setEveryOtherWeekday] = useState(0);
+  const [everyOtherWeekend, setEveryOtherWeekend] = useState(0);
+  const [onceAMonth, setOnceAMonth] = useState(0);
   const [unit, setUnit] = useState('€');
   const [currentTab, setCurrentTab] = useState(Tabs.Once);
   const [booking, setBooking] = useState(defaultBookingValue);
@@ -46,6 +52,8 @@ function ServiceBooking() {
   const dispatch = useDispatch();
 
   const location = useLocation();
+
+  const navigate = useNavigate();
 
   const job = defaultJob;
 
@@ -57,9 +65,18 @@ function ServiceBooking() {
       setName(location.state.name);
       setDescription(location.state.description);
       setPrice(location.state.price);
+      setWeekday(location.state.weekday);
+      setWeekend(location.state.weekend);
+      setEveryOtherWeekday(location.state.everyOtherWeekday);
+      setEveryOtherWeekend(location.state.everyOtherWeekend);
+      setOnceAMonth(location.state.onceAMonth);
       setUnit(location.state.unit);
     }
   }, []);
+
+  useEffect(() => {
+    console.log(booking);
+  }, [booking]);
 
   useEffect(() => {
     selectedCalendarDay(date);
@@ -118,12 +135,27 @@ function ServiceBooking() {
             start: '09:30',
             end: '12:00'
           },
-          jobId: location.state.subCategory,
+          jobId: location.state.title,
           confirmed: false,
           unread: true
         })
       );
       setBooking(defaultBookingValue);
+      navigate('/');
+    }
+  }
+
+  function imageArrowLeft() {
+    if (urlIndex > 0) {
+      let newIndex = urlIndex - 1;
+      setUrlIndex(newIndex);
+    }
+  }
+
+  function imageArrowRight() {
+    if (urlIndex < urls.length - 1) {
+      let newIndex = urlIndex + 1;
+      setUrlIndex(newIndex);
     }
   }
 
@@ -134,14 +166,45 @@ function ServiceBooking() {
       ) : (
         <div className="service-booking-container">
           <div className="service-booking-left-panel">
-            <div className="service-booking-left-panel-header">
-              <h1>{description}</h1>
-              <div className="username-commented-as">
-                <h2>{name}</h2> was commented as:
+            <div className="service-booking-left-panel-content">
+              <div className="service-booking-left-panel-header">
+                <h1>{description}</h1>
+                <div className="username-commented-as">
+                  <h2>{name}</h2> was commented as:
+                </div>
+                <p>{job.comment.comment}</p>
               </div>
-              <p>{job.comment.comment}</p>
+              <div className="service-booking-left-panel-price">
+                <div className="price">
+                  {price} {unit}/h
+                </div>
+              </div>
             </div>
-            <img src={urls[0]} className="service-booking-left-panel-image" alt={'jobImage'} />
+            <div className="service-booking-left-panel-image-content">
+              <img
+                src={urls[urlIndex]}
+                className="service-booking-left-panel-image"
+                alt={'jobImage'}
+              />
+              {urlIndex > 0 && (
+                <div
+                  className="arrow-left"
+                  onClick={() => {
+                    imageArrowLeft();
+                  }}>
+                  <span className="material-icons-outlined">keyboard_arrow_left</span>
+                </div>
+              )}
+              {urlIndex < urls.length - 1 && (
+                <div
+                  className="arrow-right"
+                  onClick={() => {
+                    imageArrowRight();
+                  }}>
+                  <span className="material-icons-outlined">keyboard_arrow_right</span>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="service-booking-right-panel">
@@ -185,7 +248,7 @@ function ServiceBooking() {
                         />
                       </div>
                       <div className="recurring-price">
-                        {price} {unit}/h
+                        {weekday} {unit}/h
                       </div>
                       {booking.checked === 'weekday' && (
                         <SelectDays selectedDays={selectedDays} booking={booking} />
@@ -201,7 +264,7 @@ function ServiceBooking() {
                           onChange={() => check('weekend')}
                         />
                       </div>
-                      <div className="recurring-price">{job.prices.weekend} €/h</div>
+                      <div className="recurring-price">{weekend} €/h</div>
                       {booking.checked === 'weekend' && (
                         <SelectDays selectedDays={selectedDays} booking={booking} />
                       )}
@@ -216,7 +279,7 @@ function ServiceBooking() {
                           onChange={() => check('everyOtherWeekday')}
                         />
                       </div>
-                      <div className="recurring-price">{job.prices.weekend} €/h</div>
+                      <div className="recurring-price">{everyOtherWeekday} €/h</div>
                       {booking.checked === 'everyOtherWeekday' && (
                         <SelectDays selectedDays={selectedDays} booking={booking} />
                       )}
@@ -231,7 +294,7 @@ function ServiceBooking() {
                           onChange={() => check('everyOtherWeekend')}
                         />
                       </div>
-                      <div className="recurring-price">{job.prices.weekend} €/h</div>
+                      <div className="recurring-price">{everyOtherWeekend} €/h</div>
                       {booking.checked === 'everyOtherWeekend' && (
                         <SelectDays selectedDays={selectedDays} booking={booking} />
                       )}
@@ -246,7 +309,7 @@ function ServiceBooking() {
                           onChange={() => checkOnceEveryMonth()}
                         />
                       </div>
-                      <div className="recurring-price">{job.prices.weekend} €/h</div>
+                      <div className="recurring-price">{onceAMonth} €/h</div>
                       {booking.checked === 'onceEveryMonth' && showCalendarModal && (
                         <div className="calendar-modal transparent-background">
                           <div className="calendar-modal">

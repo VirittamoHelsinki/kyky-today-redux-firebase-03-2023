@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createJobForm } from '../../redux/sellers/jobFormSlice';
 import Switch from 'react-switch';
@@ -8,7 +8,7 @@ import Checkbox from '../../components/Checkbox';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import FileUpload2 from '../../components/calendar/AddPhotoArray';
-import Categories from '../../components/SubCategorySelect';
+import Categories from '../../components/CategoryTitleSelect';
 import '../../styles/jobCreation.scss';
 
 const currencies = [
@@ -20,10 +20,10 @@ const currencies = [
 export default function JobCreation() {
   const [setSelectedWindow, setEditing, setScheduleWindow] = useOutletContext();
   const [recurrent, setRecurrent] = useState(false);
-  const [title, setTitle] = useState('');
+  const [headline, setHeadline] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [subCategory, setSubCategory] = useState('');
+  const [title, setTitle] = useState('');
   const [place, setPlace] = useState('');
   const [insurance, setIncurance] = useState(false);
   const [price, setPrice] = useState(0);
@@ -38,6 +38,8 @@ export default function JobCreation() {
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const user = useSelector((state) => state.user.user);
 
   const handleSubmit = (e) => {
@@ -46,10 +48,10 @@ export default function JobCreation() {
       createJobForm({
         uid: user.uid,
         name: user.displayName,
-        title: title,
+        headline: headline,
         description: description,
         category: category,
-        subCategory: subCategory,
+        title: title,
         place: place,
         insurance: insurance,
         price: price,
@@ -62,6 +64,7 @@ export default function JobCreation() {
         urls: urls
       })
     );
+    navigate('/calendar');
   };
 
   const addUrl = (u) => {
@@ -70,12 +73,12 @@ export default function JobCreation() {
     setUrls(urlsArray);
   };
 
-  const changeMainCat = (cat) => {
-    setCategory(cat);
+  const changeCategory = (c) => {
+    setCategory(c);
   };
 
-  const changeSubCat = (cat) => {
-    setSubCategory(cat);
+  const changeTitle = (t) => {
+    setTitle(t);
   };
 
   const { lang } = useContext(Language);
@@ -95,9 +98,9 @@ export default function JobCreation() {
               className="inputTitle"
               type="text"
               name="jobTitle"
-              value={title}
+              value={headline}
               onChange={(e) => {
-                setTitle(e.target.value);
+                setHeadline(e.target.value);
               }}
             />
           </div>
@@ -117,7 +120,7 @@ export default function JobCreation() {
         <div className="settings-container">
           <h3 className="title">{lang.job_creation.job_category}</h3>
           <div className="job-creation-setting">
-            <Categories changeSubCat={changeSubCat} changeMainCat={changeMainCat} />
+            <Categories changeTitle={changeTitle} changeCategory={changeCategory} />
           </div>
           <h3 className="title">{lang.job_creation.place}</h3>
           <div className="job-creation-setting">

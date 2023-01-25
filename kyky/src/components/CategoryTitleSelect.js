@@ -1,15 +1,15 @@
 import React from 'react';
 import '../styles/jobCreation.scss';
 
-export default function SubCategorySelect({ changeMainCat, changeSubCat }) {
+export default function SubCategorySelect({ changeCategory, changeTitle }) {
   return (
     <select
       name="subcategories"
       className="select-button"
       defaultValue={'DEFAULT'}
       onChange={(e) => {
-        changeSubCat(e.target.value);
-        changeMainCat(
+        changeTitle(e.target.value);
+        changeCategory(
           document.querySelector('select[name="subcategories"] option:checked').parentElement.label
         );
       }}>

@@ -83,7 +83,7 @@ const Header = ({ navlinks }) => {
               <Link to="calendar">
                 <div className="calendar-icon-hovertext">
                   <span className="material-icons-outlined">calendar_month</span>
-                  <span class="hovertext">Calendar</span>
+                  <span className="hovertext">Calendar</span>
                 </div>
               </Link>
             </li>
