@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createBooking } from '../redux/buyers/serviceBookingSlice';
 import Button from '../components/Button';
 import Calendar from '../components/calendar/Calendar';
@@ -47,6 +47,7 @@ function ServiceBooking() {
   const [currentTab, setCurrentTab] = useState(Tabs.Once);
   const [booking, setBooking] = useState(defaultBookingValue);
   const [date, setDate] = useState(new Date());
+  const [user, setUser] = useState(null);
   const [showCalendarModal, setShowCalendarModal] = useState(false);
 
   const dispatch = useDispatch();
@@ -54,6 +55,8 @@ function ServiceBooking() {
   const location = useLocation();
 
   const navigate = useNavigate();
+
+  const _user = useSelector((state) => state.user.user);
 
   const job = defaultJob;
 
@@ -75,8 +78,10 @@ function ServiceBooking() {
   }, []);
 
   useEffect(() => {
-    console.log(booking);
-  }, [booking]);
+    if (_user) {
+      setUser(_user);
+    }
+  }, []);
 
   useEffect(() => {
     selectedCalendarDay(date);
@@ -132,8 +137,8 @@ function ServiceBooking() {
           location: location.state.place,
           date: date,
           time: {
-            start: '09:30',
-            end: '12:00'
+            start: '09:00',
+            end: '15:00'
           },
           jobId: location.state.title,
           confirmed: false,
@@ -142,20 +147,6 @@ function ServiceBooking() {
       );
       setBooking(defaultBookingValue);
       navigate('/');
-    }
-  }
-
-  function imageArrowLeft() {
-    if (urlIndex > 0) {
-      let newIndex = urlIndex - 1;
-      setUrlIndex(newIndex);
-    }
-  }
-
-  function imageArrowRight() {
-    if (urlIndex < urls.length - 1) {
-      let newIndex = urlIndex + 1;
-      setUrlIndex(newIndex);
     }
   }
 
@@ -190,7 +181,7 @@ function ServiceBooking() {
                 <div
                   className="arrow-left"
                   onClick={() => {
-                    imageArrowLeft();
+                    setUrlIndex(urlIndex - 1);
                   }}>
                   <span className="material-icons-outlined">keyboard_arrow_left</span>
                 </div>
@@ -199,7 +190,7 @@ function ServiceBooking() {
                 <div
                   className="arrow-right"
                   onClick={() => {
-                    imageArrowRight();
+                    setUrlIndex(urlIndex + 1);
                   }}>
                   <span className="material-icons-outlined">keyboard_arrow_right</span>
                 </div>
