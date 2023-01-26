@@ -53,6 +53,7 @@ export default function JobCalendar() {
   const [jobs, setJobs] = useState([]);
   const [activities, setActivities] = useState([]);
   const [titles, setTitles] = useState([]);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const _user = useSelector((state) => state.user);
   const _schedules = useSelector((state) => state.schedule);
@@ -235,13 +236,6 @@ export default function JobCalendar() {
       year--;
     }
     setDate(new Date(year, month, date.getDate()));
-  }
-
-  function confirmBooking() {
-    const confirm = window.confirm('Do you want to set the booking status to confirmed?');
-    if (confirm) {
-      return;
-    }
   }
 
   return (
@@ -462,7 +456,13 @@ export default function JobCalendar() {
                               error
                             </i>
                             <span>{pending.length} pending confirmation</span>
-                            <i className="material-icons-outlined">keyboard_arrow_right</i>
+                            <i
+                              className="material-icons-outlined"
+                              onClick={() => {
+                                setShowConfirmModal(true);
+                              }}>
+                              keyboard_arrow_right
+                            </i>
                           </p>
                         </div>
                       )}
@@ -484,6 +484,19 @@ export default function JobCalendar() {
             </button>
           )}
         </div>
+        {showConfirmModal && (
+          <div className="confirm-modal transparent-background">
+            <div className="confirm-modal">
+              <div>Confirm booking?</div>
+              <div className="confirm-modal-buttons-container">
+                <Button className="confirm-modal-button">Confirm selection</Button>
+                <Button className="confirm-modal-button" onClick={() => setShowConfirmModal(false)}>
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
