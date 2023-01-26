@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBooking } from '../redux/buyers/serviceBookingSlice';
 import Button from '../components/Button';
+import Input from '../components/Input';
 import Calendar from '../components/calendar/Calendar';
 import SelectDays from '../components/SelectDays';
 import Checkbox from '../components/Checkbox';
@@ -49,6 +50,9 @@ function ServiceBooking() {
   const [date, setDate] = useState(new Date());
   const [user, setUser] = useState(null);
   const [showCalendarModal, setShowCalendarModal] = useState(false);
+  const [showGuestModal, setShowGuestModal] = useState(false);
+  const [inputname, setInputname] = useState('');
+  const [inputmail, setInputmail] = useState('');
 
   const dispatch = useDispatch();
 
@@ -56,7 +60,7 @@ function ServiceBooking() {
 
   const navigate = useNavigate();
 
-  const _user = useSelector((state) => state.user.user);
+  const _user = useSelector((state) => state.user);
 
   const job = defaultJob;
 
@@ -78,7 +82,7 @@ function ServiceBooking() {
   }, []);
 
   useEffect(() => {
-    if (_user) {
+    if (_user.uid) {
       setUser(_user);
     }
   }, []);
@@ -117,13 +121,21 @@ function ServiceBooking() {
     }
   }
 
+  function authenticated() {
+    if (user) {
+      confirmBooking();
+    } else {
+      setShowGuestModal(true);
+    }
+  }
+
   function confirmBooking() {
     if (!booking.termsAccepted) {
       alert('Please read the VAT (sales tax) terms before continuing!');
     } else {
       alert(
-        `Thank you for booking the job ${location.state.subCategory}! You have booked ${
-          location.state.subCategory
+        `Thank you for booking the job ${location.state.title}! You have booked ${
+          location.state.title
         } for the following days: ${booking.selectedDays.map((day) => day.label)}${
           booking.selectedDates
         }`
@@ -133,7 +145,8 @@ function ServiceBooking() {
           ...booking,
           id: location.state.id,
           uid: location.state.uid,
-          user: location.state.name,
+          user: user ? user.displayName : inputname,
+          mail: user ? user.email : inputmail,
           location: location.state.place,
           date: date,
           time: {
@@ -147,6 +160,14 @@ function ServiceBooking() {
       );
       setBooking(defaultBookingValue);
       navigate('/');
+    }
+  }
+
+  function mailValidation(email) {
+    if (email.length < 5 || !email.includes('@') || !email.includes('.')) {
+      return false;
+    } else {
+      return true;
     }
   }
 
@@ -333,8 +354,55 @@ function ServiceBooking() {
               )}
             </div>
             <div className="service-booking-right-panel-continue-button">
-              <Button onClick={() => confirmBooking()} children={<div>Continue</div>} />
+              <Button onClick={() => authenticated()} children={<div>Continue</div>} />
             </div>
+            {showGuestModal && (
+              <div className="guest-modal transparent-background">
+                <div className="guest-modal">
+                  <h3>You are not logged in.</h3>
+                  <h3>Enter your name and email address so you can be contacted.</h3>
+                  <div>Name</div>
+                  <Input
+                    label=""
+                    type="text"
+                    name="username"
+                    value={inputname}
+                    placeholder="your name"
+                    onChange={(e) => {
+                      setInputname(e.target.value);
+                    }}></Input>
+                  <div>Email address</div>
+                  <Input
+                    label=""
+                    type="email"
+                    name="email"
+                    value={inputmail}
+                    placeholder="your email"
+                    onChange={(e) => {
+                      setInputmail(e.target.value);
+                    }}></Input>
+                  <div className="guest-modal-buttons-container">
+                    {inputname !== '' && mailValidation(inputmail) ? (
+                      <Button
+                        className="guest-modal-button"
+                        onClick={() => {
+                          confirmBooking();
+                          setShowGuestModal(false);
+                        }}>
+                        Confirm selection
+                      </Button>
+                    ) : (
+                      <Button className="guest-modal-button-disabled" disabled>
+                        Confirm selection
+                      </Button>
+                    )}
+                    <Button className="guest-modal-button" onClick={() => setShowGuestModal(false)}>
+                      Cancel
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}

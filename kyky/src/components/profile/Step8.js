@@ -17,7 +17,7 @@ export default function Step8() {
     'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp'
   );
 
-  const user = useSelector((state) => state.user.user);
+  const _user = useSelector((state) => state.user);
   const _title = useSelector((state) => state.profile.s1Title);
   const _skills = useSelector((state) => state.profile.s1Skills);
   const _workExp = useSelector((state) => state.profile.s2WorkExperiences);
@@ -91,7 +91,7 @@ export default function Step8() {
           </div>
           <div className="bigContainer">
             <div className="nameContainer">
-              <h2 className="firstNameLastName">{user.displayName}</h2>
+              <h2 className="firstNameLastName">{_user.displayName}</h2>
             </div>
             <div className="gpsLocation">
               <Gps />

@@ -54,11 +54,11 @@ export default function JobCalendar() {
   const [activities, setActivities] = useState([]);
   const [titles, setTitles] = useState([]);
 
-  const user = useSelector((state) => state.user.user);
+  const _user = useSelector((state) => state.user);
   const _schedules = useSelector((state) => state.schedule);
   const _bookings = useSelector((state) => state.booking.bookings);
   const _titles = useSelector((state) => state.jobs.cards);
-  const isLoading = useSelector((state) => state.schedule.loading);
+  const _isLoading = useSelector((state) => state.schedule.loading);
 
   const dispatch = useDispatch();
 
@@ -77,7 +77,6 @@ export default function JobCalendar() {
     if (currentJob === '' && jobs.length > 0) {
       setCurrentJob(jobs[0]);
     }
-    console.log(jobs);
   }, [_schedules]);
 
   useEffect(() => {
@@ -137,17 +136,17 @@ export default function JobCalendar() {
   }, [selectedDay]);
 
   useEffect(() => {
-    if (user.uid) {
-      dispatch(fetchSchedules(user.uid));
+    if (_user.uid) {
+      dispatch(fetchSchedules(_user.uid));
     }
-  }, [user]);
+  }, [_user]);
 
   useEffect(() => {
-    dispatch(fetchJobsByQuery({ key: 'uid', value: user.uid }));
+    dispatch(fetchJobsByQuery({ key: 'uid', value: _user.uid }));
   }, []);
 
   useEffect(() => {
-    dispatch(fetchBookingsByQuery(user.uid));
+    dispatch(fetchBookingsByQuery(_user.uid));
   }, []);
 
   useEffect(() => {
@@ -238,6 +237,13 @@ export default function JobCalendar() {
     setDate(new Date(year, month, date.getDate()));
   }
 
+  function confirmBooking() {
+    const confirm = window.confirm('Do you want to set the booking status to confirmed?');
+    if (confirm) {
+      return;
+    }
+  }
+
   return (
     <div>
       <div className="MainContainer">
@@ -302,7 +308,7 @@ export default function JobCalendar() {
               <span key={week}>{week}</span>
             ))}
           </div>
-          {isLoading ? (
+          {_isLoading ? (
             <LoadingSpinner />
           ) : (
             <div className="job-calendar">
@@ -439,10 +445,27 @@ export default function JobCalendar() {
                                 <i className="material-icons-outlined">account_circle</i>
                                 {activity.user}
                               </p>
+                              <p>
+                                {' '}
+                                <i className="material-icons-outlined">mail</i>
+                                {activity.mail}
+                              </p>
                             </div>
                           </div>
                         );
                       })}
+                      {pending.length > 0 && (
+                        <div className="activityInfo">
+                          {' '}
+                          <p>
+                            <i className="material-icons-outlined" style={{ color: 'red' }}>
+                              error
+                            </i>
+                            <span>{pending.length} pending confirmation</span>
+                            <i className="material-icons-outlined">keyboard_arrow_right</i>
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );

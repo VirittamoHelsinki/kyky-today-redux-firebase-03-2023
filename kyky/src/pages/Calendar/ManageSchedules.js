@@ -25,7 +25,7 @@ export default function ManageSchedules() {
 
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.user.user);
+  const _user = useSelector((state) => state.user);
   const _schedules = useSelector((state) => state.schedule);
 
   useEffect(() => {
@@ -39,9 +39,9 @@ export default function ManageSchedules() {
     if (confirm) {
       storage.splice(index, 1);
       if (storage.length === 0) {
-        dispatch(removeSchedule({ uid: user.uid, schedule: schedule.jobId }));
+        dispatch(removeSchedule({ uid: _user.uid, schedule: schedule.jobId }));
       } else {
-        dispatch(createSchedule({ uid: user.uid, jobId: schedule.jobId, data: storage }));
+        dispatch(createSchedule({ uid: _user.uid, jobId: schedule.jobId, data: storage }));
       }
     }
     setSelectedSchedules(storage);
@@ -83,7 +83,7 @@ export default function ManageSchedules() {
     const temp_storage = _schedules['unavailabilities'] || [];
     const storage = [...temp_storage];
     storage.push(data);
-    dispatch(createUnavailability({ uid: user.uid, data: storage }));
+    dispatch(createUnavailability({ uid: _user.uid, data: storage }));
     setUnavailableStart('');
     setUnavailableEnd('');
   }
@@ -162,7 +162,7 @@ export default function ManageSchedules() {
                       if (confirm) {
                         const storage = [..._schedules['unavailabilities']];
                         storage.splice(index, 1);
-                        dispatch(createUnavailability({ uid: user.uid, data: storage }));
+                        dispatch(createUnavailability({ uid: _user.uid, data: storage }));
                       }
                     }}>
                     X

@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 const GuestRoute = ({ children }) => {
-  const auth = useSelector((state) => state.user.user);
+  const _user = useSelector((state) => state.user);
 
-  return !auth ? { ...children } : <Navigate to="/" />;
+  return !_user.uid ? { ...children } : <Navigate to="/" />;
 };
 
 export default GuestRoute;

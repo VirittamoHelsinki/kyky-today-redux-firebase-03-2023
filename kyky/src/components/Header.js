@@ -18,7 +18,7 @@ const Header = ({ navlinks }) => {
 
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.user.user);
+  const _user = useSelector((state) => state.user);
 
   useEffect(() => {
     const closeDropdown = (e) => {
@@ -57,7 +57,7 @@ const Header = ({ navlinks }) => {
         </a>
       </div>
       <nav>
-        {user ? (
+        {_user.uid ? (
           <ul>
             <li>
               <SearchBar />
@@ -89,7 +89,7 @@ const Header = ({ navlinks }) => {
             </li>
             <li className="dropdown" onClick={profileToggle}>
               <img
-                src={user.photoURL}
+                src={_user.photoURL}
                 className="profile-img"
                 ref={imgRef}
                 referrerPolicy="no-referrer"
@@ -97,7 +97,7 @@ const Header = ({ navlinks }) => {
               />
               {profileOpen && (
                 <div className="dropdown-content">
-                  <ProfileDropdown user={user} />
+                  <ProfileDropdown user={_user} onLogoutClick={onLogoutClick} />
                 </div>
               )}
             </li>

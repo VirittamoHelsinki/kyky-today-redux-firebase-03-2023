@@ -8,7 +8,7 @@ const FileUpload2 = ({ addUrl }) => {
 
   const fileInput = useRef(null);
 
-  const isLoading = useSelector((state) => state.upload.loading);
+  const _isLoading = useSelector((state) => state.upload.loading);
   const _url = useSelector((state) => state.upload.url);
 
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const FileUpload2 = ({ addUrl }) => {
 
   return (
     <div className="file-upload">
-      {isLoading ? (
+      {_isLoading ? (
         <Spinner />
       ) : (
         <div className="files">

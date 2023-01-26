@@ -19,7 +19,7 @@ function UserLogIn() {
 
   const dispatch = useDispatch();
 
-  const _user = useSelector((state) => state.user.user);
+  const _user = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +38,7 @@ function UserLogIn() {
   };
 
   useEffect(() => {
-    if (_user) {
+    if (_user.uid) {
       dispatch(fetchSchedules(_user.uid));
     }
   }, [_user]);

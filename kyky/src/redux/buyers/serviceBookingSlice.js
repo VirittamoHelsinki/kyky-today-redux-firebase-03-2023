@@ -30,6 +30,18 @@ export const fetchBookingsByQuery = createAsyncThunk(
   }
 );
 
+export const changeBookingStatus = createAsyncThunk(
+  'serviceBookings/changeBookingStatus',
+  async (payload) => {
+    try {
+      const bookingRef = doc(db, 'bookings', payload.booking);
+      setDoc(bookingRef, { confirmed: payload.status });
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 export const serviceBookingSlice = createSlice({
   name: 'serviceBookings',
   initialState: [],

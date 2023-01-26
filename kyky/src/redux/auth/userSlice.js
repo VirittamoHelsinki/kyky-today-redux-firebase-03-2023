@@ -32,8 +32,8 @@ export const signUpEmailAndPassword = createAsyncThunk(
         photoURL: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp',
         displayName: payload.username
       });
-      await sendEmailVerification(auth.currentUser);
-      alert('A verification link is sent to your email!');
+      // await sendEmailVerification(auth.currentUser);
+      // alert('A verification link is sent to your email!');
       return user;
     } catch (error) {
       return error;
@@ -46,16 +46,16 @@ export const signInEmailAndPassword = createAsyncThunk(
   async (payload) => {
     try {
       const res = await signInWithEmailAndPassword(auth, payload.email, payload.password);
-      if (res.user.uid && !res.user.emailVerified) {
-        const confirm = window.confirm(
-          'Please verify your email address\n\nPress OK to send a new verification link to your email'
-        );
-        if (confirm) {
-          await sendEmailVerification(auth.currentUser);
-          alert('A new verification link is sent to your email!');
-        }
-      }
-      return res;
+      // if (res.user.uid && !res.user.emailVerified) {
+      //   const confirm = window.confirm(
+      //     'Please verify your email address\n\nPress OK to send a new verification link to your email'
+      //   );
+      //   if (confirm) {
+      //     await sendEmailVerification(auth.currentUser);
+      //     alert('A new verification link is sent to your email!');
+      //   }
+      // }
+      return res.user;
     } catch (error) {
       return error;
     }
@@ -80,7 +80,7 @@ export const signInGoogleAuthProvider = createAsyncThunk(
     try {
       const provider = new GoogleAuthProvider();
       const res = await signInWithPopup(auth, provider);
-      return res;
+      return res.user;
     } catch (error) {
       return error;
     }
@@ -122,10 +122,12 @@ export const logOut = createAsyncThunk('user/logOut', async () => {
   }
 });
 
+const initialState = {};
+
 // createAsyncThunk() generates automatically pending -, fulfilled - and rejected handling cases
 export const userSlice = createSlice({
   name: 'user',
-  initialState: {},
+  initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -133,42 +135,42 @@ export const userSlice = createSlice({
         localStorage.setItem('user', JSON.stringify(action.payload));
         return (state = {
           ...state,
-          user: action.payload
+          ...action.payload
         });
       })
       .addCase(signInEmailAndPassword.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload.user));
+        localStorage.setItem('user', JSON.stringify(action.payload));
         return (state = {
           ...state,
-          user: action.payload.user
+          ...action.payload
         });
       })
       .addCase(signInGoogleAuthProvider.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload.user));
+        localStorage.setItem('user', JSON.stringify(action.payload));
         return (state = {
           ...state,
-          user: action.payload.user
+          ...action.payload
         });
       })
       .addCase(signInFacebookAuthProvider.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload.user));
+        localStorage.setItem('user', JSON.stringify(action.payload));
         return (state = {
           ...state,
-          user: action.payload.user
+          ...action.payload
         });
       })
       .addCase(signInAppleAuthProvider.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload.user));
+        localStorage.setItem('user', JSON.stringify(action.payload));
         return (state = {
           ...state,
-          user: action.payload.user
+          ...action.payload
         });
       })
       .addCase(logOut.fulfilled, (state, action) => {
+        state = initialState;
         localStorage.removeItem('user');
         return (state = {
-          ...state,
-          user: null
+          ...state
         });
       });
   }

@@ -19,7 +19,7 @@ export default function GetStarted() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
 
-  const user = useSelector((state) => state.user.user);
+  const _user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -52,8 +52,8 @@ export default function GetStarted() {
     dispatch(
       addProfileForm({
         ...formData,
-        uid: user.uid,
-        name: user.displayName
+        uid: _user.uid,
+        name: _user.displayName
       })
     );
   }

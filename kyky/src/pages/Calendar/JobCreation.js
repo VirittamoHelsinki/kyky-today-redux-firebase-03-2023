@@ -40,14 +40,14 @@ export default function JobCreation() {
 
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.user.user);
+  const _user = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
       createJobForm({
-        uid: user.uid,
-        name: user.displayName,
+        uid: _user.uid,
+        name: _user.displayName,
         headline: headline,
         description: description,
         category: category,
@@ -302,7 +302,7 @@ export default function JobCreation() {
                 urls: urls,
                 description: description,
                 rating: '',
-                name: user.displayName,
+                name: _user.displayName,
                 price: price,
                 unit: unit
               }}

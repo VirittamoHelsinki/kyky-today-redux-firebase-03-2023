@@ -41,7 +41,7 @@ function taskStatus(task) {
   }
 }
 
-const ProfileDropdown = ({ user }) => {
+const ProfileDropdown = ({ user, onLogoutClick }) => {
   return (
     <div className="profile-dropdown-main">
       <div className="profile-dropdown-content">
@@ -120,7 +120,13 @@ const ProfileDropdown = ({ user }) => {
         </div>
       </div>
       <div className="lower-icon-box">
-        <span className="material-icons-outlined">logout</span>
+        <span
+          className="material-icons-outlined"
+          onClick={() => {
+            onLogoutClick();
+          }}>
+          logout
+        </span>
       </div>
     </div>
   );

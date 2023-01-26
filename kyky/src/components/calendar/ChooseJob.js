@@ -18,12 +18,12 @@ export default function ChooseJob({ properties, setField }) {
     if (_jobs) {
       const job_list = [];
       _jobs.forEach((job) => {
-        if (!job_list.some(({ id }) => id === job.subCategory)) {
+        if (!job_list.some(({ id }) => id === job.title)) {
           job_list.push({
-            id: job.subCategory,
-            categories: [job.subCategory],
-            cities: [job.place],
-            jobTitle: job.subCategory
+            id: job.title,
+            categories: [job.title],
+            cities: [job.title],
+            jobTitle: job.title
           });
         }
       });
@@ -50,9 +50,9 @@ export default function ChooseJob({ properties, setField }) {
           setField('jobId', e.target.value);
           setJob(e.target.value);
         }}>
-        {jobs.map((job) => {
+        {jobs.map((job, index) => {
           return (
-            <option key={job.id} value={job.id}>
+            <option key={index} value={job.id}>
               {job.id}
             </option>
           );

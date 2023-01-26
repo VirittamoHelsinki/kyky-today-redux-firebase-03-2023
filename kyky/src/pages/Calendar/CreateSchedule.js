@@ -61,7 +61,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
 
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.user.user);
+  const _user = useSelector((state) => state.user);
   const _schedules = useSelector((state) => state.schedule);
 
   useEffect(() => {
@@ -109,11 +109,15 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
         console.log(properties);
         schedules.push(properties);
         dispatch(
-          createSchedule({ uid: user.uid, jobId: properties.jobId + '_schedules', data: schedules })
+          createSchedule({
+            uid: _user.uid,
+            jobId: properties.jobId + '_schedules',
+            data: schedules
+          })
         );
       } else {
         dispatch(
-          createSchedule({ uid: user.uid, jobId: properties.jobId + '_schedules', data: [data] })
+          createSchedule({ uid: _user.uid, jobId: properties.jobId + '_schedules', data: [data] })
         );
       }
     } else if (mode === 'edit') {
@@ -122,7 +126,11 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
         const index = schedules.findIndex((item) => item._id === id);
         schedules[index] = { ...properties, _id: id };
         dispatch(
-          createSchedule({ uid: user.uid, jobId: properties.jobId + '_schedules', data: schedules })
+          createSchedule({
+            uid: _user.uid,
+            jobId: properties.jobId + '_schedules',
+            data: schedules
+          })
         );
       }
     }
@@ -135,9 +143,9 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
     if (confirm) {
       storage.splice(index, 1);
       if (storage.length === 0) {
-        dispatch(removeSchedule({ uid: user.uid, schedule: schedule.jobId }));
+        dispatch(removeSchedule({ uid: _user.uid, schedule: schedule.jobId }));
       } else {
-        dispatch(createSchedule({ uid: user.uid, jobId: schedule.jobId, data: storage }));
+        dispatch(createSchedule({ uid: _user.uid, jobId: schedule.jobId, data: storage }));
       }
     }
   }
