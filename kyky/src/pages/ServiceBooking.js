@@ -154,8 +154,7 @@ function ServiceBooking() {
             end: '15:00'
           },
           jobId: location.state.title,
-          confirmed: false,
-          unread: true
+          confirmed: false
         })
       );
       setBooking(defaultBookingValue);
