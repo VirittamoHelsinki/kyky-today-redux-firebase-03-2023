@@ -35,7 +35,8 @@ export const changeBookingStatus = createAsyncThunk(
   async (payload) => {
     try {
       const bookingRef = doc(db, 'bookings', payload.booking);
-      setDoc(bookingRef, { confirmed: payload.status });
+      setDoc(bookingRef, { confirmed: payload.status }, { merge: true });
+      return { status: 'status changed - ' + new Date(), bookingId: payload.booking };
     } catch (error) {
       return error;
     }
@@ -58,6 +59,12 @@ export const serviceBookingSlice = createSlice({
         return (state = {
           ...state,
           bookings: action.payload
+        });
+      })
+      .addCase(changeBookingStatus.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          status: action.payload.status
         });
       });
   }

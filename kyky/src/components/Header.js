@@ -65,20 +65,6 @@ const Header = ({ navlinks }) => {
             <li>
               <span className="material-icons-outlined">notifications</span>
             </li>
-            <li className="dropdown" onClick={menuToggle}>
-              <span className="material-icons-outlined" ref={menuRef}>
-                dashboard
-              </span>
-              {menuOpen && (
-                <div className="dropdown-content">
-                  {navlinks.map(({ to, label }) => (
-                    <div key={to}>
-                      <Link to={to}>{label}</Link>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </li>
             <li>
               <Link to="calendar">
                 <div className="calendar-icon-hovertext">

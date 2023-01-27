@@ -8,6 +8,7 @@ export default function MyCalendar() {
   const [selectedWindow, setSelectedWindow] = useState('job-calendar');
   const [scheduleWindow, setScheduleWindow] = useState(false);
   const [editing, setEditing] = useState(undefined);
+
   return (
     <div className="my-calendar">
       <CalendarHeader

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
-import { fetchBookingsByQuery } from '../../redux/buyers/serviceBookingSlice';
+import { fetchBookingsByQuery, changeBookingStatus } from '../../redux/buyers/serviceBookingSlice';
 import { fetchJobsByQuery } from '../../redux/sellers/jobFormSlice';
 import { useOutletContext } from 'react-router-dom';
 import Button from '../../components/Button';
@@ -64,6 +64,14 @@ export default function JobCalendar() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (_user.uid) {
+      dispatch(fetchSchedules(_user.uid));
+      dispatch(fetchJobsByQuery({ key: 'uid', value: _user.uid }));
+      dispatch(fetchBookingsByQuery(_user.uid));
+    }
+  }, []);
+
+  useEffect(() => {
     getSchedules();
   }, [currentJob, _schedules]);
 
@@ -79,12 +87,6 @@ export default function JobCalendar() {
       setCurrentJob(jobs[0]);
     }
   }, [_schedules]);
-
-  useEffect(() => {
-    if (_bookings) {
-      setActivities(_bookings);
-    }
-  }, [_bookings]);
 
   useEffect(() => {
     const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
@@ -137,18 +139,10 @@ export default function JobCalendar() {
   }, [selectedDay]);
 
   useEffect(() => {
-    if (_user.uid) {
-      dispatch(fetchSchedules(_user.uid));
+    if (_bookings) {
+      setActivities(_bookings);
     }
-  }, [_user]);
-
-  useEffect(() => {
-    dispatch(fetchJobsByQuery({ key: 'uid', value: _user.uid }));
-  }, []);
-
-  useEffect(() => {
-    dispatch(fetchBookingsByQuery(_user.uid));
-  }, []);
+  }, [_bookings]);
 
   useEffect(() => {
     if (_titles) {
@@ -445,17 +439,46 @@ export default function JobCalendar() {
                                 {activity.mail}
                               </p>
                             </div>
+                            {showConfirmModal && (
+                              <div className="confirm-modal transparent-background">
+                                <div className="confirm-modal">
+                                  <div>Confirm booking?</div>
+                                  <div className="confirm-modal-buttons-container">
+                                    <Button
+                                      className="confirm-modal-button"
+                                      onClick={() => {
+                                        dispatch(
+                                          changeBookingStatus({
+                                            booking: activity.id,
+                                            status: true
+                                          })
+                                        );
+                                        setShowConfirmModal(false);
+                                      }}>
+                                      Confirm
+                                    </Button>
+                                    <Button
+                                      className="confirm-modal-button"
+                                      onClick={() => setShowConfirmModal(false)}>
+                                      Cancel
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
                           </div>
                         );
                       })}
                       {pending.length > 0 && (
                         <div className="activityInfo">
                           {' '}
-                          <p>
-                            <i className="material-icons-outlined" style={{ color: 'red' }}>
-                              error
-                            </i>
-                            <span>{pending.length} pending confirmation</span>
+                          <p className="pending-paragraph">
+                            <span className="pending-span">
+                              <i className="material-icons-outlined" style={{ color: 'red' }}>
+                                error
+                              </i>
+                              <span>{pending.length} pending confirmation</span>
+                            </span>
                             <i
                               className="material-icons-outlined"
                               onClick={() => {
@@ -484,19 +507,6 @@ export default function JobCalendar() {
             </button>
           )}
         </div>
-        {showConfirmModal && (
-          <div className="confirm-modal transparent-background">
-            <div className="confirm-modal">
-              <div>Confirm booking?</div>
-              <div className="confirm-modal-buttons-container">
-                <Button className="confirm-modal-button">Confirm selection</Button>
-                <Button className="confirm-modal-button" onClick={() => setShowConfirmModal(false)}>
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

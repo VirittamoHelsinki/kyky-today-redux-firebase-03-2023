@@ -248,6 +248,17 @@
             align-items: center;
             gap: 1rem;
           }
+
+          .pending-paragraph {
+            display: flex;
+            justify-content: space-between;
+
+            .pending-span {
+              display: flex;
+              align-items: center;
+              gap: 14px;
+            }
+          }
         }
       }
     }

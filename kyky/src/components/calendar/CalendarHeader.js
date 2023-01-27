@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import '../../styles/CalendarHeader.scss';
 
 export default function CalendarHeader({ selectedWindow, setSelectedWindow, setScheduleWindow }) {
-  const navigate = new useNavigate();
   const [titles, setTitles] = useState([]);
+  const [ongoing, setOngoing] = useState([]);
+  const [pending, setPending] = useState([]);
+  const [confirmed, setConfirmed] = useState([]);
+
+  const navigate = new useNavigate();
 
   const _titles = useSelector((state) => state.jobs.cards);
+  const _bookings = useSelector((state) => state.booking.bookings);
 
   const navButtons = [
     { to: '/calendar', label: 'Job Calendar', id: 'job-calendar', icon: 'calendar_month' },
@@ -25,6 +31,16 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
     { to: '/calendar/job-creation', label: 'Create a job', id: 'job-creation', icon: 'add_task' },
     { to: '/calendar/settings', label: 'Settings', id: 'settings', icon: 'settings' }
   ];
+
+  useEffect(() => {
+    if (_bookings) {
+      const pendings = _bookings.filter((booking) => !booking.confirmed);
+      setPending(pendings);
+
+      const confirms = _bookings.filter((booking) => booking.confirmed);
+      setConfirmed(confirms);
+    }
+  }, [_bookings]);
 
   useEffect(() => {
     if (_titles) {
@@ -48,11 +64,28 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
       <div className="top">
         <h1 className="title">My Calendar</h1>
         <div className="details">
-          <div className="info">Ongoing</div>
+          <div className="info">
+            <i id="small-icon" className="material-icons-outlined">
+              work_outline
+            </i>
+            Ongoing ({ongoing.length})
+          </div>
           <div>|</div>
-          <div className="info">Pending</div>
+          <div className="info">
+            {' '}
+            <i id="small-icon" className="material-icons-outlined">
+              running_with_errors
+            </i>
+            Pending ({pending.length})
+          </div>
           <div>|</div>
-          <div className="info">Confirmed</div>
+          <div className="info">
+            {' '}
+            <i id="small-icon" className="material-icons-outlined">
+              event_available
+            </i>
+            Confirmed ({confirmed.length})
+          </div>
           {titles.length > 0 ? (
             <button className="create-schedule--button" onClick={() => setScheduleWindow(true)}>
               Create a Schedule
