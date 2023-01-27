@@ -258,6 +258,10 @@
               align-items: center;
               gap: 14px;
             }
+
+            #pending-pointer {
+              cursor: pointer;
+            }
           }
         }
       }

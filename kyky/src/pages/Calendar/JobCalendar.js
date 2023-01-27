@@ -480,6 +480,7 @@ export default function JobCalendar() {
                               <span>{pending.length} pending confirmation</span>
                             </span>
                             <i
+                              id="pending-pointer"
                               className="material-icons-outlined"
                               onClick={() => {
                                 setShowConfirmModal(true);
