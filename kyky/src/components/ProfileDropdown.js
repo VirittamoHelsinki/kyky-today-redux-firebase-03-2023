@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from './Button';
 import starIcon from '../image/star.svg';
 import jobImage from '../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
@@ -91,7 +92,9 @@ const ProfileDropdown = ({ user, onLogoutClick }) => {
           </div>
         </div>
         <div className="create-job-button">
-          <Button className="job-button">Create a job</Button>
+          <Link to="calendar/job-creation">
+            <Button className="job-button">Create a job</Button>
+          </Link>
         </div>
         <div className="tasks-box">
           <div className="task-view-labels">

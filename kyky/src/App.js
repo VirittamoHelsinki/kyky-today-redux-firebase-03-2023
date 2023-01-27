@@ -15,7 +15,6 @@ import ContactForm from './pages/ContactForm';
 import UserLogin from './pages/UserLogIn';
 import RecoverPassword from './pages/RecoverPassword';
 import LandingPage from './pages/LandingPage';
-import JobCreation from './pages/Calendar/JobCreation';
 import ServiceBooking from './pages/ServiceBooking';
 import CategoryPage from './pages/CategoryPage';
 import UserRoute from './routes/UserRoute';
@@ -32,6 +31,7 @@ import Overview from './pages/Calendar/Overview';
 import JobCalendar from './pages/Calendar/JobCalendar';
 import ManageSchedules from './pages/Calendar/ManageSchedules';
 import CalendarSettings from './pages/Calendar/CalendarSettings';
+import JobCreation from './pages/Calendar/JobCreation';
 
 /* Buyer's Rating*/
 import BuyersRating from './pages/BuyersRating';
