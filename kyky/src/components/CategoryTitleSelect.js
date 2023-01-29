@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/jobCreation.scss';
 
-export default function SubCategorySelect({ changeCategory, changeTitle }) {
+export default function CategoryTitleSelect({ changeCategory, changeTitle }) {
   return (
     <select
       name="subcategories"
@@ -68,3 +69,8 @@ export default function SubCategorySelect({ changeCategory, changeTitle }) {
     </select>
   );
 }
+
+CategoryTitleSelect.propTypes = {
+  changeCategory: PropTypes.func.isRequired,
+  changeTitle: PropTypes.func.isRequired
+};

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import Input from '../Input';
+import PropTypes from 'prop-types';
 import Switch from 'react-switch';
+import Input from '../Input';
 
-export default function BookingPreferences({ properties, setField, canContinue, setCanContinue }) {
+export default function BookingPreferences({ properties, setField, setCanContinue }) {
   const bufferTimes = [
     { value: 0, text: 'None' },
     { value: 5, text: '5 minutes' },
@@ -249,3 +250,42 @@ export default function BookingPreferences({ properties, setField, canContinue, 
     </>
   );
 }
+
+BookingPreferences.propTypes = {
+  properties: PropTypes.shape({
+    limitBookings: PropTypes.bool.isRequired,
+    bufferBetweenBookings: PropTypes.number.isRequired,
+    includeTravelTime: PropTypes.bool.isRequired,
+    minimumBookingDuration: PropTypes.number.isRequired,
+    canOverLap: PropTypes.bool,
+    overlapType: PropTypes.string.isRequired
+  }).isRequired,
+  setField: PropTypes.func.isRequired,
+  setCanContinue: PropTypes.func.isRequired
+};
+
+// BookingPreferences.propTypes = {
+//   properties: PropTypes.shape({
+//     limitBookings: PropTypes.bool.isRequired,
+//     bufferBetweenBookings: PropTypes.number.isRequired,
+//     canOverLap: PropTypes.bool.isRequired,
+//     includeTravelTime: PropTypes.bool.isRequired,
+//     jobId: PropTypes.string.isRequired,
+//     limitBookings: PropTypes.bool.isRequired,
+//     minimumBookingDuration: PropTypes.number.isRequired,
+//     overlapType: PropTypes.string.isRequired,
+//     recurring: PropTypes.arrayOf(PropTypes.string).isRequired,
+//     recurringDays: PropTypes.arrayOf(PropTypes.string).isRequired,
+//     scheduleDuration: PropTypes.shape({
+//       months: PropTypes.number,
+//       startDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+//       endDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+//     }).isRequired,
+//     time: PropTypes.shape({
+//       start: PropTypes.string.isRequired,
+//       end: PropTypes.string.isRequired
+//     }).isRequired
+//   }).isRequired,
+//   setField: PropTypes.func.isRequired,
+//   setCanContinue: PropTypes.func.isRequired
+// };

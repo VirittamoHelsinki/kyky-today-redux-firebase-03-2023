@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { GenericSelect } from './Select';
 import Countries from '../../countries.json';
 import CountriesWithDialCodes from '../../countriesWithDialCodes.json';
@@ -181,3 +182,7 @@ export default function Step7({ handleChange }) {
     </div>
   );
 }
+
+Step7.propTypes = {
+  handleChange: PropTypes.func.isRequired
+};

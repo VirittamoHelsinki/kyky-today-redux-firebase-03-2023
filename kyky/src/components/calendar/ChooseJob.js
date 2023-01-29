@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const defaultJob = {
   id: '',
@@ -61,3 +62,10 @@ export default function ChooseJob({ properties, setField }) {
     </div>
   );
 }
+
+ChooseJob.propTypes = {
+  properties: PropTypes.shape({
+    jobId: PropTypes.string.isRequired
+  }).isRequired,
+  setField: PropTypes.func.isRequired
+};

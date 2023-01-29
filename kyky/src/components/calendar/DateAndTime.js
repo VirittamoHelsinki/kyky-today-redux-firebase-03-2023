@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import Input from '../Input';
 
-export default function DateAndTime({ properties, setField, canContinue, setCanContinue }) {
+export default function DateAndTime({ properties, setField, setCanContinue }) {
   const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
   // value is in months
   const advanceTimes = [
@@ -192,3 +193,20 @@ export default function DateAndTime({ properties, setField, canContinue, setCanC
     </>
   );
 }
+
+DateAndTime.propTypes = {
+  properties: PropTypes.shape({
+    recurring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    scheduleDuration: PropTypes.shape({
+      months: PropTypes.number,
+      startDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+      endDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+    }).isRequired,
+    time: PropTypes.shape({
+      start: PropTypes.string.isRequired,
+      end: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
+  setField: PropTypes.func.isRequired,
+  setCanContinue: PropTypes.func.isRequired
+};

@@ -1,6 +1,7 @@
 import { ReactComponent as Gps } from '../../image/gps.svg';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import '../../styles/NewProfileCreation.scss';
 import '../../styles/_components.scss';
 
@@ -148,3 +149,7 @@ export default function Step8() {
     </div>
   );
 }
+
+Step8.propTypes = {
+  handleChange: PropTypes.func.isRequired
+};

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Checkbox from '../../components/Checkbox';
 import Input from '../../components/Input';
 import Countries from '../../countries.json';
@@ -169,3 +170,8 @@ export default function WorkExperience({ addWorkExperience, setModalClosed }) {
     </div>
   );
 }
+
+WorkExperience.propTypes = {
+  addWorkExperience: PropTypes.func.isRequired,
+  setModalClosed: PropTypes.func.isRequired
+};

@@ -1,4 +1,5 @@
 import { components } from 'react-select';
+import PropTypes from 'prop-types';
 import { ReactComponent as CheckMark } from '../../image/check-mark.svg';
 
 export default function IconOption(props) {
@@ -20,3 +21,10 @@ export default function IconOption(props) {
     </Option>
   );
 }
+
+IconOption.propTypes = {
+  isSelected: PropTypes.bool.isRequired,
+  data: PropTypes.shape({
+    label: PropTypes.string.isRequired
+  }).isRequired
+};

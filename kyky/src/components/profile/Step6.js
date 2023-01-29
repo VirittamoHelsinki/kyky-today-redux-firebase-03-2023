@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { GenericSelect } from './Select';
 import '../../styles/NewProfileCreation.scss';
 
@@ -59,3 +60,7 @@ export default function Step6({ handleChange }) {
     </div>
   );
 }
+
+Step6.propTypes = {
+  handleChange: PropTypes.func.isRequired
+};

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function PreviewAndSubmit({ properties }) {
   const daysLong = {
     mon: 'Monday',
@@ -41,7 +43,6 @@ export default function PreviewAndSubmit({ properties }) {
   return (
     <div className="preview-and-submit container" style={{ flexDirection: 'column' }}>
       <h2>Preview & Submit</h2>
-      {console.log(properties)}
       <div>
         <p>Job type:</p>
         <span style={{ color: 'black' }}>{properties.jobId}</span>
@@ -101,3 +102,25 @@ export default function PreviewAndSubmit({ properties }) {
     </div>
   );
 }
+
+PreviewAndSubmit.propTypes = {
+  properties: PropTypes.shape({
+    limitBookings: PropTypes.bool.isRequired,
+    bufferBetweenBookings: PropTypes.number.isRequired,
+    canOverLap: PropTypes.bool,
+    includeTravelTime: PropTypes.bool.isRequired,
+    jobId: PropTypes.string.isRequired,
+    minimumBookingDuration: PropTypes.number.isRequired,
+    overlapType: PropTypes.string.isRequired,
+    recurring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    scheduleDuration: PropTypes.shape({
+      months: PropTypes.number,
+      startDate: PropTypes.instanceOf(Date),
+      endDate: PropTypes.instanceOf(Date)
+    }).isRequired,
+    time: PropTypes.shape({
+      start: PropTypes.string.isRequired,
+      end: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
+};

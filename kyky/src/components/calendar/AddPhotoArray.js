@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImage } from '../../redux/storage/fileUploadSlice';
+import PropTypes from 'prop-types';
 import Spinner from '../ImageSpinner';
 
-const FileUpload2 = ({ addUrl }) => {
+const AddPhotoArray = ({ addUrl }) => {
   const [receiveUrl, setReceiveUrl] = useState(false);
 
   const fileInput = useRef(null);
@@ -47,4 +48,8 @@ const FileUpload2 = ({ addUrl }) => {
   );
 };
 
-export default FileUpload2;
+AddPhotoArray.propTypes = {
+  addUrl: PropTypes.func.isRequired
+};
+
+export default AddPhotoArray;

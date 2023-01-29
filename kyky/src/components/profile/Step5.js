@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { GenericSelect } from './Select';
 import {
   categories,
@@ -104,3 +105,7 @@ export default function Step5({ handleChange }) {
     </div>
   );
 }
+
+Step5.propTypes = {
+  handleChange: PropTypes.func.isRequired
+};
