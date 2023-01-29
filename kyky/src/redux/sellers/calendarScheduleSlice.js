@@ -80,7 +80,11 @@ Add pending and rejected cases when needed */
 export const calendarScheduleSlice = createSlice({
   name: 'calendarSchedules',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    resetCalendarSchedule() {
+      return initialState;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createSchedule.fulfilled, (state, action) => {
@@ -128,4 +132,5 @@ export const calendarScheduleSlice = createSlice({
   }
 });
 
+export const { resetCalendarSchedule } = calendarScheduleSlice.actions;
 export default calendarScheduleSlice.reducer;

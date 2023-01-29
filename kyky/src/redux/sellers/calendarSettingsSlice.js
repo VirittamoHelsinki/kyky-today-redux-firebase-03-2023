@@ -30,10 +30,16 @@ export const fetchCalendarSettings = createAsyncThunk(
   }
 );
 
+const initialState = [];
+
 export const calendarSettingsSlice = createSlice({
   name: 'calendar-settings',
-  initialState: [],
-  reducers: {},
+  initialState: initialState,
+  reducers: {
+    resetCalendarSettings() {
+      return initialState;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(saveCalendarSettings.fulfilled, (state, action) => {
@@ -53,4 +59,5 @@ export const calendarSettingsSlice = createSlice({
   }
 });
 
+export const { resetCalendarSettings } = calendarSettingsSlice.actions;
 export default calendarSettingsSlice.reducer;

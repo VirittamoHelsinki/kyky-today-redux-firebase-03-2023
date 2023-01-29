@@ -35,10 +35,16 @@ export const fetchJobsByQuery = createAsyncThunk(
   }
 );
 
+const initialState = [];
+
 export const jobCreationFormSlice = createSlice({
   name: 'jobcreation-forms',
-  initialState: [],
-  reducers: {},
+  initialState: initialState,
+  reducers: {
+    resetJobCreationForm() {
+      return initialState;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createJobForm.fulfilled, (state, action) => {
@@ -53,4 +59,5 @@ export const jobCreationFormSlice = createSlice({
   }
 });
 
+export const { resetJobCreationForm } = jobCreationFormSlice.actions;
 export default jobCreationFormSlice.reducer;

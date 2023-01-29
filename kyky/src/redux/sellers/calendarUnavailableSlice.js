@@ -33,10 +33,16 @@ export const fetchUnavailabilities = createAsyncThunk(
   }
 );
 
+const initialState = [];
+
 export const calendarUnavailableSlice = createSlice({
   name: 'calendarUnavailables',
-  initialState: [],
-  reducers: {},
+  initialState: initialState,
+  reducers: {
+    resetCalendarUnavailable() {
+      return initialState;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createUnavailability.fulfilled, (state, action) => {
@@ -55,4 +61,5 @@ export const calendarUnavailableSlice = createSlice({
   }
 });
 
+export const { resetCalendarUnavailable } = calendarUnavailableSlice.actions;
 export default calendarUnavailableSlice.reducer;

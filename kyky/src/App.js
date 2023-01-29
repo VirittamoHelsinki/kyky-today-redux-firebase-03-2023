@@ -1,6 +1,10 @@
 /* eslint-disable */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSchedules } from './redux/sellers/calendarScheduleSlice';
+import { fetchBookingsByQuery } from './redux/buyers/serviceBookingSlice';
+import { fetchJobsByQuery } from './redux/sellers/jobFormSlice';
 
 /* Language */
 import Language from './language';
@@ -42,6 +46,18 @@ const languages = { fi, en };
 
 const App = () => {
   const [lang, setLang] = useState(languages.fi);
+
+  const _user = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (_user.uid) {
+      dispatch(fetchSchedules(_user.uid));
+      dispatch(fetchJobsByQuery({ key: 'uid', value: _user.uid }));
+      dispatch(fetchBookingsByQuery(_user.uid));
+    }
+  }, [_user]);
 
   const navlinks = [
     { to: '/', label: 'Home' },

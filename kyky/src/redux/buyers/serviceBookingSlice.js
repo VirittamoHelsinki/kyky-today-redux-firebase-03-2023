@@ -6,7 +6,6 @@ export const createBooking = createAsyncThunk('serviceBookings/createBooking', a
   try {
     const bookingRef = doc(collection(db, `bookings`));
     await setDoc(bookingRef, payload);
-    return payload;
   } catch (error) {
     return error;
   }
@@ -36,38 +35,45 @@ export const changeBookingStatus = createAsyncThunk(
     try {
       const bookingRef = doc(db, 'bookings', payload.booking);
       setDoc(bookingRef, { confirmed: payload.status }, { merge: true });
-      return { status: 'status changed - ' + new Date(), bookingId: payload.booking };
+      return { status: payload.status, id: payload.booking };
     } catch (error) {
       return error;
     }
   }
 );
 
+const initialState = [];
+
 export const serviceBookingSlice = createSlice({
   name: 'serviceBookings',
-  initialState: [],
-  reducers: {},
+  initialState: initialState,
+  reducers: {
+    resetServiceBooking() {
+      return initialState;
+    }
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(createBooking.fulfilled, (state, action) => {
-        return (state = {
-          ...state,
-          newbooking: action.payload.jobId
-        });
-      })
+      /* return a state with the booking array*/
       .addCase(fetchBookingsByQuery.fulfilled, (state, action) => {
         return (state = {
           ...state,
           bookings: action.payload
         });
       })
+      /* make a deep copy of booking state, find the right index using the booking id, change 
+      the confirmed value to the status value, return the state with the modified list */
       .addCase(changeBookingStatus.fulfilled, (state, action) => {
+        let new_bookings = JSON.parse(JSON.stringify(state.bookings));
+        let index = new_bookings.findIndex((f) => f.id === action.payload.id);
+        new_bookings[index].confirmed = action.payload.status;
         return (state = {
           ...state,
-          status: action.payload.status
+          bookings: new_bookings
         });
       });
   }
 });
 
+export const { resetServiceBooking } = serviceBookingSlice.actions;
 export default serviceBookingSlice.reducer;

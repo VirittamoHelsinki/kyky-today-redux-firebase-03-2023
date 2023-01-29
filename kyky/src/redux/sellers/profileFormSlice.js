@@ -18,13 +18,16 @@ const initialState = [];
 
 export const profileFormSlice = createSlice({
   name: 'profileForms',
-  initialState,
+  initialState: initialState,
   reducers: {
     updateSteps(state, action) {
       return {
         ...state,
         ...action.payload
       };
+    },
+    resetProfileForm() {
+      return initialState;
     }
   },
   extraReducers: (builder) => {
@@ -38,5 +41,5 @@ export const profileFormSlice = createSlice({
   }
 });
 
-export const { updateSteps } = profileFormSlice.actions;
+export const { updateSteps, resetProfileForm } = profileFormSlice.actions;
 export default profileFormSlice.reducer;

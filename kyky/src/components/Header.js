@@ -3,6 +3,11 @@ import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../redux/auth/userSlice';
+import { resetCalendarSchedule } from '../redux/sellers/calendarScheduleSlice';
+import { resetJobCreationForm } from '../redux/sellers/jobFormSlice';
+import { resetProfileForm } from '../redux/sellers/profileFormSlice';
+import { resetServiceBooking } from '../redux/buyers/serviceBookingSlice';
+import { resetFileUpload } from '../redux/storage/fileUploadSlice';
 import ProfileDropdown from './ProfileDropdown';
 import SearchBar from './SearchBar';
 import '../styles/header.scss';
@@ -37,6 +42,11 @@ const Header = ({ navlinks }) => {
 
   const onLogoutClick = () => {
     dispatch(logOut());
+    dispatch(resetCalendarSchedule());
+    dispatch(resetFileUpload());
+    dispatch(resetJobCreationForm());
+    dispatch(resetProfileForm());
+    dispatch(resetServiceBooking());
   };
 
   const menuToggle = () => {

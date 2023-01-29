@@ -13,13 +13,19 @@ export const uploadImage = createAsyncThunk('fileUpload/images', async (payload)
   }
 });
 
+const initialState = {
+  loading: false,
+  url: ''
+};
+
 export const fileUploadSlice = createSlice({
   name: 'fileUploads',
-  initialState: {
-    loading: false,
-    url: ''
+  initialState: initialState,
+  reducers: {
+    resetFileUpload() {
+      return initialState;
+    }
   },
-  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(uploadImage.pending, (state, action) => {
@@ -38,4 +44,5 @@ export const fileUploadSlice = createSlice({
   }
 });
 
+export const { resetFileUpload } = fileUploadSlice.actions;
 export default fileUploadSlice.reducer;
