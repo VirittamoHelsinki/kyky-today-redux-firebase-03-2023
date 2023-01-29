@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
+
 export default function TextArea({ label, name, value, onChange, className = 'text-area' }) {
   return (
     <div className={className}>
@@ -7,3 +8,11 @@ export default function TextArea({ label, name, value, onChange, className = 'te
     </div>
   );
 }
+
+TextArea.propTypes = {
+  label: PropTypes.string,
+  name: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  className: PropTypes.string
+};

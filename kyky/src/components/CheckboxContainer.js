@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Checkbox from './Checkbox';
 import 'material-icons/iconfont/material-icons.css';
 
@@ -24,8 +24,7 @@ export default function CheckboxContainer({
               type="button"
               key={item}
               className="checkbox-div-header-item"
-              onClick={() => setSelected(selected.filter((itm) => itm !== item))}
-            >
+              onClick={() => setSelected(selected.filter((itm) => itm !== item))}>
               {item}
             </button>
           ))}
@@ -77,3 +76,10 @@ export default function CheckboxContainer({
     </div>
   );
 }
+
+CheckboxContainer.propTypes = {
+  label: PropTypes.string.isRequired,
+  content: PropTypes.arrayOf(PropTypes.string).isRequired,
+  className: PropTypes.string,
+  customSelect: PropTypes.bool
+};

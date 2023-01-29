@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Input from '../../components/Input';
 import { GenericSelect } from './Select';
 import { months, years } from './Time';
@@ -125,3 +126,8 @@ export default function EducationExperience({ addEducExperience, setModalClosed 
     </div>
   );
 }
+
+EducationExperience.propTypes = {
+  addEducExperience: PropTypes.func.isRequired,
+  setModalClosed: PropTypes.func.isRequired
+};

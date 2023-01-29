@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 
 export default function Choice({ label, name, className = 'radio-choice' }) {
   return (
@@ -8,3 +8,9 @@ export default function Choice({ label, name, className = 'radio-choice' }) {
     </label>
   );
 }
+
+Choice.propTypes = {
+  label: PropTypes.string,
+  name: PropTypes.string,
+  className: PropTypes.string
+};

@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 
 // Children are expected to be Choice components.
 export default function RadioChoices({ label, children, className = 'radio-choices' }) {
@@ -9,3 +9,9 @@ export default function RadioChoices({ label, children, className = 'radio-choic
     </div>
   );
 }
+
+RadioChoices.propTypes = {
+  label: PropTypes.string,
+  className: PropTypes.string,
+  children: PropTypes.func.isRequired
+};

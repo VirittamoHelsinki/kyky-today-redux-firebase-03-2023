@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const months = [
   'january',
@@ -21,7 +22,6 @@ export default function Calendar({
   setDate,
   minYears = 5,
   maxYears = 50,
-  locale = 'fi',
   highlightDays = []
 }) {
   const [days, setDays] = useState([]);
@@ -237,3 +237,16 @@ export default function Calendar({
     </div>
   );
 }
+
+Calendar.propTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+  setDate: PropTypes.func.isRequired,
+  minYears: PropTypes.number,
+  maxYears: PropTypes.number,
+  highlightDays: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.instanceOf(Date),
+      highlight: PropTypes.bool
+    })
+  )
+};

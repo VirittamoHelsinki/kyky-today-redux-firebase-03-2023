@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import '../../styles/CalendarHeader.scss';
 
 export default function CalendarHeader({ selectedWindow, setSelectedWindow, setScheduleWindow }) {
@@ -112,3 +113,9 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
     </div>
   );
 }
+
+CalendarHeader.propTypes = {
+  selectedWindow: PropTypes.string.isRequired,
+  setSelectedWindow: PropTypes.func.isRequired,
+  setScheduleWindow: PropTypes.func.isRequired
+};

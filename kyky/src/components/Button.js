@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // Button component for ease of use.
 
@@ -25,7 +26,8 @@ export default function Button({
         {children}
       </Link>
     );
-  }0
+  }
+  0;
 
   return (
     <button type={type} onClick={onClick} className={className}>
@@ -33,3 +35,12 @@ export default function Button({
     </button>
   );
 }
+
+Button.propTypes = {
+  link: PropTypes.string,
+  href: PropTypes.string,
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  type: PropTypes.string,
+  children: PropTypes.node.isRequired
+};

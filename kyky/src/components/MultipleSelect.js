@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Checkbox from './Checkbox';
 
 /* 
@@ -69,7 +70,6 @@ export default function MultipleSelect({
                   if (selected.findIndex((o) => o.value === option.value) !== -1) {
                     setSelected(selected.filter((s) => s.value !== option.value));
                   } else {
-                    console.log('selected', selected);
                     setSelected([...selected, option]);
                   }
                 }}
@@ -81,3 +81,16 @@ export default function MultipleSelect({
     </div>
   );
 }
+
+MultipleSelect.propTypes = {
+  className: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string,
+      label: PropTypes.string
+    })
+  ),
+  disabled: PropTypes.bool,
+  defaultValue: PropTypes.string,
+  onChange: PropTypes.func
+};

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import '../../styles/NewProfileCreation.scss';
 
 export default function Step4({ handleChange }) {
@@ -32,3 +33,7 @@ export default function Step4({ handleChange }) {
     </div>
   );
 }
+
+Step4.propTypes = {
+  handleChange: PropTypes.func.isRequired
+};

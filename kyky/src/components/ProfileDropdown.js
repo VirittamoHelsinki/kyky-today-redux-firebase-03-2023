@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Button from './Button';
 import starIcon from '../image/star.svg';
 import jobImage from '../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
@@ -138,6 +139,14 @@ const ProfileDropdown = ({ user, onLogoutClick }) => {
       </div>
     </div>
   );
+};
+
+ProfileDropdown.propTypes = {
+  user: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    photoURL: PropTypes.string.isRequired
+  }).isRequired,
+  onLogoutClick: PropTypes.func.isRequired
 };
 
 export default ProfileDropdown;

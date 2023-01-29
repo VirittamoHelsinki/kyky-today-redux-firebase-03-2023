@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSchedule, removeSchedule } from '../../redux/sellers/calendarScheduleSlice';
+import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 
 /* Step components */
@@ -214,3 +215,26 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
     </main>
   );
 }
+
+ManageScheduleModal.propTypes = {
+  editing: PropTypes.shape({
+    limitBookings: PropTypes.bool.isRequired,
+    bufferBetweenBookings: PropTypes.number.isRequired,
+    canOverLap: PropTypes.bool.isRequired,
+    includeTravelTime: PropTypes.bool.isRequired,
+    jobId: PropTypes.string.isRequired,
+    minimumBookingDuration: PropTypes.number.isRequired,
+    overlapType: PropTypes.string.isRequired,
+    recurring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    recurringDays: PropTypes.arrayOf(PropTypes.string).isRequired,
+    scheduleDuration: PropTypes.shape({
+      months: PropTypes.number,
+      startDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+      endDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+    }).isRequired,
+    time: PropTypes.shape({
+      start: PropTypes.string.isRequired,
+      end: PropTypes.string.isRequired
+    }).isRequired
+  })
+};

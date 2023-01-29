@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import 'material-icons/iconfont/material-icons.css';
 
 /*
@@ -58,3 +58,25 @@ export default function Input({
     </div>
   );
 }
+
+Input.propTypes = {
+  type: PropTypes.string,
+  name: PropTypes.string,
+  className: PropTypes.string,
+  placeholder: PropTypes.string,
+  autoComplete: PropTypes.string,
+  label: PropTypes.string,
+  id: PropTypes.string,
+  value: PropTypes.string,
+  required: PropTypes.bool,
+  onChange: PropTypes.func,
+  checked: PropTypes.bool,
+  iconText: PropTypes.string,
+  iconClassName: PropTypes.string,
+  iconIsButton: PropTypes.bool,
+  labelOnFront: PropTypes.bool,
+  iconOnClick: PropTypes.func,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  children: PropTypes.node
+};

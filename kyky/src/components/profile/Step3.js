@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { GenericSelect } from './Select';
 import { language_options } from './Features';
 import Languages from '../../languages.json';
@@ -111,3 +112,7 @@ export default function Step3({ handleChange }) {
     </div>
   );
 }
+
+Step3.propTypes = {
+  handleChange: PropTypes.func.isRequired
+};

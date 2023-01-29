@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 
 /*
  * Simple checkbox component for use in forms.
@@ -38,3 +38,14 @@ export default function Checkbox({
     </div>
   );
 }
+
+Checkbox.propTypes = {
+  label: PropTypes.string,
+  name: PropTypes.string,
+  value: PropTypes.bool,
+  className: PropTypes.string,
+  onChange: PropTypes.func,
+  checked: PropTypes.bool,
+  required: PropTypes.bool,
+  children: PropTypes.node
+};

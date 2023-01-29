@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImage } from '../../redux/storage/fileUploadSlice';
+import PropTypes from 'prop-types';
 import '../../styles/NewProfileCreation.scss';
 
 export default function AddPhoto({ setModalClosed, addUrl }) {
@@ -69,3 +70,8 @@ export default function AddPhoto({ setModalClosed, addUrl }) {
     </div>
   );
 }
+
+AddPhoto.propTypes = {
+  setModalClosed: PropTypes.func.isRequired,
+  addUrl: PropTypes.func.isRequired
+};

@@ -47,10 +47,6 @@ export default function CalendarSettings() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log('selectedJobsAuto', selectedJobsAuto);
-  }, [selectedJobsAuto]);
-
   function purgeCalendar() {
     if (window.confirm('Are you sure you want to purge the calendar?')) {
       const keys = Object.keys(localStorage).filter(
