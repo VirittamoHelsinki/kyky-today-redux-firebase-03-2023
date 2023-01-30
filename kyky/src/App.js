@@ -21,6 +21,7 @@ import RecoverPassword from './pages/RecoverPassword';
 import LandingPage from './pages/LandingPage';
 import ServiceBooking from './pages/ServiceBooking';
 import CategoryPage from './pages/CategoryPage';
+import BuyersProfile from './pages/BuyersProfile';
 import UserRoute from './routes/UserRoute';
 import GuestRoute from './routes/GuestRoute';
 
@@ -185,6 +186,14 @@ const App = () => {
             element={
               <UserRoute>
                 <NPS />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="buyers-profile"
+            element={
+              <UserRoute>
+                <BuyersProfile />
               </UserRoute>
             }
           />

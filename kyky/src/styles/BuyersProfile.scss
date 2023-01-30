@@ -1,0 +1,195 @@
+h4 {
+  color: #00a088;
+}
+
+.username {
+  color: #1a1a1a;
+  padding: 1rem;
+}
+
+.userImage {
+  margin-top: 2rem;
+}
+
+.selected {
+  border-bottom: #00a088 solid 7px;
+
+  > h3 {
+    color: #00a088 !important;
+  }
+}
+
+.buyers-profile--container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+  background: #387a701a;
+
+  .title {
+    background: #387a701a;
+    padding: 2rem;
+    border-top: #9c9797 solid 1px;
+  }
+
+  .buyers-profile--header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100%;
+  }
+
+  .buyers-profile--content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80%;
+    border-top: #9c9797 solid 1px;
+
+    .buyers-profile--tabs {
+      display: flex;
+      flex-direction: row;
+      min-width: 100%;
+
+      .buyers-profile--button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 10rem;
+        min-height: 4rem;
+        flex: 1 1 0;
+        background: white;
+
+        h3 {
+          color: #817b7b;
+        }
+      }
+    }
+
+    .buyers-profile--content {
+      min-width: 100%;
+      text-align: center;
+
+      .buyers-profile--content-orders-container {
+        display: flex;
+        flex-direction: column;
+        min-width: 100%;
+        background: white;
+        border-bottom: #9c9797 solid 1px;
+
+        .buyers-profile-table {
+          width: 100%;
+
+          thead {
+            background: #d9d9d9;
+
+            tr {
+              height: 50px;
+
+              .job-header {
+                width: 30%;
+                text-align: left;
+                padding: 10px;
+              }
+
+              .seller-header {
+                width: 20%;
+                text-align: left;
+                padding: 10px;
+              }
+
+              .sum-header {
+                width: 6%;
+                text-align: right;
+                padding: 10px;
+              }
+
+              .ordered-header {
+                width: 20%;
+                text-align: right;
+                padding: 10px;
+              }
+
+              .delivered-header {
+                width: 20%;
+                text-align: right;
+                padding: 10px;
+              }
+
+              th {
+                width: 20%;
+              }
+            }
+          }
+
+          tbody {
+            background: white;
+
+            tr {
+              .job-div {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 10px;
+                margin: 8px;
+
+                .job-image-small {
+                  width: 60px;
+                }
+
+                span {
+                  text-align: left;
+                }
+              }
+
+              .seller-div {
+                text-align: left;
+                padding: 10px;
+              }
+
+              .sum-div {
+                text-align: right;
+                padding: 10px;
+              }
+
+              .ordered-div {
+                text-align: right;
+                padding: 10px;
+              }
+
+              .delivered-div {
+                text-align: right;
+                padding: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.order-information {
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+
+  .order-information--title-and-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+
+    .title-background {
+      background: #dbdbdb;
+    }
+
+    .description {
+      padding: 0.2rem;
+    }
+
+    > div > h4 {
+      color: #1a1a1a;
+      padding: 0.2rem;
+    }
+  }
+}
