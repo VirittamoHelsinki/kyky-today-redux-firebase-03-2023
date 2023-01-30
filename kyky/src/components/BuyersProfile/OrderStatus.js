@@ -3,14 +3,6 @@ import jobImage from '../../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
 import '../../styles/BuyersProfile.scss';
 
 export default function OrderStatus({ order }) {
-  if (!order) {
-    return (
-      <div className="order-information">
-        <div className="order-information--title-and-content">Ei näytettäviä tilauksia...</div>
-      </div>
-    );
-  }
-
   return (
     <tr className="buyers-profile-table-body-row">
       <td className="job-div">

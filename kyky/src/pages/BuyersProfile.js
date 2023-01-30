@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import '../styles/BuyersProfile.scss';
 import OrderStatus from '../components/BuyersProfile/OrderStatus';
 
@@ -43,44 +44,72 @@ const deliveredOrders = [
   }
 ];
 
+const cancelledOrders = [];
+
 function BuyersProfile() {
   const [currentTab, setCurrentTab] = useState(Tabs.Purchases);
+
+  const _user = useSelector((state) => state.user);
 
   function selectedTab(currentTab) {
     setCurrentTab(currentTab);
   }
 
+  function tableHeader() {
+    return (
+      <thead className="buyers-profile-table-header">
+        <tr>
+          <th className="job-header">Palvelu</th>
+          <th className="seller-header">Myyjä</th>
+          <th className="sum-header">Summa</th>
+          <th className="ordered-header">Ostettu</th>
+          <th className="delivered-header">Toimitettu</th>
+        </tr>
+      </thead>
+    );
+  }
+
   return (
     <div className="buyers-profile--container">
       <div className="buyers-profile--header">
-        <div
+        <img
+          src={_user.photoURL}
+          referrerPolicy="no-referrer"
           className="userImage"
           style={{ width: '100px', height: '100px', background: '#387a70', borderRadius: '50px' }}
         />
         <div>
-          <h3 className="username">Touko Pouko</h3>
+          <h3 className="username">{_user.displayName}</h3>
         </div>
       </div>
 
       <div className="buyers-profile--content-wrapper">
         <div className="buyers-profile--tabs">
           <div
-            className={`buyers-profile--button ${currentTab === Tabs.Purchases ? 'selected' : ''}`}
+            className={`buyers-profile--button ${
+              currentTab === Tabs.Purchases ? 'selected-tab' : ''
+            }`}
             onClick={() => selectedTab(Tabs.Purchases)}>
             <h3>Ostokset</h3>
           </div>
           <div
-            className={`buyers-profile--button ${currentTab === Tabs.Messages ? 'selected' : ''}`}
+            className={`buyers-profile--button ${
+              currentTab === Tabs.Messages ? 'selected-tab' : ''
+            }`}
             onClick={() => selectedTab(Tabs.Messages)}>
             <h3>Viestit</h3>
           </div>
           <div
-            className={`buyers-profile--button ${currentTab === Tabs.Ratings ? 'selected' : ''}`}
+            className={`buyers-profile--button ${
+              currentTab === Tabs.Ratings ? 'selected-tab' : ''
+            }`}
             onClick={() => selectedTab(Tabs.Ratings)}>
             <h3>Arvostelut</h3>
           </div>
           <div
-            className={`buyers-profile--button ${currentTab === Tabs.Settings ? 'selected' : ''}`}
+            className={`buyers-profile--button ${
+              currentTab === Tabs.Settings ? 'selected-tab' : ''
+            }`}
             onClick={() => selectedTab(Tabs.Settings)}>
             <h3>Tilin asetukset</h3>
           </div>
@@ -90,18 +119,17 @@ function BuyersProfile() {
           {currentTab === Tabs.Purchases && (
             <div className="buyers-profile--content-orders-container">
               <h4 className="title">Odottavat tilaukset</h4>
-
+              <table className="buyers-profile-table">
+                {tableHeader()}
+                <tbody className="buyers-profile-table-body">
+                  {pendingOrders.map((order, index) => (
+                    <OrderStatus order={order} key={index} />
+                  ))}
+                </tbody>
+              </table>
               <h4 className="title">Toimitetut tilaukset</h4>
               <table className="buyers-profile-table">
-                <thead className="buyers-profile-table-header">
-                  <tr>
-                    <th className="job-header">Palvelu</th>
-                    <th className="seller-header">Myyjä</th>
-                    <th className="sum-header">Summa</th>
-                    <th className="ordered-header">Ostettu</th>
-                    <th className="delivered-header">Toimitettu</th>
-                  </tr>
-                </thead>
+                {tableHeader()}
                 <tbody className="buyers-profile-table-body">
                   {deliveredOrders.map((order, index) => (
                     <OrderStatus order={order} key={index} />
@@ -109,7 +137,14 @@ function BuyersProfile() {
                 </tbody>
               </table>
               <h4 className="title">Peruutetut tilaukset</h4>
-
+              <table className="buyers-profile-table">
+                {tableHeader()}
+                <tbody className="buyers-profile-table-body">
+                  {cancelledOrders.map((order, index) => (
+                    <OrderStatus order={order} key={index} />
+                  ))}
+                </tbody>
+              </table>
               <h4 className="title">Tähdellä merkityt tilaukset</h4>
             </div>
           )}
