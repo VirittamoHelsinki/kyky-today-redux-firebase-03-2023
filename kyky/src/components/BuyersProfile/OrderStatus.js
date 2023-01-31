@@ -24,5 +24,5 @@ OrderStatus.propTypes = {
     sum: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     orderingDate: PropTypes.string,
     orderStatus: PropTypes.string
-  })
+  }).isRequired
 };

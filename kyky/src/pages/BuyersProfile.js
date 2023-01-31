@@ -69,6 +69,18 @@ function BuyersProfile() {
     );
   }
 
+  function emptyTable() {
+    return (
+      <tr className="buyers-profile-table-body-row">
+        <td className="job-div">Ei näytettäviä tilauksia...</td>
+        <td className="seller-div"></td>
+        <td className="sum-div"></td>
+        <td className="ordered-div"></td>
+        <td className="delivered-div"></td>
+      </tr>
+    );
+  }
+
   return (
     <div className="buyers-profile--container">
       <div className="buyers-profile--header">
@@ -122,27 +134,31 @@ function BuyersProfile() {
               <table className="buyers-profile-table">
                 {tableHeader()}
                 <tbody className="buyers-profile-table-body">
-                  {pendingOrders.map((order, index) => (
-                    <OrderStatus order={order} key={index} />
-                  ))}
+                  {pendingOrders.length > 0
+                    ? pendingOrders.map((order, index) => <OrderStatus order={order} key={index} />)
+                    : emptyTable()}
                 </tbody>
               </table>
               <h4 className="title">Toimitetut tilaukset</h4>
               <table className="buyers-profile-table">
                 {tableHeader()}
                 <tbody className="buyers-profile-table-body">
-                  {deliveredOrders.map((order, index) => (
-                    <OrderStatus order={order} key={index} />
-                  ))}
+                  {deliveredOrders.length > 0
+                    ? deliveredOrders.map((order, index) => (
+                        <OrderStatus order={order} key={index} />
+                      ))
+                    : emptyTable()}
                 </tbody>
               </table>
               <h4 className="title">Peruutetut tilaukset</h4>
               <table className="buyers-profile-table">
                 {tableHeader()}
                 <tbody className="buyers-profile-table-body">
-                  {cancelledOrders.map((order, index) => (
-                    <OrderStatus order={order} key={index} />
-                  ))}
+                  {cancelledOrders.length > 0
+                    ? cancelledOrders.map((order, index) => (
+                        <OrderStatus order={order} key={index} />
+                      ))
+                    : emptyTable()}
                 </tbody>
               </table>
               <h4 className="title">Tähdellä merkityt tilaukset</h4>

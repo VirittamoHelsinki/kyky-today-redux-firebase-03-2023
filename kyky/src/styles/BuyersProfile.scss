@@ -43,7 +43,7 @@ h4 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 80%;
+    width: 66%;
     border: #c4c4c4 solid 1px;
 
     .buyers-profile--tabs {
@@ -78,7 +78,6 @@ h4 {
         flex-direction: column;
         min-width: 100%;
         background: white;
-        border-bottom: #9c9797 solid 1px;
 
         .buyers-profile-table {
           width: 100%;
