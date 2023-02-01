@@ -151,6 +151,11 @@ h4 {
         }
       }
     }
+
+    .messages-main {
+      display: flex;
+      flex-direction: row;
+    }
   }
 }
 
