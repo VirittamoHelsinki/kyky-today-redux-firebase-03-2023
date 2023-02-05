@@ -66,7 +66,7 @@ const Purchases = ({ order }) => {
   return (
     <div className="buyers-profile--content-orders-container">
       <h4 className="title">Odottavat tilaukset</h4>
-      <table className="buyers-profile-table">
+      <table className="buyers-profile-table" cellPadding="0" cellSpacing="0">
         {tableHeader()}
         <tbody className="buyers-profile-table-body">
           {pendingOrders.length > 0
@@ -75,7 +75,7 @@ const Purchases = ({ order }) => {
         </tbody>
       </table>
       <h4 className="title">Toimitetut tilaukset</h4>
-      <table className="buyers-profile-table">
+      <table className="buyers-profile-table" cellPadding="0" cellSpacing="0">
         {tableHeader()}
         <tbody className="buyers-profile-table-body">
           {deliveredOrders.length > 0
@@ -84,7 +84,7 @@ const Purchases = ({ order }) => {
         </tbody>
       </table>
       <h4 className="title">Peruutetut tilaukset</h4>
-      <table className="buyers-profile-table">
+      <table className="buyers-profile-table" cellPadding="0" cellSpacing="0">
         {tableHeader()}
         <tbody className="buyers-profile-table-body">
           {cancelledOrders.length > 0

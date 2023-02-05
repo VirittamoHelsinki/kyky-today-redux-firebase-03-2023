@@ -9,6 +9,8 @@ import fileUploadReducer from './storage/fileUploadSlice';
 import profileFormReducer from './sellers/profileFormSlice';
 import jobFormReducer from './sellers/jobFormSlice';
 import serviceBookingReducer from './buyers/serviceBookingSlice';
+import contactReducer from './chat/contactSlice';
+import messageReducer from './chat/messageSlice';
 
 const reducers = combineReducers({
   user: userReducer,
@@ -16,7 +18,9 @@ const reducers = combineReducers({
   upload: fileUploadReducer,
   profile: profileFormReducer,
   jobs: jobFormReducer,
-  booking: serviceBookingReducer
+  booking: serviceBookingReducer,
+  chat: contactReducer,
+  message: messageReducer
 });
 
 const persistConfig = {

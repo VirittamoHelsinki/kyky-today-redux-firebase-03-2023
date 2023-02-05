@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBooking } from '../redux/buyers/serviceBookingSlice';
+import { createContact } from '../redux/chat/contactSlice';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Calendar from '../components/calendar/Calendar';
@@ -53,6 +54,8 @@ function ServiceBooking() {
   const [showGuestModal, setShowGuestModal] = useState(false);
   const [inputname, setInputname] = useState('');
   const [inputmail, setInputmail] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
+  const [uid, setUid] = useState('');
 
   const dispatch = useDispatch();
 
@@ -66,6 +69,7 @@ function ServiceBooking() {
 
   const state_exists = location.state !== null;
 
+  /* set card owner's data to local state */
   useEffect(() => {
     if (state_exists) {
       setUrls(location.state.urls);
@@ -78,6 +82,8 @@ function ServiceBooking() {
       setEveryOtherWeekend(location.state.everyOtherWeekend);
       setOnceAMonth(location.state.onceAMonth);
       setUnit(location.state.unit);
+      setPhotoURL(location.state.photoURL);
+      setUid(location.state.uid);
     }
   }, []);
 
@@ -127,6 +133,20 @@ function ServiceBooking() {
     } else {
       setShowGuestModal(true);
     }
+  }
+
+  /* create a chat between user and card's owner */
+  function onContactClick() {
+    dispatch(
+      createContact({
+        myUid: user.uid,
+        myName: user.displayName,
+        myPhotoURL: user.photoURL,
+        contactUid: uid,
+        contactName: name,
+        contactPhotoURL: photoURL
+      })
+    );
   }
 
   function confirmBooking() {
@@ -407,7 +427,7 @@ function ServiceBooking() {
       )}
       <div className="service-booking-footer">
         <div className="service-booking-footer-button">
-          <Button children={<div>Contact Seller</div>} />
+          <Button onClick={onContactClick}>Contact Seller</Button>
         </div>
       </div>
     </div>

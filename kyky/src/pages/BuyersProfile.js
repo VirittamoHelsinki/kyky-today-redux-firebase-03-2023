@@ -19,7 +19,7 @@ function BuyersProfile() {
   return (
     <div className="buyers-profile--container">
       <div className="buyers-profile--header">
-        <img src={_user.photoURL} referrerPolicy="no-referrer" className="userImage" />
+        <img src={_user.photoURL} referrerPolicy="no-referrer" className="userImage" alt="" />
         <div>
           <h3 className="username">{_user.displayName}</h3>
         </div>
@@ -27,8 +27,9 @@ function BuyersProfile() {
 
       <div className="buyers-profile--content-wrapper">
         <div className="buyers-profile--tabs">
-          {Tabs.map(({ tab, display }) => (
+          {Tabs.map(({ tab, display }, index) => (
             <div
+              key={index}
               className={`buyers-profile--button ${currentTab === tab ? 'selected-tab' : ''}`}
               onClick={() => setCurrentTab(tab)}>
               <h3>{display}</h3>

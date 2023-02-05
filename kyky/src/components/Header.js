@@ -8,6 +8,8 @@ import { resetJobCreationForm } from '../redux/sellers/jobFormSlice';
 import { resetProfileForm } from '../redux/sellers/profileFormSlice';
 import { resetServiceBooking } from '../redux/buyers/serviceBookingSlice';
 import { resetFileUpload } from '../redux/storage/fileUploadSlice';
+import { resetContact } from '../redux/chat/contactSlice';
+import { resetMessage } from '../redux/chat/messageSlice';
 import ProfileDropdown from './ProfileDropdown';
 import SearchBar from './SearchBar';
 import '../styles/header.scss';
@@ -47,6 +49,8 @@ const Header = ({ navlinks }) => {
     dispatch(resetJobCreationForm());
     dispatch(resetProfileForm());
     dispatch(resetServiceBooking());
+    dispatch(resetContact());
+    dispatch(resetMessage());
   };
 
   const menuToggle = () => {

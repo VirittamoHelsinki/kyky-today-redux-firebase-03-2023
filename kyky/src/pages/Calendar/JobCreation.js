@@ -61,7 +61,8 @@ export default function JobCreation() {
         everyOtherWeekend: recurrent ? everyOtherWeekend : price,
         onceAMonth: recurrent ? onceAMonth : price,
         unit: unit,
-        urls: urls
+        urls: urls,
+        photoURL: _user.photoURL
       })
     );
     navigate('/calendar');

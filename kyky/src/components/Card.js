@@ -57,6 +57,7 @@ Card.propTypes = {
     everyOtherWeekday: PropTypes.string.isRequired,
     everyOtherWeekend: PropTypes.string.isRequired,
     onceAMonth: PropTypes.string.isRequired,
-    urls: PropTypes.arrayOf(PropTypes.string).isRequired
+    urls: PropTypes.arrayOf(PropTypes.string).isRequired,
+    photoURL: PropTypes.string
   }).isRequired
 };
