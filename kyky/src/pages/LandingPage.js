@@ -39,8 +39,12 @@ function LandingPage() {
         </div>
       </div>
       <div className="landing-page-footer">
-        <button>Just Browsing?</button>
-        <button>Join Us!</button>
+        <Link to="/categories/all">
+          <button>Just Browsing?</button>
+        </Link>
+        <Link to="/user-registration">
+          <button>Join Us!</button>
+        </Link>
       </div>
     </div>
   );

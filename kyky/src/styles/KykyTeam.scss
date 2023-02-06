@@ -1,0 +1,96 @@
+.kykyteam-main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  .kykyteam-text {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .headline {
+      display: flex;
+      justify-content: flex-start;
+
+      p {
+        font-family: Poppins, sans-serif;
+        font-size: 32px;
+        text-align: left;
+      }
+    }
+
+    .paragraph {
+      display: flex;
+      justify-content: flex-start;
+
+      p {
+        font-family: Poppins, sans-serif;
+        font-size: 16px;
+        text-align: left;
+      }
+    }
+  }
+
+  .kykyteam-cards {
+    .card-row {
+      .card-person {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 15px;
+        border-radius: 15px;
+
+        .card-image {
+          width: 100%;
+          height: min-content;
+        }
+
+        .name-and-title {
+          display: flex;
+          flex-direction: column;
+          padding: 10px;
+
+          .name {
+            display: flex;
+            justify-content: flex-start;
+
+            p {
+              font-family: Poppins, sans-serif;
+              font-size: 16px;
+              font-weight: 600;
+              color: #063831;
+              text-align: left;
+            }
+          }
+
+          .title {
+            display: flex;
+            justify-content: flex-start;
+
+            p {
+              font-family: Roboto, sans-serif;
+              font-size: 15px;
+              font-weight: 400;
+              color: #063831;
+              text-align: left;
+            }
+          }
+        }
+
+        .description {
+          width: 100%;
+          padding: 10px;
+          height: min-content;
+
+          p {
+            font-family: Roboto, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: black;
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+}

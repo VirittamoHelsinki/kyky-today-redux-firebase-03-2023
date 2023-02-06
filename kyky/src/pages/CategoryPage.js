@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchJobsByQuery } from '../redux/sellers/jobFormSlice';
+import { fetchAllJobs, fetchJobsByQuery } from '../redux/sellers/jobFormSlice';
 import Card from '../components/Card';
 import '../styles/CategoryPage.scss';
 
@@ -20,7 +20,11 @@ const CategoryPage = () => {
 
   /* dispatch a query to the firebase when page loads*/
   useEffect(() => {
-    dispatch(fetchJobsByQuery({ key: 'category', value: category_with_spaces }));
+    if (category === 'all') {
+      dispatch(fetchAllJobs());
+    } else {
+      dispatch(fetchJobsByQuery({ key: 'category', value: category_with_spaces }));
+    }
   }, []);
 
   /* listen changes in redux's state, set cards when firebase returns the query result */

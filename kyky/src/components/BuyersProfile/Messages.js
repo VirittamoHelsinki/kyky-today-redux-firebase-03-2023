@@ -65,6 +65,7 @@ const Messages = ({ user }) => {
     }
   }
 
+  // timeStamp(messgae.timestamp)
   // function timeSince(timestamp) {
   //   let seconds = Math.floor(new Date() / 1000 - parseInt(timestamp));
   //   let interval = seconds / 31536000;
@@ -128,6 +129,7 @@ const Messages = ({ user }) => {
       ) : (
         <div className="messages-content">
           <div className="messages-list">
+            {/* to force the scroll bar down css has set to "flex-direction: column-reverse", so this is reversed too */}
             {messages
               .map((message, index) => (
                 <div

@@ -17,6 +17,19 @@ export const createJobForm = createAsyncThunk(
   }
 );
 
+export const fetchAllJobs = createAsyncThunk('jobcreation-forms/fetchAllJobs', async () => {
+  try {
+    const documents = [];
+    const snap = await getDocs(collection(db, 'jobs'));
+    snap.forEach((doc) => {
+      documents.push({ ...doc.data(), id: doc.id });
+    });
+    return documents;
+  } catch (error) {
+    return error;
+  }
+});
+
 export const fetchJobsByQuery = createAsyncThunk(
   'jobcreation-forms/fetchJobsByQuery',
   async (payload) => {
@@ -49,6 +62,12 @@ export const jobCreationFormSlice = createSlice({
     builder
       .addCase(createJobForm.fulfilled, (state, action) => {
         console.log(action.payload);
+      })
+      .addCase(fetchAllJobs.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          cards: action.payload
+        });
       })
       .addCase(fetchJobsByQuery.fulfilled, (state, action) => {
         return (state = {

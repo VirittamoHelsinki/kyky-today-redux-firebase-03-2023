@@ -14,6 +14,7 @@ import en from './localisation/en.json';
 /* Misc */
 import ProfileCreation from './pages/ProfileCreation';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import UserRegistration from './pages/UserRegistration';
 import ContactForm from './pages/ContactForm';
 import UserLogin from './pages/UserLogIn';
@@ -223,6 +224,7 @@ const App = () => {
             }
           />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </Language.Provider>
   );

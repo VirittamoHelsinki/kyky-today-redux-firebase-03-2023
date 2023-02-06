@@ -1,141 +1,172 @@
-p {
-  text-align: start;
-}
-
-.inputTitle {
+.job-calendar-settings {
+  width: 100%;
   display: flex;
-  width: 625px;
-  margin: 12px 0;
-  padding: 0 20px 10px;
-  border-radius: 4px;
-  border: solid 1px gainsboro;
-  text-align: start;
-}
-
-.inputLarge {
-  display: flex;
-  width: 625px;
-  margin: 12px 0;
-  padding: 0 20px 100px;
-  border-radius: 4px;
-  border: solid 1px gainsboro;
-  text-align: start;
-}
-
-.inputPrice {
-  background-color: #fff;
-  border: solid 1px gainsboro;
-  text-align: right;
-  width: 44px;
-  height: 30px;
-}
-
-.inputContainer {
-  height: auto;
-  width: 420px;
-  display: flex;
-  justify-content: space-evenly;
-  position: relative;
-  top: 20px;
-  right: 20px;
-}
-
-.inputContainer2 {
-  height: auto;
-  width: 210px;
-  display: flex;
-  justify-content: space-evenly;
-  position: relative;
-  top: 20px;
-  right: 20px;
-}
-
-.picContainer {
-  display: flex;
-  height: fit-content;
-  width: auto;
+  flex-direction: column;
   justify-content: flex-start;
-  gap: 30px;
-}
-
-.picBox {
-  display: flex;
-  height: 140px;
-  margin: 12px 0;
-  border: 1px solid gainsboro;
-  border-radius: 10px;
-  justify-content: center;
   align-items: center;
-  overflow: visible;
-  position: relative;
-}
 
-.picIcon {
-  position: relative;
-  font-weight: 700;
-  font-size: 1.25rem;
-  border: 0.25rem solid black;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background-color: #808080;
-  justify-content: center;
-  align-items: center;
-}
+  .settings {
+    flex-direction: column;
+    justify-content: flex-start;
 
-.select-button {
-  background-color: #fff;
-  border: solid 1px gainsboro;
-  width: 250px;
-  height: 30px;
-}
+    .title {
+      color: #387a70;
+      font-weight: 700;
+      font-size: 1.875rem;
+    }
 
-.select-unit {
-  background-color: #fff;
-  border: solid 1px gainsboro;
-  width: 40px;
-  height: 30px;
-}
+    .settings-container {
+      width: 95%;
+      height: 45%;
+      margin: 1%;
+      border: 1px solid silver;
+      padding: 1rem;
 
-.recurrent-switch {
-  display: flex;
-  gap: 4px;
-  padding-top: 8px;
-}
+      .title {
+        color: black;
+        font-family: Poppins, sans-serif;
+      }
 
-.recurrents {
-  display: flex;
-  justify-content: flex-start;
-  gap: 1em;
+      .job-creation-setting {
+        margin: 0.5rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 4px;
 
-  .disabled {
-    opacity: 0.3;
+        .inputTitle {
+          display: flex;
+          width: 625px;
+          margin: 12px 0;
+          padding: 0 20px 10px;
+          border-radius: 4px;
+          border: solid 1px gainsboro;
+          text-align: start;
+        }
+
+        .select-button {
+          background-color: #fff;
+          border: solid 1px gainsboro;
+          width: 250px;
+          height: 30px;
+        }
+
+        .select-unit {
+          background-color: #fff;
+          border: solid 1px gainsboro;
+          width: 40px;
+          height: 30px;
+        }
+
+        .recurrent-switch {
+          display: flex;
+          gap: 4px;
+          padding-top: 8px;
+        }
+
+        .picContainer {
+          display: flex;
+          height: fit-content;
+          width: auto;
+          justify-content: flex-start;
+          gap: 30px;
+
+          .picBox {
+            display: flex;
+            height: 140px;
+            margin: 12px 0;
+            border: 1px solid gainsboro;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            overflow: visible;
+            position: relative;
+
+            .file-upload {
+              position: relative;
+              width: auto;
+              height: auto;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: center;
+              margin: 10px;
+
+              .file-upload-image {
+                height: 130px;
+              }
+
+              .file-remove {
+                background: gray;
+                color: white;
+                position: absolute;
+                border-radius: 8px;
+                font-size: 20px;
+                font-weight: bold;
+                width: 20px;
+                top: 0;
+                right: 0;
+              }
+            }
+
+            .files {
+              height: auto;
+              margin: 12px;
+              display: flex;
+              flex-direction: row;
+
+              .picIcon {
+                position: relative;
+                font-weight: 700;
+                font-size: 1.25rem;
+                border: 0.25rem solid black;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                background-color: #808080;
+              }
+            }
+          }
+        }
+      }
+
+      .recurrents {
+        display: flex;
+        justify-content: flex-start;
+        gap: 1em;
+
+        .recurrent {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          border: solid 1px gainsboro;
+          padding: 1px;
+
+          .inputPrice {
+            background-color: #fff;
+            border: solid 1px gainsboro;
+            text-align: right;
+            width: 44px;
+            height: 30px;
+          }
+
+          .recurrent-text {
+            font-size: 0.875rem;
+          }
+        }
+
+        &.disabled {
+          opacity: 0.3;
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+    }
   }
-}
-
-.recurrent {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  border: solid 1px gainsboro;
-  padding: 1px;
-}
-
-.recurrent-text {
-  font-size: 0.875rem;
-}
-
-.job-creation-setting {
-  margin: 0.5rem;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 4px;
-}
-
-.buttons {
-  display: flex;
 }
 
 .transparent-background {
@@ -155,22 +186,6 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.file-upload-image {
-  height: 130px;
-}
-
-.file-remove {
-  background: gray;
-  color: white;
-  position: absolute;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
-  width: 20px;
-  top: 0;
-  right: 0;
 }
 
 .close-button {

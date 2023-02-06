@@ -7,7 +7,7 @@ import Language from '../../language';
 import Checkbox from '../../components/Checkbox';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
-import FileUpload2 from '../../components/calendar/AddPhotoArray';
+import AddPhotoArray from '../../components/calendar/AddPhotoArray';
 import Categories from '../../components/CategoryTitleSelect';
 import '../../styles/jobCreation.scss';
 
@@ -266,7 +266,7 @@ export default function JobCreation() {
           <div className="job-creation-setting">
             <div className="picContainer">
               <div className="picBox">
-                <FileUpload2 addUrl={addUrl} />
+                <AddPhotoArray addUrl={addUrl} />
               </div>
               {urls.map((u) => {
                 return (
