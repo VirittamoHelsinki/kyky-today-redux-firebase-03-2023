@@ -44,6 +44,9 @@ import BuyersRating from './pages/BuyersRating';
 import ThanksForRating from './components/profile/ThanksForRating';
 import NPS from './components/profile/NPS';
 
+/* Footer contents */
+import KykyTeam from './pages/Infos/KykyTeam';
+
 const languages = { fi, en };
 
 const App = () => {
@@ -223,6 +226,7 @@ const App = () => {
               </GuestRoute>
             }
           />
+          <Route path="kyky-team" element={<KykyTeam />} />
         </Routes>
         <Footer />
       </BrowserRouter>

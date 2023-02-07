@@ -1,93 +1,186 @@
 .kykyteam-main {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
+  justify-content: center;
 
-  .kykyteam-text {
+  .kykyteam-content {
     display: flex;
     flex-direction: column;
+    width: 50%;
     gap: 30px;
+    padding-top: 50px;
 
-    .headline {
+    .kykyteam-text {
       display: flex;
-      justify-content: flex-start;
+      flex-direction: column;
+      gap: 30px;
 
-      p {
-        font-family: Poppins, sans-serif;
-        font-size: 32px;
-        text-align: left;
-      }
-    }
-
-    .paragraph {
-      display: flex;
-      justify-content: flex-start;
-
-      p {
-        font-family: Poppins, sans-serif;
-        font-size: 16px;
-        text-align: left;
-      }
-    }
-  }
-
-  .kykyteam-cards {
-    .card-row {
-      .card-person {
+      .headline {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 15px;
-        border-radius: 15px;
+        justify-content: flex-start;
 
-        .card-image {
-          width: 100%;
-          height: min-content;
+        p {
+          font-family: Poppins, sans-serif;
+          font-size: 32px;
+          font-weight: 500;
+          text-align: justify;
         }
+      }
 
-        .name-and-title {
+      .paragraph {
+        display: flex;
+        justify-content: flex-start;
+
+        p {
+          font-family: Poppins, sans-serif;
+          font-size: 18px;
+          font-weight: 400;
+          text-align: left;
+        }
+      }
+    }
+
+    .kykyteam-cards {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px;
+
+      .kykyteam-card-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px;
+
+        .card-person {
           display: flex;
           flex-direction: column;
-          padding: 10px;
+          justify-content: flex-start;
+          border: solid 1px gainsboro;
+          box-shadow: 0 2px lightgrey;
+          width: 27%;
+          border-radius: 11px;
+          padding-bottom: 20px;
 
-          .name {
-            display: flex;
-            justify-content: flex-start;
+          .card-image {
+            width: 100%;
+            height: min-content;
+            padding: 7px;
 
-            p {
-              font-family: Poppins, sans-serif;
-              font-size: 16px;
-              font-weight: 600;
-              color: #063831;
-              text-align: left;
+            .image {
+              opacity: 0.7;
+              border-radius: 5px;
             }
           }
 
-          .title {
+          .name-and-title {
             display: flex;
-            justify-content: flex-start;
+            flex-direction: column;
+            gap: 5px;
+            padding: 12px;
+
+            .name {
+              display: flex;
+              justify-content: flex-start;
+
+              p {
+                font-family: Poppins, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                color: #063831;
+                text-align: left;
+              }
+            }
+
+            .title {
+              display: flex;
+              justify-content: flex-start;
+
+              p {
+                font-family: Roboto, sans-serif;
+                font-size: 15px;
+                font-weight: 400;
+                color: #063831;
+                text-align: left;
+              }
+            }
+          }
+
+          .description {
+            width: 100%;
+            height: min-content;
+            padding: 12px;
 
             p {
               font-family: Roboto, sans-serif;
               font-size: 15px;
               font-weight: 400;
-              color: #063831;
+              color: black;
               text-align: left;
             }
           }
         }
 
-        .description {
-          width: 100%;
-          padding: 10px;
-          height: min-content;
+        .card-info {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          border: solid 1px gainsboro;
+          box-shadow: 0 2px lightgrey;
+          width: 27%;
+          border-radius: 11px;
 
-          p {
-            font-family: Roboto, sans-serif;
-            font-size: 15px;
-            font-weight: 400;
-            color: black;
-            text-align: left;
+          .info-title {
+            display: flex;
+            justify-content: flex-start;
+            padding: 5px 10px;
+
+            p {
+              font-family: Roboto, sans-serif;
+              font-size: 15px;
+              font-weight: 400;
+              text-align: left;
+            }
+          }
+
+          .info-headline {
+            display: flex;
+            justify-content: flex-start;
+            padding: 5px 10px;
+
+            p {
+              font-family: Poppins, sans-serif;
+              font-size: 20px;
+              font-weight: 600;
+              text-align: left;
+            }
+          }
+
+          .info-text {
+            display: flex;
+            justify-content: flex-start;
+            padding: 5px 10px;
+
+            p {
+              font-family: Roboto, sans-serif;
+              font-size: 15px;
+              font-weight: 400;
+              text-align: left;
+            }
+          }
+
+          .info-email-us {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 60px;
+            padding: 5px 10px;
+
+            .email-us-button {
+              border-radius: 8px;
+              border: 1px solid green;
+              width: 100px;
+              height: 40px;
+            }
           }
         }
       }

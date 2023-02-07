@@ -1,5 +1,5 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../styles/Footer.scss';
 
 const Footer = () => {
@@ -7,7 +7,9 @@ const Footer = () => {
     <div className="footer-main">
       <div className="info-box">
         <div className="title">YRITYS</div>
-        <div className="content">TIIMI/TEAM</div>
+        <Link to="/categories/home_maintenance_and_repairs">
+          <div className="content">TIIMI/TEAM</div>
+        </Link>
         <div className="content">YHTEYSTIEDOT/CONTACT</div>
         <div className="content">MITEN PALVELU TOIMII</div>
         <div className="content">PREMIUM-PALVELUT</div>
