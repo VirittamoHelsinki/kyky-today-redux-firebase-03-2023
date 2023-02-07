@@ -43,3 +43,70 @@ export const buyer_texts = [
   'Suosittelemme arvostelemaan Skillerin työtä, koska se auttaa ammattilaisia rakentamaan uskottavuutta ja se auttaa tulevia ostajia valitsemaan sopivan ammattilaisen heidän työlleen. Kun keikka on valmis, saat järjestelmältä sähköpostin, jossa pyydetään arvostelua. Huomaa, että palautteen antaminen on mahdollista 14 päivän ajan sekä ostajille että myyjille. \nArviointikriteerit – yhdestä (huonoimmasta) viiteen (parhaimpaan) tähdestä – ovat seuraavat: \nPalvelun laatu – mittaa palvelun laatua verrattuna ostajan odotuksiin. \nViestintä - mittaa viestinnän tehokkuutta ennen keikkaa ja sen aikana. Esim. Skilleri vastasi nopeasti tai on luotettava vastatessa ostajien kysymyksiin. \nAjanhallinta - mittaa työn organisoinnin ja suunnittelun prosessia varaus-ajan sisällä. \nSääntöjen kunnioitus - mittaa miten hyvin sääntöjä on noudatettu, ystävällisyys ja kohteliaisuus mukaan lukien.',
   'Kyllä voit. Voit olla sekä ostaja että myyjä. Vaihda vain ostamisesta myyntiin.'
 ];
+
+export const seller_headlines = [
+  'MIKÄ ON KYKY TODAY?',
+  'KETKÄ OVAT SKILLERIT?',
+  'MIKSI MINUN PITÄISI REKISTERÖITYÄ KÄYTTÄJÄKSI KYKY TODAY-ALUSTAAN?',
+  'MIKSI MINUN PITÄISI VALITA FREELANCE-TYÖSKENTELY?',
+  'MIKSI MINUN PITÄISI VALITA KYKY TODAY?',
+  'MITÄ OVAT KYKY TODAYN PÄÄTYÖLINJAT?',
+  'KUINKA REKISTERÖIDYN KYKY TODAY -SIVUSTOLLE?',
+  'OLEN 15-VUOTIAS, VOINKO REKISTERÖITYÄ SIVUSTOLLE?',
+  'UNOHDIN SALASANANI. VOINKO NOLLATA SEN?',
+  'KUINKA VOIN LUODA PROFIILIN KYKY TODAY-SIVUSTOLLE?',
+  'KUINKA VALITSEN ASIANTUNTEMUSTASONI?',
+  'MITÄ TARKOITTAA "PERUUTUSTA VUODESSA"?',
+  'KUINKA AVOIN KALENTERI TOIMII?',
+  'VOINKO MUOKATA PROFIILIANI?',
+  'MITEN POISTAN TILINI KOKONAAN?',
+  'MITÄ TAPAHTUU, KUN SAAN VARAUKSEN?',
+  'MILLOIN TEHTÄVÄNI ALKAA?',
+  'MISSÄ VOIN NÄHDÄ VARAUKSENI?',
+  'KUINKA PERUUTTAA / HYLÄTÄ SAAPUVA VARAUS?',
+  'MITÄ TEEN, JOS OSTAJANI HALUAA PERUUTTAA VARAUKSEN?',
+  'PITÄISIKÖ MINUN OLLA YHTEYDESSÄ OSTAJAAN KEIKAN VALMISTUMISEN JÄLKEEN?',
+  'MIKSI ARVOSTELUT OVAT MERKITYKSELLISIÄ?',
+  'MITEN ARVOSTELUT TOIMIVAT?',
+  'MIKÄ ON TÄMÄ ALUSTAN MAKSUTAPA?',
+  'VELOITETAANKO MINULTA MITÄÄN MAKSUJA TAITOJENI LISÄYKSESTÄ KYKY TODAY-ALUSTALLE?'
+];
+
+export const seller_texts = [
+  'Kyky on sosiaalinen alusta, jossa freelancerit, yrittäjät, opiskelijat, ja harrastelijat voivat markkinoida taitojaan ja palveluitaan ostajille Suomessa tai muussa maassa.',
+  'Skillerit ovat henkilöitä, jotka ovat kokopäivätyössä, osa-aikatyössä, työttöminä tai eläkkeellä, ketkä tekevät keikkoja, myyvät ja markkinoivat taitojansa, kykyjensä mukaan ostajille, jotka ovat rekisteröityneet Kyky Today-alustaan.',
+  'Kyky on vallankumouksellinen sosiaalinen alusta, jonka avulla monet eri ammattialoille erikoistuneet kyvyt voivat lisätä näkyvyyttään potentiaalisille asiakkaille. Myymällä taitojaan verkossa sekä offline-tilassa Skillerit vastaavat työmarkkinoiden välittömiin tarpeisiin, tarjoamalla kustannustehokkaita ja joustavia palveluita.',
+  'Nykymaailmassa työmarkkinoiden ja talouden muutosten johdosta, freelancerina työskentelystä on muodostumassa sopivin vastaus perinteisen työllisyys- ja henkilöstömarkkinoiden tehottomuuteen. Uudessa “lahjakkuustaloudessa” uudet yrittäjät ja freelancerit reagoivat nopeammin talouden ja yhteiskunnan tarpeisiin.',
+  'Olet oman itsesi pomo. Hallitset täysin työelämääsi ja voit päättää, milloin, kenen kanssa sekä kuinka kauan työskentelet. Asiakkaita voit veloittaa tuntipalkan mukaan, tai sovitun hinnan koko projektista. Me Kykyssä autamme sinua: ⮚saamaan näkyvyyttä, julkisuutta, sekä uusia mahdollisuuksia että kasvua Kyky-alustan kautta. ⮚Parantamaan mainettasi oikeudenmukaisen arviointijärjestelmän avulla. ⮚Edistämään yrittäjyyttä ja tukemaan uusia freelancereita rakentamalla verkostoa. ⮚Tarjoamalla ohjausta ja mentorointia tarpeesi mukaan. Rekisteröityminen sekä tilin luominen Kyky Today -palveluun on maksutonta ja tulee aina olemaan.',
+  'Kyky Today kattaa useita aloja ja ammatillisia taitoja. Pääkategoriat ovat: \nKoti & korjaukset - kodin korjaus- ja huoltotyöt; kierrätys; kausikohtaiset työt kuten lumen kolaus, puutarhatyöt ja maisemasuunnittelu. \nMuuto & Siivous - Siivous- ja muuttotyö. \nHoito & Hoiva - Lasten ja vanhusten hoito ja tuki; lemmikkien hoito; terveys valmennus; urheilu- ja kuntosalivalmentajat; kampaajat, meikkaajat ja muoti-ammattilaiset. \nLuovuus & IT - Valokuvaajat, graafiset suunnittelijat, sisällön tuottajat, sosiaalisen median ammattilaiset, artistit; ohjelmoijat, IT tuottajat, IT suunnittelijat, teknikot ja muut. \nOpetus & Valmennus - Opettajat ja tuutorit; elämäntapa valmentajat; kirjanpitäjät, bisnes asiantuntijat; laki, vero ja rahoitus ammattilaiset. \nViihde & Pitopalvelu - Kokit, pitopalvelut; tapahtumien järjestäjät ja viihdyttäjät.',
+  'Täytä rekisteröintilomake antamalla voimassaoleva sähköpostiosoite ja vahvista, että olet lukenut meidän Ehdot & Tietosuojakäytännöt. Lähetettyäsi rekisteröintilomakkeen, lähetämme sinulle vahvistussähköpostin ilmoittautumisen yhteydessä käytettyyn sähköpostiosoitteeseen.',
+  'Kyllä voit. Kyky Today rohkaisee 15- vuotiaita ja sitä vanhempia ihmisiä aloittamaan uransa kanssamme ja tavoittelemaan taloudellista itsenäisyyttä.',
+  'Ole hyvä ja kirjoita sähköpostiosoitteesi ja napsauta kotisivulla “unohtunut salasana”-kohtaa. Lähetämme sinulle sähköpostia, jonka avulla voit vaihtaa salasanasi.',
+  'Aktivoi Kyky-tilisi klikkaamalla sähköpostissa olevaa linkkiä. Kirjaudu sisään Kyky Today-alustaan käyttämällä käyttäjätunnustasi ja salasanaasi. Profiilin luomista varten sinun on täytettävä kaikki sivut ja tallennettava ne. Tässä on muutamia vinkkejä: ⮚Lataa valokuva/avatar profiiliisi. Yritä välttää pieniä sekä matalan resoluution kuvia ja muista hymyillä ⮚Kirjoita hyvä esittelyteksti, jotta voit luoda hyvän ensivaikutelman. Voit puhua työkokemuksestasi, tuoda esiin taitosi ja vakuuttaa ihmiset miksi olet paras tekemisissäsi. ⮚Lisää kielitaitosi ja lokaatiot missä tahdot työskennellä. ⮚Valitse taitosi , osaamisesi, ja Kykysi tai ammattisi joukossa olevista vaihtoehdoista tai luo omasi. ⮚Valitse asiantuntemuksesi taso kokemustesi perusteella. ⮚Lisää kalenteriin päivät, jolloin olet käytettävissä, jotta ostajat näkevät sinut heti. ⮚Määritä työlle hinta, tuntihinnan mukaan tai projektin mukaan. (Esim., 25€/tunti). ⮚Lisää portfolio, ansioluettelo ja muut lähteet suosituksia varten. ⮚Määritä hyväksymäsi maksutavat. Kun olet valmis, aktivoi tilisi, jotta sivusi näkyy potentiaalisille asiakkaille. Kun profiilisi on aktiivinen, saat vahvistussähköpostiviestin ja voit lisätä käytettävyytesi kalenteriin. Kyky-tiimi tarkistaa tiedot ja auttaa profiilisi muokkaamisen kanssa tarvittaessa.',
+  'Voit valita kolmesta vaihtoehdosta: junior-taso, keskitaso, tai asiantuntijataso. Junior-taso edellyttää vähintään 20 tuntia kokemusta ja myöntää 3 peruutusta vuodessa. Keskitaso edellyttää vähintään 50 tuntia kokemusta ja myöntää 2 peruutusta vuodessa. Asiantuntijataso edellyttää vähintään 100 tuntia kokemusta ja myöntää nolla peruutusta vuodessa. Huomaa, että hinnan on oltava yhdenmukainen kokemuksenne mukaan.',
+  'Kuten monet muutkin varausjärjestelmät, ostajat luottavat ostamaansa palveluun, joten suosittelemme, ettet peruuta vahvistettua varausta. Jos sinun täytyy peruuttaa keikka terveydellisistä syistä, ota välittömästi yhteyttä ostajaan ja sovi uusi keikkatyö 14 päivän sisällä.',
+  'Avoimessa kalenterissa voit jakaa käytettävyytesi ja vastaanottaa varauksia nopeasti. Voit lisätä haluamasi ajat ja synkronoida ne kalenterisi kanssa. Voit muokata päivämääriä kuten haluat, mutta vain kaksi kalenteriviikkoa, 14 vuorokautta, näkyvät kerralla ostajille. Aktivoidaksesi tilisi sinun tulee olla käytettävissä vähintään 2 tuntia viikossa.',
+  'Kyllä, voit muokata / päivittää profiilisi milloin tahansa käyttämällä samaa käyttäjätunnusta ja salasanaa.',
+  'Voit poistaa tilisi kokonaan lähettämällä sähköpostia osoitteeseen board@kyky.today otsikolla POISTA TILINI.',
+  'Jos ostaja varaa sinulta palvelun, saat siitä vahvistuksen sähköpostitse tai ilmoituksen Kyky sovellukseen sekä tekstiviestillä, mikäli olet antanut meille luvan ottaa sinuun yhteyttä matkapuhelimella . Avoin kalenterisi päivitetään välittömästi järjestelmässämme, etkä ole enää varattavissa sinä päivänä ja aikana. Varaukset näkyvät myös profiilisivullasi “varaukset” -kohdassa, josta saat yhteenvedon kaikista keikoistasi ja muita lisätietoja. Esimerkiksi, jos teet manuaalista työtä, saat asiakkaan osoitteen ja tiedon tarvittavista työkaluista työn luonteesta riippuen. Varmistathan, että pääset ajoissa paikalle, mikäli sinulla on keikka toisensa jälkeen samana päivänä.',
+  'Tehtäväsi alkaa varauksen aloitusajan mukaisesti. Mikäli, työ vaatii matkustamista, voit lisätä matkustuskustannuksen asiakkaalle maksettavaksi. Suosittelemme, että määrittelet ylimääräiset kulut omaan Kyky profiiliisi ylimääräisiä maksuja- kohtaan tai sisällytät sen palvelusi hintaan.',
+  'Varaukset ovat näkyvissä kalenterissasi ja kaikki varaukset näkyvät eriteltynä extranetin ‘varaukset’ -välilehdellä. Jokaisesta varauksesta löytyy seuraavat tiedot: – Asiakkaan nimi ja osoite (työstä riippuen) – Päivämäärä, jolloin tilaus tehtiin – Keikan tai palvelun päivämäärä ja aika – Suosimasi maksutapa – Yhteenveto varauksen kuluista. Jokaisella varauksella on viitenumero, jolla määritellään asiakkaan tilaukset. Viitenumeron avulla voit vasta arvosteluihin sekä ilmoittaa mahdollisista ongelmista.',
+  'Peruutukset ovat mahdollisia, mutta vain tietyissä olosuhteissa. Huomaa, että junior-tason Skillerilla on vain 3 sallittua peruutusta vuodessa, kun taas keskitason Skillerilla on 2 sallittua peruutusta vuodessa. Huomaa, että asiantuntijatason Skillerilla ei ole peruutuskäytäntöä. Jos sinulla on ongelmia varauksen kanssa , voit pyrkiä sopimaan siitä ostajan kanssa ehdottamalla eri päivämäärää tai ehdottamalla toista Skillerista kyseiseen työhön.',
+  'Ostajilla on oikeus perua varaus. Voit lisätä maksuttoman peruutuksen tilillesi tai välttääksesi tätä tilannetta, voit pyytää ennakkomaksun palvelustasi. Joka tapauksessa, kannustamme sekä myyjiä että ostajia sopimaan keskenään peruutuksesta tai pyrkimään yhteisymmärrykseen palvelun ajankohdasta, tai suositella toista Skillerista kyseiseen työhön. Huomaa myös, että ostajan pyytämä peruutus ei vaikuta arvostelujärjestelmään.',
+  'Se riippuu sinusta. Tulevaisuudessa voit suositella ostajaa muille Skillerille, tiedottaa asiakkaita erikoistarjouksista ja alennuksista tai estää heiltä tulevia pyyntöjä.',
+  'Arvostelut auttavat sinua asiakkuuksien hankinnassa, uskottavuuden todentamisessa ja ansaitsemaan enemmän rahaa. Arvostelut lisäävät näkyvyyttä, luottamusta ja luotettavuutta asiakkaan näkökulmasta. Huomaa, että voit kieltäytyä arvosteluista niin kauan, kunnes olet haluat julkaista arvosteluita profiiliisi. Suosittelemme, että Junior Skilleri odottavat kolmesta viiteen keikkaa ennen arvostelujen julkaisua. Ensimmäisen arvostelun julkaisun jälkeen, kaikki uudet arvostelut ovat näkyvissä kaikille.',
+  'Kun olet suorittanut työsi loppuun, ostaja saa sähköpostin, jossa hän arvostelee taitosi. Kommenttikenttä on myös asiakkaan käytettävissä, missä hän voi perustella arvostelunsa yksityiskohtaisesti. Palaute-vaihtoehto on käytettävissä 14 päivän ajan sekä ostajille että myyjille. Arvostelut näkyvät halutessaan sekä yksityisissä että julkisissa profiileissa. Arviointikriteeri – yhdestä tähdestä (huonoin) viiteen tähteen (paras) – ovat seuraavat: Palvelun laatu – mittaa palvelun laatua verrattuna ostajan odotuksiin. Viestintä – mittaa viestinnän tehokkuutta ennen keikkaa ja sen aikana. Esim. Skilleri vastasi nopeasti tai on luotettava vastatessa ostajien kysymyksiin. Ajanhallinta – mittaa työn organisoinnin ja suunnittelun prosessia varaus-ajan sisällä. Sääntöjen kunnioitus – mittaa miten hyvin sääntöjä on noudatettu, ystävällisyys ja kohteliaisuus mukaan lukien. Oikeudenmukaisen järjestelmän takia Skilleri voi vastata arvosteluihin ja päättää haluaako julkaista ne. Muista, että kun olet julkaissut ensimmäisen arvostelusi, tulevat arvostelut näkyvät profiilissasi kaikille.',
+  'Me tarjoamme suoran maksun ostajan ja myyjän välillä. Tällä hetkellä, hyväksymme seuraavat vaihtoehdot: PayPal, MobilePay, sekä tilisiirto.',
+  '24 tunnin koeaikana (n. 3 kuukautta, tehden 2 tuntia työtä viikossa) emme veloita maksua. Koeaika on maksuton, jotta voimme arvioida, mikäli palvelujasi tarvitaan ja niistä tykätään. Tämän aikana arvioimme myös, jos olet kykenevä selviytymään varauksista sekä töistä. Koeajan jälkeen (24 tuntia tai 3 kuukautta, kumpi tulee ensin), veloitetamme palvelumaksun jokaisesta 20 euroa ylittävästä keikasta. Palvelumaksun avulla voimme parantaa alustamme ominaisuuksia, sekä tukea Skilleria hankkimaan enemmän asiakkaita, ja kattamaan markkinoinnista aiheutuvia kuluja. Samalla nostat näkyvyyttä ja mahdollisuuksia saada uusia varauksia. Arvostelut tehostavat uskottavuuttasi ja tarvittaessa saat meiltä neuvoa ja tukea!'
+];
+
+export const register_texts = [
+  'Rekisteröi sähköpostiosoitteesi kyky.today',
+  'Valitse taitosi ja aseta hinta',
+  'Avaa kalenteri varauksille',
+  'Vastaanota ensimmäiset tilauksesi',
+  'Hyväksy ja vahvista tilaukset',
+  'Suorita työ hyvin',
+  'Saat maksun heti',
+  'Anna ja vastaanota oikeudenmukaisia arvosteluja'
+];

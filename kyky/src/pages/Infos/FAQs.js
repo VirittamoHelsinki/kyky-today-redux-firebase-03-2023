@@ -1,20 +1,29 @@
 import { useState } from 'react';
-import { buyer_headlines, buyer_texts } from './FAQtexts';
-
-const initialFalses = [];
-
-for (let i = 0; i < 20; i++) {
-  initialFalses.push(false);
-}
+import BuyerFAQ from './BuyerFAQ';
+import SellerFAQ from './SellerFAQ';
+import '../../styles/FAQs.scss';
 
 const FAQs = () => {
-  const [expandedTexts, setExpandedTexts] = useState(initialFalses);
+  const [buyerSelected, setBuyerSelected] = useState(false);
 
   return (
     <div className="faq-main">
-      {buyer_headlines.map((headline, index) => (
-        <div></div>
-      ))}
+      <div className="faq-headline">
+        <p>Frequently Asked Questions</p>
+      </div>
+      <div className="faq-tab">
+        <div
+          className={`tab-item${buyerSelected ? ' selected' : ''}`}
+          onClick={() => setBuyerSelected(true)}>
+          Ostaja
+        </div>
+        <div
+          className={`tab-item${!buyerSelected ? ' selected' : ''}`}
+          onClick={() => setBuyerSelected(false)}>
+          Myyjä
+        </div>
+      </div>
+      {buyerSelected ? <BuyerFAQ /> : <SellerFAQ />}
     </div>
   );
 };

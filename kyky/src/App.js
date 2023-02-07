@@ -46,6 +46,11 @@ import NPS from './components/profile/NPS';
 
 /* Footer contents */
 import KykyTeam from './pages/Infos/KykyTeam';
+import FAQs from './pages/Infos/FAQs';
+import TermsOfService from './pages/Infos/TermsOfService';
+import PrivacyPolicy from './pages/Infos/PrivacyPolicy';
+import HowServiceWorks from './pages/Infos/HowServiceWorks';
+import Pricing from './pages/Infos/Pricing';
 
 const languages = { fi, en };
 
@@ -227,6 +232,11 @@ const App = () => {
             }
           />
           <Route path="kyky-team" element={<KykyTeam />} />
+          <Route path="kyky-faqs" element={<FAQs />} />
+          <Route path="terms-of-service" element={<TermsOfService />} />
+          <Route path="privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="how-service-works" element={<HowServiceWorks />} />
+          <Route path="pricing" element={<Pricing />} />
         </Routes>
         <Footer />
       </BrowserRouter>

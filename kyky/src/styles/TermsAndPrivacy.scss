@@ -1,0 +1,10 @@
+.terms-and-privacy-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 5% 25%;
+
+  .headline-bold {
+    font-weight: bold;
+  }
+}

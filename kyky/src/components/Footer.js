@@ -7,19 +7,29 @@ const Footer = () => {
     <div className="footer-main">
       <div className="info-box">
         <div className="title">YRITYS</div>
-        <Link to="/categories/home_maintenance_and_repairs">
+        <Link to="/kyky-team">
           <div className="content">TIIMI/TEAM</div>
         </Link>
         <div className="content">YHTEYSTIEDOT/CONTACT</div>
-        <div className="content">MITEN PALVELU TOIMII</div>
+        <Link to="/how-service-works">
+          <div className="content">MITEN PALVELU TOIMII</div>
+        </Link>
         <div className="content">PREMIUM-PALVELUT</div>
       </div>
       <div className="info-box">
         <div className="title">TUKI</div>
-        <div className="content">UKK/FAQ</div>
-        <div className="content">KÄYTTÖEHDOT/TERMS OF SERVICE</div>
-        <div className="content">TIETOSUOJASELOSTE/PRIVACY POLICY</div>
-        <div className="content">HINNASTO</div>
+        <Link to="/kyky-faqs">
+          <div className="content">UKK/FAQ</div>
+        </Link>
+        <Link to="/terms-of-service">
+          <div className="content">KÄYTTÖEHDOT/TERMS OF SERVICE</div>
+        </Link>
+        <Link to="/privacy-policy">
+          <div className="content">TIETOSUOJASELOSTE/PRIVACY POLICY</div>
+        </Link>
+        <Link to="/pricing">
+          <div className="content">HINNASTO</div>
+        </Link>
       </div>
     </div>
   );
