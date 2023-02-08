@@ -1,7 +1,11 @@
-import React from 'react';
+import { useEffect } from 'react';
 import '../../styles/TermsAndPrivacy.scss';
 
 const TermsOfService = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="terms-and-privacy-main">
       <p>Päivitetty viimeksi: 31/01/2021</p>

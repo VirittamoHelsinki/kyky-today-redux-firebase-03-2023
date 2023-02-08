@@ -1,5 +1,4 @@
-import React from 'react';
-import defaultJobImage from '../../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
+import { useEffect } from 'react';
 import professional_logo_design from '../../image/additional-services-professional-logo-design.png';
 import social_media_creation from '../../image/additional-services-social-media-creation.png';
 import simple_one_pager_website from '../../image/additional-services-simple-one-pager-website.png';
@@ -8,6 +7,10 @@ import multi_page_website from '../../image/additional-services-multi-page-websi
 import '../../styles/AdditionalServices.scss';
 
 const AdditionalServices = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="additional-services-main">
       <div className="additional-services-content">

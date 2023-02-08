@@ -1,8 +1,12 @@
-import React from 'react';
-import { register_texts } from './FAQtexts';
+import { useEffect } from 'react';
+import { register_texts } from '../../components/Infos/FAQtexts';
 import '../../styles/HowServiceWorks.scss';
 
 const HowServiceWorks = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="how-works-main">
       <div className="how-works-title-and-video">
@@ -28,7 +32,7 @@ const HowServiceWorks = () => {
           </div>
           <div className="register-info-grid">
             {register_texts.map((text, index) => (
-              <div className="info-number-and-text">
+              <div className="info-number-and-text" key={index}>
                 <span className="info-number">{index + 1}</span>
                 <p className="info-text">{text}</p>
               </div>

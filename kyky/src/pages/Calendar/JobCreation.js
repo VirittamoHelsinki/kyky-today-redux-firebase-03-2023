@@ -107,9 +107,8 @@ export default function JobCreation() {
           </div>
           <h3 className="title">{lang.job_creation.job_description}</h3>
           <div className="job-creation-setting">
-            <input
+            <textarea
               className="inputLarge"
-              type="text"
               name="job_description"
               value={description}
               onChange={(e) => {

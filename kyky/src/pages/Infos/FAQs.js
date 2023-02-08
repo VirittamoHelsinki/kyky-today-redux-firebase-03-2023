@@ -1,10 +1,14 @@
-import { useState } from 'react';
-import BuyerFAQ from './BuyerFAQ';
-import SellerFAQ from './SellerFAQ';
+import { useState, useEffect } from 'react';
+import BuyerFAQ from '../../components/Infos/BuyerFAQ';
+import SellerFAQ from '../../components/Infos/SellerFAQ';
 import '../../styles/FAQs.scss';
 
 const FAQs = () => {
   const [buyerSelected, setBuyerSelected] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="faq-main">

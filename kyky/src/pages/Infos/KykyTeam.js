@@ -1,8 +1,12 @@
-import React from 'react';
+import { useEffect } from 'react';
 import defaultJobImage from '../../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
 import '../../styles/KykyTeam.scss';
 
 const KykyTeam = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="kykyteam-main">
       <div className="kykyteam-content">

@@ -1,7 +1,11 @@
-import React from 'react';
+import { useEffect } from 'react';
 import '../../styles/TermsAndPrivacy.scss';
 
 const PrivacyPolicy = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="terms-and-privacy-main">
       <p className="headline-bold">KYKY OY TIETOSUOJASELOSTE</p>

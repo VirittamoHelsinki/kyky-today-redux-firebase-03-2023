@@ -38,7 +38,7 @@
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-evenly;
+      justify-content: center;
       padding-top: 20px;
       gap: 40px;
 
@@ -53,11 +53,11 @@
         padding-bottom: 40px;
 
         .item-image {
-          width: 100%;
           height: min-content;
           padding: 7px;
 
           .image {
+            width: 100%;
             border-radius: 5px;
           }
         }

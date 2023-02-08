@@ -1,7 +1,11 @@
-import React from 'react';
+import { useEffect } from 'react';
 import '../../styles/HowServiceWorks.scss';
 
 const Pricing = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="how-works-main">
       <div className="pricing-content">
