@@ -51,6 +51,7 @@ import TermsOfService from './pages/Infos/TermsOfService';
 import PrivacyPolicy from './pages/Infos/PrivacyPolicy';
 import HowServiceWorks from './pages/Infos/HowServiceWorks';
 import Pricing from './pages/Infos/Pricing';
+import AdditionalServices from './pages/Infos/AdditionalServices';
 
 const languages = { fi, en };
 
@@ -237,6 +238,7 @@ const App = () => {
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
           <Route path="how-service-works" element={<HowServiceWorks />} />
           <Route path="pricing" element={<Pricing />} />
+          <Route path="additional-services" element={<AdditionalServices />} />
         </Routes>
         <Footer />
       </BrowserRouter>

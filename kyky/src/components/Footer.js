@@ -14,7 +14,9 @@ const Footer = () => {
         <Link to="/how-service-works">
           <div className="content">MITEN PALVELU TOIMII</div>
         </Link>
-        <div className="content">PREMIUM-PALVELUT</div>
+        <Link to="/additional-services">
+          <div className="content">PREMIUM-PALVELUT</div>
+        </Link>
       </div>
       <div className="info-box">
         <div className="title">TUKI</div>

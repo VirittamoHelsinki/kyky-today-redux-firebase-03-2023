@@ -1,5 +1,11 @@
 import React from 'react';
 import defaultJobImage from '../../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
+import professional_logo_design from '../../image/additional-services-professional-logo-design.png';
+import social_media_creation from '../../image/additional-services-social-media-creation.png';
+import simple_one_pager_website from '../../image/additional-services-simple-one-pager-website.png';
+import multi_page_website from '../../image/additional-services-multi-page-website.png';
+
+import '../../styles/AdditionalServices.scss';
 
 const AdditionalServices = () => {
   return (
@@ -17,7 +23,7 @@ const AdditionalServices = () => {
         <div className="service-grid">
           <div className="service-item">
             <div className="item-image">
-              <img src={defaultJobImage} className="image" alt="" />
+              <img src={professional_logo_design} className="image" alt="" />
             </div>
             <div className="item-title">
               <p>PROFESSIONAL LOGO DESIGN</p>
@@ -38,7 +44,7 @@ const AdditionalServices = () => {
           <div className="service-item">
             {' '}
             <div className="item-image">
-              <img src={defaultJobImage} className="image" alt="" />
+              <img src={social_media_creation} className="image" alt="" />
             </div>
             <div className="item-title">
               <p>SOCIAL MEDIA CREATION</p>
@@ -59,7 +65,7 @@ const AdditionalServices = () => {
           <div className="service-item">
             {' '}
             <div className="item-image">
-              <img src={defaultJobImage} className="image" alt="" />
+              <img src={simple_one_pager_website} className="image" alt="" />
             </div>
             <div className="item-title">
               <p>SIMPLE ONE-PAGER WEBSITE</p>
@@ -80,7 +86,7 @@ const AdditionalServices = () => {
           <div className="service-item">
             {' '}
             <div className="item-image">
-              <img src={defaultJobImage} className="image" alt="" />
+              <img src={multi_page_website} className="image" alt="" />
             </div>
             <div className="item-title">
               <p>MULTI-PAGE WEBSITE</p>
@@ -100,7 +106,7 @@ const AdditionalServices = () => {
           </div>
         </div>
         <div className="additional-service-button">
-          <div className="service-button"></div>
+          <div className="service-button">CONTACT US WITH YOUR REQUEST</div>
         </div>
       </div>
     </div>
