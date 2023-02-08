@@ -1,5 +1,5 @@
 .booking-page-content {
-  height: 100%;
+  height: min-content;
   background: #f8f9f8;
 }
 
@@ -170,6 +170,7 @@
         border-bottom: #c4c4c4 solid 2px;
         flex: 1 1 0;
         padding: 1rem;
+        cursor: pointer;
       }
 
       .selected {

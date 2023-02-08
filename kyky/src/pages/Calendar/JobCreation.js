@@ -93,7 +93,7 @@ export default function JobCreation() {
       <div className="settings">
         <h2 className="title">{lang.job_creation.h1}</h2>
         <div className="settings-container">
-          <h3 className="title">{lang.job_creation.job_title}</h3>
+          <p className="title">{lang.job_creation.job_title}</p>
           <div className="job-creation-setting">
             <input
               className="inputTitle"
@@ -105,7 +105,7 @@ export default function JobCreation() {
               }}
             />
           </div>
-          <h3 className="title">{lang.job_creation.job_description}</h3>
+          <p className="title">{lang.job_creation.job_description}</p>
           <div className="job-creation-setting">
             <textarea
               className="inputLarge"
@@ -118,11 +118,11 @@ export default function JobCreation() {
           </div>
         </div>
         <div className="settings-container">
-          <h3 className="title">{lang.job_creation.job_category}</h3>
+          <p className="title">{lang.job_creation.job_category}</p>
           <div className="job-creation-setting">
             <Categories changeTitle={changeTitle} changeCategory={changeCategory} />
           </div>
-          <h3 className="title">{lang.job_creation.place}</h3>
+          <p className="title">{lang.job_creation.place}</p>
           <div className="job-creation-setting">
             <input
               className="inputTitle"
@@ -144,7 +144,7 @@ export default function JobCreation() {
           </div>
         </div>
         <div className="settings-container">
-          <h3 className="title">Hinnat</h3>
+          <p className="title">Hinnat</p>
           <div className="job-creation-setting">
             <input
               className="inputPrice"
@@ -261,7 +261,7 @@ export default function JobCreation() {
           </div>
         </div>
         <div className="settings-container">
-          <h3 className="title">{lang.job_creation.pictures}</h3>
+          <p className="title">{lang.job_creation.pictures}</p>
           <div className="job-creation-setting">
             <div className="picContainer">
               <div className="picBox">
@@ -288,7 +288,13 @@ export default function JobCreation() {
           </div>
         </div>
         <div className="buttons">
-          <Button onClick={() => setShowPreviewModal(true)}>Esikatsele</Button>
+          <Button
+            onClick={() => {
+              setShowPreviewModal(true);
+              window.scrollTo(0, 0);
+            }}>
+            Esikatsele
+          </Button>
           <Button type="submit" onClick={handleSubmit}>
             Julkaise
           </Button>
