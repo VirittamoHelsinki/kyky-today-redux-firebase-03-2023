@@ -427,7 +427,18 @@ function ServiceBooking() {
       )}
       <div className="service-booking-footer">
         <div className="service-booking-footer-button">
-          <Button onClick={onContactClick}>Contact Seller</Button>
+          {user ? (
+            <Button
+              className="button-enabled"
+              onClick={() => {
+                onContactClick();
+                navigate('/buyers-profile');
+              }}>
+              Contact Seller
+            </Button>
+          ) : (
+            <Button className="button-disabled">Contact Seller</Button>
+          )}
         </div>
       </div>
     </div>

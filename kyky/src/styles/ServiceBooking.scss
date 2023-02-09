@@ -68,7 +68,7 @@
 
     .service-booking-left-panel-image-content {
       position: relative;
-      height: 500px;
+      height: min-content;
 
       .service-booking-left-panel-image {
         width: 100%;
@@ -108,7 +108,7 @@
     }
 
     .service-booking-right-panel-content {
-      min-height: 59vh;
+      min-height: 50vh;
       width: 34vw;
       border: 1px solid #c4c4c4;
       border-radius: 5px;
@@ -188,15 +188,30 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    padding: 40px 0 60px;
 
-    button {
+    .button-enabled {
       box-shadow: none;
-      background-color: white;
+      background: white;
+      border: black solid 1px;
+      color: black;
+      font-family: Poppins, sans-serif;
+      font-weight: 400;
+      font-size: 1.4rem;
+      width: 300px;
+      height: 60px;
+    }
+
+    .button-disabled {
+      box-shadow: none;
+      background: white;
       border: #c4c4c4 solid 1px;
       color: #c4c4c4;
       font-family: Poppins, sans-serif;
       font-weight: 400;
       font-size: 1.4rem;
+      width: 300px;
+      height: 60px;
     }
   }
 }
