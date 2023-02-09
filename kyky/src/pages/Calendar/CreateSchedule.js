@@ -13,7 +13,7 @@ import DateAndTime from '../../components/calendar/DateAndTime';
 import BookingPreferences from '../../components/calendar/BookingPreferences';
 import PreviewAndSubmit from '../../components/calendar/PreviewAndSubmit';
 
-export default function ManageScheduleModal({ setScheduleWindow, editing }) {
+export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }) {
   const [step, setStep] = useState(1);
   const [mode, setMode] = useState('create');
   const [View, setView] = useState(() => ChooseJob);
@@ -178,6 +178,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing }) {
           setScheduleWindow={setScheduleWindow}
           canContinue={canContinue}
           setCanContinue={setCanContinue}
+          jobs={jobs}
         />
       </div>
       <div className="manage-schedule__footer">

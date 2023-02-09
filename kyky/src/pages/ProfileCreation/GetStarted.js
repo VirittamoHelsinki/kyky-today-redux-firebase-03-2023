@@ -49,13 +49,7 @@ export default function GetStarted() {
 
   function submitform() {
     nextPhase();
-    dispatch(
-      addProfileForm({
-        ...formData,
-        uid: _user.uid,
-        name: _user.displayName
-      })
-    );
+    dispatch(addProfileForm({ uid: _user.uid, data: { ...formData, name: _user.displayName } }));
   }
 
   return (

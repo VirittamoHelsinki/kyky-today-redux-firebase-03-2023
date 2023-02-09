@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../redux/auth/userSlice';
 import { resetCalendarSchedule } from '../redux/sellers/calendarScheduleSlice';
+import { resetCalendarSettings } from '../redux/sellers/calendarSettingsSlice';
 import { resetJobCreationForm } from '../redux/sellers/jobFormSlice';
 import { resetProfileForm } from '../redux/sellers/profileFormSlice';
 import { resetServiceBooking } from '../redux/buyers/serviceBookingSlice';
@@ -45,6 +46,7 @@ const Header = ({ navlinks }) => {
   const onLogoutClick = () => {
     dispatch(logOut());
     dispatch(resetCalendarSchedule());
+    dispatch(resetCalendarSettings());
     dispatch(resetFileUpload());
     dispatch(resetJobCreationForm());
     dispatch(resetProfileForm());

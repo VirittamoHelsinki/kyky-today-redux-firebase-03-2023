@@ -6,9 +6,10 @@ import { db } from '../../firebase/firebase';
 to Firestore using the new id, returns the added object */
 export const addProfileForm = createAsyncThunk('profileForms/addProfileForm', async (payload) => {
   try {
-    const formRef = doc(collection(db, `profiles`));
-    await setDoc(formRef, payload);
-    return 'profile added';
+    await setDoc(doc(db, 'users', payload.uid, 'data', 'profile'), {
+      ...payload.data
+    });
+    return 'profile added ' + new Date();
   } catch (error) {
     return error;
   }
@@ -31,11 +32,12 @@ export const profileFormSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
+    /* clear state when finished, return an info about succesfull adding with the timestamp */
     builder.addCase(addProfileForm.fulfilled, (state, action) => {
-      /* clear state when finished */
       state = initialState;
       return (state = {
-        ...state
+        ...state,
+        ...action.payload
       });
     });
   }

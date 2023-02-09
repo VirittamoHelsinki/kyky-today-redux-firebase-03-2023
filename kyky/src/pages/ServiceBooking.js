@@ -10,6 +10,7 @@ import SelectDays from '../components/SelectDays';
 import Checkbox from '../components/Checkbox';
 
 const Tabs = {
+  Info: 'Info',
   Once: 'Once',
   Recurring: 'Recurring'
 };
@@ -46,7 +47,7 @@ function ServiceBooking() {
   const [everyOtherWeekend, setEveryOtherWeekend] = useState(0);
   const [onceAMonth, setOnceAMonth] = useState(0);
   const [unit, setUnit] = useState('€');
-  const [currentTab, setCurrentTab] = useState(Tabs.Once);
+  const [currentTab, setCurrentTab] = useState(Tabs.Info);
   const [booking, setBooking] = useState(defaultBookingValue);
   const [date, setDate] = useState(new Date());
   const [user, setUser] = useState(null);
@@ -56,6 +57,11 @@ function ServiceBooking() {
   const [inputmail, setInputmail] = useState('');
   const [photoURL, setPhotoURL] = useState('');
   const [uid, setUid] = useState('');
+  const [bookingsAdvance, setBookingsAdvance] = useState(0);
+  const [notifications, setNotifications] = useState(false);
+  const [notificationDays, setNotificationDays] = useState([]);
+  const [notificationStartTime, setNotificationStartTime] = useState('08.00');
+  const [notificationEndTime, setNotificationEndTime] = useState('21.00');
 
   const dispatch = useDispatch();
 
@@ -64,10 +70,22 @@ function ServiceBooking() {
   const navigate = useNavigate();
 
   const _user = useSelector((state) => state.user);
+  const _settings = useSelector((state) => state.calendarsettings);
 
   const job = defaultJob;
 
   const state_exists = location.state !== null;
+
+  useEffect(() => {
+    if (_settings) {
+      const parsedSettings = JSON.parse(JSON.stringify(_settings));
+      setBookingsAdvance(parsedSettings.bookingsAdvance);
+      setNotifications(parsedSettings.notifications);
+      setNotificationDays(parsedSettings.notificationDays);
+      setNotificationStartTime(parsedSettings.notificationStartTime);
+      setNotificationEndTime(parsedSettings.notificationEndTime);
+    }
+  }, []);
 
   /* set card owner's data to local state */
   useEffect(() => {
@@ -190,6 +208,19 @@ function ServiceBooking() {
     }
   }
 
+  function getBookingAdvanceDate(months) {
+    const float_months = parseFloat(months);
+    const day = new Date();
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    if (float_months === 0.5) {
+      return new Date(day.setMonth(day.getMonth(), day.getDate() + 14)).toLocaleString(
+        'fi-FI',
+        options
+      );
+    }
+    return new Date(day.setMonth(day.getMonth() + float_months)).toLocaleString('fi-FI', options);
+  }
+
   return (
     <div className="booking-page-content">
       {!state_exists ? (
@@ -242,6 +273,11 @@ function ServiceBooking() {
             <div className="service-booking-right-panel-content">
               <div className="service-booking-right-panel-tabs">
                 <div
+                  className={`panel-button ${currentTab === Tabs.Info ? 'selected' : ''}`}
+                  onClick={() => selectedTab(Tabs.Info)}>
+                  Info
+                </div>
+                <div
                   className={`panel-button ${currentTab === Tabs.Once ? 'selected' : ''}`}
                   onClick={() => selectedTab(Tabs.Once)}>
                   Once
@@ -252,6 +288,22 @@ function ServiceBooking() {
                   Recurring
                 </div>
               </div>
+
+              {currentTab === Tabs.Info && (
+                <div className="info-tab-container">
+                  <div className="bookings-onward">
+                    <p>Bookings from {getBookingAdvanceDate(bookingsAdvance)} onwards</p>
+                  </div>
+                  {notifications && (
+                    <div className="notifications-allowed">
+                      <p>
+                        Only allow notifications between {notificationStartTime} -{' '}
+                        {notificationEndTime}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {currentTab === Tabs.Once && (
                 <div>

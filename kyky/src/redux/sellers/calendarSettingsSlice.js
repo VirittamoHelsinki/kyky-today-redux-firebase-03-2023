@@ -2,12 +2,12 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
+/* save calendar settings to db, overwrite existing */
 export const saveCalendarSettings = createAsyncThunk(
   'calendar-settings/saveCalendarSettings',
   async (payload) => {
-    console.log(payload.uid);
     try {
-      await setDoc(doc(db, `users/${payload.uid}/settings/calendar-settings/`), {
+      await setDoc(doc(db, 'users', payload.uid, 'data', 'calendar-settings'), {
         ...payload.data
       });
       return payload.data;
@@ -21,9 +21,8 @@ export const fetchCalendarSettings = createAsyncThunk(
   'calendar-settings/fetchCalendarSettings',
   async (uid) => {
     try {
-      const settings = await getDoc(doc(db, `users/${uid}/settings/calendar-settings/`));
-      console.log(settings.data()[0]);
-      return settings.data()[0];
+      const settings = await getDoc(doc(db, 'users', uid, 'data', 'calendar-settings'));
+      return settings.data();
     } catch (error) {
       return error;
     }
@@ -43,17 +42,15 @@ export const calendarSettingsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(saveCalendarSettings.fulfilled, (state, action) => {
-        localStorage.setItem(`kyky-calendar_settings`, JSON.stringify(action.payload));
         return (state = {
           ...state,
-          status: 'calendar-settings saved'
+          ...action.payload
         });
       })
       .addCase(fetchCalendarSettings.fulfilled, (state, action) => {
-        localStorage.setItem('kyky-calendar_settings', JSON.stringify(action.payload));
         return (state = {
           ...state,
-          status: 'calendar-settings fetched'
+          ...action.payload
         });
       });
   }

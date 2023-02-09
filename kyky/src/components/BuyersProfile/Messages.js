@@ -65,7 +65,7 @@ const Messages = ({ user }) => {
     }
   }
 
-  // timeStamp(messgae.timestamp)
+  /* add timeStamp(message.timestamp) to messages.map */
   // function timeSince(timestamp) {
   //   let seconds = Math.floor(new Date() / 1000 - parseInt(timestamp));
   //   let interval = seconds / 31536000;

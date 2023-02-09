@@ -13,24 +13,13 @@ export default function ChooseJob({ properties, setField }) {
   const [job, setJob] = useState('');
   const [jobs, setJobs] = useState([defaultJob]);
 
-  const _jobs = useSelector((state) => state.jobs.cards);
+  const _titles = useSelector((state) => state.jobs.titles);
 
   useEffect(() => {
-    if (_jobs) {
-      const job_list = [];
-      _jobs.forEach((job) => {
-        if (!job_list.some(({ id }) => id === job.title)) {
-          job_list.push({
-            id: job.title,
-            categories: [job.title],
-            cities: [job.title],
-            jobTitle: job.title
-          });
-        }
-      });
-      setJobs(job_list);
-      if (job === '' && jobs.length > 0) {
-        setJob(job_list[0].id);
+    if (_titles) {
+      setJobs(_titles);
+      if (job === '' && _titles.length > 0) {
+        setJob(_titles[0].id);
       }
     }
   }, []);

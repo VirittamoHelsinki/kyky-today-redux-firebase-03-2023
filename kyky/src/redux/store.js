@@ -5,6 +5,7 @@ import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import userReducer from './auth/userSlice';
 import calendarScheduleReducer from './sellers/calendarScheduleSlice';
+import calendarSettingsReducer from './sellers/calendarSettingsSlice';
 import fileUploadReducer from './storage/fileUploadSlice';
 import profileFormReducer from './sellers/profileFormSlice';
 import jobFormReducer from './sellers/jobFormSlice';
@@ -15,6 +16,7 @@ import messageReducer from './chat/messageSlice';
 const reducers = combineReducers({
   user: userReducer,
   schedule: calendarScheduleReducer,
+  calendarsettings: calendarSettingsReducer,
   upload: fileUploadReducer,
   profile: profileFormReducer,
   jobs: jobFormReducer,

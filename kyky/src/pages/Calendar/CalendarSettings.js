@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { saveCalendarSettings } from '../../redux/sellers/calendarSettingsSlice';
+import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Switch from 'react-switch';
 import MultipleSelect from '../../components/MultipleSelect';
 
-import jobs from '../../jobs';
-
-export default function CalendarSettings() {
+export default function CalendarSettings({ jobs }) {
   const [switched, setSwitched] = useState(false);
   const [notifications, setNotifications] = useState(false);
   const [selectingJobs, setSelectingJobs] = useState(false);
@@ -18,6 +18,11 @@ export default function CalendarSettings() {
   const [notificationDays, setNotificationDays] = useState([]);
   const [notificationStartTime, setNotificationStartTime] = useState('08.00');
   const [notificationEndTime, setNotificationEndTime] = useState('21.00');
+
+  const _user = useSelector((state) => state.user);
+  const _settings = useSelector((state) => state.calendarsettings);
+
+  const dispatch = useDispatch();
 
   // value is in months
   const advanceTimes = [
@@ -33,9 +38,8 @@ export default function CalendarSettings() {
 
   useEffect(() => {
     setJobOptions(jobs.map((job) => ({ value: job.id, label: job.jobTitle })));
-    const settings = localStorage.getItem('kyky-calendar_settings');
-    if (settings) {
-      const parsedSettings = JSON.parse(settings);
+    if (_settings) {
+      const parsedSettings = JSON.parse(JSON.stringify(_settings));
       setSwitched(parsedSettings.switched);
       setNotifications(parsedSettings.notifications);
       setSelectingJobs(parsedSettings.selectingJobs);
@@ -67,8 +71,7 @@ export default function CalendarSettings() {
       notificationStartTime,
       notificationEndTime
     };
-    localStorage.setItem('kyky-calendar_settings', JSON.stringify(settings));
-    window.location.reload();
+    dispatch(saveCalendarSettings({ uid: _user.uid, data: { ...settings } }));
   }
 
   return (
@@ -213,3 +216,14 @@ export default function CalendarSettings() {
     </main>
   );
 }
+
+CalendarSettings.propTypes = {
+  jobs: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+      cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+      jobTitle: PropTypes.string.isRequired
+    })
+  ).isRequired
+};

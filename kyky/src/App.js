@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from './redux/sellers/calendarScheduleSlice';
 import { fetchBookingsByQuery } from './redux/buyers/serviceBookingSlice';
 import { fetchJobsByQuery } from './redux/sellers/jobFormSlice';
+import { fetchCalendarSettings } from './redux/sellers/calendarSettingsSlice';
 
 /* Language */
 import Language from './language';
@@ -54,11 +55,19 @@ import Pricing from './pages/Infos/Pricing';
 import AdditionalServices from './pages/Infos/AdditionalServices';
 
 const languages = { fi, en };
+const defaultJob = {
+  id: '',
+  categories: [],
+  cities: [],
+  jobTitle: ''
+};
 
 const App = () => {
   const [lang, setLang] = useState(languages.fi);
+  const [jobs, setJobs] = useState([defaultJob]);
 
   const _user = useSelector((state) => state.user);
+  const _titles = useSelector((state) => state.jobs.titles);
 
   const dispatch = useDispatch();
 
@@ -67,8 +76,15 @@ const App = () => {
       dispatch(fetchSchedules(_user.uid));
       dispatch(fetchJobsByQuery({ key: 'uid', value: _user.uid }));
       dispatch(fetchBookingsByQuery(_user.uid));
+      dispatch(fetchCalendarSettings(_user.uid));
     }
   }, [_user]);
+
+  useEffect(() => {
+    if (_titles) {
+      setJobs(_titles);
+    }
+  }, []);
 
   const navlinks = [
     { to: '/', label: 'Home' },
@@ -145,7 +161,7 @@ const App = () => {
               path="settings"
               element={
                 <UserRoute>
-                  <CalendarSettings />
+                  <CalendarSettings jobs={jobs} />
                 </UserRoute>
               }
             />

@@ -11,7 +11,7 @@ import {
   signInWithPopup,
   signOut
 } from 'firebase/auth';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, setDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebase/firebase';
 
 export const signUpEmailAndPassword = createAsyncThunk(
@@ -20,7 +20,7 @@ export const signUpEmailAndPassword = createAsyncThunk(
     try {
       const res = await createUserWithEmailAndPassword(auth, payload.email, payload.password);
       const user = res.user;
-      await addDoc(collection(db, `users/${user.uid}/userdata`), {
+      await setDoc(collection(db, 'users', user.uid, 'data', 'userdata'), {
         uid: user.uid,
         username: payload.username,
         email: payload.email,
