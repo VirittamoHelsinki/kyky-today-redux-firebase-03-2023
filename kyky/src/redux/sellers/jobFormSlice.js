@@ -64,21 +64,12 @@ export const jobCreationFormSlice = createSlice({
         console.log(action.payload);
       })
       .addCase(fetchAllJobs.fulfilled, (state, action) => {
-        const jobs = [...action.payload];
-        const job_list = [];
-        jobs.forEach((job) => {
-          job_list.push({
-            id: job.title,
-            categories: [job.title],
-            cities: [job.title],
-            jobTitle: job.title
-          });
-        });
         return (state = {
           ...state,
           cards: action.payload
         });
       })
+      /* return user's jobs, also return job titles for calendar components */
       .addCase(fetchJobsByQuery.fulfilled, (state, action) => {
         const jobs = [...action.payload];
         const job_list = [];

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
-import { fetchBookingsByQuery, changeBookingStatus } from '../../redux/buyers/serviceBookingSlice';
-import { fetchJobsByQuery } from '../../redux/sellers/jobFormSlice';
+import { changeBookingStatus } from '../../redux/buyers/serviceBookingSlice';
 import { useOutletContext } from 'react-router-dom';
 import Button from '../../components/Button';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -58,7 +57,7 @@ export default function JobCalendar() {
   const _user = useSelector((state) => state.user);
   const _schedules = useSelector((state) => state.schedule);
   const _bookings = useSelector((state) => state.booking.bookings);
-  const _titles = useSelector((state) => state.jobs.cards);
+  const _titles = useSelector((state) => state.jobs.titles);
   const _isLoading = useSelector((state) => state.schedule.loading);
 
   const dispatch = useDispatch();
@@ -66,8 +65,6 @@ export default function JobCalendar() {
   useEffect(() => {
     if (_user.uid) {
       dispatch(fetchSchedules(_user.uid));
-      dispatch(fetchJobsByQuery({ key: 'uid', value: _user.uid }));
-      dispatch(fetchBookingsByQuery(_user.uid));
     }
   }, []);
 

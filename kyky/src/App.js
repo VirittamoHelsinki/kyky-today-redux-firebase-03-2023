@@ -80,11 +80,12 @@ const App = () => {
     }
   }, [_user]);
 
+  /* sets job titles for the calendar settings as a parameter 'cos select button values won't render otherwise */
   useEffect(() => {
     if (_titles) {
       setJobs(_titles);
     }
-  }, []);
+  }, [_titles]);
 
   const navlinks = [
     { to: '/', label: 'Home' },
