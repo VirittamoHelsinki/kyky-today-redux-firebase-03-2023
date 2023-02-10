@@ -12,7 +12,7 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
 
   const navigate = new useNavigate();
 
-  const _titles = useSelector((state) => state.jobs.cards);
+  const _titles = useSelector((state) => state.jobs.titles);
   const _bookings = useSelector((state) => state.booking.bookings);
 
   const navButtons = [
@@ -43,6 +43,7 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
     }
   }, [_bookings]);
 
+  /* just for knowing does user have any job cards made */
   useEffect(() => {
     if (_titles) {
       setTitles(_titles);
