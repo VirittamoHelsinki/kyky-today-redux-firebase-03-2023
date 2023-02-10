@@ -16,7 +16,9 @@ export default function Card({ job }) {
       <div className="user-card--username-container">
         <div className="user-card--title">
           <img src={profileImage} className="user-card--profile-image" alt={'jobImage'} />
-          <div className="user-card--bolded-font">{job.name}</div>
+          <Link to={'/user-profile'}>
+            <div className="user-card--bolded-font">{job.name}</div>
+          </Link>
         </div>
       </div>
       <div className="user-card--job-title">{job.description}</div>

@@ -1,0 +1,217 @@
+.user-profile-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .user-profile-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 70%;
+
+    .user-profile-right-content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: 30%;
+      height: min-content;
+      box-shadow: 0 4px 4px #00000040;
+      border-radius: 11px;
+      margin: 80px 0 40px;
+      padding: 20px;
+
+      .user-profile-user-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 15px;
+        border-bottom: 1px solid #c4c4c4;
+        padding-bottom: 20px;
+
+        .user-info-image {
+          display: flex;
+          justify-content: center;
+
+          .rounded-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+          }
+        }
+
+        .user-info-name {
+          display: flex;
+          justify-content: center;
+
+          p {
+            font-family: Poppins, sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: #00a088;
+            text-align: center;
+          }
+        }
+
+        .user-info-title {
+          display: flex;
+          justify-content: center;
+
+          p {
+            font-family: Poppins, sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            color: black;
+            text-align: center;
+          }
+        }
+
+        .user-info-rating {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          gap: 20px;
+
+          .star-img {
+            width: 15px;
+            height: 15px;
+          }
+        }
+
+        .user-info-contact-button {
+          display: flex;
+          justify-content: center;
+          padding: 10px 20px;
+
+          .contact-button {
+            box-shadow: 0 4px 4px #00000040;
+            background: #00a088;
+            color: white;
+            border-radius: 7px;
+            font-family: Poppins, sans-serif;
+            font-weight: 500;
+            font-size: 24px;
+            width: 310px;
+            height: 45px;
+          }
+        }
+      }
+
+      .user-profile-user-data {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 15px;
+        border-bottom: 1px solid #c4c4c4;
+        padding-bottom: 20px;
+
+        .user-data-item {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          .user-data-key {
+            font-family: Roboto, sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+          }
+
+          .user-data-value {
+            font-family: Roboto, sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+          }
+        }
+      }
+
+      .user-profile-jobs-tasks {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 15px;
+        border-bottom: 1px solid #c4c4c4;
+        padding-bottom: 20px;
+
+        .jobs-tasks-item {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          .jobs-tasks-key {
+            font-family: Roboto, sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+          }
+
+          .jobs-tasks-value {
+            font-family: Roboto, sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            color: #00a088;
+          }
+        }
+      }
+
+      .user-profile-description {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 5px;
+
+        .description-headline {
+          display: flex;
+          justify-content: flex-start;
+
+          p {
+            font-family: Roboto, sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: #00a088;
+            text-align: left;
+          }
+        }
+
+        .description-text {
+          display: flex;
+          justify-content: flex-start;
+
+          p {
+            font-family: Roboto, sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            text-align: left;
+          }
+        }
+      }
+    }
+
+    .user-profile-left-content {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      margin: 20px 0;
+
+      .user-profile-user-jobs-title {
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 30px;
+
+        p {
+          font-family: Poppins, sans-serif;
+          font-weight: 500;
+          font-size: 32px;
+          text-align: left;
+        }
+      }
+
+      .user-profile-user-cards-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+  }
+}

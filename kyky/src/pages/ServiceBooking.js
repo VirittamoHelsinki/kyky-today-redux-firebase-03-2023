@@ -480,14 +480,14 @@ function ServiceBooking() {
       <div className="service-booking-footer">
         <div className="service-booking-footer-button">
           {user ? (
-            <Button
+            <button
               className="button-enabled"
               onClick={() => {
                 onContactClick();
                 navigate('/buyers-profile');
               }}>
               Contact Seller
-            </Button>
+            </button>
           ) : (
             <Button className="button-disabled">Contact Seller</Button>
           )}

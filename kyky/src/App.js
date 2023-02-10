@@ -24,6 +24,7 @@ import LandingPage from './pages/LandingPage';
 import ServiceBooking from './pages/ServiceBooking';
 import CategoryPage from './pages/CategoryPage';
 import BuyersProfile from './pages/BuyersProfile';
+import UserProfile from './pages/UserProfile';
 import UserRoute from './routes/UserRoute';
 import GuestRoute from './routes/GuestRoute';
 
@@ -249,6 +250,7 @@ const App = () => {
               </GuestRoute>
             }
           />
+          <Route path="user-profile" element={<UserProfile />} />
           <Route path="kyky-team" element={<KykyTeam />} />
           <Route path="kyky-faqs" element={<FAQs />} />
           <Route path="terms-of-service" element={<TermsOfService />} />

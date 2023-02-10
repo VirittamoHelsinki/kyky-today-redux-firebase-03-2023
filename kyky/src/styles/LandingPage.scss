@@ -24,6 +24,13 @@
   flex-direction: column;
   align-items: flex-start;
   width: 20vw;
+  padding-top: 60px;
+
+  a {
+    button {
+      text-align: left;
+    }
+  }
 }
 
 .landing-page-navigation-container button {
@@ -38,6 +45,7 @@
 .landing-page-footer {
   display: flex;
   justify-content: center;
+  padding-left: 300px;
 }
 
 .landing-page-image {
@@ -74,9 +82,8 @@
   border: 1px solid #00a088;
   border-radius: 91px;
   height: 3em;
-  width: min-content;
+  width: 180px;
   padding: 1em;
-  margin-right: 3em;
-  margin-left: 3em;
+  margin: 0 1em;
   justify-content: center;
 }
