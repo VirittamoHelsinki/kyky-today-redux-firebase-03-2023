@@ -117,12 +117,14 @@ export default function EducationExperience({ addEducExperience, setModalClosed 
         />
       </div>
 
-      <button type="button" className="cancelButton" onClick={() => setModalClosed(true)}>
-        Cancel
-      </button>
-      <button type="button" className="saveButton" onClick={() => saveAndClose()}>
-        Save
-      </button>
+      <div className="button-container">
+        <button type="button" className="cancelButton" onClick={() => setModalClosed(true)}>
+          Cancel
+        </button>
+        <button type="button" className="saveButton" onClick={() => saveAndClose()}>
+          Save
+        </button>
+      </div>
     </div>
   );
 }

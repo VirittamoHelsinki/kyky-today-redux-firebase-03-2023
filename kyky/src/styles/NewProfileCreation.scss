@@ -523,16 +523,33 @@ input {
     margin-bottom: 30px;
   }
 
-  .saveButton {
-    font-family: Inter, sans-serif;
-    font-size: 16px;
-    height: 40px;
-    width: 150px;
-    border-radius: 20px;
-    color: white;
-    background-color: #387a70;
-    position: relative;
-    left: 300px;
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 60px;
+
+    .cancelButton {
+      font-family: Inter, sans-serif;
+      font-size: 16px;
+      height: 40px;
+      width: 150px;
+      border-radius: 20px;
+      color: white;
+      background-color: #387a70;
+      left: 300px;
+    }
+
+    .saveButton {
+      font-family: Inter, sans-serif;
+      font-size: 16px;
+      height: 40px;
+      width: 150px;
+      border-radius: 20px;
+      color: white;
+      background-color: #387a70;
+      left: 300px;
+    }
   }
 }
 

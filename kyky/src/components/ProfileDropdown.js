@@ -98,6 +98,11 @@ const ProfileDropdown = ({ user, onLogoutClick }) => {
           </Link>
         </div>
         <div className="create-job-button">
+          <Link to="new-profile-creation">
+            <Button className="job-button">Edit profile</Button>
+          </Link>
+        </div>
+        <div className="create-job-button">
           <Link to="buyers-profile">
             <Button className="job-button">Buyers profile test</Button>
           </Link>

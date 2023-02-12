@@ -161,12 +161,14 @@ export default function WorkExperience({ addWorkExperience, setModalClosed }) {
         value={description}
         onChange={(event) => setDescription(event.target.value)}
       />
-      <button type="button" className="cancelButton" onClick={() => setModalClosed(true)}>
-        Cancel
-      </button>
-      <button type="button" className="saveButton" onClick={() => saveAndClose()}>
-        Save
-      </button>
+      <div className="button-container">
+        <button type="button" className="cancelButton" onClick={() => setModalClosed(true)}>
+          Cancel
+        </button>
+        <button type="button" className="saveButton" onClick={() => saveAndClose()}>
+          Save
+        </button>
+      </div>
     </div>
   );
 }
