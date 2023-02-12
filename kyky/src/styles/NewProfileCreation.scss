@@ -290,7 +290,7 @@ input {
   .addExperience {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     color: rgb(129 123 123);
     height: 250px;
@@ -298,6 +298,25 @@ input {
     border: 2px dashed #387a70;
     border-radius: 10px;
     position: relative;
+    padding-top: 60px;
+    gap: 10px;
+
+    .experience-span {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      padding: 5px 20px;
+
+      .experience-title {
+        font-weight: 500;
+      }
+
+      #delete-button {
+        font-size: 18px !important;
+        cursor: pointer;
+      }
+    }
   }
 
   .picIcon {
@@ -944,22 +963,12 @@ input {
     display: flex;
   }
 
-  .editPhotoButtonContainer {
-    display: flex;
+  .photoContainer {
+    width: 200px;
     height: 200px;
-    width: fit-content;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
 
-    .editPhotoButton {
-      font-family: Poppins, sans-serif;
-      border-radius: 20px;
-      height: 40px;
-      width: 200px;
-      background-color: #fff;
-      color: #303030;
-      border: 1px solid black;
+    img {
+      width: 100%;
     }
   }
 }

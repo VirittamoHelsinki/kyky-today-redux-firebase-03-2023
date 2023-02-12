@@ -2,24 +2,22 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../../components/Checkbox';
 import Input from '../../components/Input';
-import Countries from '../../countries.json';
+import countries from '../../countries.json';
 import { GenericSelect } from './Select';
 import { months, years } from './Time';
 import '../../styles/NewProfileCreation.scss';
-
-const countries = Countries.map((country) => ({ value: country.code, label: country.name }));
 
 export default function WorkExperience({ addWorkExperience, setModalClosed }) {
   const [workExperience, setWorkExperience] = useState({});
   const [title, setTitle] = useState('');
   const [company, setCompany] = useState('');
   const [location, setLocation] = useState('');
-  const [country, setCountry] = useState(countries[0]);
+  const [country, setCountry] = useState({ value: '', label: '' });
   const [currentlyWorking, setCurrentlyWorking] = useState(false);
-  const [startMonth, setStartMonth] = useState(months[0]);
-  const [startYear, setStartYear] = useState(years[0]);
-  const [endMonth, setEndMonth] = useState(months[0]);
-  const [endYear, setEndYear] = useState(years[0]);
+  const [startMonth, setStartMonth] = useState({ value: '', label: '' });
+  const [startYear, setStartYear] = useState({ value: '', label: '' });
+  const [endMonth, setEndMonth] = useState({ value: '', label: '' });
+  const [endYear, setEndYear] = useState({ value: '', label: '' });
   const [description, setDescription] = useState('');
 
   useEffect(() => {
@@ -63,6 +61,26 @@ export default function WorkExperience({ addWorkExperience, setModalClosed }) {
   }, [description]);
 
   const saveAndClose = () => {
+    if (countries.value === '') {
+      window.alert('Please, select a country.');
+      return;
+    }
+    if (startMonth.value === '') {
+      window.alert('Please, select a start month.');
+      return;
+    }
+    if (endMonth.value === '') {
+      window.alert('Please, select an end month.');
+      return;
+    }
+    if (startYear.value === '') {
+      window.alert('Please, select a start year.');
+      return;
+    }
+    if (endYear.value === '') {
+      window.alert('Please, select an end year.');
+      return;
+    }
     addWorkExperience({ ...workExperience });
     setModalClosed(true);
   };

@@ -87,7 +87,7 @@ export default function Step8() {
     <div className="step step8">
       <div className="previewMainContainer">
         <div className="previewContainer1">
-          <div className="editPhotoButtonContainer">
+          <div className="photoContainer">
             <img src={profileIcon} alt="" />
           </div>
           <div className="bigContainer">

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GenericSelect } from './Select';
-import Countries from '../../countries.json';
+import countries from '../../countries.json';
 import CountriesWithDialCodes from '../../countriesWithDialCodes.json';
 import AddPhoto from './AddPhoto';
 import '../../styles/NewProfileCreation.scss';
@@ -131,8 +131,8 @@ export default function Step7({ handleChange }) {
             className="select-container3"
             name="countrySelect"
             placeholder="Select..."
-            options={Countries.map((country) => ({ value: country.code, label: country.name }))}
-            value={Countries.filter(({ value }) => value === country)}
+            options={countries}
+            value={countries.filter(({ value }) => value === country)}
             onChange={(value) => setCountry(value)}
           />
           <label>Street Address*(won’t show on profile)</label>

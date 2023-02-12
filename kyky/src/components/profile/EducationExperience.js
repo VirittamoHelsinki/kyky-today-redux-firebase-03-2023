@@ -10,10 +10,10 @@ export default function EducationExperience({ addEducExperience, setModalClosed 
   const [school, setSchool] = useState('');
   const [degree, setDegree] = useState('');
   const [location, setLocation] = useState('');
-  const [startMonth, setStartMonth] = useState(months[0]);
-  const [startYear, setStartYear] = useState(years[0]);
-  const [endMonth, setEndMonth] = useState(months[0]);
-  const [endYear, setEndYear] = useState(years[0]);
+  const [startMonth, setStartMonth] = useState({ value: '', label: '' });
+  const [startYear, setStartYear] = useState({ value: '', label: '' });
+  const [endMonth, setEndMonth] = useState({ value: '', label: '' });
+  const [endYear, setEndYear] = useState({ value: '', label: '' });
 
   useEffect(() => {
     setEducExperience({ ...educExperience, school: school });
@@ -44,6 +44,22 @@ export default function EducationExperience({ addEducExperience, setModalClosed 
   }, [endYear]);
 
   const saveAndClose = () => {
+    if (startMonth.value === '') {
+      window.alert('Please, select a start month.');
+      return;
+    }
+    if (endMonth.value === '') {
+      window.alert('Please, select an end month.');
+      return;
+    }
+    if (startYear.value === '') {
+      window.alert('Please, select a start year.');
+      return;
+    }
+    if (endYear.value === '') {
+      window.alert('Please, select an end year.');
+      return;
+    }
     addEducExperience({ ...educExperience });
     setModalClosed(true);
   };

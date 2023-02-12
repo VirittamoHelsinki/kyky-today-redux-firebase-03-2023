@@ -65,6 +65,10 @@ export default function Step2({ handleChange }) {
     }
   };
 
+  function getMonthNumberFromName(monthName) {
+    return new Date(`${monthName} 1, 2022`).getMonth() + 1;
+  }
+
   return (
     <div className="step step2">
       <div className="experienceContainer">
@@ -78,13 +82,14 @@ export default function Step2({ handleChange }) {
             +
           </button>
           {workExperiences.map((exp, index) => (
-            <span key={index}>
-              <div>{exp.title}</div>
+            <span className="experience-span" key={index}>
+              <div className="experience-title">{exp.title}</div>
               <div>
-                {exp.startMonth.label}/{exp.startYear.label} - {exp.endMonth.label}/
-                {exp.endYear.label}
+                {getMonthNumberFromName(exp.startMonth.label)}/{exp.startYear.label} -{' '}
+                {getMonthNumberFromName(exp.endMonth.label)}/{exp.endYear.label}
               </div>
               <span
+                id="delete-button"
                 className="material-icons-outlined"
                 onClick={() => setWorkExperiences(workExperiences.filter((f) => f !== exp))}>
                 delete
@@ -102,13 +107,14 @@ export default function Step2({ handleChange }) {
             +
           </button>
           {educExperiences.map((exp, index) => (
-            <span key={index}>
-              <div>{exp.degree}</div>
+            <span className="experience-span" key={index}>
+              <div className="experience-title">{exp.degree}</div>
               <div>
-                {exp.startMonth.label}/{exp.startYear.label} - {exp.endMonth.label}/
-                {exp.endYear.label}
+                {getMonthNumberFromName(exp.startMonth.label)}/{exp.startYear.label} -{' '}
+                {getMonthNumberFromName(exp.endMonth.label)}/{exp.endYear.label}
               </div>
               <span
+                id="delete-button"
                 className="material-icons-outlined"
                 onClick={() => setEducExperiences(educExperiences.filter((f) => f !== exp))}>
                 delete
