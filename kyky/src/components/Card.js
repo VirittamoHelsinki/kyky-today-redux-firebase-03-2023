@@ -16,7 +16,7 @@ export default function Card({ job }) {
       <div className="user-card--username-container">
         <div className="user-card--title">
           <img src={profileImage} className="user-card--profile-image" alt={'jobImage'} />
-          <Link to={'/user-profile'}>
+          <Link to={`/user-profile/${job.slug}`}>
             <div className="user-card--bolded-font">{job.name}</div>
           </Link>
         </div>
@@ -60,6 +60,7 @@ Card.propTypes = {
     everyOtherWeekend: PropTypes.string.isRequired,
     onceAMonth: PropTypes.string.isRequired,
     urls: PropTypes.arrayOf(PropTypes.string).isRequired,
-    photoURL: PropTypes.string
+    photoURL: PropTypes.string,
+    slug: PropTypes.string.isRequired
   }).isRequired
 };

@@ -11,7 +11,7 @@ references for both chatters with a chat log id, name and photo and store it to 
 export const createContact = createAsyncThunk('contact/createContact', async (payload) => {
   try {
     const chatRef = await addDoc(collection(db, 'chatlogs'), initialChat);
-
+    const contact_list = [];
     await addDoc(collection(db, `users/${payload.myUid}/chats/`), {
       chatId: chatRef.id,
       name: payload.contactName,
@@ -23,6 +23,12 @@ export const createContact = createAsyncThunk('contact/createContact', async (pa
       name: payload.myName,
       photoURL: payload.myPhotoURL
     });
+    contact_list.push({
+      chatId: chatRef.id,
+      name: payload.contactName,
+      photoURL: payload.contactPhotoURL
+    });
+    return contact_list;
   } catch (error) {
     return error;
   }
@@ -53,12 +59,20 @@ export const contactSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchContacts.fulfilled, (state, action) => {
-      return (state = {
-        ...state,
-        contacts: action.payload
+    builder
+      .addCase(createContact.fulfilled, (state, action) => {
+        const new_contacts = [...state.contacts, action.payload];
+        return (state = {
+          ...state,
+          contacts: new_contacts
+        });
+      })
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          contacts: action.payload
+        });
       });
-    });
   }
 });
 

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserId } from '../redux/auth/slugSlice';
+import { getProfileForm } from '../redux/sellers/profileFormSlice';
+import { fetchJobsByQuery } from '../redux/sellers/jobFormSlice';
+import { createContact } from '../redux/chat/contactSlice';
 import Card from '../components/Card';
 import starIcon from '../image/star.svg';
 import '../styles/UserProfile.scss';
-
-const sample =
-  'Lyökämme käsi kätehen, sormet sormien lomahan, lauloaksemme hyviä, parahia pannaksemme, kuulla noien kultaisien, tietä mielitehtoisien, nuorisossa nousevassa, kansassa kasuavassa: noita saamia sanoja, virsiä virittämiä vyöltä vanhan Väinämöisen, alta ahjon Ilmarisen, päästä kalvan Kaukomielen, Joukahaisen jousen tiestä, Pohjan peltojen periltä, Kalevalan kankahilta.';
 
 const UserProfile = () => {
   const [profileName, setProfileName] = useState('Etunimi Sukunimi');
@@ -18,13 +20,50 @@ const UserProfile = () => {
   const [location, setLocation] = useState('Helsinki, Finland');
   const [allJobs, setAllJobs] = useState('4');
   const [ongoingBookings, setOngoingBookings] = useState('3');
-  const [description, setDescription] = useState(sample);
+  const [description, setDescription] = useState('');
   const [cards, setCards] = useState([]);
+  const [user, setUser] = useState(null);
   const [profileImage, setProfileImage] = useState(
     'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp'
   );
 
   const _cards = useSelector((state) => state.jobs.cards);
+  const _uid = useSelector((state) => state.slug);
+  const _profile = useSelector((state) => state.profile.userProfile);
+  const _user = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const { slug } = useParams();
+
+  useEffect(() => {
+    if (_user) {
+      setUser(_user);
+    }
+  }, []);
+
+  useEffect(() => {
+    dispatch(getUserId(slug));
+  }, []);
+
+  useEffect(() => {
+    if (_uid.uid) {
+      dispatch(getProfileForm(_uid.uid));
+      dispatch(fetchJobsByQuery({ key: 'uid', value: _uid.uid }));
+    }
+  }, [_uid]);
+
+  useEffect(() => {
+    if (_profile?.name) {
+      setProfileImage(_profile.s7Url);
+      setProfileName(_profile.name);
+      setProfileTitle(_profile.s1Title);
+      setLocation(_profile.s7City + ', ' + _profile.s7Country.label);
+      setDescription(_profile.s4WorkInput);
+    }
+  }, [_profile]);
 
   useEffect(() => {
     if (_cards) {
@@ -38,6 +77,19 @@ const UserProfile = () => {
       star_img_list.push(<img className="star-img" key={i} src={starIcon} alt="" />);
     }
     return star_img_list;
+  }
+
+  function onContactClick() {
+    dispatch(
+      createContact({
+        myUid: user.uid,
+        myName: user.displayName,
+        myPhotoURL: user.photoURL,
+        contactUid: _uid.uid,
+        contactName: _uid.name,
+        contactPhotoURL: _uid.photoURL
+      })
+    );
   }
 
   return (
@@ -56,7 +108,14 @@ const UserProfile = () => {
             </div>
             <div className="user-info-rating">{loopStars().map((star) => star)}</div>
             <div className="user-info-contact-button">
-              <button className="contact-button">Contact Seller</button>
+              <button
+                className="contact-button"
+                onClick={() => {
+                  onContactClick();
+                  navigate('/buyers-profile');
+                }}>
+                Contact Seller
+              </button>
             </div>
           </div>
           <div className="user-profile-user-data">

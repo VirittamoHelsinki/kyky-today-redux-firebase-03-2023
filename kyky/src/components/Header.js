@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../redux/auth/userSlice';
 import { resetCalendarSchedule } from '../redux/sellers/calendarScheduleSlice';
@@ -11,6 +11,7 @@ import { resetServiceBooking } from '../redux/buyers/serviceBookingSlice';
 import { resetFileUpload } from '../redux/storage/fileUploadSlice';
 import { resetContact } from '../redux/chat/contactSlice';
 import { resetMessage } from '../redux/chat/messageSlice';
+import { resetSlug } from '../redux/auth/slugSlice';
 import ProfileDropdown from './ProfileDropdown';
 import SearchBar from './SearchBar';
 import '../styles/header.scss';
@@ -25,6 +26,8 @@ const Header = ({ navlinks }) => {
   const imgRef = useRef();
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const _user = useSelector((state) => state.user);
 
@@ -53,6 +56,8 @@ const Header = ({ navlinks }) => {
     dispatch(resetServiceBooking());
     dispatch(resetContact());
     dispatch(resetMessage());
+    dispatch(resetSlug());
+    navigate('/');
   };
 
   const menuToggle = () => {

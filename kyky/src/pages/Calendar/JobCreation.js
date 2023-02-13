@@ -62,7 +62,8 @@ export default function JobCreation() {
         onceAMonth: recurrent ? onceAMonth : price,
         unit: unit,
         urls: urls,
-        photoURL: _user.photoURL
+        photoURL: _user.photoURL,
+        slug: _user.slug
       })
     );
     navigate('/calendar');

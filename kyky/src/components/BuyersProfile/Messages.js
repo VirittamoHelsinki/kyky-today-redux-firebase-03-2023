@@ -24,6 +24,7 @@ const Messages = ({ user }) => {
 
   useEffect(() => {
     if (_contacts) {
+      console.log(_contacts);
       setContacts(_contacts);
     }
   }, [_contacts]);

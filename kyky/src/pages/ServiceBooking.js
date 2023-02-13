@@ -8,6 +8,7 @@ import Input from '../components/Input';
 import Calendar from '../components/calendar/Calendar';
 import SelectDays from '../components/SelectDays';
 import Checkbox from '../components/Checkbox';
+import { fetchJobsByQuery } from '../redux/sellers/jobFormSlice';
 
 const Tabs = {
   Info: 'Info',
@@ -196,6 +197,7 @@ function ServiceBooking() {
         })
       );
       setBooking(defaultBookingValue);
+      dispatch(fetchJobsByQuery({ key: 'uid', value: user.uid }));
       navigate('/');
     }
   }

@@ -12,6 +12,7 @@ import jobFormReducer from './sellers/jobFormSlice';
 import serviceBookingReducer from './buyers/serviceBookingSlice';
 import contactReducer from './chat/contactSlice';
 import messageReducer from './chat/messageSlice';
+import slugReducer from './auth/slugSlice';
 
 const reducers = combineReducers({
   user: userReducer,
@@ -22,7 +23,8 @@ const reducers = combineReducers({
   jobs: jobFormReducer,
   booking: serviceBookingReducer,
   chat: contactReducer,
-  message: messageReducer
+  message: messageReducer,
+  slug: slugReducer
 });
 
 const persistConfig = {

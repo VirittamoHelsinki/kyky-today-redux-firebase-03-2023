@@ -107,7 +107,6 @@ export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }
       }
 
       if (schedules) {
-        console.log(properties);
         schedules.push(properties);
         dispatch(
           createSchedule({

@@ -11,26 +11,36 @@ import {
   signInWithPopup,
   signOut
 } from 'firebase/auth';
-import { collection, setDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebase/firebase';
+
+/* create an email hash for the slug, f.ex "john-smith-1547289902" */
+const hashCode = (s) => s.split('').reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0);
 
 export const signUpEmailAndPassword = createAsyncThunk(
   'user/signUpEmailAndPassword',
-  async (payload) => {
+  async ({ username, email, password, company, subscribe }) => {
     try {
-      const res = await createUserWithEmailAndPassword(auth, payload.email, payload.password);
+      const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
-      await setDoc(collection(db, 'users', user.uid, 'data', 'userdata'), {
+      const slug = username.replace(/\W+/g, '-').toLowerCase() + '-' + hashCode(email);
+      await setDoc(doc(db, 'users', user.uid, 'data', 'userdata'), {
         uid: user.uid,
-        username: payload.username,
-        email: payload.email,
-        company: payload.company,
-        subscribe: payload.subscribe,
-        authProvider: 'local'
+        username: username,
+        email: email,
+        company: company,
+        subscribe: subscribe,
+        authProvider: 'local',
+        slug: slug
       });
       await updateProfile(user, {
         photoURL: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp',
-        displayName: payload.username
+        displayName: username
+      });
+      await setDoc(doc(db, 'slugs', slug), {
+        uid: user.uid,
+        name: username,
+        photoURL: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp'
       });
       // await sendEmailVerification(auth.currentUser);
       // alert('A verification link is sent to your email!');
@@ -63,7 +73,7 @@ export const signInEmailAndPassword = createAsyncThunk(
 );
 
 export const recoverPasswordResetEmail = createAsyncThunk(
-  'user/srecoverPasswordResetEmail',
+  'user/recoverPasswordResetEmail',
   async (payload) => {
     try {
       const res = await sendPasswordResetEmail(auth, payload);
@@ -80,7 +90,21 @@ export const signInGoogleAuthProvider = createAsyncThunk(
     try {
       const provider = new GoogleAuthProvider();
       const res = await signInWithPopup(auth, provider);
-      return res.user;
+      const user = res.user;
+      const slug = user.displayName.replace(/\W+/g, '-').toLowerCase() + '-' + hashCode(user.email);
+      await setDoc(doc(db, 'users', user.uid, 'data', 'userdata'), {
+        uid: user.uid,
+        username: user.displayName,
+        email: user.email,
+        authProvider: 'Google',
+        slug: slug
+      });
+      await setDoc(doc(db, 'slugs', slug), {
+        uid: user.uid,
+        name: user.displayName,
+        photoURL: user.photoURL
+      });
+      return { ...res.user, slug: slug };
     } catch (error) {
       return error;
     }
@@ -112,6 +136,15 @@ export const signInAppleAuthProvider = createAsyncThunk(
     }
   }
 );
+
+export const fetchUserData = createAsyncThunk('user/fetchUserData', async (uid) => {
+  try {
+    const docSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
+    return docSnap.data();
+  } catch (error) {
+    return error;
+  }
+});
 
 export const logOut = createAsyncThunk('user/logOut', async () => {
   try {
@@ -146,7 +179,6 @@ export const userSlice = createSlice({
         });
       })
       .addCase(signInGoogleAuthProvider.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload));
         return (state = {
           ...state,
           ...action.payload
@@ -164,6 +196,12 @@ export const userSlice = createSlice({
         return (state = {
           ...state,
           ...action.payload
+        });
+      })
+      .addCase(fetchUserData.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          slug: action.payload.slug
         });
       })
       .addCase(logOut.fulfilled, (state, action) => {

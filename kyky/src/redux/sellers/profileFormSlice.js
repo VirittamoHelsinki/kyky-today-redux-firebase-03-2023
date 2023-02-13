@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { doc, setDoc, collection } from 'firebase/firestore';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
 /* makes reference to get a auto-generated id, inserts the doc 
@@ -10,6 +10,19 @@ export const addProfileForm = createAsyncThunk('profileForms/addProfileForm', as
       ...payload.data
     });
     return 'profile added ' + new Date();
+  } catch (error) {
+    return error;
+  }
+});
+
+export const getProfileForm = createAsyncThunk('profileForms/getProfileForm', async (uid) => {
+  try {
+    const docSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      return null;
+    }
   } catch (error) {
     return error;
   }
@@ -33,13 +46,20 @@ export const profileFormSlice = createSlice({
   },
   extraReducers: (builder) => {
     /* clear state when finished, return an info about succesfull adding with the timestamp */
-    builder.addCase(addProfileForm.fulfilled, (state, action) => {
-      state = initialState;
-      return (state = {
-        ...state,
-        ...action.payload
+    builder
+      .addCase(addProfileForm.fulfilled, (state, action) => {
+        state = initialState;
+        return (state = {
+          ...state,
+          status: action.payload
+        });
+      })
+      .addCase(getProfileForm.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          userProfile: { ...action.payload }
+        });
       });
-    });
   }
 });
 

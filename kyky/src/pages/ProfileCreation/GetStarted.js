@@ -6,6 +6,7 @@ import '../../styles/NewProfileCreation.scss';
 import Step1 from '../../components/profile/Step1';
 import Step2 from '../../components/profile/Step2';
 import Step3 from '../../components/profile/Step3';
+import Step4 from '../../components/profile/Step4';
 import Step7 from '../../components/profile/Step7';
 import Step8 from '../../components/profile/Step8';
 import Step9 from '../../components/profile/Step9';
@@ -20,7 +21,7 @@ export default function GetStarted() {
 
   const dispatch = useDispatch();
 
-  const steps = 6;
+  const steps = 7;
 
   function previousPhase() {
     setTitle(title - 1);
@@ -60,9 +61,10 @@ export default function GetStarted() {
           {currentStep === 1 && <Step1 handleChange={handleChange} />}
           {currentStep === 2 && <Step2 handleChange={handleChange} />}
           {currentStep === 3 && <Step3 handleChange={handleChange} />}
-          {currentStep === 4 && <Step7 handleChange={handleChange} />}
-          {currentStep === 5 && <Step8 />}
-          {currentStep === 6 && <Step9 />}
+          {currentStep === 4 && <Step4 handleChange={handleChange} />}
+          {currentStep === 5 && <Step7 handleChange={handleChange} />}
+          {currentStep === 6 && <Step8 />}
+          {currentStep === 7 && <Step9 />}
           <div>
             {currentStep > 1 && currentStep < steps && (
               <button className="previousButton" onClick={previousPhase}>
