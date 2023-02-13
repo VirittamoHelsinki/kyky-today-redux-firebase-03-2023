@@ -48,6 +48,42 @@ export const fetchJobsByQuery = createAsyncThunk(
   }
 );
 
+export const fetchUserProfileJobs = createAsyncThunk(
+  'jobcreation-forms/fetchUserProfileJobs',
+  async (payload) => {
+    try {
+      const documents = [];
+      const jobsRef = collection(db, 'jobs');
+      const q = query(jobsRef, where('uid', '==', payload));
+      const snap = await getDocs(q);
+      snap.forEach((doc) => {
+        documents.push({ ...doc.data(), id: doc.id });
+      });
+      return documents;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
+export const fetchCategoryJobs = createAsyncThunk(
+  'jobcreation-forms/fetchCategoryJobs',
+  async ({ key, value }) => {
+    try {
+      const documents = [];
+      const jobsRef = collection(db, 'jobs');
+      const q = query(jobsRef, where(key, '==', value));
+      const snap = await getDocs(q);
+      snap.forEach((doc) => {
+        documents.push({ ...doc.data(), id: doc.id });
+      });
+      return documents;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 const initialState = [];
 
 export const jobCreationFormSlice = createSlice({
@@ -60,12 +96,6 @@ export const jobCreationFormSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllJobs.fulfilled, (state, action) => {
-        return (state = {
-          ...state,
-          cards: action.payload
-        });
-      })
       /* return user's jobs, also return job titles for calendar components */
       .addCase(fetchJobsByQuery.fulfilled, (state, action) => {
         const jobs = [...action.payload];
@@ -82,6 +112,24 @@ export const jobCreationFormSlice = createSlice({
           ...state,
           cards: action.payload,
           titles: [...job_list]
+        });
+      })
+      .addCase(fetchUserProfileJobs.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          userProfileCards: action.payload
+        });
+      })
+      .addCase(fetchCategoryJobs.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          categoryCards: action.payload
+        });
+      })
+      .addCase(fetchAllJobs.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          categoryCards: action.payload
         });
       });
   }

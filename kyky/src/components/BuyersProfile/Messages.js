@@ -23,14 +23,13 @@ const Messages = ({ user }) => {
   }, []);
 
   useEffect(() => {
-    if (_contacts) {
-      console.log(_contacts);
+    if (Array.isArray(_contacts)) {
       setContacts(_contacts);
     }
   }, [_contacts]);
 
   useEffect(() => {
-    if (_messages) {
+    if (Array.isArray(_messages)) {
       setMessages(_messages);
     }
   }, [_messages]);

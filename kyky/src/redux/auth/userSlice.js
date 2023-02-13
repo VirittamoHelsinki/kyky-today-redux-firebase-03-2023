@@ -65,7 +65,8 @@ export const signInEmailAndPassword = createAsyncThunk(
       //     alert('A new verification link is sent to your email!');
       //   }
       // }
-      return res.user;
+      const docSnap = await getDoc(doc(db, 'users', res.user.uid, 'data', 'userdata'));
+      return { ...res.user, slug: docSnap.data() };
     } catch (error) {
       return error;
     }
@@ -137,15 +138,6 @@ export const signInAppleAuthProvider = createAsyncThunk(
   }
 );
 
-export const fetchUserData = createAsyncThunk('user/fetchUserData', async (uid) => {
-  try {
-    const docSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
-    return docSnap.data();
-  } catch (error) {
-    return error;
-  }
-});
-
 export const logOut = createAsyncThunk('user/logOut', async () => {
   try {
     const res = signOut(auth);
@@ -196,12 +188,6 @@ export const userSlice = createSlice({
         return (state = {
           ...state,
           ...action.payload
-        });
-      })
-      .addCase(fetchUserData.fulfilled, (state, action) => {
-        return (state = {
-          ...state,
-          slug: action.payload.slug
         });
       })
       .addCase(logOut.fulfilled, (state, action) => {

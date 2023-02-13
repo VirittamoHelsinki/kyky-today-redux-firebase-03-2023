@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserId } from '../redux/auth/slugSlice';
 import { getProfileForm } from '../redux/sellers/profileFormSlice';
-import { fetchJobsByQuery } from '../redux/sellers/jobFormSlice';
+import { fetchUserProfileJobs } from '../redux/sellers/jobFormSlice';
 import { createContact } from '../redux/chat/contactSlice';
 import Card from '../components/Card';
 import starIcon from '../image/star.svg';
@@ -27,7 +27,7 @@ const UserProfile = () => {
     'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp'
   );
 
-  const _cards = useSelector((state) => state.jobs.cards);
+  const _cards = useSelector((state) => state.jobs.userProfileCards);
   const _uid = useSelector((state) => state.slug);
   const _profile = useSelector((state) => state.profile.userProfile);
   const _user = useSelector((state) => state.user);
@@ -51,7 +51,7 @@ const UserProfile = () => {
   useEffect(() => {
     if (_uid.uid) {
       dispatch(getProfileForm(_uid.uid));
-      dispatch(fetchJobsByQuery({ key: 'uid', value: _uid.uid }));
+      dispatch(fetchUserProfileJobs(_uid.uid));
     }
   }, [_uid]);
 

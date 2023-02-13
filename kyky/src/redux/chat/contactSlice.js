@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, doc, setDoc, collection, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
 const initialChat = {
@@ -10,25 +10,27 @@ const initialChat = {
 references for both chatters with a chat log id, name and photo and store it to their users/chats path */
 export const createContact = createAsyncThunk('contact/createContact', async (payload) => {
   try {
+    const docSnap = await getDoc(doc(db, 'users', payload.myUid, 'chats', payload.contactUid));
+    if (docSnap.exists()) {
+      return docSnap.data();
+    }
     const chatRef = await addDoc(collection(db, 'chatlogs'), initialChat);
-    const contact_list = [];
-    await addDoc(collection(db, `users/${payload.myUid}/chats/`), {
+    await setDoc(doc(db, 'users', payload.myUid, 'chats', payload.contactUid), {
       chatId: chatRef.id,
       name: payload.contactName,
       photoURL: payload.contactPhotoURL
     });
 
-    await addDoc(collection(db, `users/${payload.contactUid}/chats/`), {
+    await setDoc(doc(db, 'users', payload.contactUid, 'chats', payload.myUid), {
       chatId: chatRef.id,
       name: payload.myName,
       photoURL: payload.myPhotoURL
     });
-    contact_list.push({
+    return {
       chatId: chatRef.id,
       name: payload.contactName,
       photoURL: payload.contactPhotoURL
-    });
-    return contact_list;
+    };
   } catch (error) {
     return error;
   }
@@ -38,7 +40,7 @@ export const createContact = createAsyncThunk('contact/createContact', async (pa
 export const fetchContacts = createAsyncThunk('contact/fetchContacts', async (payload) => {
   try {
     const documents = [];
-    const snap = await getDocs(collection(db, `users/${payload}/chats/`));
+    const snap = await getDocs(collection(db, 'users', payload, 'chats'));
     snap.docs.map((doc) => {
       documents.push(doc.data());
     });
@@ -48,7 +50,9 @@ export const fetchContacts = createAsyncThunk('contact/fetchContacts', async (pa
   }
 });
 
-const initialState = [];
+const initialState = {
+  contacts: []
+};
 
 export const contactSlice = createSlice({
   name: 'contact',

@@ -6,7 +6,6 @@ import { fetchSchedules } from './redux/sellers/calendarScheduleSlice';
 import { fetchBookingsByQuery } from './redux/buyers/serviceBookingSlice';
 import { fetchJobsByQuery } from './redux/sellers/jobFormSlice';
 import { fetchCalendarSettings } from './redux/sellers/calendarSettingsSlice';
-import { fetchUserData } from './redux/auth/userSlice';
 
 /* Language */
 import Language from './language';
@@ -79,9 +78,8 @@ const App = () => {
       dispatch(fetchJobsByQuery({ key: 'uid', value: _user.uid }));
       dispatch(fetchBookingsByQuery(_user.uid));
       dispatch(fetchCalendarSettings(_user.uid));
-      dispatch(fetchUserData(_user.uid));
     }
-  }, []);
+  }, [_user]);
 
   /* sets job titles for the calendar settings as a parameter 'cos select button values won't render otherwise */
   useEffect(() => {

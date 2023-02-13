@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllJobs, fetchJobsByQuery } from '../redux/sellers/jobFormSlice';
+import { fetchAllJobs, fetchCategoryJobs } from '../redux/sellers/jobFormSlice';
 import Card from '../components/Card';
 import '../styles/CategoryPage.scss';
 
 const CategoryPage = () => {
   const [cards, setCards] = useState([]);
 
-  const _cards = useSelector((state) => state.jobs.cards);
+  const _cards = useSelector((state) => state.jobs.categoryCards);
 
   const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ const CategoryPage = () => {
     if (category === 'all') {
       dispatch(fetchAllJobs());
     } else {
-      dispatch(fetchJobsByQuery({ key: 'category', value: category_with_spaces }));
+      dispatch(fetchCategoryJobs({ key: 'category', value: category_with_spaces }));
     }
   }, []);
 

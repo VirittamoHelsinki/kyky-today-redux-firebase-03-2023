@@ -14,10 +14,8 @@ function UserLogIn() {
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  //const [creditalError] = useState(false);
 
   const dispatch = useDispatch();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username === '' || password === '') {
