@@ -10,22 +10,20 @@ import starIcon from '../image/star.svg';
 import '../styles/UserProfile.scss';
 
 const UserProfile = () => {
-  const [profileName, setProfileName] = useState('Etunimi Sukunimi');
-  const [profileTitle, setProfileTitle] = useState('Profile Title');
+  const [profileName, setProfileName] = useState('');
+  const [profileTitle, setProfileTitle] = useState('');
   const [profileRating, setProfileRating] = useState(5);
   const [onlineStatus, setOnlineStatus] = useState('Offline');
   const [lastSeen, setLastSeen] = useState(new Date('2023-02-03'));
   const [registered, setRegistered] = useState(new Date('2023-01-12'));
   const [userType, setUserType] = useState('Seller');
-  const [location, setLocation] = useState('Helsinki, Finland');
+  const [location, setLocation] = useState('');
   const [allJobs, setAllJobs] = useState('4');
   const [ongoingBookings, setOngoingBookings] = useState('3');
   const [description, setDescription] = useState('');
   const [cards, setCards] = useState([]);
   const [user, setUser] = useState(null);
-  const [profileImage, setProfileImage] = useState(
-    'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp'
-  );
+  const [profileImage, setProfileImage] = useState('');
 
   const _cards = useSelector((state) => state.jobs.userProfileCards);
   const _uid = useSelector((state) => state.slug);
@@ -39,7 +37,7 @@ const UserProfile = () => {
   const { slug } = useParams();
 
   useEffect(() => {
-    if (_user) {
+    if (_user.uid) {
       setUser(_user);
     }
   }, []);
@@ -108,14 +106,18 @@ const UserProfile = () => {
             </div>
             <div className="user-info-rating">{loopStars().map((star) => star)}</div>
             <div className="user-info-contact-button">
-              <button
-                className="contact-button"
-                onClick={() => {
-                  onContactClick();
-                  navigate('/buyers-profile');
-                }}>
-                Contact Seller
-              </button>
+              {user ? (
+                <button
+                  className="contact-button-enabled"
+                  onClick={() => {
+                    onContactClick();
+                    navigate('/buyers-profile');
+                  }}>
+                  Contact Seller
+                </button>
+              ) : (
+                <button className="contact-button-disabled">Contact Seller</button>
+              )}
             </div>
           </div>
           <div className="user-profile-user-data">
