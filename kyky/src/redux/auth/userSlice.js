@@ -66,7 +66,7 @@ export const signInEmailAndPassword = createAsyncThunk(
       //   }
       // }
       const docSnap = await getDoc(doc(db, 'users', res.user.uid, 'data', 'userdata'));
-      return { ...res.user, slug: docSnap.data() };
+      return { ...res.user, slug: docSnap.data().slug };
     } catch (error) {
       return error;
     }
