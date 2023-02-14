@@ -21,6 +21,7 @@ const UserProfile = () => {
   const [allJobs, setAllJobs] = useState('4');
   const [ongoingBookings, setOngoingBookings] = useState('3');
   const [description, setDescription] = useState('');
+  const [skills, setSkills] = useState([]);
   const [cards, setCards] = useState([]);
   const [user, setUser] = useState(null);
   const [profileImage, setProfileImage] = useState('');
@@ -60,6 +61,7 @@ const UserProfile = () => {
       setProfileTitle(_profile.s1Title);
       setLocation(_profile.s7City + ', ' + _profile.s7Country.label);
       setDescription(_profile.s4WorkInput);
+      setSkills(_profile.s1Skills);
     }
   }, [_profile]);
 
@@ -158,6 +160,16 @@ const UserProfile = () => {
             </div>
             <div className="description-text">
               <p>{description}</p>
+            </div>
+          </div>
+          <div className="user-profile-skills">
+            <div className="skills-headline">
+              <p>Taidot</p>
+            </div>
+            <div className="skills-content">
+              {skills.map((skill) => (
+                <div className="skill">{skill}</div>
+              ))}
             </div>
           </div>
         </div>
