@@ -57,11 +57,11 @@ function ServiceBooking() {
   const [inputmail, setInputmail] = useState('');
   const [photoURL, setPhotoURL] = useState('');
   const [uid, setUid] = useState('');
-  const [bookingsAdvance, setBookingsAdvance] = useState(0);
-  const [notifications, setNotifications] = useState(false);
-  const [notificationDays, setNotificationDays] = useState([]);
-  const [notificationStartTime, setNotificationStartTime] = useState('08.00');
-  const [notificationEndTime, setNotificationEndTime] = useState('21.00');
+  // const [bookingsAdvance, setBookingsAdvance] = useState(0);
+  // const [notifications, setNotifications] = useState(false);
+  // const [notificationDays, setNotificationDays] = useState([]);
+  // const [notificationStartTime, setNotificationStartTime] = useState('08.00');
+  // const [notificationEndTime, setNotificationEndTime] = useState('21.00');
 
   const dispatch = useDispatch();
 
@@ -70,22 +70,22 @@ function ServiceBooking() {
   const navigate = useNavigate();
 
   const _user = useSelector((state) => state.user);
-  const _settings = useSelector((state) => state.calendarsettings);
+  // const _settings = useSelector((state) => state.calendarsettings);
 
   const job = defaultJob;
 
   const state_exists = location.state !== null;
 
-  useEffect(() => {
-    if (_settings) {
-      const parsedSettings = JSON.parse(JSON.stringify(_settings));
-      setBookingsAdvance(parsedSettings.bookingsAdvance);
-      setNotifications(parsedSettings.notifications);
-      setNotificationDays(parsedSettings.notificationDays);
-      setNotificationStartTime(parsedSettings.notificationStartTime);
-      setNotificationEndTime(parsedSettings.notificationEndTime);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (_settings) {
+  //     const parsedSettings = JSON.parse(JSON.stringify(_settings));
+  //     setBookingsAdvance(parsedSettings.bookingsAdvance);
+  //     setNotifications(parsedSettings.notifications);
+  //     setNotificationDays(parsedSettings.notificationDays);
+  //     setNotificationStartTime(parsedSettings.notificationStartTime);
+  //     setNotificationEndTime(parsedSettings.notificationEndTime);
+  //   }
+  // }, []);
 
   /* set card owner's data to local state */
   useEffect(() => {
