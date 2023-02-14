@@ -11,7 +11,6 @@ import Checkbox from '../components/Checkbox';
 import { fetchJobsByQuery } from '../redux/sellers/jobFormSlice';
 
 const Tabs = {
-  Info: 'Info',
   Once: 'Once',
   Recurring: 'Recurring'
 };
@@ -48,7 +47,7 @@ function ServiceBooking() {
   const [everyOtherWeekend, setEveryOtherWeekend] = useState(0);
   const [onceAMonth, setOnceAMonth] = useState(0);
   const [unit, setUnit] = useState('€');
-  const [currentTab, setCurrentTab] = useState(Tabs.Info);
+  const [currentTab, setCurrentTab] = useState(Tabs.Once);
   const [booking, setBooking] = useState(defaultBookingValue);
   const [date, setDate] = useState(new Date());
   const [user, setUser] = useState(null);
@@ -274,11 +273,11 @@ function ServiceBooking() {
           <div className="service-booking-right-panel">
             <div className="service-booking-right-panel-content">
               <div className="service-booking-right-panel-tabs">
-                <div
+                {/* <div
                   className={`panel-button ${currentTab === Tabs.Info ? 'selected' : ''}`}
                   onClick={() => selectedTab(Tabs.Info)}>
                   Info
-                </div>
+                </div> */}
                 <div
                   className={`panel-button ${currentTab === Tabs.Once ? 'selected' : ''}`}
                   onClick={() => selectedTab(Tabs.Once)}>
@@ -291,7 +290,7 @@ function ServiceBooking() {
                 </div>
               </div>
 
-              {currentTab === Tabs.Info && (
+              {/* {currentTab === Tabs.Info && (
                 <div className="info-tab-container">
                   <div className="bookings-onward">
                     <p>Bookings from {getBookingAdvanceDate(bookingsAdvance)} onwards</p>
@@ -305,7 +304,7 @@ function ServiceBooking() {
                     </div>
                   )}
                 </div>
-              )}
+              )} */}
 
               {currentTab === Tabs.Once && (
                 <div>

@@ -38,7 +38,7 @@ export default function CalendarSettings({ jobs }) {
 
   useEffect(() => {
     setJobOptions(jobs.map((job) => ({ value: job.id, label: job.jobTitle })));
-    if (_settings) {
+    if (Array.isArray(_settings)) {
       const parsedSettings = JSON.parse(JSON.stringify(_settings));
       setSwitched(parsedSettings.switched);
       setNotifications(parsedSettings.notifications);
