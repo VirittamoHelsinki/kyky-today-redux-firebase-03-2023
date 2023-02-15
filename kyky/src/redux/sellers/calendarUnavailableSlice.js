@@ -4,12 +4,12 @@ import { db } from '../../firebase/firebase';
 
 export const createUnavailability = createAsyncThunk(
   'calendarUnavailabilities/createUnavailability',
-  async (payload) => {
+  async ({ uid, data }) => {
     try {
-      await setDoc(doc(db, `users/${payload.uid}/unavailabilities`), {
-        ...payload.data
+      await setDoc(doc(db, 'users', uid, 'unavailabilities'), {
+        ...data
       });
-      return payload.data;
+      return data;
     } catch (error) {
       return error;
     }
@@ -20,12 +20,7 @@ export const fetchUnavailabilities = createAsyncThunk(
   'calendarUnavailabilities/fetchUnavailabilities',
   async (uid) => {
     try {
-      // const unavail_list = [];
-      const unavailabilities = await getDoc(db, `users/${uid}/unavailabilities/`);
-      // unavailabilities.forEach((doc) => {
-      //   unavail_list.push(doc.data());
-      // });
-      console.log(unavailabilities.data());
+      const unavailabilities = await getDoc(db, 'users', uid, 'unavailabilities');
       return unavailabilities.data() ? unavailabilities.data() : [];
     } catch (error) {
       return error;

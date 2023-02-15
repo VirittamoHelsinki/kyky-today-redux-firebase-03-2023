@@ -3,7 +3,6 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
-  sendEmailVerification,
   sendPasswordResetEmail,
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -92,6 +91,12 @@ export const signInGoogleAuthProvider = createAsyncThunk(
       const provider = new GoogleAuthProvider();
       const res = await signInWithPopup(auth, provider);
       const user = res.user;
+      /* if user has logged in before... */
+      const docSnap = await getDoc(doc(db, 'users', user.uid, 'data', 'userdata'));
+      if (docSnap.exists()) {
+        return { ...res.user, slug: docSnap.data().slug };
+      }
+      /* ...and if not has logged in */
       const slug = user.displayName.replace(/\W+/g, '-').toLowerCase() + '-' + hashCode(user.email);
       await setDoc(doc(db, 'users', user.uid, 'data', 'userdata'), {
         uid: user.uid,

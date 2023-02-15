@@ -6,12 +6,12 @@ import { db } from '../../firebase/firebase';
 and returns both schedule name and object if succesfull */
 export const createSchedule = createAsyncThunk(
   'calendarSchedules/createSchedule',
-  async (payload) => {
+  async ({ uid, jobId, data }) => {
     try {
-      await setDoc(doc(db, `users/${payload.uid}/schedules/${payload.jobId}`), {
-        ...payload.data
+      await setDoc(doc(db, 'users', uid, 'schedules', jobId), {
+        ...data
       });
-      return payload;
+      return { uid, jobId, data };
     } catch (error) {
       return error;
     }
@@ -20,37 +20,33 @@ export const createSchedule = createAsyncThunk(
 
 /* creates an object with the document name as a key and the list of contents 
 as a value, checking if the content exists, returns a list of documents */
-export const fetchSchedules = createAsyncThunk(
-  'calendarSchedules/fetchSchedules',
-  async (payload) => {
-    try {
-      const documents = [];
-      const snap = await getDocs(collection(db, `users/${payload}/schedules/`));
-      snap.docs.map((doc) => {
-        let content = [];
-        let i = 0;
-        while (doc.data()[i]) {
-          content.push(doc.data()[i]);
-          i++;
-        }
-        documents.push({ [doc.id]: content });
-      });
-      return documents;
-    } catch (error) {
-      return error;
-    }
+export const fetchSchedules = createAsyncThunk('calendarSchedules/fetchSchedules', async (uid) => {
+  try {
+    const documents = [];
+    const snap = await getDocs(collection(db, 'users', uid, 'schedules'));
+    snap.docs.map((doc) => {
+      let content = [];
+      let i = 0;
+      while (doc.data()[i]) {
+        content.push(doc.data()[i]);
+        i++;
+      }
+      documents.push({ [doc.id]: content });
+    });
+    return documents;
+  } catch (error) {
+    return error;
   }
-);
+});
 
 /* deletes a document in collection by a name of the document, returns deleted name
 for a reducer */
 export const removeSchedule = createAsyncThunk(
   'calendarSchedules/removeSchedule',
-  async (payload) => {
-    console.log(payload);
+  async ({ uid, schedule }) => {
     try {
-      await deleteDoc(doc(db, `users/${payload.uid}/schedules/${payload.schedule}_schedules`));
-      return payload.schedule;
+      await deleteDoc(doc(db, 'users', uid, 'schedules', schedule + '_schedules'));
+      return schedule;
     } catch (error) {
       return error;
     }
@@ -61,12 +57,12 @@ export const removeSchedule = createAsyncThunk(
 returns the unavailability object  */
 export const createUnavailability = createAsyncThunk(
   'calendarUnavailabilities/createUnavailability',
-  async (payload) => {
+  async ({ uid, data }) => {
     try {
-      await setDoc(doc(db, `users/${payload.uid}/schedules/unavailabilities`), {
-        ...payload.data
+      await setDoc(doc(db, 'users', uid, 'schedules', 'unavailabilities'), {
+        ...data
       });
-      return payload;
+      return { uid, data };
     } catch (error) {
       return error;
     }

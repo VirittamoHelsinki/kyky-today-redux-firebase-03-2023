@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
 import { changeBookingStatus } from '../../redux/buyers/serviceBookingSlice';
+import { createContact } from '../../redux/chat/contactSlice';
 import { useOutletContext } from 'react-router-dom';
 import Button from '../../components/Button';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -61,6 +63,7 @@ export default function JobCalendar() {
   const _isLoading = useSelector((state) => state.schedule.loading);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (_user.uid) {
@@ -227,6 +230,19 @@ export default function JobCalendar() {
       year--;
     }
     setDate(new Date(year, month, date.getDate()));
+  }
+
+  function onContactClick({ uid, name, photoURL }) {
+    dispatch(
+      createContact({
+        myUid: _user.uid,
+        myName: _user.displayName,
+        myPhotoURL: _user.photoURL,
+        contactUid: uid,
+        contactName: name,
+        contactPhotoURL: photoURL
+      })
+    );
   }
 
   return (
@@ -417,23 +433,34 @@ export default function JobCalendar() {
                           <div key={activity.id} className="activity">
                             <div className="activityInfo">
                               <p>
-                                <i className="material-icons-outlined">schedule</i>{' '}
-                                {activity.time.start} - {activity.time.end}
+                                <i className="material-icons-outlined">schedule</i>
                               </p>
                               <p>
-                                {' '}
                                 <i className="material-icons-outlined">location_on</i>
-                                {activity.location}
+                                {activity.buyerLocation}
                               </p>
                               <p>
-                                {' '}
                                 <i className="material-icons-outlined">account_circle</i>
-                                {activity.user}
+                                {activity.buyerRegistered ? (
+                                  <span
+                                    className="buyer-is-registered"
+                                    onClick={() => {
+                                      onContactClick({
+                                        uid: activity.buyerUid,
+                                        name: activity.buyerName,
+                                        photoURL: activity.buyerPhotoURL
+                                      });
+                                      navigate('/buyers-profile');
+                                    }}>
+                                    {activity.buyerName}
+                                  </span>
+                                ) : (
+                                  <span className="buyer-is-guest">{activity.buyerName}</span>
+                                )}
                               </p>
                               <p>
-                                {' '}
                                 <i className="material-icons-outlined">mail</i>
-                                {activity.mail}
+                                {activity.buyerMail}
                               </p>
                             </div>
                             {showConfirmModal && (
@@ -446,7 +473,7 @@ export default function JobCalendar() {
                                       onClick={() => {
                                         dispatch(
                                           changeBookingStatus({
-                                            booking: activity.id,
+                                            booking: activity.bookingId,
                                             status: true
                                           })
                                         );

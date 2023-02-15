@@ -181,11 +181,14 @@ function ServiceBooking() {
       dispatch(
         createBooking({
           ...booking,
-          id: location.state.id,
+          bookingId: location.state.id,
           uid: location.state.uid,
-          user: user ? user.displayName : inputname,
-          mail: user ? user.email : inputmail,
-          location: location.state.place,
+          buyerUid: user ? user.uid : null,
+          buyerPhotoURL: user ? user.photoURL : '',
+          buyerName: user ? user.displayName : inputname,
+          buyerMail: user ? user.email : inputmail,
+          buyerLocation: location.state.place,
+          buyerRegistered: user ? true : false,
           date: date,
           time: {
             start: '09:00',
