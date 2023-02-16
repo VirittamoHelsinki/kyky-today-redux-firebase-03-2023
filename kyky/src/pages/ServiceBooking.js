@@ -212,18 +212,18 @@ function ServiceBooking() {
     }
   }
 
-  function getBookingAdvanceDate(months) {
-    const float_months = parseFloat(months);
-    const day = new Date();
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-    if (float_months === 0.5) {
-      return new Date(day.setMonth(day.getMonth(), day.getDate() + 14)).toLocaleString(
-        'fi-FI',
-        options
-      );
-    }
-    return new Date(day.setMonth(day.getMonth() + float_months)).toLocaleString('fi-FI', options);
-  }
+  // function getBookingAdvanceDate(months) {
+  //   const float_months = parseFloat(months);
+  //   const day = new Date();
+  //   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  //   if (float_months === 0.5) {
+  //     return new Date(day.setMonth(day.getMonth(), day.getDate() + 14)).toLocaleString(
+  //       'fi-FI',
+  //       options
+  //     );
+  //   }
+  //   return new Date(day.setMonth(day.getMonth() + float_months)).toLocaleString('fi-FI', options);
+  // }
 
   return (
     <div className="booking-page-content">
@@ -488,7 +488,7 @@ function ServiceBooking() {
               className="button-enabled"
               onClick={() => {
                 onContactClick();
-                navigate('/buyers-profile');
+                navigate('/buyer/messages');
               }}>
               Contact Seller
             </button>

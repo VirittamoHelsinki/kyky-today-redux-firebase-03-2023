@@ -13,7 +13,6 @@ import fi from './localisation/fi.json';
 import en from './localisation/en.json';
 
 /* Misc */
-import ProfileCreation from './pages/ProfileCreation';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import UserRegistration from './pages/UserRegistration';
@@ -23,7 +22,6 @@ import RecoverPassword from './pages/RecoverPassword';
 import LandingPage from './pages/LandingPage';
 import ServiceBooking from './pages/ServiceBooking';
 import CategoryPage from './pages/CategoryPage';
-import BuyersProfile from './pages/BuyersProfile';
 import UserProfile from './pages/UserProfile';
 import UserRoute from './routes/UserRoute';
 import GuestRoute from './routes/GuestRoute';
@@ -40,6 +38,13 @@ import JobCalendar from './pages/Calendar/JobCalendar';
 import ManageSchedules from './pages/Calendar/ManageSchedules';
 import CalendarSettings from './pages/Calendar/CalendarSettings';
 import JobCreation from './pages/Calendar/JobCreation';
+
+/* Buyers profile */
+import BuyersProfile from './pages/BuyersProfile/BuyersProfile';
+import Purchases from './pages/BuyersProfile/Purchases';
+import Messages from './pages/BuyersProfile/Messages';
+import Ratings from './pages/BuyersProfile/Ratings';
+import Settings from './pages/BuyersProfile/Settings';
 
 /* Buyer's Rating*/
 import BuyersRating from './pages/BuyersRating';
@@ -104,22 +109,15 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="categories/:category" element={<CategoryPage />} />
           <Route path="service-booking" element={<ServiceBooking />} />
-          <Route
-            path="profile-creation"
-            element={
-              <UserRoute>
-                <ProfileCreation />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="job-creation"
-            element={
-              <UserRoute>
-                <JobCreation />
-              </UserRoute>
-            }
-          />
+          <Route path="user-profile/:slug" element={<UserProfile />} />
+          <Route path="kyky-team" element={<KykyTeam />} />
+          <Route path="kyky-faqs" element={<FAQs />} />
+          <Route path="terms-of-service" element={<TermsOfService />} />
+          <Route path="privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="how-service-works" element={<HowServiceWorks />} />
+          <Route path="pricing" element={<Pricing />} />
+          <Route path="additional-services" element={<AdditionalServices />} />
+
           <Route
             path="calendar"
             element={
@@ -164,6 +162,47 @@ const App = () => {
               element={
                 <UserRoute>
                   <CalendarSettings jobs={jobs} />
+                </UserRoute>
+              }
+            />
+          </Route>
+
+          <Route
+            path="buyer"
+            element={
+              <UserRoute>
+                <BuyersProfile />
+              </UserRoute>
+            }>
+            <Route
+              path="purchases"
+              element={
+                <UserRoute>
+                  <Purchases />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="messages"
+              element={
+                <UserRoute>
+                  <Messages />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="ratings"
+              element={
+                <UserRoute>
+                  <Ratings />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="settings"
+              element={
+                <UserRoute>
+                  <Settings />
                 </UserRoute>
               }
             />
@@ -217,14 +256,7 @@ const App = () => {
               </UserRoute>
             }
           />
-          <Route
-            path="buyers-profile"
-            element={
-              <UserRoute>
-                <BuyersProfile />
-              </UserRoute>
-            }
-          />
+
           <Route
             path="user-registration"
             element={
@@ -250,14 +282,6 @@ const App = () => {
               </GuestRoute>
             }
           />
-          <Route path="user-profile/:slug" element={<UserProfile />} />
-          <Route path="kyky-team" element={<KykyTeam />} />
-          <Route path="kyky-faqs" element={<FAQs />} />
-          <Route path="terms-of-service" element={<TermsOfService />} />
-          <Route path="privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="how-service-works" element={<HowServiceWorks />} />
-          <Route path="pricing" element={<Pricing />} />
-          <Route path="additional-services" element={<AdditionalServices />} />
         </Routes>
         <Footer />
       </BrowserRouter>

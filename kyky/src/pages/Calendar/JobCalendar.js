@@ -305,8 +305,8 @@ export default function JobCalendar() {
             </select>
           </div>
           <div className="weekDays">
-            {weekDaysHeader.map((week) => (
-              <span key={week}>{week}</span>
+            {weekDaysHeader.map((week, i) => (
+              <span key={i}>{week}</span>
             ))}
           </div>
           {_isLoading ? (
@@ -422,7 +422,7 @@ export default function JobCalendar() {
                       </p>
                     </div>
                     <div className={`activities${openedSchedules.includes(_id) ? ' open' : ''}`}>
-                      {activitiesNow.map((activity) => {
+                      {activitiesNow.map((activity, index) => {
                         /* This should eventually check the schedule actually matches week day, but not yet! */
                         if (
                           activity.time.start > schedule.time.end ||
@@ -430,7 +430,7 @@ export default function JobCalendar() {
                         )
                           return;
                         return (
-                          <div key={activity.id} className="activity">
+                          <div key={index} className="activity">
                             <div className="activityInfo">
                               <p>
                                 <i className="material-icons-outlined">schedule</i>
@@ -450,7 +450,7 @@ export default function JobCalendar() {
                                         name: activity.buyerName,
                                         photoURL: activity.buyerPhotoURL
                                       });
-                                      navigate('/buyers-profile');
+                                      navigate('/buyer/messages');
                                     }}>
                                     {activity.buyerName}
                                   </span>
@@ -473,7 +473,7 @@ export default function JobCalendar() {
                                       onClick={() => {
                                         dispatch(
                                           changeBookingStatus({
-                                            booking: activity.bookingId,
+                                            bookingId: activity.bookingId,
                                             status: true
                                           })
                                         );

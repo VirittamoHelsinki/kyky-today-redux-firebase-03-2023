@@ -20,7 +20,7 @@ export const fetchBookingsByQuery = createAsyncThunk(
       const q = query(ref, where('uid', '==', payload));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
-        bookings.push({ ...doc.data(), id: doc.id });
+        bookings.push({ ...doc.data(), bookingId: doc.id });
       });
       return bookings;
     } catch (error) {
@@ -31,11 +31,11 @@ export const fetchBookingsByQuery = createAsyncThunk(
 
 export const changeBookingStatus = createAsyncThunk(
   'serviceBookings/changeBookingStatus',
-  async (payload) => {
+  async ({ bookingId, status }) => {
     try {
-      const bookingRef = doc(db, 'bookings', payload.booking);
-      setDoc(bookingRef, { confirmed: payload.status }, { merge: true });
-      return { status: payload.status, id: payload.booking };
+      const bookingRef = doc(db, 'bookings', bookingId);
+      setDoc(bookingRef, { confirmed: status }, { merge: true });
+      return { status: status, bookingId: bookingId };
     } catch (error) {
       return error;
     }
@@ -65,7 +65,7 @@ export const serviceBookingSlice = createSlice({
       the confirmed value to the status value, return the state with the modified list */
       .addCase(changeBookingStatus.fulfilled, (state, action) => {
         let new_bookings = JSON.parse(JSON.stringify(state.bookings));
-        let index = new_bookings.findIndex((f) => f.id === action.payload.id);
+        let index = new_bookings.findIndex((f) => f.bookingId === action.payload.bookingId);
         new_bookings[index].confirmed = action.payload.status;
         return (state = {
           ...state,

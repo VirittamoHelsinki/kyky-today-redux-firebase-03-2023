@@ -113,7 +113,7 @@ const UserProfile = () => {
                   className="contact-button-enabled"
                   onClick={() => {
                     onContactClick();
-                    navigate('/buyers-profile');
+                    navigate('/buyer/messages');
                   }}>
                   Contact Seller
                 </button>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from '../../redux/chat/contactSlice';
 import { addMessage, fetchMessages } from '../../redux/chat/messageSlice';
@@ -7,7 +8,8 @@ import { db } from '../../firebase/firebase';
 import PropTypes from 'prop-types';
 import '../../styles/BuyersProfile.scss';
 
-const Messages = ({ user }) => {
+const Messages = () => {
+  const setSelectedWindow = useOutletContext();
   const [contacts, setContacts] = useState([]);
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
@@ -17,9 +19,14 @@ const Messages = ({ user }) => {
 
   const _contacts = useSelector((state) => state.chat.contacts);
   const _messages = useSelector((state) => state.message.messages);
+  const _user = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(fetchContacts(user.uid));
+    setSelectedWindow('messages');
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchContacts(_user.uid));
   }, []);
 
   useEffect(() => {
@@ -54,7 +61,7 @@ const Messages = ({ user }) => {
   function onSendButtonClick() {
     if (messageInput !== '') {
       const new_msg = {
-        uid: user.uid,
+        uid: _user.uid,
         message: messageInput,
         timestamp: Math.floor(Date.now() / 1000)
       };
@@ -134,7 +141,7 @@ const Messages = ({ user }) => {
               .map((message, index) => (
                 <div
                   key={index}
-                  className={`message-${user.uid === message.uid ? 'myself' : 'friend'}`}>
+                  className={`message-${_user.uid === message.uid ? 'myself' : 'friend'}`}>
                   <div className="message-box">{message.message}</div>
                 </div>
               ))

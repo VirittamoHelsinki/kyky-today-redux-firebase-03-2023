@@ -1,8 +1,15 @@
-import React from 'react';
-import OrderStatus from './OrderStatus';
+import { useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import OrderStatus from '../../components/BuyersProfile/OrderStatus';
 import '../../styles/BuyersProfile.scss';
 
 const Purchases = ({ order }) => {
+  const setSelectedWindow = useOutletContext();
+
+  useEffect(() => {
+    setSelectedWindow('purchases');
+  }, []);
+
   const pendingOrders = [
     {
       job: 'Salapoliisityö',

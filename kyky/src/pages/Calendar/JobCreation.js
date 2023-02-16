@@ -18,7 +18,7 @@ const currencies = [
 ];
 
 export default function JobCreation() {
-  const [setSelectedWindow, setEditing, setScheduleWindow] = useOutletContext();
+  const [setSelectedWindow] = useOutletContext();
   const [recurrent, setRecurrent] = useState(false);
   const [headline, setHeadline] = useState('');
   const [description, setDescription] = useState('');

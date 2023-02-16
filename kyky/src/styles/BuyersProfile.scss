@@ -32,300 +32,318 @@ h4 {
     border-top: gainsboro solid 1px;
   }
 
-  .buyers-profile--header {
+  .buyers-profile--header-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 100%;
+    width: 100%;
 
-    .userImage {
-      width: 100px;
-      height: 100px;
-      background: #387a70;
-      border-radius: 50px;
-    }
-  }
-
-  .buyers-profile--content-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70%;
-    border: #c4c4c4 solid 1px;
-
-    .buyers-profile--tabs {
+    .buyers-profile--header {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      align-items: center;
       min-width: 100%;
-      background: #f8f9f8;
 
-      .buyers-profile--button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 10rem;
-        min-height: 4rem;
-        flex: 1 1 0;
-        cursor: pointer;
-
-        h3 {
-          color: #817b7b;
-        }
+      .userImage {
+        width: 100px;
+        height: 100px;
+        background: #387a70;
+        border-radius: 50px;
       }
     }
 
-    .buyers-profile--content {
-      min-width: 100%;
-      padding-left: 30px;
-      padding-right: 30px;
-      text-align: center;
+    .buyers-profile--content-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 70%;
+      border: #c4c4c4 solid 1px;
+      box-shadow: 0 4px 4px #00000040;
+      border-radius: 12px;
 
-      .buyers-profile--content-orders-container {
+      .buyers-profile--tabs {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         min-width: 100%;
         background: white;
 
-        .buyers-profile-table {
-          width: 100%;
-          font-family: Poppins, sans-serif;
+        .buyers-profile--button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-width: 10rem;
+          min-height: 4rem;
+          flex: 1 1 0;
+          cursor: pointer;
 
-          thead {
-            background: #d9d9d9;
+          h3 {
+            color: #817b7b;
+          }
+        }
+      }
+    }
+  }
 
-            tr {
-              height: 50px;
+  .buyers-profile--content {
+    width: 70%;
+    text-align: center;
 
-              th {
-                padding-left: 20px;
-                padding-right: 20px;
-                text-align: right;
-              }
+    .buyers-profile--content-orders-container {
+      display: flex;
+      flex-direction: column;
+      min-width: 100%;
+      background: white;
 
-              .job-header {
-                width: 30%;
-                text-align: left;
-              }
+      .buyers-profile-table {
+        width: 100%;
+        font-family: Poppins, sans-serif;
+        box-shadow: 0 4px 4px #00000040;
 
-              .seller-header {
-                width: 20%;
-                text-align: left;
-              }
+        thead {
+          background: #d9d9d9;
 
-              .sum-header {
-                width: 6%;
-              }
+          tr {
+            height: 50px;
 
-              .ordered-header {
-                width: 20%;
-              }
+            th {
+              padding-left: 20px;
+              padding-right: 20px;
+              text-align: right;
+            }
 
-              .delivered-header {
-                width: 20%;
-              }
+            .job-header {
+              width: 30%;
+              text-align: left;
+            }
+
+            .seller-header {
+              width: 20%;
+              text-align: left;
+            }
+
+            .sum-header {
+              width: 6%;
+            }
+
+            .ordered-header {
+              width: 20%;
+            }
+
+            .delivered-header {
+              width: 20%;
             }
           }
+        }
 
-          tbody {
-            background: white;
+        tbody {
+          background: white;
 
-            tr {
-              td {
-                padding: 10px 20px;
-                text-align: right;
+          tr {
+            td {
+              padding: 10px 20px;
+              text-align: right;
+            }
+
+            .job-div {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              gap: 10px;
+
+              .job-image-small {
+                width: 60px;
               }
 
-              .job-div {
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                gap: 10px;
-
-                .job-image-small {
-                  width: 60px;
-                }
-
-                span {
-                  text-align: left;
-                }
-              }
-
-              .seller-div {
+              span {
                 text-align: left;
               }
+            }
+
+            .seller-div {
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+
+    .messages-main {
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      width: 100%;
+      height: 800px;
+      padding-top: 40px;
+
+      .contacts-content {
+        display: flex;
+        justify-content: center;
+        width: 38.2%;
+        padding-top: 40px;
+        background: white;
+        box-shadow: 0 4px 4px #00000040;
+        border-radius: 12px;
+
+        .contact-list {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+          width: 90%;
+
+          .contact {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-radius: 6px;
+            border: 1px solid gainsboro;
+            cursor: pointer;
+
+            .contact-left-side {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              padding: 8px 10px;
+              gap: 10px;
+
+              .profile-img {
+                height: 33px;
+                border-radius: 50%;
+              }
+
+              .name-latest-message-paragraph {
+                display: flex;
+                flex-direction: column;
+                font-size: 18px;
+
+                .name-paragraph {
+                  font-weight: bold;
+                }
+
+                .latest-message-paragraph {
+                  font-weight: normal;
+                }
+              }
+            }
+
+            .contact-right-side {
+              display: flex;
+              justify-content: flex-end;
+              padding: 5px 10px;
+
+              .time-since-last-message {
+                font-size: 14px;
+              }
+            }
+
+            &.selected {
+              background: #ddd;
             }
           }
         }
       }
 
-      .messages-main {
+      .no-contacts-select-content {
         display: flex;
-        flex-direction: row;
-        width: 100%;
-        height: 800px;
+        justify-content: center;
+        align-items: center;
+        width: 61.8%;
+        height: 100%;
 
-        .contacts-content {
-          display: flex;
-          justify-content: center;
-          width: 38.2%;
-          padding-top: 40px;
-
-          .contact-list {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-            width: 90%;
-
-            .contact {
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-              align-items: center;
-              width: 100%;
-              border-radius: 6px;
-              border: 1px solid gainsboro;
-              cursor: pointer;
-
-              .contact-left-side {
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                padding: 8px 10px;
-                gap: 10px;
-
-                .profile-img {
-                  height: 33px;
-                  border-radius: 50%;
-                }
-
-                .name-latest-message-paragraph {
-                  display: flex;
-                  flex-direction: column;
-                  font-size: 18px;
-
-                  .name-paragraph {
-                    font-weight: bold;
-                  }
-
-                  .latest-message-paragraph {
-                    font-weight: normal;
-                  }
-                }
-              }
-
-              .contact-right-side {
-                display: flex;
-                justify-content: flex-end;
-                padding: 5px 10px;
-
-                .time-since-last-message {
-                  font-size: 14px;
-                }
-              }
-
-              &.selected {
-                background: #ddd;
-              }
-            }
-          }
-        }
-
-        .no-contacts-select-content {
+        .no-contacts-select-box {
           display: flex;
           justify-content: center;
           align-items: center;
-          width: 61.8%;
-          height: 100%;
+          width: 400px;
+          height: 120px;
+          border-radius: 20px;
+          border: 2px dotted gainsboro;
+          font-family: Poppins, sans-serif;
+          font-size: 18px;
+        }
+      }
 
-          .no-contacts-select-box {
+      .messages-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        width: 61.8%;
+        height: 100%;
+        gap: 40px;
+        padding: 40px 0;
+        background: white;
+        box-shadow: 0 4px 4px #00000040;
+        border-radius: 12px;
+
+        .messages-list {
+          display: flex;
+          flex-direction: column-reverse;
+          width: 95%;
+          padding: 5px 10px;
+          gap: 10px;
+          overflow-y: auto;
+
+          .message-myself {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 400px;
-            height: 120px;
-            border-radius: 20px;
-            border: 2px dotted gainsboro;
-            font-family: Poppins, sans-serif;
-            font-size: 18px;
+            justify-content: flex-end;
+
+            .message-box {
+              display: flex;
+              justify-content: flex-end;
+              width: max-content;
+              max-width: 600px;
+              background: #ddd;
+              border-radius: 5px 5px 0;
+              padding: 10px;
+              text-align: left;
+              font-size: 15px;
+            }
+          }
+
+          .message-friend {
+            display: flex;
+            justify-content: flex-start;
+
+            .message-box {
+              display: flex;
+              justify-content: flex-start;
+              width: max-content;
+              max-width: 600px;
+              background: #00a088;
+              border-radius: 5px 5px 5px 0;
+              padding: 10px;
+              text-align: left;
+              font-size: 15px;
+              color: #f8f9f8;
+            }
           }
         }
 
-        .messages-content {
+        .messages-send {
           display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          width: 61.8%;
-          height: 100%;
-          gap: 40px;
-          padding: 40px 0;
+          flex-direction: row;
+          justify-content: center;
+          width: 100%;
+          gap: 20px;
 
-          .messages-list {
-            display: flex;
-            flex-direction: column-reverse;
-            width: 95%;
-            padding: 5px 10px;
-            gap: 10px;
-            overflow-y: auto;
-
-            .message-myself {
-              display: flex;
-              justify-content: flex-end;
-
-              .message-box {
-                display: flex;
-                justify-content: flex-end;
-                width: max-content;
-                max-width: 600px;
-                background: #ddd;
-                border-radius: 5px 5px 0;
-                padding: 10px;
-                text-align: left;
-                font-size: 15px;
-              }
-            }
-
-            .message-friend {
-              display: flex;
-              justify-content: flex-start;
-
-              .message-box {
-                display: flex;
-                justify-content: flex-start;
-                width: max-content;
-                max-width: 600px;
-                background: #00a088;
-                border-radius: 5px 5px 5px 0;
-                padding: 10px;
-                text-align: left;
-                font-size: 15px;
-                color: #f8f9f8;
-              }
-            }
+          .messages-send-input {
+            border: 1px solid gainsboro;
+            border-radius: 6px;
+            width: 75%;
+            height: 33px;
+            font-size: 15px;
           }
 
-          .messages-send {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 20px;
-
-            .messages-send-input {
-              border: 1px solid gainsboro;
-              border-radius: 6px;
-              width: 75%;
-              height: 33px;
-              font-size: 15px;
-            }
-
-            .messages-send-button {
-              border-radius: 6px;
-              background: #00a088;
-              color: white;
-              font-size: 15px;
-              width: 8%;
-              height: 33px;
-            }
+          .messages-send-button {
+            border-radius: 6px;
+            background: #00a088;
+            color: white;
+            font-size: 15px;
+            width: 8%;
+            height: 33px;
           }
         }
       }
