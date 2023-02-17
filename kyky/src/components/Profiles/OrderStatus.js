@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import jobImage from '../../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
-import '../../styles/BuyersProfile.scss';
+import '../../styles/Profiles.scss';
 
 export default function OrderStatus({ order }) {
   return (
-    <tr className="buyers-profile-table-body-row">
+    <tr className="profiles-table-body-row">
       <td className="job-div">
         <img src={jobImage} className="job-image-small" alt="" />
         <span>{order.job}</span>

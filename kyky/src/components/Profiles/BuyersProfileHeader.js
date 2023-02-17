@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import '../../styles/BuyersProfile.scss';
+import '../../styles/Profiles.scss';
 
 export default function BuyersProfileHeader({ selectedWindow, setSelectedWindow }) {
   const navigate = new useNavigate();
@@ -22,20 +22,20 @@ export default function BuyersProfileHeader({ selectedWindow, setSelectedWindow 
   }
 
   return (
-    <div className="buyers-profile--header-content">
-      <div className="buyers-profile--header">
+    <div className="profiles--header-content">
+      <div className="profiles--header">
         <img src={_user.photoURL} referrerPolicy="no-referrer" className="userImage" alt="" />
         <div>
           <h3 className="username">{_user.displayName}</h3>
         </div>
       </div>
 
-      <div className="buyers-profile--content-wrapper">
-        <div className="buyers-profile--tabs">
+      <div className="profiles--content-wrapper">
+        <div className="profiles--tabs">
           {Tabs.map(({ to, label, id }) => (
             <div
               key={id}
-              className={`buyers-profile--button ${selectedWindow === id ? 'selected-tab' : ''}`}
+              className={`profiles--button ${selectedWindow === id ? 'selected-tab' : ''}`}
               onClick={() => changeWindow(to, id)}>
               <h3>{label}</h3>
             </div>

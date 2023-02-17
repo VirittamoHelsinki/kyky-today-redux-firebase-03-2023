@@ -39,12 +39,16 @@ import ManageSchedules from './pages/Calendar/ManageSchedules';
 import CalendarSettings from './pages/Calendar/CalendarSettings';
 import JobCreation from './pages/Calendar/JobCreation';
 
-/* Buyers profile */
-import BuyersProfile from './pages/BuyersProfile/BuyersProfile';
-import Purchases from './pages/BuyersProfile/Purchases';
-import Messages from './pages/BuyersProfile/Messages';
-import Ratings from './pages/BuyersProfile/Ratings';
-import Settings from './pages/BuyersProfile/Settings';
+/* Seller & buyer profiles */
+import BuyersProfile from './pages/Profiles/BuyersProfile';
+import SellersProfile from './pages/Profiles/SellersProfile';
+import Purchases from './pages/Profiles/Purchases';
+import Messages from './pages/Profiles/Messages';
+import Ratings from './pages/Profiles/Ratings';
+import Settings from './pages/Profiles/Settings';
+import OwnJobs from './pages/Profiles/OwnJobs';
+import Earnings from './pages/Profiles/Earnings';
+import FavouriteJobs from './pages/Profiles/FavouriteJobs';
 
 /* Buyer's Rating*/
 import BuyersRating from './pages/BuyersRating';
@@ -195,6 +199,71 @@ const App = () => {
               element={
                 <UserRoute>
                   <Ratings />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="settings"
+              element={
+                <UserRoute>
+                  <Settings />
+                </UserRoute>
+              }
+            />
+          </Route>
+
+          <Route
+            path="seller"
+            element={
+              <UserRoute>
+                <SellersProfile />
+              </UserRoute>
+            }>
+            <Route
+              path="own-jobs"
+              element={
+                <UserRoute>
+                  <OwnJobs />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="messages"
+              element={
+                <UserRoute>
+                  <Messages />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="ratings"
+              element={
+                <UserRoute>
+                  <Ratings />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="earnings"
+              element={
+                <UserRoute>
+                  <Earnings />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="purchases"
+              element={
+                <UserRoute>
+                  <Purchases />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="favourite-jobs"
+              element={
+                <UserRoute>
+                  <FavouriteJobs />
                 </UserRoute>
               }
             />

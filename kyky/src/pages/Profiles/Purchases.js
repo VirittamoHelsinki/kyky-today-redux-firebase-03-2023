@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import OrderStatus from '../../components/BuyersProfile/OrderStatus';
-import '../../styles/BuyersProfile.scss';
+import OrderStatus from '../../components/Profiles/OrderStatus';
+import '../../styles/Profiles.scss';
 
 const Purchases = ({ order }) => {
   const setSelectedWindow = useOutletContext();
@@ -46,7 +46,7 @@ const Purchases = ({ order }) => {
   const cancelledOrders = [];
   function tableHeader() {
     return (
-      <thead className="buyers-profile-table-header">
+      <thead className="profiles-table-header">
         <tr>
           <th className="job-header">Palvelu</th>
           <th className="seller-header">Myyjä</th>
@@ -60,7 +60,7 @@ const Purchases = ({ order }) => {
 
   function emptyTable() {
     return (
-      <tr className="buyers-profile-table-body-row">
+      <tr className="profiles-table-body-row">
         <td className="job-div">Ei näytettäviä tilauksia...</td>
         <td className="seller-div"></td>
         <td className="sum-div"></td>
@@ -71,9 +71,9 @@ const Purchases = ({ order }) => {
   }
 
   return (
-    <div className="buyers-profile--content-orders-container">
+    <div className="profiles--content-orders-container">
       <h4 className="title">Odottavat tilaukset</h4>
-      <table className="buyers-profile-table" cellPadding="0" cellSpacing="0">
+      <table className="profiles-table" cellPadding="0" cellSpacing="0">
         {tableHeader()}
         <tbody className="buyers-profile-table-body">
           {pendingOrders.length > 0
@@ -82,7 +82,7 @@ const Purchases = ({ order }) => {
         </tbody>
       </table>
       <h4 className="title">Toimitetut tilaukset</h4>
-      <table className="buyers-profile-table" cellPadding="0" cellSpacing="0">
+      <table className="profiles-table" cellPadding="0" cellSpacing="0">
         {tableHeader()}
         <tbody className="buyers-profile-table-body">
           {deliveredOrders.length > 0
@@ -91,9 +91,9 @@ const Purchases = ({ order }) => {
         </tbody>
       </table>
       <h4 className="title">Peruutetut tilaukset</h4>
-      <table className="buyers-profile-table" cellPadding="0" cellSpacing="0">
+      <table className="profiles-table" cellPadding="0" cellSpacing="0">
         {tableHeader()}
-        <tbody className="buyers-profile-table-body">
+        <tbody className="profiles-table-body">
           {cancelledOrders.length > 0
             ? cancelledOrders.map((order, index) => <OrderStatus order={order} key={index} />)
             : emptyTable()}
