@@ -8,39 +8,42 @@ const initialChat = {
 
 /* by calling the addDoc() method Firestore auto-generates an ID for the chat log, also generates 
 references for both chatters with a chat log id, name and photo and store it to their users/chats path */
-export const createContact = createAsyncThunk('contact/createContact', async (payload) => {
-  try {
-    const docSnap = await getDoc(doc(db, 'users', payload.myUid, 'chats', payload.contactUid));
-    if (docSnap.exists()) {
-      return docSnap.data();
-    }
-    const chatRef = await addDoc(collection(db, 'chatlogs'), initialChat);
-    await setDoc(doc(db, 'users', payload.myUid, 'chats', payload.contactUid), {
-      chatId: chatRef.id,
-      name: payload.contactName,
-      photoURL: payload.contactPhotoURL
-    });
+export const createContact = createAsyncThunk(
+  'contact/createContact',
+  async ({ myUid, myName, myPhotoURL, contactUid, contactName, contactPhotoURL }) => {
+    try {
+      const docSnap = await getDoc(doc(db, 'users', myUid, 'chats', contactUid));
+      if (docSnap.exists()) {
+        return docSnap.data();
+      }
+      const chatRef = await addDoc(collection(db, 'chatlogs'), initialChat);
+      await setDoc(doc(db, 'users', myUid, 'chats', contactUid), {
+        chatId: chatRef.id,
+        name: contactName,
+        photoURL: contactPhotoURL
+      });
 
-    await setDoc(doc(db, 'users', payload.contactUid, 'chats', payload.myUid), {
-      chatId: chatRef.id,
-      name: payload.myName,
-      photoURL: payload.myPhotoURL
-    });
-    return {
-      chatId: chatRef.id,
-      name: payload.contactName,
-      photoURL: payload.contactPhotoURL
-    };
-  } catch (error) {
-    return error;
+      await setDoc(doc(db, 'users', contactUid, 'chats', myUid), {
+        chatId: chatRef.id,
+        name: myName,
+        photoURL: myPhotoURL
+      });
+      return {
+        chatId: chatRef.id,
+        name: contactName,
+        photoURL: contactPhotoURL
+      };
+    } catch (error) {
+      return error;
+    }
   }
-});
+);
 
 /* fetch contacts from firestore, push to the list and return the list */
-export const fetchContacts = createAsyncThunk('contact/fetchContacts', async (payload) => {
+export const fetchContacts = createAsyncThunk('contact/fetchContacts', async (uid) => {
   try {
     const documents = [];
-    const snap = await getDocs(collection(db, 'users', payload, 'chats'));
+    const snap = await getDocs(collection(db, 'users', uid, 'chats'));
     snap.docs.map((doc) => {
       documents.push(doc.data());
     });

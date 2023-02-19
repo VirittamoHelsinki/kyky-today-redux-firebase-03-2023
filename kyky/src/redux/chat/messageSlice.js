@@ -3,22 +3,22 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
 /* add messages to the firestore with the spread operator */
-export const addMessage = createAsyncThunk('message/addMessage', async (payload) => {
+export const addMessage = createAsyncThunk('message/addMessage', async ({ chatId, data }) => {
   try {
-    await setDoc(doc(db, `chatlogs/${payload.chatId}`), {
-      ...payload.data
+    await setDoc(doc(db, 'chatlogs', chatId), {
+      ...data
     });
-    return payload.data;
+    return data;
   } catch (error) {
     return error;
   }
 });
 
 /* loops message objects from the data() object to the list until data()[i] is undefined */
-export const fetchMessages = createAsyncThunk('message/fetchMessages', async (payload) => {
+export const fetchMessages = createAsyncThunk('message/fetchMessages', async (chatId) => {
   try {
     const messages = [];
-    const docSnap = await getDoc(doc(db, `chatlogs/${payload}`));
+    const docSnap = await getDoc(doc(db, 'chatlogs', chatId));
     let i = 0;
     while (docSnap.data()[i]) {
       messages.push(docSnap.data()[i]);

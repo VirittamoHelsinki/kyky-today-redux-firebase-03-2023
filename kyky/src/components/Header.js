@@ -12,16 +12,20 @@ import { resetFileUpload } from '../redux/storage/fileUploadSlice';
 import { resetContact } from '../redux/chat/contactSlice';
 import { resetMessage } from '../redux/chat/messageSlice';
 import { resetSlug } from '../redux/auth/slugSlice';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../../firebase/firebase';
 import ProfileDropdown from './ProfileDropdown';
 import SearchBar from './SearchBar';
 import '../styles/header.scss';
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
 
-const Header = ({ navlinks }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+const Header = () => {
   const [profileOpen, setProfileOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [unreadNotifications, setUnreadNotifications] = useState([]);
 
-  const menuRef = useRef();
+  const notificationRef = useRef();
   const noImgRef = useRef();
   const imgRef = useRef();
 
@@ -30,21 +34,33 @@ const Header = ({ navlinks }) => {
   const navigate = useNavigate();
 
   const _user = useSelector((state) => state.user);
+  const _notifications = useSelector((state) => state.notification.notifications);
 
   useEffect(() => {
     const closeDropdown = (e) => {
       if (
-        e.target !== menuRef.current &&
+        e.target !== notificationRef.current &&
         e.target !== noImgRef.current &&
         e.target !== imgRef.current
       ) {
-        setMenuOpen(false);
         setProfileOpen(false);
+        setNotificationOpen(false);
       }
     };
     document.body.addEventListener('click', closeDropdown);
     return () => document.body.removeEventListener('click', closeDropdown);
   }, []);
+
+  useEffect(() => {
+    if (Array.isArray(_notifications)) {
+      setNotifications(_notifications);
+    }
+  }, [_notifications]);
+
+  useEffect(() => {
+    const unreads = notifications.filter((notification) => !notification.read);
+    setUnreadNotifications(unreads);
+  }, [notifications]);
 
   const onLogoutClick = () => {
     dispatch(logOut());
@@ -60,15 +76,31 @@ const Header = ({ navlinks }) => {
     navigate('/');
   };
 
-  const menuToggle = () => {
-    setProfileOpen(false);
-    setMenuOpen(!menuOpen);
-  };
-
   const profileToggle = () => {
-    setMenuOpen(false);
+    setNotificationOpen(false);
     setProfileOpen(!profileOpen);
   };
+
+  const notificationToggle = () => {
+    setProfileOpen(false);
+    setNotificationOpen(!notificationOpen);
+  };
+
+  const notificationClick = (to) => {
+    navigate(`${url}`);
+  };
+
+  useEffect(() => {
+    onSnapshot(doc(db, 'users', _user.uid, 'notifications'), (doc) => {
+      let notification_list = [];
+      let i = 0;
+      while (doc.data()[i]) {
+        notification_list.push(doc.data()[i]);
+        i++;
+      }
+      setNotifications(notification_list);
+    });
+  }, []);
 
   return (
     <div id="navheader">
@@ -83,8 +115,16 @@ const Header = ({ navlinks }) => {
             <li>
               <SearchBar />
             </li>
-            <li>
-              <span className="material-icons-outlined">notifications</span>
+            <li className="dropdown" onClick={notificationToggle}>
+              <div className="icon-and-red-circle">
+                <span className="material-icons-outlined" ref={notificationRef}>
+                  notifications
+                </span>
+                {unreadNotifications.length > 0 && (
+                  <span className="red-circle">{unreadNotifications.length}</span>
+                )}
+              </div>
+              {notificationOpen && <div className="dropdown-content"></div>}
             </li>
             <li>
               <Link to="calendar">
