@@ -5,7 +5,6 @@ import { fetchContacts } from '../../redux/chat/contactSlice';
 import { addMessage, fetchMessages } from '../../redux/chat/messageSlice';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
-import PropTypes from 'prop-types';
 import '../../styles/Profiles.scss';
 
 const Messages = () => {
@@ -162,12 +161,6 @@ const Messages = () => {
       )}
     </div>
   );
-};
-
-Messages.propTypes = {
-  user: PropTypes.shape({
-    uid: PropTypes.string.isRequired
-  }).isRequired
 };
 
 export default Messages;

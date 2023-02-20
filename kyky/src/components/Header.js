@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../redux/auth/userSlice';
+import { updateNotifications } from '../redux/notifications/notificationSlice';
 import { resetCalendarSchedule } from '../redux/sellers/calendarScheduleSlice';
 import { resetCalendarSettings } from '../redux/sellers/calendarSettingsSlice';
 import { resetJobCreationForm } from '../redux/sellers/jobFormSlice';
@@ -12,8 +13,9 @@ import { resetFileUpload } from '../redux/storage/fileUploadSlice';
 import { resetContact } from '../redux/chat/contactSlice';
 import { resetMessage } from '../redux/chat/messageSlice';
 import { resetSlug } from '../redux/auth/slugSlice';
+import { resetNotifications } from '../redux/notifications/notificationSlice';
 import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '../../firebase/firebase';
+import { db } from '../firebase/firebase';
 import ProfileDropdown from './ProfileDropdown';
 import SearchBar from './SearchBar';
 import '../styles/header.scss';
@@ -73,6 +75,7 @@ const Header = () => {
     dispatch(resetContact());
     dispatch(resetMessage());
     dispatch(resetSlug());
+    dispatch(resetNotifications());
     navigate('/');
   };
 
@@ -87,20 +90,8 @@ const Header = () => {
   };
 
   const notificationClick = (to) => {
-    navigate(`${url}`);
+    navigate(`${to}`);
   };
-
-  useEffect(() => {
-    onSnapshot(doc(db, 'users', _user.uid, 'notifications'), (doc) => {
-      let notification_list = [];
-      let i = 0;
-      while (doc.data()[i]) {
-        notification_list.push(doc.data()[i]);
-        i++;
-      }
-      setNotifications(notification_list);
-    });
-  }, []);
 
   return (
     <div id="navheader">
@@ -115,7 +106,7 @@ const Header = () => {
             <li>
               <SearchBar />
             </li>
-            <li className="dropdown" onClick={notificationToggle}>
+            <li onClick={notificationToggle}>
               <div className="icon-and-red-circle">
                 <span className="material-icons-outlined" ref={notificationRef}>
                   notifications
@@ -124,7 +115,49 @@ const Header = () => {
                   <span className="red-circle">{unreadNotifications.length}</span>
                 )}
               </div>
-              {notificationOpen && <div className="dropdown-content"></div>}
+              <div className="dropdown">
+                {notificationOpen && (
+                  <div className="dropdown-content">
+                    {notifications.map((notification, index) => (
+                      <div
+                        key={index}
+                        className={`notification-item ${notification.read ? '' : 'unread'}`}>
+                        <p
+                          onClick={() => {
+                            let notifications_copy = [...notifications];
+                            notifications_copy.splice(index, 1);
+                            let new_notification = { ...notification, read: true };
+                            let new_notifications = [...notifications_copy, new_notification];
+                            dispatch(
+                              updateNotifications({
+                                uid: _user.uid,
+                                notifications: new_notifications
+                              })
+                            );
+                            notificationClick(notification.to);
+                          }}>
+                          {notification.text}
+                        </p>
+                        <span
+                          id="delete-notification"
+                          className="material-icons-outlined"
+                          onClick={() => {
+                            let new_notifications = [...notifications];
+                            new_notifications.splice(index, 1);
+                            dispatch(
+                              updateNotifications({
+                                uid: _user.uid,
+                                notifications: new_notifications
+                              })
+                            );
+                          }}>
+                          delete
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </li>
             <li>
               <Link to="calendar">
@@ -134,7 +167,7 @@ const Header = () => {
                 </div>
               </Link>
             </li>
-            <li className="dropdown" onClick={profileToggle}>
+            <li onClick={profileToggle}>
               <img
                 src={_user.photoURL}
                 className="profile-img"
@@ -142,11 +175,13 @@ const Header = () => {
                 referrerPolicy="no-referrer"
                 alt=""
               />
-              {profileOpen && (
-                <div className="dropdown-content">
-                  <ProfileDropdown user={_user} onLogoutClick={onLogoutClick} />
-                </div>
-              )}
+              <div className="dropdown">
+                {profileOpen && (
+                  <div className="dropdown-content">
+                    <ProfileDropdown user={_user} onLogoutClick={onLogoutClick} />
+                  </div>
+                )}
+              </div>
             </li>
           </ul>
         ) : (

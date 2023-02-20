@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
 import { changeBookingStatus } from '../../redux/buyers/serviceBookingSlice';
 import { createContact } from '../../redux/chat/contactSlice';
+import { addNotification } from '../../redux/notifications/notificationSlice';
 import { useOutletContext } from 'react-router-dom';
 import Button from '../../components/Button';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -243,6 +244,16 @@ export default function JobCalendar() {
         contactPhotoURL: photoURL
       })
     );
+    dispatch(
+      addNotification({
+        uid: uid,
+        notification: {
+          text: _user.displayName + ' send you a message',
+          to: '/buyer/messages',
+          read: false
+        }
+      })
+    );
   }
 
   return (
@@ -462,58 +473,43 @@ export default function JobCalendar() {
                                 <i className="material-icons-outlined">mail</i>
                                 {activity.buyerMail}
                               </p>
+                              {!activity.confirmed && (
+                                <p className="pending-paragraph">
+                                  <span className="pending-span">
+                                    <i className="material-icons-outlined" style={{ color: 'red' }}>
+                                      error
+                                    </i>
+                                    <span>confirmation pending</span>
+                                  </span>
+                                  <i
+                                    id="pending-pointer"
+                                    className="material-icons-outlined"
+                                    onClick={() => {
+                                      dispatch(
+                                        changeBookingStatus({
+                                          bookingId: activity.bookingId,
+                                          status: true
+                                        })
+                                      );
+                                      dispatch(
+                                        addNotification({
+                                          uid: activity.buyerUid,
+                                          notification: {
+                                            text: _user.displayName + ' confirmed your booking',
+                                            to: '/buyer/purchases',
+                                            read: false
+                                          }
+                                        })
+                                      );
+                                    }}>
+                                    keyboard_arrow_right
+                                  </i>
+                                </p>
+                              )}
                             </div>
-                            {showConfirmModal && (
-                              <div className="confirm-modal transparent-background">
-                                <div className="confirm-modal">
-                                  <div>Confirm booking?</div>
-                                  <div className="confirm-modal-buttons-container">
-                                    <Button
-                                      className="confirm-modal-button"
-                                      onClick={() => {
-                                        dispatch(
-                                          changeBookingStatus({
-                                            bookingId: activity.bookingId,
-                                            status: true
-                                          })
-                                        );
-                                        setShowConfirmModal(false);
-                                      }}>
-                                      Confirm
-                                    </Button>
-                                    <Button
-                                      className="confirm-modal-button"
-                                      onClick={() => setShowConfirmModal(false)}>
-                                      Cancel
-                                    </Button>
-                                  </div>
-                                </div>
-                              </div>
-                            )}
                           </div>
                         );
                       })}
-                      {pending.length > 0 && (
-                        <div className="activityInfo">
-                          {' '}
-                          <p className="pending-paragraph">
-                            <span className="pending-span">
-                              <i className="material-icons-outlined" style={{ color: 'red' }}>
-                                error
-                              </i>
-                              <span>{pending.length} pending confirmation</span>
-                            </span>
-                            <i
-                              id="pending-pointer"
-                              className="material-icons-outlined"
-                              onClick={() => {
-                                setShowConfirmModal(true);
-                              }}>
-                              keyboard_arrow_right
-                            </i>
-                          </p>
-                        </div>
-                      )}
                     </div>
                   </div>
                 );
