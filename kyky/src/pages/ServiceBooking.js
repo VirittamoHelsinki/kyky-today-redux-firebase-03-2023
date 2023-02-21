@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBooking } from '../redux/buyers/serviceBookingSlice';
 import { createContact } from '../redux/chat/contactSlice';
+import { addNotification } from '../redux/notifications/notificationSlice';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Calendar from '../components/calendar/Calendar';
@@ -163,6 +164,16 @@ function ServiceBooking() {
         contactUid: uid,
         contactName: name,
         contactPhotoURL: photoURL
+      })
+    );
+    dispatch(
+      addNotification({
+        uid: uid,
+        notification: {
+          text: user.displayName + ' send you a message',
+          to: '/seller/messages',
+          read: false
+        }
       })
     );
   }

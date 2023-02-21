@@ -5,6 +5,7 @@ import { getUserId } from '../redux/auth/slugSlice';
 import { getProfileForm } from '../redux/sellers/profileFormSlice';
 import { fetchUserProfileJobs } from '../redux/sellers/jobFormSlice';
 import { createContact } from '../redux/chat/contactSlice';
+import { addNotification } from '../redux/notifications/notificationSlice';
 import Card from '../components/Card';
 import starIcon from '../image/star.svg';
 import '../styles/UserProfile.scss';
@@ -90,6 +91,16 @@ const UserProfile = () => {
         contactPhotoURL: _uid.photoURL
       })
     );
+    dispatch(
+      addNotification({
+        uid: _uid.uid,
+        notification: {
+          text: user.displayName + ' send you a message',
+          to: '/seller/messages',
+          read: false
+        }
+      })
+    );
   }
 
   return (
@@ -167,8 +178,10 @@ const UserProfile = () => {
               <p>Taidot</p>
             </div>
             <div className="skills-content">
-              {skills.map((skill) => (
-                <div className="skill">{skill}</div>
+              {skills.map((skill, index) => (
+                <div className="skill" key={index}>
+                  {skill}
+                </div>
               ))}
             </div>
           </div>

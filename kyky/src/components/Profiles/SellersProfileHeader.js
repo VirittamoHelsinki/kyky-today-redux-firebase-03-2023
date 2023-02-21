@@ -1,22 +1,20 @@
-import { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../../styles/Profiles.scss';
 
 export default function SellersProfileHeader({ selectedWindow, setSelectedWindow }) {
   const navigate = new useNavigate();
 
-  const _user = useSelector((state) => state.user);
-
   const Tabs = [
+    { to: '/seller/dashboard', label: 'Dashboard', id: 'dashboard' },
+    { to: '/seller/settings', label: 'Settings', id: 'settings' },
     { to: '/seller/own-jobs', label: 'Own Jobs', id: 'own-jobs' },
+    { to: '/seller/orders', label: 'Orders', id: 'orders' },
     { to: '/seller/messages', label: 'Messages', id: 'messages' },
     { to: '/seller/ratings', label: 'Ratings', id: 'ratings' },
     { to: '/seller/earnings', label: 'Earnings', id: 'earnings' },
-    { to: '/seller/purchases', label: 'Purchases', id: 'purchases' },
-    { to: '/seller/favourite-jobs', label: 'Favourite jobs', id: 'favourite-jobs' },
-    { to: '/seller/settings', label: 'Settings', id: 'settings' }
+    { to: '/seller/purchases', label: 'Purchases', id: 'purchases' }
   ];
 
   function changeWindow(to, id) {

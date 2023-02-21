@@ -59,9 +59,7 @@ export default function FileUpload({
   }, [lang]);
 
   useEffect(() => {
-    console.log(files);
     if (files.length > 0) {
-      console.log('excuse me WTF');
       fileInput.current.value = '';
     }
   }, [files]);

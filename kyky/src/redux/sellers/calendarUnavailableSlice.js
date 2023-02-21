@@ -47,7 +47,6 @@ export const calendarUnavailableSlice = createSlice({
         });
       })
       .addCase(fetchUnavailabilities.fulfilled, (state, action) => {
-        console.log(action.payload);
         return (state = {
           ...state,
           unavailabilities: action.payload

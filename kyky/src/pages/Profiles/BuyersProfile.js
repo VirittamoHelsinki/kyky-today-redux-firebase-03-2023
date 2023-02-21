@@ -10,6 +10,9 @@ const BuyersProfile = () => {
     <div className="profiles--container">
       <BuyersProfileHeader selectedWindow={selectedWindow} setSelectedWindow={setSelectedWindow} />
       <div className="profiles--content">
+        <div className="profiles--content-header">
+          <p>{selectedWindow}</p>
+        </div>
         <Outlet context={setSelectedWindow} />
       </div>
     </div>

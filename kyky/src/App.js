@@ -43,13 +43,14 @@ import JobCreation from './pages/Calendar/JobCreation';
 /* Seller & buyer profiles */
 import BuyersProfile from './pages/Profiles/BuyersProfile';
 import SellersProfile from './pages/Profiles/SellersProfile';
+import Dashboard from './pages/Profiles/Dashboard';
 import Purchases from './pages/Profiles/Purchases';
 import Messages from './pages/Profiles/Messages';
 import Ratings from './pages/Profiles/Ratings';
 import Settings from './pages/Profiles/Settings';
 import OwnJobs from './pages/Profiles/OwnJobs';
+import Orders from './pages/Profiles/Orders';
 import Earnings from './pages/Profiles/Earnings';
-import FavouriteJobs from './pages/Profiles/FavouriteJobs';
 
 /* Buyer's Rating*/
 import BuyersRating from './pages/BuyersRating';
@@ -222,10 +223,34 @@ const App = () => {
               </UserRoute>
             }>
             <Route
+              path="dashboard"
+              element={
+                <UserRoute>
+                  <Dashboard />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="settings"
+              element={
+                <UserRoute>
+                  <Settings />
+                </UserRoute>
+              }
+            />
+            <Route
               path="own-jobs"
               element={
                 <UserRoute>
                   <OwnJobs />
+                </UserRoute>
+              }
+            />
+            <Route
+              path="orders"
+              element={
+                <UserRoute>
+                  <Orders />
                 </UserRoute>
               }
             />
@@ -258,22 +283,6 @@ const App = () => {
               element={
                 <UserRoute>
                   <Purchases />
-                </UserRoute>
-              }
-            />
-            <Route
-              path="favourite-jobs"
-              element={
-                <UserRoute>
-                  <FavouriteJobs />
-                </UserRoute>
-              }
-            />
-            <Route
-              path="settings"
-              element={
-                <UserRoute>
-                  <Settings />
                 </UserRoute>
               }
             />

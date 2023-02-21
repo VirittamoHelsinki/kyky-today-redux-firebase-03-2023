@@ -93,6 +93,20 @@ const Header = () => {
     navigate(`${to}`);
   };
 
+  useEffect(() => {
+    if (_user.uid) {
+      onSnapshot(doc(db, 'users', _user.uid, 'data', 'notifications'), (doc) => {
+        let _notifications = [];
+        let i = 0;
+        while (doc.data()[i]) {
+          _notifications.push(doc.data()[i]);
+          i++;
+        }
+        setNotifications(_notifications);
+      });
+    }
+  }, []);
+
   return (
     <div id="navheader">
       <div className="nav-title">

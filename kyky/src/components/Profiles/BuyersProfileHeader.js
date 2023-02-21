@@ -1,13 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../../styles/Profiles.scss';
 
 export default function BuyersProfileHeader({ selectedWindow, setSelectedWindow }) {
   const navigate = new useNavigate();
-
-  const _user = useSelector((state) => state.user);
 
   const Tabs = [
     { to: '/buyer/purchases', label: 'Purchases', id: 'purchases' },
@@ -23,13 +20,6 @@ export default function BuyersProfileHeader({ selectedWindow, setSelectedWindow 
 
   return (
     <div className="profiles--header-content">
-      <div className="profiles--header">
-        <img src={_user.photoURL} referrerPolicy="no-referrer" className="userImage" alt="" />
-        <div>
-          <h3 className="username">{_user.displayName}</h3>
-        </div>
-      </div>
-
       <div className="profiles--content-wrapper">
         <div className="profiles--tabs">
           {Tabs.map(({ to, label, id }) => (
