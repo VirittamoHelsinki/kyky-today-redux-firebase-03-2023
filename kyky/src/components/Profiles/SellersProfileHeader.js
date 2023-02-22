@@ -8,13 +8,13 @@ export default function SellersProfileHeader({ selectedWindow, setSelectedWindow
 
   const Tabs = [
     { to: '/seller/dashboard', label: 'Dashboard', id: 'dashboard' },
-    { to: '/seller/settings', label: 'Settings', id: 'settings' },
-    { to: '/seller/own-jobs', label: 'Own Jobs', id: 'own-jobs' },
     { to: '/seller/orders', label: 'Orders', id: 'orders' },
+    { to: '/seller/own-jobs', label: 'Own Jobs', id: 'own-jobs' },
     { to: '/seller/messages', label: 'Messages', id: 'messages' },
-    { to: '/seller/ratings', label: 'Ratings', id: 'ratings' },
     { to: '/seller/earnings', label: 'Earnings', id: 'earnings' },
-    { to: '/seller/purchases', label: 'Purchases', id: 'purchases' }
+    { to: '/seller/ratings', label: 'Ratings', id: 'ratings' },
+    { to: '/seller/purchases', label: 'Purchases', id: 'purchases' },
+    { to: '/seller/settings', label: 'Settings', id: 'settings' }
   ];
 
   function changeWindow(to, id) {

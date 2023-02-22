@@ -39,7 +39,7 @@ const OwnJobs = () => {
           <p>Active jobs</p>
         </div>
         <Link to="/calendar/job-creation">
-          <button className="add-job-button">Add a job</button>
+          <button className="add-job-button">Create a job</button>
         </Link>
       </div>
       <div className="own-job-items">
