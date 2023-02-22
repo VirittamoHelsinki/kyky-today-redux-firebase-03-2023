@@ -15,7 +15,7 @@ const UserProfile = () => {
   const [profileTitle, setProfileTitle] = useState('');
   const [profileRating, setProfileRating] = useState(5);
   const [onlineStatus, setOnlineStatus] = useState('Offline');
-  const [lastSeen, setLastSeen] = useState(new Date('2023-02-03'));
+  const [lastseen, setLastseen] = useState(new Date('2023-02-03'));
   const [registered, setRegistered] = useState(new Date('2023-01-12'));
   const [userType, setUserType] = useState('Seller');
   const [location, setLocation] = useState('');
@@ -63,6 +63,8 @@ const UserProfile = () => {
       setLocation(_profile.s7City + ', ' + _profile.s7Country.label);
       setDescription(_profile.s4WorkInput);
       setSkills(_profile.s1Skills);
+      setLastseen(new Date(_profile.lastseen.seconds * 1000));
+      setRegistered(new Date(_profile.created.seconds * 1000));
     }
   }, [_profile]);
 
@@ -140,11 +142,11 @@ const UserProfile = () => {
             </div>
             <div className="user-data-item">
               <p className="user-data-key">Viimeksi online</p>
-              <p className="user-data-value">{lastSeen.toDateString()}</p>
+              <p className="user-data-value">{lastseen.toLocaleDateString('fi-FI')}</p>
             </div>
             <div className="user-data-item">
               <p className="user-data-key">Rekisteröitynyt</p>
-              <p className="user-data-value">{registered.toDateString()}</p>
+              <p className="user-data-value">{registered.toLocaleDateString('fi-FI')}</p>
             </div>
             <div className="user-data-item">
               <p className="user-data-key">User type</p>

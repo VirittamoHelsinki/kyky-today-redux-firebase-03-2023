@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createBooking } from '../redux/buyers/serviceBookingSlice';
 import { createContact } from '../redux/chat/contactSlice';
 import { addNotification } from '../redux/notifications/notificationSlice';
+import { addPageview } from '../redux/sellers/jobFormSlice';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Calendar from '../components/calendar/Calendar';
@@ -115,6 +116,10 @@ function ServiceBooking() {
   useEffect(() => {
     selectedCalendarDay(date);
   }, [date]);
+
+  useEffect(() => {
+    dispatch(addPageview(location.state.id));
+  }, []);
 
   function selectedCalendarDay(date) {
     setBooking({ ...booking, selectedDays: [], selectedDates: [date] });

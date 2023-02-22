@@ -1,5 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { doc, setDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import {
+  doc,
+  setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+  increment
+} from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
 /* makes reference to get a auto-generated id, inserts the doc 
@@ -9,7 +18,7 @@ export const createJobForm = createAsyncThunk(
   async (payload) => {
     try {
       const formRef = doc(collection(db, `jobs`));
-      await setDoc(formRef, payload);
+      await setDoc(formRef, { ...payload, created: new Date() });
       return payload;
     } catch (error) {
       return error;
@@ -83,6 +92,16 @@ export const fetchCategoryJobs = createAsyncThunk(
     }
   }
 );
+
+export const addPageview = createAsyncThunk('jobcreation-forms/addPageview', async (jobId) => {
+  try {
+    await updateDoc(doc(db, 'jobs', jobId), {
+      pageviews: increment(1)
+    });
+  } catch (error) {
+    return error;
+  }
+});
 
 const initialState = [];
 

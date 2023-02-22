@@ -7,6 +7,7 @@ import { fetchBookingsByQuery } from './redux/buyers/serviceBookingSlice';
 import { fetchJobsByQuery } from './redux/sellers/jobFormSlice';
 import { fetchCalendarSettings } from './redux/sellers/calendarSettingsSlice';
 import { fetchNotifications } from './redux/notifications/notificationSlice';
+import { updateLastseen } from './redux/auth/userSlice';
 
 /* Language */
 import Language from './language';
@@ -90,6 +91,7 @@ const App = () => {
       dispatch(fetchBookingsByQuery(_user.uid));
       dispatch(fetchCalendarSettings(_user.uid));
       dispatch(fetchNotifications(_user.uid));
+      dispatch(updateLastseen(_user.uid));
     }
   }, [_user]);
 

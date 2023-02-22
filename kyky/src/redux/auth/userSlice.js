@@ -10,7 +10,7 @@ import {
   signInWithPopup,
   signOut
 } from 'firebase/auth';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db, auth } from '../../firebase/firebase';
 
 /* create an email hash for the slug, f.ex "john-smith-1547289902" */
@@ -23,6 +23,8 @@ export const signUpEmailAndPassword = createAsyncThunk(
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
       const slug = username.replace(/\W+/g, '-').toLowerCase() + '-' + hashCode(email);
+      let created,
+        lastseen = serverTimestamp();
       await setDoc(doc(db, 'users', user.uid, 'data', 'userdata'), {
         uid: user.uid,
         username: username,
@@ -30,7 +32,9 @@ export const signUpEmailAndPassword = createAsyncThunk(
         company: company,
         subscribe: subscribe,
         authProvider: 'local',
-        slug: slug
+        slug: slug,
+        created: created,
+        lastseen: lastseen
       });
       await updateProfile(user, {
         photoURL: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp',
@@ -43,7 +47,7 @@ export const signUpEmailAndPassword = createAsyncThunk(
       });
       // await sendEmailVerification(auth.currentUser);
       // alert('A verification link is sent to your email!');
-      return user;
+      return { ...user, slug: slug, created: created, lastseen: lastseen };
     } catch (error) {
       return error;
     }
@@ -65,7 +69,15 @@ export const signInEmailAndPassword = createAsyncThunk(
       //   }
       // }
       const docSnap = await getDoc(doc(db, 'users', res.user.uid, 'data', 'userdata'));
-      return { ...res.user, slug: docSnap.data().slug };
+      await updateDoc(doc(db, 'users', res.user.uid, 'data', 'userdata'), {
+        lastseen: serverTimestamp()
+      });
+      return {
+        ...res.user,
+        slug: docSnap.data().slug,
+        created: docSnap.data().created,
+        lastseen: docSnap.data().lastseen
+      };
     } catch (error) {
       return error;
     }
@@ -94,7 +106,15 @@ export const signInGoogleAuthProvider = createAsyncThunk(
       /* if user has logged in before... */
       const docSnap = await getDoc(doc(db, 'users', user.uid, 'data', 'userdata'));
       if (docSnap.exists()) {
-        return { ...res.user, slug: docSnap.data().slug };
+        await updateDoc(doc(db, 'users', user.uid, 'data', 'userdata'), {
+          lastseen: serverTimestamp()
+        });
+        return {
+          ...user,
+          slug: docSnap.data().slug,
+          created: docSnap.data().created,
+          lastseen: docSnap.data().lastseen
+        };
       }
       /* ...and if not has logged in */
       const slug = user.displayName.replace(/\W+/g, '-').toLowerCase() + '-' + hashCode(user.email);
@@ -103,7 +123,9 @@ export const signInGoogleAuthProvider = createAsyncThunk(
         username: user.displayName,
         email: user.email,
         authProvider: 'Google',
-        slug: slug
+        slug: slug,
+        created: serverTimestamp(),
+        lastseen: serverTimestamp()
       });
       await setDoc(doc(db, 'slugs', slug), {
         uid: user.uid,
@@ -150,6 +172,14 @@ export const logOut = createAsyncThunk('user/logOut', async () => {
   } catch (error) {
     return error;
   }
+});
+
+export const updateLastseen = createAsyncThunk('user/updateLastseen', async (uid) => {
+  try {
+    await updateDoc(doc(db, 'users', uid, 'data', 'userdata'), {
+      lastseen: serverTimestamp()
+    });
+  } catch (error) {}
 });
 
 const initialState = {};

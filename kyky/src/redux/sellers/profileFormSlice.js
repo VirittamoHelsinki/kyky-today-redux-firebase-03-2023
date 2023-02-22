@@ -17,9 +17,14 @@ export const addProfileForm = createAsyncThunk('profileForms/addProfileForm', as
 
 export const getProfileForm = createAsyncThunk('profileForms/getProfileForm', async (uid) => {
   try {
-    const docSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
-    if (docSnap.exists()) {
-      return docSnap.data();
+    const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
+    const profileSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
+    if (profileSnap.exists()) {
+      return {
+        ...profileSnap.data(),
+        created: userSnap.data().created,
+        lastseen: userSnap.data().lastseen
+      };
     } else {
       return null;
     }

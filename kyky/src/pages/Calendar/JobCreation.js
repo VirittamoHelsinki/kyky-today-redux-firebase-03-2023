@@ -63,7 +63,8 @@ export default function JobCreation() {
         unit: unit,
         urls: urls,
         photoURL: _user.photoURL,
-        slug: _user.slug
+        slug: _user.slug,
+        pageviews: 0
       })
     );
     navigate('/calendar');
