@@ -4,18 +4,21 @@ import { db } from '../../firebase/firebase';
 
 /* makes reference to get a auto-generated id, inserts the doc 
 to Firestore using the new id, returns the added object */
-export const addProfileForm = createAsyncThunk('profileForms/addProfileForm', async (payload) => {
-  try {
-    await setDoc(doc(db, 'users', payload.uid, 'data', 'profile'), {
-      ...payload.data
-    });
-    return 'profile added ' + new Date();
-  } catch (error) {
-    return error;
+export const addProfileForm = createAsyncThunk(
+  'profileForms/addProfileForm',
+  async ({ uid, data }) => {
+    try {
+      await setDoc(doc(db, 'users', uid, 'data', 'profile'), {
+        ...data
+      });
+      return data;
+    } catch (error) {
+      return error;
+    }
   }
-});
+);
 
-export const getProfileForm = createAsyncThunk('profileForms/getProfileForm', async (uid) => {
+export const getUserProfile = createAsyncThunk('profileForms/getUserProfile', async (uid) => {
   try {
     const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
     const profileSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
@@ -32,6 +35,32 @@ export const getProfileForm = createAsyncThunk('profileForms/getProfileForm', as
     return error;
   }
 });
+
+export const getDashboardProfile = createAsyncThunk(
+  'profileForms/getDashboardProfile',
+  async (uid) => {
+    try {
+      const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
+      const profileSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
+      if (profileSnap.exists()) {
+        return {
+          ...profileSnap.data(),
+          name: userSnap.data().username,
+          created: userSnap.data().created
+        };
+      } else {
+        return {
+          name: userSnap.data().username,
+          s7Url: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp',
+          s1Title: '',
+          created: userSnap.data().created
+        };
+      }
+    } catch (error) {
+      return error;
+    }
+  }
+);
 
 const initialState = [];
 
@@ -50,19 +79,27 @@ export const profileFormSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    /* clear state when finished, return an info about succesfull adding with the timestamp */
     builder
       .addCase(addProfileForm.fulfilled, (state, action) => {
         state = initialState;
         return (state = {
           ...state,
-          status: action.payload
+          dashboardProfile: {
+            ...state.dashboardProfile,
+            ...action.payload
+          }
         });
       })
-      .addCase(getProfileForm.fulfilled, (state, action) => {
+      .addCase(getUserProfile.fulfilled, (state, action) => {
         return (state = {
           ...state,
           userProfile: { ...action.payload }
+        });
+      })
+      .addCase(getDashboardProfile.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          dashboardProfile: { ...action.payload }
         });
       });
   }

@@ -180,7 +180,8 @@ h4 {
       display: flex;
       flex-direction: row;
       gap: 40px;
-      width: 100%;
+      min-width: 800px;
+      max-width: 1200px;
       height: 800px;
       padding-top: 40px;
 
@@ -541,6 +542,166 @@ h4 {
                   box-shadow: 0 1px 1px 2px #00000024;
                   border-radius: 25px;
                 }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .dashboard-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-width: 800px;
+      max-width: 1100px;
+      gap: 40px;
+      padding-top: 40px;
+
+      .dashboard-upper-content {
+        width: 100%;
+      }
+
+      .dashboard-lower-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 40px;
+
+        .dashboard-user-profile {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          width: 329px;
+          background: white;
+          box-shadow: 0 4px 4px #00000040;
+          border-radius: 12px;
+          padding: 20px;
+
+          .user-profile-user-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 15px;
+            padding-bottom: 40px;
+
+            .user-info-image {
+              display: flex;
+              justify-content: center;
+
+              .rounded-image {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+              }
+            }
+
+            .user-info-name {
+              display: flex;
+              justify-content: center;
+
+              p {
+                font-family: Poppins, sans-serif;
+                font-size: 24px;
+                font-weight: 500;
+                color: #00a088;
+                text-align: center;
+              }
+            }
+
+            .user-info-title {
+              display: flex;
+              justify-content: center;
+
+              p {
+                font-family: Poppins, sans-serif;
+                font-size: 20px;
+                font-weight: 500;
+                color: black;
+                text-align: center;
+              }
+            }
+
+            .user-info-rating {
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              gap: 15px;
+
+              .star-img {
+                width: 20px;
+                height: 20px;
+              }
+            }
+
+            .user-profile-button {
+              display: flex;
+              justify-content: center;
+
+              .profile-button {
+                width: 284px;
+                height: 39.6px;
+                background: #00a088;
+                color: white;
+                font-family: Poppins, sans-serif;
+                font-weight: 600;
+                font-size: 20px;
+                text-align: center;
+                box-shadow: 0 4px 4px #00000040;
+                border-radius: 7px;
+              }
+            }
+          }
+
+          .user-profile-user-data {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 15px;
+            padding-bottom: 40px;
+
+            .user-data-item {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+
+              .user-data-key {
+                font-family: Roboto, sans-serif;
+                font-weight: 400;
+                font-size: 15px;
+              }
+
+              .user-data-value {
+                font-family: Roboto, sans-serif;
+                font-weight: 600;
+                font-size: 15px;
+              }
+            }
+          }
+
+          .user-profile-jobs-tasks {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 15px;
+            padding-bottom: 40px;
+
+            .jobs-tasks-item {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+
+              .jobs-tasks-key {
+                font-family: Roboto, sans-serif;
+                font-weight: 400;
+                font-size: 15px;
+              }
+
+              .jobs-tasks-value {
+                font-family: Roboto, sans-serif;
+                font-weight: 600;
+                font-size: 15px;
+                color: #00a088;
               }
             }
           }

@@ -4,7 +4,7 @@ import SellersProfileHeader from '../../components/Profiles/SellersProfileHeader
 import '../../styles/Profiles.scss';
 
 const SellersProfile = () => {
-  const [selectedWindow, setSelectedWindow] = useState('messages');
+  const [selectedWindow, setSelectedWindow] = useState('dashboard');
 
   return (
     <div className="profiles--container">

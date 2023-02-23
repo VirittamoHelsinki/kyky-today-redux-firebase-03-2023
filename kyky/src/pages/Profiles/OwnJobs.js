@@ -7,7 +7,7 @@ import starBlank from '../../image/star-white.svg';
 const OwnJobs = () => {
   const setSelectedWindow = useOutletContext();
   const [jobs, setJobs] = useState([]);
-  const [profileRating, setProfileRating] = useState(1);
+  const [profileRating, setProfileRating] = useState(4);
 
   const _jobs = useSelector((state) => state.jobs.cards);
 

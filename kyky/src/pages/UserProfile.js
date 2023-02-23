@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserId } from '../redux/auth/slugSlice';
-import { getProfileForm } from '../redux/sellers/profileFormSlice';
+import { getUserProfile } from '../redux/sellers/profileFormSlice';
 import { fetchUserProfileJobs } from '../redux/sellers/jobFormSlice';
 import { createContact } from '../redux/chat/contactSlice';
 import { addNotification } from '../redux/notifications/notificationSlice';
@@ -50,7 +50,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (_uid.uid) {
-      dispatch(getProfileForm(_uid.uid));
+      dispatch(getUserProfile(_uid.uid));
       dispatch(fetchUserProfileJobs(_uid.uid));
     }
   }, [_uid]);
