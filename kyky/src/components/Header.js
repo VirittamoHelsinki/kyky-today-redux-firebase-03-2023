@@ -16,7 +16,7 @@ import { resetSlug } from '../redux/auth/slugSlice';
 import { resetNotifications } from '../redux/notifications/notificationSlice';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
-import ProfileDropdown from './ProfileDropdown';
+import UserDropdown from './UserDropdown';
 import SearchBar from './SearchBar';
 import '../styles/header.scss';
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
@@ -192,7 +192,7 @@ const Header = () => {
               <div className="dropdown">
                 {profileOpen && (
                   <div className="dropdown-content">
-                    <ProfileDropdown user={_user} onLogoutClick={onLogoutClick} />
+                    <UserDropdown logoutClick={onLogoutClick} />
                   </div>
                 )}
               </div>

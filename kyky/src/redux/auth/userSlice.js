@@ -8,6 +8,7 @@ import {
   FacebookAuthProvider,
   OAuthProvider,
   signInWithPopup,
+  updatePassword,
   signOut
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
@@ -32,6 +33,7 @@ export const signUpEmailAndPassword = createAsyncThunk(
         company: company,
         subscribe: subscribe,
         authProvider: 'local',
+        userType: 'buyer',
         slug: slug,
         created: created,
         lastseen: lastseen
@@ -47,18 +49,38 @@ export const signUpEmailAndPassword = createAsyncThunk(
       });
       // await sendEmailVerification(auth.currentUser);
       // alert('A verification link is sent to your email!');
-      return { ...user, slug: slug, created: created, lastseen: lastseen };
+      return {
+        ...user,
+        authProvider: 'local',
+        userType: 'buyer',
+        slug: slug,
+        created: created,
+        lastseen: lastseen
+      };
     } catch (error) {
       return error;
     }
   }
 );
 
+export const changePassword = createAsyncThunk(
+  'user/changePassword',
+  async ({ email, old_password, new_password }) => {
+    try {
+      const res = await signInWithEmailAndPassword(auth, email, old_password);
+      await updatePassword(res.user, new_password);
+      return 'password changed ' + new Date();
+    } catch (error) {
+      return 'password change failed';
+    }
+  }
+);
+
 export const signInEmailAndPassword = createAsyncThunk(
   'user/signInEmailAndPassword',
-  async (payload) => {
+  async ({ email, password }) => {
     try {
-      const res = await signInWithEmailAndPassword(auth, payload.email, payload.password);
+      const res = await signInWithEmailAndPassword(auth, email, password);
       // if (res.user.uid && !res.user.emailVerified) {
       //   const confirm = window.confirm(
       //     'Please verify your email address\n\nPress OK to send a new verification link to your email'
@@ -74,6 +96,8 @@ export const signInEmailAndPassword = createAsyncThunk(
       });
       return {
         ...res.user,
+        authProvider: docSnap.data().authProvider,
+        userType: docSnap.data().userType,
         slug: docSnap.data().slug,
         created: docSnap.data().created,
         lastseen: docSnap.data().lastseen
@@ -112,6 +136,8 @@ export const signInGoogleAuthProvider = createAsyncThunk(
         return {
           ...user,
           slug: docSnap.data().slug,
+          authProvider: docSnap.data().authProvider,
+          userType: docSnap.data().userType,
           created: docSnap.data().created,
           lastseen: docSnap.data().lastseen
         };
@@ -122,7 +148,8 @@ export const signInGoogleAuthProvider = createAsyncThunk(
         uid: user.uid,
         username: user.displayName,
         email: user.email,
-        authProvider: 'Google',
+        authProvider: 'google',
+        userType: 'buyer',
         slug: slug,
         created: serverTimestamp(),
         lastseen: serverTimestamp()
@@ -132,7 +159,7 @@ export const signInGoogleAuthProvider = createAsyncThunk(
         name: user.displayName,
         photoURL: user.photoURL
       });
-      return { ...res.user, slug: slug };
+      return { ...res.user, authProvider: 'google', userType: 'buyer', slug: slug };
     } catch (error) {
       return error;
     }
@@ -182,6 +209,16 @@ export const updateLastseen = createAsyncThunk('user/updateLastseen', async (uid
   } catch (error) {}
 });
 
+export const changeUserType = createAsyncThunk('user/changeUserType', async ({ uid, userType }) => {
+  try {
+    const userTypeRef = doc(db, 'users', uid, 'data', 'userdata');
+    setDoc(userTypeRef, { userType: userType }, { merge: true });
+    return { userType: userType };
+  } catch (error) {
+    return error;
+  }
+});
+
 const initialState = {};
 
 // createAsyncThunk() generates automatically pending -, fulfilled - and rejected handling cases
@@ -192,17 +229,21 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(signUpEmailAndPassword.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload));
         return (state = {
           ...state,
           ...action.payload
         });
       })
       .addCase(signInEmailAndPassword.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload));
         return (state = {
           ...state,
           ...action.payload
+        });
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          changePassword: action.payload
         });
       })
       .addCase(signInGoogleAuthProvider.fulfilled, (state, action) => {
@@ -230,6 +271,12 @@ export const userSlice = createSlice({
         localStorage.removeItem('user');
         return (state = {
           ...state
+        });
+      })
+      .addCase(changeUserType.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          userType: action.payload.userType
         });
       });
   }
