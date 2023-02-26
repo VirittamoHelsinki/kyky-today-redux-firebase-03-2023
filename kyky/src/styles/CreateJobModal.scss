@@ -1,0 +1,413 @@
+.job-modal-main {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+  padding: 20px;
+	gap: 10px;
+  width: 100%;
+  height: 100%;
+
+	.job-modal-title-description {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+
+		.title-content {
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+
+			.title-label {
+				display: flex;
+				justify-content: flex-start;
+				width: 200px;
+
+				p {
+					font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					line-height: 30px;
+					text-align: left;
+				}
+			}
+
+			.title-input {
+				width: 600px;
+
+				.title-input-field {
+					background: white;
+					opacity: 0.7;
+					border: 1px solid #ccc;
+					border-radius: 7px;
+					width: 100%;
+					height: 41px;
+					font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					padding-left: 10px;
+				}
+			}
+		}
+
+		.description-content {
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+
+			.description-label {
+				display: flex;
+				justify-content: flex-start;
+				width: 200px;
+
+				p {
+					font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					line-height: 30px;
+					text-align: left;
+				}
+			}
+
+			.description-textarea {
+				width: 600px;
+        
+        .textarea-field {
+          width: 100%;
+          height: 100px;
+          padding: 0 4px;
+          border-radius: 4px;
+          border: solid 1px gainsboro;
+          font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+          text-align: start;
+        }
+      }
+		}
+	}
+
+  .job-modal-category-location-insurance {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 40px;
+
+    .category-content {
+      display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+
+			.category-label {
+				display: flex;
+				justify-content: flex-start;
+				width: 200px;
+
+				p {
+					font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					line-height: 30px;
+					text-align: left;
+				}
+			}
+
+      .category-dropdown {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+    }
+
+    .location-content {
+      display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+
+      .location-label {
+        display: flex;
+				justify-content: flex-start;
+				width: 200px;
+
+        p {
+					font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					line-height: 30px;
+					text-align: left;
+				}
+      }
+
+      .location-input {
+        width: 600px; 
+
+        .location-input-field {
+					background: white;
+					opacity: 0.7;
+					border: 1px solid #ccc;
+					border-radius: 7px;
+					width: 100%;
+					height: 41px;
+					font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					padding-left: 10px;
+				}
+      }
+    }
+
+    .insurance-content {
+      display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+
+      .insurance-label {
+        display: flex;
+				justify-content: flex-start;
+				width: 200px;
+
+        p {
+					font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					line-height: 30px;
+					text-align: left;
+				}
+      }
+
+      .insurance-checkbox {
+        display: flex;
+				justify-content: flex-start;
+      }
+    }
+  }
+
+  .job-modal-price-recurrents {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 40px;
+
+    .price-content {
+      display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+
+      .price-label {
+        display: flex;
+				justify-content: flex-start;
+				width: 200px;
+
+        p {
+					font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					line-height: 30px;
+					text-align: left;
+				}
+      }
+
+      .price-input {
+        width: 44px;
+
+        .price-input-field {
+          background-color: #fff;
+          border: solid 1px gainsboro;
+          text-align: right;
+          width: 100%;
+          height: 30px;
+        }
+      }
+
+      .price-select {
+        display: flex;
+				justify-content: flex-start;
+        width: 40px;
+
+        .select-unit {
+          background-color: #fff;
+          border: solid 1px gainsboro;
+          width: 100%;
+          height: 30px;
+        }
+      }
+    }
+
+    .recurrents-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      .recurrents-label {
+        display: flex;
+				justify-content: flex-start;
+				width: 200px;
+
+        p {
+					font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					line-height: 30px;
+					text-align: left;
+				}
+      }
+
+      .recurrents-switch {
+        display: flex;
+        justify-content: flex-start;
+      }
+    }
+
+    .recurrent-price-content {
+      width: 800px;
+
+      .recurrents {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 40px;
+
+        &.disabled {
+          opacity: 0.3;
+        }
+
+        .recurrent-input-field {
+          background-color: #fff;
+          border: solid 1px gainsboro;
+          text-align: right;
+          width: 100%;
+          height: 30px;
+        }
+
+        p {
+          font-family: Poppins, sans-serif;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					line-height: 30px;
+					text-align: left;
+        }
+      }
+    }
+  }
+
+  .job-modal-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 40px;
+
+    .image-label {
+      display: flex;
+      justify-content: flex-start;
+      width: 200px;
+
+      p {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 30px;
+        text-align: left;
+      }
+    }
+
+    .images-content {
+      width: 800px;
+
+      .images-container {
+        display: flex;
+        height: fit-content;
+        width: auto;
+        justify-content: flex-start;
+        gap: 30px;
+
+        .image-box {
+          display: flex;
+          height: 140px;
+          margin: 12px 0;
+          border: 1px solid gainsboro;
+          border-radius: 10px;
+          justify-content: center;
+          align-items: center;
+          overflow: visible;
+          position: relative;
+
+          .file-upload {
+            position: relative;
+            width: auto;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 10px;
+
+            .file-upload-image {
+              height: 130px;
+            }
+
+            .file-remove {
+              background: gray;
+              color: white;
+              position: absolute;
+              border-radius: 8px;
+              font-size: 20px;
+              font-weight: bold;
+              width: 20px;
+              top: 0;
+              right: 0;
+            }
+          }
+
+          .files {
+            height: auto;
+            margin: 12px;
+            display: flex;
+            flex-direction: row;
+
+            .file-upload-icon {
+              position: relative;
+              font-weight: 700;
+              font-size: 1.25rem;
+              border: 0.25rem solid black;
+              width: 35px;
+              height: 35px;
+              border-radius: 50%;
+              background-color: #808080;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .job-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+
+    .modal-button {
+      width: 310px;
+      height: 45px;
+      background: #387a70;
+      color: white;
+      box-shadow: 0 4px 4px #00000040;
+      border-radius: 11px;
+      font-family: Poppins, sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 30px;
+      text-align: center;
+    }
+  }
+}

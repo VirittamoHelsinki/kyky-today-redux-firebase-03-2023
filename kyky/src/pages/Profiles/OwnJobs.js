@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useOutletContext, Link } from 'react-router-dom';
+import CreateJobModal from '../../components/Profiles/CreateJobModal'
 import starFilled from '../../image/star-filled.svg';
 import starBlank from '../../image/star-white.svg';
 
@@ -8,6 +9,7 @@ const OwnJobs = () => {
   const setSelectedWindow = useOutletContext();
   const [jobs, setJobs] = useState([]);
   const [profileRating, setProfileRating] = useState(4);
+  const [showCreateJobModal, setShowCreateJobModal] = useState(false);
 
   const _jobs = useSelector((state) => state.jobs.cards);
 
@@ -38,10 +40,15 @@ const OwnJobs = () => {
         <div className="job-main-title">
           <p>Active jobs</p>
         </div>
-        <Link to="/calendar/job-creation">
-          <button className="add-job-button">Create a job</button>
-        </Link>
+        <button className="add-job-button" onClick={() => setShowCreateJobModal(true)}>Create a job</button>
       </div>
+      {showCreateJobModal && (
+        <div className='create-job-modal transparent-background'>
+          <div className='create-job-modal'>
+            <CreateJobModal setShowCreateJobModal={setShowCreateJobModal}/>
+          </div>
+        </div>
+      )}
       <div className="own-job-items">
         {jobs.map((job, index) => (
           <div className="job-container" key={index}>

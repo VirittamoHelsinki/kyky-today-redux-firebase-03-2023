@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeUserType } from '../redux/auth/userSlice';
 import '../styles/UserDropdown.scss';
@@ -27,10 +28,14 @@ const UserDropdown = ({ logoutClick }) => {
       {userType === 'seller' ? (
         <div className="dropdown-button-container">
           <div className="dropdown-button-content">
-            <button className="dropdown-button">Dashboard</button>
+            <Link to="seller/dashboard">
+              <button className="dropdown-button">Dashboard</button>
+            </Link>
           </div>
           <div className="dropdown-button-content">
-            <button className="dropdown-button">Calendar</button>
+            <Link to="calendar">
+              <button className="dropdown-button">Calendar</button>
+            </Link>
           </div>
           <div className="dropdown-button-content">
             <button className="dropdown-button">Create a job</button>
