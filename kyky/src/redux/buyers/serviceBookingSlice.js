@@ -6,6 +6,7 @@ export const createBooking = createAsyncThunk('serviceBookings/createBooking', a
   try {
     const bookingRef = doc(collection(db, `bookings`));
     await setDoc(bookingRef, payload);
+    console.log(bookingRef);
   } catch (error) {
     return error;
   }

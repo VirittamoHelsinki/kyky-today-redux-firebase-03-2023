@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useOutletContext, Link } from 'react-router-dom';
-import CreateJobModal from '../../components/Profiles/CreateJobModal'
+import { deleteJobById } from '../../redux/sellers/jobFormSlice';
+import CreateJobModal from '../../components/Profiles/CreateJobModal';
 import starFilled from '../../image/star-filled.svg';
 import starBlank from '../../image/star-white.svg';
 
@@ -10,8 +11,10 @@ const OwnJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [profileRating, setProfileRating] = useState(4);
   const [showCreateJobModal, setShowCreateJobModal] = useState(false);
-
+  const [editjob, setEditjob] = useState(null);
   const _jobs = useSelector((state) => state.jobs.cards);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setSelectedWindow('own-jobs');
@@ -21,7 +24,7 @@ const OwnJobs = () => {
     if (Array.isArray(_jobs)) {
       setJobs(_jobs);
     }
-  }, []);
+  }, [_jobs]);
 
   function loopStars() {
     let star_img_list = [];
@@ -34,18 +37,31 @@ const OwnJobs = () => {
     return star_img_list;
   }
 
+  function deleteJobclick(id) {
+    const confirm = window.confirm('Are you sure you want to delete this job?');
+    if (confirm) {
+      dispatch(deleteJobById(id));
+    }
+  }
+
   return (
     <div className="own-jobs-main">
       <div className="job-main-title-and-add-job-button">
         <div className="job-main-title">
           <p>Active jobs</p>
         </div>
-        <button className="add-job-button" onClick={() => setShowCreateJobModal(true)}>Create a job</button>
+        <button className="add-job-button" onClick={() => setShowCreateJobModal(true)}>
+          Create a job
+        </button>
       </div>
       {showCreateJobModal && (
-        <div className='create-job-modal transparent-background'>
-          <div className='create-job-modal'>
-            <CreateJobModal setShowCreateJobModal={setShowCreateJobModal}/>
+        <div className="create-job-modal transparent-background">
+          <div className="create-job-modal">
+            <CreateJobModal
+              setShowCreateJobModal={setShowCreateJobModal}
+              editjob={editjob}
+              setEditjob={setEditjob}
+            />
           </div>
         </div>
       )}
@@ -92,7 +108,11 @@ const OwnJobs = () => {
                       <p>Created</p>
                     </div>
                     <div className="detail-value">
-                      <p>{new Date(job.created.seconds * 1000).toLocaleDateString('fi-FI')}</p>
+                      {'seconds' in job.created ? (
+                        <p>{new Date(job.created.seconds * 1000).toLocaleDateString('fi-FI')}</p>
+                      ) : (
+                        <p>{new Date().toLocaleDateString('fi-FI')}</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -102,8 +122,17 @@ const OwnJobs = () => {
               <div className="job-rating-and-buttons">
                 <div className="job-rating">{loopStars().map((star) => star)}</div>
                 <div className="job-buttons">
-                  <button className="edit-button">Edit</button>
-                  <button className="delete-button">Delete</button>
+                  <button
+                    className="edit-button"
+                    onClick={() => {
+                      setEditjob(job);
+                      setShowCreateJobModal(true);
+                    }}>
+                    Edit
+                  </button>
+                  <button className="delete-button" onClick={() => deleteJobclick(job.id)}>
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>

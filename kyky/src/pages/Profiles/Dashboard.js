@@ -38,6 +38,7 @@ const Dashboard = () => {
       setProfileName(_profile.name);
       setProfileTitle(_profile.s1Title);
       setRegistered(new Date(_profile.created.seconds * 1000));
+      setUserType(_user.userType);
     }
   }, [_profile]);
 
@@ -115,7 +116,7 @@ const Dashboard = () => {
             </div>
             <div className="user-data-item">
               <p className="user-data-key">User type</p>
-              <p className="user-data-value">seller</p>
+              <p className="user-data-value">{userType}</p>
             </div>
             <div className="user-data-item">
               <p className="user-data-key">Omat keskustelut</p>

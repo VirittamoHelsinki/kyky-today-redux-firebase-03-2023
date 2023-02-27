@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/jobCreation.scss';
+import '../../styles/CreateJobModal.scss';
 
 export default function CategoryTitleSelect({ changeCategory, changeTitle }) {
   return (

@@ -1,190 +1,203 @@
 .job-modal-main {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #f8f9f8;
   padding: 20px;
-	gap: 10px;
+  gap: 10px;
   width: 100%;
   height: 100%;
 
-	.job-modal-title-description {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
+  .job-modal-title-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: white;
+    box-shadow: 0 4px 4px #00000040;
+    border-radius: 12px;
+    padding: 20px;
+    gap: 10px;
 
-		.title-content {
-			display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
+    .title-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
 
-			.title-label {
-				display: flex;
-				justify-content: flex-start;
-				width: 200px;
+      .title-label {
+        display: flex;
+        justify-content: flex-start;
+        width: 200px;
 
-				p {
-					font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
-					line-height: 30px;
-					text-align: left;
-				}
-			}
+        p {
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 30px;
+          text-align: left;
+        }
+      }
 
-			.title-input {
-				width: 600px;
+      .title-input {
+        width: 600px;
 
-				.title-input-field {
-					background: white;
-					opacity: 0.7;
-					border: 1px solid #ccc;
-					border-radius: 7px;
-					width: 100%;
-					height: 41px;
-					font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
-					padding-left: 10px;
-				}
-			}
-		}
+        .title-input-field {
+          background: white;
+          border: 1px solid #ccc;
+          border-radius: 7px;
+          width: 100%;
+          height: 31px;
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          padding-left: 10px;
+        }
+      }
+    }
 
-		.description-content {
-			display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
+    .description-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
 
-			.description-label {
-				display: flex;
-				justify-content: flex-start;
-				width: 200px;
+      .description-label {
+        display: flex;
+        justify-content: flex-start;
+        width: 200px;
 
-				p {
-					font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
-					line-height: 30px;
-					text-align: left;
-				}
-			}
+        p {
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 30px;
+          text-align: left;
+        }
+      }
 
-			.description-textarea {
-				width: 600px;
-        
+      .description-textarea {
+        width: 600px;
+
         .textarea-field {
           width: 100%;
           height: 100px;
           padding: 0 4px;
           border-radius: 4px;
-          border: solid 1px gainsboro;
+          border: 1px solid #ccc;
           font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          padding-left: 10px;
           text-align: start;
         }
       }
-		}
-	}
+    }
+  }
 
   .job-modal-category-location-insurance {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 40px;
+    background: white;
+    box-shadow: 0 4px 4px #00000040;
+    border-radius: 12px;
+    padding: 20px;
+    gap: 10px;
 
     .category-content {
       display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
+      flex-direction: row;
+      justify-content: flex-start;
 
-			.category-label {
-				display: flex;
-				justify-content: flex-start;
-				width: 200px;
+      .category-label {
+        display: flex;
+        justify-content: flex-start;
+        width: 200px;
 
-				p {
-					font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
-					line-height: 30px;
-					text-align: left;
-				}
-			}
+        p {
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 30px;
+          text-align: left;
+        }
+      }
 
       .category-dropdown {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
+
+        .select-button {
+          border-radius: 4px;
+        }
       }
     }
 
     .location-content {
       display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
+      flex-direction: row;
+      justify-content: flex-start;
 
       .location-label {
         display: flex;
-				justify-content: flex-start;
-				width: 200px;
+        justify-content: flex-start;
+        width: 200px;
 
         p {
-					font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
-					line-height: 30px;
-					text-align: left;
-				}
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 30px;
+          text-align: left;
+        }
       }
 
       .location-input {
-        width: 600px; 
+        width: 600px;
 
         .location-input-field {
-					background: white;
-					opacity: 0.7;
-					border: 1px solid #ccc;
-					border-radius: 7px;
-					width: 100%;
-					height: 41px;
-					font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
-					padding-left: 10px;
-				}
+          background: white;
+          border: 1px solid #ccc;
+          border-radius: 7px;
+          width: 100%;
+          height: 31px;
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          padding-left: 10px;
+        }
       }
     }
 
     .insurance-content {
       display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
+      flex-direction: row;
+      justify-content: flex-start;
 
       .insurance-label {
         display: flex;
-				justify-content: flex-start;
-				width: 200px;
+        justify-content: flex-start;
+        width: 200px;
 
         p {
-					font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
-					line-height: 30px;
-					text-align: left;
-				}
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 30px;
+          text-align: left;
+        }
       }
 
       .insurance-checkbox {
         display: flex;
-				justify-content: flex-start;
+        justify-content: flex-start;
       }
     }
   }
@@ -193,26 +206,30 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 40px;
+    background: white;
+    box-shadow: 0 4px 4px #00000040;
+    border-radius: 12px;
+    padding: 20px;
+    gap: 10px;
 
     .price-content {
       display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
+      flex-direction: row;
+      justify-content: flex-start;
 
       .price-label {
         display: flex;
-				justify-content: flex-start;
-				width: 200px;
+        justify-content: flex-start;
+        width: 200px;
 
         p {
-					font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
-					line-height: 30px;
-					text-align: left;
-				}
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 30px;
+          text-align: left;
+        }
       }
 
       .price-input {
@@ -220,8 +237,13 @@
 
         .price-input-field {
           background-color: #fff;
-          border: solid 1px gainsboro;
+          border: 1px solid #ccc;
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
           text-align: right;
+          border-radius: 4px;
           width: 100%;
           height: 30px;
         }
@@ -229,12 +251,13 @@
 
       .price-select {
         display: flex;
-				justify-content: flex-start;
+        justify-content: flex-start;
         width: 40px;
 
         .select-unit {
           background-color: #fff;
-          border: solid 1px gainsboro;
+          border: 1px solid #ccc;
+          border-radius: 4px;
           width: 100%;
           height: 30px;
         }
@@ -245,20 +268,21 @@
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
+      align-items: center;
 
       .recurrents-label {
         display: flex;
-				justify-content: flex-start;
-				width: 200px;
+        justify-content: flex-start;
+        width: 200px;
 
         p {
-					font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
-					line-height: 30px;
-					text-align: left;
-				}
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 30px;
+          text-align: left;
+        }
       }
 
       .recurrents-switch {
@@ -274,27 +298,38 @@
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
-        gap: 40px;
+        gap: 20px;
 
         &.disabled {
           opacity: 0.3;
         }
 
-        .recurrent-input-field {
-          background-color: #fff;
-          border: solid 1px gainsboro;
-          text-align: right;
-          width: 100%;
-          height: 30px;
-        }
+        .recurrent {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
 
-        p {
-          font-family: Poppins, sans-serif;
-					font-style: normal;
-					font-weight: 400;
-					font-size: 20px;
-					line-height: 30px;
-					text-align: left;
+          .recurrent-input-field {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            text-align: right;
+            border-radius: 4px;
+            width: 40px;
+            height: 30px;
+          }
+
+          p {
+            font-family: Poppins, sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: left;
+          }
+
+          .unit-paragraph {
+            padding-right: 10px;
+          }
         }
       }
     }
@@ -304,7 +339,11 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 40px;
+    background: white;
+    box-shadow: 0 4px 4px #00000040;
+    border-radius: 12px;
+    gap: 20px;
+    padding: 10px 20px 0;
 
     .image-label {
       display: flex;
