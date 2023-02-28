@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateSteps, addProfileForm } from '../../redux/sellers/profileFormSlice';
-import { titles, tips } from './Features';
 import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
+import Step4 from './Step4';
+import Step5 from './Step5';
+import Step6 from './Step6';
 import '../../styles/CreateProfileModal.scss';
 
-const CreateProfileModal = () => {
+const CreateProfileModal = ({ setShowProfileModal }) => {
   const [title, setTitle] = useState(0);
   const [tip, setTip] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
@@ -15,7 +19,7 @@ const CreateProfileModal = () => {
 
   const dispatch = useDispatch();
 
-  const steps = 7;
+  const steps = 6;
 
   function previousPhase() {
     setTitle(title - 1);
@@ -46,34 +50,42 @@ const CreateProfileModal = () => {
 
   return (
     <div className="profile-modal-main">
-      <div className="profile-model-title">
-        <h1>{titles[title]}</h1>
-        <p>{tips[tip]}</p>
-      </div>
       <form onSubmit={sendForm}>
         {currentStep === 1 && <Step1 handleChange={handleChange} />}
         {currentStep === 2 && <Step2 handleChange={handleChange} />}
         {currentStep === 3 && <Step3 handleChange={handleChange} />}
         {currentStep === 4 && <Step4 handleChange={handleChange} />}
-        {currentStep === 5 && <Step7 handleChange={handleChange} />}
-        {currentStep === 6 && <Step8 />}
-        {currentStep === 7 && <Step9 />}
-        <div>
-          {currentStep > 1 && currentStep < steps && (
-            <button className="previousButton" onClick={previousPhase}>
-              Previous
+        {currentStep === 5 && <Step5 handleChange={handleChange} />}
+        {currentStep === 6 && <Step6 />}
+        <div className="button-container">
+          <div className="cancel-button">
+            <button className="form-button" onClick={() => setShowProfileModal(false)}>
+              Cancel
             </button>
-          )}
-          {currentStep <= steps - 2 && (
-            <button className="nextButton" onClick={nextPhase}>
-              Next
-            </button>
-          )}
-          {currentStep === steps - 1 && (
-            <button className="submitButton" type="button" onClick={submitform}>
-              Submit Profile
-            </button>
-          )}
+          </div>
+          <div className="step-submit-buttons">
+            {currentStep > 1 && currentStep < steps && (
+              <button className="form-button" onClick={previousPhase}>
+                Previous
+              </button>
+            )}
+            {currentStep <= steps - 2 && (
+              <button className="form-button" onClick={nextPhase}>
+                Next
+              </button>
+            )}
+            {currentStep === steps - 1 && (
+              <button
+                className="form-button"
+                type="button"
+                onClick={() => {
+                  submitform();
+                  setShowProfileModal(false);
+                }}>
+                Submit Profile
+              </button>
+            )}
+          </div>
         </div>
       </form>
     </div>

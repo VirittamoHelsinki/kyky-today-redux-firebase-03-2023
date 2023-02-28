@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
 import { getDashboardProfile } from '../../redux/sellers/profileFormSlice';
+import CreateProfileModal from '../../components/Profiles/CreateProfileModal';
 import starIcon from '../../image/star.svg';
 import '../../styles/Profiles.scss';
 
 const Dashboard = () => {
   const setSelectedWindow = useOutletContext();
+  const [showProfileModal, setShowProfileModal] = useState(false);
   const [profileName, setProfileName] = useState('Etunimi Sukunimi');
   const [profileTitle, setProfileTitle] = useState('');
   const [profileRating, setProfileRating] = useState(5);
@@ -103,9 +105,13 @@ const Dashboard = () => {
             <div className="user-info-rating">{loopStars().map((star) => star)}</div>
             <div className="user-profile-button">
               {profileTitle !== '' ? (
-                <button className="profile-button">Edit profile</button>
+                <button className="profile-button" onClick={() => setShowProfileModal(true)}>
+                  Edit profile
+                </button>
               ) : (
-                <button className="profile-button">Create profile</button>
+                <button className="profile-button" onClick={() => setShowProfileModal(true)}>
+                  Create profile
+                </button>
               )}
             </div>
           </div>
@@ -140,6 +146,13 @@ const Dashboard = () => {
         </div>
         <div className="dashboard-own-sells"></div>
       </div>
+      {showProfileModal && (
+        <div className="create-profile-modal transparent-background">
+          <div className="create-profile-modal">
+            <CreateProfileModal setShowProfileModal={setShowProfileModal} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

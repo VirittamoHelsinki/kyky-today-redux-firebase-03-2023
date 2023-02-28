@@ -47,10 +47,14 @@ const UserDropdown = ({ logoutClick }) => {
       ) : (
         <div className="dropdown-button-container">
           <div className="dropdown-button-content">
-            <button className="dropdown-button">Dashboard</button>
+            <Link to="buyer/purchases">
+              <button className="dropdown-button">Dashboard</button>
+            </Link>
           </div>
           <div className="dropdown-button-content">
-            <button className="dropdown-button">Categories</button>
+            <Link to="categories/all">
+              <button className="dropdown-button">Categories</button>
+            </Link>
           </div>
         </div>
       )}

@@ -13,6 +13,7 @@ import serviceBookingReducer from './buyers/serviceBookingSlice';
 import contactReducer from './chat/contactSlice';
 import messageReducer from './chat/messageSlice';
 import notificationReducer from './notifications/notificationSlice';
+import adminContactReducer from './chat/adminContactSlice';
 import slugReducer from './auth/slugSlice';
 
 const reducers = combineReducers({
@@ -26,6 +27,7 @@ const reducers = combineReducers({
   chat: contactReducer,
   message: messageReducer,
   notification: notificationReducer,
+  admincontact: adminContactReducer,
   slug: slugReducer
 });
 

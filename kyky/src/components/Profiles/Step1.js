@@ -44,9 +44,9 @@ export default function Step1({ handleChange }) {
 
   return (
     <div className="profile-step1">
+      <p>Please add a title about what you do.</p>
       <input
         className="step1-title-input"
-        id="s1TitleInput"
         name="s1TitleInput"
         value={title}
         onChange={(event) => setTitle(event.target.value)}

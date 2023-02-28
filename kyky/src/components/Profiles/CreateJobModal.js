@@ -93,6 +93,14 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
     setTitle(t);
   };
 
+  useEffect(() => {
+    document.getElementById('recurrent-input-field-wk').disabled = !recurrent;
+    document.getElementById('recurrent-input-field-we').disabled = !recurrent;
+    document.getElementById('recurrent-input-field-eowk').disabled = !recurrent;
+    document.getElementById('recurrent-input-field-eowe').disabled = !recurrent;
+    document.getElementById('recurrent-input-field-oam').disabled = !recurrent;
+  }, [recurrent]);
+
   return (
     <div className="job-modal-main">
       <div className="job-modal-title-description">
@@ -216,7 +224,7 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
           <div className={`recurrents ${recurrent ? '' : 'disabled'}`}>
             <div className="recurrent">
               <input
-                className="recurrent-input-field"
+                id="recurrent-input-field-wk"
                 type="number"
                 name="standard_price"
                 value={weekday}
@@ -231,7 +239,7 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
             </div>
             <div className="recurrent">
               <input
-                className="recurrent-input-field"
+                id="recurrent-input-field-we"
                 type="number"
                 name="standard_price"
                 value={weekend}
@@ -246,7 +254,7 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
             </div>
             <div className="recurrent">
               <input
-                className="recurrent-input-field"
+                id="recurrent-input-field-eowk"
                 type="number"
                 name="standard_price"
                 value={everyOtherWeekday}
@@ -261,7 +269,7 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
             </div>
             <div className="recurrent">
               <input
-                className="recurrent-input-field"
+                id="recurrent-input-field-eowe"
                 type="number"
                 name="standard_price"
                 value={everyOtherWeekend}
@@ -276,7 +284,7 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
             </div>
             <div className="recurrent">
               <input
-                className="recurrent-input-field"
+                id="recurrent-input-field-oam"
                 type="number"
                 name="standard_price"
                 value={onceAMonth}

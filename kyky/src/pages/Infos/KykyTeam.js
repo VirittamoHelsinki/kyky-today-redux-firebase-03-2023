@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
-import defaultJobImage from '../../image/martin-dalsgaard-sGV1QDMM0Gg-unsplash.jpg';
+import claudia_image from '../../image/claudia-footer-team.png';
+import vanja_image from '../../image/vanja-footer-team.png';
+import sami_image from '../../image/sami-footer-team.png';
+import default_image from '../../image/default-footer-team.png';
 import '../../styles/KykyTeam.scss';
 
 const KykyTeam = () => {
@@ -33,7 +36,7 @@ const KykyTeam = () => {
           <div className="kykyteam-card-row">
             <div className="card-person">
               <div className="card-image">
-                <img src={defaultJobImage} className="image" alt="" />
+                <img src={claudia_image} className="image" alt="" />
               </div>
               <div className="name-and-title">
                 <div className="name">
@@ -54,7 +57,7 @@ const KykyTeam = () => {
             </div>
             <div className="card-person">
               <div className="card-image">
-                <img src={defaultJobImage} className="image" alt="" />
+                <img src={vanja_image} className="image" alt="" />
               </div>
               <div className="name-and-title">
                 <div className="name">
@@ -75,7 +78,7 @@ const KykyTeam = () => {
             </div>
             <div className="card-person">
               <div className="card-image">
-                <img src={defaultJobImage} className="image" alt="" />
+                <img src={sami_image} className="image" alt="" />
               </div>
               <div className="name-and-title">
                 <div className="name">
@@ -98,7 +101,7 @@ const KykyTeam = () => {
           <div className="kykyteam-card-row">
             <div className="card-person">
               <div className="card-image">
-                <img src={defaultJobImage} className="image" alt="" />
+                <img src={default_image} className="image" alt="" />
               </div>
               <div className="name-and-title">
                 <div className="name">
@@ -111,7 +114,7 @@ const KykyTeam = () => {
             </div>
             <div className="card-person">
               <div className="card-image">
-                <img src={defaultJobImage} className="image" alt="" />
+                <img src={default_image} className="image" alt="" />
               </div>
               <div className="name-and-title">
                 <div className="name">
@@ -143,7 +146,7 @@ const KykyTeam = () => {
           <div className="kykyteam-card-row">
             <div className="card-person">
               <div className="card-image">
-                <img src={defaultJobImage} className="image" alt="" />
+                <img src={default_image} className="image" alt="" />
               </div>
               <div className="name-and-title">
                 <div className="name">
@@ -156,7 +159,7 @@ const KykyTeam = () => {
             </div>
             <div className="card-person">
               <div className="card-image">
-                <img src={defaultJobImage} className="image" alt="" />
+                <img src={default_image} className="image" alt="" />
               </div>
               <div className="name-and-title">
                 <div className="name">

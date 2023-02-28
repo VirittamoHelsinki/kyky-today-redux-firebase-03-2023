@@ -289,31 +289,6 @@ const App = () => {
               }
             />
           </Route>
-
-          <Route
-            path="new-profile-creation"
-            element={
-              <UserRoute>
-                <Creation />
-              </UserRoute>
-            }>
-            <Route
-              index
-              element={
-                <UserRoute>
-                  <NewProfileCreation />
-                </UserRoute>
-              }
-            />
-            <Route
-              path="get-started"
-              element={
-                <UserRoute>
-                  <GetStarted />
-                </UserRoute>
-              }
-            />
-          </Route>
           <Route
             path="buyers-rating"
             element={

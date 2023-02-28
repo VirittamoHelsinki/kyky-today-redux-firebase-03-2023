@@ -966,3 +966,22 @@ h4 {
     height: 100%;
   }
 }
+
+.create-profile-modal {
+  background: white;
+  position: absolute;
+  z-index: 1000;
+  width: 800px;
+  height: 800px;
+  border: 1px #9c9797 solid;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &.transparent-background {
+    background: rgb(0 0 0 / 70%) !important;
+    border: none !important;
+    width: 100%;
+    height: 100%;
+  }
+}
