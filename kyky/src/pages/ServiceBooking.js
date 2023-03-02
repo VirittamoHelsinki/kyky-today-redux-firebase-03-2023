@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createBooking } from '../redux/buyers/serviceBookingSlice';
+import { createBooking } from '../redux/bookings/bookingSlice';
 import { createContact } from '../redux/chat/contactSlice';
 import { addNotification } from '../redux/notifications/notificationSlice';
-import { addPageview } from '../redux/sellers/jobFormSlice';
+import { fetchJobsByQuery, addPageview } from '../redux/jobs/jobSlice';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Calendar from '../components/calendar/Calendar';
 import SelectDays from '../components/SelectDays';
 import Checkbox from '../components/Checkbox';
-import { fetchJobsByQuery } from '../redux/sellers/jobFormSlice';
 
 const Tabs = {
   Once: 'Once',

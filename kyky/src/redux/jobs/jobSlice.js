@@ -15,7 +15,7 @@ import { db } from '../../firebase/firebase';
 
 /* makes reference to get a auto-generated id, inserts the doc 
 to Firestore using the new id, returns the added object */
-export const createJobForm = createAsyncThunk('jobForms/createJobForm', async (payload) => {
+export const createJobForm = createAsyncThunk('jobs/createJobForm', async (payload) => {
   try {
     const datenow = serverTimestamp();
     const formRef = doc(collection(db, `jobs`));
@@ -26,7 +26,7 @@ export const createJobForm = createAsyncThunk('jobForms/createJobForm', async (p
   }
 });
 
-export const fetchAllJobs = createAsyncThunk('jobForms/fetchAllJobs', async () => {
+export const fetchAllJobs = createAsyncThunk('jobs/fetchAllJobs', async () => {
   try {
     const documents = [];
     const snap = await getDocs(collection(db, 'jobs'));
@@ -40,7 +40,7 @@ export const fetchAllJobs = createAsyncThunk('jobForms/fetchAllJobs', async () =
 });
 
 export const fetchJobsByQuery = createAsyncThunk(
-  'jobForms/fetchJobsByQuery',
+  'jobs/fetchJobsByQuery',
   async ({ key, value }) => {
     try {
       const documents = [];
@@ -58,7 +58,7 @@ export const fetchJobsByQuery = createAsyncThunk(
 );
 
 export const fetchUserProfileJobs = createAsyncThunk(
-  'jobForms/fetchUserProfileJobs',
+  'jobs/fetchUserProfileJobs',
   async (payload) => {
     try {
       const documents = [];
@@ -76,7 +76,7 @@ export const fetchUserProfileJobs = createAsyncThunk(
 );
 
 export const fetchCategoryJobs = createAsyncThunk(
-  'jobForms/fetchCategoryJobs',
+  'jobs/fetchCategoryJobs',
   async ({ key, value }) => {
     try {
       const documents = [];
@@ -93,7 +93,7 @@ export const fetchCategoryJobs = createAsyncThunk(
   }
 );
 
-export const deleteJobById = createAsyncThunk('jobForms/deleteJobById', async (jobTitle) => {
+export const deleteJobById = createAsyncThunk('jobs/deleteJobById', async (jobTitle) => {
   try {
     await deleteDoc(doc(db, 'jobs', jobTitle));
     return jobTitle;
@@ -102,7 +102,7 @@ export const deleteJobById = createAsyncThunk('jobForms/deleteJobById', async (j
   }
 });
 
-export const addPageview = createAsyncThunk('jobForms/addPageview', async (jobTitle) => {
+export const addPageview = createAsyncThunk('jobs/addPageview', async (jobTitle) => {
   try {
     await updateDoc(doc(db, 'jobs', jobTitle), {
       pageviews: increment(1)
@@ -117,10 +117,10 @@ const initialState = {
 };
 
 export const jobCreationFormSlice = createSlice({
-  name: 'jobForms',
+  name: 'jobs',
   initialState: initialState,
   reducers: {
-    resetJobCreationForm() {
+    resetJobs() {
       return initialState;
     }
   },
@@ -177,5 +177,5 @@ export const jobCreationFormSlice = createSlice({
   }
 });
 
-export const { resetJobCreationForm } = jobCreationFormSlice.actions;
+export const { resetJobs } = jobCreationFormSlice.actions;
 export default jobCreationFormSlice.reducer;

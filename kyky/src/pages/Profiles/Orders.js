@@ -34,7 +34,7 @@ const Orders = () => {
         <p>Incompleted orders</p>
       </div>
       <div className='order-items'>
-        {incompleted.map((o, index) => <Order order={o} key={index} />)}
+        {incompleted.map((o, index) => <Order order={o} key={index} user={_user} />)}
       </div>
     </div> 
     <div className='order-content'>
@@ -42,7 +42,7 @@ const Orders = () => {
         <p>Completed orders</p>
       </div>
       <div className='order-items'>
-      {completed.map((o, index) => <Order order={o} key={index} />)}
+      {completed.map((o, index) => <Order order={o} key={index} user={_user} />)}
       </div>
     </div>
   </div>

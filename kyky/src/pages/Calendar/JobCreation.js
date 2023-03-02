@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createJobForm } from '../../redux/sellers/jobFormSlice';
+import { createJobForm } from '../../redux/jobs/jobSlice';
 import Switch from 'react-switch';
 import Language from '../../language';
 import Checkbox from '../../components/Checkbox';

@@ -3,7 +3,7 @@
 */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSchedule, removeSchedule } from '../../redux/sellers/calendarScheduleSlice';
+import { createSchedule, removeSchedule } from '../../redux/calendar/calendarScheduleSlice';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 

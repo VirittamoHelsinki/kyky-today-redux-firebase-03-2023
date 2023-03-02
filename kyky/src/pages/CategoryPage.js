@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllJobs, fetchCategoryJobs } from '../redux/sellers/jobFormSlice';
+import { fetchAllJobs, fetchCategoryJobs } from '../redux/jobs/jobSlice';
 import Card from '../components/Card';
 import '../styles/CategoryPage.scss';
 

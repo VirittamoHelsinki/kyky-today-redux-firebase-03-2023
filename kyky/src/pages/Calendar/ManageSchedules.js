@@ -5,7 +5,7 @@ import {
   createSchedule,
   removeSchedule,
   createUnavailability
-} from '../../redux/sellers/calendarScheduleSlice';
+} from '../../redux/calendar/calendarScheduleSlice';
 import Button from '../../components/Button';
 
 import Input from '../../components/Input';

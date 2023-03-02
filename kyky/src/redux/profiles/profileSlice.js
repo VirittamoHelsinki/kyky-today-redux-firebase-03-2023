@@ -5,7 +5,7 @@ import { db } from '../../firebase/firebase';
 /* makes reference to get a auto-generated id, inserts the doc 
 to Firestore using the new id, returns the added object */
 export const addProfileForm = createAsyncThunk(
-  'profileForms/addProfileForm',
+  'profiles/addProfileForm',
   async ({ uid, data }) => {
     try {
       await setDoc(doc(db, 'users', uid, 'data', 'profile'), {
@@ -18,7 +18,7 @@ export const addProfileForm = createAsyncThunk(
   }
 );
 
-export const getUserProfile = createAsyncThunk('profileForms/getUserProfile', async (uid) => {
+export const getUserProfile = createAsyncThunk('profiles/getUserProfile', async (uid) => {
   try {
     const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
     const profileSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
@@ -37,7 +37,7 @@ export const getUserProfile = createAsyncThunk('profileForms/getUserProfile', as
 });
 
 export const getDashboardProfile = createAsyncThunk(
-  'profileForms/getDashboardProfile',
+  'profiles/getDashboardProfile',
   async (uid) => {
     try {
       const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
@@ -64,8 +64,8 @@ export const getDashboardProfile = createAsyncThunk(
 
 const initialState = [];
 
-export const profileFormSlice = createSlice({
-  name: 'profileForms',
+export const profileSlice = createSlice({
+  name: 'profiles',
   initialState: initialState,
   reducers: {
     updateSteps(state, action) {
@@ -105,5 +105,5 @@ export const profileFormSlice = createSlice({
   }
 });
 
-export const { updateSteps, resetProfileForm } = profileFormSlice.actions;
-export default profileFormSlice.reducer;
+export const { updateSteps, resetProfileForm } = profileSlice.actions;
+export default profileSlice.reducer;

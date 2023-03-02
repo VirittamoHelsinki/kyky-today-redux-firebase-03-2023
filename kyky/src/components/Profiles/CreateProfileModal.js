@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSteps, addProfileForm } from '../../redux/sellers/profileFormSlice';
+import { updateSteps, addProfileForm } from '../../redux/profiles/profileSlice';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';

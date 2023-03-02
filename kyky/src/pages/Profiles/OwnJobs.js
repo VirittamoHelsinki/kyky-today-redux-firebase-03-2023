@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
-import { deleteJobById } from '../../redux/sellers/jobFormSlice';
+import { deleteJobById } from '../../redux/jobs/jobSlice';
 import CreateJobModal from '../../components/Profiles/CreateJobModal';
 import starFilled from '../../image/star-filled.svg';
 import starBlank from '../../image/star-white.svg';

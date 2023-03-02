@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createJobForm } from '../../redux/sellers/jobFormSlice';
+import { createJobForm } from '../../redux/jobs/jobSlice';
 import Switch from 'react-switch';
 import Checkbox from '../../components/Checkbox';
 import AddJobImages from './AddJobImages';

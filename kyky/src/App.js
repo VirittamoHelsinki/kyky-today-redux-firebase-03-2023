@@ -2,10 +2,10 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSchedules } from './redux/sellers/calendarScheduleSlice';
-import { fetchBookingsByQuery } from './redux/buyers/serviceBookingSlice';
-import { fetchJobsByQuery } from './redux/sellers/jobFormSlice';
-import { fetchCalendarSettings } from './redux/sellers/calendarSettingsSlice';
+import { fetchSchedules } from './redux/calendar/calendarScheduleSlice';
+import { fetchBookingsByQuery } from './redux/bookings/bookingSlice';
+import { fetchJobsByQuery } from './redux/jobs/jobSlice';
+import { fetchCalendarSettings } from './redux/calendar/calendarSettingsSlice';
 import { fetchNotifications } from './redux/notifications/notificationSlice';
 import { updateLastseen } from './redux/auth/userSlice';
 

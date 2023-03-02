@@ -4,12 +4,12 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import userReducer from './auth/userSlice';
-import calendarScheduleReducer from './sellers/calendarScheduleSlice';
-import calendarSettingsReducer from './sellers/calendarSettingsSlice';
+import calendarScheduleReducer from './calendar/calendarScheduleSlice';
+import calendarSettingsReducer from './calendar/calendarSettingsSlice';
 import fileUploadReducer from './storage/fileUploadSlice';
-import profileFormReducer from './sellers/profileFormSlice';
-import jobFormReducer from './sellers/jobFormSlice';
-import serviceBookingReducer from './buyers/serviceBookingSlice';
+import profileFormReducer from './profiles/profileSlice';
+import jobReducer from './jobs/jobSlice';
+import bookingReducer from './bookings/bookingSlice';
 import contactReducer from './chat/contactSlice';
 import messageReducer from './chat/messageSlice';
 import notificationReducer from './notifications/notificationSlice';
@@ -22,8 +22,8 @@ const reducers = combineReducers({
   calendarsettings: calendarSettingsReducer,
   upload: fileUploadReducer,
   profile: profileFormReducer,
-  jobs: jobFormReducer,
-  booking: serviceBookingReducer,
+  jobs: jobReducer,
+  booking: bookingReducer,
   chat: contactReducer,
   message: messageReducer,
   notification: notificationReducer,

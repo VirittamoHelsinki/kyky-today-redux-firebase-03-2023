@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveCalendarSettings } from '../../redux/sellers/calendarSettingsSlice';
+import { saveCalendarSettings } from '../../redux/calendar/calendarSettingsSlice';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import Input from '../../components/Input';

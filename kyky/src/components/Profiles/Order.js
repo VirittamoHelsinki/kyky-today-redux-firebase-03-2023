@@ -1,12 +1,13 @@
 import {useState} from "react";
+import { useDispatch } from "react-redux";
+import { changeBookingStatus } from "../../redux/bookings/bookingSlice";
+import { addNotification } from "../../redux/notifications/notificationSlice";
 import '../../styles/Profiles.scss'
 
-const Order = ({order}) => {
+const Order = ({order, user}) => {
   const [showOrderDataModal, setShowOrderDataModal] = useState(false);
 
-  function getOperationtime(time) {
-    return Date.parse(time) || 0;
-  }
+  const dispatch = useDispatch();
 
   return (
     <div className="order-container">
@@ -54,7 +55,7 @@ const Order = ({order}) => {
                 <p>{order.status}</p>
               </div>
               <div className="detail-value">  
-              <p>{new Date(getOperationtime(order.operationTime)).toLocaleDateString('fi-FI')}</p>
+              <p>{new Date(order.operationTime.seconds * 1000).toLocaleDateString('fi-FI')}</p>
               </div>
             </div>)}
         </div>
@@ -124,10 +125,48 @@ const Order = ({order}) => {
                     </div>
                   </div>
                   <div className='buttons-row'>
-                  <button className='completed-button'>Mark as completed</button>
+                  <button 
+                    className='completed-button'
+                    onClick={() => {
+                      dispatch(
+                        changeBookingStatus({
+                          bookingId: order.bookingId,
+                          status: 'completed'
+                        })
+                      );
+                      dispatch(
+                        addNotification({
+                          uid: order.buyerUid,
+                          notification: {
+                            text: user.displayName + ' completed your booking',
+                            to: '/buyer/purchases',
+                            read: false
+                          }
+                        })
+                      );
+                      setShowOrderDataModal(false)
+                    }}>Mark as completed</button>
                   <button 
                     className='canceled-button'
-                    onClick={() => setShowOrderDataModal(false)}>Mark as canceled</button>
+                    onClick={() => {
+                      dispatch(
+                        changeBookingStatus({
+                          bookingId: order.bookingId,
+                          status: 'canceled'
+                        })
+                      );
+                      dispatch(
+                        addNotification({
+                          uid: order.buyerUid,
+                          notification: {
+                            text: user.displayName + ' canceled your booking',
+                            to: '/buyer/purchases',
+                            read: false
+                          }
+                        })
+                      );
+                      setShowOrderDataModal(false)
+                    }}>Mark as canceled</button>
                 </div>
                 </div>
               </div>

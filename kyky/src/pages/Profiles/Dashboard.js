@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
-import { getDashboardProfile } from '../../redux/sellers/profileFormSlice';
+import { getDashboardProfile } from '../../redux/profiles/profileSlice';
 import CreateProfileModal from '../../components/Profiles/CreateProfileModal';
 import starIcon from '../../image/star.svg';
 import '../../styles/Profiles.scss';

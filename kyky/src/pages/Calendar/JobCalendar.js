@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
-import { changeBookingStatus } from '../../redux/buyers/serviceBookingSlice';
+import { fetchSchedules } from '../../redux/calendar/calendarScheduleSlice';
+import { changeConfirmedStatus } from '../../redux/bookings/bookingSlice';
 import { createContact } from '../../redux/chat/contactSlice';
 import { addNotification } from '../../redux/notifications/notificationSlice';
 import { useOutletContext } from 'react-router-dom';
@@ -485,7 +485,7 @@ export default function JobCalendar() {
                                     className="material-icons-outlined"
                                     onClick={() => {
                                       dispatch(
-                                        changeBookingStatus({
+                                        changeConfirmedStatus({
                                           bookingId: activity.bookingId,
                                           status: true
                                         })
