@@ -270,7 +270,7 @@ BookingPreferences.propTypes = {
 //     bufferBetweenBookings: PropTypes.number.isRequired,
 //     canOverLap: PropTypes.bool.isRequired,
 //     includeTravelTime: PropTypes.bool.isRequired,
-//     jobId: PropTypes.string.isRequired,
+//     jobTitle: PropTypes.string.isRequired,
 //     limitBookings: PropTypes.bool.isRequired,
 //     minimumBookingDuration: PropTypes.number.isRequired,
 //     overlapType: PropTypes.string.isRequired,

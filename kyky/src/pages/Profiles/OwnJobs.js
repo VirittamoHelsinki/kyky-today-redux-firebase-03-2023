@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useOutletContext, Link } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { deleteJobById } from '../../redux/sellers/jobFormSlice';
 import CreateJobModal from '../../components/Profiles/CreateJobModal';
 import starFilled from '../../image/star-filled.svg';
 import starBlank from '../../image/star-white.svg';
+import '../../styles/Profiles.scss';
 
 const OwnJobs = () => {
   const setSelectedWindow = useOutletContext();
@@ -12,6 +13,7 @@ const OwnJobs = () => {
   const [profileRating, setProfileRating] = useState(4);
   const [showCreateJobModal, setShowCreateJobModal] = useState(false);
   const [editjob, setEditjob] = useState(null);
+
   const _jobs = useSelector((state) => state.jobs.cards);
 
   const dispatch = useDispatch();

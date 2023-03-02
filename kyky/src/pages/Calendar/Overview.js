@@ -64,7 +64,7 @@ function Overview() {
       jobs?.forEach((job) => {
         if (!checkWeekdaySchedule(job, weekDaysArray[date.getDay()])) return;
         let time = job.time;
-        all_jobs.push({ start: time.start, end: time.end, job: job.jobId });
+        all_jobs.push({ start: time.start, end: time.end, job: job.jobTitle });
       });
       all_jobs.sort((a, b) => {
         return a.start - b.start;
@@ -96,7 +96,7 @@ function Overview() {
   /* I should look for a different profession */
   // This code works, but is definitely NOT the way I would like to do it.
   function Booking({ booking }) {
-    const name = booking.jobId;
+    const name = booking.jobTitle;
     const { start, end, overlap, overlapIndex } = booking.time;
     const startTime = ConvertTimeStringToDecimal(start);
     const time = ConvertTimeStringToDecimal(end) - ConvertTimeStringToDecimal(start);

@@ -22,7 +22,7 @@
       background: white;
       box-shadow: 0 4px 4px #00000040;
       border-radius: 12px;
-      height: min-content;
+      height: 500px;
       gap: 40px;
       padding: 20px;
 
@@ -31,7 +31,7 @@
         border: 1px solid #ccc;
         border-radius: 7px;
         width: 600px;
-        height: 41px;
+        height: 31px;
         font-family: Poppins, sans-serif;
         font-style: normal;
         font-weight: 400;
@@ -238,7 +238,7 @@
 
           label,
           .fourth-language-select-container {
-            width: 200px;
+            width: 100%;
           }
 
           .select-container {

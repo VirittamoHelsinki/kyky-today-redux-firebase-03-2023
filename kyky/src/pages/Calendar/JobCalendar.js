@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/sellers/calendarScheduleSlice';
 import { changeBookingStatus } from '../../redux/buyers/serviceBookingSlice';
@@ -55,7 +55,6 @@ export default function JobCalendar() {
   const [jobs, setJobs] = useState([]);
   const [activities, setActivities] = useState([]);
   const [titles, setTitles] = useState([]);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const _user = useSelector((state) => state.user);
   const _schedules = useSelector((state) => state.schedule);
@@ -345,7 +344,7 @@ export default function JobCalendar() {
                       new Date(activity.date.seconds * 1000).toISOString().slice(0, 10) ===
                         new Date(date.getFullYear(), date.getMonth(), day.getDate())
                           .toISOString()
-                          .slice(0, 10) && activity.jobId === currentJob
+                          .slice(0, 10) && activity.jobTitle === currentJob
                   );
                   const confirmed = activitiesToday.filter((activity) => activity.confirmed);
                   const pending = activitiesToday.filter((activity) => !activity.confirmed);
@@ -392,7 +391,7 @@ export default function JobCalendar() {
           {currentActivities.length > 0 ? (
             <div className="schedules">
               {schedules.map((schedule, index) => {
-                let _id = schedule.jobId + schedule.time.start;
+                let _id = schedule.jobTitle + schedule.time.start;
                 const activitiesNow = currentActivities.filter(
                   (activity) =>
                     activity.time.start < schedule.time.end &&

@@ -45,7 +45,7 @@ export default function PreviewAndSubmit({ properties }) {
       <h2>Preview & Submit</h2>
       <div>
         <p>Job type:</p>
-        <span style={{ color: 'black' }}>{properties.jobId}</span>
+        <span style={{ color: 'black' }}>{properties.jobTitle}</span>
       </div>
       <div>
         <p>Schedule duration</p>
@@ -109,7 +109,7 @@ PreviewAndSubmit.propTypes = {
     bufferBetweenBookings: PropTypes.number.isRequired,
     canOverLap: PropTypes.bool,
     includeTravelTime: PropTypes.bool.isRequired,
-    jobId: PropTypes.string.isRequired,
+    jobTitle: PropTypes.string.isRequired,
     minimumBookingDuration: PropTypes.number.isRequired,
     overlapType: PropTypes.string.isRequired,
     recurring: PropTypes.arrayOf(PropTypes.string).isRequired,

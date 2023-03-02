@@ -33,15 +33,15 @@ export default function ManageSchedules() {
   }, []);
 
   function deleteSchedule(schedule) {
-    const storage = [..._schedules[schedule.jobId + '_schedules']];
+    const storage = [..._schedules[schedule.jobTitle + '_schedules']];
     const index = storage.findIndex((item) => item._id === schedule._id) || 0;
     const confirm = window.confirm('Are you sure you want to delete this schedule?');
     if (confirm) {
       storage.splice(index, 1);
       if (storage.length === 0) {
-        dispatch(removeSchedule({ uid: _user.uid, schedule: schedule.jobId }));
+        dispatch(removeSchedule({ uid: _user.uid, schedule: schedule.jobTitle }));
       } else {
-        dispatch(createSchedule({ uid: _user.uid, jobId: schedule.jobId, data: storage }));
+        dispatch(createSchedule({ uid: _user.uid, jobTitle: schedule.jobTitle, data: storage }));
       }
     }
     setSelectedSchedules(storage);
@@ -57,9 +57,9 @@ export default function ManageSchedules() {
     allSchedules.forEach((schedule) => {
       if (!schedule[0]) schedule = [schedule];
       schedule.forEach((item) => {
-        const id = item.jobId;
+        const id = item.jobTitle;
         if (!schedulesObject[id]) {
-          schedulesObject[id] = { jobId: id, schedules: [] };
+          schedulesObject[id] = { jobTitle: id, schedules: [] };
         }
         schedulesObject[id].schedules.push(item);
       });
@@ -184,7 +184,7 @@ export default function ManageSchedules() {
                   setOpened(-1);
                   setSelectedSchedules(schedule.schedules);
                 }}>
-                <p className="job">{schedule.jobId}</p>
+                <p className="job">{schedule.jobTitle}</p>
                 <p>{schedule.schedules.length} Schedules</p>
               </div>
             ))}

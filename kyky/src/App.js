@@ -28,11 +28,6 @@ import UserProfile from './pages/UserProfile';
 import UserRoute from './routes/UserRoute';
 import GuestRoute from './routes/GuestRoute';
 
-/* Profile creation */
-import NewProfileCreation from './pages/ProfileCreation/NewProfileCreation';
-import Creation from './pages/ProfileCreation/Creation';
-import GetStarted from './pages/ProfileCreation/GetStarted';
-
 /* Calendar */
 import MyCalendar from './pages/Calendar/MyCalendar';
 import Overview from './pages/Calendar/Overview';
@@ -66,13 +61,14 @@ import PrivacyPolicy from './pages/Infos/PrivacyPolicy';
 import HowServiceWorks from './pages/Infos/HowServiceWorks';
 import Pricing from './pages/Infos/Pricing';
 import AdditionalServices from './pages/Infos/AdditionalServices';
+import ContactUs from './pages/Infos/ContactUs';
 
 const languages = { fi, en };
 const defaultJob = {
   id: '',
   categories: [],
   cities: [],
-  jobTitle: ''
+  job_title: ''
 };
 
 const App = () => {
@@ -126,6 +122,7 @@ const App = () => {
           <Route path="how-service-works" element={<HowServiceWorks />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="additional-services" element={<AdditionalServices />} />
+          <Route path="contact-us" element={<ContactUs />} />
 
           <Route
             path="calendar"
@@ -155,14 +152,6 @@ const App = () => {
               element={
                 <UserRoute>
                   <ManageSchedules />
-                </UserRoute>
-              }
-            />
-            <Route
-              path="job-creation"
-              element={
-                <UserRoute>
-                  <JobCreation />
                 </UserRoute>
               }
             />

@@ -10,7 +10,9 @@ const Footer = () => {
         <Link to="/kyky-team">
           <div className="content">TIIMI/TEAM</div>
         </Link>
-        <div className="content">YHTEYSTIEDOT/CONTACT</div>
+        <Link to="/contact-us">
+          <div className="content">YHTEYSTIEDOT/CONTACT</div>
+        </Link>
         <Link to="/how-service-works">
           <div className="content">MITEN PALVELU TOIMII</div>
         </Link>

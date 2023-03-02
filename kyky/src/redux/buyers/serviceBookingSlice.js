@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { doc, setDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { doc, setDoc, collection, query, where, getDocs, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
 export const createBooking = createAsyncThunk('serviceBookings/createBooking', async (payload) => {
   try {
     const bookingRef = doc(collection(db, `bookings`));
-    await setDoc(bookingRef, payload);
-    console.log(bookingRef);
+    await setDoc(bookingRef, {...payload, created: serverTimestamp()});
   } catch (error) {
     return error;
   }
@@ -18,7 +17,7 @@ export const fetchBookingsByQuery = createAsyncThunk(
     try {
       const bookings = [];
       const ref = collection(db, 'bookings');
-      const q = query(ref, where('uid', '==', payload));
+      const q = query(ref, where('sellerUid', '==', payload));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
         bookings.push({ ...doc.data(), bookingId: doc.id });

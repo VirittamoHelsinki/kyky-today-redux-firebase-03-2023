@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { contactUs } from '../../redux/chat/adminContactSlice';
 import '../../styles/ContactUs.scss';
@@ -10,9 +10,17 @@ const ContactUs = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   function sendMessage() {
     if (name !== '' && email !== '' && message !== '') {
       dispatch(contactUs({ name: name, email: email, message: message }));
+      setName('');
+      setEmail('');
+      setMessage('')
+      window.alert('Thank you for contacting us!');
     } else {
       window.alert('Please fill all fields');
     }

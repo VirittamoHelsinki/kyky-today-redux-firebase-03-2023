@@ -93,18 +93,18 @@ export const fetchCategoryJobs = createAsyncThunk(
   }
 );
 
-export const deleteJobById = createAsyncThunk('jobForms/deleteJobById', async (jobId) => {
+export const deleteJobById = createAsyncThunk('jobForms/deleteJobById', async (jobTitle) => {
   try {
-    await deleteDoc(doc(db, 'jobs', jobId));
-    return jobId;
+    await deleteDoc(doc(db, 'jobs', jobTitle));
+    return jobTitle;
   } catch (error) {
     return error;
   }
 });
 
-export const addPageview = createAsyncThunk('jobForms/addPageview', async (jobId) => {
+export const addPageview = createAsyncThunk('jobForms/addPageview', async (jobTitle) => {
   try {
-    await updateDoc(doc(db, 'jobs', jobId), {
+    await updateDoc(doc(db, 'jobs', jobTitle), {
       pageviews: increment(1)
     });
   } catch (error) {
@@ -141,7 +141,7 @@ export const jobCreationFormSlice = createSlice({
             id: job.title,
             categories: [job.title],
             cities: [job.title],
-            jobTitle: job.title
+            job_title: job.title
           });
         });
         return (state = {

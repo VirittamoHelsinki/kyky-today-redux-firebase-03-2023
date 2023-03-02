@@ -1,7 +1,7 @@
 [
   {
     "userId": "jiohjtr9405yj8h65h9rbg",
-    "jobId": "babysitting",
+    "jobTitle": "babysitting",
     "startDate": "2022-09-02",
     "endDate": "2022-12-02",
     "days": ["mon", "tue", "fri"],
@@ -10,7 +10,7 @@
   },
   {
     "userId": "jiohjtr9405yj8h65h9rbg",
-    "jobId": "plant_sitting",
+    "jobTitle": "plant_sitting",
     "startDate": "2022-09-02",
     "endDate": "2022-12-02",
     "days": ["mon", "tue", "wed", "fri"],
@@ -19,7 +19,7 @@
   },
   {
     "userId": "jiohjtr9405yj8h65h9rbg",
-    "jobId": "wordpress_designer",
+    "jobTitle": "wordpress_designer",
     "startDate": "2022-09-02",
     "endDate": "2022-12-02",
     "days": ["mon", "tue", "thu", "fri"],
@@ -28,7 +28,7 @@
   },
   {
     "userId": "jiohjtr9405yj8h65h9rbg",
-    "jobId": "photography",
+    "jobTitle": "photography",
     "startDate": "2022-09-02",
     "endDate": "2022-12-02",
     "days": ["mon", "tue", "fri"],

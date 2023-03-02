@@ -19,7 +19,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }
   const [View, setView] = useState(() => ChooseJob);
   const [canContinue, setCanContinue] = useState(true);
   const [properties, setProperties] = useState({
-    jobId: '',
+    jobTitle: '',
     scheduleDuration: {
       months: 3,
       startDate: null,
@@ -92,8 +92,8 @@ export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }
 
   function SubmitDetails() {
     // makes copy of the object to allow modifications because Firebase returns Object.freeze()
-    const schedules = _schedules[properties.jobId + '_schedules']
-      ? JSON.parse(JSON.stringify(_schedules[properties.jobId + '_schedules']))
+    const schedules = _schedules[properties.jobTitle + '_schedules']
+      ? JSON.parse(JSON.stringify(_schedules[properties.jobTitle + '_schedules']))
       : [];
     if (mode === 'create') {
       const id = Math.random().toString(36).substring(2, 9); // generate random id
@@ -111,13 +111,13 @@ export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }
         dispatch(
           createSchedule({
             uid: _user.uid,
-            jobId: properties.jobId + '_schedules',
+            jobTitle: properties.jobTitle + '_schedules',
             data: schedules
           })
         );
       } else {
         dispatch(
-          createSchedule({ uid: _user.uid, jobId: properties.jobId + '_schedules', data: [data] })
+          createSchedule({ uid: _user.uid, jobTitle: properties.jobTitle + '_schedules', data: [data] })
         );
       }
     } else if (mode === 'edit') {
@@ -128,7 +128,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }
         dispatch(
           createSchedule({
             uid: _user.uid,
-            jobId: properties.jobId + '_schedules',
+            jobTitle: properties.jobTitle + '_schedules',
             data: schedules
           })
         );
@@ -137,15 +137,15 @@ export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }
   }
 
   function deleteSchedule(schedule) {
-    const storage = JSON.parse(localStorage.getItem(`${schedule.jobId}_schedules`));
+    const storage = JSON.parse(localStorage.getItem(`${schedule.jobTitle}_schedules`));
     const index = storage.findIndex((item) => item._id === schedule._id) || 0;
     const confirm = window.confirm('Are you sure you want to delete this schedule?');
     if (confirm) {
       storage.splice(index, 1);
       if (storage.length === 0) {
-        dispatch(removeSchedule({ uid: _user.uid, schedule: schedule.jobId }));
+        dispatch(removeSchedule({ uid: _user.uid, schedule: schedule.jobTitle }));
       } else {
-        dispatch(createSchedule({ uid: _user.uid, jobId: schedule.jobId, data: storage }));
+        dispatch(createSchedule({ uid: _user.uid, jobTitle: schedule.jobTitle, data: storage }));
       }
     }
   }
@@ -222,7 +222,7 @@ ManageScheduleModal.propTypes = {
     bufferBetweenBookings: PropTypes.number.isRequired,
     canOverLap: PropTypes.bool.isRequired,
     includeTravelTime: PropTypes.bool.isRequired,
-    jobId: PropTypes.string.isRequired,
+    jobTitle: PropTypes.string.isRequired,
     minimumBookingDuration: PropTypes.number.isRequired,
     overlapType: PropTypes.string.isRequired,
     recurring: PropTypes.arrayOf(PropTypes.string).isRequired,

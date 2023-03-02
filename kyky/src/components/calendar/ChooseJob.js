@@ -6,7 +6,7 @@ const defaultJob = {
   id: '',
   categories: [],
   cities: [],
-  jobTitle: ''
+  job_title: ''
 };
 
 export default function ChooseJob({ properties, setField }) {
@@ -25,9 +25,9 @@ export default function ChooseJob({ properties, setField }) {
   }, []);
 
   useEffect(() => {
-    if (properties.jobId) {
-      setField('jobId', properties.jobId);
-    } else setField('jobId', jobs[0].id);
+    if (properties.jobTitle) {
+      setField('jobTitle', properties.jobTitle);
+    } else setField('jobTitle', jobs[0].id);
   }, [jobs]);
 
   return (
@@ -37,7 +37,7 @@ export default function ChooseJob({ properties, setField }) {
         className="select-basic"
         value={job}
         onChange={(e) => {
-          setField('jobId', e.target.value);
+          setField('jobTitle', e.target.value);
           setJob(e.target.value);
         }}>
         {jobs.map((job, index) => {
@@ -54,7 +54,7 @@ export default function ChooseJob({ properties, setField }) {
 
 ChooseJob.propTypes = {
   properties: PropTypes.shape({
-    jobId: PropTypes.string.isRequired
+    jobTitle: PropTypes.string.isRequired
   }).isRequired,
   setField: PropTypes.func.isRequired
 };

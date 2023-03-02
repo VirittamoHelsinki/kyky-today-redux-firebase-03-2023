@@ -37,7 +37,7 @@ export default function CalendarSettings({ jobs }) {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   useEffect(() => {
-    setJobOptions(jobs.map((job) => ({ value: job.id, label: job.jobTitle })));
+    setJobOptions(jobs.map((job) => ({ value: job.id, label: job.job_title })));
     if (Array.isArray(_settings)) {
       const parsedSettings = JSON.parse(JSON.stringify(_settings));
       setSwitched(parsedSettings.switched);
@@ -223,7 +223,7 @@ CalendarSettings.propTypes = {
       id: PropTypes.string.isRequired,
       categories: PropTypes.arrayOf(PropTypes.string).isRequired,
       cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-      jobTitle: PropTypes.string.isRequired
+      job_title: PropTypes.string.isRequired
     })
   ).isRequired
 };

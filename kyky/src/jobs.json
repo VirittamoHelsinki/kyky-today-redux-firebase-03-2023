@@ -3,24 +3,24 @@
     "id": "babysitting",
     "categories": ["babysitting"],
     "cities": ["Helsinki"],
-    "jobTitle": "Babysitter"
+    "job_title": "Babysitter"
   },
   {
     "id": "plant_sitting",
     "categories": ["plant_sitting"],
     "cities": ["Helsinki"],
-    "jobTitle": "Plant sitter"
+    "job_title": "Plant sitter"
   },
   {
     "id": "wordpress_designer",
     "categories": ["wordpress_designer"],
     "cities": ["Helsinki"],
-    "jobTitle": "Wordpress designer"
+    "job_title": "Wordpress designer"
   },
   {
     "id": "photography",
     "categories": ["photography"],
     "cities": ["Helsinki"],
-    "jobTitle": "Photographer"
+    "job_title": "Photographer"
   }
 ]

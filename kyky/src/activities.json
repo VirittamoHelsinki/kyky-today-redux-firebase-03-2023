@@ -8,7 +8,7 @@
       "start": "10:00",
       "end": "11:00"
     },
-    "jobId": "babysitting",
+    "jobTitle": "babysitting",
     "confirmed": true
   },
   {
@@ -20,7 +20,7 @@
       "start": "11:30",
       "end": "14:00"
     },
-    "jobId": "babysitting",
+    "jobTitle": "babysitting",
     "confirmed": true
   },
   {
@@ -32,7 +32,7 @@
       "start": "09:30",
       "end": "12:00"
     },
-    "jobId": "babysitting",
+    "jobTitle": "babysitting",
     "confirmed": false
   },
   {
@@ -44,7 +44,7 @@
       "start": "10:30",
       "end": "15:00"
     },
-    "jobId": "babysitting",
+    "jobTitle": "babysitting",
     "confirmed": true
   }
 ]

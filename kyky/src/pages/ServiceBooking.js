@@ -197,8 +197,11 @@ function ServiceBooking() {
       dispatch(
         createBooking({
           ...booking,
-          bookingId: location.state.id,
-          uid: location.state.uid,
+          jobId: location.state.id,
+          jobTitle: location.state.title,
+          jobPhotoURL: location.state.urls[0],
+          jobHeadline: location.state.headline,
+          sellerUid: location.state.uid,
           buyerUid: user ? user.uid : null,
           buyerPhotoURL: user ? user.photoURL : '',
           buyerName: user ? user.displayName : inputname,
@@ -210,8 +213,12 @@ function ServiceBooking() {
             start: '09:00',
             end: '15:00'
           },
-          jobId: location.state.title,
-          confirmed: false
+          price: location.state.price,
+          unit: location.state.unit,
+          status: 'incompleted',
+          operationTime: '',
+          paid: false,
+          confirmed: false,
         })
       );
       setBooking(defaultBookingValue);

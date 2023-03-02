@@ -108,18 +108,16 @@ const Header = () => {
   }, []);
 
   return (
-    <div id="navheader">
+    <div className="navheader">
       <div className="nav-title">
         <a href="/">
           <KykyLogo />
         </a>
       </div>
+      <SearchBar />
       <nav>
         {_user.uid ? (
           <ul>
-            <li>
-              <SearchBar />
-            </li>
             <li onClick={notificationToggle}>
               <div className="icon-and-red-circle">
                 <span className="material-icons-outlined" ref={notificationRef}>
@@ -173,14 +171,6 @@ const Header = () => {
                 )}
               </div>
             </li>
-            <li>
-              <Link to="calendar">
-                <div className="calendar-icon-hovertext">
-                  <span className="material-icons-outlined">calendar_month</span>
-                  <span className="hovertext">Calendar</span>
-                </div>
-              </Link>
-            </li>
             <li onClick={profileToggle}>
               <img
                 src={_user.photoURL}
@@ -200,9 +190,6 @@ const Header = () => {
           </ul>
         ) : (
           <ul>
-            <li>
-              <SearchBar />
-            </li>
             <li>
               <Link to="/user-registration">Sign up</Link>
             </li>

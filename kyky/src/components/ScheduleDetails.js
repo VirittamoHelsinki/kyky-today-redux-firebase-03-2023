@@ -40,10 +40,10 @@ export default function ScheduleDetails({ schedule }) {
 
   return (
     <div className="schedule-details-view">
-      <h2>{schedule.jobId} details</h2>
+      <h2>{schedule.jobTitle} details</h2>
       <div>
         <p>Job type:</p>
-        <span style={{ color: 'black' }}>{schedule.jobId}</span>
+        <span style={{ color: 'black' }}>{schedule.jobTitle}</span>
       </div>
       <div>
         <p>Schedule duration</p>

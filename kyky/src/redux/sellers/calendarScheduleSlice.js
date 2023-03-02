@@ -6,12 +6,12 @@ import { db } from '../../firebase/firebase';
 and returns both schedule name and object if succesfull */
 export const createSchedule = createAsyncThunk(
   'calendarSchedules/createSchedule',
-  async ({ uid, jobId, data }) => {
+  async ({ uid, jobTitle, data }) => {
     try {
-      await setDoc(doc(db, 'users', uid, 'schedules', jobId), {
+      await setDoc(doc(db, 'users', uid, 'schedules', jobTitle), {
         ...data
       });
-      return { uid, jobId, data };
+      return { uid, jobTitle, data };
     } catch (error) {
       return error;
     }
@@ -86,7 +86,7 @@ export const calendarScheduleSlice = createSlice({
       .addCase(createSchedule.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          [action.payload.jobId]: action.payload.data
+          [action.payload.jobTitle]: action.payload.data
         });
       })
       .addCase(fetchSchedules.pending, (state, action) => {

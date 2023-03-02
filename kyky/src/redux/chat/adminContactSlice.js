@@ -5,7 +5,7 @@ import { db } from '../../firebase/firebase';
 export const contactUs = createAsyncThunk('adminContacts/contactUs', async (payload) => {
   try {
     const contactRef = doc(collection(db, `contacts`));
-    await setDoc(contactRef, ...payload);
+    await setDoc(contactRef, payload);
   } catch (error) {
     return error;
   }
