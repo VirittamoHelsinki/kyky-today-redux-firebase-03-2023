@@ -1,105 +1,63 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import OrderStatus from '../../components/Profiles/OrderStatus';
-import '../../styles/Profiles.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPurchasesByQuery } from '../../redux/bookings/bookingSlice';
+import Purchase from '../../components/Profiles/Purchase';
 
-const Purchases = ({ order }) => {
+const Purchases = () => {
   const setSelectedWindow = useOutletContext();
+  const [incompleted, setIncompleted] = useState([]);
+  const [completed, setCompleted] = useState([]);
+  const [canceled, setCanceled] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const _user = useSelector((state) => state.user);
+  const _orders = useSelector((state) => state.booking.purchases);
 
   useEffect(() => {
     setSelectedWindow('purchases');
   }, []);
 
-  const pendingOrders = [
-    {
-      job: 'Salapoliisityö',
-      seller: 'Kyösti Pöysti',
-      sum: (47.9).toFixed(2),
-      orderingDate: '23.1.2023',
-      orderStatus: 'Käsittelyssä'
-    }
-  ];
-  const deliveredOrders = [
-    {
-      job: 'Salapoliisityö',
-      seller: 'Kyösti Pöysti',
-      sum: 2115.55,
-      orderingDate: '1.10.2022',
-      orderStatus: '1.01.2023'
-    },
-    {
-      job: 'Halloween juhlasuunnittelu',
-      seller: 'Pelle Hermanni',
-      sum: 600.55,
-      orderingDate: '20.10.2022',
-      orderStatus: '25.10.2022'
-    },
-    {
-      job: 'Keskiajan miekkailutunti',
-      seller: 'Johannes Liechtenauer',
-      sum: 10000.65,
-      orderingDate: '1.12.2022',
-      orderStatus: '24.12.2023'
-    }
-  ];
+  useEffect(() => {
+    dispatch(fetchPurchasesByQuery(_user.uid));
+  }, []);
 
-  const cancelledOrders = [];
-  function tableHeader() {
-    return (
-      <thead className="profiles-table-header">
-        <tr>
-          <th className="job-header">Palvelu</th>
-          <th className="seller-header">Myyjä</th>
-          <th className="sum-header">Summa</th>
-          <th className="ordered-header">Ostettu</th>
-          <th className="delivered-header">Toimitettu</th>
-        </tr>
-      </thead>
-    );
-  }
-
-  function emptyTable() {
-    return (
-      <tr className="profiles-table-body-row">
-        <td className="job-div">Ei näytettäviä tilauksia...</td>
-        <td className="seller-div"></td>
-        <td className="sum-div"></td>
-        <td className="ordered-div"></td>
-        <td className="delivered-div"></td>
-      </tr>
-    );
-  }
+  useEffect(() => {
+    if (Array.isArray(_orders)) {
+      const incompletes = _orders.filter(
+        (order) => order.confirmed && order.status === 'incompleted'
+      );
+      setIncompleted(incompletes);
+      const completes = _orders.filter((order) => order.status === 'completed');
+      setCompleted(completes);
+      const cancels = _orders.filter((order) => order.status === 'canceled');
+      setCanceled(cancels);
+    }
+  }, [_orders]);
 
   return (
-    <div className="profiles--content-orders-container">
-      <h4 className="title">Odottavat tilaukset</h4>
-      <table className="profiles-table" cellPadding="0" cellSpacing="0">
-        {tableHeader()}
-        <tbody className="buyers-profile-table-body">
-          {pendingOrders.length > 0
-            ? pendingOrders.map((order, index) => <OrderStatus order={order} key={index} />)
-            : emptyTable()}
-        </tbody>
-      </table>
-      <h4 className="title">Toimitetut tilaukset</h4>
-      <table className="profiles-table" cellPadding="0" cellSpacing="0">
-        {tableHeader()}
-        <tbody className="buyers-profile-table-body">
-          {deliveredOrders.length > 0
-            ? deliveredOrders.map((order, index) => <OrderStatus order={order} key={index} />)
-            : emptyTable()}
-        </tbody>
-      </table>
-      <h4 className="title">Peruutetut tilaukset</h4>
-      <table className="profiles-table" cellPadding="0" cellSpacing="0">
-        {tableHeader()}
-        <tbody className="profiles-table-body">
-          {cancelledOrders.length > 0
-            ? cancelledOrders.map((order, index) => <OrderStatus order={order} key={index} />)
-            : emptyTable()}
-        </tbody>
-      </table>
-      <h4 className="title">Tähdellä merkityt tilaukset</h4>
+    <div className="orders-main">
+      <div className="order-content">
+        <div className="status-label">
+          <p>Incompleted orders</p>
+        </div>
+        <div className="order-items">
+          {incompleted.map((o, index) => (
+            <Purchase order={o} key={index} />
+          ))}
+        </div>
+      </div>
+      <div className="order-content">
+        <div className="status-label">
+          <p>Completed orders</p>
+        </div>
+        <div className="order-items">
+          {completed.map((o, index) => (
+            <Purchase order={o} key={index} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

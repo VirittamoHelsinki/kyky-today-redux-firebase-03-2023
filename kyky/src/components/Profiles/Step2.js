@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import WorkExperience from '../profile/WorkExperience';
-import EducationExperience from '../profile/EducationExperience';
+import WorkExperience from '../Profiles/WorkExperience';
+import EducationExperience from '../Profiles/EducationExperience';
 import '../../styles/CreateProfileModal.scss';
 
 export default function Step2({ handleChange }) {

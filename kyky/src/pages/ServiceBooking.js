@@ -200,13 +200,14 @@ function ServiceBooking() {
           jobTitle: location.state.title,
           jobPhotoURL: location.state.urls[0],
           jobHeadline: location.state.headline,
+          sellerName: location.state.name,
           sellerUid: location.state.uid,
           buyerUid: user ? user.uid : null,
-          buyerPhotoURL: user ? user.photoURL : '',
           buyerName: user ? user.displayName : inputname,
           buyerMail: user ? user.email : inputmail,
-          buyerLocation: location.state.place,
+          buyerPhotoURL: user ? user.photoURL : '',
           buyerRegistered: user ? true : false,
+          buyerLocation: location.state.place,
           date: date,
           time: {
             start: '09:00',
@@ -217,7 +218,7 @@ function ServiceBooking() {
           status: 'incompleted',
           operationTime: '',
           paid: false,
-          confirmed: false,
+          confirmed: false
         })
       );
       setBooking(defaultBookingValue);

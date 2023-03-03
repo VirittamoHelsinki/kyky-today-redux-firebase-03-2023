@@ -1,11 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { doc, setDoc, collection, query, where, getDocs, serverTimestamp } from 'firebase/firestore';
+import {
+  doc,
+  setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  serverTimestamp
+} from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
 export const createBooking = createAsyncThunk('bookings/createBooking', async (payload) => {
   try {
     const bookingRef = doc(collection(db, `bookings`));
-    await setDoc(bookingRef, {...payload, bookingId: bookingRef.id, created: serverTimestamp()});
+    await setDoc(bookingRef, { ...payload, bookingId: bookingRef.id, created: serverTimestamp() });
   } catch (error) {
     return error;
   }
@@ -20,9 +28,27 @@ export const fetchBookingsByQuery = createAsyncThunk(
       const q = query(ref, where('sellerUid', '==', payload));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
-        bookings.push({ ...doc.data()});
+        bookings.push({ ...doc.data() });
       });
       return bookings;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
+export const fetchPurchasesByQuery = createAsyncThunk(
+  'bookings/fetchPurchasesByQuery',
+  async (payload) => {
+    try {
+      const purchases = [];
+      const ref = collection(db, 'bookings');
+      const q = query(ref, where('buyerUid', '==', payload));
+      const snap = await getDocs(q);
+      snap.forEach((doc) => {
+        purchases.push({ ...doc.data() });
+      });
+      return purchases;
     } catch (error) {
       return error;
     }
@@ -73,6 +99,12 @@ export const bookingSlice = createSlice({
         return (state = {
           ...state,
           bookings: action.payload
+        });
+      })
+      .addCase(fetchPurchasesByQuery.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          purchases: action.payload
         });
       })
       /* make a deep copy of booking state, find the right index using the booking id, change 
