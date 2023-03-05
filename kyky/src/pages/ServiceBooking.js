@@ -221,6 +221,16 @@ function ServiceBooking() {
           confirmed: false
         })
       );
+      dispatch(
+        addNotification({
+          uid: uid,
+          notification: {
+            text: user.displayName + ' made a new booking',
+            to: '/calendar',
+            read: false
+          }
+        })
+      );
       setBooking(defaultBookingValue);
       dispatch(fetchJobsByQuery({ key: 'uid', value: user.uid }));
       navigate('/');

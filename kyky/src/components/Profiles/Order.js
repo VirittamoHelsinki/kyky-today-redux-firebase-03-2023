@@ -64,8 +64,18 @@ const Order = ({order, user}) => {
         <div className='order-data-modal transparent-background'>
           <div className='order-data-modal'>
             <div className='order-data-content'>
-              <div className='order-data-title'>
-                <p>{order.jobHeadline}</p>
+              <div className='order-data-title-close-button'>
+                <div className='order-data-title'>
+                  <p>{order.jobHeadline}</p>
+                </div>
+                <div className='order-data-close-button'>
+                  <span
+                    id="cancel-button"
+                    className="material-icons-outlined"
+                    onClick={() => setShowOrderDataModal(false)}>
+                    cancel
+                  </span>
+                </div>
               </div>
               <div className='order-data-image-details'>
                 <div className="order-data-image">

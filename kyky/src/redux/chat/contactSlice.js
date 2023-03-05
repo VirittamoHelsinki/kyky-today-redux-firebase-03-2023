@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { addDoc, doc, setDoc, collection, getDoc, getDocs } from 'firebase/firestore';
+import { addDoc, doc, setDoc, collection, getDoc, getDocs, deleteDoc } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
 const initialChat = {
@@ -24,11 +24,13 @@ export const createContact = createAsyncThunk(
       });
 
       await setDoc(doc(db, 'users', contactUid, 'chats', myUid), {
+        contactUid: contactUid,
         chatId: chatRef.id,
         name: myName,
         photoURL: myPhotoURL
       });
       return {
+        contactUid: contactUid,
         chatId: chatRef.id,
         name: contactName,
         photoURL: contactPhotoURL
@@ -52,6 +54,15 @@ export const fetchContacts = createAsyncThunk('contact/fetchContacts', async (ui
     return error;
   }
 });
+
+export const deleteContact = createAsyncThunk('contact/deleteContact', async ({userUid, contactUid}) => {
+  try {
+    await deleteDoc(doc(db, 'users', userUid, 'chats', contactUid));
+    return contactUid
+  } catch (error) {
+    return error;
+  }
+})
 
 const initialState = {
   contacts: []
@@ -79,7 +90,13 @@ export const contactSlice = createSlice({
           ...state,
           contacts: action.payload
         });
-      });
+      })
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          contacts: state.contacts.filter((c) => c.contactUid !== action.payload)
+        });
+      })
   }
 });
 

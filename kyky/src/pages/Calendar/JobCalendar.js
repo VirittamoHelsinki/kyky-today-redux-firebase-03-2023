@@ -55,6 +55,7 @@ export default function JobCalendar() {
   const [jobs, setJobs] = useState([]);
   const [activities, setActivities] = useState([]);
   const [titles, setTitles] = useState([]);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const _user = useSelector((state) => state.user);
   const _schedules = useSelector((state) => state.schedule);
@@ -460,7 +461,7 @@ export default function JobCalendar() {
                                         name: activity.buyerName,
                                         photoURL: activity.buyerPhotoURL
                                       });
-                                      navigate('/buyer/messages');
+                                      navigate('/seller/messages');
                                     }}>
                                     {activity.buyerName}
                                   </span>
@@ -483,26 +484,47 @@ export default function JobCalendar() {
                                   <i
                                     id="pending-pointer"
                                     className="material-icons-outlined"
-                                    onClick={() => {
-                                      dispatch(
-                                        changeConfirmedStatus({
-                                          bookingId: activity.bookingId,
-                                          status: true
-                                        })
-                                      );
-                                      dispatch(
-                                        addNotification({
-                                          uid: activity.buyerUid,
-                                          notification: {
-                                            text: _user.displayName + ' confirmed your booking',
-                                            to: '/buyer/purchases',
-                                            read: false
-                                          }
-                                        })
-                                      );
-                                    }}>
+                                    onClick={() => setShowConfirmModal(true)}>
                                     keyboard_arrow_right
                                   </i>
+                                  {showConfirmModal && (
+                                    <div className='confirm-modal transparent-background'>
+                                      <div className='confirm-modal'>
+                                        <div className='confirm-container'>
+                                          <div className='confirm-label'>
+                                            <p>Confirm booking?</p>
+                                          </div>
+                                          <div className='buttons-row'>
+                                            <button 
+                                              className='cancel-button'
+                                              onClick={() => setShowConfirmModal(false)}>Cancel</button>
+                                            <button 
+                                              className='confirm-button'
+                                              onClick={() => {
+                                                dispatch(
+                                                  changeConfirmedStatus({
+                                                    bookingId: activity.bookingId,
+                                                    status: true
+                                                  })
+                                                );
+                                                dispatch(
+                                                  addNotification({
+                                                    uid: activity.buyerUid,
+                                                    notification: {
+                                                      text: _user.displayName + ' confirmed your booking',
+                                                      to: '/buyer/purchases',
+                                                      read: false
+                                                    }
+                                                  })
+                                                );
+                                                setShowConfirmModal(false)
+                                                window.location.reload(false);
+                                              }}>Confirm</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
                                 </p>
                               )}
                             </div>

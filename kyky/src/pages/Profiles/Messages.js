@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from '../../redux/chat/contactSlice';
+import { fetchContacts, deleteContact } from '../../redux/chat/contactSlice';
 import { addMessage, fetchMessages } from '../../redux/chat/messageSlice';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
@@ -13,6 +13,7 @@ const Messages = () => {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
   const [chatId, setChatId] = useState(null);
+  const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -71,32 +72,6 @@ const Messages = () => {
     }
   }
 
-  /* add timeStamp(message.timestamp) to messages.map */
-  // function timeSince(timestamp) {
-  //   let seconds = Math.floor(new Date() / 1000 - parseInt(timestamp));
-  //   let interval = seconds / 31536000;
-  //   if (interval > 1) {
-  //     return Math.floor(interval) + ' years';
-  //   }
-  //   interval = seconds / 2592000;
-  //   if (interval > 1) {
-  //     return Math.floor(interval) + ' months';
-  //   }
-  //   interval = seconds / 86400;
-  //   if (interval > 1) {
-  //     return Math.floor(interval) + ' days';
-  //   }
-  //   interval = seconds / 3600;
-  //   if (interval > 1) {
-  //     return Math.floor(interval) + ' hrs';
-  //   }
-  //   interval = seconds / 60;
-  //   if (interval > 1) {
-  //     return Math.floor(interval) + ' min';
-  //   }
-  //   return Math.floor(seconds) + ' sec';
-  // }
-
   return (
     <div className="messages-main">
       <div className="contacts-content">
@@ -116,14 +91,43 @@ const Messages = () => {
                   referrerPolicy="no-referrer"
                   alt=""
                 />
-                <div className="name-latest-message-paragraph">
-                  <p className="name-paragraph">{contact.name}</p>
-                  <p className="latest-message-paragraph">ok done..</p>
+                <div className="contact-name">
+                  <p className="name-label">{contact.name}</p>
                 </div>
               </div>
               <div className="contact-right-side">
-                <p className="time-since-last-message">1h</p>
+                <button 
+                  className='remove-contact-button'
+                  onClick={() => setShowDeleteContactModal(true)}
+                  >X</button>
               </div>
+              {showDeleteContactModal && (
+                <div className='delete-contact-modal transparent-background'>
+                  <div className='delete-contact-modal'>
+                  <div className='delete-contact-container'>
+                    <div className='delete-contact-label'>
+                      <p>Are you sure you want to delete the conversation with {contact.name}?</p>
+                    </div>
+                    <div className='buttons-row'>
+                      <button 
+                        className='cancel-button'
+                        onClick={() => setShowDeleteContactModal(false)}>Cancel</button>
+                      <button 
+                        className='delete-button'
+                        onClick={() => {
+                          dispatch(
+                            deleteContact({
+                              userUid: _user.uid,
+                              contactUid: contact.contactUid
+                            })
+                          );
+                          setShowDeleteContactModal(false)
+                        }}>Delete</button>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -135,7 +139,7 @@ const Messages = () => {
       ) : (
         <div className="messages-content">
           <div className="messages-list">
-            {/* to force the scroll bar down css has set to "flex-direction: column-reverse", so this is reversed too */}
+            {/* to force the scroll bar down, css has set to "flex-direction: column-reverse", so this is reversed too */}
             {messages
               .map((message, index) => (
                 <div

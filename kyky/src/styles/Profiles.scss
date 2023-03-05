@@ -207,6 +207,7 @@ h4 {
             justify-content: space-between;
             align-items: center;
             width: 100%;
+            height: 60px;
             border-radius: 6px;
             border: 1px solid gainsboro;
             cursor: pointer;
@@ -223,17 +224,14 @@ h4 {
                 border-radius: 50%;
               }
 
-              .name-latest-message-paragraph {
+              .contact-name {
                 display: flex;
                 flex-direction: column;
+                align-items: flex-start;
                 font-size: 18px;
 
-                .name-paragraph {
+                .name-label {
                   font-weight: bold;
-                }
-
-                .latest-message-paragraph {
-                  font-weight: normal;
                 }
               }
             }
@@ -241,15 +239,24 @@ h4 {
             .contact-right-side {
               display: flex;
               justify-content: flex-end;
+              height: 100%;
               padding: 5px 10px;
 
-              .time-since-last-message {
-                font-size: 14px;
+              .remove-contact-button {
+                display: flex;
+                align-items: flex-start;
+                background: #8c8c8c;
+                color: white;
+                border-radius: 50%;
+                box-shadow: 0 1px 1px 2px #00000024;
+                height: 16px;
+                padding: 0 5px;
+                cursor: pointer;
               }
             }
 
             &.selected {
-              background: #ddd;
+              background: #f5f5f5
             }
           }
         }
@@ -1141,18 +1148,39 @@ h4 {
     justify-content: flex-start;
     background: #c4c4c447;
     padding: 20px;
+    gap: 20px;
 
-    .order-data-title {
+    .order-data-title-close-button {
       display: flex;
-      justify-content: flex-start;
+      flex-direction: row;
+      justify-content: space-between;
 
-      p {
-        font-family: Poppins, sans-serif;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 32px;
-        line-height: 48px;
-        text-align: left;
+      .order-data-title {
+        display: flex;
+        justify-content: flex-start;
+  
+        p {
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 32px;
+          line-height: 48px;
+          text-align: left;
+        }
+      }
+
+      .order-data-close-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+
+        #cancel-button {
+          color: #79001D;
+          cursor: pointer;
+
+        }
       }
     }
 
@@ -1323,6 +1351,76 @@ h4 {
             border-radius: 25px;
           }
         }
+      }
+    }
+  }
+
+  &.transparent-background {
+    background: rgb(0 0 0 / 70%) !important;
+    border: none !important;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.delete-contact-modal {
+  background: #c4c4c4;
+  position: fixed;
+  z-index: 1000;
+  border: 1px #9c9797 solid;
+  width: 400px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+
+  .delete-contact-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    box-shadow: 0 4px 4px #00000040;
+    background: white;
+    border-radius: 11px;
+    padding: 20px;
+
+    .delete-contact-label {
+      display: flex;
+      justify-content: flex-start;
+
+      p {
+        font-family: Poppins, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 36px;
+        text-align: left;
+      }
+    }
+
+    .buttons-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      margin-bottom: 20px;
+
+      .cancel-button {
+        width: 120px;
+        height: 30px;
+        background: #00A088;
+        color: white;
+        box-shadow: 1px 2px 2px 4px #00000024;
+        border-radius: 19px;
+      }
+  
+      .delete-button {
+        width: 120px;
+        height: 30px;
+        background: #FFCFCF;
+        color: #79001D;
+        box-shadow: 1px 2px 2px 4px #00000024;
+        border-radius: 19px;
       }
     }
   }
