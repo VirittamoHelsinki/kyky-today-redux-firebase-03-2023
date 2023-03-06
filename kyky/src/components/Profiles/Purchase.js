@@ -14,6 +14,14 @@ const Purchase = ({ order }) => {
         <div className="order-details">
           <div className="detail">
             <div className="detail-title">
+              <p>Booking Id</p>
+            </div>
+            <div className="detail-value">
+              <p>{order.bookingId}</p>
+            </div>
+          </div>
+          <div className="detail">
+            <div className="detail-title">
               <p>Seller</p>
             </div>
             <div className="detail-value">

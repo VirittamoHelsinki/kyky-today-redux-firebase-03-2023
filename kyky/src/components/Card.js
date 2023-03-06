@@ -21,7 +21,9 @@ export default function Card({ job }) {
           </Link>
         </div>
       </div>
-      <div className="user-card--job-title">{job.description}</div>
+      <div className="user-card--job-title">
+        {job.description < 65 ? job.description : job.description.substring(0, 65) + '...'}
+      </div>
       <div className="user-card--content user-card--bolded-font rating-and-price">
         <div className="rating-and-price--star-icon-and-rating">
           <img src={starIcon} alt={'starIcon'} />

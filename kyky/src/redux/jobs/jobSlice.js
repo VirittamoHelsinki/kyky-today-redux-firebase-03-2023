@@ -116,7 +116,7 @@ const initialState = {
   cards: []
 };
 
-export const jobCreationFormSlice = createSlice({
+export const jobSlice = createSlice({
   name: 'jobs',
   initialState: initialState,
   reducers: {
@@ -177,5 +177,5 @@ export const jobCreationFormSlice = createSlice({
   }
 });
 
-export const { resetJobs } = jobCreationFormSlice.actions;
-export default jobCreationFormSlice.reducer;
+export const { resetJobs } = jobSlice.actions;
+export default jobSlice.reducer;

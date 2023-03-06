@@ -88,7 +88,7 @@ export const bookingSlice = createSlice({
   name: 'bookings',
   initialState: initialState,
   reducers: {
-    resetbooking() {
+    resetBooking() {
       return initialState;
     }
   },

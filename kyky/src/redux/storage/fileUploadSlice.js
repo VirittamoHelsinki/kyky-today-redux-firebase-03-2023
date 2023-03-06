@@ -4,7 +4,7 @@ import { storage } from '../../firebase/firebase';
 
 export const uploadImage = createAsyncThunk('fileUpload/images', async (payload) => {
   try {
-    const storageRef = ref(storage, `/images/${payload.name}`);
+    const storageRef = ref(storage, 'images', payload.name);
     await uploadBytes(storageRef, payload);
     const url = await getDownloadURL(storageRef);
     return url;
