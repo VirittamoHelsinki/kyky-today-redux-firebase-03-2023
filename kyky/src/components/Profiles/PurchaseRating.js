@@ -1,26 +1,56 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { addRating } from '../../redux/profiles/ratingSlice';
+import { rateCompletedPurchase } from '../../redux/bookings/bookingSlice';
 import starFilled from '../../image/star-filled.svg';
 import starBlank from '../../image/star-white.svg';
 import '../../styles/Profiles.scss';
 
-const PurchaseRating = ({ order }) => {
+const adjectives = [
+  'Punctual',
+  'Friendly',
+  'Responsible',
+  'Good taste',
+  'Empathetic',
+  'Creative',
+  'Professional',
+  'Problem solving',
+  'Positive attitude'
+];
+
+const PurchaseRating = ({ order, user }) => {
   const [showRatingModal, setShowRatingModal] = useState(false);
-  const [selectedTexts, setSelectedTexts] = useState([]);
-  const [comments, setComments] = useState('');
+  const [selectedTexts, setSelectedTexts] = useState(adjectives.map(() => false));
+  const [comment, setComment] = useState('');
   const [starValue, setStarValue] = useState(5);
 
-  const adjectives = [
-    'Punctual',
-    'Friendly',
-    'Responsible',
-    'Good taste',
-    'Empathetic',
-    'Creative',
-    'Professional',
-    'Problem solving',
-    'Positive Attitude'
-  ];
+  const dispatch = useDispatch();
+
+  function submitRating() {
+    let texts = []
+    for (let i = 0; i < adjectives.length; i++) {
+      if (selectedTexts[i]) {
+        texts.push(adjectives[i])
+      }
+    };
+    dispatch(addRating({
+      uid: order.sellerUid, 
+      rating: {
+        buyerName: user.displayName,
+        buyerUid: user.uid, 
+        texts: texts,
+        comment: comment,
+        stars: starValue
+      }
+    }));
+    dispatch(rateCompletedPurchase({ 
+      bookingId: order.bookingId, 
+      value: starValue 
+    }));
+    setSelectedTexts(adjectives.map(() => false));
+    setComment('');
+    setStarValue(5);
+  }
 
   function loopStars(rating) {
     let star_img_list = [];
@@ -125,12 +155,14 @@ const PurchaseRating = ({ order }) => {
                 </div>
                 <div className="rating-modal-texts-content">
                   {adjectives.map((adj, index) => (
-                    <div className="rating-modal-text" key={index}>
-                      {selectedTexts.includes(adj) ? (
-                        <div className="adj-text selected">{adj}</div>
-                      ) : (
-                        <div className="adj-text">{adj}</div>
-                      )}
+                    <div className='rating-modal-text' key={index}>
+                      <div 
+                        className={`adj-text ${selectedTexts[index] ? 'selected' : ''}`}
+                        onClick={() => {
+                          let texts = [...selectedTexts];
+                          texts[index] = !texts[index]
+                          setSelectedTexts(texts)
+                        }}>{adj}</div>
                     </div>
                   ))}
                 </div>
@@ -138,16 +170,16 @@ const PurchaseRating = ({ order }) => {
                   <textarea
                     className="rating-modal-textarea"
                     name="comments-field"
-                    value={comments}
+                    value={comment}
                     placeholder="Feel free to add more fair comments!"
                     onChange={(e) => {
-                      setComments(e.target.value);
+                      setComment(e.target.value);
                     }}
                   />
                 </div>
                 <div className="rating-modal-stars-content">
                   <div className="rating-modal-stars-label">
-                    <p>How do you rate {order.sellerName}</p>
+                    <p>How do you rate {order.sellerName}?</p>
                   </div>
                   <div className="rating-modal-stars-row">
                     {[1, 2, 3, 4, 5].map((star, index) => (
@@ -162,7 +194,10 @@ const PurchaseRating = ({ order }) => {
                   </div>
                 </div>
                 <div className="submit-button-content">
-                  <button className="submit-button" onClick={() => setShowRatingModal(false)}>
+                  <button className="submit-button" onClick={() => {
+                    submitRating();
+                    setShowRatingModal(false);
+                    }}>
                     Submit
                   </button>
                 </div>

@@ -1643,6 +1643,10 @@ h4 {
         display: flex;
         justify-content: flex-start;
         height: 100%;
+
+        span {
+          cursor: pointer;
+        }
       }
     }
 
@@ -1661,7 +1665,8 @@ h4 {
           display: flex;
           justify-content: center;
           align-items: center;
-          width: 180px;
+          width: max-content;
+          padding: 0 25px;
           height: 60px;
           background: #387a703d;
           border-radius: 13px;
@@ -1671,6 +1676,7 @@ h4 {
           font-size: 20px;
           line-height: 23px;
           text-align: center;
+          cursor: pointer;
 
           &.selected {
             background: #063831;
@@ -1732,6 +1738,7 @@ h4 {
         .rating-modal-star {
           width: 20px;
           height: 20px;
+          cursor: pointer;
         }
       }
     }

@@ -32,7 +32,7 @@ const Ratings = () => {
     <div className="ratings-main">
       <div className="ratings-items">
         {completed.map((order, index) => (
-          <PurchaseRating order={order} key={index} />
+          <PurchaseRating order={order} user={_user} key={index} />
         ))}
       </div>
     </div>

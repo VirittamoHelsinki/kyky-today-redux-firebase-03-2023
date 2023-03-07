@@ -82,6 +82,18 @@ export const changeBookingStatus = createAsyncThunk(
   }
 );
 
+export const rateCompletedPurchase = createAsyncThunk(
+  'bookings/rateCompletedPurchase', 
+  async ({ bookingId, value }) => {
+    try {
+      const bookingRef = doc(db, 'bookings', bookingId);
+      setDoc(bookingRef, { rating: value }, { merge: true });
+      return { rating: value, bookingId: bookingId };
+    } catch (error) {
+      return error;
+    }
+})
+
 const initialState = [];
 
 export const bookingSlice = createSlice({
@@ -126,6 +138,15 @@ export const bookingSlice = createSlice({
         return (state = {
           ...state,
           bookings: new_bookings
+        });
+      })
+      .addCase(rateCompletedPurchase.fulfilled, (state, action) => {
+        let new_purchases = JSON.parse(JSON.stringify(state.purchases));
+        let index = new_purchases.findIndex((f) => f.bookingId === action.payload.bookingId);
+        new_purchases[index].rating = action.payload.rating;
+        return (state = {
+          ...state,
+          purchases: new_purchases
         });
       });
   }

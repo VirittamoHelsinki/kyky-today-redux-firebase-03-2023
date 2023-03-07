@@ -14,6 +14,7 @@ import contactReducer from './chat/contactSlice';
 import messageReducer from './chat/messageSlice';
 import notificationReducer from './notifications/notificationSlice';
 import adminContactReducer from './chat/adminContactSlice';
+import ratingReducer from './profiles/ratingSlice';
 import slugReducer from './auth/slugSlice';
 
 const reducers = combineReducers({
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   message: messageReducer,
   notification: notificationReducer,
   admincontact: adminContactReducer,
+  rating: ratingReducer,
   slug: slugReducer
 });
 
