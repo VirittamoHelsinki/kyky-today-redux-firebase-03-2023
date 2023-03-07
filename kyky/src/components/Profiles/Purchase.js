@@ -61,7 +61,7 @@ const Purchase = ({ order }) => {
                 <p>{order.status}</p>
               </div>
               <div className="detail-value">
-                <p>{new Date(order.operationTime.seconds * 1000).toLocaleDateString('fi-FI')}</p>
+                <p>{new Date(order.activityTime.seconds * 1000).toLocaleDateString('fi-FI')}</p>
               </div>
             </div>
           )}

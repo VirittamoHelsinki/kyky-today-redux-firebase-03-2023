@@ -217,7 +217,7 @@ function ServiceBooking() {
           unit: location.state.unit,
           rating: 0,
           status: 'incompleted',
-          operationTime: '',
+          activityTime: '',
           paid: false,
           confirmed: false
         })

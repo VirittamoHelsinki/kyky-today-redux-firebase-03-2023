@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
 import { getDashboardProfile } from '../../redux/profiles/profileSlice';
 import CreateProfileModal from '../../components/Profiles/CreateProfileModal';
-import starIcon from '../../image/star.svg';
+import starFilled from '../../image/star-filled.svg';
+import starBlank from '../../image/star-white.svg';
 import '../../styles/Profiles.scss';
 
 const Dashboard = () => {
@@ -41,13 +42,18 @@ const Dashboard = () => {
       setProfileTitle(_profile.s1Title);
       setRegistered(new Date(_profile.created.seconds * 1000));
       setUserType(_user.userType);
+      _profile.totalAmount > 0 &&
+        setProfileRating(parseInt(_profile.totalRating / _profile.totalAmount));
     }
   }, [_profile]);
 
-  function loopStars() {
+  function loopReviewStars(rating) {
     let star_img_list = [];
-    for (let i = 0; i < profileRating; i++) {
-      star_img_list.push(<img className="star-img" key={i} src={starIcon} alt="" />);
+    for (let i = 0; i < rating; i++) {
+      star_img_list.push(<img className="review-star-img" key={i} src={starFilled} alt="" />);
+    }
+    for (let i = rating; i < 5; i++) {
+      star_img_list.push(<img className="review-star-img" key={i} src={starBlank} alt="" />);
     }
     return star_img_list;
   }
@@ -102,7 +108,9 @@ const Dashboard = () => {
             <div className="user-info-title">
               <p>{profileTitle}</p>
             </div>
-            <div className="user-info-rating">{loopStars().map((star) => star)}</div>
+            <div className="user-info-rating">
+              {loopReviewStars(profileRating).map((star) => star)}
+            </div>
             <div className="user-profile-button">
               {profileTitle !== '' ? (
                 <button className="profile-button" onClick={() => setShowProfileModal(true)}>

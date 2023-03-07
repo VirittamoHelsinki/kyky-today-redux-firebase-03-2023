@@ -6,48 +6,47 @@ import starFilled from '../../image/star-filled.svg';
 import starBlank from '../../image/star-white.svg';
 import '../../styles/Profiles.scss';
 
-const adjectives = [
-  'Punctual',
-  'Friendly',
-  'Responsible',
-  'Good taste',
-  'Empathetic',
-  'Creative',
-  'Professional',
-  'Problem solving',
-  'Positive attitude'
+const adjs = [
+  { text: 'Punctual', selected: false },
+  { text: 'Friendly', selected: false },
+  { text: 'Responsible', selected: false },
+  { text: 'Good taste', selected: false },
+  { text: 'Empathetic', selected: false },
+  { text: 'Creative', selected: false },
+  { text: 'Professional', selected: false },
+  { text: 'Problem solving', selected: false },
+  { text: 'Positive attitude', selected: false }
 ];
 
 const PurchaseRating = ({ order, user }) => {
   const [showRatingModal, setShowRatingModal] = useState(false);
-  const [selectedTexts, setSelectedTexts] = useState(adjectives.map(() => false));
+  const [selectedTexts, setSelectedTexts] = useState(adjs);
   const [comment, setComment] = useState('');
   const [starValue, setStarValue] = useState(5);
 
   const dispatch = useDispatch();
 
   function submitRating() {
-    let texts = []
-    for (let i = 0; i < adjectives.length; i++) {
-      if (selectedTexts[i]) {
-        texts.push(adjectives[i])
-      }
-    };
-    dispatch(addRating({
-      uid: order.sellerUid, 
-      rating: {
-        buyerName: user.displayName,
-        buyerUid: user.uid, 
-        texts: texts,
-        comment: comment,
-        stars: starValue
-      }
-    }));
-    dispatch(rateCompletedPurchase({ 
-      bookingId: order.bookingId, 
-      value: starValue 
-    }));
-    setSelectedTexts(adjectives.map(() => false));
+    const texts = selectedTexts.filter((f) => f.selected).map((t) => t.text);
+    dispatch(
+      addRating({
+        uid: order.sellerUid,
+        rating: {
+          buyerName: user.displayName,
+          buyerUid: user.uid,
+          texts: texts,
+          comment: comment,
+          stars: starValue
+        }
+      })
+    );
+    dispatch(
+      rateCompletedPurchase({
+        bookingId: order.bookingId,
+        value: starValue
+      })
+    );
+    setSelectedTexts(adjs);
     setComment('');
     setStarValue(5);
   }
@@ -112,7 +111,7 @@ const PurchaseRating = ({ order, user }) => {
               <p>completed</p>
             </div>
             <div className="detail-value">
-              <p>{new Date(order.operationTime.seconds * 1000).toLocaleDateString('fi-FI')}</p>
+              <p>{new Date(order.activityTime.seconds * 1000).toLocaleDateString('fi-FI')}</p>
             </div>
           </div>
           {order.rating > 0 ? (
@@ -154,15 +153,17 @@ const PurchaseRating = ({ order, user }) => {
                   </div>
                 </div>
                 <div className="rating-modal-texts-content">
-                  {adjectives.map((adj, index) => (
-                    <div className='rating-modal-text' key={index}>
-                      <div 
-                        className={`adj-text ${selectedTexts[index] ? 'selected' : ''}`}
+                  {selectedTexts.map((text, index) => (
+                    <div className="rating-modal-text" key={index}>
+                      <div
+                        className={`adj-text ${text.selected ? 'selected' : ''}`}
                         onClick={() => {
                           let texts = [...selectedTexts];
-                          texts[index] = !texts[index]
-                          setSelectedTexts(texts)
-                        }}>{adj}</div>
+                          texts[index].selected = !texts[index].selected;
+                          setSelectedTexts(texts);
+                        }}>
+                        {text.text}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -194,9 +195,11 @@ const PurchaseRating = ({ order, user }) => {
                   </div>
                 </div>
                 <div className="submit-button-content">
-                  <button className="submit-button" onClick={() => {
-                    submitRating();
-                    setShowRatingModal(false);
+                  <button
+                    className="submit-button"
+                    onClick={() => {
+                      submitRating();
+                      setShowRatingModal(false);
                     }}>
                     Submit
                   </button>

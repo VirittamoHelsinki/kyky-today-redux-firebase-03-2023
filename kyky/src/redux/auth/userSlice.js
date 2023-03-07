@@ -36,7 +36,9 @@ export const signUpEmailAndPassword = createAsyncThunk(
         userType: 'buyer',
         slug: slug,
         created: created,
-        lastseen: lastseen
+        lastseen: lastseen,
+        totalRating: 0,
+        totalAmount: 0
       });
       await updateProfile(user, {
         photoURL: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp',
@@ -152,7 +154,9 @@ export const signInGoogleAuthProvider = createAsyncThunk(
         userType: 'buyer',
         slug: slug,
         created: serverTimestamp(),
-        lastseen: serverTimestamp()
+        lastseen: serverTimestamp(),
+        totalRating: 0,
+        totalAmount: 0
       });
       await setDoc(doc(db, 'slugs', slug), {
         uid: user.uid,

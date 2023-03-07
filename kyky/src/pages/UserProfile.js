@@ -6,8 +6,10 @@ import { getUserProfile } from '../redux/profiles/profileSlice';
 import { fetchUserProfileJobs } from '../redux/jobs/jobSlice';
 import { createContact } from '../redux/chat/contactSlice';
 import { addNotification } from '../redux/notifications/notificationSlice';
+import { fetchRatings } from '../redux/profiles/ratingSlice';
 import Card from '../components/Card';
-import starIcon from '../image/star.svg';
+import starFilled from '../image/star-filled.svg';
+import starBlank from '../image/star-white.svg';
 import '../styles/UserProfile.scss';
 
 const UserProfile = () => {
@@ -26,11 +28,14 @@ const UserProfile = () => {
   const [cards, setCards] = useState([]);
   const [user, setUser] = useState(null);
   const [profileImage, setProfileImage] = useState('');
+  const [ratings, setRatings] = useState([]);
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   const _cards = useSelector((state) => state.jobs.userProfileCards);
   const _uid = useSelector((state) => state.slug);
   const _profile = useSelector((state) => state.profile.userProfile);
   const _user = useSelector((state) => state.user);
+  const _ratings = useSelector((state) => state.rating.ratings);
 
   const dispatch = useDispatch();
 
@@ -52,6 +57,7 @@ const UserProfile = () => {
     if (_uid.uid) {
       dispatch(getUserProfile(_uid.uid));
       dispatch(fetchUserProfileJobs(_uid.uid));
+      dispatch(fetchRatings(_uid.uid));
     }
   }, [_uid]);
 
@@ -65,6 +71,8 @@ const UserProfile = () => {
       setSkills(_profile.s1Skills);
       setLastseen(new Date(_profile.lastseen.seconds * 1000));
       setRegistered(new Date(_profile.created.seconds * 1000));
+      _profile.totalAmount > 0 &&
+        setProfileRating(parseInt(_profile.totalRating / _profile.totalAmount));
     }
   }, [_profile]);
 
@@ -74,10 +82,19 @@ const UserProfile = () => {
     }
   }, [_cards]);
 
-  function loopStars() {
+  useEffect(() => {
+    if (Array.isArray(_ratings)) {
+      setRatings(_ratings);
+    }
+  }, [_ratings]);
+
+  function loopReviewStars(rating) {
     let star_img_list = [];
-    for (let i = 0; i < profileRating; i++) {
-      star_img_list.push(<img className="star-img" key={i} src={starIcon} alt="" />);
+    for (let i = 0; i < rating; i++) {
+      star_img_list.push(<img className="review-star-img" key={i} src={starFilled} alt="" />);
+    }
+    for (let i = rating; i < 5; i++) {
+      star_img_list.push(<img className="review-star-img" key={i} src={starBlank} alt="" />);
     }
     return star_img_list;
   }
@@ -119,7 +136,24 @@ const UserProfile = () => {
             <div className="user-info-title">
               <p>{profileTitle}</p>
             </div>
-            <div className="user-info-rating">{loopStars().map((star) => star)}</div>
+            <div className="user-info-rating-reviews-button">
+              <div className="user-info-rating">
+                {loopReviewStars(profileRating).map((star) => star)}
+              </div>
+              <div className="user-info-reviews-button">
+                {ratings.length > 0 ? (
+                  <p
+                    className="reviews-button"
+                    onClick={() => {
+                      setShowReviewModal(true);
+                    }}>
+                    {ratings.length} ratings
+                  </p>
+                ) : (
+                  <p className="reviews-button noratings">0 rating</p>
+                )}
+              </div>
+            </div>
             <div className="user-info-contact-button">
               {user ? (
                 <button
@@ -198,6 +232,56 @@ const UserProfile = () => {
             ))}
           </div>
         </div>
+        {showReviewModal && (
+          <div className="review-modal transparent-background">
+            <div className="review-modal">
+              <div className="review-content">
+                <div className="review-close-button">
+                  <span
+                    className="material-icons-outlined"
+                    onClick={() => setShowReviewModal(false)}>
+                    close
+                  </span>
+                </div>
+                <div className="review-title">
+                  <p>Customer rating</p>
+                </div>
+                <div className="review-item-content">
+                  {ratings.map((rating) => (
+                    <div className="review-item">
+                      <div className="item-title-date">
+                        <div className="item-title">
+                          <p>{rating.buyerName}</p>
+                        </div>
+                        <div className="item-date">
+                          <p>
+                            {new Date(rating.created.seconds * 1000).toLocaleDateString('fi-FI')}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="stars-rating-number">
+                        <div className="stars">
+                          {loopReviewStars(rating.stars).map((star) => star)}
+                        </div>
+                        <div className="rating-number">
+                          <p>{rating.stars}</p>
+                        </div>
+                      </div>
+                      <div className="rating-texts">
+                        {rating.texts.map((text) => (
+                          <div className="rating-text">{text}</div>
+                        ))}
+                      </div>
+                      <div className="review-comment">
+                        <p>{rating.comment}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

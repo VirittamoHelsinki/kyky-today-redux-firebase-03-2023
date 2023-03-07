@@ -4,19 +4,16 @@ import { db } from '../../firebase/firebase';
 
 /* makes reference to get a auto-generated id, inserts the doc 
 to Firestore using the new id, returns the added object */
-export const addProfileForm = createAsyncThunk(
-  'profiles/addProfileForm',
-  async ({ uid, data }) => {
-    try {
-      await setDoc(doc(db, 'users', uid, 'data', 'profile'), {
-        ...data
-      });
-      return data;
-    } catch (error) {
-      return error;
-    }
+export const addProfileForm = createAsyncThunk('profiles/addProfileForm', async ({ uid, data }) => {
+  try {
+    await setDoc(doc(db, 'users', uid, 'data', 'profile'), {
+      ...data
+    });
+    return data;
+  } catch (error) {
+    return error;
   }
-);
+});
 
 export const getUserProfile = createAsyncThunk('profiles/getUserProfile', async (uid) => {
   try {
@@ -26,7 +23,9 @@ export const getUserProfile = createAsyncThunk('profiles/getUserProfile', async 
       return {
         ...profileSnap.data(),
         created: userSnap.data().created,
-        lastseen: userSnap.data().lastseen
+        lastseen: userSnap.data().lastseen,
+        totalRating: userSnap.data().totalRating,
+        totalAmount: userSnap.data().totalAmount
       };
     } else {
       return null;
@@ -36,31 +35,30 @@ export const getUserProfile = createAsyncThunk('profiles/getUserProfile', async 
   }
 });
 
-export const getDashboardProfile = createAsyncThunk(
-  'profiles/getDashboardProfile',
-  async (uid) => {
-    try {
-      const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
-      const profileSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
-      if (profileSnap.exists()) {
-        return {
-          ...profileSnap.data(),
-          name: userSnap.data().username,
-          created: userSnap.data().created
-        };
-      } else {
-        return {
-          name: userSnap.data().username,
-          s7Url: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp',
-          s1Title: '',
-          created: userSnap.data().created
-        };
-      }
-    } catch (error) {
-      return error;
+export const getDashboardProfile = createAsyncThunk('profiles/getDashboardProfile', async (uid) => {
+  try {
+    const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
+    const profileSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
+    if (profileSnap.exists()) {
+      return {
+        ...profileSnap.data(),
+        name: userSnap.data().username,
+        created: userSnap.data().created,
+        totalRating: userSnap.data().totalRating,
+        totalAmount: userSnap.data().totalAmount
+      };
+    } else {
+      return {
+        name: userSnap.data().username,
+        s7Url: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp',
+        s1Title: '',
+        created: userSnap.data().created
+      };
     }
+  } catch (error) {
+    return error;
   }
-);
+});
 
 const initialState = [];
 

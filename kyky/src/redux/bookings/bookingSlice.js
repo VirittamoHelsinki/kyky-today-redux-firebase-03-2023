@@ -74,8 +74,8 @@ export const changeBookingStatus = createAsyncThunk(
     try {
       let timestamp = serverTimestamp();
       const bookingRef = doc(db, 'bookings', bookingId);
-      setDoc(bookingRef, { status: status, operationTime: timestamp }, { merge: true });
-      return { status: status, operationTime: timestamp, bookingId: bookingId };
+      setDoc(bookingRef, { status: status, activityTime: timestamp }, { merge: true });
+      return { status: status, activityTime: timestamp, bookingId: bookingId };
     } catch (error) {
       return error;
     }
@@ -83,7 +83,7 @@ export const changeBookingStatus = createAsyncThunk(
 );
 
 export const rateCompletedPurchase = createAsyncThunk(
-  'bookings/rateCompletedPurchase', 
+  'bookings/rateCompletedPurchase',
   async ({ bookingId, value }) => {
     try {
       const bookingRef = doc(db, 'bookings', bookingId);
@@ -92,7 +92,8 @@ export const rateCompletedPurchase = createAsyncThunk(
     } catch (error) {
       return error;
     }
-})
+  }
+);
 
 const initialState = [];
 
@@ -134,7 +135,7 @@ export const bookingSlice = createSlice({
         let new_bookings = JSON.parse(JSON.stringify(state.bookings));
         let index = new_bookings.findIndex((f) => f.bookingId === action.payload.bookingId);
         new_bookings[index].status = action.payload.status;
-        new_bookings[index].operationTime = action.payload.operationTime;
+        new_bookings[index].activityTime = action.payload.activityTime;
         return (state = {
           ...state,
           bookings: new_bookings
