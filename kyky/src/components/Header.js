@@ -19,7 +19,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import UserDropdown from './UserDropdown';
 import SearchBar from './SearchBar';
-import '../styles/header.scss';
+import '../styles/Header.scss';
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
 
 const Header = () => {
@@ -132,11 +132,13 @@ const Header = () => {
               <div className="dropdown">
                 {notificationOpen && (
                   <div className="dropdown-content">
+                    <div className="notification-title-bar">Notifications</div>
                     {notifications.map((notification, index) => (
                       <div
                         key={index}
                         className={`notification-item ${notification.read ? '' : 'unread'}`}>
-                        <p
+                        <div 
+                          className="item-left-side"
                           onClick={() => {
                             let notifications_copy = [...notifications];
                             notifications_copy.splice(index, 1);
@@ -150,23 +152,34 @@ const Header = () => {
                             );
                             notificationClick(notification.to);
                           }}>
-                          {notification.text}
-                        </p>
-                        <span
-                          id="delete-notification"
-                          className="material-icons-outlined"
-                          onClick={() => {
-                            let new_notifications = [...notifications];
-                            new_notifications.splice(index, 1);
-                            dispatch(
-                              updateNotifications({
-                                uid: _user.uid,
-                                notifications: new_notifications
-                              })
-                            );
-                          }}>
-                          delete
-                        </span>
+                          <span 
+                            className="material-icons-outlined"
+                            id="icon-notification" 
+                            style={{ color: notification.color }}>{notification.icon}
+                          </span>
+                          <p className="item-name-bold">{notification.name}</p>
+                          <p
+                             className="item-text-normal">
+                            {notification.text}
+                          </p>
+                        </div>
+                        <div className="item-right-side">
+                          <span
+                            id="delete-notification"
+                            className="material-icons-outlined"
+                            onClick={() => {
+                              let new_notifications = [...notifications];
+                              new_notifications.splice(index, 1);
+                              dispatch(
+                                updateNotifications({
+                                  uid: _user.uid,
+                                  notifications: new_notifications
+                                })
+                              );
+                            }}>
+                            close
+                          </span>
+                        </div>
                       </div>
                     ))}
                   </div>

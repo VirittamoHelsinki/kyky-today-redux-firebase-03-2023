@@ -114,7 +114,10 @@ const UserProfile = () => {
       addNotification({
         uid: _uid.uid,
         notification: {
-          text: user.displayName + ' send you a message',
+          icon: "mail",
+          color: "#4285F4",
+          name: user.displayName,
+          text: 'send you a message',
           to: '/seller/messages',
           read: false
         }

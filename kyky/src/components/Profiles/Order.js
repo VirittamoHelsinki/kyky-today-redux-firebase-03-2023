@@ -164,7 +164,10 @@ const Order = ({ order, user }) => {
                           addNotification({
                             uid: order.buyerUid,
                             notification: {
-                              text: user.displayName + ' completed your booking',
+                              icon: "done_all",
+                              color: "#53F550",
+                              name: user.displayName,
+                              text: 'completed your booking',
                               to: '/buyer/purchases',
                               read: false
                             }
@@ -187,7 +190,10 @@ const Order = ({ order, user }) => {
                           addNotification({
                             uid: order.buyerUid,
                             notification: {
-                              text: user.displayName + ' canceled your booking',
+                              icon: 'cancel',
+                              color: '#FD0707',
+                              name: user.displayName,
+                              text: 'canceled your booking',
                               to: '/buyer/purchases',
                               read: false
                             }

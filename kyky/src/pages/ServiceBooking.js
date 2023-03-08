@@ -174,7 +174,10 @@ function ServiceBooking() {
       addNotification({
         uid: uid,
         notification: {
-          text: user.displayName + ' send you a message',
+          icon: "mail",
+          color: "#4285F4",
+          name: user.displayName,
+          text: 'send you a message',
           to: '/seller/messages',
           read: false
         }
@@ -226,7 +229,10 @@ function ServiceBooking() {
         addNotification({
           uid: uid,
           notification: {
-            text: user.displayName + ' made a new booking',
+            icon: "edit",
+            color: "#fc9803",
+            name: user.displayName,
+            text: 'made a new booking',
             to: '/calendar',
             read: false
           }

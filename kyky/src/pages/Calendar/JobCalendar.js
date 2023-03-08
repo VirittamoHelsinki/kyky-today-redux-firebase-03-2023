@@ -248,7 +248,10 @@ export default function JobCalendar() {
       addNotification({
         uid: uid,
         notification: {
-          text: _user.displayName + ' send you a message',
+          icon: "mail",
+          color: "#4285F4",
+          name: _user.displayName,
+          text: 'send you a message',
           to: '/buyer/messages',
           read: false
         }
@@ -513,16 +516,16 @@ export default function JobCalendar() {
                                                   addNotification({
                                                     uid: activity.buyerUid,
                                                     notification: {
-                                                      text:
-                                                        _user.displayName +
-                                                        ' confirmed your booking',
+                                                      icon: "done",
+                                                      color: "#00A088",
+                                                      name: _user.displayName,
+                                                      text: 'confirmed your booking',
                                                       to: '/buyer/purchases',
                                                       read: false
                                                     }
                                                   })
                                                 );
                                                 setShowConfirmModal(false);
-                                                window.location.reload(false);
                                               }}>
                                               Confirm
                                             </button>
