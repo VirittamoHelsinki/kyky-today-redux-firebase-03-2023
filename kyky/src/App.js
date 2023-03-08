@@ -34,7 +34,6 @@ import Overview from './pages/Calendar/Overview';
 import JobCalendar from './pages/Calendar/JobCalendar';
 import ManageSchedules from './pages/Calendar/ManageSchedules';
 import CalendarSettings from './pages/Calendar/CalendarSettings';
-import JobCreation from './pages/Calendar/JobCreation';
 
 /* Seller & buyer profiles */
 import BuyersProfile from './pages/Profiles/BuyersProfile';

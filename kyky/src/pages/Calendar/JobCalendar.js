@@ -488,18 +488,20 @@ export default function JobCalendar() {
                                     keyboard_arrow_right
                                   </i>
                                   {showConfirmModal && (
-                                    <div className='confirm-modal transparent-background'>
-                                      <div className='confirm-modal'>
-                                        <div className='confirm-container'>
-                                          <div className='confirm-label'>
+                                    <div className="confirm-modal transparent-background">
+                                      <div className="confirm-modal">
+                                        <div className="confirm-container">
+                                          <div className="confirm-label">
                                             <p>Confirm booking?</p>
                                           </div>
-                                          <div className='buttons-row'>
-                                            <button 
-                                              className='cancel-button'
-                                              onClick={() => setShowConfirmModal(false)}>Cancel</button>
-                                            <button 
-                                              className='confirm-button'
+                                          <div className="buttons-row">
+                                            <button
+                                              className="cancel-button"
+                                              onClick={() => setShowConfirmModal(false)}>
+                                              Cancel
+                                            </button>
+                                            <button
+                                              className="confirm-button"
                                               onClick={() => {
                                                 dispatch(
                                                   changeConfirmedStatus({
@@ -511,15 +513,19 @@ export default function JobCalendar() {
                                                   addNotification({
                                                     uid: activity.buyerUid,
                                                     notification: {
-                                                      text: _user.displayName + ' confirmed your booking',
+                                                      text:
+                                                        _user.displayName +
+                                                        ' confirmed your booking',
                                                       to: '/buyer/purchases',
                                                       read: false
                                                     }
                                                   })
                                                 );
-                                                setShowConfirmModal(false)
+                                                setShowConfirmModal(false);
                                                 window.location.reload(false);
-                                              }}>Confirm</button>
+                                              }}>
+                                              Confirm
+                                            </button>
                                           </div>
                                         </div>
                                       </div>

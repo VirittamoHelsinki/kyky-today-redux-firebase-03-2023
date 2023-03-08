@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../firebase/firebase';
 
-export const uploadImage = createAsyncThunk('fileUpload/images', async (payload) => {
+export const uploadImage = createAsyncThunk('fileUpload/images', async (image) => {
   try {
-    const storageRef = ref(storage, 'images', payload.name);
-    await uploadBytes(storageRef, payload);
+    const storageRef = ref(storage, `images/${image.name}`);
+    await uploadBytes(storageRef, image);
     const url = await getDownloadURL(storageRef);
     return url;
   } catch (error) {

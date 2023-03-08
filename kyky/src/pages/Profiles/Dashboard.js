@@ -12,7 +12,7 @@ const Dashboard = () => {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [profileName, setProfileName] = useState('Etunimi Sukunimi');
   const [profileTitle, setProfileTitle] = useState('');
-  const [profileRating, setProfileRating] = useState(5);
+  const [profileRating, setProfileRating] = useState(0);
   const [registered, setRegistered] = useState(new Date('2023-01-12'));
   const [userType, setUserType] = useState('Seller');
   const [allJobs, setAllJobs] = useState('4');
@@ -43,7 +43,7 @@ const Dashboard = () => {
       setRegistered(new Date(_profile.created.seconds * 1000));
       setUserType(_user.userType);
       _profile.totalAmount > 0 &&
-        setProfileRating(parseInt(_profile.totalRating / _profile.totalAmount));
+        setProfileRating(Math.round(_profile.totalRating / _profile.totalAmount));
     }
   }, [_profile]);
 
@@ -108,9 +108,15 @@ const Dashboard = () => {
             <div className="user-info-title">
               <p>{profileTitle}</p>
             </div>
-            <div className="user-info-rating">
-              {loopReviewStars(profileRating).map((star) => star)}
-            </div>
+            {profileRating > 0 ? (
+              <div className="user-info-rating">
+                {loopReviewStars(profileRating).map((star) => star)}
+              </div>
+            ) : (
+              <div className="user-info-rating">
+                <p>No ratings yet</p>
+              </div>
+            )}
             <div className="user-profile-button">
               {profileTitle !== '' ? (
                 <button className="profile-button" onClick={() => setShowProfileModal(true)}>

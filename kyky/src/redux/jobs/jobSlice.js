@@ -17,10 +17,24 @@ import { db } from '../../firebase/firebase';
 to Firestore using the new id, returns the added object */
 export const createJobForm = createAsyncThunk('jobs/createJobForm', async (payload) => {
   try {
-    const datenow = serverTimestamp();
-    const formRef = doc(collection(db, `jobs`));
-    await setDoc(formRef, { ...payload, created: datenow });
-    return { ...payload, id: formRef.id, created: datenow };
+    const timestamp = serverTimestamp();
+    const formRef = doc(collection(db, 'jobs'));
+    await setDoc(formRef, { ...payload, id: formRef.id, created: timestamp, updated: timestamp });
+    return { ...payload, id: formRef.id, created: timestamp };
+  } catch (error) {
+    return error;
+  }
+});
+
+export const updateJobForm = createAsyncThunk('jobs/updateJobForm', async ({ id, data }) => {
+  try {
+    const timestamp = serverTimestamp();
+    const jobRef = doc(db, 'jobs', id);
+    await setDoc(jobRef, {
+      ...data,
+      updated: timestamp
+    });
+    return { ...data, updated: timestamp };
   } catch (error) {
     return error;
   }
@@ -31,7 +45,7 @@ export const fetchAllJobs = createAsyncThunk('jobs/fetchAllJobs', async () => {
     const documents = [];
     const snap = await getDocs(collection(db, 'jobs'));
     snap.forEach((doc) => {
-      documents.push({ ...doc.data(), id: doc.id });
+      documents.push({ ...doc.data() });
     });
     return documents;
   } catch (error) {
@@ -48,7 +62,7 @@ export const fetchJobsByQuery = createAsyncThunk(
       const q = query(jobsRef, where(key, '==', value));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
-        documents.push({ ...doc.data(), id: doc.id });
+        documents.push({ ...doc.data() });
       });
       return documents;
     } catch (error) {
@@ -66,7 +80,7 @@ export const fetchUserProfileJobs = createAsyncThunk(
       const q = query(jobsRef, where('uid', '==', payload));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
-        documents.push({ ...doc.data(), id: doc.id });
+        documents.push({ ...doc.data() });
       });
       return documents;
     } catch (error) {
@@ -84,7 +98,7 @@ export const fetchCategoryJobs = createAsyncThunk(
       const q = query(jobsRef, where(key, '==', value));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
-        documents.push({ ...doc.data(), id: doc.id });
+        documents.push({ ...doc.data() });
       });
       return documents;
     } catch (error) {
@@ -130,6 +144,13 @@ export const jobSlice = createSlice({
         return (state = {
           ...state,
           cards: [...state.cards, { ...action.payload }]
+        });
+      })
+      .addCase(updateJobForm.fulfilled, (state, action) => {
+        const filtered = state.cards.filter((c) => c.id !== action.payload.id);
+        return (state = {
+          ...state,
+          cards: [...filtered, { ...action.payload }]
         });
       })
       /* return user's jobs, also return job titles for calendar components */

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createJobForm } from '../../redux/jobs/jobSlice';
+import { createJobForm, updateJobForm } from '../../redux/jobs/jobSlice';
 import Switch from 'react-switch';
 import Checkbox from '../../components/Checkbox';
 import AddJobImages from './AddJobImages';
@@ -53,7 +53,7 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
     }
   }, []);
 
-  const handleSubmit = () => {
+  const handleCreateJob = () => {
     dispatch(
       createJobForm({
         uid: _user.uid,
@@ -75,6 +75,37 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
         photoURL: _user.photoURL,
         slug: _user.slug,
         pageviews: 0
+      })
+    );
+  };
+
+  const handleUpdateJob = () => {
+    dispatch(
+      updateJobForm({
+        id: editjob.id,
+        data: {
+          id: editjob.id,
+          uid: _user.uid,
+          name: _user.displayName,
+          headline: headline,
+          description: description,
+          category: category,
+          title: title,
+          place: place,
+          insurance: insurance,
+          price: price,
+          weekday: recurrent ? weekday : price,
+          weekend: recurrent ? weekend : price,
+          everyOtherWeekday: recurrent ? everyOtherWeekday : price,
+          everyOtherWeekend: recurrent ? everyOtherWeekend : price,
+          onceAMonth: recurrent ? onceAMonth : price,
+          unit: unit,
+          urls: urls,
+          photoURL: _user.photoURL,
+          slug: _user.slug,
+          pageviews: 0,
+          created: editjob.created
+        }
       })
     );
   };
@@ -338,15 +369,27 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
           }}>
           Cancel
         </button>
-        <button
-          className="modal-button"
-          onClick={() => {
-            handleSubmit();
-            setEditjob(null);
-            setShowCreateJobModal(false);
-          }}>
-          Add job
-        </button>
+        {editjob ? (
+          <button
+            className="modal-button"
+            onClick={() => {
+              handleUpdateJob();
+              setEditjob(null);
+              setShowCreateJobModal(false);
+            }}>
+            Edit job
+          </button>
+        ) : (
+          <button
+            className="modal-button"
+            onClick={() => {
+              handleCreateJob();
+              setEditjob(null);
+              setShowCreateJobModal(false);
+            }}>
+            Add job
+          </button>
+        )}
       </div>
     </div>
   );

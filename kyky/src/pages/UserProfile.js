@@ -15,7 +15,7 @@ import '../styles/UserProfile.scss';
 const UserProfile = () => {
   const [profileName, setProfileName] = useState('');
   const [profileTitle, setProfileTitle] = useState('');
-  const [profileRating, setProfileRating] = useState(5);
+  const [profileRating, setProfileRating] = useState(0);
   const [onlineStatus, setOnlineStatus] = useState('Offline');
   const [lastseen, setLastseen] = useState(new Date('2023-02-03'));
   const [registered, setRegistered] = useState(new Date('2023-01-12'));
@@ -72,7 +72,7 @@ const UserProfile = () => {
       setLastseen(new Date(_profile.lastseen.seconds * 1000));
       setRegistered(new Date(_profile.created.seconds * 1000));
       _profile.totalAmount > 0 &&
-        setProfileRating(parseInt(_profile.totalRating / _profile.totalAmount));
+        setProfileRating(Math.round(_profile.totalRating / _profile.totalAmount));
     }
   }, [_profile]);
 
@@ -136,12 +136,12 @@ const UserProfile = () => {
             <div className="user-info-title">
               <p>{profileTitle}</p>
             </div>
-            <div className="user-info-rating-reviews-button">
-              <div className="user-info-rating">
-                {loopReviewStars(profileRating).map((star) => star)}
-              </div>
-              <div className="user-info-reviews-button">
-                {ratings.length > 0 ? (
+            {profileRating > 0 ? (
+              <div className="user-info-rating-reviews-button">
+                <div className="user-info-rating">
+                  {loopReviewStars(profileRating).map((star) => star)}
+                </div>
+                <div className="user-info-reviews-button">
                   <p
                     className="reviews-button"
                     onClick={() => {
@@ -149,11 +149,13 @@ const UserProfile = () => {
                     }}>
                     {ratings.length} ratings
                   </p>
-                ) : (
-                  <p className="reviews-button noratings">0 rating</p>
-                )}
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="user-info-rating-reviews-button">
+                <p>No ratings yet</p>
+              </div>
+            )}
             <div className="user-info-contact-button">
               {user ? (
                 <button
