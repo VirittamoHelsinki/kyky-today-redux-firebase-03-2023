@@ -18,13 +18,14 @@ export const createContact = createAsyncThunk(
       }
       const chatRef = await addDoc(collection(db, 'chatlogs'), initialChat);
       await setDoc(doc(db, 'users', myUid, 'chats', contactUid), {
+        contactUid: contactUid,
         chatId: chatRef.id,
         name: contactName,
         photoURL: contactPhotoURL
       });
 
       await setDoc(doc(db, 'users', contactUid, 'chats', myUid), {
-        contactUid: contactUid,
+        contactUid: myUid,
         chatId: chatRef.id,
         name: myName,
         photoURL: myPhotoURL
@@ -55,14 +56,17 @@ export const fetchContacts = createAsyncThunk('contact/fetchContacts', async (ui
   }
 });
 
-export const deleteContact = createAsyncThunk('contact/deleteContact', async ({userUid, contactUid}) => {
-  try {
-    await deleteDoc(doc(db, 'users', userUid, 'chats', contactUid));
-    return contactUid
-  } catch (error) {
-    return error;
+export const deleteContact = createAsyncThunk(
+  'contact/deleteContact',
+  async ({ userUid, contactUid }) => {
+    try {
+      await deleteDoc(doc(db, 'users', userUid, 'chats', contactUid));
+      return contactUid;
+    } catch (error) {
+      return error;
+    }
   }
-})
+);
 
 const initialState = {
   contacts: []
@@ -96,7 +100,7 @@ export const contactSlice = createSlice({
           ...state,
           contacts: state.contacts.filter((c) => c.contactUid !== action.payload)
         });
-      })
+      });
   }
 });
 

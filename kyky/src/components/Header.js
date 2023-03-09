@@ -137,7 +137,7 @@ const Header = () => {
                       <div
                         key={index}
                         className={`notification-item ${notification.read ? '' : 'unread'}`}>
-                        <div 
+                        <div
                           className="item-left-side"
                           onClick={() => {
                             let notifications_copy = [...notifications];
@@ -152,16 +152,14 @@ const Header = () => {
                             );
                             notificationClick(notification.to);
                           }}>
-                          <span 
+                          <span
                             className="material-icons-outlined"
-                            id="icon-notification" 
-                            style={{ color: notification.color }}>{notification.icon}
+                            id="icon-notification"
+                            style={{ color: notification.color }}>
+                            {notification.icon}
                           </span>
                           <p className="item-name-bold">{notification.name}</p>
-                          <p
-                             className="item-text-normal">
-                            {notification.text}
-                          </p>
+                          <p className="item-text-normal">{notification.text}</p>
                         </div>
                         <div className="item-right-side">
                           <span

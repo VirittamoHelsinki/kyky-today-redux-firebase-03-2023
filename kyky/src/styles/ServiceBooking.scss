@@ -112,7 +112,7 @@
     }
 
     .service-booking-right-panel-content {
-      height: 580px;
+      height: 660px;
       width: 560px;
       border: 1px solid #c4c4c4;
       border-radius: 5px;
@@ -124,6 +124,46 @@
         display: flex;
         width: 100%;
         text-align: center;
+      }
+
+      .once-tab-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 20px;
+
+        .select-time-content {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          gap: 20px;
+
+          .select-time-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
+
+            span {
+              font-size: 18px !important;
+            }
+
+            p {
+              font-size: 18px;
+            }
+
+            .time-select {
+              height: 40px;
+              font-size: 18px;
+              border-radius: 4px;
+
+              .option-value {
+                height: 30px;
+              }
+            }
+          }
+        }
       }
 
       .recurring-tab-container {

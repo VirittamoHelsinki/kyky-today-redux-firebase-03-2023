@@ -14,16 +14,14 @@ export default function Step3({ handleChange }) {
   const [languages, setLanguages] = useState([]);
   const [langArr, setLangArr] = useState([]);
 
-  /* find if the obj key exists in the list and replace existing obj, push a new 
-  if doesn't exist, if 'No selection' remove obj from lang array, pass the lang 
-  array to the parent components formData state */
+  /* find if the obj key exists in the list and push a new if doesn't exist, 
+  if 'No selection' remove obj from lang array, pass the lang array to 
+  the parent components formData state */
   const handleChoices = (obj) => {
     let langArr_copy = [...langArr];
     let keys = Object.keys(langArr_copy);
     let index = keys.indexOf(Object.keys(obj)[0]);
-    if (index >= 0) {
-      langArr_copy[index] = obj;
-    } else {
+    if (index < 0) {
       langArr_copy.push(obj);
     }
     if (Object.values(obj)[0] === 'No selection') {

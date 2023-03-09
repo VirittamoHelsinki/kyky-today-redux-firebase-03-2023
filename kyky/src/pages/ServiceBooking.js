@@ -10,6 +10,7 @@ import Input from '../components/Input';
 import Calendar from '../components/calendar/Calendar';
 import SelectDays from '../components/SelectDays';
 import Checkbox from '../components/Checkbox';
+import TimeSelect from '../components/TimeSelect';
 
 const Tabs = {
   Once: 'Once',
@@ -51,6 +52,8 @@ function ServiceBooking() {
   const [currentTab, setCurrentTab] = useState(Tabs.Once);
   const [booking, setBooking] = useState(defaultBookingValue);
   const [date, setDate] = useState(new Date());
+  const [startTime, setStartTime] = useState('8:00');
+  const [endTime, setEndTime] = useState('16:00');
   const [user, setUser] = useState(null);
   const [showCalendarModal, setShowCalendarModal] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
@@ -58,11 +61,6 @@ function ServiceBooking() {
   const [inputmail, setInputmail] = useState('');
   const [photoURL, setPhotoURL] = useState('');
   const [uid, setUid] = useState('');
-  // const [bookingsAdvance, setBookingsAdvance] = useState(0);
-  // const [notifications, setNotifications] = useState(false);
-  // const [notificationDays, setNotificationDays] = useState([]);
-  // const [notificationStartTime, setNotificationStartTime] = useState('08.00');
-  // const [notificationEndTime, setNotificationEndTime] = useState('21.00');
 
   const dispatch = useDispatch();
 
@@ -71,22 +69,10 @@ function ServiceBooking() {
   const navigate = useNavigate();
 
   const _user = useSelector((state) => state.user);
-  // const _settings = useSelector((state) => state.calendarsettings);
 
   const job = defaultJob;
 
   const state_exists = location.state !== null;
-
-  // useEffect(() => {
-  //   if (_settings) {
-  //     const parsedSettings = JSON.parse(JSON.stringify(_settings));
-  //     setBookingsAdvance(parsedSettings.bookingsAdvance);
-  //     setNotifications(parsedSettings.notifications);
-  //     setNotificationDays(parsedSettings.notificationDays);
-  //     setNotificationStartTime(parsedSettings.notificationStartTime);
-  //     setNotificationEndTime(parsedSettings.notificationEndTime);
-  //   }
-  // }, []);
 
   /* set card owner's data to local state */
   useEffect(() => {
@@ -174,8 +160,8 @@ function ServiceBooking() {
       addNotification({
         uid: uid,
         notification: {
-          icon: "mail",
-          color: "#4285F4",
+          icon: 'mail',
+          color: '#4285F4',
           name: user.displayName,
           text: 'send you a message',
           to: '/seller/messages',
@@ -213,8 +199,8 @@ function ServiceBooking() {
           buyerLocation: location.state.place,
           date: date,
           time: {
-            start: '09:00',
-            end: '15:00'
+            start: startTime,
+            end: endTime
           },
           price: location.state.price,
           unit: location.state.unit,
@@ -229,8 +215,8 @@ function ServiceBooking() {
         addNotification({
           uid: uid,
           notification: {
-            icon: "edit",
-            color: "#fc9803",
+            icon: 'edit',
+            color: '#fc9803',
             name: user.displayName,
             text: 'made a new booking',
             to: '/calendar',
@@ -251,19 +237,6 @@ function ServiceBooking() {
       return true;
     }
   }
-
-  // function getBookingAdvanceDate(months) {
-  //   const float_months = parseFloat(months);
-  //   const day = new Date();
-  //   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  //   if (float_months === 0.5) {
-  //     return new Date(day.setMonth(day.getMonth(), day.getDate() + 14)).toLocaleString(
-  //       'fi-FI',
-  //       options
-  //     );
-  //   }
-  //   return new Date(day.setMonth(day.getMonth() + float_months)).toLocaleString('fi-FI', options);
-  // }
 
   return (
     <div className="booking-page-content">
@@ -316,11 +289,6 @@ function ServiceBooking() {
           <div className="service-booking-right-panel">
             <div className="service-booking-right-panel-content">
               <div className="service-booking-right-panel-tabs">
-                {/* <div
-                  className={`panel-button ${currentTab === Tabs.Info ? 'selected' : ''}`}
-                  onClick={() => selectedTab(Tabs.Info)}>
-                  Info
-                </div> */}
                 <div
                   className={`panel-button ${currentTab === Tabs.Once ? 'selected' : ''}`}
                   onClick={() => selectedTab(Tabs.Once)}>
@@ -333,25 +301,23 @@ function ServiceBooking() {
                 </div>
               </div>
 
-              {/* {currentTab === Tabs.Info && (
-                <div className="info-tab-container">
-                  <div className="bookings-onward">
-                    <p>Bookings from {getBookingAdvanceDate(bookingsAdvance)} onwards</p>
-                  </div>
-                  {notifications && (
-                    <div className="notifications-allowed">
-                      <p>
-                        Only allow notifications between {notificationStartTime} -{' '}
-                        {notificationEndTime}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )} */}
-
               {currentTab === Tabs.Once && (
-                <div>
+                <div className="once-tab-container">
                   <Calendar date={date} setDate={setDate} minYears={0} maxYears={5} />
+                  <div className="select-time-content">
+                    <div className="select-time-item">
+                      <span className="material-icons-outlined">calendar_month</span>
+                      <p>{date.toLocaleDateString('fi-FI')}</p>
+                    </div>
+                    <div className="select-time-item">
+                      <span className="material-icons-outlined">access_time</span>
+                      <TimeSelect setTime={setStartTime} timestring={'8:00'} />
+                    </div>
+                    <div className="select-time-item">
+                      <span className="material-icons-outlined">access_time</span>
+                      <TimeSelect setTime={setEndTime} timestring={'16:00'} />
+                    </div>
+                  </div>
                   <div className="vat-terms">
                     <Checkbox
                       className="checkbox"

@@ -96,35 +96,42 @@ const Messages = () => {
                 </div>
               </div>
               <div className="contact-right-side">
-                <button 
-                  className='remove-contact-button'
-                  onClick={() => setShowDeleteContactModal(true)}
-                  >X</button>
+                <button
+                  className="remove-contact-button"
+                  onClick={() => setShowDeleteContactModal(true)}>
+                  X
+                </button>
               </div>
               {showDeleteContactModal && (
-                <div className='delete-contact-modal transparent-background'>
-                  <div className='delete-contact-modal'>
-                  <div className='delete-contact-container'>
-                    <div className='delete-contact-label'>
-                      <p>Are you sure you want to delete the conversation with {contact.name}?</p>
+                <div className="delete-contact-modal transparent-background">
+                  <div className="delete-contact-modal">
+                    <div className="delete-contact-container">
+                      <div className="delete-contact-label">
+                        <p>Are you sure you want to delete the conversation with {contact.name}?</p>
+                      </div>
+                      <div className="buttons-row">
+                        <button
+                          className="cancel-button"
+                          onClick={() => setShowDeleteContactModal(false)}>
+                          Cancel
+                        </button>
+                        <button
+                          className="delete-button"
+                          onClick={() => {
+                            dispatch(
+                              deleteContact({
+                                userUid: _user.uid,
+                                contactUid: contact.contactUid
+                              })
+                            );
+                            setChatId(null);
+                            setMessages([]);
+                            setShowDeleteContactModal(false);
+                          }}>
+                          Delete
+                        </button>
+                      </div>
                     </div>
-                    <div className='buttons-row'>
-                      <button 
-                        className='cancel-button'
-                        onClick={() => setShowDeleteContactModal(false)}>Cancel</button>
-                      <button 
-                        className='delete-button'
-                        onClick={() => {
-                          dispatch(
-                            deleteContact({
-                              userUid: _user.uid,
-                              contactUid: contact.contactUid
-                            })
-                          );
-                          setShowDeleteContactModal(false)
-                        }}>Delete</button>
-                    </div>
-                  </div>
                   </div>
                 </div>
               )}

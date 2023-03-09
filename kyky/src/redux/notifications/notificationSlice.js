@@ -6,7 +6,6 @@ export const addNotification = createAsyncThunk(
   'notifications/addNotification',
   async ({ uid, notification }) => {
     try {
-      console.log(uid)
       const notifications = [];
       const docSnap = await getDoc(doc(db, 'users', uid, 'data', 'notifications'));
       if (docSnap.exists()) {

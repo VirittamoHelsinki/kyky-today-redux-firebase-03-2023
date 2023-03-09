@@ -248,8 +248,8 @@ export default function JobCalendar() {
       addNotification({
         uid: uid,
         notification: {
-          icon: "mail",
-          color: "#4285F4",
+          icon: 'mail',
+          color: '#4285F4',
           name: _user.displayName,
           text: 'send you a message',
           to: '/buyer/messages',
@@ -448,6 +448,7 @@ export default function JobCalendar() {
                             <div className="activityInfo">
                               <p>
                                 <i className="material-icons-outlined">schedule</i>
+                                {activity.time.start} - {activity.time.end}
                               </p>
                               <p>
                                 <i className="material-icons-outlined">location_on</i>
@@ -516,8 +517,8 @@ export default function JobCalendar() {
                                                   addNotification({
                                                     uid: activity.buyerUid,
                                                     notification: {
-                                                      icon: "done",
-                                                      color: "#00A088",
+                                                      icon: 'done',
+                                                      color: '#00A088',
                                                       name: _user.displayName,
                                                       text: 'confirmed your booking',
                                                       to: '/buyer/purchases',
