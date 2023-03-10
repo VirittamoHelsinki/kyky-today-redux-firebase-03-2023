@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createBooking } from '../redux/bookings/bookingSlice';
 import { createContact } from '../redux/chat/contactSlice';
 import { addNotification } from '../redux/notifications/notificationSlice';
+import { fetchCalendarSettings } from '../redux/calendar/calendarSettingsSlice';
 import { fetchJobsByQuery, addPageview } from '../redux/jobs/jobSlice';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -54,6 +55,8 @@ function ServiceBooking() {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState('8:00');
   const [endTime, setEndTime] = useState('16:00');
+  const [startTimeScale, setStartTimeScale] = useState('8:00');
+  const [endTimeScale, setEndTimeScale] = useState('16:00');
   const [user, setUser] = useState(null);
   const [showCalendarModal, setShowCalendarModal] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
@@ -69,6 +72,7 @@ function ServiceBooking() {
   const navigate = useNavigate();
 
   const _user = useSelector((state) => state.user);
+  const _settings = useSelector((state) => state.calendarsettings);
 
   const job = defaultJob;
 
@@ -105,6 +109,19 @@ function ServiceBooking() {
   useEffect(() => {
     dispatch(addPageview(location.state.id));
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchCalendarSettings(location.state.uid));
+  }, []);
+
+  useEffect(() => {
+    if ('notificationStartTime' in _settings) {
+      setStartTime(_settings.notificationStartTime);
+      setEndTime(_settings.notificationEndTime);
+      setStartTimeScale(_settings.notificationStartTime);
+      setEndTimeScale(_settings.notificationEndTime);
+    }
+  }, [_settings]);
 
   function selectedCalendarDay(date) {
     setBooking({ ...booking, selectedDays: [], selectedDates: [date] });
@@ -304,18 +321,30 @@ function ServiceBooking() {
               {currentTab === Tabs.Once && (
                 <div className="once-tab-container">
                   <Calendar date={date} setDate={setDate} minYears={0} maxYears={5} />
-                  <div className="select-time-content">
-                    <div className="select-time-item">
+                  <div className="select-date-time-content">
+                    <div className="select-date-item">
                       <span className="material-icons-outlined">calendar_month</span>
                       <p>{date.toLocaleDateString('fi-FI')}</p>
                     </div>
-                    <div className="select-time-item">
-                      <span className="material-icons-outlined">access_time</span>
-                      <TimeSelect setTime={setStartTime} timestring={'8:00'} />
-                    </div>
-                    <div className="select-time-item">
-                      <span className="material-icons-outlined">access_time</span>
-                      <TimeSelect setTime={setEndTime} timestring={'16:00'} />
+                    <div className="select-time-content">
+                      <div className="select-time-item">
+                        <span className="material-icons-outlined">access_time</span>
+                        <TimeSelect
+                          setTime={setStartTime}
+                          startTime={startTimeScale}
+                          endTime={endTimeScale}
+                        />
+                      </div>
+                      <div className="span-line">
+                        <span>-</span>
+                      </div>
+                      <div className="select-time-item">
+                        <TimeSelect
+                          setTime={setEndTime}
+                          startTime={startTimeScale}
+                          endTime={endTimeScale}
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="vat-terms">

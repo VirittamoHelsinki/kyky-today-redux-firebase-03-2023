@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveCalendarSettings } from '../../redux/calendar/calendarSettingsSlice';
+import {
+  saveCalendarSettings,
+  fetchCalendarSettings
+} from '../../redux/calendar/calendarSettingsSlice';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -37,8 +40,12 @@ export default function CalendarSettings({ jobs }) {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   useEffect(() => {
+    dispatch(fetchCalendarSettings(_user.uid));
+  }, []);
+
+  useEffect(() => {
     setJobOptions(jobs.map((job) => ({ value: job.id, label: job.job_title })));
-    if (Array.isArray(_settings)) {
+    if ('bookingsAdvance' in _settings) {
       const parsedSettings = JSON.parse(JSON.stringify(_settings));
       setSwitched(parsedSettings.switched);
       setNotifications(parsedSettings.notifications);
@@ -49,7 +56,7 @@ export default function CalendarSettings({ jobs }) {
       setNotificationStartTime(parsedSettings.notificationStartTime);
       setNotificationEndTime(parsedSettings.notificationEndTime);
     }
-  }, []);
+  }, [_settings]);
 
   function purgeCalendar() {
     if (window.confirm('Are you sure you want to purge the calendar?')) {
@@ -154,13 +161,13 @@ export default function CalendarSettings({ jobs }) {
               <input
                 type="time"
                 defaultValue="08:00"
-                onChange={(e) => setNotificationStartTime(e.target.time)}
+                onChange={(e) => setNotificationStartTime(e.target.value)}
               />
               <span>-</span>
               <input
                 type="time"
                 defaultValue="21:00"
-                onChange={(e) => setNotificationEndTime(e.target.time)}
+                onChange={(e) => setNotificationEndTime(e.target.value)}
               />
             </label>
             <div className={`days ${notifications ? '' : 'disabled'}`}>

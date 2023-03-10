@@ -132,13 +132,13 @@
         justify-content: flex-start;
         gap: 20px;
 
-        .select-time-content {
+        .select-date-time-content {
           display: flex;
           flex-direction: row;
           justify-content: center;
           gap: 20px;
 
-          .select-time-item {
+          .select-date-item {
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
@@ -152,14 +152,45 @@
             p {
               font-size: 18px;
             }
+          }
 
-            .time-select {
-              height: 40px;
-              font-size: 18px;
-              border-radius: 4px;
+          .select-time-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
 
-              .option-value {
-                height: 30px;
+            .select-time-item {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 5px;
+
+              span {
+                font-size: 18px !important;
+              }
+
+              p {
+                font-size: 18px;
+              }
+
+              .time-select {
+                height: 40px;
+                font-size: 18px;
+                border-radius: 4px;
+              }
+            }
+
+            .span-line {
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+
+              span {
+                font-size: 28px;
               }
             }
           }
