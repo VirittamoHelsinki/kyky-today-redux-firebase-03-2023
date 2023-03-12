@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   saveCalendarSettings,
-  fetchCalendarSettings
+  fetchOwnCalendarSettings
 } from '../../redux/calendar/calendarSettingsSlice';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Switch from 'react-switch';
 import MultipleSelect from '../../components/MultipleSelect';
+
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 export default function CalendarSettings({ jobs }) {
   const [switched, setSwitched] = useState(false);
@@ -18,12 +20,12 @@ export default function CalendarSettings({ jobs }) {
   const [bookingsAdvance, setBookingsAdvance] = useState(3);
   const [jobOptions, setJobOptions] = useState([]);
   const [selectedJobsAuto, setSelectedJobsAuto] = useState([]);
-  const [notificationDays, setNotificationDays] = useState([]);
-  const [notificationStartTime, setNotificationStartTime] = useState('08.00');
-  const [notificationEndTime, setNotificationEndTime] = useState('21.00');
+  const [notificationDays, setNotificationDays] = useState(days);
+  const [notificationStartTime, setNotificationStartTime] = useState('08:00');
+  const [notificationEndTime, setNotificationEndTime] = useState('21:00');
 
   const _user = useSelector((state) => state.user);
-  const _settings = useSelector((state) => state.calendarsettings);
+  const _settings = useSelector((state) => state.setting.settings);
 
   const dispatch = useDispatch();
 
@@ -37,15 +39,13 @@ export default function CalendarSettings({ jobs }) {
     { value: 12, text: '12 months' }
   ];
 
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
   useEffect(() => {
-    dispatch(fetchCalendarSettings(_user.uid));
+    dispatch(fetchOwnCalendarSettings(_user.uid));
   }, []);
 
   useEffect(() => {
     setJobOptions(jobs.map((job) => ({ value: job.id, label: job.job_title })));
-    if ('bookingsAdvance' in _settings) {
+    if (_settings) {
       const parsedSettings = JSON.parse(JSON.stringify(_settings));
       setSwitched(parsedSettings.switched);
       setNotifications(parsedSettings.notifications);
@@ -146,7 +146,7 @@ export default function CalendarSettings({ jobs }) {
           </div>
         </div>
         <div className="settings-container">
-          <h3 className="title">Contact Hours</h3>
+          <h3 className="title">Allow bookings</h3>
           <div className="setting">
             <label className="switchy-switch">
               {/* Switchy UwU */}
@@ -157,16 +157,16 @@ export default function CalendarSettings({ jobs }) {
                 checked={notifications}
                 onChange={() => setNotifications(!notifications)}
               />
-              <span>Only allow notifications between</span>
+              <span>Only allow bookings between</span>
               <input
                 type="time"
-                defaultValue="08:00"
+                value={notificationStartTime}
                 onChange={(e) => setNotificationStartTime(e.target.value)}
               />
               <span>-</span>
               <input
                 type="time"
-                defaultValue="21:00"
+                value={notificationEndTime}
                 onChange={(e) => setNotificationEndTime(e.target.value)}
               />
             </label>
@@ -193,13 +193,6 @@ export default function CalendarSettings({ jobs }) {
           </div>
         </div>
         <Button onClick={confirmChanges}>Confirm Changes</Button>
-      </div>
-      <div className="export-import">
-        <h2 className="title">Export/Import Calendar</h2>
-        <div className="buttons">
-          <Button className="button-secondary">Import Calendar</Button>
-          <Button className="button-secondary bg-white">Export Calendar</Button>
-        </div>
       </div>
       <div className="purge">
         <h2 className="title">Purge Calendar</h2>

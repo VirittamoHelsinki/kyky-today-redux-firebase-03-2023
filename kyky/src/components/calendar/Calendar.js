@@ -17,18 +17,22 @@ const months = [
 ];
 const weekDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
+const us_days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 export default function Calendar({
   date,
   setDate,
   minYears = 5,
   maxYears = 50,
-  highlightDays = []
+  highlightDays = [],
+  enabledDays = us_days
 }) {
   const [days, setDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(date.getMonth());
   const [currentYear, setCurrentYear] = useState(date.getFullYear());
   const [years, setYears] = useState([]);
+  const [notificationDays, setNotificationDays] = useState([])
 
   useEffect(() => {
     setCurrentMonth(date.getMonth());
@@ -72,6 +76,10 @@ export default function Calendar({
         .map((_, i) => i + new Date().getFullYear() - minYears)
     );
   }, [minYears, maxYears]);
+
+  useEffect(() => {
+    setNotificationDays(enabledDays)
+  }, [enabledDays])
 
   function changeMonth(month) {
     let year = currentYear;
@@ -221,13 +229,18 @@ export default function Calendar({
           {days.map((day, index) => {
             const isCurrentMonth = day.getMonth() === currentMonth;
             const highlight = isCurrentMonth && highlightDays[day.getDate() - 1]?.highlight;
+            const disabled = !isCurrentMonth || !notificationDays.includes(us_days[day.getDay()]);
             return (
               <div
                 key={`day-${index}`}
                 className={`calendar-day ${selectedDay === index ? 'selected' : ''} ${
-                  !isCurrentMonth ? 'disabled' : ''
+                  disabled ? 'disabled' : ''
                 }${highlight ? ' highlight' : ''}`}
-                onClick={() => setSelectedDay(index)}>
+                onClick={() => {
+                  if (!disabled) {
+                    setSelectedDay(index)
+                  }
+                }}>
                 {day.getDate()}
               </div>
             );

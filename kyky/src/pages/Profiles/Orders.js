@@ -10,7 +10,7 @@ const Orders = () => {
   const [canceled, setCanceled] = useState([]);
 
   const _user = useSelector((state) => state.user);
-  const _orders = useSelector((state) => state.booking.bookings);
+  const _orders = useSelector((state) => state.order.bookings);
 
   useEffect(() => {
     setSelectedWindow('orders');

@@ -9,7 +9,7 @@ import calendarSettingsReducer from './calendar/calendarSettingsSlice';
 import fileUploadReducer from './storage/fileUploadSlice';
 import profileFormReducer from './profiles/profileSlice';
 import jobReducer from './jobs/jobSlice';
-import bookingReducer from './bookings/bookingSlice';
+import orderReducer from './orders/orderSlice';
 import contactReducer from './chat/contactSlice';
 import messageReducer from './chat/messageSlice';
 import notificationReducer from './notifications/notificationSlice';
@@ -20,11 +20,11 @@ import slugReducer from './auth/slugSlice';
 const reducers = combineReducers({
   user: userReducer,
   schedule: calendarScheduleReducer,
-  calendarsettings: calendarSettingsReducer,
+  setting: calendarSettingsReducer,
   upload: fileUploadReducer,
   profile: profileFormReducer,
   jobs: jobReducer,
-  booking: bookingReducer,
+  order: orderReducer,
   chat: contactReducer,
   message: messageReducer,
   notification: notificationReducer,

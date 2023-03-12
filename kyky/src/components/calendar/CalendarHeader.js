@@ -13,7 +13,7 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
   const navigate = new useNavigate();
 
   const _titles = useSelector((state) => state.jobs.titles);
-  const _bookings = useSelector((state) => state.booking.bookings);
+  const _bookings = useSelector((state) => state.order.bookings);
 
   const navButtons = [
     { to: '/calendar', label: 'Job Calendar', id: 'job-calendar', icon: 'calendar_month' },

@@ -17,8 +17,20 @@ export const saveCalendarSettings = createAsyncThunk(
   }
 );
 
-export const fetchCalendarSettings = createAsyncThunk(
-  'calendar-settings/fetchCalendarSettings',
+export const fetchOwnCalendarSettings = createAsyncThunk(
+  'calendar-settings/fetchOwnCalendarSettings',
+  async (uid) => {
+    try {
+      const settings = await getDoc(doc(db, 'users', uid, 'data', 'calendar-settings'));
+      return settings.data();
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
+export const fetchSellerCalendarSettings = createAsyncThunk(
+  'calendar-settings/fetchSellerCalendarSettings',
   async (uid) => {
     try {
       const settings = await getDoc(doc(db, 'users', uid, 'data', 'calendar-settings'));
@@ -44,13 +56,19 @@ export const calendarSettingsSlice = createSlice({
       .addCase(saveCalendarSettings.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          ...action.payload
+          settings: action.payload
         });
       })
-      .addCase(fetchCalendarSettings.fulfilled, (state, action) => {
+      .addCase(fetchOwnCalendarSettings.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          ...action.payload
+          settings: action.payload
+        });
+      })
+      .addCase(fetchSellerCalendarSettings.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          bookingsettings: action.payload
         });
       });
   }

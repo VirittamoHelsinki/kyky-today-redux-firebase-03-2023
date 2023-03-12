@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createBooking } from '../redux/bookings/bookingSlice';
+import { createBooking } from '../redux/orders/orderSlice';
 import { createContact } from '../redux/chat/contactSlice';
 import { addNotification } from '../redux/notifications/notificationSlice';
-import { fetchCalendarSettings } from '../redux/calendar/calendarSettingsSlice';
+import { fetchSellerCalendarSettings } from '../redux/calendar/calendarSettingsSlice';
 import { fetchJobsByQuery, addPageview } from '../redux/jobs/jobSlice';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -38,6 +38,8 @@ const defaultJob = {
   }
 };
 
+const us_days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 function ServiceBooking() {
   const [urls, setUrls] = useState([]);
   const [urlIndex, setUrlIndex] = useState(0);
@@ -55,8 +57,9 @@ function ServiceBooking() {
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState('8:00');
   const [endTime, setEndTime] = useState('16:00');
-  const [startTimeScale, setStartTimeScale] = useState('8:00');
-  const [endTimeScale, setEndTimeScale] = useState('16:00');
+  const [startScale, setStartScale] = useState('0:00');
+  const [endScale, setEndScale] = useState('23:00');
+  const [notificationDays, setNotificationDays] = useState(us_days)
   const [user, setUser] = useState(null);
   const [showCalendarModal, setShowCalendarModal] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
@@ -72,7 +75,7 @@ function ServiceBooking() {
   const navigate = useNavigate();
 
   const _user = useSelector((state) => state.user);
-  const _settings = useSelector((state) => state.calendarsettings);
+  const _settings = useSelector((state) => state.setting.bookingsettings);
 
   const job = defaultJob;
 
@@ -111,15 +114,18 @@ function ServiceBooking() {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchCalendarSettings(location.state.uid));
+    dispatch(fetchSellerCalendarSettings(location.state.uid));
   }, []);
 
   useEffect(() => {
-    if ('notificationStartTime' in _settings) {
+    if (_settings) {
       setStartTime(_settings.notificationStartTime);
       setEndTime(_settings.notificationEndTime);
-      setStartTimeScale(_settings.notificationStartTime);
-      setEndTimeScale(_settings.notificationEndTime);
+      setStartScale(_settings.notificationStartTime);
+      setEndScale(_settings.notificationEndTime);
+      if (_settings.notifications) {
+        setNotificationDays(_settings.notificationDays)
+      }
     }
   }, [_settings]);
 
@@ -221,6 +227,7 @@ function ServiceBooking() {
           },
           price: location.state.price,
           unit: location.state.unit,
+          note: '',
           rating: 0,
           status: 'incompleted',
           activityTime: '',
@@ -320,7 +327,7 @@ function ServiceBooking() {
 
               {currentTab === Tabs.Once && (
                 <div className="once-tab-container">
-                  <Calendar date={date} setDate={setDate} minYears={0} maxYears={5} />
+                  <Calendar date={date} setDate={setDate} minYears={0} maxYears={5} enabledDays={notificationDays} />
                   <div className="select-date-time-content">
                     <div className="select-date-item">
                       <span className="material-icons-outlined">calendar_month</span>
@@ -331,8 +338,8 @@ function ServiceBooking() {
                         <span className="material-icons-outlined">access_time</span>
                         <TimeSelect
                           setTime={setStartTime}
-                          startTime={startTimeScale}
-                          endTime={endTimeScale}
+                          startTime={startScale}
+                          endTime={endScale}
                         />
                       </div>
                       <div className="span-line">
@@ -341,8 +348,8 @@ function ServiceBooking() {
                       <div className="select-time-item">
                         <TimeSelect
                           setTime={setEndTime}
-                          startTime={startTimeScale}
-                          endTime={endTimeScale}
+                          startTime={startScale}
+                          endTime={endScale}
                         />
                       </div>
                     </div>

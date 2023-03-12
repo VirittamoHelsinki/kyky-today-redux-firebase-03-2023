@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPurchasesByQuery } from '../../redux/bookings/bookingSlice';
+import { fetchPurchasesByQuery } from '../../redux/orders/orderSlice';
 import Purchase from '../../components/Profiles/Purchase';
 
 const Purchases = () => {
@@ -13,7 +13,7 @@ const Purchases = () => {
   const dispatch = useDispatch();
 
   const _user = useSelector((state) => state.user);
-  const _orders = useSelector((state) => state.booking.purchases);
+  const _orders = useSelector((state) => state.order.purchases);
 
   useEffect(() => {
     setSelectedWindow('purchases');

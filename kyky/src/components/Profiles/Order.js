@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { changeBookingStatus } from '../../redux/bookings/bookingSlice';
+import { changeBookingStatus } from '../../redux/orders/orderSlice';
 import { addNotification } from '../../redux/notifications/notificationSlice';
 import '../../styles/Profiles.scss';
 
@@ -24,7 +24,7 @@ const Order = ({ order, user }) => {
               <p>Booking Id</p>
             </div>
             <div className="detail-value">
-              <p>{order.bookingId}</p>
+              <p>{order.orderId}</p>
             </div>
           </div>
           <div className="detail">
@@ -55,7 +55,10 @@ const Order = ({ order, user }) => {
           </div>
           {order.status === 'incompleted' ? (
             <div className="order-data-button">
-              <button onClick={() => setShowOrderDataModal(true)}>Order data</button>
+              <button onClick={() => {
+                window.scrollTo(0, 0);
+                setShowOrderDataModal(true)
+              }}>Order data</button>
             </div>
           ) : (
             <div className="detail">
@@ -145,8 +148,7 @@ const Order = ({ order, user }) => {
                     </div>
                     <div className="note-description">
                       <p>
-                        I have several leashes and collar for dogs, cats and rabbits as well as
-                        small transport and small extra cage if needed.
+                        {order.note}
                       </p>
                     </div>
                   </div>
@@ -156,7 +158,7 @@ const Order = ({ order, user }) => {
                       onClick={() => {
                         dispatch(
                           changeBookingStatus({
-                            bookingId: order.bookingId,
+                            orderId: order.orderId,
                             status: 'completed'
                           })
                         );
@@ -182,7 +184,7 @@ const Order = ({ order, user }) => {
                       onClick={() => {
                         dispatch(
                           changeBookingStatus({
-                            bookingId: order.bookingId,
+                            orderId: order.orderId,
                             status: 'canceled'
                           })
                         );

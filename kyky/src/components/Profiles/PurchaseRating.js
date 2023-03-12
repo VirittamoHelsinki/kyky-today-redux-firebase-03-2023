@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addRating } from '../../redux/profiles/ratingSlice';
-import { rateCompletedPurchase } from '../../redux/bookings/bookingSlice';
+import { rateCompletedPurchase } from '../../redux/orders/orderSlice';
 import starFilled from '../../image/star-filled.svg';
 import starBlank from '../../image/star-white.svg';
 import '../../styles/Profiles.scss';
@@ -42,7 +42,7 @@ const PurchaseRating = ({ order, user }) => {
     );
     dispatch(
       rateCompletedPurchase({
-        bookingId: order.bookingId,
+        orderId: order.orderId,
         value: starValue
       })
     );
@@ -77,7 +77,7 @@ const PurchaseRating = ({ order, user }) => {
               <p>Booking Id</p>
             </div>
             <div className="detail-value">
-              <p>{order.bookingId}</p>
+              <p>{order.orderId}</p>
             </div>
           </div>
           <div className="detail">

@@ -8,7 +8,7 @@ import { resetCalendarSchedule } from '../redux/calendar/calendarScheduleSlice';
 import { resetCalendarSettings } from '../redux/calendar/calendarSettingsSlice';
 import { resetJobs } from '../redux/jobs/jobSlice';
 import { resetProfileForm } from '../redux/profiles/profileSlice';
-import { resetBooking } from '../redux/bookings/bookingSlice';
+import { resetOrder } from '../redux/orders/orderSlice';
 import { resetFileUpload } from '../redux/storage/fileUploadSlice';
 import { resetContact } from '../redux/chat/contactSlice';
 import { resetMessage } from '../redux/chat/messageSlice';
@@ -72,7 +72,7 @@ const Header = () => {
     dispatch(resetFileUpload());
     dispatch(resetJobs());
     dispatch(resetProfileForm());
-    dispatch(resetBooking());
+    dispatch(resetOrder());
     dispatch(resetContact());
     dispatch(resetMessage());
     dispatch(resetSlug());

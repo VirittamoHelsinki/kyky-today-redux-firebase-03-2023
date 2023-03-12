@@ -17,7 +17,7 @@ const Purchase = ({ order }) => {
               <p>Booking Id</p>
             </div>
             <div className="detail-value">
-              <p>{order.bookingId}</p>
+              <p>{order.orderId}</p>
             </div>
           </div>
           <div className="detail">

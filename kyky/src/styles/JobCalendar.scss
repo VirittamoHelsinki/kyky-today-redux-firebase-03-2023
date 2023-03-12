@@ -289,7 +289,7 @@
   }
 }
 
-.confirm-modal {
+.job-calendar-modal {
   background: #c4c4c4;
   position: fixed;
   z-index: 1000;
@@ -301,7 +301,7 @@
   transform: translate(-50%, -50%);
   padding: 20px;
 
-  .confirm-container {
+  .job-calendar-modal-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -311,7 +311,7 @@
     border-radius: 11px;
     padding: 20px;
 
-    .confirm-label {
+    .job-calendar-modal-label {
       display: flex;
       justify-content: flex-start;
 
@@ -323,6 +323,21 @@
         line-height: 48px;
         text-align: left;
       }
+    }
+
+    .job-calendar-modal-textarea {
+      width: 100%;
+      height: 150px;
+      padding: 0 4px;
+      border-radius: 6px;
+      border: 0.5px solid #0000004d;
+      font-family: roboto, sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 23px;
+      padding-left: 10px;
+      text-align: start;
     }
 
     .buttons-row {

@@ -3,8 +3,8 @@ import React from 'react';
 const TimeSelect = ({ setTime, startTime, endTime }) => {
   const start_split = startTime.split(':');
   const end_split = endTime.split(':');
-  const start = parseInt(start_split[0]) ? parseInt(start_split[0]) : 0;
-  const end = parseInt(end_split[0]) ? parseInt(end_split[0]) : 0;
+  const start = parseInt(start_split[0]) || 0;
+  const end = parseInt(end_split[0]) || 23;
   let values = [];
   for (let i = start; i < end; i++) {
     values.push(i + ':00');

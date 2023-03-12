@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from './redux/calendar/calendarScheduleSlice';
-import { fetchBookingsByQuery } from './redux/bookings/bookingSlice';
+import { fetchBookingsByQuery } from './redux/orders/orderSlice';
 import { fetchJobsByQuery } from './redux/jobs/jobSlice';
 import { fetchNotifications } from './redux/notifications/notificationSlice';
 import { updateLastseen } from './redux/auth/userSlice';

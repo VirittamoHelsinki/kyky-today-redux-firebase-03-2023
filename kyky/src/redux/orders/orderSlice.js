@@ -10,27 +10,27 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
-export const createBooking = createAsyncThunk('bookings/createBooking', async (payload) => {
+export const createBooking = createAsyncThunk('orders/createBooking', async (payload) => {
   try {
-    const bookingRef = doc(collection(db, `bookings`));
-    await setDoc(bookingRef, { ...payload, bookingId: bookingRef.id, created: serverTimestamp() });
+    const orderRef = doc(collection(db, `orders`));
+    await setDoc(orderRef, { ...payload, orderId: orderRef.id, created: serverTimestamp() });
   } catch (error) {
     return error;
   }
 });
 
 export const fetchBookingsByQuery = createAsyncThunk(
-  'bookings/fetchBookingsByQuery',
+  'orders/fetchOrdersByQuery',
   async (payload) => {
     try {
-      const bookings = [];
-      const ref = collection(db, 'bookings');
+      const orders = [];
+      const ref = collection(db, 'orders');
       const q = query(ref, where('sellerUid', '==', payload));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
-        bookings.push({ ...doc.data() });
+        orders.push({ ...doc.data() });
       });
-      return bookings;
+      return orders;
     } catch (error) {
       return error;
     }
@@ -38,11 +38,11 @@ export const fetchBookingsByQuery = createAsyncThunk(
 );
 
 export const fetchPurchasesByQuery = createAsyncThunk(
-  'bookings/fetchPurchasesByQuery',
+  'orders/fetchPurchasesByQuery',
   async (payload) => {
     try {
       const purchases = [];
-      const ref = collection(db, 'bookings');
+      const ref = collection(db, 'orders');
       const q = query(ref, where('buyerUid', '==', payload));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
@@ -56,26 +56,26 @@ export const fetchPurchasesByQuery = createAsyncThunk(
 );
 
 export const changeConfirmedStatus = createAsyncThunk(
-  'bookings/changeConfirmedStatus',
-  async ({ bookingId, status }) => {
+  'orders/changeConfirmedStatus',
+  async ({ orderId, status }) => {
     try {
-      const bookingRef = doc(db, 'bookings', bookingId);
-      setDoc(bookingRef, { confirmed: status }, { merge: true });
-      return { status: status, bookingId: bookingId };
+      const orderRef = doc(db, 'orders', orderId);
+      setDoc(orderRef, { confirmed: status }, { merge: true });
+      return { status: status, ordeId: orderId };
     } catch (error) {
       return error;
     }
   }
 );
 
-export const changeBookingStatus = createAsyncThunk(
-  'bookings/changeBookingStatus',
-  async ({ bookingId, status }) => {
+export const changeOrderStatus = createAsyncThunk(
+  'orders/changeBookingStatus',
+  async ({ orderId, status }) => {
     try {
       let timestamp = serverTimestamp();
-      const bookingRef = doc(db, 'bookings', bookingId);
-      setDoc(bookingRef, { status: status, activityTime: timestamp }, { merge: true });
-      return { status: status, activityTime: timestamp, bookingId: bookingId };
+      const orderRef = doc(db, 'orders', orderId);
+      setDoc(orderRef, { status: status, activityTime: timestamp }, { merge: true });
+      return { status: status, activityTime: timestamp, orderId: orderId };
     } catch (error) {
       return error;
     }
@@ -83,12 +83,25 @@ export const changeBookingStatus = createAsyncThunk(
 );
 
 export const rateCompletedPurchase = createAsyncThunk(
-  'bookings/rateCompletedPurchase',
-  async ({ bookingId, value }) => {
+  'orders/rateCompletedPurchase',
+  async ({ orderId, value }) => {
     try {
-      const bookingRef = doc(db, 'bookings', bookingId);
-      setDoc(bookingRef, { rating: value }, { merge: true });
-      return { rating: value, bookingId: bookingId };
+      const orderRef = doc(db, 'orders', orderId);
+      setDoc(orderRef, { rating: value }, { merge: true });
+      return { rating: value, orderId: orderId };
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
+export const addNoteToOrder = createAsyncThunk(
+  'orders/addNoteToOrder',
+  async ({ orderId, note }) => {
+    try {
+      const orderRef = doc(db, 'orders', orderId);
+      setDoc(orderRef, { note: note }, { merge: true });
+      return { note: note, orderId: orderId };
     } catch (error) {
       return error;
     }
@@ -97,11 +110,11 @@ export const rateCompletedPurchase = createAsyncThunk(
 
 const initialState = [];
 
-export const bookingSlice = createSlice({
-  name: 'bookings',
+export const orderSlice = createSlice({
+  name: 'orders',
   initialState: initialState,
   reducers: {
-    resetBooking() {
+    resetOrder() {
       return initialState;
     }
   },
@@ -124,7 +137,7 @@ export const bookingSlice = createSlice({
       the confirmed value to the status value, return the state with the modified list */
       .addCase(changeConfirmedStatus.fulfilled, (state, action) => {
         let new_bookings = JSON.parse(JSON.stringify(state.bookings));
-        let index = new_bookings.findIndex((f) => f.bookingId === action.payload.bookingId);
+        let index = new_bookings.findIndex((f) => f.orderId === action.payload.orderId);
         new_bookings[index].confirmed = action.payload.status;
         return (state = {
           ...state,
@@ -133,7 +146,7 @@ export const bookingSlice = createSlice({
       })
       .addCase(changeBookingStatus.fulfilled, (state, action) => {
         let new_bookings = JSON.parse(JSON.stringify(state.bookings));
-        let index = new_bookings.findIndex((f) => f.bookingId === action.payload.bookingId);
+        let index = new_bookings.findIndex((f) => f.orderId === action.payload.orderId);
         new_bookings[index].status = action.payload.status;
         new_bookings[index].activityTime = action.payload.activityTime;
         return (state = {
@@ -143,15 +156,24 @@ export const bookingSlice = createSlice({
       })
       .addCase(rateCompletedPurchase.fulfilled, (state, action) => {
         let new_purchases = JSON.parse(JSON.stringify(state.purchases));
-        let index = new_purchases.findIndex((f) => f.bookingId === action.payload.bookingId);
+        let index = new_purchases.findIndex((f) => f.orderId === action.payload.orderId);
         new_purchases[index].rating = action.payload.rating;
         return (state = {
           ...state,
           purchases: new_purchases
         });
+      })
+      .addCase(addNoteToOrder.fulfilled, (state, action) => {
+        let new_bookings = JSON.parse(JSON.stringify(state.bookings));
+        let index = new_bookings.findIndex((f) => f.orderId === action.payload.orderId);
+        new_bookings[index].note = action.payload.note;
+        return (state = {
+          ...state,
+          bookings: new_bookings
+        });
       });
   }
 });
 
-export const { resetBooking } = bookingSlice.actions;
-export default bookingSlice.reducer;
+export const { resetOrder } = orderSlice.actions;
+export default orderSlice.reducer;

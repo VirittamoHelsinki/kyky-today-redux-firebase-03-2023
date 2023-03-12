@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from '../../redux/calendar/calendarScheduleSlice';
-import { changeConfirmedStatus } from '../../redux/bookings/bookingSlice';
+import { changeConfirmedStatus, addNoteToOrder } from '../../redux/orders/orderSlice';
 import { createContact } from '../../redux/chat/contactSlice';
 import { addNotification } from '../../redux/notifications/notificationSlice';
 import { useOutletContext } from 'react-router-dom';
@@ -56,10 +56,12 @@ export default function JobCalendar() {
   const [activities, setActivities] = useState([]);
   const [titles, setTitles] = useState([]);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showAddNoteModal, setShowAddNoteModal] = useState(false);
+  const [note, setNote] = useState('');
 
   const _user = useSelector((state) => state.user);
   const _schedules = useSelector((state) => state.schedule);
-  const _bookings = useSelector((state) => state.booking.bookings);
+  const _bookings = useSelector((state) => state.order.bookings);
   const _titles = useSelector((state) => state.jobs.titles);
   const _isLoading = useSelector((state) => state.schedule.loading);
 
@@ -477,6 +479,48 @@ export default function JobCalendar() {
                                 <i className="material-icons-outlined">mail</i>
                                 {activity.buyerMail}
                               </p>
+                              <p onClick={() => setShowAddNoteModal(true)}>
+                                <i className="material-icons-outlined">add_comment</i>
+                                {activity.note === '' ? 
+                                <p>click to add a note</p> : 
+                                <p>{activity.note < 20 ? activity.note : activity.note.substring(0, 20) + '...'}</p>}
+                                {showAddNoteModal && (
+                                <div className="job-calendar-modal transparent-background">
+                                  <div className="job-calendar-modal">
+                                    <div className="job-calendar-modal-container">
+                                      <textarea
+                                        className="job-calendar-modal-textarea"
+                                        name="comments-field"
+                                        value={note}
+                                        placeholder="Add a note to the buyer"
+                                        onChange={(e) => {
+                                          setNote(e.target.value);
+                                        }} 
+                                      />
+                                      <div className="buttons-row">
+                                        <button
+                                          className="cancel-button"
+                                          onClick={() => {
+                                            setNote('')
+                                            setShowAddNoteModal(false)
+                                          }}>
+                                          Cancel
+                                        </button>
+                                        <button
+                                          className="confirm-button"
+                                          onClick={() => {
+                                            dispatch(addNoteToOrder({ orderId: activity.orderId, note: note }));
+                                            setNote('')
+                                            setShowAddNoteModal(false);
+                                          }}>
+                                          Add a note
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                )}
+                              </p>
                               {!activity.confirmed && (
                                 <p className="pending-paragraph">
                                   <span className="pending-span">
@@ -492,48 +536,48 @@ export default function JobCalendar() {
                                     keyboard_arrow_right
                                   </i>
                                   {showConfirmModal && (
-                                    <div className="confirm-modal transparent-background">
-                                      <div className="confirm-modal">
-                                        <div className="confirm-container">
-                                          <div className="confirm-label">
-                                            <p>Confirm booking?</p>
-                                          </div>
-                                          <div className="buttons-row">
-                                            <button
-                                              className="cancel-button"
-                                              onClick={() => setShowConfirmModal(false)}>
-                                              Cancel
-                                            </button>
-                                            <button
-                                              className="confirm-button"
-                                              onClick={() => {
-                                                dispatch(
-                                                  changeConfirmedStatus({
-                                                    bookingId: activity.bookingId,
-                                                    status: true
-                                                  })
-                                                );
-                                                dispatch(
-                                                  addNotification({
-                                                    uid: activity.buyerUid,
-                                                    notification: {
-                                                      icon: 'done',
-                                                      color: '#00A088',
-                                                      name: _user.displayName,
-                                                      text: 'confirmed your booking',
-                                                      to: '/buyer/purchases',
-                                                      read: false
-                                                    }
-                                                  })
-                                                );
-                                                setShowConfirmModal(false);
-                                              }}>
-                                              Confirm
-                                            </button>
-                                          </div>
+                                  <div className="job-calendar-modal transparent-background">
+                                    <div className="job-calendar-modal">
+                                      <div className="job-calendar-modal-container">
+                                        <div className="job-calendar-modal-label">
+                                          <p>Confirm booking?</p>
+                                        </div>
+                                        <div className="buttons-row">
+                                          <button
+                                            className="cancel-button"
+                                            onClick={() => setShowConfirmModal(false)}>
+                                            Cancel
+                                          </button>
+                                          <button
+                                            className="confirm-button"
+                                            onClick={() => {
+                                              dispatch(
+                                                changeConfirmedStatus({
+                                                  orderId: activity.orderId,
+                                                  status: true
+                                                })
+                                              );
+                                              dispatch(
+                                                addNotification({
+                                                  uid: activity.buyerUid,
+                                                  notification: {
+                                                    icon: 'done',
+                                                    color: '#00A088',
+                                                    name: _user.displayName,
+                                                    text: 'confirmed your booking',
+                                                    to: '/buyer/purchases',
+                                                    read: false
+                                                  }
+                                                })
+                                              );
+                                              setShowConfirmModal(false);
+                                            }}>
+                                            Confirm
+                                          </button>
                                         </div>
                                       </div>
                                     </div>
+                                  </div>
                                   )}
                                 </p>
                               )}
