@@ -5,8 +5,6 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   GoogleAuthProvider,
-  FacebookAuthProvider,
-  OAuthProvider,
   signInWithPopup,
   updatePassword,
   signOut
@@ -170,32 +168,6 @@ export const signInGoogleAuthProvider = createAsyncThunk(
   }
 );
 
-export const signInFacebookAuthProvider = createAsyncThunk(
-  'user/signInFacebookAuthProvider',
-  async () => {
-    try {
-      const provider = new FacebookAuthProvider();
-      const res = await signInWithPopup(auth, provider);
-      return res;
-    } catch (error) {
-      return error;
-    }
-  }
-);
-
-export const signInAppleAuthProvider = createAsyncThunk(
-  'user/signInAppleAuthProvider',
-  async () => {
-    try {
-      const provider = new OAuthProvider('apple.com');
-      const res = await signInWithPopup(auth, provider);
-      return res;
-    } catch (error) {
-      return error;
-    }
-  }
-);
-
 export const logOut = createAsyncThunk('user/logOut', async () => {
   try {
     const res = signOut(auth);
@@ -251,20 +223,6 @@ export const userSlice = createSlice({
         });
       })
       .addCase(signInGoogleAuthProvider.fulfilled, (state, action) => {
-        return (state = {
-          ...state,
-          ...action.payload
-        });
-      })
-      .addCase(signInFacebookAuthProvider.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload));
-        return (state = {
-          ...state,
-          ...action.payload
-        });
-      })
-      .addCase(signInAppleAuthProvider.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload));
         return (state = {
           ...state,
           ...action.payload

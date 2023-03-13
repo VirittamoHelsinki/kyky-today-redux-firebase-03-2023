@@ -36,16 +36,6 @@ function UserLogIn() {
     dispatch(signInGoogleAuthProvider());
   };
 
-  const onFacebookClick = () => {
-    //dispatch(signInFacebookAuthProvider());
-    console.log('facebook app needed');
-  };
-
-  const onAppleClick = () => {
-    //dispatch(signInAppleAuthProvider());
-    console.log('apple app needed');
-  };
-
   return (
     <main className="wrapper fixed-centered">
       <form className="card light small shadow centered" onSubmit={handleSubmit}>
@@ -92,19 +82,6 @@ function UserLogIn() {
           }}>
           Kirjaudu Googlella
         </Button>
-        <Button
-          onClick={() => {
-            onFacebookClick();
-          }}>
-          Kirjaudu Facebookilla
-        </Button>
-        <Button
-          onClick={() => {
-            onAppleClick();
-          }}>
-          Kirjaudu Applella
-        </Button>
-
         <div className="primary">
           <Link to="/recover-password">{lang.registration.recover_password}</Link>
         </div>

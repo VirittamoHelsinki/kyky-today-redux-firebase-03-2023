@@ -38,6 +38,7 @@ const Header = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
+  const [randNumber, setRandNumber] = useState(0);
 
   const notificationRef = useRef();
   const noImgRef = useRef();
@@ -242,7 +243,10 @@ const Header = () => {
                 <p className="sign-in-register-label">Register</p>
               </Link>
             </li>
-            <li onClick={() => setShowLoginModal(true)}>
+            <li onClick={() => {
+              setRandNumber(Math.floor(Math.random() * randomImages.length))
+              setShowLoginModal(true)
+            }}>
               <p className="sign-in-register-label">Sign in</p>
             </li>
           </ul>
@@ -262,7 +266,7 @@ const Header = () => {
                 <div className="login-modal-image">
                   <img
                     className="random-images"
-                    src={randomImages[Math.floor(Math.random() * randomImages.length)]}
+                    src={randomImages[randNumber]}
                     alt=""
                   />
                 </div>
