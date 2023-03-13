@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { changeBookingStatus } from '../../redux/orders/orderSlice';
+import { changeOrderStatus } from '../../redux/orders/orderSlice';
 import { addNotification } from '../../redux/notifications/notificationSlice';
 import '../../styles/Profiles.scss';
 
@@ -55,10 +55,13 @@ const Order = ({ order, user }) => {
           </div>
           {order.status === 'incompleted' ? (
             <div className="order-data-button">
-              <button onClick={() => {
-                window.scrollTo(0, 0);
-                setShowOrderDataModal(true)
-              }}>Order data</button>
+              <button
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  setShowOrderDataModal(true);
+                }}>
+                Order data
+              </button>
             </div>
           ) : (
             <div className="detail">
@@ -147,9 +150,7 @@ const Order = ({ order, user }) => {
                       <p>Note to the buyer</p>
                     </div>
                     <div className="note-description">
-                      <p>
-                        {order.note}
-                      </p>
+                      <p>{order.note}</p>
                     </div>
                   </div>
                   <div className="buttons-row">
@@ -157,7 +158,7 @@ const Order = ({ order, user }) => {
                       className="completed-button"
                       onClick={() => {
                         dispatch(
-                          changeBookingStatus({
+                          changeOrderStatus({
                             orderId: order.orderId,
                             status: 'completed'
                           })
@@ -166,8 +167,8 @@ const Order = ({ order, user }) => {
                           addNotification({
                             uid: order.buyerUid,
                             notification: {
-                              icon: "done_all",
-                              color: "#53F550",
+                              icon: 'done_all',
+                              color: '#53F550',
                               name: user.displayName,
                               text: 'completed your booking',
                               to: '/buyer/purchases',
@@ -183,7 +184,7 @@ const Order = ({ order, user }) => {
                       className="canceled-button"
                       onClick={() => {
                         dispatch(
-                          changeBookingStatus({
+                          changeOrderStatus({
                             orderId: order.orderId,
                             status: 'canceled'
                           })

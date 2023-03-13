@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../redux/auth/userSlice';
+import { signInEmailAndPassword, signInGoogleAuthProvider, logOut } from '../redux/auth/userSlice';
 import { updateNotifications } from '../redux/notifications/notificationSlice';
 import { resetCalendarSchedule } from '../redux/calendar/calendarScheduleSlice';
 import { resetCalendarSettings } from '../redux/calendar/calendarSettingsSlice';
@@ -18,15 +18,26 @@ import { resetNotifications } from '../redux/notifications/notificationSlice';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import UserDropdown from './UserDropdown';
-import SearchBar from './SearchBar';
-import '../styles/Header.scss';
+import Filter from './FilterComponent';
+import Checkbox from './Checkbox';
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
+import dogIMG from '../image/dog-walker.png';
+import cookingIMG from '../image/cooking.png';
+import technologyIMG from '../image/technology.png';
+import gardeningIMG from '../image/gardening.png';
+import photographyIMG from '../image/photography.png';
+import googleLogo from '../image/google_logo.svg';
+import '../styles/Header.scss';
 
 const Header = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [unreadNotifications, setUnreadNotifications] = useState([]);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [remember, setRemember] = useState(false);
 
   const notificationRef = useRef();
   const noImgRef = useRef();
@@ -38,6 +49,8 @@ const Header = () => {
 
   const _user = useSelector((state) => state.user);
   const _notifications = useSelector((state) => state.notification.notifications);
+
+  const randomImages = [dogIMG, cookingIMG, technologyIMG, gardeningIMG, photographyIMG];
 
   useEffect(() => {
     const closeDropdown = (e) => {
@@ -109,6 +122,27 @@ const Header = () => {
     }
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (username === '' || password === '') {
+      return;
+    }
+    dispatch(
+      signInEmailAndPassword({
+        email: username,
+        password: password
+      })
+    );
+    setShowLoginModal(false);
+    setUsername('');
+    setPassword('');
+    setRemember(false);
+  };
+
+  const onGoogleClick = () => {
+    dispatch(signInGoogleAuthProvider());
+  };
+
   return (
     <div className="navheader">
       <div className="nav-title">
@@ -116,7 +150,7 @@ const Header = () => {
           <KykyLogo />
         </a>
       </div>
-      <SearchBar />
+      <Filter />
       <nav>
         {_user.uid ? (
           <ul>
@@ -204,19 +238,116 @@ const Header = () => {
         ) : (
           <ul>
             <li>
-              <Link to="/user-registration">Sign up</Link>
+              <Link to="/user-registration">
+                <p className="sign-in-register-label">Register</p>
+              </Link>
             </li>
-            <li>
-              <Link to="/user-log-in">Sign in</Link>
-            </li>
-            <li className="dropdown" onClick={profileToggle}>
-              <span className="material-icons-outlined" ref={noImgRef}>
-                account_circle
-              </span>
+            <li onClick={() => setShowLoginModal(true)}>
+              <p className="sign-in-register-label">Sign in</p>
             </li>
           </ul>
         )}
       </nav>
+      {showLoginModal && (
+        <div className="login-modal transparent-background">
+          <div className="login-modal">
+            <div className="login-modal-container">
+              <div className="login-modal-left-side">
+                <div className="login-modal-logo">
+                  <KykyLogo />
+                </div>
+                <div className="login-modal-title">
+                  <p>Let's get things done!</p>
+                </div>
+                <div className="login-modal-image">
+                  <img
+                    className="random-images"
+                    src={randomImages[Math.floor(Math.random() * randomImages.length)]}
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div className="login-modal-right-side">
+                <div className="login-modal-login-title">
+                  <p>Sign in</p>
+                </div>
+                <div className="login-modal-input-container">
+                  <div className="input-title">
+                    <p>User name</p>
+                  </div>
+                  <div className="input-container">
+                    <input
+                      className="input-field"
+                      type="text"
+                      placeholder="User name"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="login-modal-input-container">
+                  <div className="input-title">
+                    <p>Password</p>
+                  </div>
+                  <div className="input-container">
+                    <input
+                      className="input-field"
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="login-modal-checkbox-recovery-container">
+                  <Checkbox
+                    label="Keep me logged in"
+                    name="remember"
+                    value={remember}
+                    onChange={(e) => setRemember(e.target.checked)}
+                    checked={remember}></Checkbox>
+                  <div className="recovery-label">
+                    <Link to="/recover-password">
+                      <p>Recover password</p>
+                    </Link>
+                  </div>
+                </div>
+                <div className="login-modal-buttons-column-container">
+                  <button className="login-local-button" onClick={handleSubmit}>
+                    <p>Log in</p>
+                  </button>
+                  <button
+                    className="login-google-button"
+                    onClick={() => {
+                      setShowLoginModal(false);
+                      setUsername('');
+                      setPassword('');
+                      setRemember(false);
+                      onGoogleClick();
+                    }}>
+                    <img src={googleLogo} alt="" />
+                    <p>Log in with Google</p>
+                  </button>
+                </div>
+                <div className="login-modal-register-container">
+                  <p className="new-user-label">New user?</p>
+                  <p
+                    className="register-here-link"
+                    onClick={() => {
+                      setShowLoginModal(false);
+                      setUsername('');
+                      setPassword('');
+                      setRemember(false);
+                      navigate('/user-registration');
+                    }}>
+                    Register here
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

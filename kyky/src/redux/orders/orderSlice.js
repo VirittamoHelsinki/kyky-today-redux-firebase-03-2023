@@ -69,7 +69,7 @@ export const changeConfirmedStatus = createAsyncThunk(
 );
 
 export const changeOrderStatus = createAsyncThunk(
-  'orders/changeBookingStatus',
+  'orders/changeOrderStatus',
   async ({ orderId, status }) => {
     try {
       let timestamp = serverTimestamp();
@@ -144,7 +144,7 @@ export const orderSlice = createSlice({
           bookings: new_bookings
         });
       })
-      .addCase(changeBookingStatus.fulfilled, (state, action) => {
+      .addCase(changeOrderStatus.fulfilled, (state, action) => {
         let new_bookings = JSON.parse(JSON.stringify(state.bookings));
         let index = new_bookings.findIndex((f) => f.orderId === action.payload.orderId);
         new_bookings[index].status = action.payload.status;
