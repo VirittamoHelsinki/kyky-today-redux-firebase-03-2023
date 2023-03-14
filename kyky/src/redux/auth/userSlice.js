@@ -83,7 +83,7 @@ export const changePassword = createAsyncThunk(
     try {
       const res = await signInWithEmailAndPassword(auth, email, old_password);
       await updatePassword(res.user, new_password);
-      return 'password changed ' + new Date();
+      return res.user
     } catch (error) {
       return 'password change failed';
     }
@@ -95,15 +95,6 @@ export const signInEmailAndPassword = createAsyncThunk(
   async ({ email, password }) => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
-      // if (res.user.uid && !res.user.emailVerified) {
-      //   const confirm = window.confirm(
-      //     'Please verify your email address\n\nPress OK to send a new verification link to your email'
-      //   );
-      //   if (confirm) {
-      //     await sendEmailVerification(auth.currentUser);
-      //     alert('A new verification link is sent to your email!');
-      //   }
-      // }
       const docSnap = await getDoc(doc(db, 'users', res.user.uid, 'data', 'userdata'));
       await updateDoc(doc(db, 'users', res.user.uid, 'data', 'userdata'), {
         lastseen: serverTimestamp()
@@ -239,7 +230,7 @@ export const userSlice = createSlice({
       .addCase(changePassword.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          changePassword: action.payload
+          ...action.payload
         });
       })
       .addCase(signInGoogleAuthProvider.fulfilled, (state, action) => {

@@ -4,9 +4,7 @@ import { updateSteps, addProfileForm } from '../../redux/profiles/profileSlice';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
-import Step4 from './Step4';
-import Step5 from './Step5';
-import Step6 from './Step6';
+import Step4 from './Step2';
 import '../../styles/CreateProfileModal.scss';
 
 const CreateProfileModal = ({ setShowProfileModal }) => {
@@ -19,7 +17,7 @@ const CreateProfileModal = ({ setShowProfileModal }) => {
 
   const dispatch = useDispatch();
 
-  const steps = 6;
+  const steps = 4;
 
   function previousPhase() {
     setTitle(title - 1);
@@ -50,13 +48,14 @@ const CreateProfileModal = ({ setShowProfileModal }) => {
 
   return (
     <div className="profile-modal-main">
+      <div className="profile-modal-title">
+        <p>Create your profile</p>
+      </div>
       <form onSubmit={sendForm}>
         {currentStep === 1 && <Step1 handleChange={handleChange} />}
         {currentStep === 2 && <Step2 handleChange={handleChange} />}
         {currentStep === 3 && <Step3 handleChange={handleChange} />}
-        {currentStep === 4 && <Step4 handleChange={handleChange} />}
-        {currentStep === 5 && <Step5 handleChange={handleChange} />}
-        {currentStep === 6 && <Step6 />}
+        {currentStep === 4 && <Step4 />}
         <div className="button-container">
           <div className="cancel-button">
             <button className="form-button" onClick={() => setShowProfileModal(false)}>

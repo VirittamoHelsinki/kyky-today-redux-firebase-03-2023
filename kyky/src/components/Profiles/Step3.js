@@ -1,117 +1,202 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { uploadImage } from '../../redux/storage/fileUploadSlice';
 import PropTypes from 'prop-types';
 import { GenericSelect } from './Select';
-import { language_options } from './Features';
-import Languages from '../../languages.json';
+import countries from '../../countries.json';
+import CountriesWithDialCodes from '../../countriesWithDialCodes.json';
 import '../../styles/CreateProfileModal.scss';
+import '../../styles/_components.scss';
 
-export default function Step3({ handleChange }) {
-  const [finnish, setFinnish] = useState(language_options[0]);
-  const [swedish, setSwedish] = useState(language_options[0]);
-  const [english, setEnglish] = useState(language_options[0]);
-  const [optionalLang, setOptionalLang] = useState({ value: '', label: '' });
-  const [optionalSkill, setOptionalSkill] = useState(language_options[0]);
-  const [languages, setLanguages] = useState([]);
-  const [langArr, setLangArr] = useState([]);
+export default function Step5({ handleChange }) {
+  const [country, setCountry] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [postalcode, setPostalCode] = useState('');
+  const [dialCode, setDialCode] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [receiveUrl, setReceiveUrl] = useState(false);
+  const [profileIcon, setProfileIcon] = useState(
+    'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp'
+  );
 
-  /* find if the obj key exists in the list and push a new if doesn't exist, 
-  if 'No selection' remove obj from lang array, pass the lang array to 
-  the parent components formData state */
-  const handleChoices = (obj) => {
-    let langArr_copy = [...langArr];
-    let keys = Object.keys(langArr_copy);
-    let index = keys.indexOf(Object.keys(obj)[0]);
-    if (index < 0) {
-      langArr_copy.push(obj);
+  const _url = useSelector((state) => state.upload.url);
+  const _country = useSelector((state) => state.profile.country);
+  const _address = useSelector((state) => state.profile.address);
+  const _city = useSelector((state) => state.profile.city);
+  const _postalCode = useSelector((state) => state.profile.postalCode);
+  const _dialCode = useSelector((state) => state.profile.dialcode);
+  const _phoneNumber = useSelector((state) => state.profile.phoneNumber);
+  const _profileIcon = useSelector((state) => state.profile.url);
+
+  const fileInput = useRef();
+
+  const dispatch = useDispatch();
+
+  /* set new url only when receiveUrl is true */
+  useEffect(() => {
+    if (receiveUrl) {
+      handleChange('url', _url);
+      setProfileIcon(_url);
+      setReceiveUrl(false);
     }
-    if (Object.values(obj)[0] === 'No selection') {
-      let temp_arr = langArr_copy.filter((e) => Object.keys(e)[0] !== Object.keys(obj)[0]);
-      langArr_copy = [...temp_arr];
+  }, [_url]);
+
+  useEffect(() => {
+    handleChange('country', country);
+  }, [country]);
+
+  useEffect(() => {
+    handleChange('address', address);
+  }, [address]);
+
+  useEffect(() => {
+    handleChange('city', city);
+  }, [city]);
+
+  useEffect(() => {
+    handleChange('postalCode', postalcode);
+  }, [postalcode]);
+
+  useEffect(() => {
+    handleChange('dialCode', dialCode);
+  }, [dialCode]);
+
+  useEffect(() => {
+    handleChange('phoneNumber', phoneNumber);
+  }, [phoneNumber]);
+
+  useEffect(() => {
+    if (_country) {
+      setCountry(_country);
     }
-    setLangArr(langArr_copy);
-    handleChange('s3Langs', langArr_copy);
+  }, [_country]);
+
+  useEffect(() => {
+    if (_address) {
+      setAddress(_address);
+    }
+  }, [_address]);
+
+  useEffect(() => {
+    if (_city) {
+      setCity(_city);
+    }
+  }, [_city]);
+
+  useEffect(() => {
+    if (_postalCode) {
+      setPostalCode(_postalCode);
+    }
+  }, [_postalCode]);
+
+  useEffect(() => {
+    if (_dialCode) {
+      setDialCode(_dialCode);
+    }
+  }, [_dialCode]);
+
+  useEffect(() => {
+    if (_phoneNumber) {
+      setPhoneNumber(_phoneNumber);
+    }
+  }, [_phoneNumber]);
+
+  useEffect(() => {
+    if (_profileIcon) {
+      setProfileIcon(_profileIcon);
+    }
+  }, [_profileIcon]);
+
+  const handleClick = () => {
+    fileInput.current.click();
   };
 
-  /* take values and labels from Languages.JSON for react-select when page loads  */
-  useEffect(() => {
-    setLanguages(
-      Object.keys(Languages).map((key) => {
-        return { value: key, label: Languages[key].name };
-      })
-    );
-  }, []);
-
-  useEffect(() => {
-    handleChoices({ s3Finnish: finnish.label });
-  }, [finnish]);
-
-  useEffect(() => {
-    handleChoices({ s3Swedish: swedish.label });
-  }, [swedish]);
-
-  useEffect(() => {
-    handleChoices({ s3English: english.label });
-  }, [english]);
-
-  useEffect(() => {
-    handleChoices({ s3OptionalLang: optionalLang.label });
-  }, [optionalLang]);
-
-  useEffect(() => {
-    handleChoices({ s3OptionalSkill: optionalSkill.label });
-  }, [optionalSkill]);
+  const handleImageChange = (e) => {
+    const filesEvent = e.target.files[0];
+    setReceiveUrl(true);
+    dispatch(uploadImage(filesEvent));
+  };
 
   return (
-    <div className="profile-step3">
-      <div className="languageform-container">
-        <h3>Language</h3>
-        <div className="languageRow">
-          <label htmlFor="finnishSelect">Finnish</label>
-          <GenericSelect
-            name="finnishSelect"
-            placeholder="My level is"
-            options={[...language_options]}
-            onChange={(value) => setFinnish(value)}
-          />
+    <div className="profile-step5">
+      <div className="details-main-container">
+        <div className="photo-container">
+          <img src={profileIcon} alt="" />
+          <button type="button" className="uploadPhotoButton" onClick={handleClick}>
+            Upload Photo
+          </button>
+          <input type="file" ref={fileInput} onChange={handleImageChange} hidden />
         </div>
-        <div className="languageRow">
-          <label htmlFor="swedishSelect">Swedish</label>
-          <GenericSelect
-            name="swedishSelect"
-            placeholder="My level is"
-            options={[...language_options]}
-            onChange={(value) => setSwedish(value)}
-          />
-        </div>
-        <div className="languageRow">
-          <label htmlFor="englishSelect">English</label>
-          <GenericSelect
-            name="englishSelect"
-            placeholder="My level is"
-            options={[...language_options]}
-            onChange={(value) => setEnglish(value)}
-          />
-        </div>
-        <div className="languageRow">
-          <GenericSelect
-            className="fourth-language-select-container"
-            name="otherSelect"
-            placeholder="Select language"
-            options={languages}
-            onChange={(value) => setOptionalLang(value)}
-          />
-          <GenericSelect
-            name="otherSelect"
-            placeholder="My level is"
-            options={[...language_options]}
-            onChange={(value) => setOptionalSkill(value)}
-          />
+        <div className="details-container">
+          <div className="details-row">
+            <label>Country*</label>
+            <GenericSelect
+              className="select-container3"
+              name="countrySelect"
+              placeholder="Select..."
+              options={countries}
+              value={countries.filter(({ value }) => value === country)}
+              onChange={(value) => setCountry(value)}
+            />
+          </div>
+          <div className="details-row">
+            <label>Street Address*(won’t show on profile)</label>
+            <input
+              className="detailsInput"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </div>
+          <div className="details-row">
+            <div className="row-item">
+              <label>City*</label>
+              <input
+                className="detailsInputShort"
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
+            <div className="row-item">
+              <label>ZIP/ Postal Code</label>
+              <input
+                className="detailsInputShort"
+                type="text"
+                value={postalcode}
+                onChange={(e) => setPostalCode(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="phone-container">
+            <div className="phone-row">
+              <label>Phone</label>
+              <GenericSelect
+                className="select-container"
+                name="phoneSelect"
+                placeholder="Select..."
+                options={CountriesWithDialCodes.map((country) => ({
+                  value: country.dial_code,
+                  label: [country.name, ' ', country.dial_code]
+                }))}
+                value={CountriesWithDialCodes.filter(({ value }) => value === dialCode)}
+                onChange={(value) => setDialCode(value)}
+              />
+            </div>
+            <input
+              className="detailsInputPhone"
+              placeholder="type your number"
+              maxLength={13}
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}></input>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-Step3.propTypes = {
+Step5.propTypes = {
   handleChange: PropTypes.func.isRequired
 };

@@ -8,12 +8,27 @@
   width: 100%;
   height: 100%;
 
+  .profile-modal-title {
+    display: flex;
+    justify-content: center;
+
+    p {
+      font-family: Poppins, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 36px;
+      text-align: center;
+    }
+  }
+
   form {
     display: flex;
     justify-content: space-between;
     width: 100%;
     height: 100%;
     padding: 20px;
+    margin: 0 !important;
 
     .profile-step1 {
       display: flex;
@@ -22,6 +37,7 @@
       background: white;
       box-shadow: 0 4px 4px #00000040;
       border-radius: 12px;
+      width: 100%;
       height: 500px;
       gap: 40px;
       padding: 20px;
@@ -52,13 +68,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: center;
         gap: 20px;
-
-        .mag-glass {
-          height: 20px;
-          width: 20px;
-        }
 
         .add-skills-input {
           background: white;
@@ -73,39 +83,55 @@
           padding-left: 10px;
         }
 
-        .addSkills {
-          width: 700px;
+        .skill-dropdown {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          position: fixed;
+          width: 300px;
           height: fit-content;
-          background-color: #fff;
-          text-align: center;
-          padding-top: 30px;
-          padding-bottom: 40px;
-          margin-bottom: 30px;
-          border: 1px solid #00a088;
           border-radius: 10px;
+          box-shadow: 4px 6px 15px 0 #00000040;
+          background-color: #fff;
+          left: 195px;
+          top: 310px;
 
           .skillBox {
-            font-family: Roboto, sans-serif;
-            font-weight: 500;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            border: 1px solid #00000040;
-            border-radius: 10px;
-            box-shadow: 4px 6px 15px 0 #00000040;
-            background-color: #fff;
-            margin: 3px;
+            font-family: Roboto, sans-serif;
+            font-weight: 500;
             height: 40px;
-            width: 300px;
-            padding-left: 10px;
-            position: relative;
-            left: 195px;
-
+            width: 100%;
+  
             p {
               color: black;
             }
+          }
+        }
+
+        .addSkills {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 20px;
+          width: 100%;
+
+          .addedSkill {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: max-content;
+            padding: 0 20px;
+            background-color: #fff;
+            text-align: center;
+            border: 1px solid #00a088;
+            border-radius: 15px;
           }
         }
       }
@@ -362,21 +388,28 @@
         .details-container {
           display: flex;
           flex-direction: column;
-          justify-content: space-evenly;
+          justify-content: space-between;
           height: 550px;
           width: 450px;
+          padding: 40px 20px 20px;
 
           .details-row {
             display: flex;
             flex-direction: row;
+            gap: 20px;
 
             label {
+              display: flex;
+              justify-content: center;
+              align-items: center;
               color: #636262;
               width: 150px;
             }
 
             .select-container3 {
               width: 200px;
+              border-radius: 5px;
+              border: 1px solid #636232;
             }
 
             .detailsInput {
@@ -393,7 +426,7 @@
               width: 50%;
 
               .detailsInputShort {
-                width: 180px;
+                width: 100%;
                 height: 40px;
                 border-radius: 5px;
                 border: 1px solid #636232;
@@ -402,7 +435,6 @@
           }
 
           .phone-container {
-            height: 150px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -413,12 +445,17 @@
               flex-direction: row;
 
               label {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 color: #636262;
                 width: 150px;
               }
 
               .select-container {
                 width: 200px;
+                border-radius: 5px;
+                border: 1px solid #636232;
               }
             }
 

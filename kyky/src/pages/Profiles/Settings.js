@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
 import { uploadImage } from '../../redux/storage/fileUploadSlice';
-import { uploadProfileImage } from '../../redux/auth/userSlice';
+import { updateProfileImage, changePassword } from '../../redux/auth/userSlice';
 import '../../styles/Profiles.scss';
 
 const Settings = () => {
@@ -25,7 +25,7 @@ const Settings = () => {
 
   useEffect(() => {
     if (receiveUrl) {
-      dispatch(uploadProfileImage(_url))
+      dispatch(updateProfileImage(_url))
       fileInput.current.value = '';
       setReceiveUrl(false);
     }
@@ -40,6 +40,21 @@ const Settings = () => {
     setReceiveUrl(true);
     dispatch(uploadImage(filesEvent));
   };
+
+  const handlePasswordChange = () => {
+    if (currentPassword !== '' && newPassword !== '' && newPassword === confirmPassword) {
+      dispatch(changePassword({
+        email: _user.email, 
+        old_password: currentPassword, 
+        new_password: newPassword
+      }))
+      setCurrentPassword('')
+      setNewPassword('')
+      setConfirmPassword('')
+    } else {
+      window.alert('Check input fields');
+    }
+  }
 
   return (
     <div className="settings-main">
@@ -127,7 +142,9 @@ const Settings = () => {
             </div>
           </div>
           <div className="save-password-content">
-            <button className="save-password-button">Save password</button>
+            <button 
+              className="save-password-button"
+              onClick={handlePasswordChange}>Save password</button>
           </div>
         </div>
       </div>
