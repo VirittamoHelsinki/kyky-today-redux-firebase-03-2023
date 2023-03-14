@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
+import { uploadImage } from '../../redux/storage/fileUploadSlice';
+import { uploadProfileImage } from '../../redux/auth/userSlice';
 import '../../styles/Profiles.scss';
 
 const Settings = () => {
@@ -8,12 +10,36 @@ const Settings = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [receiveUrl, setReceiveUrl] = useState(false);
 
-  const _user = useSelector((state) => state.user)
+  const fileInput = useRef(null);
+
+  const _user = useSelector((state) => state.user);
+  const _url = useSelector((state) => state.upload.url);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setSelectedWindow('settings');
   }, []);
+
+  useEffect(() => {
+    if (receiveUrl) {
+      dispatch(uploadProfileImage(_url))
+      fileInput.current.value = '';
+      setReceiveUrl(false);
+    }
+  }, [_url]);
+
+  const handleClick = () => {
+    fileInput.current.click();
+  };
+
+  const handleChange = (e) => {
+    const filesEvent = e.target.files[0];
+    setReceiveUrl(true);
+    dispatch(uploadImage(filesEvent));
+  };
 
   return (
     <div className="settings-main">
@@ -40,7 +66,8 @@ const Settings = () => {
           </div>
           <div className="photo-text-content">
             <div className="photo-title">
-              <p>Change Photo</p>
+              <p onClick={handleClick}>Change Photo</p>
+              <input type="file" ref={fileInput} onChange={handleChange} hidden />
             </div>
             <div className="photo-description">
               <p>Your photo should show your face clearly, we suggest a neutral background</p>

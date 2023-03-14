@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   updatePassword,
+  getAuth,
   signOut
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
@@ -62,6 +63,19 @@ export const signUpEmailAndPassword = createAsyncThunk(
     }
   }
 );
+
+export const updateProfileImage = createAsyncThunk('user/updateProfileImage', async (url) => {
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    await updateProfile(user, {
+      photoURL: url
+    });
+    return user
+  } catch (error) {
+    return error
+  }
+})
 
 export const changePassword = createAsyncThunk(
   'user/changePassword',
@@ -211,6 +225,12 @@ export const userSlice = createSlice({
         });
       })
       .addCase(signInEmailAndPassword.fulfilled, (state, action) => {
+        return (state = {
+          ...state,
+          ...action.payload
+        });
+      })
+      .addCase(updateProfileImage.fulfilled, (state, action) => {
         return (state = {
           ...state,
           ...action.payload
