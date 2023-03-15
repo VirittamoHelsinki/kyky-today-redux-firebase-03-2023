@@ -60,42 +60,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-main">
-      <div className="dashboard-upper-content">
-        <div className="dashboard-user-data-box">
-          <div className="user-data-item">
-            <div className="user-data-title">
-              <p>Current saldo</p>
-            </div>
-            <div className="user-data-value">
-              <p>20,00</p>
-            </div>
-          </div>
-          <div className="user-data-item">
-            <div className="user-data-title">
-              <p>Active sells</p>
-            </div>
-            <div className="user-data-value">
-              <p>15</p>
-            </div>
-          </div>
-          <div className="user-data-item">
-            <div className="user-data-title">
-              <p>Active buys</p>
-            </div>
-            <div className="user-data-value">
-              <p>2</p>
-            </div>
-          </div>
-          <div className="user-data-item last">
-            <div className="user-data-title">
-              <p>In-box messages</p>
-            </div>
-            <div className="user-data-value">
-              <p>5</p>
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="dashboard-lower-content">
         <div className="dashboard-user-profile">
           <div className="user-profile-user-info">

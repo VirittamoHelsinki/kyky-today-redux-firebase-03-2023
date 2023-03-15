@@ -21,12 +21,13 @@ import UserDropdown from './UserDropdown';
 import Filter from './FilterComponent';
 import Checkbox from './Checkbox';
 import { ReactComponent as KykyLogo } from '../image/kykylogo.svg';
+import kyky from '../image/kykylogo.png';
 import dogIMG from '../image/dog-walker.png';
 import cookingIMG from '../image/cooking.png';
 import technologyIMG from '../image/technology.png';
 import gardeningIMG from '../image/gardening.png';
 import photographyIMG from '../image/photography.png';
-import googleLogo from '../image/google_logo.svg';
+import googleLogo from '../image/googlelogo.png';
 import '../styles/Header.scss';
 
 const Header = () => {
@@ -243,10 +244,11 @@ const Header = () => {
                 <p className="sign-in-register-label">Register</p>
               </Link>
             </li>
-            <li onClick={() => {
-              setRandNumber(Math.floor(Math.random() * randomImages.length))
-              setShowLoginModal(true)
-            }}>
+            <li
+              onClick={() => {
+                setRandNumber(Math.floor(Math.random() * randomImages.length));
+                setShowLoginModal(true);
+              }}>
               <p className="sign-in-register-label">Sign in</p>
             </li>
           </ul>
@@ -258,20 +260,23 @@ const Header = () => {
             <div className="login-modal-container">
               <div className="login-modal-left-side">
                 <div className="login-modal-logo">
-                  <KykyLogo />
+                  <img src={kyky} alt="" />
                 </div>
                 <div className="login-modal-title">
                   <p>Let's get things done!</p>
                 </div>
                 <div className="login-modal-image">
-                  <img
-                    className="random-images"
-                    src={randomImages[randNumber]}
-                    alt=""
-                  />
+                  <img className="random-images" src={randomImages[randNumber]} alt="" />
                 </div>
               </div>
               <div className="login-modal-right-side">
+                <div className="login-modal-close-button">
+                  <span
+                    className="material-icons-outlined"
+                    onClick={() => setShowLoginModal(false)}>
+                    close
+                  </span>
+                </div>
                 <div className="login-modal-login-title">
                   <p>Sign in</p>
                 </div>
