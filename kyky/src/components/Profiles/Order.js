@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeOrderStatus } from '../../redux/orders/orderSlice';
 import { addNotification } from '../../redux/notifications/notificationSlice';
+import CreatePDF from './CreatePDF';
 import '../../styles/Profiles.scss';
 
 const Order = ({ order, user }) => {
   const [showOrderDataModal, setShowOrderDataModal] = useState(false);
+  const [showPDF, setShowPDF] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -53,7 +55,15 @@ const Order = ({ order, user }) => {
               <p>{new Date(order.created.seconds * 1000).toLocaleDateString('fi-FI')}</p>
             </div>
           </div>
-          {order.status === 'incompleted' ? (
+          <div className="detail">
+            <div className="detail-title">
+              <p>{order.status}</p>
+            </div>
+            <div className="detail-value">
+              <p>{new Date(order.activityTime.seconds * 1000).toLocaleDateString('fi-FI')}</p>
+            </div>
+          </div>
+          {order.status === 'incompleted' && (
             <div className="order-data-button">
               <button
                 onClick={() => {
@@ -63,17 +73,19 @@ const Order = ({ order, user }) => {
                 Order data
               </button>
             </div>
-          ) : (
-            <div className="detail">
-              <div className="detail-title">
-                <p>{order.status}</p>
-              </div>
-              <div className="detail-value">
-                <p>{new Date(order.activityTime.seconds * 1000).toLocaleDateString('fi-FI')}</p>
-              </div>
+          )}
+          {order.status === 'completed' && (
+            <div className="download-button">
+              <button
+                onClick={() => {
+                  setShowPDF(true);
+                }}>
+                Download
+              </button>
             </div>
           )}
         </div>
+        {showPDF && <CreatePDF order={order} />}
       </div>
       {showOrderDataModal && (
         <div className="order-data-modal transparent-background">

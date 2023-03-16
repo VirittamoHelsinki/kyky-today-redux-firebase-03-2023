@@ -1,20 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllJobs } from '../redux/jobs/jobSlice';
 import { searchtitles, cities, categories } from '../components/Profiles/Features';
 import '../styles/FilterComponent.scss';
 
 const FilterComponent = () => {
   const [searchOpen, setSearchOpen] = useState(true);
+  const [searches, setSearches] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [locationOpen, setLocationOpen] = useState(false);
   const [locationText, setLocationText] = useState('');
   const [categoryOpen, setCategoryOpen] = useState(false);
-  const [categoryText, setCategoryText] = useState('')
+  const [categoryText, setCategoryText] = useState('');
   const [priceOpen, setPriceOpen] = useState(false);
+  const [minPrice, setMinPrice] = useState('0');
+  const [maxPrice, setMaxPrice] = useState('100');
 
   const searchRef = useRef();
   const locationRef = useRef();
   const categoryRef = useRef();
   const priceRef = useRef();
+
+  const _tags = useSelector((state) => state.jobs.all);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const closeFilterDropdowns = (e) => {
@@ -39,6 +48,18 @@ const FilterComponent = () => {
       setSearchOpen(true);
     }
   }, [keyword]);
+
+  useEffect(() => {
+    dispatch(fetchAllJobs());
+  }, []);
+
+  useEffect(() => {
+    let tagwords = [];
+    if (Array.isArray(_tags)) {
+      _tags.forEach((job) => tagwords.push(job.headline.toLocaleLowerCase()));
+    }
+    setSearches([...searchtitles, ...tagwords]);
+  }, [_tags]);
 
   const locationToggle = () => {
     setSearchOpen(false);
@@ -77,7 +98,7 @@ const FilterComponent = () => {
           </div>
           {keyword.length > 1 && searchOpen && (
             <div className="search-dropdown">
-              {searchtitles
+              {searches
                 .filter((f) => {
                   if (f.search(new RegExp(`${keyword.toLocaleLowerCase()}`)) >= 0) {
                     return true;
@@ -102,17 +123,19 @@ const FilterComponent = () => {
             <p>Location</p>
           </div>
           <div className="location-text">
-            <p ref={locationRef} onClick={locationToggle}>{locationText === '' ? 'choose location' : locationText}</p>
+            <p ref={locationRef} onClick={locationToggle}>
+              {locationText === '' ? 'choose location' : locationText}
+            </p>
           </div>
           {locationOpen && (
-          <div className="location-dropdown">
-            {cities.map((city, index) => (
-              <div className="location-item" key={index} onClick={() => setLocationText(city)}>
-                {city}
-              </div>
-            ))}
-          </div>
-        )}
+            <div className="location-dropdown">
+              {cities.map((city, index) => (
+                <div className="location-item" key={index} onClick={() => setLocationText(city)}>
+                  {city}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="category-content">
           <div className="category-title">
@@ -120,26 +143,66 @@ const FilterComponent = () => {
           </div>
           <div className="category-text">
             <p ref={categoryRef} onClick={categoryToggle}>
-              {categoryText === '' ? 'choose category' : categoryText < 16 ? categoryText : categoryText.substring(0, 16) + '...'}
+              {categoryText === ''
+                ? 'choose category'
+                : categoryText < 16
+                ? categoryText
+                : categoryText.substring(0, 16) + '...'}
             </p>
           </div>
           {categoryOpen && (
-          <div className="category-dropdown">
-            {categories.map((category, index) => (
-              <div className="category-item" key={index} onClick={() => setCategoryText(category.label)}>
-                {category.label}
-              </div>
-            ))}
-          </div>
-        )}
+            <div className="category-dropdown">
+              {categories.map((category, index) => (
+                <div
+                  className="category-item"
+                  key={index}
+                  onClick={() => setCategoryText(category.label)}>
+                  {category.label}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-        <div className="price-content" ref={priceRef} onClick={priceToggle}>
+        <div className="price-content">
           <div className="price-title">
             <p>Price</p>
           </div>
           <div className="price-text">
-            <p>choose price range</p>
+            <p ref={priceRef} onClick={priceToggle}>
+              {minPrice === '0' && maxPrice === '100'
+                ? 'choose price range'
+                : minPrice + ' € - ' + maxPrice + ' €'}
+            </p>
           </div>
+          {priceOpen && (
+            <div className="price-dropdown">
+              <div className="prices-row">
+                <span>{minPrice} €</span>
+                <span>-</span>
+                <span>{maxPrice} €</span>
+              </div>
+              <div className="range_container">
+                <div className="sliders_control">
+                  <input
+                    id="fromSlider"
+                    type="range"
+                    value={minPrice}
+                    min="0"
+                    max="100"
+                    onInput={(e) => setMinPrice(e.target.value)}
+                  />
+                  <input
+                    id="toSlider"
+                    type="range"
+                    value={maxPrice}
+                    min="0"
+                    max="100"
+                    onInput={(e) => setMaxPrice(e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="search-button">

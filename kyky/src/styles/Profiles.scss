@@ -838,29 +838,29 @@ h4 {
           border-radius: 12px;
           padding: 20px;
           gap: 40px;
-  
+
           .photo-image {
             width: 120px;
             height: 120px;
-  
+
             .image {
               width: 100%;
               height: 100%;
               border-radius: 50%;
             }
           }
-  
+
           .photo-text-content {
             display: flex;
             flex-direction: column;
             justify-content: center;
             gap: 10px;
-  
+
             .photo-title {
               display: flex;
               justify-content: flex-start;
               background: white;
-  
+
               p {
                 font-family: Roboto, sans-serif;
                 font-style: normal;
@@ -871,12 +871,12 @@ h4 {
                 color: #00a088;
               }
             }
-  
+
             .photo-description {
               display: flex;
               justify-content: flex-start;
               width: 233px;
-  
+
               p {
                 font-family: Roboto, sans-serif;
                 font-style: normal;
@@ -899,11 +899,11 @@ h4 {
           border-radius: 12px;
           padding: 20px;
           gap: 30px;
-  
+
           .headline {
             display: flex;
             justify-content: center;
-  
+
             p {
               font-family: Poppins, sans-serif;
               font-style: normal;
@@ -913,18 +913,18 @@ h4 {
               text-align: center;
             }
           }
-  
+
           .change-password-label-and-input {
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
-  
+
             .label-text {
               display: flex;
               justify-content: flex-start;
               align-items: center;
               width: 200px;
-  
+
               p {
                 font-family: Poppins, sans-serif;
                 font-style: normal;
@@ -934,12 +934,12 @@ h4 {
                 text-align: left;
               }
             }
-  
+
             .input-field-box {
               display: flex;
               justify-content: flex-end;
               width: 600px;
-  
+
               .input-field {
                 background: white;
                 opacity: 0.7;
@@ -955,13 +955,13 @@ h4 {
               }
             }
           }
-  
+
           .save-password-content {
             display: flex;
             justify-content: center;
             align-items: center;
             padding-top: 20px;
-  
+
             .save-password-button {
               width: 516.99px;
               height: 55.4px;
@@ -1112,6 +1112,28 @@ h4 {
                     border-radius: 25px;
                   }
                 }
+
+                .download-button {
+                  display: flex;
+                  justify-content: center;
+
+                  button {
+                    width: 121px;
+                    height: 40px;
+                    background: #063831;
+                    color: white;
+                    box-shadow: 1px 2px 2px 4px #00000024;
+                    border-radius: 25px;
+                  }
+                }
+              }
+
+              iframe {
+                position: fixed;
+                width: 600px;
+                height: 700px;
+                top: 120px;
+                left: 500px;
               }
             }
           }
