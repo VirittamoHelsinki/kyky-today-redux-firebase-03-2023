@@ -8,7 +8,7 @@ import '../styles/CategoryPage.scss';
 const CategoryPage = () => {
   const [cards, setCards] = useState([]);
 
-  const _cards = useSelector((state) => state.jobs.categoryCards);
+  const _cards = useSelector((state) => state.jobs.all);
 
   const dispatch = useDispatch();
 

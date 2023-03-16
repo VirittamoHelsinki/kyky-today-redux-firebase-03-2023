@@ -1,89 +1,144 @@
 @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
-.landing-page-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: #387a701a;
-}
 
-.landing-page-nav-and-image-container {
+.landing-page-main {
   display: flex;
-  margin-left: 5em;
-  margin-top: 3em;
-}
+  justify-content: center;
+  background: #E8FEF8;
 
-.landing-page-navigation {
-  display: flex;
-  flex-direction: column;
-}
-
-.landing-page-navigation-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 20vw;
-  padding-top: 60px;
-
-  a {
-    button {
-      text-align: left;
+  .landing-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding-bottom: 100px;
+    width: 1440px;
+  
+    .landing-page-left-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 42.3%;
+      padding: 60px;
+      gap: 30px;
+  
+      .landing-page-title {
+        display: flex;
+        justify-content: center;
+  
+        p {
+          font-family: 'Lilita One', cursive;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 74px;
+          line-height: 85px;
+          text-align: center;
+          letter-spacing: 0.03em;
+          color: #063831;
+        }
+      }
+  
+      .landing-page-description {
+        display: flex;
+        justify-content: center;
+        padding: 0 40px;
+  
+        p {
+          display: flex;
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 18px;
+          align-items: center;
+        }
+      }
+  
+      .landing-page-buttons-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 40px;
+        width: 100%;
+  
+        .browsing-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 189px;
+          height: 45px;
+          background: #00A088;
+          color: white;
+          border-radius: 13px;
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 27px;
+          text-align: center;
+        }
+  
+        .join-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 189px;
+          height: 45px;
+          background: white;
+          color: #00A088;
+          border: 2px solid #00A088;
+          border-radius: 13px;
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 27px;
+          text-align: center;
+        }
+      }
+    }
+  
+    .landing-page-right-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: 57.7%;
+      padding: 60px 60px 40px 8px;
+      gap: 40px;
+  
+      .landing-page-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 759px;
+        height: fit-content;
+      }
+  
+      .landing-page-navigation-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+  
+        button {
+          font-family: Poppins, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 24px;
+          line-height: 36px;
+          text-align: center;
+          background: #E8FEF8;
+          color: #063831;
+  
+          &:hover {
+            background: #063831;
+            color: white;
+          }
+        }
+      }
     }
   }
 }
 
-.landing-page-navigation-container button {
-  font-family: Poppins, sans-serif;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 36px;
-  border-bottom: #00a088 1px solid;
-  margin-bottom: 1em;
-}
-
-.landing-page-footer {
-  display: flex;
-  justify-content: center;
-  padding-left: 300px;
-}
-
-.landing-page-image {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-
-  img {
-    background-position: center;
-    background-size: cover;
-    height: fit-content;
-    width: 600px;
-  }
-}
-
-.landing-page-image h1 {
-  font-family: 'Lilita One', cursive;
-  font-weight: 400;
-  font-size: 64px;
-  letter-spacing: 0.03em;
-  color: #063831;
-}
-
-.landing-page-footer button {
-  display: flex;
-  align-items: center;
-  font-family: Ubuntu, sans-serif;
-  font-size: 1.5vw;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: #002520;
-  background: #0638311a;
-  border: 1px solid #00a088;
-  border-radius: 91px;
-  height: 3em;
-  width: 180px;
-  padding: 1em;
-  margin: 0 1em;
-  justify-content: center;
-}

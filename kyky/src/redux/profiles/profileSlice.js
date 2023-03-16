@@ -82,8 +82,8 @@ export const profileSlice = createSlice({
         state = initialState;
         return (state = {
           ...state,
-          dashboardProfile: {
-            ...state.dashboardProfile,
+          dashboard: {
+            ...state.dashboard,
             ...action.payload
           }
         });
@@ -91,13 +91,13 @@ export const profileSlice = createSlice({
       .addCase(getUserProfile.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          userProfile: { ...action.payload }
+          user: { ...action.payload }
         });
       })
       .addCase(getDashboardProfile.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          dashboardProfile: { ...action.payload }
+          dashboard: { ...action.payload }
         });
       });
   }

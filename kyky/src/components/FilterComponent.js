@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
-import { searchtitles, cities } from '../components/Profiles/Features';
+import { searchtitles, cities, categories } from '../components/Profiles/Features';
 import '../styles/FilterComponent.scss';
 
 const FilterComponent = () => {
   const [searchOpen, setSearchOpen] = useState(true);
   const [keyword, setKeyword] = useState('');
   const [locationOpen, setLocationOpen] = useState(false);
-  const [locationText, setLocationText] = useState('choose location');
+  const [locationText, setLocationText] = useState('');
   const [categoryOpen, setCategoryOpen] = useState(false);
+  const [categoryText, setCategoryText] = useState('')
   const [priceOpen, setPriceOpen] = useState(false);
 
   const searchRef = useRef();
@@ -96,30 +97,41 @@ const FilterComponent = () => {
             </div>
           )}
         </div>
-        <div className="location-content" ref={locationRef} onClick={locationToggle}>
+        <div className="location-content">
           <div className="location-title">
             <p>Location</p>
           </div>
           <div className="location-text">
-            <p>{locationText}</p>
+            <p ref={locationRef} onClick={locationToggle}>{locationText === '' ? 'choose location' : locationText}</p>
           </div>
           {locationOpen && (
-            <div className="location-dropdown">
-              {cities.map((city, index) => (
-                <div className="location-item" key={index} onClick={() => setLocationText(city)}>
-                  {city}
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="location-dropdown">
+            {cities.map((city, index) => (
+              <div className="location-item" key={index} onClick={() => setLocationText(city)}>
+                {city}
+              </div>
+            ))}
+          </div>
+        )}
         </div>
-        <div className="category-content" ref={categoryRef} onclick={categoryToggle}>
+        <div className="category-content">
           <div className="category-title">
             <p>Category</p>
           </div>
           <div className="category-text">
-            <p>choose category</p>
+            <p ref={categoryRef} onClick={categoryToggle}>
+              {categoryText === '' ? 'choose category' : categoryText < 16 ? categoryText : categoryText.substring(0, 16) + '...'}
+            </p>
           </div>
+          {categoryOpen && (
+          <div className="category-dropdown">
+            {categories.map((category, index) => (
+              <div className="category-item" key={index} onClick={() => setCategoryText(category.label)}>
+                {category.label}
+              </div>
+            ))}
+          </div>
+        )}
         </div>
         <div className="price-content" ref={priceRef} onClick={priceToggle}>
           <div className="price-title">

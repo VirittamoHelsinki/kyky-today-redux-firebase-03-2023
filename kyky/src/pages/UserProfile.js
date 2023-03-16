@@ -31,9 +31,9 @@ const UserProfile = () => {
   const [ratings, setRatings] = useState([]);
   const [showReviewModal, setShowReviewModal] = useState(false);
 
-  const _cards = useSelector((state) => state.jobs.userProfileCards);
+  const _cards = useSelector((state) => state.jobs.user);
   const _uid = useSelector((state) => state.slug);
-  const _profile = useSelector((state) => state.profile.userProfile);
+  const _profile = useSelector((state) => state.profile.user);
   const _user = useSelector((state) => state.user);
   const _ratings = useSelector((state) => state.rating.ratings);
 
@@ -63,12 +63,12 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (_profile?.name) {
-      setProfileImage(_profile.s7Url);
+      setProfileImage(_profile.url);
       setProfileName(_profile.name);
-      setProfileTitle(_profile.s1Title);
-      setLocation(_profile.s7City + ', ' + _profile.s7Country.label);
-      setDescription(_profile.s4WorkInput);
-      setSkills(_profile.s1Skills);
+      setProfileTitle(_profile.title);
+      setLocation(_profile.city + ', ' + _profile.country.label);
+      setDescription(_profile.workInput);
+      setSkills(_profile.skills);
       setLastseen(new Date(_profile.lastseen.seconds * 1000));
       setRegistered(new Date(_profile.created.seconds * 1000));
       _profile.totalAmount > 0 &&

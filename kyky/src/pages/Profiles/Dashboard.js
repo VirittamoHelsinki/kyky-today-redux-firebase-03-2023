@@ -23,7 +23,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const _user = useSelector((state) => state.user);
-  const _profile = useSelector((state) => state.profile.dashboardProfile);
+  const _profile = useSelector((state) => state.profile.dashboard);
 
   useEffect(() => {
     setSelectedWindow('dashboard');
@@ -37,9 +37,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (_profile?.name) {
-      setProfileImage(_profile.s7Url);
+      setProfileImage(_profile.url);
       setProfileName(_profile.name);
-      setProfileTitle(_profile.s1Title);
+      setProfileTitle(_profile.title);
       setRegistered(new Date(_profile.created.seconds * 1000));
       setUserType(_user.userType);
       _profile.totalAmount > 0 &&

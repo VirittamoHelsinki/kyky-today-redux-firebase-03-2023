@@ -174,19 +174,19 @@ export const jobSlice = createSlice({
       .addCase(fetchUserProfileJobs.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          userProfileCards: action.payload
+          user: action.payload
         });
       })
       .addCase(fetchCategoryJobs.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          categoryCards: action.payload
+          all: action.payload
         });
       })
       .addCase(fetchAllJobs.fulfilled, (state, action) => {
         return (state = {
           ...state,
-          categoryCards: action.payload
+          all: action.payload
         });
       })
       .addCase(deleteJobById.fulfilled, (state, action) => {
