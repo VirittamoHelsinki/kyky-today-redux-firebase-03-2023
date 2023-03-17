@@ -47,7 +47,8 @@ function UserRegistration() {
           password: password,
           company: company,
           subscribe: subscribe,
-          termasAccepted: termsAccepted
+          termasAccepted: termsAccepted,
+          time: new Date()
         })
       );
     }

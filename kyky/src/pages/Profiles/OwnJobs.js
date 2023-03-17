@@ -110,11 +110,7 @@ const OwnJobs = () => {
                       <p>Created</p>
                     </div>
                     <div className="detail-value">
-                      {'seconds' in job.created ? (
-                        <p>{new Date(job.created.seconds * 1000).toLocaleDateString('fi-FI')}</p>
-                      ) : (
-                        <p>{new Date().toLocaleDateString('fi-FI')}</p>
-                      )}
+                      <p>{new Date(job.created.seconds * 1000).toLocaleDateString('fi-FI')}</p>
                     </div>
                   </div>
                 </div>

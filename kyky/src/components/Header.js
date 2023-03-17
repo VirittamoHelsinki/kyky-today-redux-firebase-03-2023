@@ -15,8 +15,6 @@ import { resetMessage } from '../redux/chat/messageSlice';
 import { resetRating } from '../redux/profiles/ratingSlice';
 import { resetSlug } from '../redux/auth/slugSlice';
 import { resetNotifications } from '../redux/notifications/notificationSlice';
-import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '../firebase/firebase';
 import UserDropdown from './UserDropdown';
 import Filter from './FilterComponent';
 import Checkbox from './Checkbox';
@@ -29,6 +27,8 @@ import gardeningIMG from '../image/gardening.png';
 import photographyIMG from '../image/photography.png';
 import googleLogo from '../image/googlelogo.png';
 import '../styles/Header.scss';
+// import { doc, onSnapshot } from 'firebase/firestore';
+// import { db } from '../firebase/firebase';
 
 const Header = () => {
   const [profileOpen, setProfileOpen] = useState(false);
@@ -110,19 +110,19 @@ const Header = () => {
     navigate(`${to}`);
   };
 
-  useEffect(() => {
-    if (_user.uid) {
-      onSnapshot(doc(db, 'users', _user.uid, 'data', 'notifications'), (doc) => {
-        let _notifications = [];
-        let i = 0;
-        while (doc.data()[i]) {
-          _notifications.push(doc.data()[i]);
-          i++;
-        }
-        setNotifications(_notifications);
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (_user.uid) {
+  //     onSnapshot(doc(db, 'users', _user.uid, 'data', 'notifications'), (doc) => {
+  //       let _notifications = [];
+  //       let i = 0;
+  //       while (doc.data()[i]) {
+  //         _notifications.push(doc.data()[i]);
+  //         i++;
+  //       }
+  //       setNotifications(_notifications);
+  //     });
+  //   }
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

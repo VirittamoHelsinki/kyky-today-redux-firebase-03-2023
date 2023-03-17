@@ -54,6 +54,7 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
   }, []);
 
   const handleCreateJob = () => {
+    let time = new Date;
     dispatch(
       createJobForm({
         uid: _user.uid,
@@ -74,7 +75,9 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
         urls: urls,
         photoURL: _user.photoURL,
         slug: _user.slug,
-        pageviews: 0
+        pageviews: 0,
+        created: time,
+        updated: time
       })
     );
   };
@@ -104,7 +107,8 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
           photoURL: _user.photoURL,
           slug: _user.slug,
           pageviews: 0,
-          created: editjob.created
+          created: editjob.created,
+          updated: new Date()
         }
       })
     );

@@ -11,7 +11,6 @@ export default function SellersProfileHeader({ selectedWindow, setSelectedWindow
     { to: '/seller/orders', label: 'Orders', id: 'orders' },
     { to: '/seller/own-jobs', label: 'Own Jobs', id: 'own-jobs' },
     { to: '/seller/messages', label: 'Messages', id: 'messages' },
-    { to: '/seller/earnings', label: 'Earnings', id: 'earnings' },
     { to: '/seller/ratings', label: 'Ratings', id: 'ratings' },
     { to: '/seller/purchases', label: 'Purchases', id: 'purchases' },
     { to: '/seller/settings', label: 'Settings', id: 'settings' }
@@ -26,11 +25,11 @@ export default function SellersProfileHeader({ selectedWindow, setSelectedWindow
     <div className="profiles--header-content">
       <div className="profiles--content-wrapper">
         <div className="profiles--tabs">
-          {Tabs.map(({ to, label, id }) => (
+          {Tabs.map(({ to, label, index }) => (
             <div
-              key={id}
-              className={`profiles--button ${selectedWindow === id ? 'selected-tab' : ''}`}
-              onClick={() => changeWindow(to, id)}>
+              key={index}
+              className={`profiles--button ${selectedWindow === index ? 'selected-tab' : ''}`}
+              onClick={() => changeWindow(to, index)}>
               <h3>{label}</h3>
             </div>
           ))}

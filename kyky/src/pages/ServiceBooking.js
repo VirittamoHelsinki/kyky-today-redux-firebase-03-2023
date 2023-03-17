@@ -232,7 +232,8 @@ function ServiceBooking() {
           status: 'incompleted',
           activityTime: '',
           paid: false,
-          confirmed: false
+          confirmed: false,
+          created: new Date()
         })
       );
       dispatch(

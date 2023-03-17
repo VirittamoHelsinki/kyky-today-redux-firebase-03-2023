@@ -5,15 +5,14 @@ import {
   collection,
   query,
   where,
-  getDocs,
-  serverTimestamp
+  getDocs
 } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
 export const createBooking = createAsyncThunk('orders/createBooking', async (payload) => {
   try {
     const orderRef = doc(collection(db, `orders`));
-    await setDoc(orderRef, { ...payload, orderId: orderRef.id, created: serverTimestamp() });
+    await setDoc(orderRef, { ...payload, orderId: orderRef.id });
   } catch (error) {
     return error;
   }
@@ -70,12 +69,11 @@ export const changeConfirmedStatus = createAsyncThunk(
 
 export const changeOrderStatus = createAsyncThunk(
   'orders/changeOrderStatus',
-  async ({ orderId, status }) => {
+  async ({ orderId, status, time }) => {
     try {
-      let timestamp = serverTimestamp();
       const orderRef = doc(db, 'orders', orderId);
-      setDoc(orderRef, { status: status, activityTime: timestamp }, { merge: true });
-      return { status: status, activityTime: timestamp, orderId: orderId };
+      setDoc(orderRef, { status: status, activityTime: time }, { merge: true });
+      return { status: status, activityTime: time, orderId: orderId };
     } catch (error) {
       return error;
     }

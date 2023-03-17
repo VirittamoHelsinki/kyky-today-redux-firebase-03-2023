@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSchedules } from '../../redux/calendar/calendarScheduleSlice';
+import { fetchBookingsByQuery } from '../../redux/orders/orderSlice';
 import { changeConfirmedStatus, addNoteToOrder } from '../../redux/orders/orderSlice';
 import { createContact } from '../../redux/chat/contactSlice';
 import { addNotification } from '../../redux/notifications/notificationSlice';
@@ -70,7 +70,7 @@ export default function JobCalendar() {
 
   useEffect(() => {
     if (_user.uid) {
-      dispatch(fetchSchedules(_user.uid));
+      dispatch(fetchBookingsByQuery(_user.uid));
     }
   }, []);
 
@@ -89,7 +89,7 @@ export default function JobCalendar() {
     if (currentJob === '' && jobs.length > 0) {
       setCurrentJob(jobs[0]);
     }
-  }, [_schedules]);
+  }, [_bookings]);
 
   useEffect(() => {
     const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
@@ -482,9 +482,10 @@ export default function JobCalendar() {
                               <p onClick={() => setShowAddNoteModal(true)}>
                                 <i className="material-icons-outlined">add_comment</i>
                                 {activity.note === '' ? 
-                                <p>click to add a note</p> : 
-                                <p>{activity.note < 20 ? activity.note : activity.note.substring(0, 20) + '...'}</p>}
-                                {showAddNoteModal && (
+                                <span className="add-note-span">click to add a note</span> : 
+                                <span className="add-note-span">{activity.note < 30 ? activity.note : activity.note.substring(0, 30) + '...'}</span>}
+                              </p>
+                              {showAddNoteModal && (
                                 <div className="job-calendar-modal transparent-background">
                                   <div className="job-calendar-modal">
                                     <div className="job-calendar-modal-container">
@@ -501,8 +502,8 @@ export default function JobCalendar() {
                                         <button
                                           className="cancel-button"
                                           onClick={() => {
+                                            setShowAddNoteModal(false);
                                             setNote('')
-                                            setShowAddNoteModal(false)
                                           }}>
                                           Cancel
                                         </button>
@@ -510,8 +511,8 @@ export default function JobCalendar() {
                                           className="confirm-button"
                                           onClick={() => {
                                             dispatch(addNoteToOrder({ orderId: activity.orderId, note: note }));
-                                            setNote('')
                                             setShowAddNoteModal(false);
+                                            setNote('')
                                           }}>
                                           Add a note
                                         </button>
@@ -520,7 +521,7 @@ export default function JobCalendar() {
                                   </div>
                                 </div>
                                 )}
-                              </p>
+
                               {!activity.confirmed && (
                                 <p className="pending-paragraph">
                                   <span className="pending-span">

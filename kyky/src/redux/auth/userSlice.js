@@ -23,8 +23,7 @@ export const signUpEmailAndPassword = createAsyncThunk(
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
       const slug = username.replace(/\W+/g, '-').toLowerCase() + '-' + hashCode(email);
-      let created,
-        lastseen = serverTimestamp();
+      const time = serverTimestamp();
       await setDoc(doc(db, 'users', user.uid, 'data', 'userdata'), {
         uid: user.uid,
         username: username,
@@ -34,8 +33,8 @@ export const signUpEmailAndPassword = createAsyncThunk(
         authProvider: 'local',
         userType: 'buyer',
         slug: slug,
-        created: created,
-        lastseen: lastseen,
+        created: time,
+        lastseen: time,
         totalRating: 0,
         totalAmount: 0
       });
@@ -55,8 +54,8 @@ export const signUpEmailAndPassword = createAsyncThunk(
         authProvider: 'local',
         userType: 'buyer',
         slug: slug,
-        created: created,
-        lastseen: lastseen
+        created: time,
+        lastseen: time
       };
     } catch (error) {
       return error;
@@ -132,11 +131,12 @@ export const signInGoogleAuthProvider = createAsyncThunk(
       const provider = new GoogleAuthProvider();
       const res = await signInWithPopup(auth, provider);
       const user = res.user;
+      const time = serverTimestamp();
       /* if user has logged in before... */
       const docSnap = await getDoc(doc(db, 'users', user.uid, 'data', 'userdata'));
       if (docSnap.exists()) {
         await updateDoc(doc(db, 'users', user.uid, 'data', 'userdata'), {
-          lastseen: serverTimestamp()
+          lastseen: time
         });
         return {
           ...user,
@@ -156,8 +156,8 @@ export const signInGoogleAuthProvider = createAsyncThunk(
         authProvider: 'google',
         userType: 'buyer',
         slug: slug,
-        created: serverTimestamp(),
-        lastseen: serverTimestamp(),
+        created: time,
+        lastseen: time,
         totalRating: 0,
         totalAmount: 0
       });

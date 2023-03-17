@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedules } from './redux/calendar/calendarScheduleSlice';
-import { fetchBookingsByQuery } from './redux/orders/orderSlice';
 import { fetchJobsByQuery } from './redux/jobs/jobSlice';
 import { fetchNotifications } from './redux/notifications/notificationSlice';
 import { updateLastseen } from './redux/auth/userSlice';
@@ -44,7 +43,6 @@ import Ratings from './pages/Profiles/Ratings';
 import Settings from './pages/Profiles/Settings';
 import OwnJobs from './pages/Profiles/OwnJobs';
 import Orders from './pages/Profiles/Orders';
-import Earnings from './pages/Profiles/Earnings';
 
 /* Buyer's Rating*/
 import BuyersRating from './pages/BuyersRating';
@@ -82,7 +80,6 @@ const App = () => {
     if (_user.uid) {
       dispatch(fetchSchedules(_user.uid));
       dispatch(fetchJobsByQuery({ key: 'uid', value: _user.uid }));
-      dispatch(fetchBookingsByQuery(_user.uid));
       dispatch(fetchNotifications(_user.uid));
       dispatch(updateLastseen(_user.uid));
     }
@@ -255,14 +252,6 @@ const App = () => {
               element={
                 <UserRoute>
                   <Ratings />
-                </UserRoute>
-              }
-            />
-            <Route
-              path="earnings"
-              element={
-                <UserRoute>
-                  <Earnings />
                 </UserRoute>
               }
             />

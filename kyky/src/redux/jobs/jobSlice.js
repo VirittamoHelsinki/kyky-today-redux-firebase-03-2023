@@ -8,8 +8,7 @@ import {
   getDocs,
   updateDoc,
   deleteDoc,
-  increment,
-  serverTimestamp
+  increment
 } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
@@ -17,10 +16,9 @@ import { db } from '../../firebase/firebase';
 to Firestore using the new id, returns the added object */
 export const createJobForm = createAsyncThunk('jobs/createJobForm', async (payload) => {
   try {
-    const timestamp = serverTimestamp();
     const formRef = doc(collection(db, 'jobs'));
-    await setDoc(formRef, { ...payload, id: formRef.id, created: timestamp, updated: timestamp });
-    return { ...payload, id: formRef.id, created: timestamp };
+    await setDoc(formRef, { ...payload, id: formRef.id });
+    return { ...payload, id: formRef.id };
   } catch (error) {
     return error;
   }
@@ -28,13 +26,11 @@ export const createJobForm = createAsyncThunk('jobs/createJobForm', async (paylo
 
 export const updateJobForm = createAsyncThunk('jobs/updateJobForm', async ({ id, data }) => {
   try {
-    const timestamp = serverTimestamp();
     const jobRef = doc(db, 'jobs', id);
     await setDoc(jobRef, {
-      ...data,
-      updated: timestamp
+      ...data
     });
-    return { ...data, updated: timestamp };
+    return { ...data};
   } catch (error) {
     return error;
   }
@@ -73,11 +69,11 @@ export const fetchJobsByQuery = createAsyncThunk(
 
 export const fetchUserProfileJobs = createAsyncThunk(
   'jobs/fetchUserProfileJobs',
-  async (payload) => {
+  async (uid) => {
     try {
       const documents = [];
       const jobsRef = collection(db, 'jobs');
-      const q = query(jobsRef, where('uid', '==', payload));
+      const q = query(jobsRef, where('uid', '==', uid));
       const snap = await getDocs(q);
       snap.forEach((doc) => {
         documents.push({ ...doc.data() });
@@ -107,18 +103,18 @@ export const fetchCategoryJobs = createAsyncThunk(
   }
 );
 
-export const deleteJobById = createAsyncThunk('jobs/deleteJobById', async (jobTitle) => {
+export const deleteJobById = createAsyncThunk('jobs/deleteJobById', async (jobId) => {
   try {
-    await deleteDoc(doc(db, 'jobs', jobTitle));
-    return jobTitle;
+    await deleteDoc(doc(db, 'jobs', jobId));
+    return jobId;
   } catch (error) {
     return error;
   }
 });
 
-export const addPageview = createAsyncThunk('jobs/addPageview', async (jobTitle) => {
+export const addPageview = createAsyncThunk('jobs/addPageview', async (jobId) => {
   try {
-    await updateDoc(doc(db, 'jobs', jobTitle), {
+    await updateDoc(doc(db, 'jobs', jobId), {
       pageviews: increment(1)
     });
   } catch (error) {

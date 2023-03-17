@@ -6,7 +6,6 @@ import '../../styles/CalendarHeader.scss';
 
 export default function CalendarHeader({ selectedWindow, setSelectedWindow, setScheduleWindow }) {
   const [titles, setTitles] = useState([]);
-  const [ongoing, setOngoing] = useState([]);
   const [pending, setPending] = useState([]);
   const [confirmed, setConfirmed] = useState([]);
 
@@ -65,13 +64,6 @@ export default function CalendarHeader({ selectedWindow, setSelectedWindow, setS
       <div className="top">
         <h1 className="title">My Calendar</h1>
         <div className="details">
-          <div className="info">
-            <i id="small-icon" className="material-icons-outlined">
-              work_outline
-            </i>
-            Ongoing ({ongoing.length})
-          </div>
-          <div>|</div>
           <div className="info">
             {' '}
             <i id="small-icon" className="material-icons-outlined">

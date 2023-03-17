@@ -4,7 +4,6 @@ import {
   setDoc,
   getDocs,
   collection,
-  serverTimestamp,
   updateDoc,
   increment
 } from 'firebase/firestore';
@@ -13,7 +12,7 @@ import { db } from '../../firebase/firebase';
 export const addRating = createAsyncThunk('rating/addRating', async ({ uid, rating }) => {
   try {
     const rateRef = doc(collection(db, `users`, uid, 'ratings'));
-    await setDoc(rateRef, { ...rating, created: serverTimestamp() });
+    await setDoc(rateRef, { ...rating });
   } catch (error) {
     return error;
   }

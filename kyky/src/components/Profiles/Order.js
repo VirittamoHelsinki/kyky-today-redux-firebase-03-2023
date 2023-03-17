@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeOrderStatus } from '../../redux/orders/orderSlice';
 import { addNotification } from '../../redux/notifications/notificationSlice';
@@ -10,6 +10,20 @@ const Order = ({ order, user }) => {
   const [showPDF, setShowPDF] = useState(false);
 
   const dispatch = useDispatch();
+
+  const downloadRef = useRef();
+
+  useEffect(() => {
+    const closeDropdown = (e) => {
+      if (
+        e.target !== downloadRef.current
+      ) {
+        setShowPDF(false);
+      }
+    };
+    document.body.addEventListener('click', closeDropdown);
+    return () => document.body.removeEventListener('click', closeDropdown);
+  }, []);
 
   return (
     <div className="order-container">
@@ -77,6 +91,7 @@ const Order = ({ order, user }) => {
           {order.status === 'completed' && (
             <div className="download-button">
               <button
+                ref={downloadRef}
                 onClick={() => {
                   setShowPDF(true);
                 }}>
@@ -172,7 +187,8 @@ const Order = ({ order, user }) => {
                         dispatch(
                           changeOrderStatus({
                             orderId: order.orderId,
-                            status: 'completed'
+                            status: 'completed',
+                            time: new Date()
                           })
                         );
                         dispatch(

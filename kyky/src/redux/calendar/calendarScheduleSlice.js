@@ -45,7 +45,7 @@ export const removeSchedule = createAsyncThunk(
   'calendarSchedules/removeSchedule',
   async ({ uid, schedule }) => {
     try {
-      await deleteDoc(doc(db, 'users', uid, 'schedules', schedule + '_schedules'));
+      await deleteDoc(doc(db, 'users', uid, 'schedules', schedule));
       return schedule;
     } catch (error) {
       return error;

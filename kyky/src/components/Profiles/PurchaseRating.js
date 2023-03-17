@@ -36,7 +36,8 @@ const PurchaseRating = ({ order, user }) => {
           buyerUid: user.uid,
           texts: texts,
           comment: comment,
-          stars: starValue
+          stars: starValue,
+          created: new Date()
         }
       })
     );

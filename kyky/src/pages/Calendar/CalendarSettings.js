@@ -4,6 +4,7 @@ import {
   saveCalendarSettings,
   fetchOwnCalendarSettings
 } from '../../redux/calendar/calendarSettingsSlice';
+import { removeSchedule } from '../../redux/calendar/calendarScheduleSlice';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -26,6 +27,7 @@ export default function CalendarSettings({ jobs }) {
 
   const _user = useSelector((state) => state.user);
   const _settings = useSelector((state) => state.setting.settings);
+  const _schedules = useSelector((state) => state.schedule);
 
   const dispatch = useDispatch();
 
@@ -60,10 +62,8 @@ export default function CalendarSettings({ jobs }) {
 
   function purgeCalendar() {
     if (window.confirm('Are you sure you want to purge the calendar?')) {
-      const keys = Object.keys(localStorage).filter(
-        (key) => key.includes('_schedules') && !key.includes('unavailability')
-      );
-      keys.forEach((key) => localStorage.removeItem(key));
+      const keys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
+      keys.forEach((key) => dispatch(removeSchedule({uid: _user.uid, schedule: key})));
     }
   }
 

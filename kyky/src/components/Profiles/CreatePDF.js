@@ -39,8 +39,10 @@ const CreatePDF = ({ order }) => {
     }
   });
 
+  /* f. ex. 9:30 - 15:00 --> 15 - 9 + (00 - 30) / 60 = 6 + (-0.5) = 5.5 */
   const duration =
-    parseInt(order.time.end.split(':')[0]) - parseInt(order.time.start.split(':')[0]);
+    parseInt(order.time.end.split(':')[0]) - parseInt(order.time.start.split(':')[0]) 
+  + (parseInt(order.time.end.split(':')[1]) - parseInt(order.time.start.split(':')[1]))/60;
 
   const MyDocument = () => (
     <Document>
