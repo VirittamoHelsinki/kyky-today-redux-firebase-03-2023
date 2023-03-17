@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllJobs } from '../redux/jobs/jobSlice';
+import { fetchAllJobs, filterJobs } from '../redux/jobs/jobSlice';
 import { searchtitles, cities, categories } from '../components/Profiles/Features';
 import '../styles/FilterComponent.scss';
 
@@ -24,6 +25,8 @@ const FilterComponent = () => {
   const _tags = useSelector((state) => state.jobs.all);
 
   const dispatch = useDispatch();
+
+  const navigate = new useNavigate();
 
   useEffect(() => {
     const closeFilterDropdowns = (e) => {
@@ -58,6 +61,12 @@ const FilterComponent = () => {
     if (Array.isArray(_tags)) {
       _tags.forEach((job) => tagwords.push(job.headline.toLocaleLowerCase()));
     }
+    // if (Array.isArray(_tags)) {
+    //   _tags.forEach((job) => {
+    //     let words = job.headline.split(' ')
+    //     words.forEach((word) => tagwords.push(word.toLocaleLowerCase()))
+    //   });
+    // }
     setSearches([...searchtitles, ...tagwords]);
   }, [_tags]);
 
@@ -80,6 +89,27 @@ const FilterComponent = () => {
     setLocationOpen(false);
     setCategoryOpen(false);
     setPriceOpen(!priceOpen);
+  };
+
+  const searchButtonClick = () => {
+    let title = '';
+    let headline = '';
+    if (searchtitles.includes(keyword)) {
+      title = keyword;
+    } else {
+      headline = keyword;
+    }
+    dispatch(
+      filterJobs({
+        title: title,
+        headline: headline,
+        location: locationText,
+        category: categoryText,
+        minPrice: parseInt(minPrice),
+        maxPrice: parseInt(maxPrice)
+      })
+    );
+    navigate('/search-result');
   };
 
   return (
@@ -205,7 +235,7 @@ const FilterComponent = () => {
           )}
         </div>
       </div>
-      <div className="search-button">
+      <div className="search-button" onClick={searchButtonClick}>
         <span className="material-icons-outlined">search</span>
       </div>
     </div>

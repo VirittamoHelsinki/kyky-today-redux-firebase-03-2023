@@ -12,6 +12,7 @@ const TimeSelect = ({ setTime, startTime, endTime }) => {
     values.push(i + ':30');
     values.push(i + ':45');
   }
+  values.push(end + ':00');
   return (
     <select className="time-select" onChange={(e) => setTime(e.target.value)}>
       {values.map((value, index) => (

@@ -8,7 +8,7 @@ import '../styles/CategoryPage.scss';
 const CategoryPage = () => {
   const [cards, setCards] = useState([]);
 
-  const _cards = useSelector((state) => state.jobs.all);
+  const _all = useSelector((state) => state.jobs.all);
 
   const dispatch = useDispatch();
 
@@ -29,10 +29,10 @@ const CategoryPage = () => {
 
   /* listen changes in redux's state, set cards when firebase returns the query result */
   useEffect(() => {
-    if (_cards) {
-      setCards(_cards);
+    if (_all) {
+      setCards(_all);
     }
-  }, [_cards]);
+  }, [_all]);
 
   return (
     <div className="category-main">

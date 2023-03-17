@@ -30,7 +30,7 @@ export const updateJobForm = createAsyncThunk('jobs/updateJobForm', async ({ id,
     await setDoc(jobRef, {
       ...data
     });
-    return { ...data};
+    return { ...data };
   } catch (error) {
     return error;
   }
@@ -67,23 +67,20 @@ export const fetchJobsByQuery = createAsyncThunk(
   }
 );
 
-export const fetchUserProfileJobs = createAsyncThunk(
-  'jobs/fetchUserProfileJobs',
-  async (uid) => {
-    try {
-      const documents = [];
-      const jobsRef = collection(db, 'jobs');
-      const q = query(jobsRef, where('uid', '==', uid));
-      const snap = await getDocs(q);
-      snap.forEach((doc) => {
-        documents.push({ ...doc.data() });
-      });
-      return documents;
-    } catch (error) {
-      return error;
-    }
+export const fetchUserProfileJobs = createAsyncThunk('jobs/fetchUserProfileJobs', async (uid) => {
+  try {
+    const documents = [];
+    const jobsRef = collection(db, 'jobs');
+    const q = query(jobsRef, where('uid', '==', uid));
+    const snap = await getDocs(q);
+    snap.forEach((doc) => {
+      documents.push({ ...doc.data() });
+    });
+    return documents;
+  } catch (error) {
+    return error;
   }
-);
+});
 
 export const fetchCategoryJobs = createAsyncThunk(
   'jobs/fetchCategoryJobs',
@@ -132,6 +129,37 @@ export const jobSlice = createSlice({
   reducers: {
     resetJobs() {
       return initialState;
+    },
+    filterJobs(state, action) {
+      let all_jobs = [...state.all];
+      if (action.payload.title !== '') {
+        all_jobs = all_jobs.filter((s) => s.title.toLowerCase() === action.payload.title);
+      }
+      if (action.payload.headline !== '') {
+        all_jobs = all_jobs.filter((s) => s.headline.toLowerCase() === action.payload.headline);
+      }
+      // all_jobs = all_jobs.filter((s) => {
+      //   if (s.headline.search(new RegExp(`${action.payload.headline.toLocaleLowerCase()}`)) >= 0) {
+      //     return true;
+      //   }
+      // });
+      if (action.payload.location !== '') {
+        all_jobs = all_jobs.filter((s) => s.place === action.payload.location);
+      }
+      if (action.payload.category !== '') {
+        all_jobs = all_jobs.filter(
+          (s) => s.category === action.payload.category.replace('&', 'and').toLowerCase()
+        );
+      }
+      all_jobs = all_jobs.filter(
+        (s) =>
+          parseInt(s.price) >= action.payload.minPrice &&
+          parseInt(s.price) <= action.payload.maxPrice
+      );
+      return (state = {
+        ...state,
+        result: all_jobs
+      });
     }
   },
   extraReducers: (builder) => {
@@ -194,5 +222,5 @@ export const jobSlice = createSlice({
   }
 });
 
-export const { resetJobs } = jobSlice.actions;
+export const { resetJobs, filterJobs } = jobSlice.actions;
 export default jobSlice.reducer;

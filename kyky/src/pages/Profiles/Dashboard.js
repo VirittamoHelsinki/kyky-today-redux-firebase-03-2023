@@ -112,14 +112,6 @@ const Dashboard = () => {
               <p className="jobs-task-key">Kaikki käyttäjän työt</p>
               <p className="jobs-tasks-value">20</p>
             </div>
-            <div className="jobs-tasks-item">
-              <p className="jobs-tasks-key">Käynnissä olevat tilaukset</p>
-              <p className="jobs-tasks-value">4</p>
-            </div>
-            <div className="jobs-tasks-item">
-              <p className="jobs-tasks-key">Ansaittu</p>
-              <p className="jobs-tasks-value">€200</p>
-            </div>
           </div>
         </div>
         <div className="dashboard-own-sells"></div>

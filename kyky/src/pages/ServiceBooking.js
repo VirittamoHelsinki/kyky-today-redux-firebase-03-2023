@@ -59,7 +59,7 @@ function ServiceBooking() {
   const [endTime, setEndTime] = useState('16:00');
   const [startScale, setStartScale] = useState('0:00');
   const [endScale, setEndScale] = useState('23:00');
-  const [notificationDays, setNotificationDays] = useState(us_days)
+  const [notificationDays, setNotificationDays] = useState(us_days);
   const [user, setUser] = useState(null);
   const [showCalendarModal, setShowCalendarModal] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
@@ -118,14 +118,12 @@ function ServiceBooking() {
   }, []);
 
   useEffect(() => {
-    if (_settings) {
+    if (_settings?.notifications) {
       setStartTime(_settings.notificationStartTime);
       setEndTime(_settings.notificationEndTime);
       setStartScale(_settings.notificationStartTime);
       setEndScale(_settings.notificationEndTime);
-      if (_settings.notifications) {
-        setNotificationDays(_settings.notificationDays)
-      }
+      setNotificationDays(_settings.notificationDays);
     }
   }, [_settings]);
 
@@ -328,7 +326,13 @@ function ServiceBooking() {
 
               {currentTab === Tabs.Once && (
                 <div className="once-tab-container">
-                  <Calendar date={date} setDate={setDate} minYears={0} maxYears={5} enabledDays={notificationDays} />
+                  <Calendar
+                    date={date}
+                    setDate={setDate}
+                    minYears={0}
+                    maxYears={5}
+                    enabledDays={notificationDays}
+                  />
                   <div className="select-date-time-content">
                     <div className="select-date-item">
                       <span className="material-icons-outlined">calendar_month</span>

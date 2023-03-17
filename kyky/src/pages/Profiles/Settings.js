@@ -25,7 +25,7 @@ const Settings = () => {
 
   useEffect(() => {
     if (receiveUrl) {
-      dispatch(updateProfileImage(_url))
+      dispatch(updateProfileImage(_url));
       fileInput.current.value = '';
       setReceiveUrl(false);
     }
@@ -43,18 +43,20 @@ const Settings = () => {
 
   const handlePasswordChange = () => {
     if (currentPassword !== '' && newPassword !== '' && newPassword === confirmPassword) {
-      dispatch(changePassword({
-        email: _user.email, 
-        old_password: currentPassword, 
-        new_password: newPassword
-      }))
-      setCurrentPassword('')
-      setNewPassword('')
-      setConfirmPassword('')
+      dispatch(
+        changePassword({
+          email: _user.email,
+          old_password: currentPassword,
+          new_password: newPassword
+        })
+      );
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
     } else {
       window.alert('Check input fields');
     }
-  }
+  };
 
   return (
     <div className="settings-main">
@@ -70,84 +72,80 @@ const Settings = () => {
           </div>
         </div>
       ) : (
-      <div className="settings-content">
-        <div className="settings-edit-photo-content">
-          <div className="photo-image">
-            <img
-              className="image"
-              src={_user.photoURL}
-              alt=""
-            />
-          </div>
-          <div className="photo-text-content">
-            <div className="photo-title">
-              <p onClick={handleClick}>Change Photo</p>
-              <input type="file" ref={fileInput} onChange={handleChange} hidden />
+        <div className="settings-content">
+          <div className="settings-edit-photo-content">
+            <div className="photo-image">
+              <img className="image" src={_user.photoURL} alt="" />
             </div>
-            <div className="photo-description">
-              <p>Your photo should show your face clearly, we suggest a neutral background</p>
+            <div className="photo-text-content">
+              <div className="photo-title">
+                <p onClick={handleClick}>Change Photo</p>
+                <input type="file" ref={fileInput} onChange={handleChange} hidden />
+              </div>
+              <div className="photo-description">
+                <p>Your photo should show your face clearly, we suggest a neutral background</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="settings-change-password-content">
-          <div className="headline">
-            <p>Change password</p>
-          </div>
-          <div className="change-password-label-and-input">
-            <div className="label-text">
-              <p>Current password</p>
+          <div className="settings-change-password-content">
+            <div className="headline">
+              <p>Change password</p>
             </div>
-            <div className="input-field-box">
-              <input
-                className="input-field"
-                type="text"
-                name="current-password"
-                value={currentPassword}
-                onChange={(e) => {
-                  setCurrentPassword(e.target.value);
-                }}
-              />
+            <div className="change-password-label-and-input">
+              <div className="label-text">
+                <p>Current password</p>
+              </div>
+              <div className="input-field-box">
+                <input
+                  className="input-field"
+                  type="password"
+                  name="current-password"
+                  value={currentPassword}
+                  onChange={(e) => {
+                    setCurrentPassword(e.target.value);
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          <div className="change-password-label-and-input">
-            <div className="label-text">
-              <p>New password</p>
+            <div className="change-password-label-and-input">
+              <div className="label-text">
+                <p>New password</p>
+              </div>
+              <div className="input-field-box">
+                <input
+                  className="input-field"
+                  type="password"
+                  name="new-password"
+                  value={newPassword}
+                  onChange={(e) => {
+                    setNewPassword(e.target.value);
+                  }}
+                />
+              </div>
             </div>
-            <div className="input-field-box">
-              <input
-                className="input-field"
-                type="text"
-                name="new-password"
-                value={newPassword}
-                onChange={(e) => {
-                  setNewPassword(e.target.value);
-                }}
-              />
+            <div className="change-password-label-and-input">
+              <div className="label-text">
+                <p>Confirm password</p>
+              </div>
+              <div className="input-field-box">
+                <input
+                  className="input-field"
+                  type="password"
+                  name="confirm-password"
+                  value={confirmPassword}
+                  onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          <div className="change-password-label-and-input">
-            <div className="label-text">
-              <p>Confirm password</p>
+            <div className="save-password-content">
+              <button className="save-password-button" onClick={handlePasswordChange}>
+                Save password
+              </button>
             </div>
-            <div className="input-field-box">
-              <input
-                className="input-field"
-                type="text"
-                name="confirm-password"
-                value={confirmPassword}
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                }}
-              />
-            </div>
-          </div>
-          <div className="save-password-content">
-            <button 
-              className="save-password-button"
-              onClick={handlePasswordChange}>Save password</button>
           </div>
         </div>
-      </div>
       )}
     </div>
   );

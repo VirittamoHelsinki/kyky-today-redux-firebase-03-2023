@@ -36,7 +36,7 @@ const Header = () => {
   const [notifications, setNotifications] = useState([]);
   const [unreadNotifications, setUnreadNotifications] = useState([]);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [username, setUsername] = useState('');
+  const [usermail, setUsermail] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [randNumber, setRandNumber] = useState(0);
@@ -126,17 +126,17 @@ const Header = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === '' || password === '') {
+    if (usermail === '' || password === '') {
       return;
     }
     dispatch(
       signInEmailAndPassword({
-        email: username,
+        email: usermail,
         password: password
       })
     );
     setShowLoginModal(false);
-    setUsername('');
+    setUsermail('');
     setPassword('');
     setRemember(false);
   };
@@ -282,15 +282,15 @@ const Header = () => {
                 </div>
                 <div className="login-modal-input-container">
                   <div className="input-title">
-                    <p>User name</p>
+                    <p>Email</p>
                   </div>
                   <div className="input-container">
                     <input
                       className="input-field"
-                      type="text"
-                      placeholder="User name"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      type="email"
+                      placeholder="Email"
+                      value={usermail}
+                      onChange={(e) => setUsermail(e.target.value)}
                     />
                   </div>
                 </div>
@@ -329,7 +329,7 @@ const Header = () => {
                     className="login-google-button"
                     onClick={() => {
                       setShowLoginModal(false);
-                      setUsername('');
+                      setUsermail('');
                       setPassword('');
                       setRemember(false);
                       onGoogleClick();
@@ -344,7 +344,7 @@ const Header = () => {
                     className="register-here-link"
                     onClick={() => {
                       setShowLoginModal(false);
-                      setUsername('');
+                      setUsermail('');
                       setPassword('');
                       setRemember(false);
                       navigate('/user-registration');

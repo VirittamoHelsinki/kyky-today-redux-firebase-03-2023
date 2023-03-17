@@ -129,7 +129,7 @@ export default function Step5({ handleChange }) {
           <input type="file" ref={fileInput} onChange={handleImageChange} hidden />
         </div>
         <div className="details-container">
-          <div className="details-row">
+          <div className="details-column">
             <label>Country*</label>
             <GenericSelect
               className="select-container3"
@@ -140,15 +140,15 @@ export default function Step5({ handleChange }) {
               onChange={(value) => setCountry(value)}
             />
           </div>
-          <div className="details-row">
-            <label>Street Address*(won’t show on profile)</label>
+          <div className="details-column">
+            <label>Street Address* (won’t show on profile)</label>
             <input
               className="detailsInput"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
           </div>
-          <div className="details-row">
+          <div className="city-zip-row">
             <div className="row-item">
               <label>City*</label>
               <input
@@ -170,8 +170,8 @@ export default function Step5({ handleChange }) {
           </div>
 
           <div className="phone-container">
+            <label>Phone</label>
             <div className="phone-row">
-              <label>Phone</label>
               <GenericSelect
                 className="select-container"
                 name="phoneSelect"
@@ -183,13 +183,14 @@ export default function Step5({ handleChange }) {
                 value={CountriesWithDialCodes.filter(({ value }) => value === dialCode)}
                 onChange={(value) => setDialCode(value)}
               />
+              <input
+                className="detailsInputPhone"
+                placeholder="type your number"
+                maxLength={13}
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
             </div>
-            <input
-              className="detailsInputPhone"
-              placeholder="type your number"
-              maxLength={13}
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}></input>
           </div>
         </div>
       </div>

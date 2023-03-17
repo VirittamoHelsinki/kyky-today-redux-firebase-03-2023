@@ -778,8 +778,8 @@ h4 {
     .settings-main {
       display: flex;
       justify-content: center;
-      min-width: 700px;
-      max-width: 1000px;
+      min-width: 600px;
+      max-width: 800px;
 
       .settings-content {
         display: flex;
@@ -869,6 +869,7 @@ h4 {
                 line-height: 21px;
                 text-decoration-line: underline;
                 color: #00a088;
+                cursor: pointer;
               }
             }
 
@@ -938,7 +939,7 @@ h4 {
             .input-field-box {
               display: flex;
               justify-content: flex-end;
-              width: 600px;
+              width: 500px;
 
               .input-field {
                 background: white;

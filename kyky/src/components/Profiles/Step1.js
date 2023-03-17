@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import Skills from '../../mock_skills.json';
 import '../../styles/CreateProfileModal.scss';
 
 export default function Step1({ handleChange }) {
   const [query, setQuery] = useState('');
   const [title, setTitle] = useState('');
+  const [skill, setSkill] = useState('');
   const [skills, setSkills] = useState([]);
 
   const _title = useSelector((state) => state.profile.title);
@@ -43,52 +43,54 @@ export default function Step1({ handleChange }) {
 
   return (
     <div className="profile-step1">
-      <p>Add a title about what you do.</p>
-      <input
-        className="step1-title-input"
-        name="s1TitleInput"
-        value={title}
-        onChange={(event) => setTitle(event.target.value)}
-        placeholder="Example: Dogwalker"
-        aria-label="Please add a title about what you do"></input>
-      <p>Add skills you have.</p>
-      <div className="step-1-add-skills-container">
+      <div className="title-input-container">
+        <p>Add a title about what you do.</p>
         <input
-          className="add-skills-input"
-          placeholder="Add Skills"
-          onChange={(event) => setQuery(event.target.value)}>
-        </input>
-        <div className="skill-dropdown">
-          {Skills.filter((post) => {
-            if (query === '') {
-              return '';
-            } else if (post.skill.toLowerCase().startsWith(query.toLowerCase())) {
-              return post;
-            }
-          }).map((post) => {
-            return (
-              <button
-                className="skillBox"
-                id="skillBox"
-                key={post.id}
-                value={post.skill}
-                onClick={() => {
-                  handleClick();
-                }}>
-                {post.skill}
-              </button>
-            );
-          })}
+          className="step1-title-input"
+          name="s1TitleInput"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          placeholder="Example: Dogwalker"
+          aria-label="Please add a title about what you do"
+        />
+      </div>
+      <div className="skill-container">
+        <p>Add skills you have.</p>
+        <div className="step-1-add-skills-container">
+          <div className="input-button-row">
+            <input
+              className="add-skills-input"
+              placeholder="Add Skills"
+              value={skill}
+              onChange={(e) => setSkill(e.target.value)}
+            />
+            <button
+              className="add-skill-button"
+              onClick={() => {
+                if (skill !== '') {
+                  setSkills([...skills, skill]);
+                  setSkill('');
+                }
+              }}>
+              +
+            </button>
+          </div>
+          <ul className="addSkills">
+            {skills.map((skill, index) => {
+              return (
+                <li
+                  className="addedSkill"
+                  key={index}
+                  value={skill}
+                  onClick={() => {
+                    setSkills(skills.filter((item) => item !== skill));
+                  }}>
+                  {skill}
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <ul className="addSkills">
-          {skills.map((skill) => {
-            return (
-              <li className="addedSkill" key={skill} value={skill}>
-                {skill}
-              </li>
-            );
-          })}
-        </ul>
       </div>
     </div>
   );

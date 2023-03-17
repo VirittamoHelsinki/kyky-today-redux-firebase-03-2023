@@ -25,11 +25,11 @@ export default function SellersProfileHeader({ selectedWindow, setSelectedWindow
     <div className="profiles--header-content">
       <div className="profiles--content-wrapper">
         <div className="profiles--tabs">
-          {Tabs.map(({ to, label, index }) => (
+          {Tabs.map(({ to, label, id }, index) => (
             <div
               key={index}
-              className={`profiles--button ${selectedWindow === index ? 'selected-tab' : ''}`}
-              onClick={() => changeWindow(to, index)}>
+              className={`profiles--button ${selectedWindow === id ? 'selected-tab' : ''}`}
+              onClick={() => changeWindow(to, id)}>
               <h3>{label}</h3>
             </div>
           ))}

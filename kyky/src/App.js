@@ -22,6 +22,7 @@ import RecoverPassword from './pages/RecoverPassword';
 import LandingPage from './pages/LandingPage';
 import ServiceBooking from './pages/ServiceBooking';
 import CategoryPage from './pages/CategoryPage';
+import SearchResultPage from './pages/SearchResultPage';
 import UserProfile from './pages/UserProfile';
 import UserRoute from './routes/UserRoute';
 import GuestRoute from './routes/GuestRoute';
@@ -107,6 +108,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="categories/:category" element={<CategoryPage />} />
+          <Route path="search-result" element={<SearchResultPage />} />
           <Route path="service-booking" element={<ServiceBooking />} />
           <Route path="user-profile/:slug" element={<UserProfile />} />
           <Route path="kyky-team" element={<KykyTeam />} />
