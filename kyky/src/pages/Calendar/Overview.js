@@ -29,8 +29,7 @@ function Overview() {
 
   function checkSchedule(schedule) {
     let { startDate: start, endDate: end } = schedule.scheduleDuration;
-    let result = parseInt(start.seconds) <= parseInt(date.getTime() / 1000) && parseInt(end.seconds) >= parseInt(date.getTime() / 1000);
-    console.log(result)
+    let result = start.seconds <= date.getTime() / 1000 && end.seconds >= date.getTime() / 1000;
     return result;
   }
 
@@ -49,44 +48,41 @@ function Overview() {
 
   useEffect(() => {
     const scheduleKeys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
-    const data = scheduleKeys
+    const allSchedules = scheduleKeys
       .map((key) => {
         /* copy the object to allow modifications because Firebase returns Object.freeze() */
         const schedule = JSON.parse(JSON.stringify(_schedules[key]));
         return schedule;
       })
       .flat(Infinity);
-    // const data = allSchedules.filter((schedule) => {
-    //   return checkSchedule(schedule);
-    // });
-    if (data) {
-      const jobs = checkOverlap(data);
-      const all_jobs = [];
-      jobs?.forEach((job) => {
-        console.log(job)
-        if (!checkWeekdaySchedule(job, weekDaysArray[date.getDay()])) return;
+    const all_jobs = [];
+    allSchedules?.forEach((job) => {
+      if (
+        date.getDate() >= new Date(job.scheduleDuration.startDate.seconds * 1000).getDate() &&
+        date.getDate() <= new Date(job.scheduleDuration.endDate.seconds * 1000).getDate()
+      ) {
         let time = job.time;
         all_jobs.push({ start: time.start, end: time.end, job: job.jobTitle });
+      }
+    });
+    all_jobs.sort((a, b) => {
+      return a.start - b.start;
+    });
+    const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
+    const daysToHighlight = [];
+    allDaysOfMonth.forEach((day) => {
+      const schedules = allSchedules.filter((schedule) => {
+        return (
+          day.getDate() >= new Date(schedule.scheduleDuration.startDate.seconds * 1000).getDate() &&
+          day.getDate() <= new Date(schedule.scheduleDuration.endDate.seconds * 1000).getDate()
+        );
       });
-      all_jobs.sort((a, b) => {
-        return a.start - b.start;
-      });
-      const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
-      const daysToHighlight = [];
-      allDaysOfMonth.forEach((day) => {
-        const dayOfWeek = day.getDay();
-        const dayOfWeekString = weekDaysArray[dayOfWeek];
-        const schedules = data.filter((schedule) => {
-          return checkWeekdaySchedule(schedule, dayOfWeekString);
-        });
-        daysToHighlight.push({ day, highlight: schedules.length > 0 });
-      });
-      setDaysWithJobs(daysToHighlight);
-      setAllJobs(all_jobs);
-      setBookings(jobs);
-    } else {
-      setBookings([]);
-    }
+      daysToHighlight.push({ day, highlight: schedules.length > 0 });
+    });
+
+    setDaysWithJobs(daysToHighlight);
+    setAllJobs(all_jobs);
+    setBookings(allSchedules);
   }, [date]);
 
   function ConvertTimeStringToDecimal(time) {
@@ -207,9 +203,15 @@ function Overview() {
         ))}
         <div className="bookings">
           {bookings?.map((booking, index) => {
-            if (checkWeekdaySchedule(booking, weekDaysArray[date.getDay()])) {
+            if (
+              date.getDate() >=
+                new Date(booking.scheduleDuration.startDate.seconds * 1000).getDate() &&
+              date.getDate() <= new Date(booking.scheduleDuration.endDate.seconds * 1000).getDate()
+            ) {
               return <Booking booking={booking} key={index} />;
-            } else return null;
+            } else {
+              return null;
+            }
           })}
         </div>
       </div>

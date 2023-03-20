@@ -16,12 +16,8 @@ export default function DateAndTime({ properties, setField, setCanContinue }) {
   ];
   const [schedule, setSchedule] = useState(properties.scheduleDuration.months === null);
   const [months, setMonths] = useState(properties.scheduleDuration.months || 3);
-  const [startDate, setStartDate] = useState(
-    new Date(properties.scheduleDuration.startDate) || new Date()
-  );
-  const [endDate, setEndDate] = useState(
-    new Date(properties.scheduleDuration.endDate) || new Date()
-  );
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [startTime, setStartTime] = useState(properties.time.start);
   const [endTime, setEndTime] = useState(properties.time.end);
   const [recurringDays, setRecurringDays] = useState(properties.recurring);
