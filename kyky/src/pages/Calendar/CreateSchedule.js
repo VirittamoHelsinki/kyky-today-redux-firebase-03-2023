@@ -145,7 +145,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }
       if (storage.length === 0) {
         dispatch(removeSchedule({ uid: _user.uid, schedule: schedule.jobTitle + '_schedules' }));
       } else {
-        dispatch(createSchedule({ uid: _user.uid, jobTitle: schedule.jobTitle, data: storage }));
+        dispatch(createSchedule({ uid: _user.uid, jobTitle: schedule.jobTitle + '_schedules', data: storage }));
       }
     }
   }

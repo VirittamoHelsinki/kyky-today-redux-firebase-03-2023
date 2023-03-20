@@ -10,9 +10,9 @@ const FilterComponent = () => {
   const [searches, setSearches] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [locationOpen, setLocationOpen] = useState(false);
-  const [locationText, setLocationText] = useState('');
+  const [locationText, setLocationText] = useState(null);
   const [categoryOpen, setCategoryOpen] = useState(false);
-  const [categoryText, setCategoryText] = useState('');
+  const [categoryText, setCategoryText] = useState(null);
   const [priceOpen, setPriceOpen] = useState(false);
   const [minPrice, setMinPrice] = useState('0');
   const [maxPrice, setMaxPrice] = useState('100');
@@ -22,7 +22,7 @@ const FilterComponent = () => {
   const categoryRef = useRef();
   const priceRef = useRef();
 
-  const _tags = useSelector((state) => state.jobs.all);
+  const _all = useSelector((state) => state.jobs.all);
 
   const dispatch = useDispatch();
 
@@ -58,17 +58,14 @@ const FilterComponent = () => {
 
   useEffect(() => {
     let tagwords = [];
-    if (Array.isArray(_tags)) {
-      _tags.forEach((job) => tagwords.push(job.headline.toLocaleLowerCase()));
+    if (Array.isArray(_all)) {
+      _all.forEach((job) => {
+        let words = job.headline.split(' ')
+        words.forEach((word) => tagwords.push(word.toLowerCase()))
+      });
     }
-    // if (Array.isArray(_tags)) {
-    //   _tags.forEach((job) => {
-    //     let words = job.headline.split(' ')
-    //     words.forEach((word) => tagwords.push(word.toLocaleLowerCase()))
-    //   });
-    // }
     setSearches([...searchtitles, ...tagwords]);
-  }, [_tags]);
+  }, [_all]);
 
   const locationToggle = () => {
     setSearchOpen(false);
@@ -92,8 +89,8 @@ const FilterComponent = () => {
   };
 
   const searchButtonClick = () => {
-    let title = '';
-    let headline = '';
+    let title = null;
+    let headline = null;
     if (searchtitles.includes(keyword)) {
       title = keyword;
     } else {
@@ -153,8 +150,11 @@ const FilterComponent = () => {
             <p>Location</p>
           </div>
           <div className="location-text">
-            <p ref={locationRef} onClick={locationToggle}>
-              {locationText === '' ? 'choose location' : locationText}
+            <p ref={locationRef} onClick={() => {
+              setLocationText(null);
+              locationToggle();
+            }}>
+              {locationText ? locationText : 'choose location'}
             </p>
           </div>
           {locationOpen && (
@@ -172,12 +172,11 @@ const FilterComponent = () => {
             <p>Category</p>
           </div>
           <div className="category-text">
-            <p ref={categoryRef} onClick={categoryToggle}>
-              {categoryText === ''
-                ? 'choose category'
-                : categoryText < 16
-                ? categoryText
-                : categoryText.substring(0, 16) + '...'}
+            <p ref={categoryRef} onClick={() => {
+              setCategoryText(null);
+              categoryToggle();
+            }}>
+              {categoryText ? categoryText < 16 ? categoryText : categoryText.substring(0, 16) + '...' : 'choose category'}
             </p>
           </div>
           {categoryOpen && (

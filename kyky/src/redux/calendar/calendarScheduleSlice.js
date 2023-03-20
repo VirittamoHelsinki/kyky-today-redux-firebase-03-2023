@@ -116,7 +116,7 @@ export const calendarScheduleSlice = createSlice({
       })
       .addCase(removeSchedule.fulfilled, (state, action) => {
         const new_state = { ...state };
-        delete new_state[action.payload + '_schedules'];
+        delete new_state[action.payload];
         return new_state;
       })
       .addCase(createUnavailability.fulfilled, (state, action) => {

@@ -39,9 +39,9 @@ export default function ManageSchedules() {
     if (confirm) {
       storage.splice(index, 1);
       if (storage.length === 0) {
-        dispatch(removeSchedule({ uid: _user.uid, schedule: schedule.jobTitle }));
+        dispatch(removeSchedule({ uid: _user.uid, schedule: schedule.jobTitle + '_schedules' }));
       } else {
-        dispatch(createSchedule({ uid: _user.uid, jobTitle: schedule.jobTitle, data: storage }));
+        dispatch(createSchedule({ uid: _user.uid, jobTitle: schedule.jobTitle + '_schedules', data: storage }));
       }
     }
     setSelectedSchedules(storage);
@@ -195,6 +195,7 @@ export default function ManageSchedules() {
         <div className="schedule-details">
           <h2>Schedules</h2>
           {selectedSchedules.map((schedule, index) => {
+            console.log(schedule)
             return (
               <React.Fragment key={index}>
                 <div className="schedule">
@@ -217,9 +218,9 @@ export default function ManageSchedules() {
                       <span style={{ color: 'black' }}>
                         {schedule.scheduleDuration.months
                           ? `${schedule.scheduleDuration.months} months`
-                          : `${new Date(schedule.scheduleDuration.startDate).toLocaleDateString(
+                          : `${new Date(schedule.scheduleDuration.startDate.seconds * 1000).toLocaleDateString(
                               'fi-FI'
-                            )} - ${new Date(schedule.scheduleDuration.endDate).toLocaleDateString(
+                            )} - ${new Date(schedule.scheduleDuration.endDate.seconds * 1000).toLocaleDateString(
                               'fi-FI'
                             )}`}
                       </span>

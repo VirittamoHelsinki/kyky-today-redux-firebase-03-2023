@@ -482,7 +482,7 @@ export default function JobCalendar() {
                               <p onClick={() => setShowAddNoteModal(true)}>
                                 <i className="material-icons-outlined">add_comment</i>
                                 {activity.note === '' ? 
-                                <span className="add-note-span">click to add a note</span> : 
+                                <span className="add-note-span">click to add a note for the buyer</span> : 
                                 <span className="add-note-span">{activity.note < 30 ? activity.note : activity.note.substring(0, 30) + '...'}</span>}
                               </p>
                               {showAddNoteModal && (
@@ -493,7 +493,7 @@ export default function JobCalendar() {
                                         className="job-calendar-modal-textarea"
                                         name="comments-field"
                                         value={note}
-                                        placeholder="Add a note to the buyer"
+                                        placeholder="Add a note for the buyer"
                                         onChange={(e) => {
                                           setNote(e.target.value);
                                         }} 

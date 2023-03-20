@@ -29,7 +29,8 @@ function Overview() {
 
   function checkSchedule(schedule) {
     let { startDate: start, endDate: end } = schedule.scheduleDuration;
-    let result = start.seconds <= date.getTime() / 1000 && end.seconds >= date.getTime() / 1000;
+    let result = parseInt(start.seconds) <= parseInt(date.getTime() / 1000) && parseInt(end.seconds) >= parseInt(date.getTime() / 1000);
+    console.log(result)
     return result;
   }
 
@@ -48,20 +49,21 @@ function Overview() {
 
   useEffect(() => {
     const scheduleKeys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
-    const allSchedules = scheduleKeys
+    const data = scheduleKeys
       .map((key) => {
         /* copy the object to allow modifications because Firebase returns Object.freeze() */
         const schedule = JSON.parse(JSON.stringify(_schedules[key]));
         return schedule;
       })
       .flat(Infinity);
-    const data = allSchedules.filter((schedule) => {
-      return checkSchedule(schedule);
-    });
+    // const data = allSchedules.filter((schedule) => {
+    //   return checkSchedule(schedule);
+    // });
     if (data) {
       const jobs = checkOverlap(data);
       const all_jobs = [];
       jobs?.forEach((job) => {
+        console.log(job)
         if (!checkWeekdaySchedule(job, weekDaysArray[date.getDay()])) return;
         let time = job.time;
         all_jobs.push({ start: time.start, end: time.end, job: job.jobTitle });

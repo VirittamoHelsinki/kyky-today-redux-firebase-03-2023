@@ -132,21 +132,21 @@ export const jobSlice = createSlice({
     },
     filterJobs(state, action) {
       let all_jobs = [...state.all];
-      if (action.payload.title !== '') {
+      if (action.payload.title) {
         all_jobs = all_jobs.filter((s) => s.title.toLowerCase() === action.payload.title);
       }
-      if (action.payload.headline !== '') {
-        all_jobs = all_jobs.filter((s) => s.headline.toLowerCase() === action.payload.headline);
+      if (action.payload.headline) {
+        all_jobs = all_jobs.filter((s) => {
+          let line = s.headline.toLowerCase()
+          if (line.search(new RegExp(`${action.payload.headline}`)) >= 0) {
+            return true;
+          }
+        });
       }
-      // all_jobs = all_jobs.filter((s) => {
-      //   if (s.headline.search(new RegExp(`${action.payload.headline.toLocaleLowerCase()}`)) >= 0) {
-      //     return true;
-      //   }
-      // });
-      if (action.payload.location !== '') {
+      if (action.payload.location) {
         all_jobs = all_jobs.filter((s) => s.place === action.payload.location);
       }
-      if (action.payload.category !== '') {
+      if (action.payload.category) {
         all_jobs = all_jobs.filter(
           (s) => s.category === action.payload.category.replace('&', 'and').toLowerCase()
         );
