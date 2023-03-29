@@ -27,20 +27,27 @@ function Overview() {
 
   const _schedules = useSelector((state) => state.schedule);
 
-  function checkSchedule(day, schedule) {
+  function checkWeekdaySchedule(schedule, day) {
+    const dayOfWeek = day.getDay();
+    const weekDay = weekDaysArray[dayOfWeek];
     return (
-      day.getDate() >= new Date(schedule.scheduleDuration.startDate.seconds * 1000).getDate() &&
-      day.getDate() <= new Date(schedule.scheduleDuration.endDate.seconds * 1000).getDate()
+      schedule.recurring.length === 0 || schedule.recurring.findIndex((d) => d === weekDay) !== -1
     );
-  }
-
-  function checkWeekdaySchedule(schedule, weekDay) {
-    return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
   }
 
   function getDaysInMonthAsArray(year, month) {
     const lastDay = new Date(year, month + 1, 0).getDate();
     return new Array(lastDay).fill(0).map((_, i) => new Date(year, month, i + 1));
+  }
+
+  /* convert day and schedule to the same timezone*/
+  function checkSchedule(day, schedule) {
+    return (
+      Math.floor(day.valueOf() / 1000) >=
+        parseInt(schedule.scheduleDuration.startDate.seconds) + day.getTimezoneOffset() * 60 &&
+      Math.floor(day.valueOf() / 1000) <=
+        parseInt(schedule.scheduleDuration.endDate.seconds) + day.getTimezoneOffset() * 60
+    );
   }
 
   useEffect(() => {
@@ -57,7 +64,7 @@ function Overview() {
       .flat(Infinity);
     const all_jobs = [];
     schedules?.forEach((job) => {
-      if (checkSchedule(date, job)) {
+      if (checkSchedule(date, job) && checkWeekdaySchedule(job, date)) {
         let time = job.time;
         all_jobs.push({ start: time.start, end: time.end, job: job.jobTitle });
       }
@@ -65,10 +72,9 @@ function Overview() {
     const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
     const daysToHighlight = [];
     allDaysOfMonth.forEach((day) => {
-      const highlighted = schedules.filter((schedule) => checkSchedule(day, schedule));
-      const dayOfWeek = day.getDay();
-      const dayOfWeekString = weekDaysArray[dayOfWeek];
-      if (highlighted.recurring > 0 && !checkWeekdaySchedule(highlighted, dayOfWeekString)) return;
+      const highlighted = schedules.filter(
+        (schedule) => checkSchedule(day, schedule) && checkWeekdaySchedule(schedule, day)
+      );
       daysToHighlight.push({ day, highlight: highlighted.length > 0 });
     });
     setDaysWithJobs(daysToHighlight);
@@ -194,7 +200,7 @@ function Overview() {
         ))}
         <div className="bookings">
           {bookings?.map((booking, index) => {
-            if (checkSchedule(date, booking)) {
+            if (checkSchedule(date, booking) && checkWeekdaySchedule(booking, date)) {
               return <Booking booking={booking} key={index} />;
             } else {
               return null;

@@ -225,9 +225,9 @@ export default function ManageSchedules() {
                           ? `${schedule.scheduleDuration.months} months`
                           : `${new Date(
                               schedule.scheduleDuration.startDate.seconds * 1000
-                            ).toLocaleDateString('fi-FI')} - ${new Date(
+                            ).valueOf()} - ${new Date(
                               schedule.scheduleDuration.endDate.seconds * 1000
-                            ).toLocaleDateString('fi-FI')}`}
+                            ).valueOf()}`}
                       </span>
                     </div>
                     <span style={{ color: 'black' }}>
