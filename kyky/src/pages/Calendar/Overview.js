@@ -27,10 +27,11 @@ function Overview() {
 
   const _schedules = useSelector((state) => state.schedule);
 
-  function checkSchedule(schedule) {
-    let { startDate: start, endDate: end } = schedule.scheduleDuration;
-    let result = start.seconds <= date.getTime() / 1000 && end.seconds >= date.getTime() / 1000;
-    return result;
+  function checkSchedule(day, schedule) {
+    return (
+      day.getDate() >= new Date(schedule.scheduleDuration.startDate.seconds * 1000).getDate() &&
+      day.getDate() <= new Date(schedule.scheduleDuration.endDate.seconds * 1000).getDate()
+    );
   }
 
   function checkWeekdaySchedule(schedule, weekDay) {
@@ -48,41 +49,31 @@ function Overview() {
 
   useEffect(() => {
     const scheduleKeys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
-    const allSchedules = scheduleKeys
+    const schedules = scheduleKeys
       .map((key) => {
-        /* copy the object to allow modifications because Firebase returns Object.freeze() */
         const schedule = JSON.parse(JSON.stringify(_schedules[key]));
         return schedule;
       })
       .flat(Infinity);
     const all_jobs = [];
-    allSchedules?.forEach((job) => {
-      if (
-        date.getDate() >= new Date(job.scheduleDuration.startDate.seconds * 1000).getDate() &&
-        date.getDate() <= new Date(job.scheduleDuration.endDate.seconds * 1000).getDate()
-      ) {
+    schedules?.forEach((job) => {
+      if (checkSchedule(date, job)) {
         let time = job.time;
         all_jobs.push({ start: time.start, end: time.end, job: job.jobTitle });
       }
     });
-    all_jobs.sort((a, b) => {
-      return a.start - b.start;
-    });
     const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
     const daysToHighlight = [];
     allDaysOfMonth.forEach((day) => {
-      const schedules = allSchedules.filter((schedule) => {
-        return (
-          day.getDate() >= new Date(schedule.scheduleDuration.startDate.seconds * 1000).getDate() &&
-          day.getDate() <= new Date(schedule.scheduleDuration.endDate.seconds * 1000).getDate()
-        );
-      });
-      daysToHighlight.push({ day, highlight: schedules.length > 0 });
+      const highlighted = schedules.filter((schedule) => checkSchedule(day, schedule));
+      const dayOfWeek = day.getDay();
+      const dayOfWeekString = weekDaysArray[dayOfWeek];
+      if (highlighted.recurring > 0 && !checkWeekdaySchedule(highlighted, dayOfWeekString)) return;
+      daysToHighlight.push({ day, highlight: highlighted.length > 0 });
     });
-
     setDaysWithJobs(daysToHighlight);
     setAllJobs(all_jobs);
-    setBookings(allSchedules);
+    setBookings(schedules);
   }, [date]);
 
   function ConvertTimeStringToDecimal(time) {
@@ -203,11 +194,7 @@ function Overview() {
         ))}
         <div className="bookings">
           {bookings?.map((booking, index) => {
-            if (
-              date.getDate() >=
-                new Date(booking.scheduleDuration.startDate.seconds * 1000).getDate() &&
-              date.getDate() <= new Date(booking.scheduleDuration.endDate.seconds * 1000).getDate()
-            ) {
+            if (checkSchedule(date, booking)) {
               return <Booking booking={booking} key={index} />;
             } else {
               return null;
