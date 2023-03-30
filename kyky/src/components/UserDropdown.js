@@ -38,10 +38,9 @@ const UserDropdown = ({ logoutClick }) => {
             </Link>
           </div>
           <div className="dropdown-button-content">
-            <button className="dropdown-button">Create a job</button>
-          </div>
-          <div className="dropdown-button-content">
-            <button className="dropdown-button">Edit profile</button>
+            <Link to="seller/own-jobs">
+              <button className="dropdown-button">Create a job</button>
+            </Link>
           </div>
         </div>
       ) : (

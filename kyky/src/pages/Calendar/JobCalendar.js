@@ -95,12 +95,13 @@ export default function JobCalendar() {
     const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
     const daysToHighlight = [];
     allDaysOfMonth.forEach((day) => {
-      const highlighted = schedules.filter((schedule) => checkSchedule(schedule, day) && checkWeekdaySchedule(schedule, day)
+      const highlighted = schedules.filter(
+        (schedule) => checkSchedule(day, schedule) && checkWeekdaySchedule(day, schedule)
       );
       daysToHighlight.push({ day, highlight: highlighted.length > 0 });
     });
     setHighlightDays(daysToHighlight);
-  }, [schedules]);
+  }, [schedules, date]);
 
   useEffect(() => {
     setCurrentMonth(date.getMonth());
@@ -157,6 +158,11 @@ export default function JobCalendar() {
 
   /* convert day and schedule to the same timezone*/
   function checkSchedule(day, schedule) {
+    console.log(
+      Math.floor(day.valueOf() / 1000) +
+        ' > ' +
+        (parseInt(schedule.scheduleDuration.startDate.seconds) + day.getTimezoneOffset() * 60)
+    );
     return (
       Math.floor(day.valueOf() / 1000) >=
         parseInt(schedule.scheduleDuration.startDate.seconds) + day.getTimezoneOffset() * 60 &&
@@ -492,9 +498,17 @@ export default function JobCalendar() {
                               </p>
                               <p onClick={() => setShowAddNoteModal(true)}>
                                 <i className="material-icons-outlined">add_comment</i>
-                                {activity.note === '' ? 
-                                <span className="add-note-span">click to add a note for the buyer</span> : 
-                                <span className="add-note-span">{activity.note < 30 ? activity.note : activity.note.substring(0, 30) + '...'}</span>}
+                                {activity.note === '' ? (
+                                  <span className="add-note-span">
+                                    click to add a note for the buyer
+                                  </span>
+                                ) : (
+                                  <span className="add-note-span">
+                                    {activity.note < 30
+                                      ? activity.note
+                                      : activity.note.substring(0, 30) + '...'}
+                                  </span>
+                                )}
                               </p>
                               {showAddNoteModal && (
                                 <div className="job-calendar-modal transparent-background">
@@ -507,23 +521,28 @@ export default function JobCalendar() {
                                         placeholder="Add a note for the buyer"
                                         onChange={(e) => {
                                           setNote(e.target.value);
-                                        }} 
+                                        }}
                                       />
                                       <div className="buttons-row">
                                         <button
                                           className="cancel-button"
                                           onClick={() => {
                                             setShowAddNoteModal(false);
-                                            setNote('')
+                                            setNote('');
                                           }}>
                                           Cancel
                                         </button>
                                         <button
                                           className="confirm-button"
                                           onClick={() => {
-                                            dispatch(addNoteToOrder({ orderId: activity.orderId, note: note }));
+                                            dispatch(
+                                              addNoteToOrder({
+                                                orderId: activity.orderId,
+                                                note: note
+                                              })
+                                            );
                                             setShowAddNoteModal(false);
-                                            setNote('')
+                                            setNote('');
                                           }}>
                                           Add a note
                                         </button>
@@ -531,7 +550,7 @@ export default function JobCalendar() {
                                     </div>
                                   </div>
                                 </div>
-                                )}
+                              )}
 
                               {!activity.confirmed && (
                                 <p className="pending-paragraph">
@@ -548,48 +567,48 @@ export default function JobCalendar() {
                                     keyboard_arrow_right
                                   </i>
                                   {showConfirmModal && (
-                                  <div className="job-calendar-modal transparent-background">
-                                    <div className="job-calendar-modal">
-                                      <div className="job-calendar-modal-container">
-                                        <div className="job-calendar-modal-label">
-                                          <p>Confirm booking?</p>
-                                        </div>
-                                        <div className="buttons-row">
-                                          <button
-                                            className="cancel-button"
-                                            onClick={() => setShowConfirmModal(false)}>
-                                            Cancel
-                                          </button>
-                                          <button
-                                            className="confirm-button"
-                                            onClick={() => {
-                                              dispatch(
-                                                changeConfirmedStatus({
-                                                  orderId: activity.orderId,
-                                                  status: true
-                                                })
-                                              );
-                                              dispatch(
-                                                addNotification({
-                                                  uid: activity.buyerUid,
-                                                  notification: {
-                                                    icon: 'done',
-                                                    color: '#00A088',
-                                                    name: _user.displayName,
-                                                    text: 'confirmed your booking',
-                                                    to: '/buyer/purchases',
-                                                    read: false
-                                                  }
-                                                })
-                                              );
-                                              setShowConfirmModal(false);
-                                            }}>
-                                            Confirm
-                                          </button>
+                                    <div className="job-calendar-modal transparent-background">
+                                      <div className="job-calendar-modal">
+                                        <div className="job-calendar-modal-container">
+                                          <div className="job-calendar-modal-label">
+                                            <p>Confirm booking?</p>
+                                          </div>
+                                          <div className="buttons-row">
+                                            <button
+                                              className="cancel-button"
+                                              onClick={() => setShowConfirmModal(false)}>
+                                              Cancel
+                                            </button>
+                                            <button
+                                              className="confirm-button"
+                                              onClick={() => {
+                                                dispatch(
+                                                  changeConfirmedStatus({
+                                                    orderId: activity.orderId,
+                                                    status: true
+                                                  })
+                                                );
+                                                dispatch(
+                                                  addNotification({
+                                                    uid: activity.buyerUid,
+                                                    notification: {
+                                                      icon: 'done',
+                                                      color: '#00A088',
+                                                      name: _user.displayName,
+                                                      text: 'confirmed your booking',
+                                                      to: '/buyer/purchases',
+                                                      read: false
+                                                    }
+                                                  })
+                                                );
+                                                setShowConfirmModal(false);
+                                              }}>
+                                              Confirm
+                                            </button>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
                                   )}
                                 </p>
                               )}

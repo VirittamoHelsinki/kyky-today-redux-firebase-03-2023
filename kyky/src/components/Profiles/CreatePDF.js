@@ -41,8 +41,9 @@ const CreatePDF = ({ order }) => {
 
   /* f. ex. 9:30 - 15:00 --> 15 - 9 + (00 - 30) / 60 = 6 + (-0.5) = 5.5 */
   const duration =
-    parseInt(order.time.end.split(':')[0]) - parseInt(order.time.start.split(':')[0]) 
-  + (parseInt(order.time.end.split(':')[1]) - parseInt(order.time.start.split(':')[1]))/60;
+    parseInt(order.time.end.split(':')[0]) -
+    parseInt(order.time.start.split(':')[0]) +
+    (parseInt(order.time.end.split(':')[1]) - parseInt(order.time.start.split(':')[1])) / 60;
 
   const MyDocument = () => (
     <Document>
@@ -96,6 +97,10 @@ const CreatePDF = ({ order }) => {
           </View>
         </View>
         <View style={styles.rows}>
+          <View style={styles.row}>
+            <Text>Paid</Text>
+            <Text>{order.paid ? 'yes' : 'no'}</Text>
+          </View>
           <View style={styles.row}>
             <Text>Duration</Text>
             <Text>{duration}</Text>

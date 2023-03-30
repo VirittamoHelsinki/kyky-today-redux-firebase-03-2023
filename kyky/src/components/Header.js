@@ -13,7 +13,6 @@ import { resetFileUpload } from '../redux/storage/fileUploadSlice';
 import { resetContact } from '../redux/chat/contactSlice';
 import { resetMessage } from '../redux/chat/messageSlice';
 import { resetRating } from '../redux/profiles/ratingSlice';
-import { resetSlug } from '../redux/auth/slugSlice';
 import { resetNotifications } from '../redux/notifications/notificationSlice';
 import UserDropdown from './UserDropdown';
 import Filter from './FilterComponent';
@@ -90,7 +89,6 @@ const Header = () => {
     dispatch(resetOrder());
     dispatch(resetContact());
     dispatch(resetMessage());
-    dispatch(resetSlug());
     dispatch(resetNotifications());
     dispatch(resetRating());
     navigate('/');

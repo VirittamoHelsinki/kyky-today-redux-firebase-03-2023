@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { changeOrderStatus } from '../../redux/orders/orderSlice';
+import { changeOrderStatus, changePaidStatus } from '../../redux/orders/orderSlice';
 import { addNotification } from '../../redux/notifications/notificationSlice';
 import CreatePDF from './CreatePDF';
 import '../../styles/Profiles.scss';
@@ -8,6 +8,7 @@ import '../../styles/Profiles.scss';
 const Order = ({ order, user }) => {
   const [showOrderDataModal, setShowOrderDataModal] = useState(false);
   const [showPDF, setShowPDF] = useState(false);
+  const [paidChecked, setPaidChecked] = useState(order.paid);
 
   const dispatch = useDispatch();
 
@@ -15,15 +16,18 @@ const Order = ({ order, user }) => {
 
   useEffect(() => {
     const closeDropdown = (e) => {
-      if (
-        e.target !== downloadRef.current
-      ) {
+      if (e.target !== downloadRef.current) {
         setShowPDF(false);
       }
     };
     document.body.addEventListener('click', closeDropdown);
     return () => document.body.removeEventListener('click', closeDropdown);
   }, []);
+
+  function paidStatusChanged(status) {
+    setPaidChecked(status);
+    dispatch(changePaidStatus({ orderId: order.orderId, status: status }));
+  }
 
   return (
     <div className="order-container">
@@ -179,6 +183,15 @@ const Order = ({ order, user }) => {
                     <div className="note-description">
                       <p>{order.note}</p>
                     </div>
+                  </div>
+                  <div className="paid-checkbox-content">
+                    <input
+                      type="checkbox"
+                      className="paid-checkbox"
+                      checked={paidChecked}
+                      onChange={() => paidStatusChanged(!paidChecked)}
+                    />
+                    <label>Paid</label>
                   </div>
                   <div className="buttons-row">
                     <button

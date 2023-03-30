@@ -40,7 +40,7 @@ const Dashboard = () => {
       setProfileImage(_profile.url);
       setProfileName(_profile.name);
       setProfileTitle(_profile.title);
-      setRegistered(new Date(_profile.created.seconds * 1000));
+      setRegistered(new Date(_profile.created?.seconds * 1000));
       setUserType(_user.userType);
       _profile.totalAmount > 0 &&
         setProfileRating(Math.round(_profile.totalRating / _profile.totalAmount));

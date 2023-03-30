@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserId } from '../redux/auth/slugSlice';
-import { getUserProfile } from '../redux/profiles/profileSlice';
-import { fetchUserProfileJobs } from '../redux/jobs/jobSlice';
 import { createContact } from '../redux/chat/contactSlice';
 import { addNotification } from '../redux/notifications/notificationSlice';
-import { fetchRatings } from '../redux/profiles/ratingSlice';
+import { doc, getDoc, getDocs, collection, query, where } from 'firebase/firestore';
+import { db } from '../firebase/firebase';
 import Card from '../components/Card';
 import starFilled from '../image/star-filled.svg';
 import starBlank from '../image/star-white.svg';
@@ -30,18 +28,79 @@ const UserProfile = () => {
   const [profileImage, setProfileImage] = useState('');
   const [ratings, setRatings] = useState([]);
   const [showReviewModal, setShowReviewModal] = useState(false);
+  const [uid, setUid] = useState(null);
 
-  const _cards = useSelector((state) => state.jobs.user);
-  const _uid = useSelector((state) => state.slug);
-  const _profile = useSelector((state) => state.profile.user);
   const _user = useSelector((state) => state.user);
-  const _ratings = useSelector((state) => state.rating.ratings);
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const { slug } = useParams();
+
+  const getUserId = async (slug) => {
+    try {
+      const idSnap = await getDoc(doc(db, 'slugs', slug));
+      setUid(idSnap.data().uid);
+    } catch (error) {
+      return;
+    }
+  };
+
+  const getUserProfile = async (uid) => {
+    try {
+      const profileSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
+      if (profileSnap.exists()) {
+        setProfileImage(profileSnap.data().url);
+        setProfileName(profileSnap.data().name);
+        setProfileTitle(profileSnap.data().title);
+        setLocation(profileSnap.data().city + ', ' + profileSnap.data().country.label);
+        setDescription(profileSnap.data().workInput);
+        setSkills(profileSnap.data().skills);
+      }
+    } catch (error) {
+      return;
+    }
+  };
+
+  const getUserData = async (uid) => {
+    try {
+      const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
+      setLastseen(new Date(userSnap.data().lastseen.seconds * 1000));
+      setRegistered(new Date(userSnap.data().created.seconds * 1000));
+      setProfileRating(Math.round(userSnap.data().totalRating / userSnap.data().totalAmount));
+    } catch (error) {
+      return;
+    }
+  };
+
+  const getUserProfileJobs = async (uid) => {
+    try {
+      const documents = [];
+      const jobsRef = collection(db, 'jobs');
+      const q = query(jobsRef, where('uid', '==', uid));
+      const snap = await getDocs(q);
+      snap.forEach((doc) => {
+        documents.push({ ...doc.data() });
+      });
+      setCards(documents);
+    } catch (error) {
+      return;
+    }
+  };
+
+  const getRatings = async (uid) => {
+    try {
+      const documents = [];
+      const snap = await getDocs(collection(db, 'users', uid, 'ratings'));
+      snap.docs.map((doc) => {
+        documents.push(doc.data());
+      });
+      setRatings(documents);
+    } catch (error) {
+      return;
+    }
+  };
 
   useEffect(() => {
     if (_user.uid) {
@@ -50,43 +109,17 @@ const UserProfile = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getUserId(slug));
+    getUserId(slug);
   }, []);
 
   useEffect(() => {
-    if (_uid.uid) {
-      dispatch(getUserProfile(_uid.uid));
-      dispatch(fetchUserProfileJobs(_uid.uid));
-      dispatch(fetchRatings(_uid.uid));
+    if (uid) {
+      getUserProfile(uid);
+      getUserData(uid);
+      getUserProfileJobs(uid);
+      getRatings(uid);
     }
-  }, [_uid]);
-
-  useEffect(() => {
-    if (_profile?.name) {
-      setProfileImage(_profile.url);
-      setProfileName(_profile.name);
-      setProfileTitle(_profile.title);
-      setLocation(_profile.city + ', ' + _profile.country.label);
-      setDescription(_profile.workInput);
-      setSkills(_profile.skills);
-      setLastseen(new Date(_profile.lastseen.seconds * 1000));
-      setRegistered(new Date(_profile.created.seconds * 1000));
-      _profile.totalAmount > 0 &&
-        setProfileRating(Math.round(_profile.totalRating / _profile.totalAmount));
-    }
-  }, [_profile]);
-
-  useEffect(() => {
-    if (_cards) {
-      setCards(_cards);
-    }
-  }, [_cards]);
-
-  useEffect(() => {
-    if (Array.isArray(_ratings)) {
-      setRatings(_ratings);
-    }
-  }, [_ratings]);
+  }, [uid]);
 
   function loopReviewStars(rating) {
     let star_img_list = [];
@@ -105,17 +138,17 @@ const UserProfile = () => {
         myUid: user.uid,
         myName: user.displayName,
         myPhotoURL: user.photoURL,
-        contactUid: _uid.uid,
-        contactName: _uid.name,
-        contactPhotoURL: _uid.photoURL
+        contactUid: uid.uid,
+        contactName: uid.name,
+        contactPhotoURL: uid.photoURL
       })
     );
     dispatch(
       addNotification({
-        uid: _uid.uid,
+        uid: uid.uid,
         notification: {
-          icon: "mail",
-          color: "#4285F4",
+          icon: 'mail',
+          color: '#4285F4',
           name: user.displayName,
           text: 'send you a message',
           to: '/seller/messages',
@@ -252,8 +285,8 @@ const UserProfile = () => {
                   <p>Customer rating</p>
                 </div>
                 <div className="review-item-content">
-                  {ratings.map((rating) => (
-                    <div className="review-item">
+                  {ratings.map((rating, index) => (
+                    <div className="review-item" key={index}>
                       <div className="item-title-date">
                         <div className="item-title">
                           <p>{rating.buyerName}</p>

@@ -1529,6 +1529,31 @@ h4 {
           }
         }
 
+        .paid-checkbox-content {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          gap: 6px;
+          padding-bottom: 20px;
+
+          .paid-checkbox {
+            width: 23px;
+            height: 23px;
+            background: white;
+            border: 1px solid black;
+            border-radius: 4px;
+          }
+
+          label {
+            font-family: Poppins, sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: left;
+          }
+        }
+
         .buttons-row {
           display: flex;
           flex-direction: row;

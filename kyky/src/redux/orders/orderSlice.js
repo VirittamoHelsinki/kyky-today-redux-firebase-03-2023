@@ -1,12 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {
-  doc,
-  setDoc,
-  collection,
-  query,
-  where,
-  getDocs
-} from 'firebase/firestore';
+import { doc, setDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebase';
 
 export const createBooking = createAsyncThunk('orders/createBooking', async (payload) => {
@@ -58,9 +51,10 @@ export const changeConfirmedStatus = createAsyncThunk(
   'orders/changeConfirmedStatus',
   async ({ orderId, status }) => {
     try {
+      console.log(orderId + ', ' + status);
       const orderRef = doc(db, 'orders', orderId);
       setDoc(orderRef, { confirmed: status }, { merge: true });
-      return { status: status, ordeId: orderId };
+      return { status: status, orderId: orderId };
     } catch (error) {
       return error;
     }
@@ -106,6 +100,19 @@ export const addNoteToOrder = createAsyncThunk(
   }
 );
 
+export const changePaidStatus = createAsyncThunk(
+  'orders/changePaidStatus',
+  async ({ orderId, status }) => {
+    try {
+      const orderRef = doc(db, 'orders', orderId);
+      setDoc(orderRef, { paid: status }, { merge: true });
+      return { paid: status, orderId: orderId };
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 const initialState = [];
 
 export const orderSlice = createSlice({
@@ -134,6 +141,7 @@ export const orderSlice = createSlice({
       /* make a deep copy of booking state, find the right index using the booking id, change 
       the confirmed value to the status value, return the state with the modified list */
       .addCase(changeConfirmedStatus.fulfilled, (state, action) => {
+        console.log(action.payload.orderId + ', ' + action.payload.status);
         let new_bookings = JSON.parse(JSON.stringify(state.bookings));
         let index = new_bookings.findIndex((f) => f.orderId === action.payload.orderId);
         new_bookings[index].confirmed = action.payload.status;
@@ -165,6 +173,15 @@ export const orderSlice = createSlice({
         let new_bookings = JSON.parse(JSON.stringify(state.bookings));
         let index = new_bookings.findIndex((f) => f.orderId === action.payload.orderId);
         new_bookings[index].note = action.payload.note;
+        return (state = {
+          ...state,
+          bookings: new_bookings
+        });
+      })
+      .addCase(changePaidStatus.fulfilled, (state, action) => {
+        let new_bookings = JSON.parse(JSON.stringify(state.bookings));
+        let index = new_bookings.findIndex((f) => f.orderId === action.payload.orderId);
+        new_bookings[index].paid = action.payload.paid;
         return (state = {
           ...state,
           bookings: new_bookings
