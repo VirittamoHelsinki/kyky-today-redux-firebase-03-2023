@@ -14,13 +14,11 @@ const UserProfile = () => {
   const [profileName, setProfileName] = useState('');
   const [profileTitle, setProfileTitle] = useState('');
   const [profileRating, setProfileRating] = useState(0);
-  const [onlineStatus, setOnlineStatus] = useState('Offline');
   const [lastseen, setLastseen] = useState(new Date('2023-02-03'));
   const [registered, setRegistered] = useState(new Date('2023-01-12'));
   const [userType, setUserType] = useState('Seller');
   const [location, setLocation] = useState('');
   const [allJobs, setAllJobs] = useState('4');
-  const [ongoingBookings, setOngoingBookings] = useState('3');
   const [description, setDescription] = useState('');
   const [skills, setSkills] = useState([]);
   const [cards, setCards] = useState([]);
@@ -69,6 +67,7 @@ const UserProfile = () => {
       setLastseen(new Date(userSnap.data().lastseen.seconds * 1000));
       setRegistered(new Date(userSnap.data().created.seconds * 1000));
       setProfileRating(Math.round(userSnap.data().totalRating / userSnap.data().totalAmount));
+      setUserType(userSnap.data().userType)
     } catch (error) {
       return;
     }
@@ -84,6 +83,7 @@ const UserProfile = () => {
         documents.push({ ...doc.data() });
       });
       setCards(documents);
+      setAllJobs(documents.length)
     } catch (error) {
       return;
     }
@@ -93,7 +93,7 @@ const UserProfile = () => {
     try {
       const documents = [];
       const snap = await getDocs(collection(db, 'users', uid, 'ratings'));
-      snap.docs.map((doc) => {
+      snap.docs.forEach((doc) => {
         documents.push(doc.data());
       });
       setRatings(documents);
@@ -106,10 +106,12 @@ const UserProfile = () => {
     if (_user.uid) {
       setUser(_user);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     getUserId(slug);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -209,10 +211,6 @@ const UserProfile = () => {
           </div>
           <div className="user-profile-user-data">
             <div className="user-data-item">
-              <p className="user-data-key">Online-tila</p>
-              <p className="user-data-value">{onlineStatus}</p>
-            </div>
-            <div className="user-data-item">
               <p className="user-data-key">Viimeksi online</p>
               <p className="user-data-value">{lastseen.toLocaleDateString('fi-FI')}</p>
             </div>
@@ -233,10 +231,6 @@ const UserProfile = () => {
             <div className="jobs-tasks-item">
               <p className="jobs-task-key">Kaikki käyttäjän työt</p>
               <p className="jobs-tasks-value">{allJobs}</p>
-            </div>
-            <div className="jobs-tasks-item">
-              <p className="jobs-tasks-key">Käynnissä olevat tilaukset</p>
-              <p className="jobs-tasks-value">{ongoingBookings}</p>
             </div>
           </div>
           <div className="user-profile-description">

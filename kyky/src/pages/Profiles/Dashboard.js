@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
-import { getDashboardProfile } from '../../redux/profiles/profileSlice';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase/firebase';
 import CreateProfileModal from '../../components/Profiles/CreateProfileModal';
 import starFilled from '../../image/star-filled.svg';
 import starBlank from '../../image/star-white.svg';
@@ -15,44 +16,54 @@ const Dashboard = () => {
   const [profileRating, setProfileRating] = useState(0);
   const [registered, setRegistered] = useState(new Date('2023-01-12'));
   const [userType, setUserType] = useState('Seller');
-  const [allJobs, setAllJobs] = useState('4');
-  const [ongoingBookings, setOngoingBookings] = useState('3');
-  const [earnings, setEarnings] = useState('€200');
   const [profileImage, setProfileImage] = useState('');
 
-  const dispatch = useDispatch();
-
   const _user = useSelector((state) => state.user);
-  const _profile = useSelector((state) => state.profile.dashboard);
+
+  const getUser = async (uid) => {
+    try {
+      const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
+      setProfileName(userSnap.data().username)
+      setRegistered(new Date(userSnap.data().created.seconds * 1000))
+      setProfileRating(parseInt(userSnap.data().totalRating) / parseInt(userSnap.data().totalAmount))
+      setUserType(userSnap.data().userType);
+    } catch (error) {
+      return;
+    }
+  }
+
+  const getProfile = async (uid) => {
+    try {
+      const profileSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
+      if (profileSnap.exists()) {
+        setProfileImage(profileSnap.data().url);
+        setProfileTitle(profileSnap.data().title);
+      } else {
+        setProfileImage('https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp')
+      }
+    } catch (error) {
+      return;
+    }
+  };
 
   useEffect(() => {
     setSelectedWindow('dashboard');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (_user.uid) {
-      dispatch(getDashboardProfile(_user.uid));
+      getUser(_user.uid)
+      getProfile(_user.uid);
     }
-  }, []);
-
-  useEffect(() => {
-    if (_profile?.name) {
-      setProfileImage(_profile.url);
-      setProfileName(_profile.name);
-      setProfileTitle(_profile.title);
-      setRegistered(new Date(_profile.created?.seconds * 1000));
-      setUserType(_user.userType);
-      _profile.totalAmount > 0 &&
-        setProfileRating(Math.round(_profile.totalRating / _profile.totalAmount));
-    }
-  }, [_profile]);
+  }, [_user]);
 
   function loopReviewStars(rating) {
     let star_img_list = [];
     for (let i = 0; i < rating; i++) {
       star_img_list.push(<img className="review-star-img" key={i} src={starFilled} alt="" />);
     }
-    for (let i = rating; i < 5; i++) {
+    for (let i = rating; i < 4; i++) {
       star_img_list.push(<img className="review-star-img" key={i} src={starBlank} alt="" />);
     }
     return star_img_list;
