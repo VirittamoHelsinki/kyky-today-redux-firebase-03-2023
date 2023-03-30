@@ -27,7 +27,7 @@ function Overview() {
 
   const _schedules = useSelector((state) => state.schedule);
 
-  function checkWeekdaySchedule(schedule, day) {
+  function checkWeekdaySchedule(day, schedule) {
     const dayOfWeek = day.getDay();
     const weekDay = weekDaysArray[dayOfWeek];
     return (
@@ -64,7 +64,7 @@ function Overview() {
       .flat(Infinity);
     const all_jobs = [];
     schedules?.forEach((job) => {
-      if (checkSchedule(date, job) && checkWeekdaySchedule(job, date)) {
+      if (checkSchedule(date, job) && checkWeekdaySchedule(date, job)) {
         let time = job.time;
         all_jobs.push({ start: time.start, end: time.end, job: job.jobTitle });
       }
@@ -73,7 +73,7 @@ function Overview() {
     const daysToHighlight = [];
     allDaysOfMonth.forEach((day) => {
       const highlighted = schedules.filter(
-        (schedule) => checkSchedule(day, schedule) && checkWeekdaySchedule(schedule, day)
+        (schedule) => checkSchedule(day, schedule) && checkWeekdaySchedule(day, schedule)
       );
       daysToHighlight.push({ day, highlight: highlighted.length > 0 });
     });
@@ -200,7 +200,7 @@ function Overview() {
         ))}
         <div className="bookings">
           {bookings?.map((booking, index) => {
-            if (checkSchedule(date, booking) && checkWeekdaySchedule(booking, date)) {
+            if (checkSchedule(date, booking) && checkWeekdaySchedule(date, booking)) {
               return <Booking booking={booking} key={index} />;
             } else {
               return null;

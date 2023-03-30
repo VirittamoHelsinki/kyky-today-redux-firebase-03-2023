@@ -95,12 +95,9 @@ export default function JobCalendar() {
     const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
     const daysToHighlight = [];
     allDaysOfMonth.forEach((day) => {
-      const dayOfWeek = day.getDay();
-      const dayOfWeekString = weekDaysArray[dayOfWeek];
-      const _schedules = schedules.filter((schedule) => {
-        return checkWeekdaySchedule(schedule, dayOfWeekString);
-      });
-      daysToHighlight.push({ day, highlight: _schedules.length > 0 });
+      const highlighted = schedules.filter((schedule) => checkSchedule(schedule, day) && checkWeekdaySchedule(schedule, day)
+      );
+      daysToHighlight.push({ day, highlight: highlighted.length > 0 });
     });
     setHighlightDays(daysToHighlight);
   }, [schedules]);
@@ -158,8 +155,22 @@ export default function JobCalendar() {
     setSchedules(schedules);
   }
 
-  function checkWeekdaySchedule(schedule, weekDay) {
-    return schedule.recurring.findIndex((day) => day === weekDay) !== -1;
+  /* convert day and schedule to the same timezone*/
+  function checkSchedule(day, schedule) {
+    return (
+      Math.floor(day.valueOf() / 1000) >=
+        parseInt(schedule.scheduleDuration.startDate.seconds) + day.getTimezoneOffset() * 60 &&
+      Math.floor(day.valueOf() / 1000) <=
+        parseInt(schedule.scheduleDuration.endDate.seconds) + day.getTimezoneOffset() * 60
+    );
+  }
+
+  function checkWeekdaySchedule(day, schedule) {
+    const dayOfWeek = day.getDay();
+    const weekDay = weekDaysArray[dayOfWeek];
+    return (
+      schedule.recurring.length === 0 || schedule.recurring.findIndex((d) => d === weekDay) !== -1
+    );
   }
 
   function getFirstDayOfMonth(year, month) {
