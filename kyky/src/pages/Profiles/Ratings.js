@@ -15,11 +15,13 @@ const Ratings = () => {
 
   useEffect(() => {
     setSelectedWindow('ratings');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     dispatch(fetchPurchasesByQuery(_user.uid));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_user]);
 
   useEffect(() => {
     if (Array.isArray(_orders)) {

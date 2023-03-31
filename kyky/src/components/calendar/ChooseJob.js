@@ -22,12 +22,14 @@ export default function ChooseJob({ properties, setField }) {
         setJob(_titles[0].id);
       }
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_titles]);
 
   useEffect(() => {
     if (properties.jobTitle) {
       setField('jobTitle', properties.jobTitle);
     } else setField('jobTitle', jobs[0].id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jobs]);
 
   return (

@@ -39,17 +39,20 @@ export default function DateAndTime({ properties, setField, setCanContinue }) {
         endDate: null
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [schedule, months, startDate, endDate]);
 
   useEffect(() => {
     checkIfCanContinue();
     setField('time', { start: startTime, end: endTime });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startTime, endTime]);
 
   useEffect(() => {
     if (recurringDays.length === 0) {
       setField('recurringDays', days);
     } else setField('recurring', recurringDays);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recurringDays]);
 
   function checkIfCanContinue() {

@@ -54,14 +54,14 @@ const FilterComponent = () => {
 
   useEffect(() => {
     dispatch(fetchAllJobs());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     let tagwords = [];
     if (Array.isArray(_all)) {
       _all.forEach((job) => {
-        let words = job.headline.split(' ')
-        words.forEach((word) => tagwords.push(word.toLowerCase()))
+        let words = job.headline.split(' ');
+        words.forEach((word) => tagwords.push(word.toLowerCase()));
       });
     }
     setSearches([...searchtitles, ...tagwords]);
@@ -126,11 +126,7 @@ const FilterComponent = () => {
           {keyword.length > 1 && searchOpen && (
             <div className="search-dropdown">
               {searches
-                .filter((f) => {
-                  if (f.search(new RegExp(`${keyword.toLocaleLowerCase()}`)) >= 0) {
-                    return true;
-                  }
-                })
+                .filter((search) => search.includes(keyword.toLowerCase()))
                 .map((result, index) => (
                   <div
                     className="search-item"
@@ -150,10 +146,12 @@ const FilterComponent = () => {
             <p>Location</p>
           </div>
           <div className="location-text">
-            <p ref={locationRef} onClick={() => {
-              setLocationText(null);
-              locationToggle();
-            }}>
+            <p
+              ref={locationRef}
+              onClick={() => {
+                setLocationText(null);
+                locationToggle();
+              }}>
               {locationText ? locationText : 'choose location'}
             </p>
           </div>
@@ -172,11 +170,17 @@ const FilterComponent = () => {
             <p>Category</p>
           </div>
           <div className="category-text">
-            <p ref={categoryRef} onClick={() => {
-              setCategoryText(null);
-              categoryToggle();
-            }}>
-              {categoryText ? categoryText < 16 ? categoryText : categoryText.substring(0, 16) + '...' : 'choose category'}
+            <p
+              ref={categoryRef}
+              onClick={() => {
+                setCategoryText(null);
+                categoryToggle();
+              }}>
+              {categoryText
+                ? categoryText < 16
+                  ? categoryText
+                  : categoryText.substring(0, 16) + '...'
+                : 'choose category'}
             </p>
           </div>
           {categoryOpen && (

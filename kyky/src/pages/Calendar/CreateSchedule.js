@@ -67,6 +67,7 @@ export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }
 
   useEffect(() => {
     setView(() => progression[progression.findIndex((item) => item.id === step)].component);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
   useEffect(() => {
@@ -117,7 +118,11 @@ export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }
         );
       } else {
         dispatch(
-          createSchedule({ uid: _user.uid, jobTitle: properties.jobTitle + '_schedules', data: [data] })
+          createSchedule({
+            uid: _user.uid,
+            jobTitle: properties.jobTitle + '_schedules',
+            data: [data]
+          })
         );
       }
     } else if (mode === 'edit') {
@@ -145,7 +150,13 @@ export default function ManageScheduleModal({ setScheduleWindow, editing, jobs }
       if (storage.length === 0) {
         dispatch(removeSchedule({ uid: _user.uid, schedule: schedule.jobTitle + '_schedules' }));
       } else {
-        dispatch(createSchedule({ uid: _user.uid, jobTitle: schedule.jobTitle + '_schedules', data: storage }));
+        dispatch(
+          createSchedule({
+            uid: _user.uid,
+            jobTitle: schedule.jobTitle + '_schedules',
+            data: storage
+          })
+        );
       }
     }
   }

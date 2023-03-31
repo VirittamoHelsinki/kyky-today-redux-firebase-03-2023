@@ -25,6 +25,7 @@ const CategoryPage = () => {
     } else {
       dispatch(fetchCategoryJobs({ key: 'category', value: category_with_spaces }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* listen changes in redux's state, set cards when firebase returns the query result */

@@ -30,6 +30,7 @@ const AddJobImages = ({ addUrl }) => {
       fileInput.current.value = '';
       setReceiveUrl(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_url]);
 
   return (

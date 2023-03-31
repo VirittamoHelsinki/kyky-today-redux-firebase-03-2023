@@ -3,14 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
 import { deleteJobById } from '../../redux/jobs/jobSlice';
 import CreateJobModal from '../../components/Profiles/CreateJobModal';
-import starFilled from '../../image/star-filled.svg';
-import starBlank from '../../image/star-white.svg';
 import '../../styles/Profiles.scss';
 
 const OwnJobs = () => {
   const setSelectedWindow = useOutletContext();
   const [jobs, setJobs] = useState([]);
-  const [profileRating, setProfileRating] = useState(4);
   const [showCreateJobModal, setShowCreateJobModal] = useState(false);
   const [editjob, setEditjob] = useState(null);
 
@@ -20,6 +17,7 @@ const OwnJobs = () => {
 
   useEffect(() => {
     setSelectedWindow('own-jobs');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -27,17 +25,6 @@ const OwnJobs = () => {
       setJobs(_jobs);
     }
   }, [_jobs]);
-
-  function loopStars() {
-    let star_img_list = [];
-    for (let i = 0; i < profileRating; i++) {
-      star_img_list.push(<img className="star-img" key={i} src={starFilled} alt="" />);
-    }
-    for (let i = profileRating; i < 5; i++) {
-      star_img_list.push(<img className="star-img" key={i} src={starBlank} alt="" />);
-    }
-    return star_img_list;
-  }
 
   function deleteJobclick(id) {
     const confirm = window.confirm('Are you sure you want to delete this job?');
@@ -118,7 +105,6 @@ const OwnJobs = () => {
             </div>
             <div className="job-container-rightside">
               <div className="job-rating-and-buttons">
-                <div className="job-rating">{loopStars().map((star) => star)}</div>
                 <div className="job-buttons">
                   <button
                     className="edit-button"

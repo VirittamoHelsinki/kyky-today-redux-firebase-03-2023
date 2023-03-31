@@ -51,10 +51,10 @@ const CreateJobModal = ({ setShowCreateJobModal, editjob, setEditjob }) => {
       setOnceAMonth(editjob.onceAMonth);
       setUrls(editjob.urls);
     }
-  }, []);
+  }, [editjob]);
 
   const handleCreateJob = () => {
-    let time = new Date;
+    let time = new Date();
     dispatch(
       createJobForm({
         uid: _user.uid,

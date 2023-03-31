@@ -11,7 +11,7 @@ export default function Step4({ handleChange }) {
   /* call handleChange every time the field value changes */
   useEffect(() => {
     handleChange('workInput', text);
-  }, [text]);
+  }, [text, handleChange]);
 
   /* set a value if redux's state.profile.s4WorkInput is not empty */
   useEffect(() => {

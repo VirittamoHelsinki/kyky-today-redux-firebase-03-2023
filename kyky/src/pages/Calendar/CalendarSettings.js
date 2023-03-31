@@ -43,7 +43,8 @@ export default function CalendarSettings({ jobs }) {
 
   useEffect(() => {
     dispatch(fetchOwnCalendarSettings(_user.uid));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_user]);
 
   useEffect(() => {
     setJobOptions(jobs.map((job) => ({ value: job.id, label: job.job_title })));
@@ -58,12 +59,12 @@ export default function CalendarSettings({ jobs }) {
       setNotificationStartTime(parsedSettings.notificationStartTime);
       setNotificationEndTime(parsedSettings.notificationEndTime);
     }
-  }, [_settings]);
+  }, [_settings, jobs]);
 
   function purgeCalendar() {
     if (window.confirm('Are you sure you want to purge the calendar?')) {
       const keys = Object.keys(_schedules).filter((key) => key.includes('_schedules'));
-      keys.forEach((key) => dispatch(removeSchedule({uid: _user.uid, schedule: key})));
+      keys.forEach((key) => dispatch(removeSchedule({ uid: _user.uid, schedule: key })));
     }
   }
 

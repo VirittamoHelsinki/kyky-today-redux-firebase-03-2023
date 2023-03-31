@@ -6,9 +6,6 @@ import { useOutletContext } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import '../../styles/JobCalendarOverview.scss';
-
-// import mockData from '../../mock_bookings.json';
-
 const times = [];
 
 for (let i = 0; i <= 23; i++) {
@@ -52,6 +49,7 @@ function Overview() {
 
   useEffect(() => {
     setSelectedWindow('overview');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -62,8 +60,9 @@ function Overview() {
         return schedule;
       })
       .flat(Infinity);
+    const jobs = checkOverlap(schedules);
     const all_jobs = [];
-    schedules?.forEach((job) => {
+    jobs?.forEach((job) => {
       if (checkSchedule(date, job) && checkWeekdaySchedule(date, job)) {
         let time = job.time;
         all_jobs.push({ start: time.start, end: time.end, job: job.jobTitle });
@@ -72,15 +71,16 @@ function Overview() {
     const allDaysOfMonth = getDaysInMonthAsArray(date.getFullYear(), date.getMonth());
     const daysToHighlight = [];
     allDaysOfMonth.forEach((day) => {
-      const highlighted = schedules.filter(
+      const highlighted = jobs.filter(
         (schedule) => checkSchedule(day, schedule) && checkWeekdaySchedule(day, schedule)
       );
       daysToHighlight.push({ day, highlight: highlighted.length > 0 });
     });
     setDaysWithJobs(daysToHighlight);
     setAllJobs(all_jobs);
-    setBookings(schedules);
-  }, [date]);
+    setBookings(jobs);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date, _schedules]);
 
   function ConvertTimeStringToDecimal(time) {
     if (!time) return 0;
@@ -116,7 +116,7 @@ function Overview() {
   function checkOverlap(jobs) {
     // We start checking for overlaps by looping through each job
     for (let i = 0; i < jobs?.length; i++) {
-      if (!checkWeekdaySchedule(jobs[i], weekDaysArray[date.getDay()])) continue;
+      if (!checkWeekdaySchedule(date, jobs[i])) continue;
       // Get start end time of the job
       let time = jobs[i].time;
 

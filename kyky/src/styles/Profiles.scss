@@ -512,26 +512,14 @@ h4 {
             .job-rating-and-buttons {
               display: flex;
               flex-direction: column;
-              justify-content: space-between;
+              justify-content: flex-end;
               align-items: center;
-
-              .job-rating {
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-end;
-                gap: 15px;
-
-                .star-img {
-                  width: 20px;
-                  height: 20px;
-                }
-              }
 
               .job-buttons {
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
-                gap: 10px;
+                gap: 20px;
 
                 .edit-button {
                   width: 80px;

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import '../../styles/CreateProfileModal.scss';
 
 export default function Step1({ handleChange }) {
-  const [query, setQuery] = useState('');
   const [title, setTitle] = useState('');
   const [skill, setSkill] = useState('');
   const [skills, setSkills] = useState([]);
@@ -14,11 +13,11 @@ export default function Step1({ handleChange }) {
 
   useEffect(() => {
     handleChange('title', title);
-  }, [title]);
+  }, [title, handleChange]);
 
   useEffect(() => {
     handleChange('skills', skills);
-  }, [skills]);
+  }, [skills, handleChange]);
 
   useEffect(() => {
     if (_title) {
@@ -31,15 +30,6 @@ export default function Step1({ handleChange }) {
       setSkills(_skills);
     }
   }, [_skills]);
-
-  const handleClick = (event) => {
-    for (const skill of skills) {
-      if (event.target.value === skill) {
-        return;
-      }
-    }
-    setSkills(skills.concat(event.target.value));
-  };
 
   return (
     <div className="profile-step1">

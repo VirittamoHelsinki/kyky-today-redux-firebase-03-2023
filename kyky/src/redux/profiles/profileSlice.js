@@ -35,31 +35,6 @@ export const getUserProfile = createAsyncThunk('profiles/getUserProfile', async 
   }
 });
 
-export const getDashboardProfile = createAsyncThunk('profiles/getDashboardProfile', async (uid) => {
-  try {
-    const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
-    const profileSnap = await getDoc(doc(db, 'users', uid, 'data', 'profile'));
-    if (profileSnap.exists()) {
-      return {
-        ...profileSnap.data(),
-        name: userSnap.data().username,
-        created: userSnap.data().created,
-        totalRating: userSnap.data().totalRating,
-        totalAmount: userSnap.data().totalAmount
-      };
-    } else {
-      return {
-        name: userSnap.data().username,
-        s7Url: 'https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp',
-        s1Title: '',
-        created: userSnap.data().created
-      };
-    }
-  } catch (error) {
-    return error;
-  }
-});
-
 const initialState = [];
 
 export const profileSlice = createSlice({
@@ -92,12 +67,6 @@ export const profileSlice = createSlice({
         return (state = {
           ...state,
           user: { ...action.payload }
-        });
-      })
-      .addCase(getDashboardProfile.fulfilled, (state, action) => {
-        return (state = {
-          ...state,
-          dashboard: { ...action.payload }
         });
       });
   }

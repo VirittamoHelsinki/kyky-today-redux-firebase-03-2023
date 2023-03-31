@@ -19,18 +19,21 @@ const Dashboard = () => {
   const [profileImage, setProfileImage] = useState('');
 
   const _user = useSelector((state) => state.user);
+  const _profileChanged = useSelector((state) => state.profile.dashboard);
 
   const getUser = async (uid) => {
     try {
       const userSnap = await getDoc(doc(db, 'users', uid, 'data', 'userdata'));
-      setProfileName(userSnap.data().username)
-      setRegistered(new Date(userSnap.data().created.seconds * 1000))
-      setProfileRating(parseInt(userSnap.data().totalRating) / parseInt(userSnap.data().totalAmount))
+      setProfileName(userSnap.data().username);
+      setRegistered(new Date(userSnap.data().created.seconds * 1000));
+      setProfileRating(
+        parseInt(userSnap.data().totalRating) / parseInt(userSnap.data().totalAmount)
+      );
       setUserType(userSnap.data().userType);
     } catch (error) {
       return;
     }
-  }
+  };
 
   const getProfile = async (uid) => {
     try {
@@ -39,7 +42,7 @@ const Dashboard = () => {
         setProfileImage(profileSnap.data().url);
         setProfileTitle(profileSnap.data().title);
       } else {
-        setProfileImage('https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp')
+        setProfileImage('https://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802?d=mp');
       }
     } catch (error) {
       return;
@@ -53,10 +56,10 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (_user.uid) {
-      getUser(_user.uid)
+      getUser(_user.uid);
       getProfile(_user.uid);
     }
-  }, [_user]);
+  }, [_user, _profileChanged]);
 
   function loopReviewStars(rating) {
     let star_img_list = [];

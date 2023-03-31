@@ -41,7 +41,7 @@ const weekDaysHeader = [
 const weekDaysArray = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
 export default function JobCalendar() {
-  const [setSelectedWindow, setEditing, setScheduleWindow] = useOutletContext();
+  const [setSelectedWindow, setScheduleWindow] = useOutletContext();
   const [date, setDate] = useState(new Date());
   const [days, setDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -72,10 +72,11 @@ export default function JobCalendar() {
     if (_user.uid) {
       dispatch(fetchBookingsByQuery(_user.uid));
     }
-  }, []);
+  }, [_user, dispatch]);
 
   useEffect(() => {
     getSchedules();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentJob, _schedules]);
 
   useEffect(() => {
@@ -89,6 +90,7 @@ export default function JobCalendar() {
     if (currentJob === '' && jobs.length > 0) {
       setCurrentJob(jobs[0]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_bookings]);
 
   useEffect(() => {
@@ -101,6 +103,7 @@ export default function JobCalendar() {
       daysToHighlight.push({ day, highlight: highlighted.length > 0 });
     });
     setHighlightDays(daysToHighlight);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [schedules, date]);
 
   useEffect(() => {
@@ -116,6 +119,7 @@ export default function JobCalendar() {
     );
     setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 1);
     getSchedules();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date]);
 
   useEffect(() => {
@@ -137,6 +141,7 @@ export default function JobCalendar() {
         )
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDay]);
 
   useEffect(() => {
@@ -158,11 +163,6 @@ export default function JobCalendar() {
 
   /* convert day and schedule to the same timezone*/
   function checkSchedule(day, schedule) {
-    console.log(
-      Math.floor(day.valueOf() / 1000) +
-        ' > ' +
-        (parseInt(schedule.scheduleDuration.startDate.seconds) + day.getTimezoneOffset() * 60)
-    );
     return (
       Math.floor(day.valueOf() / 1000) >=
         parseInt(schedule.scheduleDuration.startDate.seconds) + day.getTimezoneOffset() * 60 &&
@@ -237,6 +237,7 @@ export default function JobCalendar() {
 
   useEffect(() => {
     setSelectedWindow('job-calendar');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function changeMonth(month) {
@@ -455,7 +456,7 @@ export default function JobCalendar() {
                       </p>
                     </div>
                     <div className={`activities${openedSchedules.includes(_id) ? ' open' : ''}`}>
-                      {activitiesNow.map((activity, index) => {
+                      {activitiesNow.forEach((activity, index) => {
                         /* This should eventually check the schedule actually matches week day, but not yet! */
                         if (
                           activity.time.start > schedule.time.end ||

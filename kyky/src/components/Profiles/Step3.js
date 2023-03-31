@@ -40,31 +40,32 @@ export default function Step5({ handleChange }) {
       setProfileIcon(_url);
       setReceiveUrl(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_url]);
 
   useEffect(() => {
     handleChange('country', country);
-  }, [country]);
+  }, [country, handleChange]);
 
   useEffect(() => {
     handleChange('address', address);
-  }, [address]);
+  }, [address, handleChange]);
 
   useEffect(() => {
     handleChange('city', city);
-  }, [city]);
+  }, [city, handleChange]);
 
   useEffect(() => {
     handleChange('postalCode', postalcode);
-  }, [postalcode]);
+  }, [postalcode, handleChange]);
 
   useEffect(() => {
     handleChange('dialCode', dialCode);
-  }, [dialCode]);
+  }, [dialCode, handleChange]);
 
   useEffect(() => {
     handleChange('phoneNumber', phoneNumber);
-  }, [phoneNumber]);
+  }, [phoneNumber, handleChange]);
 
   useEffect(() => {
     if (_country) {

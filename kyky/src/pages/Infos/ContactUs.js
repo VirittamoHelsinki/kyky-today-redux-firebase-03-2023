@@ -19,7 +19,7 @@ const ContactUs = () => {
       dispatch(contactUs({ name: name, email: email, message: message }));
       setName('');
       setEmail('');
-      setMessage('')
+      setMessage('');
       window.alert('Thank you for contacting us!');
     } else {
       window.alert('Please fill all fields');

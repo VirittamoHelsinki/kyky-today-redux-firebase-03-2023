@@ -67,21 +67,6 @@ export const fetchJobsByQuery = createAsyncThunk(
   }
 );
 
-export const fetchUserProfileJobs = createAsyncThunk('jobs/fetchUserProfileJobs', async (uid) => {
-  try {
-    const documents = [];
-    const jobsRef = collection(db, 'jobs');
-    const q = query(jobsRef, where('uid', '==', uid));
-    const snap = await getDocs(q);
-    snap.forEach((doc) => {
-      documents.push({ ...doc.data() });
-    });
-    return documents;
-  } catch (error) {
-    return error;
-  }
-});
-
 export const fetchCategoryJobs = createAsyncThunk(
   'jobs/fetchCategoryJobs',
   async ({ key, value }) => {
@@ -133,15 +118,12 @@ export const jobSlice = createSlice({
     filterJobs(state, action) {
       let all_jobs = [...state.all];
       if (action.payload.title) {
-        all_jobs = all_jobs.filter((s) => s.title.toLowerCase() === action.payload.title);
+        all_jobs = all_jobs.filter((job) => job.title.toLowerCase() === action.payload.title);
       }
       if (action.payload.headline) {
-        all_jobs = all_jobs.filter((s) => {
-          let line = s.headline.toLowerCase()
-          if (line.search(new RegExp(`${action.payload.headline}`)) >= 0) {
-            return true;
-          }
-        });
+        all_jobs = all_jobs.filter((job) =>
+          job.headline.toLowerCase().includes(action.payload.headline)
+        );
       }
       if (action.payload.location) {
         all_jobs = all_jobs.filter((s) => s.place === action.payload.location);
@@ -193,12 +175,6 @@ export const jobSlice = createSlice({
           ...state,
           cards: action.payload,
           titles: [...job_list]
-        });
-      })
-      .addCase(fetchUserProfileJobs.fulfilled, (state, action) => {
-        return (state = {
-          ...state,
-          user: action.payload
         });
       })
       .addCase(fetchCategoryJobs.fulfilled, (state, action) => {

@@ -17,11 +17,13 @@ const Purchases = () => {
 
   useEffect(() => {
     setSelectedWindow('purchases');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     dispatch(fetchPurchasesByQuery(_user.uid));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_user]);
 
   useEffect(() => {
     if (Array.isArray(_orders)) {
@@ -54,6 +56,16 @@ const Purchases = () => {
         </div>
         <div className="order-items">
           {completed.map((o, index) => (
+            <Purchase order={o} key={index} />
+          ))}
+        </div>
+      </div>
+      <div className="order-content">
+        <div className="status-label">
+          <p>Canceled orders</p>
+        </div>
+        <div className="order-items">
+          {canceled.map((o, index) => (
             <Purchase order={o} key={index} />
           ))}
         </div>

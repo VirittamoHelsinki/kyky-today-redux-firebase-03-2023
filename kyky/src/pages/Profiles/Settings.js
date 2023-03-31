@@ -21,6 +21,7 @@ const Settings = () => {
 
   useEffect(() => {
     setSelectedWindow('settings');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const Settings = () => {
       fileInput.current.value = '';
       setReceiveUrl(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_url]);
 
   const handleClick = () => {

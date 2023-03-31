@@ -67,7 +67,7 @@ const UserProfile = () => {
       setLastseen(new Date(userSnap.data().lastseen.seconds * 1000));
       setRegistered(new Date(userSnap.data().created.seconds * 1000));
       setProfileRating(Math.round(userSnap.data().totalRating / userSnap.data().totalAmount));
-      setUserType(userSnap.data().userType)
+      setUserType(userSnap.data().userType);
     } catch (error) {
       return;
     }
@@ -83,7 +83,7 @@ const UserProfile = () => {
         documents.push({ ...doc.data() });
       });
       setCards(documents);
-      setAllJobs(documents.length)
+      setAllJobs(documents.length);
     } catch (error) {
       return;
     }

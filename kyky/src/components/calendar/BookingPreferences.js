@@ -38,6 +38,7 @@ export default function BookingPreferences({ properties, setField, setCanContinu
 
   useEffect(() => {
     checkIfCanContinue();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customBuffertime, customMinimumBookingDuration]);
 
   function checkIfCanContinue() {
@@ -86,6 +87,7 @@ export default function BookingPreferences({ properties, setField, setCanContinu
       setField('bufferBetweenBookings', bufferTime);
       setField('includeTravelTime', travelTime);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limitBookings, bufferTime, travelTime]);
 
   useEffect(() => {
@@ -95,6 +97,7 @@ export default function BookingPreferences({ properties, setField, setCanContinu
     } else {
       setField('canOverlap', false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allowOverlap, overlapAnyType]);
 
   return (

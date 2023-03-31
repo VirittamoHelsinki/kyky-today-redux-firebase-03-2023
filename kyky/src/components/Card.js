@@ -23,6 +23,7 @@ export default function Card({ job }) {
 
   useEffect(() => {
     getRating();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let jobImage = job.urls[0] ? job.urls[0] : defaultJobImage;

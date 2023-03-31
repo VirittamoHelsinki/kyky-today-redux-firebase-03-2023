@@ -29,7 +29,7 @@ export default function MultipleSelect({
   /* Whenever selected changes, the onChange function is called with selected passed as argument */
   useEffect(() => {
     onChange(selected);
-  }, [selected]);
+  }, [selected, onChange]);
 
   return (
     <div className={`${className}${disabled ? ' disabled' : ''}`}>

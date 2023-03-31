@@ -25,19 +25,6 @@ const defaultBookingValue = {
   termsAccepted: false
 };
 
-const defaultJob = {
-  job: 'Dog Walker',
-  title: 'I will walk your dog with love and care',
-  comment: { author: 'John Doe', comment: 'Punctual, friendly, dog lover, caring, responsible' },
-  prices: {
-    weekday: 25,
-    weekend: 30,
-    everyOtherWeekday: 22,
-    everyOtherWeekend: 25,
-    onceEveryMonth: 25
-  }
-};
-
 const us_days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function ServiceBooking() {
@@ -77,8 +64,6 @@ function ServiceBooking() {
   const _user = useSelector((state) => state.user);
   const _settings = useSelector((state) => state.setting.bookingsettings);
 
-  const job = defaultJob;
-
   const state_exists = location.state !== null;
 
   /* set card owner's data to local state */
@@ -97,25 +82,24 @@ function ServiceBooking() {
       setPhotoURL(location.state.photoURL);
       setUid(location.state.uid);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (_user.uid) {
       setUser(_user);
     }
-  }, []);
+  }, [_user]);
 
   useEffect(() => {
     selectedCalendarDay(date);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date]);
 
   useEffect(() => {
     dispatch(addPageview(location.state.id));
-  }, []);
-
-  useEffect(() => {
     dispatch(fetchSellerCalendarSettings(location.state.uid));
-  }, []);
+  }, [dispatch, location.state.id, location.state.uid]);
 
   useEffect(() => {
     if (_settings?.notifications) {
@@ -271,10 +255,6 @@ function ServiceBooking() {
             <div className="service-booking-left-panel-content">
               <div className="service-booking-left-panel-header">
                 <h1>{description}</h1>
-                <div className="username-commented-as">
-                  <h2>{name}</h2> was commented as:
-                </div>
-                <p>{job.comment.comment}</p>
               </div>
               <div className="service-booking-left-panel-price">
                 <div className="price">

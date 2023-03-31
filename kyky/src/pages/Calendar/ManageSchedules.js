@@ -30,6 +30,7 @@ export default function ManageSchedules() {
 
   useEffect(() => {
     setSelectedWindow('manage-schedules');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function deleteSchedule(schedule) {

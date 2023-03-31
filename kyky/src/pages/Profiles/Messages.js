@@ -23,11 +23,13 @@ const Messages = () => {
 
   useEffect(() => {
     setSelectedWindow('messages');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     dispatch(fetchContacts(_user.uid));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_user]);
 
   useEffect(() => {
     if (Array.isArray(_contacts)) {

@@ -32,7 +32,7 @@ export default function Calendar({
   const [currentMonth, setCurrentMonth] = useState(date.getMonth());
   const [currentYear, setCurrentYear] = useState(date.getFullYear());
   const [years, setYears] = useState([]);
-  const [notificationDays, setNotificationDays] = useState([])
+  const [notificationDays, setNotificationDays] = useState([]);
 
   useEffect(() => {
     setCurrentMonth(date.getMonth());
@@ -46,6 +46,7 @@ export default function Calendar({
       firstDayOfMonth
     );
     setSelectedDay(date.getDate() + lastDaysOfPreviousMonth.length - 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date]);
 
   useEffect(() => {
@@ -67,6 +68,7 @@ export default function Calendar({
         )
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDay]);
 
   useEffect(() => {
@@ -78,8 +80,8 @@ export default function Calendar({
   }, [minYears, maxYears]);
 
   useEffect(() => {
-    setNotificationDays(enabledDays)
-  }, [enabledDays])
+    setNotificationDays(enabledDays);
+  }, [enabledDays]);
 
   function changeMonth(month) {
     let year = currentYear;
@@ -238,7 +240,7 @@ export default function Calendar({
                 }${highlight ? ' highlight' : ''}`}
                 onClick={() => {
                   if (!disabled) {
-                    setSelectedDay(index)
+                    setSelectedDay(index);
                   }
                 }}>
                 {day.getDate()}

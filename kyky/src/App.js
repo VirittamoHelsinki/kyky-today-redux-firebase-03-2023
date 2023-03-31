@@ -16,8 +16,6 @@ import en from './localisation/en.json';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import UserRegistration from './pages/UserRegistration';
-import ContactForm from './pages/ContactForm';
-import UserLogin from './pages/UserLogIn';
 import RecoverPassword from './pages/RecoverPassword';
 import LandingPage from './pages/LandingPage';
 import ServiceBooking from './pages/ServiceBooking';
@@ -44,11 +42,6 @@ import Ratings from './pages/Profiles/Ratings';
 import Settings from './pages/Profiles/Settings';
 import OwnJobs from './pages/Profiles/OwnJobs';
 import Orders from './pages/Profiles/Orders';
-
-/* Buyer's Rating*/
-import BuyersRating from './pages/BuyersRating';
-import ThanksForRating from './components/profile/ThanksForRating';
-import NPS from './components/profile/NPS';
 
 /* Footer contents */
 import KykyTeam from './pages/Infos/KykyTeam';
@@ -266,45 +259,12 @@ const App = () => {
               }
             />
           </Route>
-          <Route
-            path="buyers-rating"
-            element={
-              <UserRoute>
-                <BuyersRating />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="buyers-rating/thanks-for-rating"
-            element={
-              <UserRoute>
-                <ThanksForRating />
-              </UserRoute>
-            }
-          />
-          <Route
-            path="buyers-rating/thanks-for-rating/nps"
-            element={
-              <UserRoute>
-                <NPS />
-              </UserRoute>
-            }
-          />
 
           <Route
             path="user-registration"
             element={
               <GuestRoute>
                 <UserRegistration />
-              </GuestRoute>
-            }
-          />
-          <Route path="contact-form" element={<ContactForm />} />
-          <Route
-            path="user-log-in"
-            element={
-              <GuestRoute>
-                <UserLogin />
               </GuestRoute>
             }
           />
